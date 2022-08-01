@@ -1,3 +1,26 @@
 export default {
-    lmht: "html"
-}
+    "artigo": "article",
+    "cabeca": "head",
+    "cabeça": "head",
+    "cabeca-tabela": "thead",
+    "cabeça-tabela": "thead",
+    "celula": "td",
+    "célula": "td",
+    "codigo": "code",
+    "código": "code",
+    "corpo": "body",
+    "corpo-tabela": "tbody",
+    "item-lista": "li",
+    "linha": "tr",
+    "lista-numerada": "ol",
+    "lista-simples": "ul",
+    "lmht": "html",
+    "negrito": "strong",
+    "tabela": "table",
+    "titulo1": "h1",
+    "titulo2": "h2",
+    "titulo3": "h3",
+    "titulo4": "h4",
+    "titulo5": "h5",
+    "titulo6": "h6",
+};
