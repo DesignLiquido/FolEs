@@ -16,3 +16,15 @@ lmht {
     tamanho-texto: 12px;
 }
 ```
+
+Isso traduz para o seguinte CSS:
+
+```css
+html {
+    font-size: 12px;
+}
+```
+
+## Arquitetura
+
+FolEs copia vários elementos de [Delégua](https://github.com/DesignLiquido/delegua), como um Lexador e um Avaliador Sintático, mas contém um elemento original (um Tradutor, que usa o retorno do Avaliador Sintático para gerar uma folha de estilo em CSS). 
