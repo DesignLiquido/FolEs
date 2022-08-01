@@ -1,0 +1,15 @@
+{
+    "name": "@designliquido/foles",
+    "version": "0.0.1",
+    "description": "Linguagem de folhas de estilo para documentos em geral",
+    "main": "index.ts",
+    "keywords": [
+        "foles",
+        "lmht"
+    ],
+    "author": "Leonel Sanches da Silva",
+    "devDependencies": {
+        "@types/node": "^18.6.3",
+        "ts-node": "^10.9.1"
+    }
+}

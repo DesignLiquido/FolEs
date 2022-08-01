@@ -1,0 +1,28 @@
+import tiposDeSimbolos from "../tipos-de-simbolos";
+
+export default {
+    "artigo": tiposDeSimbolos.ESTRUTURA,
+    "cabeca": tiposDeSimbolos.ESTRUTURA,
+    "cabeça": tiposDeSimbolos.ESTRUTURA,
+    "cabeca-tabela": tiposDeSimbolos.ESTRUTURA,
+    "cabeça-tabela": tiposDeSimbolos.ESTRUTURA,
+    "celula": tiposDeSimbolos.ESTRUTURA,
+    "célula": tiposDeSimbolos.ESTRUTURA,
+    "codigo": tiposDeSimbolos.ESTRUTURA,
+    "código": tiposDeSimbolos.ESTRUTURA,
+    "corpo": tiposDeSimbolos.ESTRUTURA,
+    "corpo-tabela": tiposDeSimbolos.ESTRUTURA,
+    "item-lista": tiposDeSimbolos.ESTRUTURA,
+    "linha": tiposDeSimbolos.ESTRUTURA,
+    "lista-numerada": tiposDeSimbolos.ESTRUTURA,
+    "lista-simples": tiposDeSimbolos.ESTRUTURA,
+    "lmht": tiposDeSimbolos.ESTRUTURA,
+    "negrito": tiposDeSimbolos.ESTRUTURA,
+    "tabela": tiposDeSimbolos.ESTRUTURA,
+    "titulo1": tiposDeSimbolos.ESTRUTURA,
+    "titulo2": tiposDeSimbolos.ESTRUTURA,
+    "titulo3": tiposDeSimbolos.ESTRUTURA,
+    "titulo4": tiposDeSimbolos.ESTRUTURA,
+    "titulo5": tiposDeSimbolos.ESTRUTURA,
+    "titulo6": tiposDeSimbolos.ESTRUTURA,
+}
