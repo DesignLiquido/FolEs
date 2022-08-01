@@ -140,6 +140,23 @@ export class Lexador {
         );
     }
 
+    identificarPalavraChave(): void {
+        while (this.eAlfabetoOuDigito(this.simboloAtual())) {
+            this.avancar();
+        }
+
+        const codigo: string = this.codigo[this.linha].substring(
+            this.inicioSimbolo,
+            this.atual
+        );
+        const tipo: string =
+            codigo in palavrasReservadas
+                ? palavrasReservadas[codigo]
+                : tiposDeSimbolos.IDENTIFICADOR;
+
+        this.adicionarSimbolo(tipo);
+    }
+
     analisarToken(): void {
         const caractere = this.simboloAtual();
 
@@ -154,6 +171,10 @@ export class Lexador {
                 break;
             case ':':
                 this.adicionarSimbolo(tiposDeSimbolos.DOIS_PONTOS);
+                this.avancar();
+                break;
+            case ';':
+                this.adicionarSimbolo(tiposDeSimbolos.PONTO_E_VIRGULA);
                 this.avancar();
                 break;
             case ' ':
@@ -176,23 +197,6 @@ export class Lexador {
                     this.avancar();
                 }
         }
-    }
-
-    identificarPalavraChave(): void {
-        while (this.eAlfabetoOuDigito(this.simboloAtual())) {
-            this.avancar();
-        }
-
-        const codigo: string = this.codigo[this.linha].substring(
-            this.inicioSimbolo,
-            this.atual
-        );
-        const tipo: string =
-            codigo in palavrasReservadas
-                ? palavrasReservadas[codigo]
-                : tiposDeSimbolos.IDENTIFICADOR;
-
-        this.adicionarSimbolo(tipo);
     }
 
     mapear(codigo: string[]) {
