@@ -31,8 +31,7 @@ FolEs copia vários elementos de [Delégua](https://github.com/DesignLiquido/del
 
 ## Mapeamentos
 
-+---------------+-----------+
+
 | FolEs         | CSS       |
-+---------------+-----------+
+| ------------- | ----------|
 | tamanho-texto | font-size |
-+---------------+-----------+
