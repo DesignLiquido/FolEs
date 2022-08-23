@@ -25,6 +25,26 @@ html {
 }
 ```
 
+## Execução
+
+No Visual Studio Code, adicione no seu `launch.json` o seguinte:
+
+```jsonc
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "FolEs",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": ["${workspaceFolder}${pathSeparator}index.ts"],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+    ]
+```
+
 ## Arquitetura
 
 FolEs copia vários elementos de [Delégua](https://github.com/DesignLiquido/delegua), como um Lexador e um Avaliador Sintático, mas contém um elemento original (um Tradutor, que usa o retorno do Avaliador Sintático para gerar uma folha de estilo em CSS). 
