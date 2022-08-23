@@ -1,3 +1,7 @@
 lmht {
     tamanho-texto: 12px;
 }
+
+corpo {
+    tamanho-texto: 16px;
+}
