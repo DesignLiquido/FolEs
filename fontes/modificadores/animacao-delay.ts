@@ -1,13 +1,13 @@
 import { Modificador } from "./modificador";
 
-export class AlinharConteudo extends Modificador {
+export class AnimacaoDelay extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(["animacao-delay", "animação-delay"], "animation-delay");
         this.valor = valor;
         this.quantificador = quantificador;
     }

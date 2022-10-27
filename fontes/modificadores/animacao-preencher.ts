@@ -1,13 +1,13 @@
 import { Modificador } from "./modificador";
 
-export class AlinharConteudo extends Modificador {
+export class AnimacaoPreencher extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(["animacao-preencher", "animação-preencher"], "animation-fill-mode");
         this.valor = valor;
         this.quantificador = quantificador;
     }

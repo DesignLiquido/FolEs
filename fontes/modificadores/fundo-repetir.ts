@@ -1,8 +1,8 @@
 import { Modificador } from "./modificador";
 
-export class CorComponenteFormulario extends Modificador {
+export class FundoRepetir extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("cor-componente-formulario", "accent-color");
+        super("fundo-repetir", "background-repeat");
         this.valor = valor;
         this.quantificador = quantificador;
     }

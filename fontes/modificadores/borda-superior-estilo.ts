@@ -1,8 +1,8 @@
 import { Modificador } from "./modificador";
 
-export class CorComponenteFormulario extends Modificador {
+export class BordaSuperiorEstilo extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("cor-componente-formulario", "accent-color");
+        super("borda-superior-estilo", "border-top-style");
         this.valor = valor;
         this.quantificador = quantificador;
     }
