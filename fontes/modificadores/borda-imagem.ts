@@ -1,4 +1,4 @@
-import { Modificador } from "./modificador";
+import { Modificador } from "./superclasse/modificador";
 
 export class BordaImagem extends Modificador {
     constructor(valor: string, quantificador: string) {

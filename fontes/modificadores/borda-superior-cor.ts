@@ -1,4 +1,4 @@
-import { Modificador } from "./modificador";
+import { Modificador } from "./superclasse/modificador";
 
 export class BordaSuperiorCor extends Modificador {
     constructor(valor: string, quantificador: string) {

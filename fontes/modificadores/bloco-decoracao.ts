@@ -1,4 +1,4 @@
-import { Modificador } from "./modificador";
+import { Modificador } from "./superclasse/modificador";
 
 export class BlocoDecoracao extends Modificador {
     nomesFoles: string[];
