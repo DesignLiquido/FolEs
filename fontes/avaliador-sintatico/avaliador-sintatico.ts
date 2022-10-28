@@ -2,7 +2,7 @@ import { ErroAvaliadorSintatico } from ".";
 import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
-import { TamanhoTexto } from "../modificadores/tamanho-texto";
+import { TamanhoTexto } from "../modificadores/fonte-tamanho";
 import tiposDeSimbolos from "../tipos-de-simbolos";
 
 export class AvaliadorSintatico {
