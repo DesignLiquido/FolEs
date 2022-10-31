@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class BordaImagemFatiar extends Modificador {
+export class IncrementarContador extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("borda-imagem-fatiar", "border-image-slice");
+        super("incrementar-contador", "counter-increment");
         this.valor = valor;
         this.quantificador = quantificador;
     }

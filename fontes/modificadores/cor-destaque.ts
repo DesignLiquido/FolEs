@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class BordaImagemEstender extends Modificador {
+export class CorDestaque extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("borda-imagem-estender", "border-image-outset");
+        super("cor-destaque", "accent-color");
         this.valor = valor;
         this.quantificador = quantificador;
     }

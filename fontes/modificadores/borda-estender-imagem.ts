@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class ContadorResetar extends Modificador {
+export class BordaEstenderImagem extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("contador-resetar", "counter-reset");
+        super("borda-estender-imagem", "border-image-outset");
         this.valor = valor;
         this.quantificador = quantificador;
     }

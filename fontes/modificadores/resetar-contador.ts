@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class CorComponenteFormulario extends Modificador {
+export class ResetarContador extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("cor-componente-formulario", "accent-color");
+        super("resetar-contador", "counter-reset");
         this.valor = valor;
         this.quantificador = quantificador;
     }
