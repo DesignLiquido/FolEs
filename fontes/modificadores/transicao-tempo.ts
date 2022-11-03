@@ -7,7 +7,10 @@ export class TransicaoTempo extends Modificador {
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["transicao-tempo", "transição-tempo"], "transition-timing-function");
+        super(
+            ["transicao-tempo", "transição-tempo"], 
+            "transition-timing-function"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }

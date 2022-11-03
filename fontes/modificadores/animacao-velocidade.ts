@@ -7,7 +7,10 @@ export class AnimacaoVelocidade extends Modificador {
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["animacao-velocidade", "animação-velocidade"], "animation-timing-function");
+        super(
+            ["animacao-velocidade", "animação-velocidade"], 
+            "animation-timing-function"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }

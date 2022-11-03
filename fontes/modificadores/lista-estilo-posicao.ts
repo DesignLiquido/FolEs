@@ -7,7 +7,10 @@ export class ListaEstiloPosicao extends Modificador {
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["lista-estilo-posicao", "lista-estilo-posição"], "list-style-position");
+        super(
+            ["lista-estilo-posicao", "lista-estilo-posição"], 
+            "list-style-position"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }

@@ -7,7 +7,10 @@ export class AnimacaoRepeticao extends Modificador {
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["animacao-repeticao", "animação-repetição"], "animation-iteration-count");
+        super(
+            ["animacao-repeticao", "animação-repetição"], 
+            "animation-iteration-count"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }
