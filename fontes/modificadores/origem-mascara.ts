@@ -1,13 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class MascaraModo extends Modificador {
+export class OrigemMascara extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
     
     constructor(valor: string, quantificador: string) {
-        super(["mascara-modo", "máscara-modo"], "mask-mode");
+        super(["origem-mascara", "origem-máscara"], "mask-origin");
         this.valor = valor;
         this.quantificador = quantificador;
     }
