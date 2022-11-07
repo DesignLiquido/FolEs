@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class Ponteiro extends Modificador {
+export class RecuoEsquerdo extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("ponteiro", "pointer-events");
+        super("recuo-esquerdo", "padding-left");
         this.valor = valor;
         this.quantificador = quantificador;
     }

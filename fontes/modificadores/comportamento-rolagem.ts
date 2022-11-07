@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class OrdenarElemento extends Modificador {
+export class ComportamentoRolagem extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("ordenar-elemento", "z-index");
+        super("comportamento-rolagem", "scroll-behavior");
         this.valor = valor;
         this.quantificador = quantificador;
     }
