@@ -1,13 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class AlinharConteudo extends Modificador {
+export class LarguraMaxima extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(["largura-maxima", "largura-máxima"], "max-width");
         this.valor = valor;
         this.quantificador = quantificador;
     }

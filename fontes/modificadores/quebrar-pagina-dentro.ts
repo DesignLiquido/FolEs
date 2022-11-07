@@ -1,13 +1,16 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class AlinharConteudo extends Modificador {
+export class QuebrarPaginaDentro extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(
+            ["quebrar-pagina-dentro", "quebrar-página-dentro"], 
+            "page-break-inside"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }

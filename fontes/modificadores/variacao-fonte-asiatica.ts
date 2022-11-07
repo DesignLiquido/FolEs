@@ -1,13 +1,16 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class AlinharConteudo extends Modificador {
+export class VariacaoFonteAsiatica extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(
+            ["variacao-fonte-asiatica", "variação-fonte-asiática"], 
+            "font-variant-east-asian"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }

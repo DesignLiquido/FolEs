@@ -1,13 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class AlinharConteudo extends Modificador {
+export class ModoMascara extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
-
+    
     constructor(valor: string, quantificador: string) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(["modo-mascara", "modo-máscara"], "mask-mode");
         this.valor = valor;
         this.quantificador = quantificador;
     }

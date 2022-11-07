@@ -1,1 +1,1 @@
-export * from './modificador';
+export * from './superclasse/modificador';
