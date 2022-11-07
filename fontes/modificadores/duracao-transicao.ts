@@ -1,16 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class TextoSublinhadoPosicao extends Modificador {
+export class DuracaoTransicao extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(
-            ["texto-sublinhado-posicao", "texto-sublinhado-posição"], 
-            "text-underline-position"
-        );
+        super(["duracao-transicao", "duração-transição"], "transition-duration");
         this.valor = valor;
         this.quantificador = quantificador;
     }

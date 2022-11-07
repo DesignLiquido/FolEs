@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class VazamentoAgrupar extends Modificador {
+export class CombinarTextoVertical extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("vazamento-agrupar", "overflow-wrap");
+        super("combinar-texto-vertical", "text-combine-upright");
         this.valor = valor;
         this.quantificador = quantificador;
     }
