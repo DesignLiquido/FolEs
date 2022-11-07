@@ -1,16 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class ModoPreencherAnimacao extends Modificador {
+export class IndentacaoTexto extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(
-            ["modo-preencher-animacao", "modo-preencher-animação"], 
-            "animation-fill-mode"
-        );
+        super(["indentacao-texto", "indentação-texto"], "text-indent");
         this.valor = valor;
         this.quantificador = quantificador;
     }

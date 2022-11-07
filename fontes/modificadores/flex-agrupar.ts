@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class IdentarTexto extends Modificador {
+export class FlexAgrupar extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("identar-texto", "text-indent");
+        super("flex-agrupar", "flex-wrap");
         this.valor = valor;
         this.quantificador = quantificador;
     }

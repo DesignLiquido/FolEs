@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class Flexionar extends Modificador {
+export class FlexFluxo extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("flexionar", "flex");
+        super("flex-fluxo", "flex-flow");
         this.valor = valor;
         this.quantificador = quantificador;
     }

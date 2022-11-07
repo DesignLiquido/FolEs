@@ -1,13 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class FlexionarDirecao extends Modificador {
+export class Conteudo extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(["flexionar-direcao", "flexionar-direção"], "flex-direction");
+        super(["conteudo", "conteúdo"], "content");
         this.valor = valor;
         this.quantificador = quantificador;
     }
