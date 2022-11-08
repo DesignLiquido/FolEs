@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class TamanhoBloco extends Modificador {
+export class LarguraFimBordaBloco extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("tamanho-bloco", "block-size");
+        super("largura-fim-borda-bloco", "border-block-end-width");
         this.valor = valor;
         this.quantificador = quantificador;
     }
