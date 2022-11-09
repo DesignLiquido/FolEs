@@ -1,8 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class RaioFinalBordaFinal extends Modificador {
+export class Contem extends Modificador {
+    nomesFoles: string[];
+    propriedadeCss: string;
+    valor: string;
+    quantificador: string;
+
     constructor(valor: string, quantificador: string) {
-        super("raio-final-borda-final", "border-end-end-radius");
+        super(["contem", "contém"], "contain");
         this.valor = valor;
         this.quantificador = quantificador;
     }

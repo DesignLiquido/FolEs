@@ -1,16 +1,13 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class PosicaoHorizontalFundo extends Modificador {
+export class Insercao extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
     quantificador: string;
 
     constructor(valor: string, quantificador: string) {
-        super(
-            ["posicao-horizontal-fundo", "posição-horizontal-fundo"], 
-            "background-position-x"
-        );
+        super(["insercao", "inserção"], "inset");
         this.valor = valor;
         this.quantificador = quantificador;
     }

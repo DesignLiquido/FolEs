@@ -1,6 +1,6 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class InserirInicioAlinhado extends Modificador {
+export class InicioInsercaoEmLinha extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
@@ -8,7 +8,7 @@ export class InserirInicioAlinhado extends Modificador {
 
     constructor(valor: string, quantificador: string) {
         super(
-            ["inserir-inicio-alinhado", "inserir-início-alinhado"],
+            ["inicio-insercao-em-linha", "início-inserção-em-linha"],
             "inset-inline-start"
         );
         this.valor = valor;

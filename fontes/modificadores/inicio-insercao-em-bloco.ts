@@ -1,6 +1,6 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class InserirInicioBloco extends Modificador {
+export class InicioInsercaoEmBloco extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
@@ -8,7 +8,7 @@ export class InserirInicioBloco extends Modificador {
 
     constructor(valor: string, quantificador: string) {
         super(
-            ["inserir-inicio-bloco", "inserir-início-bloco"],
+            ["inicio-insercao-em-bloco", "início-inserção-em-bloco"],
             "inset-block-start"
         );
         this.valor = valor;
