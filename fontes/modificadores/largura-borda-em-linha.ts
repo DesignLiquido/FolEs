@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class CorFimBordaAlinhada extends Modificador {
+export class LarguraBordaEmLinha extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("cor-fim-borda-alinhada", "border-inline-end-color");
+        super("largura-borda-em-linha", "border-inline-width");
         this.valor = valor;
         this.quantificador = quantificador;
     }

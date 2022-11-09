@@ -1,6 +1,6 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class CorInicioBordaAlinhada extends Modificador {
+export class CorInicioBordaEmLinha extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
@@ -8,7 +8,7 @@ export class CorInicioBordaAlinhada extends Modificador {
 
     constructor(valor: string, quantificador: string) {
         super(
-            ["cor-inicio-borda-alinhada", "cor-início-borda-alinhada"], 
+            ["cor-inicio-borda-em-linha", "cor-início-borda-em-linha"], 
             "border-inline-start-color"
         );
         this.valor = valor;
