@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class RenderizarImagem extends Modificador {
+export class MargemEsquerdaRolagemMouse extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("renderizar-imagem", "image-rendering");
+        super("margem-esquerda-rolagem-mouse", "scroll-margin-left");
         this.valor = valor;
         this.quantificador = quantificador;
     }
