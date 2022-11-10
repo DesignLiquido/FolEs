@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class PreenchimentoEmBloco extends Modificador {
+export class RecuoSuperiorRolagemMouse extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("preenchimento-em-bloco", "padding-block");
+        super("recuo-superior-rolagem-mouse", "scroll-padding-top");
         this.valor = valor;
         this.quantificador = quantificador;
     }

@@ -1,6 +1,6 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class InicioPreenchimentoEmBloco extends Modificador {
+export class InicioRecuoEmLinha extends Modificador {
     nomesFoles: string[];
     propriedadeCss: string;
     valor: string;
@@ -8,8 +8,8 @@ export class InicioPreenchimentoEmBloco extends Modificador {
 
     constructor(valor: string, quantificador: string) {
         super(
-            ["inicio-preenchimento-em-bloco", "início-preenchimento-em-bloco"], 
-            "padding-block-start"
+            ["inicio-recuo-em-linha", "início-recuo-em-linha"], 
+            "padding-inline-start"
         );
         this.valor = valor;
         this.quantificador = quantificador;
