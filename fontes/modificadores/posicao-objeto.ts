@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class PosicaoLegenda extends Modificador {
+export class PosicaoObjeto extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super(["posicao-legenda", "posição-legenda"], "caption-side");
+        super(["posicao-objeto", "posição-objeto"], "object-position");
         this.valor = valor;
         this.quantificador = quantificador;
     }

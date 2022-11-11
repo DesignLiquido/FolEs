@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class RecortarMargemVazamento extends Modificador {
+export class RecortarMargemVazada extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("recortar-margem-vazamento", "overflow-clip-margin");
+        super("recortar-margem-vazada", "overflow-clip-margin");
         this.valor = valor;
         this.quantificador = quantificador;
     }

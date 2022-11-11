@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class PosicionarObjeto extends Modificador {
+export class AoMudar extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("posicionar-objeto", "object-position");
+        super("ao-mudar", "will-change");
         this.valor = valor;
         this.quantificador = quantificador;
     }
