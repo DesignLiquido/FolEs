@@ -1,11 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class EspacamentoColunaEmGrade extends Modificador {
+export class EstenderBordaImagem extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super(
-            ["espacamento-coluna-em-grade", "espaçamento-coluna-em-grade"], 
-            "grid-column-gap"
-        );
+        super("estender-borda-imagem", "border-image-outset");
         this.valor = valor;
         this.quantificador = quantificador;
     }

@@ -1,8 +1,8 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class LarguraRolagemMouse extends Modificador {
+export class CorBarraRolagem extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("largura-rolagem-mouse", "scrollbar-width");
+        super("cor-barra-rolagem", "scrollbar-color");
         this.valor = valor;
         this.quantificador = quantificador;
     }

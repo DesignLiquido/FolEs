@@ -1,14 +1,9 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class ConfigurarVariacaoFonte extends Modificador {
-    nomesFoles: string[];
-    propriedadeCss: string;
-    valor: string;
-    quantificador: string;
-
+export class ConfiguracoesVariacaoFonte extends Modificador {
     constructor(valor: string, quantificador: string) {
         super(
-            ["configurar-variacao-fonte", "configurar-variação-fonte"], 
+            ["configuracoes-variacao-fonte", "configurações-variação-fonte"], 
             "font-variation-settings"
         );
         this.valor = valor;
