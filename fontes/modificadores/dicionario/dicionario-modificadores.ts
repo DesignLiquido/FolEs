@@ -865,5 +865,3 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "visibilidade-conteúdo": VisibilidadeConteudo,
     "visibilidade-fundo": VisibilidadeFundo,
 }
-
-console.log(Object.keys(DicionarioModificadores).length);
