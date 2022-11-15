@@ -1,8 +1,11 @@
 import { Modificador } from "./superclasse/modificador";
 
-export class FlexReduzir extends Modificador {
+export class PosicaoVerticalFundo extends Modificador {
     constructor(valor: string, quantificador: string) {
-        super("flex-reduzir", "flex-shrink");
+        super(
+            ["posicao-vertical-fundo", "posição-vertical-fundo"], 
+            "background-position-y"
+        );
         this.valor = valor;
         this.quantificador = quantificador;
     }
