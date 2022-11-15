@@ -150,6 +150,166 @@ import { Fundo } from "../fundo";
 import { Girar } from "../girar";
 import { Grade } from "../grade";
 import { Hifens } from "../hifens";
+import { ImagemBorda } from "../imagem-borda";
+import { ImagemFundo } from "../imagem-fundo";
+import { ImagemMascara } from "../imagem-mascara";
+import { ImpressaoAjusteCor } from "../impressao-ajuste-cor";
+import { IncrementarContador } from "../incrementar-contador";
+import { IndentacaoTexto } from "../indentacao-texto";
+import { IndiceZ } from "../indice-z";
+import { InicioBordaEmBloco } from "../inicio-borda-em-bloco";
+import { InicioBordaEmLinha } from "../inicio-borda-em-linha";
+import { InicioBordaMascara } from "../inicio-borda-mascara";
+import { InicioColunaEmGrade } from "../inicio-coluna-em-grade";
+import { InicioInsercaoEmBloco } from "../inicio-insercao-em-bloco";
+import { InicioInsercaoEmLinha } from "../inicio-insercao-em-linha";
+import { InicioLinhaEmGrade } from "../inicio-linha-em-grade";
+import { InicioMargemEmBloco } from "../inicio-margem-em-bloco";
+import { InicioMargemEmLinha } from "../inicio-margem-em-linha";
+import { InicioRecuoEmBloco } from "../inicio-recuo-em-bloco";
+import { InicioRecuoEmLinha } from "../inicio-recuo-em-linha";
+import { Insercao } from "../insercao";
+import { InsercaoEmBloco } from "../insercao-em-bloco";
+import { InsercaoEmBlocoFim } from "../insercao-em-bloco-fim";
+import { InsercaoEmLinha } from "../insercao-em-linha";
+import { InsercaoEmLinhaFim } from "../insercao-em-linha-fim";
+import { Isolamento } from "../isolamento";
+import { JustificarConteudo } from "../justificar-conteudo";
+import { JustificarItens } from "../justificar-itens";
+import { JustificarSe } from "../justificar-se";
+import { JustificarTexto } from "../justificar-texto";
+import { Largura } from "../largura";
+import { LarguraBarraRolagem } from "../largura-barra-rolagem";
+import { LarguraBorda } from "../largura-borda";
+import { LarguraBordaDireita } from "../largura-borda-direita";
+import { LarguraBordaEmBloco } from "../largura-borda-em-bloco";
+import { LarguraBordaEmLinha } from "../largura-borda-em-linha";
+import { LarguraBordaEsquerda } from "../largura-borda-esquerda";
+import { LarguraBordaInferior } from "../largura-borda-inferior";
+import { LarguraBordaMascara } from "../largura-borda-mascara";
+import { LarguraBordaSuperior } from "../largura-borda-superior";
+import { LarguraColuna } from "../largura-coluna";
+import { LarguraContorno } from "../largura-contorno";
+import { LarguraFimBordaEmBloco } from "../largura-fim-borda-em-bloco";
+import { LarguraFimBordaEmLinha } from "../largura-fim-borda-em-linha";
+import { LarguraImagemBorda } from "../largura-imagem-borda";
+import { LarguraInicioBordaEmBloco } from "../largura-inicio-borda-em-bloco";
+import { LarguraInicioBordaEmLinha } from "../largura-inicio-borda-em-linha";
+import { LarguraMaxima } from "../largura-maxima";
+import { LarguraMinima } from "../largura-minima";
+import { LimiteFormaImagem } from "../limite-forma-imagem";
+import { LinhaEmGrade } from "../linha-em-grade";
+import { LinhasInferiores } from "../linhas-inferiores";
+import { LinhasSuperiores } from "../linhas-superiores";
+import { Margem } from "../margem";
+import { MargemDireita } from "../margem-direita";
+import { MargemDireitaRolagemMouse } from "../margem-direita-rolagem-mouse";
+import { MargemEmBloco } from "../margem-em-bloco";
+import { MargemEmBlocoFim } from "../margem-em-bloco-fim";
+import { MargemEmBlocoRolagemMouse } from "../margem-em-bloco-rolagem-mouse";
+import { MargemEmLinha } from "../margem-em-linha";
+import { MargemEmLinhaFim } from "../margem-em-linha-fim";
+import { MargemEmLinhaRolagemMouse } from "../margem-em-linha-rolagem-mouse";
+import { MargemEsquerda } from "../margem-esquerda";
+import { MargemEsquerdaRolagemMouse } from "../margem-esquerda-rolagem-mouse";
+import { MargemInferior } from "../margem-inferior";
+import { MargemInferiorRolagemMouse } from "../margem-inferior-rolagem-mouse";
+import { MargemRolagemMouse } from "../margem-rolagem-mouse";
+import { MargemSuperior } from "../margem-superior";
+import { MargemSuperiorRolagemMouse } from "../margem-superior-rolagem-mouse";
+import { Mascara } from "../mascara";
+import { MesclarFundo } from "../mesclar-fundo";
+import { ModeloColunasEmGrade } from "../modelo-colunas-em-grade";
+import { ModeloEmGrade } from "../modelo-em-grade";
+import { ModeloGeralEmGrade } from "../modelo-geral-em-grade";
+import { ModeloLinhasEmGrade } from "../modelo-linhas-em-grade";
+import { ModoBordaMascara } from "../modo-borda-mascara";
+import { ModoEscrita } from "../modo-escrita";
+import { ModoMascara } from "../modo-mascara";
+import { ModoMescla } from "../modo-mescla";
+import { ModoPreenchimentoAnimacao } from "../modo-preenchimento-animacao";
+import { NomeAnimacao } from "../nome-animacao";
+import { Opacidade } from "../opacidade";
+import { OrdemPintura } from "../ordem-pintura";
+import { Ordenar } from "../ordenar";
+import { OrientacaoImagem } from "../orientacao-imagem";
+import { OrientacaoTexto } from "../orientacao-texto";
+import { OrigemBordaMascara } from "../origem-borda-mascara";
+import { OrigemFundo } from "../origem-fundo";
+import { OrigemImagemBorda } from "../origem-imagem-borda";
+import { OrigemMascara } from "../origem-mascara";
+import { OrigemPerspectiva } from "../origem-perspectiva";
+import { PararEncaixeRolagemMouse } from "../parar-encaixe-rolagem-mouse";
+import { Perspectiva } from "../perspectiva";
+import { Posicao } from "../posicao";
+import { PosicaoDeslocamento } from "../posicao-deslocamento";
+import { PosicaoDireita } from "../posicao-direita";
+import { PosicaoEnfaseTexto } from "../posicao-enfase-texto";
+import { PosicaoEsquerda } from "../posicao-esquerda";
+import { PosicaoFundo } from "../posicao-fundo";
+import { PosicaoHorizontalFundo } from "../posicao-horizontal-fundo";
+import { PosicaoInferior } from "../posicao-inferior";
+import { PosicaoLegenda } from "../posicao-legenda";
+import { PosicaoMascara } from "../posicao-mascara";
+import { PosicaoObjeto } from "../posicao-objeto";
+import { PosicaoSuperior } from "../posicao-superior";
+import { PosicaoTextoSublinhado } from "../posicao-texto-sublinhado";
+import { PosicaoVerticalFundo } from "../posicao-vertical-fundo";
+import { PosicionarConteudo } from "../posicionar-conteudo";
+import { PosicionarItens } from "../posicionar-itens";
+import { PosicionarSe } from "../posicionar-se";
+import { PreencherColuna } from "../preencher-coluna";
+import { ProporcaoTela } from "../proporcao-tela";
+import { PropriedadeTransicao } from "../propriedade-transicao";
+import { QuebraDecoracaoCaixa } from "../quebra-decoracao-caixa";
+import { QuebrarAntes } from "../quebrar-antes";
+import { QuebrarApos } from "../quebrar-apos";
+import { QuebrarDentro } from "../quebrar-dentro";
+import { QuebrarLinha } from "../quebrar-linha";
+import { QuebrarPaginaAntes } from "../quebrar-pagina-antes";
+import { QuebrarPaginaApos } from "../quebrar-pagina-apos";
+import { QuebrarPaginaDentro } from "../quebrar-pagina-dentro";
+import { QuebrarPalavra } from "../quebrar-palavra";
+import { RaioBorda } from "../raio-borda";
+import { RaioDireitoBordaInferior } from "../raio-direito-borda-inferior";
+import { RaioDireitoBordaSuperior } from "../raio-direito-borda-superior";
+import { RaioEsquerdoBordaInferior } from "../raio-esquerdo-borda-inferior";
+import { RaioEsquerdoBordaSuperior } from "../raio-esquerdo-borda-superior";
+import { RecolherBorda } from "../recolher-borda";
+import { Recortar } from "../recortar";
+import { RecortarFundo } from "../recortar-fundo";
+import { RecortarMargemVazada } from "../recortar-margem-vazada";
+import { Recuo } from "../recuo";
+import { RecuoDireito } from "../recuo-direito";
+import { RecuoDireitoRolagemMouse } from "../recuo-direito-rolagem-mouse";
+import { RecuoEmBloco } from "../recuo-em-bloco";
+import { RecuoEmBlocoFim } from "../recuo-em-bloco-fim";
+import { RecuoEmBlocoRolagemMouse } from "../recuo-em-bloco-rolagem-mouse";
+import { RecuoEmLinha } from "../recuo-em-linha";
+import { RecuoEmLinhaFim } from "../recuo-em-linha-fim";
+import { RecuoEmLinhaRolagemMouse } from "../recuo-em-linha-rolagem-mouse";
+import { RecuoEsquerdo } from "../recuo-esquerdo";
+import { RecuoEsquerdoRolagemMouse } from "../recuo-esquerdo-rolagem-mouse";
+import { RecuoInferior } from "../recuo-inferior";
+import { RecuoInferiorRolagemMouse } from "../recuo-inferior-rolagem-mouse";
+import { RecuoRolagemMouse } from "../recuo-rolagem-mouse";
+import { RecuoSuperior } from "../recuo-superior";
+import { RecuoSuperiorRolagemMouse } from "../recuo-superior-rolagem-mouse";
+import { RecursosFonte } from "../recursos-fonte";
+import { Redimensionar } from "../redimensionar";
+import { RegrasColuna } from "../regras-coluna";
+import { RegrasCorColuna } from "../regras-cor-coluna";
+import { RegrasEstiloColuna } from "../regras-estilo-coluna";
+import { RegrasLarguraColuna } from "../regras-largura-coluna";
+import { RenderizacaoImagem } from "../renderizacao-imagem";
+import { RenderizacaoTexto } from "../renderizacao-texto";
+import { RepeticaoBordaMascara } from "../repeticao-borda-mascara";
+import { RepetirAnimacao } from "../repetir-animacao";
+import { RepetirFundo } from "../repetir-fundo";
+import { RepetirImagemBorda } from "../repetir-imagem-borda";
+import { RepetirMascara } from "../repetir-mascara";
+import { ReiniciarContador } from "../reiniciar-contador";
+import { ReiniciarTudo } from "../reiniciar-tudo";
 // import { Modificador } from "../superclasse/modificador";
 
 export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
@@ -358,9 +518,233 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "grade": Grade,
     "hifens": Hifens,
     "hífens": Hifens,
-    
-    // EM CONSTRUÇÃO
+    "imagem-borda": ImagemBorda,
+    "imagem-fundo": ImagemFundo,
+    "imagem-mascara": ImagemMascara,
+    "imagem-máscara": ImagemMascara,
+    "impressao-ajuste-cor": ImpressaoAjusteCor,
+    "impressão-ajuste-cor": ImpressaoAjusteCor,
+    "incrementar-contador": IncrementarContador,
+    "indentacao-texto": IndentacaoTexto,
+    "indentação-texto": IndentacaoTexto,
+    "indice-z": IndiceZ,
+    "índice-z": IndiceZ,
+    "inicio-borda-em-bloco": InicioBordaEmBloco,
+    "início-borda-em-bloco": InicioBordaEmBloco,
+    "inicio-borda-em-linha": InicioBordaEmLinha,
+    "início-borda-em-linha": InicioBordaEmLinha,
+    "inicio-borda-mascara": InicioBordaMascara,
+    "início-borda-máscara": InicioBordaMascara,
+    "inicio-coluna-em-grade": InicioColunaEmGrade,
+    "início-coluna-em-grade": InicioColunaEmGrade,
+    "inicio-insercao-em-bloco": InicioInsercaoEmBloco,
+    "início-inserção-em-bloco": InicioInsercaoEmBloco,
+    "inicio-insercao-em-linha": InicioInsercaoEmLinha,
+    "início-inserção-em-linha": InicioInsercaoEmLinha,
+    "inicio-linha-em-grade": InicioLinhaEmGrade,
+    "início-linha-em-grade": InicioLinhaEmGrade,
+    "inicio-margem-em-bloco": InicioMargemEmBloco,
+    "início-margem-em-bloco": InicioMargemEmBloco,
+    "inicio-margem-em-linha": InicioMargemEmLinha,
+    "início-margem-em-linha": InicioMargemEmLinha,
+    "inicio-recuo-em-bloco": InicioRecuoEmBloco,
+    "início-recuo-em-bloco": InicioRecuoEmBloco,
+    "inicio-recuo-em-linha": InicioRecuoEmLinha,
+    "início-recuo-em-linha": InicioRecuoEmLinha,
+    "insercao": Insercao,
+    "inserção": Insercao,
+    "insercao-em-bloco": InsercaoEmBloco,
+    "inserção-em-bloco": InsercaoEmBloco,
+    "insercao-em-bloco-fim": InsercaoEmBlocoFim,
+    "inserção-em-bloco-fim": InsercaoEmBlocoFim,
+    "insercao-em-linha": InsercaoEmLinha,
+    "inserção-em-linha": InsercaoEmLinha,
+    "insercao-em-linha-fim": InsercaoEmLinhaFim,
+    "inserção-em-linha-fim": InsercaoEmLinhaFim,
+    "isolamento": Isolamento,
+    "justificar-conteudo": JustificarConteudo,
+    "justificar-conteúdo": JustificarConteudo,
+    "justificar-itens": JustificarItens,
+    "justificar-se": JustificarSe,
+    "justificar-texto": JustificarTexto,
+    "largura": Largura,
+    "largura-barra-rolagem": LarguraBarraRolagem,
+    "largura-borda": LarguraBorda,
+    "largura-borda-direita": LarguraBordaDireita,
+    "largura-borda-em-bloco": LarguraBordaEmBloco,
+    "largura-borda-em-linha": LarguraBordaEmLinha,
+    "largura-borda-esquerda": LarguraBordaEsquerda,
+    "largura-borda-inferior": LarguraBordaInferior,
+    "largura-borda-mascara": LarguraBordaMascara,
+    "largura-borda-máscara": LarguraBordaMascara,
+    "largura-borda-superior": LarguraBordaSuperior,
+    "largura-coluna": LarguraColuna,
+    "largura-contorno": LarguraContorno,
+    "largura-fim-borda-em-bloco": LarguraFimBordaEmBloco,
+    "largura-fim-borda-em-linha": LarguraFimBordaEmLinha,
+    "largura-imagem-borda": LarguraImagemBorda,
+    "largura-inicio-borda-em-bloco": LarguraInicioBordaEmBloco,
+    "largura-início-borda-em-bloco": LarguraInicioBordaEmBloco,
+    "largura-inicio-borda-em-linha": LarguraInicioBordaEmLinha,
+    "largura-início-borda-em-linha": LarguraInicioBordaEmLinha,
+    "largura-maxima": LarguraMaxima,
+    "largura-máxima": LarguraMaxima,
+    "largura-minima": LarguraMinima,
+    "largura-mínima": LarguraMinima,
+    "limite-forma-imagem": LimiteFormaImagem,
+    "linha-em-grade": LinhaEmGrade,
+    "linhas-inferiores": LinhasInferiores,
+    "linhas-superiores": LinhasSuperiores,
+    "margem": Margem,
+    "margem-direita": MargemDireita,
+    "margem-direita-rolagem-mouse": MargemDireitaRolagemMouse,
+    "margem-em-bloco": MargemEmBloco,
+    "margem-em-bloco-fim": MargemEmBlocoFim,
+    "margem-em-bloco-rolagem-mouse": MargemEmBlocoRolagemMouse,
+    "margem-em-linha": MargemEmLinha,
+    "margem-em-linha-fim": MargemEmLinhaFim,
+    "margem-em-linha-rolagem-mouse": MargemEmLinhaRolagemMouse,
+    "margem-esquerda": MargemEsquerda,
+    "margem-esquerda-rolagem-mouse": MargemEsquerdaRolagemMouse,
+    "margem-inferior": MargemInferior,
+    "margem-inferior-rolagem-mouse": MargemInferiorRolagemMouse,
+    "margem-rolagem-mouse": MargemRolagemMouse,
+    "margem-superior": MargemSuperior,
+    "margem-superior-rolagem-mouse": MargemSuperiorRolagemMouse,
+    "mascara": Mascara,
+    "máscara": Mascara,
+    "mesclar-fundo": MesclarFundo,
+    "modelo-colunas-em-grade": ModeloColunasEmGrade,
+    "modelo-em-grade": ModeloEmGrade,
+    "modelo-geral-em-grade": ModeloGeralEmGrade,
+    "modelo-linhas-em-grade": ModeloLinhasEmGrade,
+    "modo-borda-mascara": ModoBordaMascara,
+    "modo-borda-máscara": ModoBordaMascara,
+    "modo-escrita": ModoEscrita,
+    "modo-mascara": ModoMascara,
+    "modo-máscara": ModoMascara,
+    "modo-mescla": ModoMescla,
+    "modo-preenchimento-animacao": ModoPreenchimentoAnimacao,
+    "modo-preenchimento-animação": ModoPreenchimentoAnimacao,
+    "nome-animacao": NomeAnimacao,
+    "nome-animação": NomeAnimacao,
+    "opacidade": Opacidade,
+    "ordem-pintura": OrdemPintura,
+    "ordenar": Ordenar,
+    "orientacao-imagem": OrientacaoImagem,
+    "orientação-imagem": OrientacaoImagem,
+    "orientacao-texto": OrientacaoTexto,
+    "orientação-texto": OrientacaoTexto,
+    "origem-borda-mascara": OrigemBordaMascara,
+    "origem-borda-máscara": OrigemBordaMascara,
+    "origem-fundo": OrigemFundo,
+    "origem-imagem-borda": OrigemImagemBorda,
+    "origem-mascara": OrigemMascara,
+    "origem-máscara": OrigemMascara,
+    "origem-perspectiva": OrigemPerspectiva,
+    "parar-encaixe-rolagem-mouse": PararEncaixeRolagemMouse,
+    "perspectiva": Perspectiva,
+    "posicao": Posicao,
+    "posição": Posicao,
+    "posicao-deslocamento": PosicaoDeslocamento,
+    "posição-deslocamento": PosicaoDeslocamento,
+    "posicao-direita": PosicaoDireita,
+    "posição-direita": PosicaoDireita,
+    "posicao-enfase-texto": PosicaoEnfaseTexto,
+    "posição-ênfase-texto": PosicaoEnfaseTexto,
+    "posicao-esquerda": PosicaoEsquerda,
+    "posição-esquerda": PosicaoEsquerda,
+    "posicao-fundo": PosicaoFundo,
+    "posição-fundo": PosicaoFundo,
+    "posicao-horizontal-fundo": PosicaoHorizontalFundo,
+    "posição-horizontal-fundo": PosicaoHorizontalFundo,
+    "posicao-inferior": PosicaoInferior,
+    "posição-inferior": PosicaoInferior,
+    "posicao-legenda": PosicaoLegenda,
+    "posição-legenda": PosicaoLegenda,
+    "posicao-mascara": PosicaoMascara,
+    "posição-máscara": PosicaoMascara,
+    "posicao-objeto": PosicaoObjeto,
+    "posição-objeto": PosicaoObjeto,
+    "posicao-superior": PosicaoSuperior,
+    "posição-superior": PosicaoSuperior,
+    "posicao-texto-sublinhado": PosicaoTextoSublinhado,
+    "posição-texto-sublinhado": PosicaoTextoSublinhado,
+    "posicao-vertical-fundo": PosicaoVerticalFundo,
+    "posição-vertical-fundo": PosicaoVerticalFundo,
+    "posicionar-conteudo": PosicionarConteudo,
+    "posicionar-conteúdo": PosicionarConteudo,
+    "posicionar-itens": PosicionarItens,
+    "posicionar-se": PosicionarSe,
+    "preencher-coluna": PreencherColuna,
+    "proporcao-tela": ProporcaoTela,
+    "proporção-tela": ProporcaoTela,
+    "propriedade-transicao": PropriedadeTransicao,
+    "propriedade-transição": PropriedadeTransicao,
+    "quebra-decoracao-caixa": QuebraDecoracaoCaixa,
+    "quebra-decoração-caixa": QuebraDecoracaoCaixa,
+    "quebrar-antes": QuebrarAntes,
+    "quebrar-apos": QuebrarApos,
+    "quebrar-após": QuebrarApos,
+    "quebrar-dentro": QuebrarDentro,
+    "quebrar-linha": QuebrarLinha,
+    "quebrar-pagina-antes": QuebrarPaginaAntes,
+    "quebrar-página-antes": QuebrarPaginaAntes,
+    "quebrar-pagina-apos": QuebrarPaginaApos,
+    "quebrar-página-após": QuebrarPaginaApos,
+    "quebrar-pagina-dentro": QuebrarPaginaDentro,
+    "quebrar-página-dentro": QuebrarPaginaDentro,
+    "quebrar-palavra": QuebrarPalavra,
+    "raio-borda": RaioBorda,   
+    "raio-direito-borda-inferior": RaioDireitoBordaInferior,
+    "raio-direito-borda-superior": RaioDireitoBordaSuperior,
+    "raio-esquerdo-borda-inferior": RaioEsquerdoBordaInferior,
+    "raio-esquerdo-borda-superior": RaioEsquerdoBordaSuperior,
+    "recolher-borda": RecolherBorda,
+    "recortar": Recortar,
+    "recortar-fundo": RecortarFundo,
+    "recortar-margem-vazada": RecortarMargemVazada,
+    "recuo": Recuo,
+    "recuo-direito": RecuoDireito,
+    "recuo-direito-rolagem-mouse": RecuoDireitoRolagemMouse,
+    "recuo-em-bloco": RecuoEmBloco,
+    "recuo-em-bloco-fim": RecuoEmBlocoFim,
+    "recuo-em-bloco-rolagem-mouse": RecuoEmBlocoRolagemMouse,
+    "recuo-em-linha": RecuoEmLinha,
+    "recuo-em-linha-fim": RecuoEmLinhaFim,
+    "recuo-em-linha-rolagem-mouse": RecuoEmLinhaRolagemMouse, 
+    "recuo-esquerdo": RecuoEsquerdo,
+    "recuo-esquerdo-rolagem-mouse": RecuoEsquerdoRolagemMouse,
+    "recuo-inferior": RecuoInferior,
+    "recuo-inferior-rolagem-mouse": RecuoInferiorRolagemMouse,
+    "recuo-rolagem-mouse": RecuoRolagemMouse,
+    "recuo-superior": RecuoSuperior,
+    "recuo-superior-rolagem-mouse": RecuoSuperiorRolagemMouse,
+    "recursos-fonte": RecursosFonte,
+    "redimensionar": Redimensionar,
+    "regras-coluna": RegrasColuna,
+    "regras-cor-coluna": RegrasCorColuna,
+    "regras-estilo-coluna": RegrasEstiloColuna,
+    "regras-largura-coluna": RegrasLarguraColuna,
+    "reiniciar-contador": ReiniciarContador,
+    "reiniciar-tudo": ReiniciarTudo,
+    "renderizacao-imagem": RenderizacaoImagem,
+    "renderização-imagem": RenderizacaoImagem,
+    "renderizacao-texto": RenderizacaoTexto,
+    "renderização-texto": RenderizacaoTexto,
+    "repeticao-borda-mascara": RepeticaoBordaMascara,
+    "repetição-borda-máscara": RepeticaoBordaMascara,
+    "repetir-animacao": RepetirAnimacao,
+    "repetir-animação": RepetirAnimacao,
+    "repetir-fundo": RepetirFundo,
+    "repetir-imagem-borda": RepetirImagemBorda,
+    "repetir-mascara": RepetirMascara,
+    "repetir-máscara": RepetirMascara,
+
+
+
+
 
 }
 
-// console.log(Object.keys(DicionarioModificadores).length);
+console.log(Object.keys(DicionarioModificadores).length);
