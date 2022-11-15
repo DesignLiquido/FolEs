@@ -11,3 +11,6 @@ export class SeletorModificador {
         return new DicionarioModificadores[nomeFolEs];
     }
 }
+
+const largura = new SeletorModificador("largura-maxima");
+console.log(largura);
