@@ -310,6 +310,57 @@ import { RepetirImagemBorda } from "../repetir-imagem-borda";
 import { RepetirMascara } from "../repetir-mascara";
 import { ReiniciarContador } from "../reiniciar-contador";
 import { ReiniciarTudo } from "../reiniciar-tudo";
+import { SelecaoUsuario } from "../selecao-usuario";
+import { SintetizarFonte } from "../sintetizar-fonte";
+import { SombraCaixa } from "../sombra-caixa";
+import { SombraTexto } from "../sombra-texto";
+import { StatusAnimacao } from "../status-animacao";
+import { SubstituirIdiomaFonte } from "../substituir-idioma-fonte";
+import { Tabulacao } from "../tabulacao";
+import { TamanhoCaixa } from "../tamanho-caixa";
+import { TamanhoColunasEmGrade } from "../tamanho-colunas-em-grade";
+import { TamanhoEmBloco } from "../tamanho-em-bloco";
+import { TamanhoEmLinha } from "../tamanho-em-linha";
+import { TamanhoFonte } from "../tamanho-fonte";
+import { TamanhoFundo } from "../tamanho-fundo";
+import { TamanhoGrade } from "../tamanho-grade";
+import { TamanhoLinhasEmGrade } from "../tamanho-linhas-em-grade";
+import { TamanhoMascara } from "../tamanho-mascara";
+import { TamanhoMaximoEmBloco } from "../tamanho-maximo-em-bloco";
+import { TamanhoMaximoEmLinha } from "../tamanho-maximo-em-linha";
+import { TamanhoMinimoEmBloco } from "../tamanho-minimo-em-bloco";
+import { TamanhoMinimoEmLinha } from "../tamanho-minimo-em-linha";
+import { TamanhoOpticoFonte } from "../tamanho-optico-fonte";
+import { TempoTransicao } from "../tempo-transicao";
+import { TextoBidirecional } from "../texto-bidirecional";
+import { TipoEncaixeRolagemMouse } from "../tipo-encaixe-rolagem-mouse";
+import { TipoMascara } from "../tipo-mascara";
+import { ToqueTela } from "../toque-tela";
+import { TrajetoDeslocamento } from "../trajeto-deslocamento";
+import { Transformar } from "../transformar";
+import { TransformarCaixa } from "../transformar-caixa";
+import { TransformarEstilo } from "../transformar-estilo";
+import { TransformarOrigem } from "../transformar-origem";
+import { TransformarTexto } from "../transformar-texto";
+import { Transicao } from "../transicao";
+import { TravarPontuacao } from "../travar-pontuacao";
+import { VariacaoFonte } from "../variacao-fonte";
+import { VariacaoFonteAlternativa } from "../variacao-fonte-alternativa";
+import { VariacaoFonteAsiatica } from "../variacao-fonte-asiatica";
+import { VariacaoFonteLigacao } from "../variacao-fonte-ligacao";
+import { VariacaoFonteMaiuscula } from "../variacao-fonte-maiuscula";
+import { VariacaoFonteNumerica } from "../variacao-fonte-numerica";
+import { VariacaoFontePosicao } from "../variacao-fonte-posicao";
+import { Vazamento } from "../vazamento";
+import { VazamentoEmAncora } from "../vazamento-em-ancora";
+import { VazamentoEmBloco } from "../vazamento-em-bloco";
+import { VazamentoEmLinha } from "../vazamento-em-linha";
+import { VazamentoHorizontal } from "../vazamento-horizontal";
+import { VazamentoTexto } from "../vazamento-texto";
+import { VazamentoVertical } from "../vazamento-vertical";
+import { Visibilidade } from "../visibilidade";
+import { VisibilidadeConteudo } from "../visibilidade-conteudo";
+import { VisibilidadeFundo } from "../visibilidade-fundo";
 // import { Modificador } from "../superclasse/modificador";
 
 export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
@@ -740,11 +791,79 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "repetir-imagem-borda": RepetirImagemBorda,
     "repetir-mascara": RepetirMascara,
     "repetir-máscara": RepetirMascara,
-
-
-
-
-
+    "selecao-usuario": SelecaoUsuario,
+    "seleção-usuario": SelecaoUsuario,
+    "sintetizar-fonte": SintetizarFonte,
+    "sombra-caixa": SombraCaixa,
+    "sombra-texto": SombraTexto,
+    "status-animacao": StatusAnimacao,
+    "status-animação": StatusAnimacao,
+    "substituir-idioma-fonte": SubstituirIdiomaFonte,
+    "tabulacao": Tabulacao,
+    "tabulação": Tabulacao,
+    "tamanho-caixa": TamanhoCaixa,
+    "tamanho-colunas-em-grade": TamanhoColunasEmGrade,
+    "tamanho-em-bloco": TamanhoEmBloco,
+    "tamanho-em-linha": TamanhoEmLinha,
+    "tamanho-fonte": TamanhoFonte,
+    "tamanho-fundo": TamanhoFundo,
+    "tamanho-grade": TamanhoGrade,
+    "tamanho-linhas-em-grade": TamanhoLinhasEmGrade,
+    "tamanho-mascara": TamanhoMascara,
+    "tamanho-máscara": TamanhoMascara,
+    "tamanho-maximo-em-bloco": TamanhoMaximoEmBloco,
+    "tamanho-máximo-em-bloco": TamanhoMaximoEmBloco,
+    "tamanho-maximo-em-linha": TamanhoMaximoEmLinha,
+    "tamanho-máximo-em-linha": TamanhoMaximoEmLinha,
+    "tamanho-minimo-em-bloco": TamanhoMinimoEmBloco,
+    "tamanho-mínimo-em-bloco": TamanhoMinimoEmBloco,
+    "tamanho-minimo-em-linha": TamanhoMinimoEmLinha,
+    "tamanho-mínimo-em-linha": TamanhoMinimoEmLinha,
+    "tamanho-optico-fonte": TamanhoOpticoFonte,
+    "tamanho-óptico-fonte": TamanhoOpticoFonte,
+    "tempo-transicao": TempoTransicao,
+    "tempo-transição": TempoTransicao,
+    "texto-bidirecional": TextoBidirecional,
+    "tipo-encaixe-rolagem-mouse": TipoEncaixeRolagemMouse,
+    "tipo-mascara": TipoMascara,
+    "tipo-máscara": TipoMascara,
+    "toque-tela": ToqueTela,
+    "trajeto-deslocamento": TrajetoDeslocamento,
+    "transformar": Transformar,
+    "transformar-caixa": TransformarCaixa,
+    "transformar-estilo": TransformarEstilo,
+    "transformar-origem": TransformarOrigem,
+    "transformar-texto": TransformarTexto,
+    "transicao": Transicao,
+    "transição": Transicao,                
+    "travar-pontuacao": TravarPontuacao,
+    "travar-pontuação": TravarPontuacao,
+    "variacao-fonte": VariacaoFonte,
+    "variação-fonte": VariacaoFonte,
+    "variacao-fonte-alternativa": VariacaoFonteAlternativa,
+    "variação-fonte-alternativa": VariacaoFonteAlternativa,
+    "variacao-fonte-asiatica": VariacaoFonteAsiatica,
+    "variação-fonte-asiática": VariacaoFonteAsiatica,
+    "variacao-fonte-ligacao": VariacaoFonteLigacao,
+    "variação-fonte-ligação": VariacaoFonteLigacao,
+    "variacao-fonte-maiuscula": VariacaoFonteMaiuscula,
+    "variação-fonte-maiúscula": VariacaoFonteMaiuscula,
+    "variacao-fonte-numerica": VariacaoFonteNumerica,
+    "variação-fonte-numérica": VariacaoFonteNumerica,
+    "variacao-fonte-posicao": VariacaoFontePosicao,
+    "variação-fonte-posição": VariacaoFontePosicao,
+    "vazamento": Vazamento,
+    "vazamento-em-ancora": VazamentoEmAncora,
+    "vazamento-em-âncora": VazamentoEmAncora,
+    "vazamento-em-bloco": VazamentoEmBloco,
+    "vazamento-em-linha": VazamentoEmLinha,
+    "vazamento-horizontal": VazamentoHorizontal,
+    "vazamento-texto": VazamentoTexto,
+    "vazamento-vertical": VazamentoVertical,
+    "visibilidade": Visibilidade,
+    "visibilidade-conteudo": VisibilidadeConteudo,
+    "visibilidade-conteúdo": VisibilidadeConteudo,
+    "visibilidade-fundo": VisibilidadeFundo,
 }
 
 console.log(Object.keys(DicionarioModificadores).length);
