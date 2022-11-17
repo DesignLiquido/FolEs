@@ -1,7 +1,8 @@
 lmht {
-    tamanho-texto: 12px;
+    tamanho-fonte: 12px;
 }
 
 corpo {
-    tamanho-texto: 16px;
+    tamanho-fonte: 16px;
+    largura-maxima: 20cm;
 }

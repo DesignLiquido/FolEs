@@ -13,6 +13,6 @@ const avaliadorSintatico = new AvaliadorSintatico();
 const tradutor = new Tradutor();
 
 const resultadoLexador = lexador.mapear(conteudoDoArquivo);
-// const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
-// const traducao = tradutor.traduzir(resultadoAvaliadorSintatico);
-console.log(resultadoLexador);
+const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+const traducao = tradutor.traduzir(resultadoAvaliadorSintatico);
+console.log(traducao);

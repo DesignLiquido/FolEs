@@ -2,6 +2,7 @@ import { ErroAvaliadorSintatico } from ".";
 import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
+import { SeletorModificador } from "../modificadores/superclasse";
 import { TamanhoFonte } from "../modificadores/tamanho-fonte";
 import tiposDeSimbolos from "../tipos-de-simbolos";
 
@@ -69,7 +70,9 @@ export class AvaliadorSintatico {
                 `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
             );
 
-            modificadores.push(new TamanhoFonte(valorModificador.lexema, quantificador.lexema));
+            // modificadores.push(new TamanhoFonte(valorModificador.lexema, quantificador.lexema));
+            const classeModificadora = new SeletorModificador(modificador.lexema);
+            modificadores.push(classeModificadora as Modificador);
         }
 
         this.avancarEDevolverAnterior(); // chave direita
