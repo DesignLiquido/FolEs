@@ -1,4 +1,5 @@
 # FolEs
+
 Folhas de Estilo em Português, para geração de CSS.
 
 ## Motivação
@@ -13,7 +14,7 @@ Se queremos definir estilos para um documento inteiro, podemos usar:
 
 ```
 lmht {
-    tamanho-texto: 12px;
+    tamanho-fonte: 12px;
 }
 ```
 
@@ -25,7 +26,23 @@ html {
 }
 ```
 
+## Instalação
+
+Para instalar FolEs globalmente, use o seguinte comando:
+
+```sh
+npm i -g @designliquido/foles
+```
+
 ## Execução
+
+Após instalar globalmente pelo npm, para executar FolEs traduzindo um arquivo chamado `exemplo.foles`, use:
+
+```sh
+foles exemplo.foles
+```
+
+### VSCode
 
 No Visual Studio Code, adicione no seu `launch.json` o seguinte:
 
@@ -38,7 +55,10 @@ No Visual Studio Code, adicione no seu `launch.json` o seguinte:
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}index.ts"],
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}exemplo.foles"
+            ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
         },
@@ -54,4 +74,4 @@ FolEs copia vários elementos de [Delégua](https://github.com/DesignLiquido/del
 
 | FolEs         | CSS       |
 | ------------- | ----------|
-| tamanho-texto | font-size |
+| tamanho-fonte | font-size |
