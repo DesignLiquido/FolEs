@@ -7,11 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "FolEs",
+            "name": "FolEs > Exemplos > exemplo.foles",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
-            "args": ["${workspaceFolder}${pathSeparator}index.ts"],
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}exemplo.foles"
+            ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
         },
