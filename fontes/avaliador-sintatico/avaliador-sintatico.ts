@@ -70,8 +70,11 @@ export class AvaliadorSintatico {
                 `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
             );
 
-            // modificadores.push(new TamanhoFonte(valorModificador.lexema, quantificador.lexema));
-            const classeModificadora = new SeletorModificador(modificador.lexema);
+            const classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valorModificador.lexema,
+                quantificador.lexema
+            );
             modificadores.push(classeModificadora as Modificador);
         }
 
