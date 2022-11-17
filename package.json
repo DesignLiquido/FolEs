@@ -18,7 +18,7 @@
         "url": "git+https://github.com/DesignLiquido/FolEs.git"
     },
     "bin": {
-        "delegua": "./bin/foles"
+        "foles": "./bin/foles"
     },
     "author": "Leonel Sanches da Silva",
     "license": "MIT",
