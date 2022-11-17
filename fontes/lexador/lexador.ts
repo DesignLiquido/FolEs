@@ -177,6 +177,15 @@ export class Lexador {
                 this.adicionarSimbolo(tiposDeSimbolos.PONTO_E_VIRGULA);
                 this.avancar();
                 break;
+            case '%':
+                // TODO @Vitor: Se % está no começo de uma linha (ou seja, é o primeiro
+                // caractere de uma linha sem contar espaços, é um placeholder selector.
+                // Caso contrário, é um quantificador.
+                // Verificar se é melhor apenas devolver o símbolo percentual aqui e
+                // tratar a situação no avaliador sintático, ou se mais lógica é necessária aqui.
+                this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL);
+                this.avancar();
+                break;
             case ' ':
                 case '\0':
                 case '\r':

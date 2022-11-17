@@ -117,5 +117,21 @@ export default {
     "titulo6": tiposDeSimbolos.ESTRUTURA,
     "título6": tiposDeSimbolos.ESTRUTURA,
     "variavel": tiposDeSimbolos.ESTRUTURA,
-    "variável": tiposDeSimbolos.ESTRUTURA
+    "variável": tiposDeSimbolos.ESTRUTURA, 
+
+    // Quantificadores
+    "cm": tiposDeSimbolos.QUANTIFICADOR,
+    "mm": tiposDeSimbolos.QUANTIFICADOR,
+    "in": tiposDeSimbolos.QUANTIFICADOR,
+    "px": tiposDeSimbolos.QUANTIFICADOR,
+    "pt": tiposDeSimbolos.QUANTIFICADOR,
+    "pc": tiposDeSimbolos.QUANTIFICADOR,
+    "em": tiposDeSimbolos.QUANTIFICADOR,
+    "ex": tiposDeSimbolos.QUANTIFICADOR,
+    "ch": tiposDeSimbolos.QUANTIFICADOR,
+    "rem": tiposDeSimbolos.QUANTIFICADOR,
+    "vw": tiposDeSimbolos.QUANTIFICADOR,
+    "vh": tiposDeSimbolos.QUANTIFICADOR,
+    "vmin": tiposDeSimbolos.QUANTIFICADOR,
+    "vmax": tiposDeSimbolos.QUANTIFICADOR
 }
