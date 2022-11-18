@@ -42,7 +42,12 @@ export class AvaliadorSintatico {
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
     }
 
-    declaracaoDeclaracao(): Declaracao {
+    declaracaoPorSeletor(): Declaracao {
+        // TODO @Vitor: Pensar lógica para seletor de classes.
+        return null;
+    }
+
+    declaracaoPorEstrutura(): Declaracao {
         const simboloSeletor = this.avancarEDevolverAnterior();
 
         this.consumir(
@@ -89,7 +94,9 @@ export class AvaliadorSintatico {
 
         switch (simboloAtual.tipo) {
             case tiposDeSimbolos.ESTRUTURA:
-                return this.declaracaoDeclaracao();
+                return this.declaracaoPorEstrutura();
+            case tiposDeSimbolos.IDENTIFICADOR:
+                return this.declaracaoPorSeletor();
         }
     }
 
