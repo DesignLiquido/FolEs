@@ -5,4 +5,5 @@ lmht {
 corpo {
     tamanho-fonte: 16px;
     largura-maxima: 20cm;
+    recuo-direito: 2px;
 }
