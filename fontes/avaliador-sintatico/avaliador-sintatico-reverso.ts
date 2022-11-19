@@ -1,17 +1,18 @@
-import { ErroAvaliadorSintatico } from ".";
 import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
+import { ErroAvaliadorSintatico } from "./erro-avaliador-sintatico";
+
 import { Modificador } from "../modificadores";
-import { SeletorModificador } from "../modificadores/superclasse";
+import { SeletorReversoModificador } from "../modificadores/superclasse/seletor-reverso-modificador";
 
-import tiposDeSimbolos from "../tipos-de-simbolos/foles";
+import tiposDeSimbolos from "../tipos-de-simbolos/css";
 
-export class AvaliadorSintatico {
+export class AvaliadorSintaticoReverso {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
 
     atual: number;
-
+    
     constructor() {
         this.simbolos = [];
     }
@@ -43,11 +44,11 @@ export class AvaliadorSintatico {
     }
 
     declaracaoPorSeletor(): Declaracao {
-        // TODO @Vitor: Pensar lógica para seletor de classes.
+        // TODO: Pensar lógica para seletor de classes.
         return null;
     }
 
-    declaracaoPorEstrutura(): Declaracao {
+    declaracaoPorTag(): Declaracao {
         const simboloSeletor = this.avancarEDevolverAnterior();
 
         this.consumir(
@@ -75,7 +76,7 @@ export class AvaliadorSintatico {
                 `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
             );
 
-            const classeModificadora = new SeletorModificador(
+            const classeModificadora = new SeletorReversoModificador(
                 modificador.lexema,
                 valorModificador.lexema,
                 quantificador.lexema
@@ -93,8 +94,8 @@ export class AvaliadorSintatico {
         if (!simboloAtual) return null;
 
         switch (simboloAtual.tipo) {
-            case tiposDeSimbolos.ESTRUTURA:
-                return this.declaracaoPorEstrutura();
+            case tiposDeSimbolos.TAG:
+                return this.declaracaoPorTag();
             case tiposDeSimbolos.IDENTIFICADOR:
                 return this.declaracaoPorSeletor();
         }

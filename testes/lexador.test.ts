@@ -1,5 +1,5 @@
 import { Lexador } from "../fontes/lexador";
-import tiposDeSimbolos from "../fontes/tipos-de-simbolos";
+import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
 
 describe('Lexador', () => {
     describe('mapear()', () => {
