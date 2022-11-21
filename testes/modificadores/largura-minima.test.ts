@@ -67,12 +67,15 @@ describe('Testando Dicionario Modificadores', () => {
                 "    largura-minima: 12px;",
                 "}"
             ]);
+
             const resultadoAvaliadorSintatico = avaliador.analisar(resultado.simbolos);
 
             const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+
             expect(resultadoTradutor).toBeTruthy();
-            expect(resultadoTradutor).toHaveLength(27);
-            // expect(resultadoTradutor).toStrictEqual("html {min-width: 12px;}");
+            expect(resultadoTradutor).toContain("html");
+            expect(resultadoTradutor).toContain("min-width");
+            expect(resultadoTradutor).toContain("12px;");
         });
 
         it('Lexador - Caso de Falha: sem quantificador', () => {
