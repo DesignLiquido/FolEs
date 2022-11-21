@@ -109,12 +109,12 @@ export class Lexador {
         }
     }
 
-    adicionarSimbolo(tipo: any, literal: any = null): void {
+    adicionarSimbolo(tipo: any, literal: any = null, lexema: string = null): void {
         const texto: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
-        this.simbolos.push(new Simbolo(tipo, texto, literal, this.linha + 1));
+        this.simbolos.push(new Simbolo(tipo, texto || lexema, literal, this.linha + 1));
     }
 
     analisarNumero(): void {
@@ -178,12 +178,10 @@ export class Lexador {
                 this.avancar();
                 break;
             case '%':
-                if (this.simbolos.length === 0) {
-                    this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL);
-                } if (this.simbolos[this.simbolos.length - 1].tipo === 'CHAVE_DIREITA') {
-                    this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL);
+                if (this.atual === 0) {
+                    this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL, null, '%');
                 } else {
-                    this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR);
+                    this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, '%');
                 }
                 this.avancar();
                 break;
