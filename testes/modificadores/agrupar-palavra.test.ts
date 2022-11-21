@@ -4,7 +4,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
 
 describe('Testando Dicionario Modificadores', () => {
-    describe('Largura Mínima', () => {
+    describe('Agrupar Palavra', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
         let tradutor: Tradutor;
