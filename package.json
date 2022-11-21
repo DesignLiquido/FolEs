@@ -21,6 +21,9 @@
         "foles": "./bin/foles"
     },
     "author": "Leonel Sanches da Silva",
+    "collaborators": [
+        "Vitor dos Santos Brandão da Silva"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/DesignLiquido/FolEs/issues"
