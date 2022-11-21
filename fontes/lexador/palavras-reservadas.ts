@@ -133,5 +133,6 @@ export default {
     "vw": tiposDeSimbolos.QUANTIFICADOR,
     "vh": tiposDeSimbolos.QUANTIFICADOR,
     "vmin": tiposDeSimbolos.QUANTIFICADOR,
-    "vmax": tiposDeSimbolos.QUANTIFICADOR
+    "vmax": tiposDeSimbolos.QUANTIFICADOR,
+    "%": tiposDeSimbolos.QUANTIFICADOR,
 }
