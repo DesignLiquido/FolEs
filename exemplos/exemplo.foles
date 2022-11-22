@@ -5,4 +5,9 @@ lmht {
 %corpo {
     tamanho-fonte: 16mm;
     largura-maxima: 20cm;
+    borda-superior: 130%;
+}
+
+%lmht {
+    altura: 130px;
 }

@@ -22,7 +22,6 @@ export class FolEs {
             .split('\n');
 
         const resultadoLexador = this.lexador.mapear(conteudoDoArquivo);
-        console.log(resultadoLexador);
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador.simbolos);
         const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
         console.log(traducao);
@@ -30,4 +29,4 @@ export class FolEs {
 }
 
 // const teste = new FolEs();
-// console.log(teste.converterParaCss('../exemplos/exemplo.foles'));
+// teste.converterParaCss('../exemplos/exemplo.foles');

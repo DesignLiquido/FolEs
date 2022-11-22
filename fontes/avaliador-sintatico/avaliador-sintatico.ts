@@ -3,7 +3,6 @@ import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
 import { SeletorModificador } from "../modificadores/superclasse";
-import { TamanhoFonte } from "../modificadores/tamanho-fonte";
 import tiposDeSimbolos from "../tipos-de-simbolos";
 
 export class AvaliadorSintatico {
@@ -42,8 +41,12 @@ export class AvaliadorSintatico {
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
     }
 
-    declaracaoDeclaracao(): Declaracao {
-        const simboloSeletor = this.avancarEDevolverAnterior();
+    declaracaoDeclaracao(placeholder: string = null): Declaracao {
+        let simboloSeletor = this.avancarEDevolverAnterior();
+
+        if(placeholder){
+            simboloSeletor = this.avancarEDevolverAnterior();
+        }
 
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
@@ -79,7 +82,7 @@ export class AvaliadorSintatico {
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return new Declaracao(simboloSeletor.lexema, modificadores);
+        return new Declaracao(simboloSeletor.lexema, modificadores, placeholder);
     }
 
     declaracao(): any {
@@ -90,6 +93,8 @@ export class AvaliadorSintatico {
         switch (simboloAtual.tipo) {
             case tiposDeSimbolos.ESTRUTURA:
                 return this.declaracaoDeclaracao();
+            case tiposDeSimbolos.PERCENTUAL:
+                return this.declaracaoDeclaracao(simboloAtual.lexema);
         }
     }
 

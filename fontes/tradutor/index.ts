@@ -11,7 +11,12 @@ export class Tradutor {
         let resultado = "";
 
         for (const declaracao of declaracoes) {
-            resultado += `${estruturasHtml[declaracao.seletor]} {\n`
+            if (declaracao.placeholder) {
+                resultado += `${declaracao.placeholder}${estruturasHtml[declaracao.seletor]} {\n`
+            } else {
+                resultado += `${estruturasHtml[declaracao.seletor]} {\n`
+            }
+
             for (const modificador of declaracao.modificadores) {
                 resultado += this.traduzirModificador(modificador);
             }
