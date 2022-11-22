@@ -22,7 +22,17 @@ const principal = () => {
     }
 
     const foles = new FolEs();
-    foles.converterParaCss(nomeArquivo);
+
+    if (nomeArquivo.endsWith("foles")) {
+        foles.converterParaCss(nomeArquivo);
+        return;
+    } else if (nomeArquivo.endsWith("css")) {
+        const retorno = foles.converterParaFolEs(nomeArquivo);
+        console.log(retorno);
+        return;
+    }
+
+    throw new Error("Formato de arquivo não reconhecido.");
 }
 
 principal();

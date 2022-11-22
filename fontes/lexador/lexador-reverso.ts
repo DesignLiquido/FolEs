@@ -1,17 +1,17 @@
 import { ErroLexador } from "./erro-lexador";
 import { Simbolo } from "./simbolo";
 
-import palavrasReservadas from "./palavras-reservadas/foles";
-import tiposDeSimbolos from "../tipos-de-simbolos/foles";
+import palavrasReservadas from "./palavras-reservadas/css";
+import tiposDeSimbolos from "../tipos-de-simbolos/css";
 
-export class Lexador {
-    codigo: string[];
-    simbolos: Simbolo[];
-    erros: ErroLexador[];
-
+export class LexadorReverso {
     linha: number;
     atual: number;
     inicioSimbolo: number;
+
+    codigo: string[];
+    simbolos: Simbolo[];
+    erros: ErroLexador[];
 
     constructor() {
         this.codigo = [""];
@@ -29,7 +29,7 @@ export class Lexador {
      * @returns Verdadeiro se contador de linhas está na última linha.
      *          Falso caso contrário.
      */
-    eUltimaLinha(): boolean {
+     eUltimaLinha(): boolean {
         return this.linha >= this.codigo.length - 1;
     }
 
@@ -50,6 +50,10 @@ export class Lexador {
     simboloAtual(): string {
         if (this.eFinalDaLinha()) return "\0";
         return this.codigo[this.linha].charAt(this.atual);
+    }
+
+    eDigito(caractere: string): boolean {
+        return caractere >= "0" && caractere <= "9";
     }
 
     proximoSimbolo(): string {
@@ -93,10 +97,6 @@ export class Lexador {
         );
     }
 
-    eDigito(caractere: string): boolean {
-        return caractere >= "0" && caractere <= "9";
-    }
-
     eAlfabetoOuDigito(caractere: any): boolean {
         return this.eDigito(caractere) || this.eAlfabeto(caractere);
     }
@@ -110,12 +110,29 @@ export class Lexador {
         }
     }
 
-    adicionarSimbolo(tipo: any, literal: any = null, lexema: string = null): void {
+    identificarPalavraChave(): void {
+        while (this.eAlfabetoOuDigito(this.simboloAtual())) {
+            this.avancar();
+        }
+
+        const codigo: string = this.codigo[this.linha].substring(
+            this.inicioSimbolo,
+            this.atual
+        );
+        const tipo: string =
+            codigo in palavrasReservadas
+                ? palavrasReservadas[codigo]
+                : tiposDeSimbolos.IDENTIFICADOR;
+
+        this.adicionarSimbolo(tipo);
+    }
+
+    adicionarSimbolo(tipo: any, literal: any = null): void {
         const texto: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
-        this.simbolos.push(new Simbolo(tipo, texto || lexema, literal, this.linha + 1));
+        this.simbolos.push(new Simbolo(tipo, texto, literal, this.linha + 1));
     }
 
     analisarNumero(): void {
@@ -141,23 +158,6 @@ export class Lexador {
         );
     }
 
-    identificarPalavraChave(): void {
-        while (this.eAlfabetoOuDigito(this.simboloAtual())) {
-            this.avancar();
-        }
-
-        const codigo: string = this.codigo[this.linha].substring(
-            this.inicioSimbolo,
-            this.atual
-        );
-        const tipo: string =
-            codigo in palavrasReservadas
-                ? palavrasReservadas[codigo]
-                : tiposDeSimbolos.IDENTIFICADOR;
-
-        this.adicionarSimbolo(tipo);
-    }
-
     analisarToken(): void {
         const caractere = this.simboloAtual();
 
@@ -176,14 +176,6 @@ export class Lexador {
                 break;
             case ';':
                 this.adicionarSimbolo(tiposDeSimbolos.PONTO_E_VIRGULA);
-                this.avancar();
-                break;
-            case '%':
-                if (this.atual === 0) {
-                    this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL, null, '%');
-                } else {
-                    this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, '%');
-                }
                 this.avancar();
                 break;
             case ' ':

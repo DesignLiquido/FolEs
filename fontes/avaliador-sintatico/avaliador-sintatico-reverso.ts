@@ -1,16 +1,18 @@
-import { ErroAvaliadorSintatico } from ".";
 import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
-import { Modificador } from "../modificadores";
-import { SeletorModificador } from "../modificadores/superclasse";
-import tiposDeSimbolos from "../tipos-de-simbolos/foles";
+import { ErroAvaliadorSintatico } from "./erro-avaliador-sintatico";
 
-export class AvaliadorSintatico {
+import { Modificador } from "../modificadores";
+import { SeletorReversoModificador } from "../modificadores/superclasse/seletor-reverso-modificador";
+
+import tiposDeSimbolos from "../tipos-de-simbolos/css";
+
+export class AvaliadorSintaticoReverso {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
 
     atual: number;
-
+    
     constructor() {
         this.simbolos = [];
     }
@@ -41,21 +43,13 @@ export class AvaliadorSintatico {
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
     }
 
-    // declaracaoPorSeletor(): Declaracao {
-    //     // TODO @Vitor: Pensar lógica para seletor de classes.
-    //     return null;
-    // }
+    declaracaoPorSeletor(): Declaracao {
+        // TODO: Pensar lógica para seletor de classes.
+        return null;
+    }
 
-    // declaracaoPorEstrutura(): Declaracao {
-    //     const simboloSeletor = this.avancarEDevolverAnterior();
-    // }
-
-    declaracaoDeclaracao(placeholder: string = null): Declaracao {
-        let simboloSeletor = this.avancarEDevolverAnterior();
-
-        if(placeholder){
-            simboloSeletor = this.avancarEDevolverAnterior();
-        }
+    declaracaoPorTag(): Declaracao {
+        const simboloSeletor = this.avancarEDevolverAnterior();
 
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
@@ -82,7 +76,7 @@ export class AvaliadorSintatico {
                 `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
             );
 
-            const classeModificadora = new SeletorModificador(
+            const classeModificadora = new SeletorReversoModificador(
                 modificador.lexema,
                 valorModificador.lexema,
                 quantificador.lexema
@@ -91,7 +85,7 @@ export class AvaliadorSintatico {
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return new Declaracao(simboloSeletor.lexema, modificadores, placeholder);
+        return new Declaracao(simboloSeletor.lexema, modificadores);
     }
 
     declaracao(): any {
@@ -100,13 +94,10 @@ export class AvaliadorSintatico {
         if (!simboloAtual) return null;
 
         switch (simboloAtual.tipo) {
-            case tiposDeSimbolos.ESTRUTURA:
-                return this.declaracaoDeclaracao();
-            case tiposDeSimbolos.PERCENTUAL:
-                return this.declaracaoDeclaracao(simboloAtual.lexema);
-            //     return this.declaracaoPorEstrutura();
-            // case tiposDeSimbolos.IDENTIFICADOR:
-            //     return this.declaracaoPorSeletor();
+            case tiposDeSimbolos.TAG:
+                return this.declaracaoPorTag();
+            case tiposDeSimbolos.IDENTIFICADOR:
+                return this.declaracaoPorSeletor();
         }
     }
 

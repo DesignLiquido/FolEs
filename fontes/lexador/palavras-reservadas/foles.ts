@@ -1,4 +1,4 @@
-import tiposDeSimbolos from "../tipos-de-simbolos";
+import tiposDeSimbolos from "../../tipos-de-simbolos/foles";
 
 export default {
     "abreviacao": tiposDeSimbolos.ESTRUTURA,

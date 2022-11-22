@@ -361,7 +361,6 @@ import { VazamentoVertical } from "../vazamento-vertical";
 import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
-// import { Modificador } from "../superclasse/modificador";
 
 export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "agrupar-palavra": AgruparPalavra,

@@ -10,4 +10,5 @@ lmht {
 
 %lmht {
     altura: 130px;
+    recuo-direito: 2px;
 }

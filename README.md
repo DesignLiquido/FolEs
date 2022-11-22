@@ -8,6 +8,8 @@ Assim como linguagens de programação e de marcação, linguagens de estilo com
 
 FolEs começa do mesmo ponto que [SASS](https://sass-lang.com/), como uma linguagem de extensão que gera CSS. A base de CSS é HTML. A base de FolEs é [LMHT](https://github.com/DesignLiquido/LMHT).
 
+Adicionalmente, FolEs possui um recurso de tradução reversa. Em outras palavras, FolEs pode ingerir um arquivo CSS e devolver seu correspondente em FolEs.
+
 ## Exemplos
 
 Se queremos definir estilos para um documento inteiro, podemos usar:
@@ -40,6 +42,12 @@ Após instalar globalmente pelo npm, para executar FolEs traduzindo um arquivo c
 
 ```sh
 foles exemplo.foles
+```
+
+Para tradução reversa:
+
+```sh
+foles exemplo.css
 ```
 
 ### VSCode
