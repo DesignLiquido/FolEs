@@ -4,7 +4,8 @@ import { AvaliadorSintatico } from "./avaliador-sintatico";
 import { AvaliadorSintaticoReverso } from './avaliador-sintatico/avaliador-sintatico-reverso';
 import { Lexador } from "./lexador";
 import { LexadorReverso } from './lexador/lexador-reverso';
-import { Tradutor, TradutorReverso } from "./tradutor";
+import { Tradutor } from "./tradutor";
+import { TradutorReverso } from './tradutor/tradutor-reverso';
 
 export class FolEs {
     lexador: Lexador;

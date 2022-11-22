@@ -110,12 +110,12 @@ export class Lexador {
         }
     }
 
-    adicionarSimbolo(tipo: any, literal: any = null): void {
+    adicionarSimbolo(tipo: any, literal: any = null, lexema: string = null): void {
         const texto: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
-        this.simbolos.push(new Simbolo(tipo, texto, literal, this.linha + 1));
+        this.simbolos.push(new Simbolo(tipo, texto || lexema, literal, this.linha + 1));
     }
 
     analisarNumero(): void {
@@ -179,12 +179,11 @@ export class Lexador {
                 this.avancar();
                 break;
             case '%':
-                // TODO @Vitor: Se % está no começo de uma linha (ou seja, é o primeiro
-                // caractere de uma linha sem contar espaços, é um placeholder selector.
-                // Caso contrário, é um quantificador.
-                // Verificar se é melhor apenas devolver o símbolo percentual aqui e
-                // tratar a situação no avaliador sintático, ou se mais lógica é necessária aqui.
-                this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL);
+                if (this.atual === 0) {
+                    this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL, null, '%');
+                } else {
+                    this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, '%');
+                }
                 this.avancar();
                 break;
             case ' ':
