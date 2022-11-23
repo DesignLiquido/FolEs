@@ -190,6 +190,14 @@ export class Lexador {
                 if(this.atual === 0) {
                     this.adicionarSimbolo(tiposDeSimbolos.NOME_DE_CLASSE, null, '.');
                 }
+                this.avancar();
+                break;
+            case '#':
+                if(this.atual === 0) {
+                    this.adicionarSimbolo(tiposDeSimbolos.ID_DO_ELEMENTO, null, '#');
+                }
+                this.avancar();
+                break;
             case ' ':
                 case '\0':
                 case '\r':

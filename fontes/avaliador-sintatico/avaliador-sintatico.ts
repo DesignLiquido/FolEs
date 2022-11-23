@@ -51,9 +51,9 @@ export class AvaliadorSintatico {
 
     declaracaoDeclaracao(placeholder: string = null): Declaracao {
         let simboloSeletor = this.avancarEDevolverAnterior();
-
+        
         if(placeholder) simboloSeletor = this.avancarEDevolverAnterior();
-
+        
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
@@ -102,6 +102,8 @@ export class AvaliadorSintatico {
             case tiposDeSimbolos.PERCENTUAL:
                 return this.declaracaoPorSeletor(simboloAtual.lexema);
             case tiposDeSimbolos.NOME_DE_CLASSE:
+                return this.declaracaoPorSeletor(simboloAtual.lexema);
+            case tiposDeSimbolos.ID_DO_ELEMENTO:
                 return this.declaracaoPorSeletor(simboloAtual.lexema);
         }
     }

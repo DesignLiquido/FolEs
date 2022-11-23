@@ -31,7 +31,9 @@ export class FolEs {
             .split('\n');
 
         const resultadoLexador = this.lexador.mapear(conteudoDoArquivo);
+        // console.log(resultadoLexador);
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        // console.log(resultadoAvaliadorSintatico);
         const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
         console.log(traducao);
     }
@@ -48,3 +50,6 @@ export class FolEs {
         return traducaoReversa;
     }
 }
+
+// const teste = new FolEs();
+// teste.converterParaCss('../exemplos/exemplo.foles');
