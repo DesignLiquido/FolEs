@@ -1,14 +1,20 @@
-lmht {
-    tamanho-fonte: 12%;
+.minha-classe {
+    tamanho-fonte: 16px;
+    largura-maxima: 20cm;
 }
 
-%corpo {
-    tamanho-fonte: 16mm;
-    largura-maxima: 20cm;
-    borda-superior: 130%;
+corpo {
+    altura: 40px;
 }
 
 %lmht {
-    altura: 130px;
-    recuo-direito: 2px;
+    largura-borda-direita: 130mm;
+}
+
+.minha-segunda-classe {
+    margem-superior: 13mm;
+}
+
+campos {
+    margem-inferior: 50px;
 }
