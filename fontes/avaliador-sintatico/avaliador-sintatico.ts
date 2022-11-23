@@ -41,21 +41,18 @@ export class AvaliadorSintatico {
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
     }
 
-    // declaracaoPorSeletor(): Declaracao {
-    //     // TODO @Vitor: Pensar lógica para seletor de classes.
-    //     return null;
-    // }
+    declaracaoPorSeletor(lexema: string): Declaracao {
+        return this.declaracaoDeclaracao(lexema);
+    }
 
-    // declaracaoPorEstrutura(): Declaracao {
-    //     const simboloSeletor = this.avancarEDevolverAnterior();
-    // }
+    declaracaoPorEstrutura(): Declaracao {
+        return this.declaracaoDeclaracao();
+    }
 
     declaracaoDeclaracao(placeholder: string = null): Declaracao {
         let simboloSeletor = this.avancarEDevolverAnterior();
 
-        if(placeholder){
-            simboloSeletor = this.avancarEDevolverAnterior();
-        }
+        if(placeholder) simboloSeletor = this.avancarEDevolverAnterior();
 
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
@@ -101,12 +98,11 @@ export class AvaliadorSintatico {
 
         switch (simboloAtual.tipo) {
             case tiposDeSimbolos.ESTRUTURA:
-                return this.declaracaoDeclaracao();
+                return this.declaracaoPorEstrutura();
             case tiposDeSimbolos.PERCENTUAL:
-                return this.declaracaoDeclaracao(simboloAtual.lexema);
-            //     return this.declaracaoPorEstrutura();
-            // case tiposDeSimbolos.IDENTIFICADOR:
-            //     return this.declaracaoPorSeletor();
+                return this.declaracaoPorSeletor(simboloAtual.lexema);
+            case tiposDeSimbolos.NOME_DE_CLASSE:
+                return this.declaracaoPorSeletor(simboloAtual.lexema);
         }
     }
 

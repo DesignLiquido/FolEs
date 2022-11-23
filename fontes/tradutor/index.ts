@@ -12,7 +12,16 @@ export class Tradutor {
 
         for (const declaracao of declaracoes) {
             if (declaracao.placeholder) {
-                resultado += `${declaracao.placeholder}${estruturasHtml[declaracao.seletor]} {\n`
+                const encontrarHtml = Object.keys(estruturasHtml).filter(
+                    (estrutura) => declaracao.seletor === estrutura
+                );
+
+                if (encontrarHtml.length !== 0) {
+                    resultado += `${declaracao.placeholder}${estruturasHtml[declaracao.seletor]} {\n`
+                } else {
+                    resultado += `${declaracao.placeholder}${declaracao.seletor} {\n`
+                }
+                
             } else {
                 resultado += `${estruturasHtml[declaracao.seletor]} {\n`
             }

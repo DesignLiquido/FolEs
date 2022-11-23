@@ -186,6 +186,10 @@ export class Lexador {
                 }
                 this.avancar();
                 break;
+            case '.':
+                if(this.atual === 0) {
+                    this.adicionarSimbolo(tiposDeSimbolos.NOME_DE_CLASSE, null, '.');
+                }
             case ' ':
                 case '\0':
                 case '\r':
