@@ -3,11 +3,11 @@
     largura-maxima: 20cm;
 }
 
-corpo {
+#elemento-caixa {
     altura: 40px;
 }
 
-%lmht {
+lmht {
     largura-borda-direita: 130mm;
 }
 
@@ -15,6 +15,10 @@ corpo {
     margem-superior: 13mm;
 }
 
-campos {
+#meu-segundo-id {
+    largura: 400mm;
+}
+
+%campos {
     margem-inferior: 50px;
 }
