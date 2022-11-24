@@ -85,7 +85,7 @@ describe('Testando Seletores que recebem valor e quantificador', () => {
                 );
 
                 // Causar erro de digitação
-                const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[0][0], '')
+                const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
 
                 const novoLexador = lexador.mapear([
                     "lmht {",
