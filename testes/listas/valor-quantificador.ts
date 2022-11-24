@@ -34,4 +34,11 @@ export const ValorQuantificador: { [indice: number]: string } = {
     32: 'espaçamento-coluna',
     33: 'regras-largura-coluna',
     34: 'largura-coluna',
+    35: 'flex-comprimento',
+    36: 'tamanho-fonte',
+    37: 'esticar-fonte',
+    38: 'espacamento',
+    39: 'espaçamento',
+    40: 'tamanho-colunas-em-grade',
+    41: 'tamanho-linhas-em-grade',
 }
