@@ -77,7 +77,6 @@ import { DefinirContador } from "../definir-contador";
 import { DesignTabela } from "../design-tabela";
 import { Deslocamento } from "../deslocamento";
 import { DeslocamentoEmAncora } from "../deslocamento-em-ancora";
-import { DeslocamentoRotacao } from "../deslocamento-rotacao";
 import { DeslocamentoTextoSublinhado } from "../deslocamento-texto-sublinhado";
 import { DeslocarContorno } from "../deslocar-contorno";
 import { Direcao } from "../direcao";
@@ -308,6 +307,7 @@ import { RepetirAnimacao } from "../repetir-animacao";
 import { RepetirFundo } from "../repetir-fundo";
 import { RepetirImagemBorda } from "../repetir-imagem-borda";
 import { RepetirMascara } from "../repetir-mascara";
+import { RotacaoDeslocamento } from "../rotacao-deslocamento";
 import { ReiniciarContador } from "../reiniciar-contador";
 import { ReiniciarTudo } from "../reiniciar-tudo";
 import { SelecaoUsuario } from "../selecao-usuario";
@@ -469,8 +469,6 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "deslocamento": Deslocamento,
     "deslocamento-em-ancora": DeslocamentoEmAncora,
     "deslocamento-em-âncora": DeslocamentoEmAncora,
-    "deslocamento-rotacao": DeslocamentoRotacao,
-    "deslocamento-rotação": DeslocamentoRotacao,
     "deslocamento-texto-sublinhado": DeslocamentoTextoSublinhado,
     "deslocar-contorno": DeslocarContorno,
     "direcao": Direcao,
@@ -790,6 +788,8 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "repetir-imagem-borda": RepetirImagemBorda,
     "repetir-mascara": RepetirMascara,
     "repetir-máscara": RepetirMascara,
+    "rotacao-deslocamento": RotacaoDeslocamento,
+    "rotação-deslocamento": RotacaoDeslocamento,
     "selecao-usuario": SelecaoUsuario,
     "seleção-usuario": SelecaoUsuario,
     "sintetizar-fonte": SintetizarFonte,
