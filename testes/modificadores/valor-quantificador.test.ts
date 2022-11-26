@@ -43,6 +43,7 @@ describe('Testando Seletores que recebem valor e quantificador', () => {
                     ])
                 );
 
+
                 // AVALIADOR SINTÁTICO
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -52,9 +53,16 @@ describe('Testando Seletores que recebem valor e quantificador', () => {
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss)
-                    .toStrictEqual(seletor['propriedadeCss']
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
                 );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
+                    '12'
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].quantificador).toStrictEqual(
+                    'px'
+                );
+
 
                 // TRADUTOR
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
