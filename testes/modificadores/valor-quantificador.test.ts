@@ -101,13 +101,13 @@ describe('Testando Seletores que recebem valor e quantificador', () => {
                     "}"
                 ]);
 
-                // AVALIADOR SINTÁTICO
+                // AVALIADOR SINTÁTICO - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // TRADUTOR
+                // TRADUTOR - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
                     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
