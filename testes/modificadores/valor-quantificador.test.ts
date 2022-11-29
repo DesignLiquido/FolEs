@@ -6,7 +6,7 @@ import { Tradutor } from "../../fontes/tradutor";
 import { ValorQuantificador } from "../listas/valor-quantificador";
 
 describe('Testando Seletores que recebem valor e quantificador', () => {
-    describe('Teste Geral', () => {
+    describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
         let tradutor: Tradutor;
