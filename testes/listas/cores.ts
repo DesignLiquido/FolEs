@@ -25,3 +25,17 @@ export const Cores: { [indice: number]: string } = {
     23: 'cor-enfase-texto',
     24: 'cor-ênfase-texto',
 }
+
+/*
+
+VALORES DE COR - EXEMPLOS
+
+red
+#009900;
+#f015ca
+rgba(34, 12, 64, 0.6);
+rgb(34, 12, 64, 0.6);
+hsl(0, 100%, 50%)
+transparent
+
+*/

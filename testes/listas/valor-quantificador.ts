@@ -158,3 +158,25 @@ export const ValorQuantificador: { [indice: number]: string } = {
     156: 'espacamento-palavras',
     157: 'espaçamento-palavras',
 }
+
+
+/*
+
+VALOR-QUANTIFICADOR: EXEMPLOS
+
+12px
+12mm
+12em
+12cm
+12in
+12pt
+12pc
+12ex
+12ch
+12rem
+12vw
+12vh
+12vmin
+12vmax
+
+*/

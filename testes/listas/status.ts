@@ -71,3 +71,18 @@ export const Status: { [indice: number]: string } = {
     69: 'indice-z',
     70: 'índice-z',
 };
+
+/*
+
+VALORES DE STATUS
+
+auto
+none
+always
+avoid
+all
+both
+left
+right
+
+*/

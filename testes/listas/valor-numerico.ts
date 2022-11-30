@@ -1,4 +1,5 @@
 export const ValorNumerico: { [indice: number]: string } = {
+    0: 'linhas-superiores',
     1: 'repetir-animacao',
     2: 'repetir-animação',
     3: 'proporcao-tela',
@@ -29,7 +30,17 @@ export const ValorNumerico: { [indice: number]: string } = {
     28: 'limite-forma-imagem',
     29: 'tabulacao',
     30: 'tabulação',
-    31: 'linhas-superiores',
-    32: 'indice-z',
-    33: 'índice-z',
+    31: 'indice-z',
+    32: 'índice-z',
 };
+
+/*
+
+VALORES NUMÉRICOS - EXEMPLOS
+
+1
+1.5
+10
+0.5
+
+*/
