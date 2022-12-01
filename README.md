@@ -82,4 +82,5 @@ FolEs copia vários elementos de [Delégua](https://github.com/DesignLiquido/del
 
 | FolEs         | CSS       |
 | ------------- | ----------|
+| altura        | height    |
 | tamanho-fonte | font-size |
