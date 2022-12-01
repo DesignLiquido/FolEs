@@ -5,7 +5,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
 import { Shorthand } from "../listas/shorthand";
 
-describe('Testando Seletores SHORTHAND, que recebem dois ou mais atributos', () => {
+describe('Testando Seletores SHORTHAND (de atribuição abreviada), que recebem dois ou mais atributos', () => {
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
@@ -15,6 +15,10 @@ describe('Testando Seletores SHORTHAND, que recebem dois ou mais atributos', () 
             lexador = new Lexador();
             avaliador = new AvaliadorSintatico();
             tradutor = new Tradutor();
+        });
+
+        it('Trivial', () => {
+            expect(1).toBe(1);
         });
 
         // ARQUIVO DE TESTES CRIADO PARA PENSARMOS EM UMA LÓGICA DE COMO
