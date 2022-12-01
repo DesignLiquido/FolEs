@@ -5,7 +5,11 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
 import { ValorQuantificador } from "../listas/valor-quantificador";
 
-describe('Testando Seletores que recebem valor e quantificador', () => {
+describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', () => {
+    const atributos = [
+        '12px', '1mm', '2em', '150cm',
+    ];
+
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
@@ -76,7 +80,7 @@ describe('Testando Seletores que recebem valor e quantificador', () => {
 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
-                
+
                 // LEXADOR - valor e quantificador não informados
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
