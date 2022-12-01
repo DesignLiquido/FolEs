@@ -3,11 +3,12 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { ValorNumerico } from "../listas/valor-numerico";
+import { Url } from "../listas/url";
 
-describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
+describe('Testando Seletores que recebem URL como atributo', () => {
     const atributos = [
-        '1', '10', '0.5', '0'
+        'url("img_tree.gif")',
+        'url("https://www.showmetech.com.br/wp-content/uploads//2018/12/email_ss_1920-1920x1024.png")',
     ];
 
     describe('Testes Unitários', () => {
@@ -22,13 +23,13 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
+            for (let index = 0; index < Object.keys(Url).length; index += 1) {
+                const seletor = new SeletorModificador(Url[index], 'url("img_tree.gif")', null);
 
                 // LEXADOR
                 const resultadoLexador = lexador.mapear([
-                    "corpo {",
-                    `${ValorNumerico[index]}: ${seletor['valor']};`,
+                    "lmht {",
+                    `${Url[index]}: ${seletor['valor']};`,
                     "}"
                 ]);
 
@@ -40,7 +41,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_ESQUERDA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.DOIS_PONTOS }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_URL }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.PONTO_E_VIRGULA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_DIREITA }),
                     ])
@@ -49,6 +50,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
                     ])
                 );
 
@@ -58,7 +60,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
 
                 expect(resultadoAvaliadorSintatico).toBeTruthy();
                 expect(resultadoAvaliadorSintatico).toHaveLength(1);
-                expect(resultadoAvaliadorSintatico[0].seletor).toBe('corpo');
+                expect(resultadoAvaliadorSintatico[0].seletor).toBe('lmht');
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
@@ -66,7 +68,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     seletor['propriedadeCss']
                 );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
-                    '3'
+                    'url("img_tree.gif")'
                 );
 
 
@@ -74,35 +76,35 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
-                expect(resultadoTradutor).toContain("body");
+                expect(resultadoTradutor).toContain("html");
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain("3;");
+                expect(resultadoTradutor).toContain('url("img_tree.gif");');
             }
         });
 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                
-                // LEXADOR - valor numérico não informado
+            for (let index = 0; index < Object.keys(Url).length; index += 1) {
+
+                // LEXADOR - URL não informada
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${ValorNumerico[index]}: ;`,
+                    `${Url[index]}: ;`,
                     "}"
                 ]);
 
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_URL }),
                     ])
                 );
 
                 // Causar erro de digitação
-                const seletorIncorreto = ValorNumerico[index].replace(ValorNumerico[index][0], '')
+                const seletorIncorreto = Url[index].replace(Url[index][0], '')
 
                 const novoLexador = lexador.mapear([
                     "lmht {",
-                    `${seletorIncorreto}: 1.5;`,
+                    `${seletorIncorreto}: 'url("img_tree.gif")';`,
                     "}"
                 ]);
 

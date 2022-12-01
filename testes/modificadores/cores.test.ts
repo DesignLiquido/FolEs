@@ -3,12 +3,28 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { ValorNumerico } from "../listas/valor-numerico";
+import { Cores } from "../listas/cores";
 
-describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
-    const atributos = [
-        '1', '10', '0.5', '0'
+describe('Testando Seletores que recebem COR como atributo', () => {
+    const atributosCss = [
+        'red', 
+        '#009900',
+        '#f015ca',
+        'rgba(34, 12, 64, 0.6)',
+        'rgb(34, 12, 64, 0.6)',
+        'hsl(0, 100%, 50%)',
+        'transparent'
     ];
+
+    const atributosFolEs = [
+        'vermelho',
+        '#009900',
+        '#f015ca',
+        'rgba(34, 12, 64, 0.6)',
+        'rgb(34, 12, 64, 0.6)',
+        'hsl(0, 100%, 50%)',
+        'transparente'
+    ]
 
     describe('Testes Unitários', () => {
         let lexador: Lexador;
@@ -22,13 +38,13 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
+            for (let index = 0; index < Object.keys(Cores).length; index += 1) {
+                const seletor = new SeletorModificador(Cores[index], '#f015ca', '');
 
                 // LEXADOR
                 const resultadoLexador = lexador.mapear([
-                    "corpo {",
-                    `${ValorNumerico[index]}: ${seletor['valor']};`,
+                    "lmht {",
+                    `${Cores[index]}: ${seletor['valor']};`,
                     "}"
                 ]);
 
@@ -40,7 +56,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_ESQUERDA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.DOIS_PONTOS }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_COR }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.PONTO_E_VIRGULA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_DIREITA }),
                     ])
@@ -49,6 +65,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
                     ])
                 );
 
@@ -58,7 +75,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
 
                 expect(resultadoAvaliadorSintatico).toBeTruthy();
                 expect(resultadoAvaliadorSintatico).toHaveLength(1);
-                expect(resultadoAvaliadorSintatico[0].seletor).toBe('corpo');
+                expect(resultadoAvaliadorSintatico[0].seletor).toBe('lmht');
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
@@ -66,7 +83,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     seletor['propriedadeCss']
                 );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
-                    '3'
+                    '#f015ca'
                 );
 
 
@@ -74,35 +91,35 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
-                expect(resultadoTradutor).toContain("body");
+                expect(resultadoTradutor).toContain("html");
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain("3;");
+                expect(resultadoTradutor).toContain("#f015ca;");
             }
         });
 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                
-                // LEXADOR - valor numérico não informado
+            for (let index = 0; index < Object.keys(Cores).length; index += 1) {
+
+                // LEXADOR - cor não informada
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${ValorNumerico[index]}: ;`,
+                    `${Cores[index]}: ;`,
                     "}"
                 ]);
 
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_COR }),
                     ])
                 );
 
                 // Causar erro de digitação
-                const seletorIncorreto = ValorNumerico[index].replace(ValorNumerico[index][0], '')
+                const seletorIncorreto = Cores[index].replace(Cores[index][0], '')
 
                 const novoLexador = lexador.mapear([
                     "lmht {",
-                    `${seletorIncorreto}: 1.5;`,
+                    `${seletorIncorreto}: rgb(34, 12, 64, 0.6);`,
                     "}"
                 ]);
 

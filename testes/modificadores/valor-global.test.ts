@@ -3,12 +3,24 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { ValorNumerico } from "../listas/valor-numerico";
+import { ValorGlobal } from "../listas/valor-global";
 
-describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
-    const atributos = [
-        '1', '10', '0.5', '0'
+describe('Testando Seletores com VALORES GLOBAIS', () => {
+    const atributosCss = [
+        'inherit',
+        'initial',
+        'revert',
+        'revert-layer',
+        'unset',
     ];
+
+    const atributosFolEs = [
+        'herdar',
+        'inicial',
+        'reverter',
+        'reverter-camada',
+        'desarmar'
+    ]
 
     describe('Testes Unitários', () => {
         let lexador: Lexador;
@@ -22,13 +34,13 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
+            for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
+                const seletor = new SeletorModificador(ValorGlobal[index], 'herdar', null);
 
                 // LEXADOR
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${ValorNumerico[index]}: ${seletor['valor']};`,
+                    `${ValorGlobal[index]}: ${seletor['valor']};`,
                     "}"
                 ]);
 
@@ -40,7 +52,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_ESQUERDA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.DOIS_PONTOS }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_GLOBAL }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.PONTO_E_VIRGULA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_DIREITA }),
                     ])
@@ -49,6 +61,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
                     ])
                 );
 
@@ -66,7 +79,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     seletor['propriedadeCss']
                 );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
-                    '3'
+                    'herdar'
                 );
 
 
@@ -76,33 +89,33 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 expect(resultadoTradutor).toBeTruthy();
                 expect(resultadoTradutor).toContain("body");
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain("3;");
+                expect(resultadoTradutor).toContain('inherit;');
             }
         });
 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                
-                // LEXADOR - valor numérico não informado
+            for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
+
+                // LEXADOR - Valor Global não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${ValorNumerico[index]}: ;`,
+                    `${ValorGlobal[index]}: ;`,
                     "}"
                 ]);
 
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_GLOBAL }),
                     ])
                 );
 
                 // Causar erro de digitação
-                const seletorIncorreto = ValorNumerico[index].replace(ValorNumerico[index][0], '')
+                const seletorIncorreto = ValorGlobal[index].replace(ValorGlobal[index][0], '')
 
                 const novoLexador = lexador.mapear([
                     "lmht {",
-                    `${seletorIncorreto}: 1.5;`,
+                    `${seletorIncorreto}: reverter;`,
                     "}"
                 ]);
 

@@ -3,12 +3,18 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { ValorNumerico } from "../listas/valor-numerico";
+import { Posição } from "../listas/posição";
 
-describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
-    const atributos = [
-        '1', '10', '0.5', '0'
+describe('Testando Seletores de POSIÇÃO', () => {
+    const atributosCss = [
+        'start', 'end', 'normal', 'stretch', 'center', 'baseline',
+        'flex-start', 'flex-end', 'top', 'bottom', 'right', 'left'
     ];
+
+    const atributosFolEs = [
+        ['inicio', 'início'], 'fim', 'normal', 'esticar', 'centro', 'linha-de-base',
+        ['flex-inicio', 'flex-início'], 'flex-fim', 'superior', 'inferior', 'direita', 'esquerda'
+    ]
 
     describe('Testes Unitários', () => {
         let lexador: Lexador;
@@ -22,13 +28,13 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
+            for (let index = 0; index < Object.keys(Posição).length; index += 1) {
+                const seletor = new SeletorModificador(Posição[index], 'centro', null);
 
                 // LEXADOR
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${ValorNumerico[index]}: ${seletor['valor']};`,
+                    `${Posição[index]}: ${seletor['valor']};`,
                     "}"
                 ]);
 
@@ -40,7 +46,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_ESQUERDA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.DOIS_PONTOS }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_POSICAO }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.PONTO_E_VIRGULA }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_DIREITA }),
                     ])
@@ -49,6 +55,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
                     ])
                 );
 
@@ -66,7 +73,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     seletor['propriedadeCss']
                 );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
-                    '3'
+                    'centro'
                 );
 
 
@@ -76,33 +83,33 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 expect(resultadoTradutor).toBeTruthy();
                 expect(resultadoTradutor).toContain("body");
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain("3;");
+                expect(resultadoTradutor).toContain('center;');
             }
         });
 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                
-                // LEXADOR - valor numérico não informado
+            for (let index = 0; index < Object.keys(Posição).length; index += 1) {
+
+                // LEXADOR - Posição não informada
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${ValorNumerico[index]}: ;`,
+                    `${Posição[index]}: ;`,
                     "}"
                 ]);
 
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_POSICAO }),
                     ])
                 );
 
                 // Causar erro de digitação
-                const seletorIncorreto = ValorNumerico[index].replace(ValorNumerico[index][0], '')
+                const seletorIncorreto = Posição[index].replace(Posição[index][0], '')
 
                 const novoLexador = lexador.mapear([
                     "lmht {",
-                    `${seletorIncorreto}: 1.5;`,
+                    `${seletorIncorreto}: inicio;`,
                     "}"
                 ]);
 
