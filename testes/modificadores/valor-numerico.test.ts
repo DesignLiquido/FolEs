@@ -21,7 +21,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
                 const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
 
@@ -80,7 +80,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
             }
         });
 
-        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
                 
                 // LEXADOR - valor numérico não informado

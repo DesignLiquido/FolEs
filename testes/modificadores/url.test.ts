@@ -22,7 +22,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Url).length; index += 1) {
                 const seletor = new SeletorModificador(Url[index], 'url("img_tree.gif")', null);
 
@@ -82,7 +82,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
             }
         });
 
-        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Url).length; index += 1) {
 
                 // LEXADOR - URL não informada

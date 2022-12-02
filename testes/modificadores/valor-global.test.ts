@@ -33,7 +33,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(ValorGlobal[index], 'herdar', null);
 
@@ -93,7 +93,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             }
         });
 
-        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
 
                 // LEXADOR - Valor Global não informado

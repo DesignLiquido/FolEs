@@ -17,6 +17,10 @@ describe('Testando Seletores SHORTHAND, que recebem dois ou mais atributos', () 
             tradutor = new Tradutor();
         });
 
+        it('Trivial', () => {
+            expect(1).toBe(1);
+        });
+
         // ARQUIVO DE TESTES CRIADO PARA PENSARMOS EM UMA LÓGICA DE COMO
         // TESTAR OS SELETORES SHORTHAND, TENDO EM VISTA QUE CADA SELETOR
         // RECEBE UM DETERMINADO NÚMERO DE PARÂMETROS.

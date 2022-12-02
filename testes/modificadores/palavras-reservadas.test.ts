@@ -17,6 +17,10 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
             tradutor = new Tradutor();
         });
 
+        it('Trivial', () => {
+            expect(1).toBe(1);
+        });
+
         // ARQUIVO DE TESTES CRIADO PARA PENSARMOS EM UMA LÓGICA DE COMO
         // TESTAR OS SELETORES QUE RECEBEM PALAVRAS ESPECÍFICAS COMO ATRIBUTO
     });
