@@ -27,7 +27,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Posição).length; index += 1) {
                 const seletor = new SeletorModificador(Posição[index], 'centro', null);
 
@@ -87,7 +87,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             }
         });
 
-        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Posição).length; index += 1) {
 
                 // LEXADOR - Posição não informada

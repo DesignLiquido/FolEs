@@ -27,7 +27,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
                 const seletor = new SeletorModificador(Estilo[index], 'pontilhado', null);
 
@@ -87,7 +87,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
 
                 // LEXADOR - estilo não informado
