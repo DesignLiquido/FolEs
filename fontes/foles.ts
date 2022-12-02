@@ -23,33 +23,44 @@ export class FolEs {
         this.tradutor = new Tradutor();
         this.tradutorReverso = new TradutorReverso();
     }
-    
-    converterParaCss(nomeArquivo: string) {
-        const dadosDoArquivo: Buffer = arquivos.readFileSync(nomeArquivo);
-        const conteudoDoArquivo: string[] = dadosDoArquivo
-            .toString()
-            .split('\n');
 
-        const resultadoLexador = this.lexador.mapear(conteudoDoArquivo);
-        // console.log(resultadoLexador);
+    private converterParaCssInterno(conteudo: string[]) {
+        const resultadoLexador = this.lexador.mapear(conteudo);
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador.simbolos);
-        // console.log(resultadoAvaliadorSintatico);
         const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
-        console.log(traducao);
+        return traducao;
     }
 
-    converterParaFolEs(nomeArquivo: string) {
-        const dadosDoArquivo: Buffer = arquivos.readFileSync(nomeArquivo);
-        const conteudoDoArquivo: string[] = dadosDoArquivo
-            .toString()
-            .split('\n');
-
+    private converterParaFolEsInterno(conteudoDoArquivo: string[]) {
         const resultadoLexadorReverso = this.lexadorReverso.mapear(conteudoDoArquivo);
         const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(resultadoLexadorReverso.simbolos);
         const traducaoReversa = this.tradutorReverso.traduzir(resultadoAvaliadorSintaticoReverso);
         return traducaoReversa;
     }
-}
+    
+    converterParaCss(nomeArquivo: string): string {
+        const dadosDoArquivo: Buffer = arquivos.readFileSync(nomeArquivo);
+        const conteudoDoArquivo: string[] = dadosDoArquivo
+            .toString()
+            .split('\n');
 
-// const teste = new FolEs();
-// teste.converterParaCss('../exemplos/exemplo.foles');
+        return this.converterParaCssInterno(conteudoDoArquivo);
+    }
+
+    converterParaFolEs(nomeArquivo: string): string {
+        const dadosDoArquivo: Buffer = arquivos.readFileSync(nomeArquivo);
+        const conteudoDoArquivo: string[] = dadosDoArquivo
+            .toString()
+            .split('\n');
+
+        return this.converterParaFolEsInterno(conteudoDoArquivo);
+    }
+
+    converterTextoParaCss(texto: string): string {
+        return this.converterParaCssInterno([texto]);
+    }
+
+    converterTextoParaFolEs(texto: string): string {
+        return this.converterParaFolEsInterno([texto]);
+    }
+}
