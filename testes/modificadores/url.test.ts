@@ -26,7 +26,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
             for (let index = 0; index < Object.keys(Url).length; index += 1) {
                 const seletor = new SeletorModificador(Url[index], 'url("img_tree.gif")', null);
 
-                // LEXADOR
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${Url[index]}: ${seletor['valor']};`,
@@ -55,7 +55,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                 );
 
 
-                // AVALIADOR SINTÁTICO
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico).toBeTruthy();
@@ -72,7 +72,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                 );
 
 
-                // TRADUTOR
+                // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
@@ -85,7 +85,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Url).length; index += 1) {
 
-                // LEXADOR - URL não informada
+                // Lexador - URL não informada
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${Url[index]}: ;`,
@@ -108,13 +108,13 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                     "}"
                 ]);
 
-                // AVALIADOR SINTÁTICO - Erro esperado como retorno
+                // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // TRADUTOR - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
                     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);

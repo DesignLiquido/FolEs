@@ -5,7 +5,7 @@ import { Tradutor } from "../fontes/tradutor";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 
 describe('Testes Unitários', () => {
-    describe('AVALIADOR SINTÁTICO', () => {
+    describe('Avaliador Sintático', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
         let tradutor: Tradutor;
@@ -20,14 +20,14 @@ describe('Testes Unitários', () => {
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
                 const seletor = new SeletorModificador(ValorQuantificador[index], '25', 'px');
 
-                // LEXADOR
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                     "}"
                 ]);
 
-                // AVALIADOR SINTÁTICO
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico).toBeTruthy();
@@ -46,7 +46,7 @@ describe('Testes Unitários', () => {
                     'px'
                 );
 
-                // O resultado do Avaliador deve ser recebido corretamente pelo TRADUTOR
+                // O resultado do Avaliador deve ser recebido corretamente pelo Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
@@ -56,7 +56,7 @@ describe('Testes Unitários', () => {
         it('Casos de Falha - mensagens de erro esperadas como retorno', () => {
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
-                // LEXADOR - valor e quantificador não informados
+                // Lexador - valor e quantificador não informados
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorQuantificador[index]}: ;`,

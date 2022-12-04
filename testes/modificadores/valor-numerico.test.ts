@@ -25,7 +25,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
             for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
                 const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
 
-                // LEXADOR
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
                     `${ValorNumerico[index]}: ${seletor['valor']};`,
@@ -53,7 +53,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 );
 
 
-                // AVALIADOR SINTÁTICO
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico).toBeTruthy();
@@ -70,7 +70,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 );
 
 
-                // TRADUTOR
+                // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
@@ -83,7 +83,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
                 
-                // LEXADOR - valor numérico não informado
+                // Lexador - valor numérico não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorNumerico[index]}: ;`,
@@ -106,13 +106,13 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     "}"
                 ]);
 
-                // AVALIADOR SINTÁTICO - Erro esperado como retorno
+                // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // TRADUTOR - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
                     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);

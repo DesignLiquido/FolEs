@@ -31,7 +31,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             for (let index = 0; index < Object.keys(Posição).length; index += 1) {
                 const seletor = new SeletorModificador(Posição[index], 'centro', null);
 
-                // LEXADOR
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
                     `${Posição[index]}: ${seletor['valor']};`,
@@ -60,7 +60,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 );
 
 
-                // AVALIADOR SINTÁTICO
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico).toBeTruthy();
@@ -77,7 +77,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 );
 
 
-                // TRADUTOR
+                // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
@@ -90,7 +90,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(Posição).length; index += 1) {
 
-                // LEXADOR - Posição não informada
+                // Lexador - Posição não informada
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${Posição[index]}: ;`,
@@ -113,13 +113,13 @@ describe('Testando Seletores de POSIÇÃO', () => {
                     "}"
                 ]);
 
-                // AVALIADOR SINTÁTICO - Erro esperado como retorno
+                // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // TRADUTOR - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
                     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);

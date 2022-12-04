@@ -12,5 +12,5 @@ describe('Classe FolEs', () => {
             const resultado = foles.converterTextoParaCss('lmht {tamanho-fonte:12px;} ');
             expect(resultado).toBeTruthy();
         });
-    })
-})
+    });
+});

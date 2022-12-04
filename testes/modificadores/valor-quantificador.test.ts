@@ -25,7 +25,7 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
                 const seletor = new SeletorModificador(ValorQuantificador[index], '12', 'px');
 
-                // LEXADOR
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
@@ -41,7 +41,7 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
                 );
 
 
-                // AVALIADOR SINTÁTICO
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
@@ -52,7 +52,7 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
                 );
 
 
-                // TRADUTOR
+                // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -62,7 +62,7 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
                 
-                // LEXADOR - valor numérico não informado
+                // Lexador - valor numérico não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorQuantificador[index]}: ;`,

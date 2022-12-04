@@ -2,7 +2,7 @@ import { Lexador } from "../fontes/lexador";
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
 
 describe('Testes Unitários', () => {
-    describe('LEXADOR', () => {
+    describe('Lexador', () => {
         let lexador: Lexador;
 
         beforeEach(() => {

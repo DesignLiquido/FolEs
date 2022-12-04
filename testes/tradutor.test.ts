@@ -6,7 +6,7 @@ import estruturasHtml from "../fontes/tradutor/estruturas-html";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 
 describe('Testes Unitários', () => {
-    describe('TRADUTOR', () => {
+    describe('Tradutor', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
         let tradutor: Tradutor;
@@ -30,7 +30,7 @@ describe('Testes Unitários', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // TRADUTOR deve retornar a estrutura HTML correspondente
+                // Tradutor deve retornar a estrutura HTML correspondente
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
             }
@@ -40,17 +40,17 @@ describe('Testes Unitários', () => {
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
                 const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'cm');
 
-                // LEXADOR
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                     "}"
                 ]);
 
-                // AVALIADOR SINTÁTICO
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // TRADUTOR deve funcionar de acordo
+                // Tradutor deve funcionar de acordo
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toBeTruthy();
@@ -63,14 +63,14 @@ describe('Testes Unitários', () => {
         it('Casos de Falha - seletores valor-quantificador', () => {
             for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
-                // LEXADOR - valor e quantificador não informados
+                // Lexador - valor e quantificador não informados
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorQuantificador[index]}: ;`,
                     "}"
                 ]);
 
-                // TRADUTOR - Não deve ser executado, dado o erro gerado no Avaliador Sintático
+                // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
                 expect(() => {
                     tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
                 }).not.toBeTruthy;
