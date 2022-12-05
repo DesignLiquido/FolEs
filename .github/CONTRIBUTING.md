@@ -22,9 +22,9 @@ yarn
 
 Isso deve baixar e instalar os pacotes que FolEs precisa para ser desenvolvida.
 
-Delégua funciona em qualquer sistema operacional que tenha uma versão de Node.js compatível. 
+FolEs funciona em qualquer sistema operacional que tenha uma versão de Node.js compatível. 
 
-Para os fontes, usamos [TypeScript](https://www.typescriptlang.org/) (versão mais recente). Normalmente desenvolvemos em Visual Studio Code, e, ao abrir o projeto nele, já temos as configurações para depurar (debugar) Delégua. Outros editores podem ser usados, mas não temos arquivos de suporte a todos eles.
+Para os fontes, usamos [TypeScript](https://www.typescriptlang.org/) (versão mais recente). Normalmente desenvolvemos em Visual Studio Code, e, ao abrir o projeto nele, já temos as configurações para depurar (debugar) FolEs. Outros editores podem ser usados, mas não temos arquivos de suporte a todos eles.
 
 Nós usamos testes unitários para testar todos os componentes de FolEs. Nossa biblioteca de testes é a Jest: https://jestjs.io/. Não é preciso escrever testes unitários para contribuir com a linguagem.
 
