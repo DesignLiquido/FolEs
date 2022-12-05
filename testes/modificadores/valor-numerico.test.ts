@@ -32,23 +32,10 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     "}"
                 ]);
 
-                expect(resultadoLexador).toBeTruthy();
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.ESTRUTURA }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_ESQUERDA }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.DOIS_PONTOS }),
                         expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.PONTO_E_VIRGULA }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_DIREITA }),
-                    ])
-                );
-
-                expect(resultadoLexador.simbolos).not.toEqual(
-                    expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
                     ])
                 );
 
@@ -56,27 +43,18 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico).toBeTruthy();
-                expect(resultadoAvaliadorSintatico).toHaveLength(1);
-                expect(resultadoAvaliadorSintatico[0].seletor).toBe('corpo');
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
-                    '3'
-                );
 
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toBeTruthy();
-                expect(resultadoTradutor).toContain("body");
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain("3;");
             }
         });
 
@@ -90,7 +68,6 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     "}"
                 ]);
 
-                expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
