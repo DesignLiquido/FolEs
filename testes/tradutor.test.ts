@@ -2,83 +2,82 @@ import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
-import estruturasHtml from "../fontes/tradutor/estruturas-html";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 
-describe('Testes Unitários', () => {
-    describe('Tradutor', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
+import estruturasHtml from "../fontes/tradutor/estruturas-html";
 
-        beforeEach(() => {
-            lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
-            tradutor = new Tradutor();
-        });
+describe('Tradutor', () => {
+    let lexador: Lexador;
+    let avaliador: AvaliadorSintatico;
+    let tradutor: Tradutor;
 
-        it('Testando tradução das estruturas HTML', () => {
-            for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
+    beforeEach(() => {
+        lexador = new Lexador();
+        avaliador = new AvaliadorSintatico();
+        tradutor = new Tradutor();
+    });
 
-                // Lexador recebe as estruturas FolEs
-                const resultadoLexador = lexador.mapear([
-                    `${Object.keys(estruturasHtml)[index]} {`,
-                    "   tamanho-fonte: 60px;",
-                    "}"
-                ])
+    it('Testando tradução das estruturas HTML', () => {
+        for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
 
-                // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            // Lexador recebe as estruturas FolEs
+            const resultadoLexador = lexador.mapear([
+                `${Object.keys(estruturasHtml)[index]} {`,
+                "   tamanho-fonte: 60px;",
+                "}"
+            ])
 
-                // Tradutor deve retornar a estrutura HTML correspondente
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
-            }
-        })
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
-            for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
-                const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'cm');
+            // Tradutor deve retornar a estrutura HTML correspondente
+            const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+            expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
+        }
+    });
 
-                // Lexador
-                const resultadoLexador = lexador.mapear([
-                    "lmht {",
-                    `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
-                    "}"
-                ]);
+    it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
+        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
+            const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'cm');
 
-                // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                "}"
+            ]);
 
-                // Tradutor deve funcionar de acordo
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoTradutor).toBeTruthy();
-                expect(resultadoTradutor).toContain("html");
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('40cm;');
-            }
-        });
+            // Tradutor deve funcionar de acordo
+            const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        it('Casos de Falha - seletores valor-quantificador', () => {
-            for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
+            expect(resultadoTradutor).toBeTruthy();
+            expect(resultadoTradutor).toContain("html");
+            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            expect(resultadoTradutor).toContain('40cm;');
+        }
+    });
 
-                // Lexador - valor e quantificador não informados
-                const resultadoLexador = lexador.mapear([
-                    "lmht {",
-                    `${ValorQuantificador[index]}: ;`,
-                    "}"
-                ]);
+    it('Casos de Falha - seletores valor-quantificador', () => {
+        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
-                // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
-                expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
-                }).not.toBeTruthy;
+            // Lexador - valor e quantificador não informados
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `${ValorQuantificador[index]}: ;`,
+                "}"
+            ]);
 
-                expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
-                }).toHaveLength(0);
-            }
-        });
+            // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
+            expect(() => {
+                tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+            }).not.toBeTruthy;
+
+            expect(() => {
+                tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+            }).toHaveLength(0);
+        }
     });
 });
