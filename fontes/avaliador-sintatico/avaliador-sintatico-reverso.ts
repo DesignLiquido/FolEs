@@ -45,6 +45,7 @@ export class AvaliadorSintaticoReverso {
 
     declaracaoPorSeletor(): Declaracao {
         // TODO: Pensar lógica para seletor de classes.
+        this.avancarEDevolverAnterior();
         return null;
     }
 

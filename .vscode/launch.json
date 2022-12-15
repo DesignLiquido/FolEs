@@ -39,7 +39,7 @@
             "runtimeArgs": [
                 "--inspect-brk",
                 "${workspaceRoot}/node_modules/jest/bin/jest.js",
-                "foles.test.ts",
+                // "tradutor-reverso.test.ts",
                 "--runInBand"
             ],
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
