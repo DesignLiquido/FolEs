@@ -119,7 +119,7 @@ export default {
     "variavel": tiposDeSimbolos.ESTRUTURA,
     "variável": tiposDeSimbolos.ESTRUTURA, 
 
-    // Quantificadores
+    // Quantificadores especiais
     "cm": tiposDeSimbolos.QUANTIFICADOR,
     "mm": tiposDeSimbolos.QUANTIFICADOR,
     "in": tiposDeSimbolos.QUANTIFICADOR,
@@ -134,4 +134,8 @@ export default {
     "vh": tiposDeSimbolos.QUANTIFICADOR,
     "vmin": tiposDeSimbolos.QUANTIFICADOR,
     "vmax": tiposDeSimbolos.QUANTIFICADOR,
+
+    // Quantificadores temporais
+    "s": tiposDeSimbolos.QUANTIFICADOR,
+    "ms": tiposDeSimbolos.QUANTIFICADOR
 }
