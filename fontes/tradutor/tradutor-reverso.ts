@@ -12,7 +12,7 @@ export class TradutorReverso {
         let resultado = "";
 
         for (const declaracao of declaracoes) {
-            resultado += `${estruturasLmht[declaracao.seletor]} {\n`
+            resultado += `${estruturasLmht[declaracao.seletor][0]} {\n`
             for (const modificador of declaracao.modificadores) {
                 resultado += this.traduzirModificador(modificador);
             }

@@ -2,84 +2,81 @@ import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
-import estruturasHtml from "../fontes/tradutor/estruturas-html";
 import { ValorQuantificador } from "./listas/valor-quantificador"
+import estruturasHtml from "../fontes/tradutor/estruturas-html";
 
-describe('Testes Unitários', () => {
-    describe('Tradutor', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
+describe('Tradutor', () => {
+    let lexador: Lexador;
+    let avaliador: AvaliadorSintatico;
+    let tradutor: Tradutor;
 
-        beforeEach(() => {
-            lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
-            tradutor = new Tradutor();
-        });
+    beforeEach(() => {
+        lexador = new Lexador();
+        avaliador = new AvaliadorSintatico();
+        tradutor = new Tradutor();
+    });
 
-        it('Testando tradução das estruturas HTML', () => {
-            for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
+    it('Testando tradução das estruturas HTML', () => {
+        for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
 
-                // Lexador recebe as estruturas FolEs
-                const resultadoLexador = lexador.mapear([
-                    `${Object.keys(estruturasHtml)[index]} {`,
-                    "   tamanho-fonte: 60px;",
-                    "}"
-                ])
+            // Lexador recebe as estruturas FolEs
+            const resultadoLexador = lexador.mapear([
+                `${Object.keys(estruturasHtml)[index]} {`,
+                "   tamanho-fonte: 60px;",
+                "}"
+            ])
 
-                // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // Tradutor deve retornar a estrutura HTML correspondente
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
-            }
-        })
+            // Tradutor deve retornar a estrutura HTML correspondente
+            const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+            expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
+        }
+    });
 
-        it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
-            // TODO @Vitor: Notar aqui que `atraso-animacao` já não funciona bem neste teste.
-            for (let index = 2; index < Object.keys(ValorQuantificador).length; index++) {
-                const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'cm');
+    it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
+        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
+            const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'cm');
 
-                // Lexador
-                const resultadoLexador = lexador.mapear([
-                    "lmht {",
-                    `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
-                    "}"
-                ]);
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                "}"
+            ]);
 
-                // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // Tradutor deve funcionar de acordo
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+            // Tradutor deve funcionar de acordo
+            const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toBeTruthy();
-                expect(resultadoTradutor).toContain("html");
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('40cm;');
-            }
-        });
+            expect(resultadoTradutor).toBeTruthy();
+            expect(resultadoTradutor).toContain("html");
+            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            expect(resultadoTradutor).toContain('40cm;');
+        }
+    });
 
-        it('Casos de Falha - seletores valor-quantificador', () => {
-            for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
+    it('Casos de Falha - seletores valor-quantificador', () => {
+        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
-                // Lexador - valor e quantificador não informados
-                const resultadoLexador = lexador.mapear([
-                    "lmht {",
-                    `${ValorQuantificador[index]}: ;`,
-                    "}"
-                ]);
+            // Lexador - valor e quantificador não informados
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `${ValorQuantificador[index]}: ;`,
+                "}"
+            ]);
 
-                // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
-                expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
-                }).not.toBeTruthy;
+            // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
+            expect(() => {
+                tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+            }).not.toBeTruthy;
 
-                expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
-                }).toHaveLength(0);
-            }
-        });
+            expect(() => {
+                tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+            }).toHaveLength(0);
+        }
     });
 });
