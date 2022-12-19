@@ -9,7 +9,7 @@ export class RecortarFundo extends Modificador {
         "texto": "text",
     }
 
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador?: string) {
         super("recortar-fundo", "background-clip");
 
         if (!(valor in this.valoresAceitos)) {
