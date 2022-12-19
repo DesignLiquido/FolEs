@@ -1,8 +1,8 @@
-export const ValorQuantificador: { [indice: number]: string } = {
-    0: 'atraso-animacao',
-    1: 'atraso-animação',
-    2: 'duracao-animacao',
-    3: 'duração-animação',
+export const ValorComprimento: { [indice: number]: string } = {
+    0: 'alinhar-vertical',
+    1: 'largura',
+    2: 'espacamento-palavras',
+    3: 'espaçamento-palavras',
     4: 'posicao-horizontal-fundo',
     5: 'posição-horizontal-fundo',
     6: 'posicao-vertical-fundo',
@@ -153,12 +153,15 @@ export const ValorQuantificador: { [indice: number]: string } = {
     151: 'posição-superior',
     152: 'transformar-origem',
     153: 'coordenadas',
-    154: 'alinhar-vertical',
-    155: 'largura',
-    156: 'espacamento-palavras',
-    157: 'espaçamento-palavras',
 }
 
+
+export const ValorTempo: { [indice: number]: string } = {
+    0: 'atraso-animacao',
+    1: 'atraso-animação',
+    2: 'duracao-animacao',
+    3: 'duração-animação',
+}
 
 /*
 
