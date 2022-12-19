@@ -15,7 +15,6 @@ import { AlturaLinha } from "../altura-linha";
 import { AlturaMaxima } from "../altura-maxima";
 import { AlturaMinima } from "../altura-minima";
 import { Animacao } from "../animacao";
-import { AnimacaoVelocidade } from "../animacao-velocidade";
 import { AoMudar } from "../ao-mudar";
 import { Aparencia } from "../aparencia";
 import { AreaMascara } from "../area-mascara";
@@ -358,6 +357,7 @@ import { VazamentoEmLinha } from "../vazamento-em-linha";
 import { VazamentoHorizontal } from "../vazamento-horizontal";
 import { VazamentoTexto } from "../vazamento-texto";
 import { VazamentoVertical } from "../vazamento-vertical";
+import { VelocidadeAnimacao } from "../velocidade-animacao";
 import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
@@ -386,8 +386,6 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "altura-mínima": AlturaMinima,
     "animacao": Animacao,
     "animação": Animacao,
-    "animacao-velocidade": AnimacaoVelocidade,
-    "animação-velocidade": AnimacaoVelocidade,
     "ao-mudar": AoMudar,
     "aparencia": Aparencia,
     "aparência": Aparencia, 
@@ -859,6 +857,8 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "vazamento-horizontal": VazamentoHorizontal,
     "vazamento-texto": VazamentoTexto,
     "vazamento-vertical": VazamentoVertical,
+    "velocidade-animacao": VelocidadeAnimacao,
+    "velocidade-animação": VelocidadeAnimacao,
     "visibilidade": Visibilidade,
     "visibilidade-conteudo": VisibilidadeConteudo,
     "visibilidade-conteúdo": VisibilidadeConteudo,

@@ -1,9 +1,21 @@
 import { Modificador } from "./superclasse/modificador";
 
 export class StatusAnimacao extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "executando": "running",
+        "parada": "paused"
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super(["status-animacao", "status-animação"], "animation-play-state");
+
+        if (!(valor in this.valoresAceitos)) {
+            throw new Error(`Valor ${valor} inválido para 'status-animação'. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }

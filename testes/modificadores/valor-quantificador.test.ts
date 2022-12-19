@@ -3,7 +3,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { ValorQuantificador } from "../listas/valor-quantificador";
+import { ValorComprimento } from "../listas/valor-quantificador";
 
 describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', () => {
     const atributos = [
@@ -23,13 +23,13 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             // TODO @Vitor: Notar aqui que `atraso-animacao` já não funciona bem neste teste.
-            for (let index = 2; index < Object.keys(ValorQuantificador).length; index += 1) {
-                const seletor = new SeletorModificador(ValorQuantificador[index], '12', 'px');
+            for (let index = 2; index < Object.keys(ValorComprimento).length; index += 1) {
+                const seletor = new SeletorModificador(ValorComprimento[index], '12', 'px');
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                    `${ValorComprimento[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                     "}"
                 ]);
 
@@ -61,12 +61,12 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
         });
 
         it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
+            for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
                 
                 // Lexador - valor numérico não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${ValorQuantificador[index]}: ;`,
+                    `${ValorComprimento[index]}: ;`,
                     "}"
                 ]);
 
@@ -81,7 +81,7 @@ describe('Testando Seletores que recebem VALOR e QUANTIFICADOR como atributos', 
                 // Avaliador Sintático deve retornar erro
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
+                }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorComprimento[index]}'.`);
             }
         });
     });
