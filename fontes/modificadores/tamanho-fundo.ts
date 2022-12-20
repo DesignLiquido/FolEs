@@ -33,6 +33,3 @@ export class TamanhoFundo extends Modificador {
         }
     }
 }
-
-const a = new TamanhoFundo('14', 'pt');
-console.log(a);
