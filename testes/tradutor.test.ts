@@ -55,7 +55,7 @@ describe('Tradutor', () => {
             expect(resultadoTradutor).toBeTruthy();
             expect(resultadoTradutor).toContain("html");
             expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-            expect(resultadoTradutor).toContain('40cm;');
+            expect(resultadoTradutor).toContain('40px;');
         }
     });
 
