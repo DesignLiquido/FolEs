@@ -20,6 +20,3 @@ export class CorFundo extends Modificador {
         // this.quantificador = quantificador;
     }
 }
-
-const a = new CorFundo("azl");
-console.log(a);
