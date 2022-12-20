@@ -37,7 +37,7 @@ describe('Tradutor', () => {
 
     it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
         for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
-            const seletor = new SeletorModificador(ValorComprimento[index], '40', 'cm');
+            const seletor = new SeletorModificador(ValorComprimento[index], '40', 'px');
 
             // Lexador
             const resultadoLexador = lexador.mapear([
