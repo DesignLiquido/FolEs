@@ -1,16 +1,8 @@
+import { ListaDePosições } from "./atributos/posição";
 import { Modificador } from "./superclasse/modificador";
 
 export class AlinharItens extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "inicio": "start",
-        "início": "start",
-        "fim": "end",
-        "flex-inicio": "flex-start",
-        "flex-início": "flex-start",
-        "flex-fim": "flex-end",
-        "centro": "center",
-        "normal": "normal",
-        "linha-de-base": "alternate",
         "inicio-linha-de-base": "first baseline",
         "início-linha-de-base": "first baseline",
         "fim-linha-de-base": "last baseline",
@@ -20,7 +12,6 @@ export class AlinharItens extends Modificador {
         "espaço-ao-redor": "space-around",
         "espaco-uniforme": "space-evenly",
         "espaço-uniforme": "space-evenly",
-        "esticar": "stretch",
         "seguro": "safe",
         "inseguro": "unsafe",
     }
@@ -28,8 +19,11 @@ export class AlinharItens extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("alinhar-itens", "align-items");
 
-        if (!(valor in this.valoresAceitos)) {
-            throw new Error(`Valor ${valor} inválido para 'alinhar-itens'. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
+        // Pode receber valores próprios ou valores da lista de posições
+        if (!(valor in this.valoresAceitos) && !(valor in ListaDePosições)) {
+            throw new Error(`Valor ${valor} inválido para 'alinhar-itens'. Valores aceitos:
+            ${Object.keys(ListaDePosições).reduce((final, atual) => final += `, ${atual}`)}, 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
