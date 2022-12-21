@@ -1,9 +1,27 @@
 import { Modificador } from "./superclasse/modificador";
 
 export class RepetirFundo extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "repetir-horizontal": "repeat-x",
+        "repetir-vertical": "repeat-y",
+        "repetir": "repeat",
+        "espacar": "space",
+        "espaçar": "space",
+        "completar": "round",
+        "nao-repetir": "no-repeat",
+        "não-repetir": "no-repeat",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super("repetir-fundo", "background-repeat");
+
+        if (!(valor in this.valoresAceitos)) {
+            throw new Error(`Propriedade 'repetir-fundo' com valor ${valor} inválido. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`)
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }

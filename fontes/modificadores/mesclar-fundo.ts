@@ -1,9 +1,38 @@
 import { Modificador } from "./superclasse/modificador";
 
 export class MesclarFundo extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "normal": "normal",
+        "multiplicar": "multiply",
+        "alternar": "screen",
+        "sobrepor": "overlay",
+        "escurecer": "darken",
+        "clarear": "normal",
+        "subexposicao": "color-dodge",
+        "subexposição": "color-dodge",
+        "contraste": "color-burn",
+        "luz-forte": "hard-light",
+        "luz-fraca": "soft-light",
+        "diferenca": "difference",
+        "diferença": "difference",
+        "excluir": "exclusion",
+        "espaçar": "space",
+        "matiz": "hue",
+        "saturar": "saturation",
+        "cor": "color",
+        "luminosidade": "luminosity",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super("mesclar-fundo", "background-blend-mode");
+
+        if (!(valor in this.valoresAceitos)) {
+            throw new Error(`Propriedade 'mesclar-fundo' com valor ${valor} inválido. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`)
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }
