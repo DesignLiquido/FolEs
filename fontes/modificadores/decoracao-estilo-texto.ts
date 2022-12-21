@@ -1,12 +1,29 @@
 import { Modificador } from "./superclasse/modificador";
 
 export class DecoracaoEstiloTexto extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "solido": "solid",
+        "sólido": "solid",
+        "duplicado": "double",
+        "tracejado": "dashed",
+        "pontilhado": "dotted",
+        "ondulado": "wavy",
+        "nenhum": "none",
+    }
+    
+    constructor(valor: string, quantificador?: string) {
         super(
             ["decoracao-estilo-texto", "decoração-estilo-texto"], 
             "text-decoration-style"
         );
+
+        if (!(valor in this.valoresAceitos)) {
+            throw new Error(`Propriedade 'decoração-estilo-texto' com valor ${valor} inválido. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`)
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }
