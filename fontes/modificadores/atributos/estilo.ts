@@ -11,3 +11,5 @@ export const ListaDeEstilos: { [valorFolEs: string]: string } = {
     "escondido": "hidden",
     "nenhum": "none",
 }
+
+// Baseado em: https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
