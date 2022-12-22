@@ -44,6 +44,3 @@ export class JustificarConteudo extends Modificador {
         // this.quantificador = quantificador;
     }
 }
-
-const a = new JustificarConteudo('herda');
-console.log(a);
