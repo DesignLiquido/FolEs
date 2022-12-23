@@ -22,6 +22,3 @@ export class PosicaoObjeto extends Modificador {
         // this.quantificador = quantificador;
     }
 }
-
-const a = new PosicaoObjeto('centro');
-console.log(a);
