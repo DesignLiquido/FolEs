@@ -171,3 +171,5 @@ export const ListaDeCores: { [valorFolEs: string]: string } = {
   "amarelo": "yellow",
   "amareloesverdeado": "yellowgreen",
 }
+
+// Baseado em: https://www.w3schools.com/cssref/css_colors.php
