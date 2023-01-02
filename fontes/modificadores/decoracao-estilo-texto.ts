@@ -1,3 +1,4 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class DecoracaoEstiloTexto extends Modificador {
@@ -17,8 +18,10 @@ export class DecoracaoEstiloTexto extends Modificador {
             "text-decoration-style"
         );
 
-        if (!(valor in this.valoresAceitos)) {
-            throw new Error(`Propriedade 'decoração-estilo-texto' com valor ${valor} inválido. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`)
+        if (!(valor in this.valoresAceitos) && !(valor in ListaDeValoresGlobais)) {
+            throw new Error(`Propriedade 'decoração-estilo-texto' com valor ${valor} inválido. Valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
