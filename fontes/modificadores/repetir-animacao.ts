@@ -1,3 +1,4 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class RepetirAnimacao extends Modificador {
@@ -8,8 +9,11 @@ export class RepetirAnimacao extends Modificador {
         );
         
         // Aceita somente 'infinito' e valores numéricos
-        if (Number.isNaN(parseInt(valor)) && valor !== 'infinito') {
-            throw new Error(`Propriedade 'repetir-animação' com valor ${valor} inválido. Valor deve ser um número ou 'infinito'`)
+        if (Number.isNaN(parseInt(valor)) && 
+            valor !== 'infinito' && 
+            !(valor in ListaDeValoresGlobais)
+        ) {
+            throw new Error(`Propriedade 'repetir-animação' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: infinito, ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         } 
 
         this.valor = valor;

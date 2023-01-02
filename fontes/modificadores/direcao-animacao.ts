@@ -1,3 +1,4 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class DirecaoAnimacao extends Modificador {
@@ -14,8 +15,10 @@ export class DirecaoAnimacao extends Modificador {
             "animation-direction"
         );
 
-        if (!(valor in this.valoresAceitos)) {
-            throw new Error(`Valor ${valor} inválido para 'direção-animação'. Valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
+        if (!(valor in this.valoresAceitos) && !(valor in ListaDeValoresGlobais)) {
+            throw new Error(`Valor ${valor} inválido para 'direção-animação'. Valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
