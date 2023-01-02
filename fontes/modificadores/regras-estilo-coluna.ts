@@ -18,6 +18,3 @@ export class RegrasEstiloColuna extends Modificador {
         // this.quantificador = quantificador;
     }
 }
-
-const a = new RegrasEstiloColuna('desarmar');
-console.log(a);
