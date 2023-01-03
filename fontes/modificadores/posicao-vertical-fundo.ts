@@ -1,3 +1,4 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class PosicaoVerticalFundo extends Modificador {
@@ -18,9 +19,12 @@ export class PosicaoVerticalFundo extends Modificador {
         // Aceita valores listados e valores numéricos
         if (
             Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos)
+            !(valor in this.valoresAceitos) && 
+            !(valor in ListaDeValoresGlobais)
         ) {
-            throw new Error(`Propriedade 'posição-vertical-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`)
+            throw new Error(`Propriedade 'posição-vertical-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
@@ -30,7 +34,7 @@ export class PosicaoVerticalFundo extends Modificador {
                 'px', '%', 'rem', 'vmin', 'vmax'
             ];
     
-            if (!quantificadoresAceitos.includes(quantificador)) {
+            if (!quantificadoresAceitos.includes(quantificador) || quantificador === undefined) {
                 throw new Error(`Propriedade 'posição-horizontal-fundo' com quantificador ${quantificador} inválido. Valores aceitos: ${quantificadoresAceitos} .`);
             }
     

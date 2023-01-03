@@ -1,3 +1,4 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class PosicaoFundo extends Modificador {
@@ -18,9 +19,12 @@ export class PosicaoFundo extends Modificador {
         // 1 valor-quantificador e as palavras reservadas aceitas.
         if (
             Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos)
+            !(valor in this.valoresAceitos) && 
+            !(valor in ListaDeValoresGlobais)
         ) {
-            throw new Error(`Propriedade 'posição-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores aceitos: ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`)
+            throw new Error(`Propriedade 'posição-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
@@ -30,8 +34,8 @@ export class PosicaoFundo extends Modificador {
                 'px', '%', 'rem', 'vmin', 'vmax'
             ];
     
-            if (!quantificadoresAceitos.includes(quantificador)) {
-                throw new Error(`Propriedade 'posição-fundo' com quantificador ${quantificador} inválido. Valores aceitos: ${quantificadoresAceitos} .`);
+            if (!quantificadoresAceitos.includes(quantificador) || quantificador === undefined) {
+                throw new Error(`Propriedade 'posição-fundo' com quantificador ${quantificador} inválido. Valores aceitos: ${quantificadoresAceitos}.`);
             }
     
             this.quantificador = quantificador;
