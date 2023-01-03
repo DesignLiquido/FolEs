@@ -1,4 +1,5 @@
 import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class TamanhoFundo extends Modificador {
@@ -11,7 +12,8 @@ export class TamanhoFundo extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("tamanho-fundo", "background-size");
 
-        // Aceita valores listados e valores numéricos
+        // Aceita valores listados e número-quantificador
+        // OBS.: Também aceita receber DOIS valores. A lógica abaixo cobre o recebimento de UM valor.
         if (
             Number.isNaN(parseInt(valor)) && 
             !(valor in this.valoresAceitos) && 
@@ -24,13 +26,10 @@ export class TamanhoFundo extends Modificador {
 
         this.valor = valor;
 
-        if (Number(parseInt(valor))){
-            const quantificadoresAceitos = [
-                'px', 'cm', 'mm', 'Q', 'in', 'pc', 'pt'
-            ];
-    
-            if (!quantificadoresAceitos.includes(quantificador) || quantificador === undefined) {
-                throw new Error(`Propriedade 'tamanho-fundo' com quantificador ${quantificador} inválido. Valores aceitos: ${quantificadoresAceitos} .`);
+        if (Number(parseInt(valor))){  
+            if (!(quantificador in ListaDeQuantificadores) || quantificador === undefined) {
+                throw new Error(`Propriedade 'tamanho-fundo' com quantificador inválido. Valores aceitos:
+                ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
     
             this.quantificador = quantificador;
