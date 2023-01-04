@@ -5,8 +5,8 @@ import { Modificador } from "./superclasse/modificador";
 export class LarguraInicioBordaEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "fina": "thin",
-        "medio": "medium",
-        "médio": "medium",
+        "media": "medium",
+        "média": "medium",
         "grossa": "thick",
     }
 

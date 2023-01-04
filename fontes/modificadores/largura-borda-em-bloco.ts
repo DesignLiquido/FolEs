@@ -5,19 +5,21 @@ import { Modificador } from "./superclasse/modificador";
 export class LarguraBordaEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "fina": "thin",
-        "medio": "medium",
-        "médio": "medium",
+        "media": "medium",
+        "média": "medium",
         "grossa": "thick",
     }
 
     constructor(valor: string, quantificador: string) {
         super("largura-borda-em-bloco", "border-block-width");
+
         // Pode receber valores próprios ou número-quantificador
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in ListaDeValoresGlobais)
         ) {
-            throw new Error(`Propriedade 'largura-borda-em-bloco' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
+            throw new Error(
+                `Propriedade 'largura-borda-em-bloco' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
                 ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
                 ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
