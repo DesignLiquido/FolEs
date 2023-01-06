@@ -105,3 +105,8 @@ export const ListaDeComprimento: { [valorFolEs: string]: string } = {
 export const ListaDeValorFlex: { [valorFolEs: string]: string } = {
     "fr": "fr",
 }
+
+export const ListaDeValoresTempo: { [valorFolEs: string]: string } = {
+    "s": "s",
+    "ms": "ms",
+}
