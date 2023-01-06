@@ -14,7 +14,7 @@ export class TamanhoEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("tamanho-em-linha", "inline-size");
 
-        // OBS.: Também pode receber as funções minmax(min, max) e fit-content( [ <length> | <percentage> ] )
+        // OBS.: Também pode receber a função fit-content( [ <length> | <percentage> ] )
         // A lógica abaixo cobre somente o recebimento de UM único valor. 
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
@@ -28,7 +28,6 @@ export class TamanhoEmLinha extends Modificador {
 
         this.valor = valor;
 
-        // Além dos quantificadores de Comprimento e Percentual, também pode receber a unidade 'fr', do tipo Flex.
         if (Number(parseInt(valor))) {
             if (
                 !(quantificador in ListaDeQuantificadores) || 

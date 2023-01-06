@@ -1,4 +1,5 @@
 import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeValoresTempo } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class DuracaoAnimacao extends Modificador {
@@ -16,8 +17,9 @@ export class DuracaoAnimacao extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!['s', 'ms'].includes(quantificador) || quantificador === undefined) {
-                throw new Error(`Propriedade 'duração-animação' com quantificador ${quantificador} inválido. Valores aceitos: 's', 'ms'`);
+            if (!(quantificador in ListaDeValoresTempo) || quantificador === undefined) {
+                throw new Error(`Propriedade 'duração-animação' com quantificador inválido. Valores aceitos: 
+                ${Object.keys(ListaDeValoresTempo).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;
