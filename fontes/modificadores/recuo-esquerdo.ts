@@ -1,9 +1,32 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class RecuoEsquerdo extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador?: string) {
         super("recuo-esquerdo", "padding-left");
+
+        if (Number.isNaN(parseInt(valor)) &&
+            !(valor in ListaDeValoresGlobais)
+        ) {
+            throw new Error(
+                `Propriedade 'recuo-esquerdo' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
+                ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // O seletor aceita o número 0.
+        // Logo, o código só passa pela validação caso haja um segundo parâmetro
+        // ou caso o primeiro seja diferente de 0.
+        if (quantificador !== undefined || valor !== '0') {
+            if (!(quantificador in ListaDeQuantificadores)) {
+                throw new Error(
+                    `Propriedade 'recuo-esquerdo' com quantificador inválido. Valores aceitos:
+                    ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+            this.quantificador = quantificador;
+        }
     }
 }
