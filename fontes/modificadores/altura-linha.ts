@@ -15,7 +15,7 @@ export class AlturaLinha extends Modificador {
             !(valor in ListaDeValoresGlobais)
         ) {
             throw new Error(
-                `Propriedade 'espaçamento-letras' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
+                `Propriedade 'altura-linha' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
                 ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
                 ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
@@ -28,7 +28,7 @@ export class AlturaLinha extends Modificador {
                 !(quantificador in ListaDeQuantificadores)
             ) {
                 throw new Error(
-                    `Propriedade 'espaçamento-letras' com quantificador inválido. Valores aceitos:
+                    `Propriedade 'altura-linha' com quantificador inválido. Valores aceitos:
                     ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 

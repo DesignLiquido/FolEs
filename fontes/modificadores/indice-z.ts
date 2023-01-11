@@ -1,9 +1,30 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class IndiceZ extends Modificador {
-    constructor(valor: string, quantificador: string) {
-        super("indice-z", "z-index");
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "auto": "auto",
+    }
+
+    constructor(valor: string, quantificador?: string) {
+        super(["indice-z", "índice-z"], "z-index");
+
+        if (Number.isNaN(parseInt(valor)) &&
+            !(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)
+        ) {
+            throw new Error(`Propriedade 'índice-z' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador, apenas o valor numérico.
+        // Logo, deve retornar um erro se recebido um segundo parâmetro. 
+        if (quantificador !== undefined) {
+            throw new Error(
+                `Propriedade 'índice-z' aceita somente valores numéricos. O quantificador ${quantificador} é inválido para esta operação.`);
+        }
     }
 }
