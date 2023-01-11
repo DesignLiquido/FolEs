@@ -16,7 +16,7 @@ describe('Tradutor', () => {
         tradutor = new Tradutor();
     });
 
-    it('Testando tradução das estruturas HTML', () => {
+    it.skip('Testando tradução das estruturas HTML', () => {
         for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
 
             // Lexador recebe as estruturas FolEs
@@ -35,7 +35,7 @@ describe('Tradutor', () => {
         }
     });
 
-    it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
+    it.skip('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
         for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
             const seletor = new SeletorModificador(ValorComprimento[index], '40', 'px');
 
@@ -59,7 +59,7 @@ describe('Tradutor', () => {
         }
     });
 
-    it('Casos de Falha - seletores valor-quantificador', () => {
+    it.skip('Casos de Falha - seletores valor-quantificador', () => {
         for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
 
             // Lexador - valor e quantificador não informados

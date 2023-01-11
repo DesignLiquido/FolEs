@@ -1,9 +1,37 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class PosicaoDireita extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "auto": "auto",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super(["posicao-direita", "posição-direita"], "right");
+
+        if (Number.isNaN(parseInt(valor)) &&
+            !(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)
+        ) {
+            throw new Error(
+                `Propriedade 'posição-direita' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
+                ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // O seletor aceita o número 0.
+        // Logo, o código só passa pela validação caso haja um segundo parâmetro
+        // ou caso o primeiro seja diferente de 0.
+        if (quantificador !== undefined || valor !== '0') {
+            if (!(quantificador in ListaDeQuantificadores)) {
+                throw new Error(
+                    `Propriedade 'posição-direita' com quantificador inválido. Valores aceitos:
+                    ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+            this.quantificador = quantificador;
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeValoresTempo } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class AtrasoAnimacao extends Modificador {
@@ -9,14 +10,16 @@ export class AtrasoAnimacao extends Modificador {
         );
 
         if (Number.isNaN(parseInt(valor)) && !(valor in ListaDeValoresGlobais)) {
-            throw new Error(`Propriedade 'atraso-animação' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            throw new Error(`Propriedade 'atraso-animação' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!['s', 'ms'].includes(quantificador) || quantificador === undefined) {
-                throw new Error(`Propriedade 'atraso-animação' com quantificador ${quantificador} inválido. Valores aceitos: 's', 'ms'`);
+            if (!(quantificador in ListaDeValoresTempo) || quantificador === undefined) {
+                throw new Error(`Propriedade 'atraso-animação' com quantificador inválido. Valores aceitos:
+                ${Object.keys(ListaDeValoresTempo).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

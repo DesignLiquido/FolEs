@@ -1,4 +1,5 @@
 import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class PosicaoVerticalFundo extends Modificador {
@@ -29,13 +30,10 @@ export class PosicaoVerticalFundo extends Modificador {
 
         this.valor = valor;
         
-        if (Number(parseInt(valor))){
-            const quantificadoresAceitos = [
-                'px', '%', 'rem', 'vmin', 'vmax'
-            ];
-    
-            if (!quantificadoresAceitos.includes(quantificador) || quantificador === undefined) {
-                throw new Error(`Propriedade 'posição-horizontal-fundo' com quantificador ${quantificador} inválido. Valores aceitos: ${quantificadoresAceitos} .`);
+        if (Number(parseInt(valor))){   
+            if (!(quantificador in ListaDeQuantificadores) || quantificador === undefined) {
+                throw new Error(`Propriedade 'posição-vertical-fundo' com quantificador inválido. Valores aceitos: 
+                ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
     
             this.quantificador = quantificador;
