@@ -16,7 +16,8 @@ export class RecuoSuperiorRolagemMouse extends Modificador {
         ) {
             throw new Error(
                 `Propriedade 'recuo-superior-rolagem-mouse' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
