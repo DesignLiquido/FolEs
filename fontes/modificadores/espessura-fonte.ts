@@ -32,6 +32,3 @@ export class EspessuraFonte extends Modificador {
         }
     }
 }
-
-const a = new EspessuraFonte('130');
-console.log(a);
