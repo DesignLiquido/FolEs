@@ -23,7 +23,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
         });
 
         it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Url).length; index += 1) {
+            for (let index = 0; index < Url.length; index += 1) {
                 const seletor = new SeletorModificador(Url[index], 'url("img_tree.gif")', null);
 
                 // Lexador
@@ -61,7 +61,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
         });
 
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Url).length; index += 1) {
+            for (let index = 0; index < Url.length; index += 1) {
 
                 // Lexador - URL não informada
                 const resultadoLexador = lexador.mapear([
