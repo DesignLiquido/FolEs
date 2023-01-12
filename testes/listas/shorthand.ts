@@ -1,43 +1,59 @@
-export const Shorthand: { [indice: number]: string } = {
-    0: 'animacao',
-    1: 'animação',
-    2: 'borda',
-    3: 'borda-em-bloco',
-    4: 'fim-borda-em-bloco',
-    5: 'inicio-borda-em-bloco',
-    6: 'início-borda-em-bloco',
-    7: 'borda-inferior',
-    8: 'cor-borda',
-    9: 'borda-em-linha',
-    10: 'fim-borda-em-linha',
-    11: 'inicio-borda-em-linha',
-    12: 'início-borda-em-linha',
-    13: 'borda-esquerda',
-    14: 'borda-direita',
-    15: 'estilo-borda',
-    16: 'borda-superior',
-    17: 'sombra-caixa',
-    18: 'colunas',
-    19: 'flex',
-    20: 'fonte',
-    21: 'insercao',
-    22: 'inserção',
-    23: 'estilo-lista',
-    24: 'margem',
-    25: 'mascara',
-    26: 'máscara',
-    27: 'borda-mascara',
-    28: 'borda-máscara',
-    29: 'contorno',
-    30: 'recuo',
-    31: 'recuo-em-linha',
-    32: 'posicionar-itens',
-    33: 'margem-rolagem-mouse',
-    34: 'decoracao-texto',
-    35: 'decoração-texto',
-    36: 'transicao',
-    37: 'transição',
-};
+export const Shorthand: Array<string> = [
+    'animacao',
+    'animação',
+    'borda',
+    'borda-em-bloco',
+    'fim-borda-em-bloco',
+    'inicio-borda-em-bloco',
+    'início-borda-em-bloco',
+    'borda-inferior',
+    'cor-borda',
+    'borda-em-linha',
+    'fim-borda-em-linha',
+    'inicio-borda-em-linha',
+    'início-borda-em-linha',
+    'borda-esquerda',
+    'borda-direita',
+    'estilo-borda',
+    'borda-superior',
+    'sombra-caixa',
+    'colunas',
+    'flex',
+    'fonte',
+    'insercao',
+    'inserção',
+    'estilo-lista',
+    'margem',
+    'mascara',
+    'máscara',
+    'borda-mascara',
+    'borda-máscara',
+    'contorno',
+    'recuo',
+    'recuo-em-linha',
+    'posicionar-itens',
+    'margem-rolagem-mouse',
+    'decoracao-texto',
+    'decoração-texto',
+    'transicao',
+    'transição',
+    'regras-coluna',
+    'posicionar-conteudo',
+    'posicionar-se',
+    'raio-borda',
+    'inserção-em-bloco',
+    'insercao-em-linha',
+    'margem-em-bloco',
+    'margem-em-linha',
+    'recuo-em-bloco',
+    'margem-rolagem-mouse',
+    'margem-em-bloco-rolagem-mouse',
+    'margem-em-linha-rolagem-mouse',
+    'recuo-rolagem-mouse',
+    'recuo-em-bloco-rolagem-mouse',
+    'recuo-em-linha-rolagem-mouse',
+    'linha-em-grade',
+];
 
 /*
 
@@ -73,5 +89,21 @@ posicionar-itens (2)
 margem-rolagem-mouse (4)
 decoracao-texto (4)
 transicao (4)
+regras-coluna (3)
+posicionar-conteudo (2)
+posicionar-se (2)
+raio-borda(4)
+inserção-em-bloco (2)
+insercao-em-linha (2)
+margem-em-bloco (2)
+margem-em-linha (2)
+recuo-em-bloco (2)
+margem-rolagem-mouse (4)
+margem-em-bloco-rolagem-mouse (2)
+margem-em-linha-rolagem-mouse (2)
+recuo-rolagem-mouse (4)
+recuo-em-bloco-rolagem-mouse (2)
+recuo-em-linha-rolagem-mouse (2)
+linha-em-grade (2)
 
 */
