@@ -28,7 +28,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
         });
 
         it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Status).length; index += 1) {
+            for (let index = 0; index < Status.length; index += 1) {
                 const seletor = new SeletorModificador(Status[index], 'sempre', null);
 
                 // Lexador
@@ -65,7 +65,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
         });
 
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Status).length; index += 1) {
+            for (let index = 0; index < Status.length; index += 1) {
 
                 // Lexador - Status não informado
                 const resultadoLexador = lexador.mapear([

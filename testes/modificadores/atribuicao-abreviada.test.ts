@@ -3,9 +3,9 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { Shorthand } from "../listas/shorthand";
+import { AtribuiçãoAbreviada } from "../listas/atribuicao-abreviada";
 
-describe('Testando Seletores SHORTHAND (de atribuição abreviada), que recebem dois ou mais atributos', () => {
+describe('Testando Seletores AtribuiçãoAbreviada (de atribuição abreviada), que recebem dois ou mais atributos', () => {
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
@@ -22,7 +22,7 @@ describe('Testando Seletores SHORTHAND (de atribuição abreviada), que recebem 
         });
 
         // ARQUIVO DE TESTES CRIADO PARA PENSARMOS EM UMA LÓGICA DE COMO
-        // TESTAR OS SELETORES SHORTHAND, TENDO EM VISTA QUE CADA SELETOR
+        // TESTAR OS SELETORES DE ATRIBUIÇÃO ABREVIADA, TENDO EM VISTA QUE CADA SELETOR
         // RECEBE UM DETERMINADO NÚMERO DE PARÂMETROS.
         
         // A QUANTIDADE DE PARÂMETROS QUE CADA SELETOR SHORTHAND RECEBE 
