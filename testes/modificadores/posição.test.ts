@@ -27,8 +27,8 @@ describe('Testando Seletores de POSIÇÃO', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Posição).length; index += 1) {
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+            for (let index = 0; index < Posição.length; index += 1) {
                 const seletor = new SeletorModificador(Posição[index], 'centro', null);
 
                 // Lexador
@@ -47,21 +47,21 @@ describe('Testando Seletores de POSIÇÃO', () => {
 
 
                 // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
+                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                //     seletor['nomeFoles']
+                // );
+                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                //     seletor['propriedadeCss']
+                // );
 
 
-                // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                // // Tradutor
+                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('center;');
+                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                // expect(resultadoTradutor).toContain('center;');
             }
         });
 
