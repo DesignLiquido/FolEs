@@ -38,7 +38,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
         });
 
         it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Cores).length; index += 1) {
+            for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], '#f015ca', '');
 
                 // Lexador
@@ -75,7 +75,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
         });
 
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(Cores).length; index += 1) {
+            for (let index = 0; index < Cores.length; index += 1) {
 
                 // Lexador - cor não informada
                 const resultadoLexador = lexador.mapear([
