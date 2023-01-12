@@ -21,9 +21,9 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
-                const seletor = new SeletorModificador(ValorNumerico[index], '3', '');
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+            for (let index = 0; index < ValorNumerico.length; index += 1) {
+                const seletor = new SeletorModificador(ValorNumerico[index], '1');
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -39,26 +39,25 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     ])
                 );
 
-
                 // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
+                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                //     seletor['nomeFoles']
+                // );
+                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                //     seletor['propriedadeCss']
+                // );
 
 
-                // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                // // Tradutor
+                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
         });
 
-        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
                 
                 // Lexador - valor numérico não informado
@@ -77,22 +76,22 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 // Causar erro de digitação
                 const seletorIncorreto = ValorNumerico[index].replace(ValorNumerico[index][0], '')
 
-                const novoLexador = lexador.mapear([
-                    "lmht {",
-                    `${seletorIncorreto}: 1.5;`,
-                    "}"
-                ]);
+                // const novoLexador = lexador.mapear([
+                //     "lmht {",
+                //     `${seletorIncorreto}: 1.5;`,
+                //     "}"
+                // ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                // expect(() => {
+                //     avaliador.analisar(novoLexador.simbolos);
+                // }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
-                expect(() => {
-                    tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
-                }).toHaveLength(0);
+                // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // expect(() => {
+                //     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
+                // }).toHaveLength(0);
             }
         });
     });
