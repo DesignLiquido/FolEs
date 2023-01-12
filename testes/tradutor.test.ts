@@ -2,7 +2,7 @@ import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
-import { ValorComprimento } from "./listas/valor-quantificador"
+import { ValorQuantificador } from "./listas/valor-quantificador"
 import estruturasHtml from "../fontes/tradutor/estruturas-html";
 
 describe('Tradutor', () => {
@@ -16,7 +16,7 @@ describe('Tradutor', () => {
         tradutor = new Tradutor();
     });
 
-    it.skip('Testando tradução das estruturas HTML', () => {
+    it('Testando tradução das estruturas HTML', () => {
         for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
 
             // Lexador recebe as estruturas FolEs
@@ -35,14 +35,14 @@ describe('Tradutor', () => {
         }
     });
 
-    it.skip('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
-        for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
-            const seletor = new SeletorModificador(ValorComprimento[index], '40', 'px');
+    it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
+        for (let index = 0; index < ValorQuantificador.length; index += 1) {
+            const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'px');
 
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "lmht {",
-                `${ValorComprimento[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
             ]);
 
@@ -59,13 +59,13 @@ describe('Tradutor', () => {
         }
     });
 
-    it.skip('Casos de Falha - seletores valor-quantificador', () => {
-        for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
+    it('Casos de Falha - seletores valor-quantificador', () => {
+        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
             const resultadoLexador = lexador.mapear([
                 "lmht {",
-                `${ValorComprimento[index]}: ;`,
+                `${ValorQuantificador[index]}: ;`,
                 "}"
             ]);
 

@@ -2,7 +2,7 @@ import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
-import { ValorComprimento } from "./listas/valor-quantificador"
+import { ValorQuantificador } from "./listas/valor-quantificador"
 
 describe('Avaliador Sintático', () => {
     let lexador: Lexador;
@@ -16,15 +16,14 @@ describe('Avaliador Sintático', () => {
     });
 
 
-        it.skip('Casos de sucesso - testando seletores valor-quantificador', () => {
-            // TODO @Vitor: Notar aqui que `atraso-animacao` já não funciona bem neste teste.
-            for (let index = 2; index < Object.keys(ValorComprimento).length; index++) {
-                const seletor = new SeletorModificador(ValorComprimento[index], '25', 'px');
+    it('Casos de sucesso - testando seletores valor-quantificador', () => {
+        for (let index = 0; index < ValorQuantificador.length; index += 1) {
+            const seletor = new SeletorModificador(ValorQuantificador[index], '25', 'px');
 
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "lmht {",
-                `${ValorComprimento[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
             ]);
 
@@ -54,23 +53,23 @@ describe('Avaliador Sintático', () => {
         }
     });
 
-    it.skip('Casos de Falha - mensagens de erro esperadas como retorno', () => {
-        for (let index = 0; index < Object.keys(ValorComprimento).length; index += 1) {
+    it('Casos de Falha - mensagens de erro esperadas como retorno', () => {
+        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
             const resultadoLexador = lexador.mapear([
                 "lmht {",
-                `${ValorComprimento[index]}: ;`,
+                `${ValorQuantificador[index]}: ;`,
                 "}"
             ]);
 
             // Avaliador Sintático deve retornar erro
             expect(() => {
                 avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorComprimento[index]}'.`);
+            }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
 
             // Causar erro de digitação
-            const seletorIncorreto = ValorComprimento[index].replace(ValorComprimento[index][0], '')
+            const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
 
             const novoLexador = lexador.mapear([
                 "lmht {",

@@ -9,7 +9,7 @@ describe('Lexador', () => {
         lexador = new Lexador();
     });
 
-    it.skip('Caso de sucesso - função mapear() monta objeto corretamente', () => {
+    it('Caso de sucesso - função mapear() monta objeto corretamente', () => {
         const resultadoLexador = lexador.mapear([
             "lmht {",
             "    tamanho-texto: 12px;",
@@ -42,7 +42,7 @@ describe('Lexador', () => {
         );
     });
 
-    it.skip('Caso de falha - mapear() não recebe parâmetros corretos', () => {
+    it('Caso de falha - mapear() não recebe parâmetros corretos', () => {
         const resultadoLexador = lexador.mapear([
             "lmht {",
             "    tamanho-texto: px;",
