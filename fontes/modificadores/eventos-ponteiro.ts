@@ -1,9 +1,25 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class EventosPonteiro extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "auto": "auto",
+        "nenhum": "none",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super("eventos-ponteiro", "pointer-events");
+
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)) {
+            throw new Error(`Propriedade 'eventos-ponteiro' com valor ${valor} inválido. Valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Quantificador não é usado aqui.
+        // this.quantificador = quantificador;
     }
 }
