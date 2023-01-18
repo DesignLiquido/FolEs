@@ -49,6 +49,8 @@ export class VelocidadeAnimacao extends Modificador {
         if (['passos'].includes(valor)){
             // Lógica para validar 2 parâmetros
         }
+
+        // TODO: Pensar em uma lógica para as duas condicionais acima.
         
         // Demais valores aceitos
         if (!(valor in this.valoresAceitos && !(valor in ListaDeValoresGlobais))) {
