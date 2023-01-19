@@ -1,9 +1,35 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class OrigemMascara extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "conteudo-caixa": "content-box",
+        "conteúdo-caixa": "content-box",
+        "preenchimento-caixa": "padding-box",
+        "borda-caixa": "border-box",
+        "margem-caixa": "margin-box",
+        "completar-caixa": "fill-box",
+        "delimitar-caixa": "stroke-box",
+        "visualizar-caixa": "view-box",
+        "conteudo": "content",
+        "conteúdo": "content",
+        "preenchimento": "padding",
+        "borda": "border",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super(["origem-mascara", "origem-máscara"], "mask-origin");
+
+        if (!(valor in this.valoresAceitos &&
+            !(valor in ListaDeValoresGlobais))) {
+            throw new Error(`Propriedade 'origem-máscara' com valor ${valor} inválido. Valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }
