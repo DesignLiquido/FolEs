@@ -95,7 +95,6 @@ export const ValorQuantificador: Array<string> = [
     'recuo-esquerdo',
     'recuo-direito',
     'recuo-superior',
-    'origem-perspectiva',
     'posicao-direita',
     'posição-direita',
     'espacamento-linhas',
