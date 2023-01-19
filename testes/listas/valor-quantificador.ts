@@ -153,6 +153,7 @@ export const ValorPercentual: Array<string> = [
     'esticar-fonte',
     'fatiar-borda-mascara',
     'fatiar-borda-máscara',
+    'origem-perspectiva',
 ];
 
 export const ValorTempo: Array<string> = [
