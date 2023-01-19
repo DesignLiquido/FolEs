@@ -4,8 +4,8 @@ import { Modificador } from "./superclasse/modificador";
 export class VariacaoFonteAlternativa extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "normal": "normal",
-        "formar-historicas": "historical-forms",
-        "formar-históricas": "historical-forms",
+        "formas-historicas": "historical-forms",
+        "formas-históricas": "historical-forms",
     }
 
     constructor(valor: string, quantificador?: string) {
