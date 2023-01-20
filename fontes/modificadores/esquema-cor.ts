@@ -14,8 +14,10 @@ export class EsquemaCor extends Modificador {
         
         // OBS.: Também pode receber duas palavras dos valores aceitos.
         // Ex.: esquema-cor: apenas claro;
+
         // A lógica abaixo cobre o recebimento de uma única palavra
-        // TODO: Adaptar lógica para cobrir recebimento de duas palavras. 
+        // TODO: Adaptar lógica para cobrir recebimento de duas palavras.
+    
         if (!(valor in this.valoresAceitos) &&
             !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'esquema-cor' com valor ${valor} inválido. Valores aceitos: 
