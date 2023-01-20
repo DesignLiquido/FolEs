@@ -110,3 +110,10 @@ export const ListaDeValoresTempo: { [valorFolEs: string]: string } = {
     "s": "s",
     "ms": "ms",
 }
+
+export const ListaDeAngulos: { [valorFolEs: string]: string } = {
+    "deg": "deg",
+    "grad": "grad",
+    "rad": "rad",
+    "turn": "turn",
+}

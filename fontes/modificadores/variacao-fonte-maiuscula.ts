@@ -1,12 +1,38 @@
+import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class VariacaoFonteMaiuscula extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "normal": "normal",
+        "maiusculas-pequenas": "small-caps",
+        "maiúsculas-pequenas": "small-caps",
+        "todas-maiusculas-pequenas": "all-small-caps",
+        "todas-maiúsculas-pequenas": "all-small-caps",
+        "maiusculas-menores": "petite-caps",
+        "maiúsculas-menores": "petite-caps",
+        "todas-maiusculas-menores": "all-petite-caps",
+        "todas-maiúsculas-menores": "all-petite-caps",
+        "misturar": "unicase",
+        "titulo-maiusculo": "titling-caps",
+        "título-maiúsculo": "titling-caps",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super(
-            ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"], 
+            ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
             "font-variant-caps"
         );
+
+        if (!(valor in this.valoresAceitos &&
+            !(valor in ListaDeValoresGlobais))) {
+            throw new Error(`Propriedade 'variação-fonte-maiúscula' com valor ${valor} inválido. Valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }
