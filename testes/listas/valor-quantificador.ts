@@ -95,7 +95,6 @@ export const ValorQuantificador: Array<string> = [
     'recuo-esquerdo',
     'recuo-direito',
     'recuo-superior',
-    'origem-perspectiva',
     'posicao-direita',
     'posição-direita',
     'espacamento-linhas',
@@ -154,6 +153,7 @@ export const ValorPercentual: Array<string> = [
     'esticar-fonte',
     'fatiar-borda-mascara',
     'fatiar-borda-máscara',
+    'origem-perspectiva',
 ];
 
 export const ValorTempo: Array<string> = [

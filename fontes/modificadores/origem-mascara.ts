@@ -8,13 +8,13 @@ export class OrigemMascara extends Modificador {
         "preenchimento-caixa": "padding-box",
         "borda-caixa": "border-box",
         "margem-caixa": "margin-box",
-        "preencher-caixa": "fill-box",
-        "quebrar-caixa": "stroke-box",
+        "completar-caixa": "fill-box",
+        "delimitar-caixa": "stroke-box",
         "visualizar-caixa": "view-box",
-        "borda": "border",
-        "preenchimento": "padding",
         "conteudo": "content",
         "conteúdo": "content",
+        "preenchimento": "padding",
+        "borda": "border",
     }
 
     constructor(valor: string, quantificador?: string) {

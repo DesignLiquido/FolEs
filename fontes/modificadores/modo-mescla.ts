@@ -2,6 +2,9 @@ import { ListaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class ModoMescla extends Modificador {
+
+    // Valores do tipo <blend-mode>
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/blend-mode 
     valoresAceitos: { [valorFoles: string]: string } = {
         "normal": "normal",
         "multiplicar": "multiply",
@@ -26,12 +29,11 @@ export class ModoMescla extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("modo-mescla", "mix-blend-mode");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in ListaDeValoresGlobais)
-        ) {
+        if (!(valor in this.valoresAceitos &&
+            !(valor in ListaDeValoresGlobais))) {
             throw new Error(`Propriedade 'modo-mescla' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
