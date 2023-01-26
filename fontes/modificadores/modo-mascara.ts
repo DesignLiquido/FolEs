@@ -6,7 +6,7 @@ export class ModoMascara extends Modificador {
         "alfa": "alpha",
         "luminancia": "luminance",
         "luminância": "luminance",
-        "origem-correspondente": "match-source",
+        "fonte-correspondente": "match-source",
     }
 
     constructor(valor: string, quantificador?: string) {
