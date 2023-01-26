@@ -1,4 +1,5 @@
 import { ListaDeValoresGlobais } from "./atributos/globais";
+import { ListaDeAngulos } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class RotacaoDeslocamento extends Modificador {
@@ -25,15 +26,15 @@ export class RotacaoDeslocamento extends Modificador {
 
         this.valor = valor;
         
-        // Único quantificador aceito é o 'deg'
+        // Quantificador deve ser do tipo ângulo (<angle>)
         if (Number(parseInt(valor))){
             if (
-                quantificador !== 'deg' ||
+                !(quantificador in ListaDeAngulos)  ||
                 quantificador === undefined
             ) {
                 throw new Error(
                 `Propriedade 'rotação-deslocamento' com quantificador inválido. Valores aceitos:
-                deg.`);
+                ${Object.keys(ListaDeAngulos).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
     
             this.quantificador = quantificador;
