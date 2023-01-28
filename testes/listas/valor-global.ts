@@ -134,6 +134,7 @@ export const ValorGlobal: Array<string> = [
     'posição-legenda',
     'posicao-texto-sublinhado',
     'posição-texto-sublinhado',
+    'reiniciar-tudo',
 ];
 
 /*
