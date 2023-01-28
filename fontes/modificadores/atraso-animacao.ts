@@ -10,7 +10,7 @@ export class AtrasoAnimacao extends Modificador {
         );
 
         if (Number.isNaN(parseInt(valor)) && !(valor in ListaDeValoresGlobais)) {
-            throw new Error(`Propriedade 'atraso-animação' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
+            throw new Error(`Propriedade 'atraso-animação' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores: 
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
