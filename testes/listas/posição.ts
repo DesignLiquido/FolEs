@@ -4,7 +4,6 @@ export const Posição: Array<string> = [
     'alinhar-conteúdo',
     'alinhar-itens',
     'alinhar-se',
-    'reiniciar-tudo',
     'posicao-fundo',
     'posição-fundo',
     'posicao-horizontal-fundo',
