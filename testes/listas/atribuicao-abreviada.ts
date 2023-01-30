@@ -53,6 +53,10 @@ export const AtribuiçãoAbreviada: Array<string> = [
     'recuo-em-bloco-rolagem-mouse',
     'recuo-em-linha-rolagem-mouse',
     'linha-em-grade',
+    'coluna-em-grade',
+    'deslocamento',
+    'vazamento',
+    'modelo-em-grade',
 ];
 
 /*

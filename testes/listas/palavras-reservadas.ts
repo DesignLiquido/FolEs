@@ -56,4 +56,19 @@ export const PalavrasReservadas: Array<string> = [
     'orientacao-texto',
     'orientação-texto',
     'transformar',
+    // 'nome-animacao',
+    // 'nome-animação',
+    'status-animacao',
+    'status-animação',
+    'visibilidade-fundo',
+    'visibilidade',
+
+    // FUNÇÕES ESPECÍFICAS
+    'recursos-fonte',
+    'substituir-idioma-fonte',
+    'configuracoes-variacao-fonte',
+    'configurações-variação-fonte',
+    'modelo-geral-em-grade',
+    'modelo-colunas-em-grade',
+    'modelo-linhas-em-grade',
 ];
