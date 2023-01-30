@@ -36,8 +36,8 @@ export class EstiloEnfaseTexto extends Modificador {
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
         // TODO: Adaptar lógica para cobrir os demais casos.
 
-        if (!(valor in this.valoresAceitos &&
-            !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'estilo-ênfase-texto' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);

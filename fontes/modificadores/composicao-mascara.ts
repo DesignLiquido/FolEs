@@ -15,8 +15,8 @@ export class ComposicaoMascara extends Modificador {
             "mask-composite"
         );
 
-        if (!(valor in this.valoresAceitos &&
-            !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'composição-máscara' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
