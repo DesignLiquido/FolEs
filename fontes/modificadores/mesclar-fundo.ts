@@ -27,7 +27,7 @@ export class MesclarFundo extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("mesclar-fundo", "background-blend-mode");
 
-        if (!(valor in this.valoresAceitos && !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) && !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'mesclar-fundo' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)

@@ -28,8 +28,8 @@ export class VariacaoFonteLigacao extends Modificador {
             "font-variant-ligatures"
         );
 
-        if (!(valor in this.valoresAceitos &&
-            !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'variação-fonte-ligação' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
