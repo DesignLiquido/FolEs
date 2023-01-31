@@ -34,5 +34,3 @@ export class Contem extends Modificador {
         // this.quantificador = quantificador;
     }
 }
-const a = new Contem('herdar');
-console.log(a);
