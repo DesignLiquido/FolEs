@@ -10,8 +10,8 @@ export class RecolherBorda extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("recolher-borda", "border-collapse");
 
-        if (!(valor in this.valoresAceitos && 
-            !(valor in ListaDeValoresGlobais))) 
+        if (!(valor in this.valoresAceitos) && 
+            !(valor in ListaDeValoresGlobais)) 
         {
             throw new Error(`Propriedade 'recolher-borda' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},

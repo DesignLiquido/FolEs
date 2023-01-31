@@ -34,8 +34,8 @@ export class FonteTexto extends Modificador {
         // A lógica abaixo cobre somente o recebimento dos valores genéricos.
         // TODO: Adaptar lógica para cobrir o caso de receber 2 parâmetros. 
 
-        if (!(valor in this.valoresAceitos &&
-            !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'fonte-texto' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);

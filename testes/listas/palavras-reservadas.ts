@@ -1,6 +1,6 @@
 export const PalavrasReservadas: Array<string> = [
-    'animacao-velocidade',
-    'animação-velocidade',
+    'velocidade-animacao',
+    'velocidade-animação',
     'aparencia',
     'aparência',
     'filtro-fundo',
@@ -56,4 +56,20 @@ export const PalavrasReservadas: Array<string> = [
     'orientacao-texto',
     'orientação-texto',
     'transformar',
+    // 'nome-animacao',
+    // 'nome-animação',
+    'status-animacao',
+    'status-animação',
+    'visibilidade-fundo',
+    'visibilidade',
 ];
+
+export const FunçõesReservadas: Array<string> = [
+    'recursos-fonte',
+    'substituir-idioma-fonte',
+    'configuracoes-variacao-fonte',
+    'configurações-variação-fonte',
+    'modelo-geral-em-grade',
+    'modelo-colunas-em-grade',
+    'modelo-linhas-em-grade',
+]

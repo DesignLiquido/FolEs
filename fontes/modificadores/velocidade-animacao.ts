@@ -53,7 +53,7 @@ export class VelocidadeAnimacao extends Modificador {
         // TODO: Pensar em uma lógica para as duas condicionais acima.
         
         // Demais valores aceitos
-        if (!(valor in this.valoresAceitos && !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) && !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Valor ${valor} inválido para 'velocidade-animação'. Valores aceitos:  
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);

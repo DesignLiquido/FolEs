@@ -3,7 +3,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { Status } from "../listas/status";
+import { StatusAuto, StatusNenhum, StatusNormal } from "../listas/status";
 
 describe('Testando Seletores com STATUS como atributo', () => {
     const atributosCss = [
@@ -27,54 +27,94 @@ describe('Testando Seletores com STATUS como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Status.length; index += 1) {
-                const seletor = new SeletorModificador(Status[index], 'sempre', null);
+        it('Casos de sucesso - Valor AUTO', () => {
+            for (let index = 0; index < StatusAuto.length; index += 1) {
+                const seletor = new SeletorModificador(StatusAuto[index], 'auto', null);
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${Status[index]}: ${seletor['valor']};`,
+                    `${StatusAuto[index]}: ${seletor['valor']};`,
                     "}"
                 ]);
 
-                expect(resultadoLexador.simbolos).toHaveLength(7);
-                expect(resultadoLexador.simbolos).toEqual(
-                    expect.arrayContaining([
-                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_STATUS }),
-                    ])
-                );
+                // O modificador deve aceitar 'auto' como valor
+                expect(seletor['valor']).toEqual('auto');
 
+                // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(7);
+                expect(resultadoLexador.erros).toHaveLength(0);
 
                 // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
+                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                //     seletor['nomeFoles']
+                // );
+                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                //     seletor['propriedadeCss']
+                // );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                // // Tradutor
+                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('always');
+                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                // expect(resultadoTradutor).toContain('always');
+            }
+        });
+
+        it('Casos de sucesso - Valor NENHUM', () => {
+            for (let index = 0; index < StatusNenhum.length; index += 1) {
+                const seletor = new SeletorModificador(StatusNenhum[index], 'nenhum', null);
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                    `${StatusNenhum[index]}: ${seletor['valor']};`,
+                    "}"
+                ]);
+
+                // O modificador deve aceitar 'nenhum' como valor
+                expect(seletor['valor']).toEqual('nenhum');
+
+                // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(7);
+                expect(resultadoLexador.erros).toHaveLength(0);
+            }
+        });
+
+        it('Casos de sucesso - Valor NORMAL', () => {
+            for (let index = 0; index < StatusNormal.length; index += 1) {
+                const seletor = new SeletorModificador(StatusNormal[index], 'normal', null);
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                    `${StatusNormal[index]}: ${seletor['valor']};`,
+                    "}"
+                ]);
+
+                // O modificador deve aceitar 'normal' como valor
+                expect(seletor['valor']).toEqual('normal');
+
+                // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(7);
+                expect(resultadoLexador.erros).toHaveLength(0);
             }
         });
 
         it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Status.length; index += 1) {
+            for (let index = 0; index < StatusAuto.length; index += 1) {
 
                 // Lexador - Status não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Status[index]}: ;`,
+                    `${StatusAuto[index]}: ;`,
                     "}"
                 ]);
 
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
+                expect(resultadoLexador.erros).toHaveLength(1);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_STATUS }),
@@ -82,7 +122,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // Causar erro de digitação
-                const seletorIncorreto = Status[index].replace(Status[index][0], '')
+                const seletorIncorreto = StatusAuto[index].replace(StatusAuto[index][0], '')
 
                 const novoLexador = lexador.mapear([
                     "lmht {",

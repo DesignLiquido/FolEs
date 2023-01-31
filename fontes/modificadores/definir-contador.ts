@@ -17,8 +17,8 @@ export class DefinirContador extends Modificador {
         
         // A lógica abaixo cobre somente o recebimento de 'nenhum' (único valor aceito) e dos Globais.
         // TODO: Adaptar lógica de acordo com a sintaxe do modificador.
-        if (!(valor in this.valoresAceitos &&
-            !(valor in ListaDeValoresGlobais))) {
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in ListaDeValoresGlobais)) {
             throw new Error(`Propriedade 'definir-contador' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
