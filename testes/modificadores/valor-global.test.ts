@@ -6,22 +6,6 @@ import { Tradutor } from "../../fontes/tradutor";
 import { ValorGlobal } from "../listas/valor-global";
 
 describe('Testando Seletores com VALORES GLOBAIS', () => {
-    const atributosCss = [
-        'inherit',
-        'initial',
-        'revert',
-        'revert-layer',
-        'unset',
-    ];
-
-    const atributosFolEs = [
-        'herdar',
-        'inicial',
-        'reverter',
-        'reverter-camada',
-        'desarmar'
-    ]
-
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;

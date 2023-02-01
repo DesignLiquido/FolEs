@@ -24,6 +24,8 @@ export class AlinharUltimoItem extends Modificador {
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
+        this.valor = valor;
+
         // Não recebe quantificador
         // this.quantificador = quantificador;
     }

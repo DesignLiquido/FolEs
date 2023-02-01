@@ -6,16 +6,6 @@ import { Tradutor } from "../../fontes/tradutor";
 import { Estilo } from "../listas/estilo";
 
 describe('Testando Seletores com ESTILO como atributo', () => {
-    const atributosCss = [
-        'dashed', 'dotted', 'groove', 'solid', 'double',
-        'ridge', 'inset', 'outset', 'none', 'hidden'
-    ];
-
-    const atributosFolEs = [
-        'tracejado', 'pontilhado', 'entalhado', ['solido', 'sólido'], 'duplicado',
-        'sulcado', 'embutido', 'saltado', 'nenhum', 'escondido'
-    ];
-
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
@@ -39,11 +29,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 ]);
 
                 expect(resultadoLexador.simbolos).toHaveLength(7);
-                expect(resultadoLexador.simbolos).toEqual(
-                    expect.arrayContaining([
-                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_ESTILO }),
-                    ])
-                );
+                expect(resultadoLexador.erros).toHaveLength(0);
 
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
@@ -71,9 +57,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de Falha - Valor não informado', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
-
+        
                 // Lexador - estilo não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -84,29 +70,30 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_ESTILO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO }),
                     ])
                 );
 
+
                 // Causar erro de digitação
-                const seletorIncorreto = Estilo[index].replace(Estilo[index][0], '')
+                // const seletorIncorreto = Estilo[index].replace(Estilo[index][0], '')
 
-                const novoLexador = lexador.mapear([
-                    "lmht {",
-                    `${seletorIncorreto}: solido;`,
-                    "}"
-                ]);
+                // const novoLexador = lexador.mapear([
+                //     "lmht {",
+                //     `${seletorIncorreto}: solido;`,
+                //     "}"
+                // ]);
 
-                // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                // // Avaliador Sintático - Erro esperado como retorno
+                // expect(() => {
+                //     avaliador.analisar(novoLexador.simbolos);
+                // }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
-                expect(() => {
-                    tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
-                }).toHaveLength(0);
+                // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // expect(() => {
+                //     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
+                // }).toHaveLength(0);
             }
         });
     });
