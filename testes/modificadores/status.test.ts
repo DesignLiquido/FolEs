@@ -6,16 +6,6 @@ import { Tradutor } from "../../fontes/tradutor";
 import { StatusAuto, StatusNenhum, StatusNormal } from "../listas/status";
 
 describe('Testando Seletores com STATUS como atributo', () => {
-    const atributosCss = [
-        'auto', 'none', 'always', 'avoid',
-        'all', 'both', 'left', 'right'
-    ];
-
-    const atributosFolEs = [
-        ['automatico', 'automático'], 'nenhum', 'sempre', 'evitar',
-        'tudo', 'ambos', 'esquerda', 'direita'
-    ]
-
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
