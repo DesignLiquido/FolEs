@@ -95,5 +95,25 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 );
             }
         });
+
+        it('Caso de falha - Palavra reservada inválida', () => {
+            for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                    `${PalavrasReservadas[index]}: ;`,
+                    "}"
+                ]);
+
+                expect(resultadoLexador.simbolos).not.toHaveLength(7);
+
+                expect(resultadoLexador.simbolos).not.toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO }),
+                    ])
+                );
+            }
+        });
     });
+    
 });
