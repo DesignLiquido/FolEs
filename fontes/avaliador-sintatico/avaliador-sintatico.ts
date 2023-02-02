@@ -58,6 +58,32 @@ export class AvaliadorSintatico {
                     lexema,
                     [vermelho, verde, azul]
                 );
+
+                case "rgba":
+                    this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                    const vermelhoRgba = this.avancarEDevolverAnterior();
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                    const verdeRgba = this.avancarEDevolverAnterior();
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                    const azulRgba = this.avancarEDevolverAnterior();
+                    this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+                    return new SeletorValor(
+                        lexema,
+                        [vermelhoRgba, verdeRgba, azulRgba]
+                    );
+
+                    case "hsl":
+                        this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                        const vermelhoHsl = this.avancarEDevolverAnterior();
+                        this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                        const verdeHsl = this.avancarEDevolverAnterior();
+                        this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                        const azulHsl = this.avancarEDevolverAnterior();
+                        this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+                        return new SeletorValor(
+                            lexema,
+                            [vermelhoHsl, verdeHsl, azulHsl]
+                        );
         }
         return null;
     }

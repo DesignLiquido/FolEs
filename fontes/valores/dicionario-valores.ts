@@ -1,5 +1,7 @@
 import { Rgb } from "./metodos/rgb";
+import { Rgba } from "./metodos/rgba";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
-    "rgb": Rgb
+    "rgb": Rgb,
+    "rgba": Rgba,
 }
