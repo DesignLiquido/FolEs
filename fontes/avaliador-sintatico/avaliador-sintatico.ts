@@ -3,6 +3,9 @@ import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
 import { SeletorModificador } from "../modificadores/superclasse";
+import { Metodo } from "../valores/metodos/metodo";
+import { Valor } from "../valores/valor";
+import { SeletorValor } from "../valores/seletor-valor";
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
 
 export class AvaliadorSintatico {
@@ -36,9 +39,37 @@ export class AvaliadorSintatico {
     }
 
     consumir(tipo: string, mensagemDeErro: string): Simbolo {
-        if (this.verificarTipoSimboloAtual(tipo)) 
+        if (this.verificarTipoSimboloAtual(tipo))
             return this.avancarEDevolverAnterior();
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
+    }
+
+    resolverMetodo(lexema: string): Valor {
+        switch (lexema) {
+            case "rgb":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                const vermelho = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verde = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const azul = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+                return new SeletorValor(
+                    lexema,
+                    [vermelho, verde, azul]
+                );
+        }
+        return null;
+    }
+
+    valorModificador(): any {
+        const modificador = this.avancarEDevolverAnterior();
+
+        if (modificador.tipo === tiposDeSimbolos.METODO) {
+            return this.resolverMetodo(modificador.lexema);
+        }
+
+        return modificador;
     }
 
     declaracaoPorSeletor(lexema: string): Declaracao {
@@ -51,9 +82,9 @@ export class AvaliadorSintatico {
 
     declaracaoDeclaracao(placeholder: string = null): Declaracao {
         let simboloSeletor = this.avancarEDevolverAnterior();
-        
-        if(placeholder) simboloSeletor = this.avancarEDevolverAnterior();
-        
+
+        if (placeholder) simboloSeletor = this.avancarEDevolverAnterior();
+
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
@@ -71,8 +102,11 @@ export class AvaliadorSintatico {
                 `Esperado ':' após declaração de modificador '${modificador.lexema}'.`
             );
 
-            const valorModificador = this.avancarEDevolverAnterior();
-            const quantificador = this.avancarEDevolverAnterior();
+            const valorModificador = this.valorModificador();
+            let quantificador;
+            if (!(valorModificador instanceof Metodo)) {
+                quantificador = this.avancarEDevolverAnterior();
+            }
 
             this.consumir(
                 tiposDeSimbolos.PONTO_E_VIRGULA,
@@ -81,14 +115,21 @@ export class AvaliadorSintatico {
 
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
-                valorModificador.lexema,
-                quantificador.lexema
+                valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
+                quantificador && quantificador.hasOwnProperty('lexema') ? 
+                    quantificador.lexema : 
+                    quantificador
             );
+
             modificadores.push(classeModificadora as Modificador);
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return new Declaracao(simboloSeletor.lexema, modificadores, placeholder);
+        return new Declaracao(
+            simboloSeletor.lexema,
+            modificadores,
+            placeholder
+        );
     }
 
     declaracao(): any {

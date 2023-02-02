@@ -24,7 +24,7 @@ const principal = () => {
     const foles = new FolEs();
 
     if (nomeArquivo.endsWith("foles")) {
-        foles.converterParaCss(nomeArquivo);
+        console.log(foles.converterParaCss(nomeArquivo));
         return;
     } else if (nomeArquivo.endsWith("css")) {
         const retorno = foles.converterParaFolEs(nomeArquivo);

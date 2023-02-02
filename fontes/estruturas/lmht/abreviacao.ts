@@ -1,4 +1,4 @@
-import { Estrutura } from "./estrutura";
+import { Estrutura } from "../lmht/estrutura";
 
 export class Abreviacao extends Estrutura {
 

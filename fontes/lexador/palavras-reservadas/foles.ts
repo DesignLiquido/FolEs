@@ -137,5 +137,10 @@ export default {
 
     // Quantificadores temporais
     "s": tiposDeSimbolos.QUANTIFICADOR,
-    "ms": tiposDeSimbolos.QUANTIFICADOR
+    "ms": tiposDeSimbolos.QUANTIFICADOR,
+
+    // Métodos
+    "rgb": tiposDeSimbolos.METODO,
+    "rgba": tiposDeSimbolos.METODO,
+    "hsl": tiposDeSimbolos.METODO
 }
