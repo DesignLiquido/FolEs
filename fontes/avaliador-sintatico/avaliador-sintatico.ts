@@ -59,18 +59,18 @@ export class AvaliadorSintatico {
                     [vermelho, verde, azul]
                 );
 
-                case "rgba":
-                    this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
-                    const vermelhoRgba = this.avancarEDevolverAnterior();
-                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
-                    const verdeRgba = this.avancarEDevolverAnterior();
-                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
-                    const azulRgba = this.avancarEDevolverAnterior();
-                    this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
-                    return new SeletorValor(
-                        lexema,
-                        [vermelhoRgba, verdeRgba, azulRgba]
-                    );
+            case "rgba":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                const vermelhoRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verdeRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const azulRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+                return new SeletorValor(
+                    lexema,
+                    [vermelhoRgba, verdeRgba, azulRgba]
+                );
         }
         return null;
     }
@@ -129,8 +129,8 @@ export class AvaliadorSintatico {
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
-                quantificador && quantificador.hasOwnProperty('lexema') ? 
-                    quantificador.lexema : 
+                quantificador && quantificador.hasOwnProperty('lexema') ?
+                    quantificador.lexema :
                     quantificador
             );
 
