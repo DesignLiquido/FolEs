@@ -5,18 +5,24 @@ import { Modificador } from "./superclasse/modificador";
 export class CorFundo extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("cor-fundo", "background-color");
-        this.valor = valor;
 
-        // Lista de cores como valor
-        if (!(valor in ListaDeCores) && !(valor in ListaDeValoresGlobais)) {
-            throw new Error(`Propriedade 'cor-fundo' com valor ${valor} inválido. Valores aceitos: 
+        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
+        // A constante abaixo é criada para não ocorrer esse problema.
+        const valorString = valor.toString();
+
+        if (!(valor in ListaDeCores) &&
+            !(valor in ListaDeValoresGlobais) &&
+            !(valorString.includes('rgb')) &&
+            !(valorString.includes('rgba')) &&
+            !(valorString.includes('hsl'))
+        ) {
+            throw new Error(`Propriedade 'cor-fundo' com valor ${valor} inválido. Valores aceitos:
+            rgb, rgba, hsl, 
             ${Object.keys(ListaDeCores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
-        // Há ainda os casos de:
-        // rgb / rgba - ex.: rgb(255, 255, 128)
-        // hsl / hsla - ex.: hsl(50, 33%, 25%)
+        this.valor = valor;
 
         // Não recebe quantificador
         // this.quantificador = quantificador;
