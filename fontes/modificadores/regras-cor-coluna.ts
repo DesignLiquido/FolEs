@@ -14,10 +14,11 @@ export class RegrasCorColuna extends Modificador {
             !(valor in ListaDeValoresGlobais) &&
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
-            !(valorString.includes('hsl'))
+            !(valorString.includes('hsl')) &&
+            !(valorString.startsWith('#') && valorString.length <= 6) 
         ) {
             throw new Error(`Propriedade 'regras-cor-coluna' com valor ${valor} inválido. Valores aceitos:
-            rgb, rgba, hsl, 
+            rgb, rgba, hsl, #HEX,
             ${Object.keys(ListaDeCores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
