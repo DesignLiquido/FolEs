@@ -1,7 +1,7 @@
 .minha-classe {
     tamanho-fonte: 16px;
     largura-maxima: 20cm;
-    cor: rgb(34, 12, 64);
+    cor-borda-superior: hsl(64, 130%, 12%);
 }
 
 #elemento-caixa {
