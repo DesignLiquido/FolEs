@@ -51,7 +51,7 @@ export class AvaliadorSintatico {
                 const vermelho = this.avancarEDevolverAnterior();
                 this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
                 const verde = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
                 const azul = this.avancarEDevolverAnterior();
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
                 return new SeletorValor(
@@ -64,7 +64,7 @@ export class AvaliadorSintatico {
                 const vermelhoRgba = this.avancarEDevolverAnterior();
                 this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
                 const verdeRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
                 const azulRgba = this.avancarEDevolverAnterior();
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgba'.");
                 return new SeletorValor(
@@ -72,20 +72,27 @@ export class AvaliadorSintatico {
                     [vermelhoRgba, verdeRgba, azulRgba]
                 );
 
-                // case "hsl":
-                //     this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hsl'.");
-                //     const HdeHSL = this.avancarEDevolverAnterior();
-                //     this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de matiz (H).");
-                //     const SdeHSL = this.avancarEDevolverAnterior();
-                //     this.consumir(tiposDeSimbolos.PERCENTUAL, "Esperado símbolo percentual após argumento de saturação (S).");
-                //     this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de saturação (S).");
-                //     const LdeHSL = this.avancarEDevolverAnterior();
-                //     this.consumir(tiposDeSimbolos.PERCENTUAL, "Esperado símbolo percentual após argumento de luminosidade (L).");
-                //     this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'hsl'.");
-                //     return new SeletorValor(
-                //         lexema,
-                //         [HdeHSL, SdeHSL, LdeHSL]
-                //     );
+            case "hsl":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hsl'.");
+                const HdeHSL = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de matiz (H) no método 'hsl'.");
+                const SdeHSL = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de saturação (S) no método 'hsl'.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de saturação (S) no método 'hsl'.");
+                const LdeHSL = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de luminosidade (L) no método 'hsl'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'hsl'.");
+                return new SeletorValor(
+                    lexema,
+                    [HdeHSL, SdeHSL, LdeHSL]
+                );
+
+            // case "#":
+            //     const codigoHEX = this.avancarEDevolverAnterior();
+            //     return new SeletorValor(
+            //         'hex',
+            //         [codigoHEX],
+            //     );
         }
         return null;
     }

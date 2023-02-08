@@ -2,7 +2,7 @@ import { Simbolo } from "../../lexador";
 import { Metodo } from "./metodo";
 
 export class Hsl extends Metodo {
-    matiz: number;
+    matiz: number; // em inglês: 'hue'
     saturacao: number;
     luminosidade: number; 
 
