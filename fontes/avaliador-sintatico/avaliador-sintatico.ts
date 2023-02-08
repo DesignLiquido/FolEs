@@ -87,6 +87,21 @@ export class AvaliadorSintatico {
                     [HdeHSL, SdeHSL, LdeHSL]
                 );
 
+            case "hsla":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hsla'.");
+                const HdeHSLA = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de matiz (H) no método 'hsla'.");
+                const SdeHSLA = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de saturação (S) no método 'hsla'.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de saturação (S) no método 'hsla'.");
+                const LdeHSLA = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de luminosidade (L) no método 'hsla'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'hsla'.");
+                return new SeletorValor(
+                    lexema,
+                    [HdeHSLA, SdeHSLA, LdeHSLA]
+                );
+
             // case "#":
             //     const codigoHEX = this.avancarEDevolverAnterior();
             //     return new SeletorValor(

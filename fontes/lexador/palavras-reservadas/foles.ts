@@ -142,5 +142,6 @@ export default {
     // Métodos
     "rgb": tiposDeSimbolos.METODO,
     "rgba": tiposDeSimbolos.METODO,
-    "hsl": tiposDeSimbolos.METODO
+    "hsl": tiposDeSimbolos.METODO,
+    "hsla": tiposDeSimbolos.METODO,
 }
