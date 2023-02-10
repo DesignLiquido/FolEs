@@ -1,4 +1,4 @@
-// import { Hex } from "./metodos/hex";
+import { Hex } from "./metodos/hex";
 import { Hsl } from "./metodos/hsl";
 import { Hsla } from "./metodos/hsla";
 import { Rgb } from "./metodos/rgb";
@@ -9,5 +9,5 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "rgba": Rgba,
     "hsl": Hsl,
     "hsla": Hsla,
-    // "hex": Hex,
+    "hex": Hex,
 }
