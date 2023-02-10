@@ -207,6 +207,8 @@ export class Lexador {
             case '#':
                 if(this.atual === 0) {
                     this.adicionarSimbolo(tiposDeSimbolos.ID_DO_ELEMENTO, null, '#');
+                } else {
+                    this.adicionarSimbolo(tiposDeSimbolos.METODO, null, '#');
                 }
                 this.avancar();
                 break;
