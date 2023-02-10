@@ -102,12 +102,12 @@ export class AvaliadorSintatico {
                     [HdeHSLA, SdeHSLA, LdeHSLA]
                 );
 
-            // case "#":
-            //     const codigoHEX = this.avancarEDevolverAnterior();
-            //     return new SeletorValor(
-            //         'hex',
-            //         [codigoHEX],
-            //     );
+            case "#":
+                const codigoHEX =  this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
+                return new SeletorValor(
+                    'hex',
+                    [codigoHEX.lexema],
+                );
         }
         return null;
     }
