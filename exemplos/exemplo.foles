@@ -1,4 +1,5 @@
 .minha-classe {
+    cor-destaque: #f4f500;
     tamanho-fonte: 16px;
     largura-maxima: 20cm;
 }

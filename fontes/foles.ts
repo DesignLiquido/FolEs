@@ -64,3 +64,6 @@ export class FolEs {
         return this.converterParaFolEsInterno([texto]);
     }
 }
+
+// const a = new FolEs();
+// console.log(a.converterParaCss('../exemplos/exemplo.foles'));

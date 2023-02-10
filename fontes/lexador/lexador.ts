@@ -170,12 +170,24 @@ export class Lexador {
                 this.adicionarSimbolo(tiposDeSimbolos.CHAVE_DIREITA);
                 this.avancar();
                 break;
+            case "(":
+                this.adicionarSimbolo(tiposDeSimbolos.PARENTESE_ESQUERDO);
+                this.avancar();
+                break;
+            case ")":
+                this.adicionarSimbolo(tiposDeSimbolos.PARENTESE_DIREITO);
+                this.avancar();
+                break;
             case ':':
                 this.adicionarSimbolo(tiposDeSimbolos.DOIS_PONTOS);
                 this.avancar();
                 break;
             case ';':
                 this.adicionarSimbolo(tiposDeSimbolos.PONTO_E_VIRGULA);
+                this.avancar();
+                break;
+            case ',':
+                this.adicionarSimbolo(tiposDeSimbolos.VIRGULA);
                 this.avancar();
                 break;
             case '%':
@@ -195,6 +207,8 @@ export class Lexador {
             case '#':
                 if(this.atual === 0) {
                     this.adicionarSimbolo(tiposDeSimbolos.ID_DO_ELEMENTO, null, '#');
+                } else {
+                    this.adicionarSimbolo(tiposDeSimbolos.METODO, null, '#');
                 }
                 this.avancar();
                 break;
