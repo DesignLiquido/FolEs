@@ -18,7 +18,7 @@ export class CorInicioBordaEmBloco extends Modificador {
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
             !(valorString.includes('hsl')) &&
-            !(valorString.startsWith('#') && valorString.length <= 6)
+            !(valorString.startsWith('#') && valorString.length <= 7)
         ) {
             throw new Error(`Propriedade 'cor-início-borda-em-bloco' com valor ${valor} inválido. Valores aceitos:
             rgb, rgba, hsl, #HEX,
