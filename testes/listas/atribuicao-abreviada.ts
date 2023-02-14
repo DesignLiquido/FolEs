@@ -57,6 +57,7 @@ export const AtribuiçãoAbreviada: Array<string> = [
     'deslocamento',
     'vazamento',
     'modelo-em-grade',
+    'fundo',
 ];
 
 /*
