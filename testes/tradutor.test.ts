@@ -60,7 +60,7 @@ describe('Tradutor', () => {
             }
         });
 
-        it.only('Qualificador', () => {
+        it('Qualificador', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "lmht {",
