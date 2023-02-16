@@ -1,4 +1,4 @@
-export const ListaDeCores: { [valorFolEs: string]: string } = {
+export const cores: { [valorFolEs: string]: string } = {
   "azulpalido": "aliceblue",
   "azulpálido": "aliceblue",
   "brancoantigo": "antiquewhite",

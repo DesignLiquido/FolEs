@@ -1,5 +1,5 @@
-import { ListaDeCores } from "./atributos/cores";
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { cores } from "./atributos/cores";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class CorDestaque extends Modificador {
@@ -10,8 +10,8 @@ export class CorDestaque extends Modificador {
         // A constante abaixo é criada para não ocorrer esse problema.
         const valorString = valor.toString();
         
-        if (!(valor in ListaDeCores) &&
-            !(valor in listaDeValoresGlobais) &&
+        if (!(valor in cores) &&
+            !(valor in valoresGlobais) &&
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
             !(valorString.includes('hsl')) &&
@@ -19,8 +19,8 @@ export class CorDestaque extends Modificador {
         ) {
             throw new Error(`Propriedade 'cor-destaque' com valor ${valor} inválido. Valores aceitos:
             rgb, rgba, hsl, #HEX, 
-            ${Object.keys(ListaDeCores).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

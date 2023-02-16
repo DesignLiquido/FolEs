@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDePosições } from "./atributos/posição";
+import { valoresGlobais } from "./atributos/globais";
+import { posicoes } from "./atributos/posicoes";
 import { Modificador } from "./superclasse/modificador";
 
 export class JustificarSe extends Modificador {
@@ -17,18 +17,18 @@ export class JustificarSe extends Modificador {
 
         // Além dos valores listados, aceita também todos os valores da Lista 
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'
-        const posicoesAceitas = Object.keys(ListaDePosições).filter((posicao) =>
+        const posicoesAceitas = Object.keys(posicoes).filter((posicao) =>
             posicao !== 'superior' && posicao !== 'inferior'
         );
 
         if (!(valor in this.valoresAceitos) &&
             !(posicoesAceitas.includes(valor)) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Valor ${valor} inválido para 'justificar-se'. Valores aceitos:
             ${posicoesAceitas.reduce((final, atual) => final += `, ${atual}`)}, 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

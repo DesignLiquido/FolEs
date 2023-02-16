@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeComprimento } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { comprimentos } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class Tabulacao extends Modificador {
@@ -7,11 +7,11 @@ export class Tabulacao extends Modificador {
         super(["tabulacao", "tabulação"], "tab-size");
 
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'tabulação' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
@@ -20,10 +20,10 @@ export class Tabulacao extends Modificador {
         // números inteiros também, sem quantificador.
         // Dentre os quantificadores, aceita somente os de comprimento/length.
         if (quantificador !== undefined) {
-            if (!(quantificador in ListaDeComprimento)) {
+            if (!(quantificador in comprimentos)) {
                 throw new Error(
                     `Propriedade 'tabulação' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeComprimento).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

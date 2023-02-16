@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class ModoMescla extends Modificador {
@@ -30,10 +30,10 @@ export class ModoMescla extends Modificador {
         super("modo-mescla", "mix-blend-mode");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)) {
+            !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'modo-mescla' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

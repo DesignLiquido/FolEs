@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeQuantificadores } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class EspacamentoLinhas extends Modificador {
@@ -7,23 +7,23 @@ export class EspacamentoLinhas extends Modificador {
         super(["espacamento-linhas", "espaçamento-linhas"], "row-gap");
 
         if (Number.isNaN(parseInt(valor)) &&
-        !(valor in listaDeValoresGlobais)
+        !(valor in valoresGlobais)
     ) {
         throw new Error(
             `Propriedade 'espaçamento-linhas' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-    ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
     }
 
     this.valor = valor;
 
     if (Number(parseInt(valor))) {
         if (
-            !(quantificador in ListaDeQuantificadores) ||
+            !(quantificador in unidadesMedida) ||
             quantificador === undefined
         ) {
             throw new Error(
                 `Propriedade 'espaçamento-linhas' com quantificador inválido. Valores aceitos:
-        ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
+        ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.quantificador = quantificador;

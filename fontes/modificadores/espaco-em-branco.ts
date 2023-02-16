@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class EspacoEmBranco extends Modificador {
@@ -17,11 +17,11 @@ export class EspacoEmBranco extends Modificador {
         super(["espaco-em-branco", "espaço-em-branco"], "white-space");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'espaço-em-branco' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

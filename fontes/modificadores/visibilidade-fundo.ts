@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class VisibilidadeFundo extends Modificador {
@@ -12,10 +12,10 @@ export class VisibilidadeFundo extends Modificador {
         super("visibilidade-fundo", "backface-visibility");
 
         if (!(valor in this.valoresAceitos) && 
-            !(valor in listaDeValoresGlobais)) {
+            !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'visibilidade-fundo' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

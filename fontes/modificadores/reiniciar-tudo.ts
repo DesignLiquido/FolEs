@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class ReiniciarTudo extends Modificador {
@@ -6,9 +6,9 @@ export class ReiniciarTudo extends Modificador {
         super("reiniciar-tudo", "all");
         
         // Aceita somente os valores globais
-        if (!(valor in listaDeValoresGlobais)) {
+        if (!(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'reiniciar-tudo' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

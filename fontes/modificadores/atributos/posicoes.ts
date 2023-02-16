@@ -1,4 +1,4 @@
-export const ListaDePosições: { [valorFolEs: string]: string } = {
+export const posicoes: { [valorFolEs: string]: string } = {
     "superior": "top",
     "inferior": "bottom",
     "direita": "right",
@@ -15,7 +15,7 @@ export const ListaDePosições: { [valorFolEs: string]: string } = {
     "flex-fim": "flex-end",
 }
 
-export const ListaDePosiçõesBasicas: { [valorFolEs: string]: string } = {
+export const posicoesBasicas: { [valorFolEs: string]: string } = {
     "superior": "top",
     "inferior": "bottom",
     "direita": "right",

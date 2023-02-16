@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDePosiçõesBasicas } from "./atributos/posição";
+import { valoresGlobais } from "./atributos/globais";
+import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador } from "./superclasse/modificador";
 
 export class AlinharTexto extends Modificador {
@@ -13,13 +13,13 @@ export class AlinharTexto extends Modificador {
         super("alinhar-texto", "text-align");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in ListaDePosiçõesBasicas) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in posicoesBasicas) &&
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Valor ${valor} inválido para 'alinhar-texto'. Valores aceitos:
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(ListaDePosiçõesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class CalhaBarraRolagem extends Modificador {
@@ -13,10 +13,10 @@ export class CalhaBarraRolagem extends Modificador {
         super("calha-barra-rolagem", "scrollbar-gutter");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)) {
+            !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'calha-barra-rolagem' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

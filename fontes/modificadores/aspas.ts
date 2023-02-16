@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class Aspas extends Modificador {
@@ -20,10 +20,10 @@ export class Aspas extends Modificador {
         // A lógica abaixo cobre somente o recebimento dos Valores Aceitos
         // TODO: Adaptar lógica para cobrir o caso de valores <string>.
         if (!(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)) {
+            !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'aspas' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

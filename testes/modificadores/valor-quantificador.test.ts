@@ -1,6 +1,6 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Lexador } from "../../fontes/lexador";
-import { ListaDeQuantificadores } from "../../fontes/modificadores/atributos/quantificadores";
+import { unidadesMedida } from "../../fontes/modificadores/atributos/quantificadores";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";

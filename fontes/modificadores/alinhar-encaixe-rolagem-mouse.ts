@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class AlinharEncaixeRolagemMouse extends Modificador {
@@ -14,11 +14,11 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
         super("alinhar-encaixe-rolagem-mouse", "scroll-snap-align");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Valor ${valor} inválido para 'alinhar-encaixe-rolagem-mouse'. Valores aceitos:
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

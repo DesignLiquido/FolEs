@@ -1,4 +1,4 @@
-export const ListaDeQuantificadores: { [valorFolEs: string]: string } = {
+export const unidadesMedida: { [valorFolEs: string]: string } = {
     "px": "px",
     "cm": "cm",
     "mm": "mm",
@@ -52,7 +52,7 @@ export const ListaDeValoresVisualização: { [valorFolEs: string]: string } = {
     "vi": "vi",
 }
 
-export const ListaDeValoresConteiner: { [valorFolEs: string]: string } = {
+export const valoresConteiner: { [valorFolEs: string]: string } = {
     "cqw": "cqw",
     "cqh": "cqh",
     "cqi": "cqi",
@@ -61,7 +61,7 @@ export const ListaDeValoresConteiner: { [valorFolEs: string]: string } = {
     "cqmax": "cqmax",
 }
 
-export const ListaDeValoresFonte: { [valorFolEs: string]: string } = {
+export const valoresFonte: { [valorFolEs: string]: string } = {
     "cap": "cap",
     "ch": "ch",
     "em": "em",
@@ -72,7 +72,7 @@ export const ListaDeValoresFonte: { [valorFolEs: string]: string } = {
     "rlh": "rlh",
 }
 
-export const ListaDeComprimento: { [valorFolEs: string]: string } = {
+export const comprimentos: { [valorFolEs: string]: string } = {
     "px": "px",
     "cm": "cm",
     "mm": "mm",
@@ -102,16 +102,16 @@ export const ListaDeComprimento: { [valorFolEs: string]: string } = {
     "rlh": "rlh",
 }
 
-export const ListaDeValorFlex: { [valorFolEs: string]: string } = {
+export const valoresFlex: { [valorFolEs: string]: string } = {
     "fr": "fr",
 }
 
-export const ListaDeValoresTempo: { [valorFolEs: string]: string } = {
+export const valoresTemporais: { [valorFolEs: string]: string } = {
     "s": "s",
     "ms": "ms",
 }
 
-export const ListaDeAngulos: { [valorFolEs: string]: string } = {
+export const angulos: { [valorFolEs: string]: string } = {
     "deg": "deg",
     "grad": "grad",
     "rad": "rad",

@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class VelocidadeAnimacao extends Modificador {
@@ -53,10 +53,10 @@ export class VelocidadeAnimacao extends Modificador {
         // TODO: Pensar em uma lógica para as duas condicionais acima.
         
         // Demais valores aceitos
-        if (!(valor in this.valoresAceitos) && !(valor in listaDeValoresGlobais)) {
+        if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
             throw new Error(`Valor ${valor} inválido para 'velocidade-animação'. Valores aceitos:  
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

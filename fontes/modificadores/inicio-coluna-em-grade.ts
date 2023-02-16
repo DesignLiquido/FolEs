@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class InicioColunaEmGrade extends Modificador {
@@ -18,11 +18,11 @@ export class InicioColunaEmGrade extends Modificador {
         // A lógica abaixo cobre somente o recebimento de UM valor numérico.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'início-coluna-em-grade' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

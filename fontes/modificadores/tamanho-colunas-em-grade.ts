@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeQuantificadores, ListaDeValorFlex } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class TamanhoColunasEmGrade extends Modificador {
@@ -18,11 +18,11 @@ export class TamanhoColunasEmGrade extends Modificador {
         // A lógica abaixo cobre somente o recebimento de UM único valor. 
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'tamanho-colunas-em-grade' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
@@ -30,13 +30,13 @@ export class TamanhoColunasEmGrade extends Modificador {
         // Além dos quantificadores de Comprimento e Percentual, também pode receber a unidade 'fr', do tipo Flex.
         if (Number(parseInt(valor))) {
             if (
-                (!(quantificador in ListaDeQuantificadores) && !(quantificador in ListaDeValorFlex))
+                (!(quantificador in unidadesMedida) && !(quantificador in valoresFlex))
                 || quantificador === undefined
             ) {
                 throw new Error(
                     `Propriedade 'tamanho-colunas-em-grade' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)},
-                    ${Object.keys(ListaDeValorFlex).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(valoresFlex).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

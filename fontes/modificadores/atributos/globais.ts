@@ -1,4 +1,4 @@
-export const listaDeValoresGlobais: { [valorFolEs: string]: string } = {
+export const valoresGlobais: { [valorFolEs: string]: string } = {
     "herdar": "inherit",
     "inicial": "initial",
     "reverter": "revert",

@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeAngulos } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { angulos } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class Girar extends Modificador {
@@ -17,11 +17,11 @@ export class Girar extends Modificador {
         // TODO: Adaptar lógica para cobrir os demais casos. 
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'girar' com valor ${valor} inválido. Valores aceitos: 
                 ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
@@ -29,12 +29,12 @@ export class Girar extends Modificador {
         // Quantificador deve ser do tipo ângulo (<angle>)
         if (Number(parseInt(valor))) {
             if (
-                !(quantificador in ListaDeAngulos) ||
+                !(quantificador in angulos) ||
                 quantificador === undefined
             ) {
                 throw new Error(
                     `Propriedade 'girar' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeAngulos).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    ${Object.keys(angulos).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

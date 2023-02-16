@@ -1,4 +1,4 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -10,11 +10,11 @@ export class Opacidade extends Modificador {
         // Caso haja um quantificador %, pode ser qualquer número. 
         if ((Number(parseInt(valor)) < 0 || Number(parseInt(valor)) > 1) &&
             quantificador === undefined && 
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'opacidade' com valor ${valor} inválido. O valor deve estar entre 0 e 1 ou ser um dos valores:
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

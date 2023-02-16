@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeQuantificadores } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class AlturaLinha extends Modificador {
@@ -12,12 +12,12 @@ export class AlturaLinha extends Modificador {
 
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'altura-linha' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
                 ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
@@ -25,11 +25,11 @@ export class AlturaLinha extends Modificador {
         // Lógica diferente dos demais pois o modificador pode receber valores numéricos s/ quantificador
         if (quantificador !== undefined) {
             if (
-                !(quantificador in ListaDeQuantificadores)
+                !(quantificador in unidadesMedida)
             ) {
                 throw new Error(
                     `Propriedade 'altura-linha' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

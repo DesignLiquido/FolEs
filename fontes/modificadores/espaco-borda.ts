@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeQuantificadores } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class EspacoBorda extends Modificador {
@@ -10,11 +10,11 @@ export class EspacoBorda extends Modificador {
         // Ex.: espaco-borda: 1cm 2em;
         // A lógica abaixo cobre apenas o recebimento de UM único valor
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'espaco-borda' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
@@ -24,12 +24,12 @@ export class EspacoBorda extends Modificador {
             // Verificação parte da lista de Comprimento, e não da de Quantificadores,
             // pois o modificador não aceita valores percentuais. 
             if (
-                !(quantificador in ListaDeQuantificadores) ||
+                !(quantificador in unidadesMedida) ||
                 quantificador === undefined
             ) {
                 throw new Error(
                     `Propriedade 'espaco-borda' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ListaDeQuantificadores).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

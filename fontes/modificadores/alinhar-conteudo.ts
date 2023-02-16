@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDePosições } from "./atributos/posição";
+import { valoresGlobais } from "./atributos/globais";
+import { posicoes } from "./atributos/posicoes";
 import { Modificador } from "./superclasse/modificador";
 
 export class AlinharConteudo extends Modificador {
@@ -25,13 +25,13 @@ export class AlinharConteudo extends Modificador {
 
         // Pode receber valores próprios ou valores da lista de posições
         if (!(valor in this.valoresAceitos) && 
-            !(valor in ListaDePosições) && 
-            !(valor in listaDeValoresGlobais)
+            !(valor in posicoes) && 
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'alinhar-conteúdo' com valor ${valor} inválido. Valores aceitos:
-            ${Object.keys(ListaDePosições).reduce((final, atual) => final += `, ${atual}`)}, 
+            ${Object.keys(posicoes).reduce((final, atual) => final += `, ${atual}`)}, 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

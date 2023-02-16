@@ -1,5 +1,5 @@
-import { listaDeValoresGlobais } from "./atributos/globais";
-import { ListaDeValoresTempo } from "./atributos/quantificadores";
+import { valoresGlobais } from "./atributos/globais";
+import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class DuracaoTransicao extends Modificador {
@@ -16,18 +16,18 @@ export class DuracaoTransicao extends Modificador {
         // TODO: Adaptar lógica para cobrir os demais casos. 
 
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in listaDeValoresGlobais)
+            !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'duração-transição' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores: 
-            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in ListaDeValoresTempo) || quantificador === undefined) {
+            if (!(quantificador in valoresTemporais) || quantificador === undefined) {
                 throw new Error(`Propriedade 'duração-transição' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ListaDeValoresTempo).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(valoresTemporais).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;
