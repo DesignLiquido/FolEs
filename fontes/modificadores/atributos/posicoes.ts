@@ -9,7 +9,7 @@ export const posicoes: { [valorFolEs: string]: string } = {
     "normal": "normal",
     "esticar": "stretch",
     "centro": "center",
-    "linha-de-base": "baseline",
+    "linha-base": "baseline",
     "flex-inicio": "flex-start",
     "flex-início": "flex-start",
     "flex-fim": "flex-end",

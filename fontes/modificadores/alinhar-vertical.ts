@@ -4,7 +4,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class AlinharVertical extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "linha-de-base": "baseline",
+        "linha-base": "baseline",
         "linha-inferior": "sub",
         "linha-superior": "super",
         "topo-texto": "text-top",

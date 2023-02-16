@@ -11,9 +11,9 @@ export class JustificarConteudo extends Modificador {
         "espaco-ao-redor": "space-around",
         "espaço-ao-redor": "space-around",
         "espaco-uniforme": "space-evenly",
-        "primeira-linha-de-base": "first baseline",
-        "ultima-linha-de-base": "last baseline",
-        "última-linha-de-base": "last baseline",
+        "primeira-linha-base": "first baseline",
+        "ultima-linha-base": "last baseline",
+        "última-linha-base": "last baseline",
     }
 
     constructor(valor: string, quantificador?: string) {

@@ -4,9 +4,9 @@ import { Modificador } from "./superclasse/modificador";
 
 export class AlinharSe extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "inicio-linha-de-base": "first baseline",
-        "início-linha-de-base": "first baseline",
-        "fim-linha-de-base": "last baseline",
+        "inicio-linha-base": "first baseline",
+        "início-linha-base": "first baseline",
+        "fim-linha-base": "last baseline",
         "espaco-entre": "space-between",
         "espaço-entre": "space-between",
         "espaco-ao-redor": "space-around",
