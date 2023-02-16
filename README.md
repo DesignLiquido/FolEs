@@ -77,6 +77,106 @@ No Visual Studio Code, adicione no seu `launch.json` o seguinte:
 
 FolEs copia vários elementos de [Delégua](https://github.com/DesignLiquido/delegua), como um Lexador e um Avaliador Sintático, mas contém um elemento original (um Tradutor, que usa o retorno do Avaliador Sintático para gerar uma folha de estilo em CSS). 
 
+### Seletores
+
+Um seletor é uma expressão que encontra N elementos em um documento LMHT que possuem certas características, como por exemplo o nome de uma estrutura, um id, uma classe e atributos dessa estrutura. Por exemplo:
+
+```foles
+ligacao {
+
+}
+```
+
+Encontra todas as estruturas de um documento LMHT cujo nome da estrutura seja ligação:
+
+```lmht
+<lmht>
+    <cabeça>
+    </cabeça>
+    <corpo>
+        <ligacao destino="https://github.com/DesignLiquido">GitHub da Design Líquido</ligacao>
+        <ligacao destino="https://github.com/DesignLiquido/delegua">Linguagem Delégua</ligacao>
+        <ligacao destino="https://github.com/DesignLiquido/FolEs">Linguagem FolEs</ligacao>
+    </corpo>
+</lmht>
+```
+
+Neste exemplo, portanto, irá encontrar três estruturas.
+
+Podemos ainda selecionar por um identificador único:
+
+```foles
+#ligacao1 {
+
+}
+```
+
+Para o exemplo modificado:
+
+```lmht
+<lmht>
+    <cabeça>
+    </cabeça>
+    <corpo>
+        <ligacao id="ligacao1" destino="https://github.com/DesignLiquido">GitHub da Design Líquido</ligacao>
+        <ligacao id="ligacao2" destino="https://github.com/DesignLiquido/delegua">Linguagem Delégua</ligacao>
+        <ligacao id="ligacao3" destino="https://github.com/DesignLiquido/FolEs">Linguagem FolEs</ligacao>
+    </corpo>
+</lmht>
+```
+
+Iremos encontrar uma estrutura. Ainda, podemos usar algo assim:
+
+```foles
+.minhaligacao {
+
+}
+```
+
+E modificar o exemplo mais uma vez:
+
+```lmht
+<lmht>
+    <cabeça>
+    </cabeça>
+    <corpo>
+        <ligacao classe="minhaligacao" destino="https://github.com/DesignLiquido">GitHub da Design Líquido</ligacao>
+        <ligacao classe="outraligacao" destino="https://github.com/DesignLiquido/delegua">Linguagem Delégua</ligacao>
+        <ligacao classe="minhaligacao" destino="https://github.com/DesignLiquido/FolEs">Linguagem FolEs</ligacao>
+    </corpo>
+</lmht>
+```
+
+E encontraremos apenas duas das três estruturas.
+
+### Modificadores
+
+Um modificador é toda e qualquer propriedade declarada no escopo de um seletor que irá causar uma modificação em estruturas de um documento. Voltando ao exemplo da seção anterior:
+
+```foles
+ligacao {
+    tamanho-fonte: 16px;
+}
+```
+
+Se aplicamos este estilo ao documento do primeiro exemplo, todas as três estruturas receberão uma modificação de estilo, ou seja o tamanho da fonte (texto) passa a ter o tamanho de 16 pixels.
+
+### Atributos de Modificadores: Valores, Quantificadores e Qualitativos
+
+FolEs trabalha com três conceitos de atributos em todas as etapas dos ciclos de ingestão de arquivos:
+
+- **Valores**: são os atributos que acompanham modificadores. No exemplo `tamanho-fonte: 16px;`, `tamanho-fonte` é o modificador, e `16px` é o valor. Valores podem ser formados por números absolutos, números acompanhados de quantificadores, quantitativos ou ainda uma combinação de todos esses;
+- **Quantificadores**: são complementos de valores. No exemplo anterior, `px` é o quantificador, e acompanha o número `16`, a parte numérica do valor;
+- **Qualitativos**: são valores adjetivos. Nem todo valor é expresso por um número e uma unidade de medida. Explorando um outro exemplo:
+
+```foles
+ligacao {
+    estilo-contorno: pontilhado;
+}
+```
+
+`estilo-contorno` é um modificador que pede um qualitativo. `pontihado` é um qualitativo.
+
 ## Mapeamentos
 
 
