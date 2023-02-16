@@ -134,6 +134,26 @@ export default {
     "vh": tiposDeSimbolos.QUANTIFICADOR,
     "vmin": tiposDeSimbolos.QUANTIFICADOR,
     "vmax": tiposDeSimbolos.QUANTIFICADOR,
+    "vb": tiposDeSimbolos.QUANTIFICADOR,
+    "vi": tiposDeSimbolos.QUANTIFICADOR,
+    "cqw": tiposDeSimbolos.QUANTIFICADOR,
+    "cqh": tiposDeSimbolos.QUANTIFICADOR,
+    "cqi": tiposDeSimbolos.QUANTIFICADOR,
+    "cqb": tiposDeSimbolos.QUANTIFICADOR,
+    "cqmin": tiposDeSimbolos.QUANTIFICADOR,
+    "cqmax": tiposDeSimbolos.QUANTIFICADOR,
+    "cap": tiposDeSimbolos.QUANTIFICADOR,
+    "ic": tiposDeSimbolos.QUANTIFICADOR,
+    "lh": tiposDeSimbolos.QUANTIFICADOR,
+    "rlh": tiposDeSimbolos.QUANTIFICADOR,
+    "Q": tiposDeSimbolos.QUANTIFICADOR,
+    "fr": tiposDeSimbolos.QUANTIFICADOR,
+
+    // Quantificadores de ângulo
+    "deg": tiposDeSimbolos.QUANTIFICADOR,
+    "grad": tiposDeSimbolos.QUANTIFICADOR,
+    "rad": tiposDeSimbolos.QUANTIFICADOR,
+    "turn": tiposDeSimbolos.QUANTIFICADOR,
 
     // Quantificadores temporais
     "s": tiposDeSimbolos.QUANTIFICADOR,
