@@ -144,4 +144,13 @@ export default {
     "rgba": tiposDeSimbolos.METODO,
     "hsl": tiposDeSimbolos.METODO,
     "hsla": tiposDeSimbolos.METODO,
+
+    // Qualitativos
+    "solido": tiposDeSimbolos.QUALITATIVO,
+    "sólido": tiposDeSimbolos.QUALITATIVO,
+    "duplicado": tiposDeSimbolos.QUALITATIVO,
+    "tracejado": tiposDeSimbolos.QUALITATIVO,
+    "pontilhado": tiposDeSimbolos.QUALITATIVO,
+    "ondulado": tiposDeSimbolos.QUALITATIVO,
+    "nenhum": tiposDeSimbolos.QUALITATIVO,
 }
