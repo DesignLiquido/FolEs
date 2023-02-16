@@ -180,9 +180,9 @@ ligacao {
 ## Mapeamentos
 
 
-| FolEs                                   | CSS       |
-| --------------------------------------- | ----------|
-| agrupar-palavra                         | word-wrap |
+| FolEs                                                                                            | CSS       |
+| ------------------------------------------------------------------------------------------------ | ----------|
+| [agrupar-palavra](https://github.com/DesignLiquido/FolEs/wiki/Modificador-%60agrupar-palavra%60)                         | [word-break](https://developer.mozilla.org/pt-BR/docs/Web/CSS/word-break) |
 | agrupar-vazamento                       | overflow-wrap |
 | ajustar-objeto                          | object-fit |
 | ajustar-tamanho-fonte                   | font-size-adjust |
