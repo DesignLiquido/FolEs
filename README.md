@@ -1,6 +1,40 @@
 # FolEs
 
-Folhas de Estilo em Português, para geração de CSS.
+<p align="center">
+  <img src="./recursos/imagens/icone-foles.png" alt="FolEs" width="auto" height="268px">
+
+  <p align="center">
+    Linguagem de Folhas de Estilo em Português, para geração de CSS.
+  </p>
+
+  <p align="center">
+    <img src="./recursos/imagens/badge-statements.svg" />
+    <img src="./recursos/imagens/badge-lines.svg" />
+    <img src="./recursos/imagens/badge-functions.svg" />
+    <img src="./recursos/imagens/badge-branches.svg" />
+    <a href="https://github.com/DesignLiquido/FolEs/issues" target="_blank">
+      <img src="https://img.shields.io/github/issues/Designliquido/FolEs" />
+    </a>
+    <img src="https://img.shields.io/github/stars/Designliquido/FolEs" />
+    <img src="https://img.shields.io/github/forks/Designliquido/FolEs" />
+    <a href="https://www.npmjs.com/package/@designliquido/foles" target="_blank">
+      <img src="https://img.shields.io/npm/v/@designliquido/foles" />
+    </a>
+    <img src="https://img.shields.io/github/license/Designliquido/FolEs" />
+  </p>
+
+  <p align="center">
+    Acompanhe a Design Líquido nas redes sociais:
+  </p>
+
+  <p align="center">
+    <a href="https://twitter.com/designliquido" target="_blank"><img src="https://img.shields.io/static/v1?style=for-the-badge&message=Twitter&color=1DA1F2&logo=Twitter&logoColor=FFFFFF&label=" /></a>
+    <a href="https://www.instagram.com/design.liquido" target="_blank"><img src="https://img.shields.io/static/v1?style=for-the-badge&message=Instagram&color=E4405F&logo=Instagram&logoColor=FFFFFF&label=" /></a>
+    <a href="https://www.youtube.com/channel/UCJRn3B7r0aex6LCaOyrQtZQ" target="_blank"><img src="https://img.shields.io/static/v1?style=for-the-badge&message=YouTube&color=FF0000&logo=YouTube&logoColor=FFFFFF&label=" /></a>
+    <a href="https://www.linkedin.com/company/design-liquido" target="_blank"><img src="https://img.shields.io/static/v1?style=for-the-badge&message=LinkedIn&color=0A66C2&logo=LinkedIn&logoColor=FFFFFF&label=" /></a>
+    <a href="https://www.tiktok.com/@designliquido" target="_blank"><img src="https://img.shields.io/static/v1?style=for-the-badge&message=TikTok&color=000000&logo=TikTok&logoColor=FFFFFF&label=" /></a>
+  </p>
+</p>
 
 ## Motivação
 
