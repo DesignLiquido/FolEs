@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -23,11 +23,11 @@ export class OrigemPerspectiva extends Modificador {
         // Pode receber tanto os valores aceitos quanto número-quantificador (%)
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(`Propriedade 'origem-perspectiva' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

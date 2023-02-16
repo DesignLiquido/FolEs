@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDePosições } from "./atributos/posição";
 import { Modificador } from "./superclasse/modificador";
 
@@ -23,12 +23,12 @@ export class AlinharItens extends Modificador {
         // Pode receber valores próprios ou valores da lista de posições
         if (!(valor in this.valoresAceitos) && 
             !(valor in ListaDePosições) && 
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(`Propriedade 'alinhar-itens' com valor ${valor} inválido. Valores aceitos:
             ${Object.keys(ListaDePosições).reduce((final, atual) => final += `, ${atual}`)}, 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

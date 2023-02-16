@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDePosiçõesBasicas } from "./atributos/posição";
 import { Modificador } from "./superclasse/modificador";
 
@@ -10,10 +10,10 @@ export class PosicaoMascara extends Modificador {
         // Ex.: posicao-mascara: 25% 75%;
 
         // Porém, essa validação inicial cobre somente as posições e os valores globais
-        if (!(valor in ListaDePosiçõesBasicas) && !(valor in ListaDeValoresGlobais)) {
+        if (!(valor in ListaDePosiçõesBasicas) && !(valor in listaDeValoresGlobais)) {
             throw new Error(`Propriedade 'posição-máscara' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(ListaDePosiçõesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

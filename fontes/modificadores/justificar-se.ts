@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDePosições } from "./atributos/posição";
 import { Modificador } from "./superclasse/modificador";
 
@@ -23,12 +23,12 @@ export class JustificarSe extends Modificador {
 
         if (!(valor in this.valoresAceitos) &&
             !(posicoesAceitas.includes(valor)) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(`Valor ${valor} inválido para 'justificar-se'. Valores aceitos:
             ${posicoesAceitas.reduce((final, atual) => final += `, ${atual}`)}, 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

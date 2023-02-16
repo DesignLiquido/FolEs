@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class TransformarCaixa extends Modificador {
@@ -15,11 +15,11 @@ export class TransformarCaixa extends Modificador {
         super("transformar-caixa", "transform-box");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(`Propriedade 'transformar-caixa' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

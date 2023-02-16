@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeComprimento } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -10,11 +10,11 @@ export class EstenderBordaImagem extends Modificador {
         // Ex.: estender-borda-imagem: 7px 12px 14px 5px;
         // A lógica abaixo cobre apenas o recebimento de UM único valor
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'estender-borda-imagem' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -16,12 +16,12 @@ export class EspacamentoLetras extends Modificador {
         // A lógica abaixo cobre somente o recebimento de valores positivos e negativos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'espaçamento-letras' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
         ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-        ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

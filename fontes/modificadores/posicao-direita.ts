@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -12,11 +12,11 @@ export class PosicaoDireita extends Modificador {
 
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'posição-direita' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

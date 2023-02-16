@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeValoresTempo } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -9,9 +9,9 @@ export class AtrasoAnimacao extends Modificador {
             "animation-delay"
         );
 
-        if (Number.isNaN(parseInt(valor)) && !(valor in ListaDeValoresGlobais)) {
+        if (Number.isNaN(parseInt(valor)) && !(valor in listaDeValoresGlobais)) {
             throw new Error(`Propriedade 'atraso-animação' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores: 
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

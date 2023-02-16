@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeValoresTempo } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -9,9 +9,9 @@ export class DuracaoAnimacao extends Modificador {
             "animation-duration"
         );
 
-        if (Number.isNaN(parseInt(valor)) && !(valor in ListaDeValoresGlobais)) {
+        if (Number.isNaN(parseInt(valor)) && !(valor in listaDeValoresGlobais)) {
             throw new Error(`Propriedade 'duração-animação' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;

@@ -1,4 +1,4 @@
-export const ListaDeEstilos: { [valorFolEs: string]: string } = {
+export const listaDeEstilos: { [valorFolEs: string]: string } = {
     "tracejado": "dashed",
     "pontilhado": "dotted",
     "entalhado": "groove",

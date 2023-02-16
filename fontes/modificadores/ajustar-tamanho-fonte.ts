@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class AjustarTamanhoFonte extends Modificador {
@@ -19,10 +19,10 @@ export class AjustarTamanhoFonte extends Modificador {
  
         // A lógica abaixo cobre somente o recebimento de UM valor numérico.
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(`Propriedade 'ajustar-tamanho-fonte' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }   
 
         this.valor = valor;

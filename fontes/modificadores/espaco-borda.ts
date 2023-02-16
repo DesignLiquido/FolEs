@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { ListaDeQuantificadores } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
@@ -10,11 +10,11 @@ export class EspacoBorda extends Modificador {
         // Ex.: espaco-borda: 1cm 2em;
         // A lógica abaixo cobre apenas o recebimento de UM único valor
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'espaco-borda' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

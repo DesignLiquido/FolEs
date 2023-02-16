@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class TipoEncaixeRolagemMouse extends Modificador {
@@ -18,10 +18,10 @@ export class TipoEncaixeRolagemMouse extends Modificador {
         super("tipo-encaixe-rolagem-mouse", "scroll-snap-type");
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in ListaDeValoresGlobais)) {
+            !(valor in listaDeValoresGlobais)) {
             throw new Error(`Propriedade 'tipo-encaixe-rolagem-mouse' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

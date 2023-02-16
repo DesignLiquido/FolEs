@@ -1,4 +1,4 @@
-import { ListaDeValoresGlobais } from "./atributos/globais";
+import { listaDeValoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class LinhasSuperiores extends Modificador {
@@ -6,10 +6,10 @@ export class LinhasSuperiores extends Modificador {
         super("linhas-superiores", "widows");
 
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in ListaDeValoresGlobais)
+            !(valor in listaDeValoresGlobais)
         ) {
             throw new Error(`Propriedade 'linhas-superiores' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
-            ${Object.keys(ListaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+            ${Object.keys(listaDeValoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 
         this.valor = valor;
