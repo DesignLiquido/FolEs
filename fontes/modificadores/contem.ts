@@ -8,7 +8,7 @@ export class Contem extends Modificador {
         "conteudo": "content",
         "conteúdo": "content",
         "tamanho": "size",
-        "tamanho-em-linha": "inline-size",
+        "tamanho-alinhado": "inline-size",
         "layout": "layout",
         "estilo": "style",
         "pintar": "paint",
