@@ -5,7 +5,7 @@ export class TamanhoCaixa extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo": "content-box",
         "conteúdo": "content-box",
-        "borda": "border-box",
+        "borda-caixa": "border-box",
     }
 
     constructor(valor: string, quantificador?: string) {

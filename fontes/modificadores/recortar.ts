@@ -5,6 +5,7 @@ export class Recortar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }
+
     constructor(valor: string, quantificador?: string) {
         super("recortar", "clip");
 

@@ -6,6 +6,7 @@ import { SeletorModificador } from "../modificadores/superclasse";
 import { Metodo } from "../valores/metodos/metodo";
 import { Valor } from "../valores/valor";
 import { SeletorValor } from "../valores/seletor-valor";
+
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
 
 export class AvaliadorSintatico {
@@ -113,13 +114,14 @@ export class AvaliadorSintatico {
     }
 
     valorModificador(): any {
-        const modificador = this.avancarEDevolverAnterior();
+        const valorModificador = this.avancarEDevolverAnterior();
 
-        if (modificador.tipo === tiposDeSimbolos.METODO) {
-            return this.resolverMetodo(modificador.lexema);
+        switch (valorModificador.tipo) {
+            case tiposDeSimbolos.METODO:
+                return this.resolverMetodo(valorModificador.lexema);
+            default:
+                return valorModificador;
         }
-
-        return modificador;
     }
 
     declaracaoPorSeletor(lexema: string): Declaracao {
@@ -144,7 +146,7 @@ export class AvaliadorSintatico {
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
             const modificador = this.consumir(
                 tiposDeSimbolos.IDENTIFICADOR,
-                "Esperado nome do atributo de identificação."
+                "Esperado nome do modificador."
             );
 
             this.consumir(
@@ -154,7 +156,11 @@ export class AvaliadorSintatico {
 
             const valorModificador = this.valorModificador();
             let quantificador;
-            if (!(valorModificador instanceof Metodo)) {
+            // TODO: Pensar num teste melhor pra isso.
+            /*if (!(valorModificador instanceof Metodo)) {
+                quantificador = this.avancarEDevolverAnterior();
+            }*/
+            if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
                 quantificador = this.avancarEDevolverAnterior();
             }
 
