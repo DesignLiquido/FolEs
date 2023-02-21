@@ -705,7 +705,7 @@ export default {
     "subexposicao": tiposDeSimbolos.QUALITATIVO,
     "subexposição": tiposDeSimbolos.QUALITATIVO,
     "contraste": tiposDeSimbolos.QUALITATIVO,
-    "cor": tiposDeSimbolos.QUALITATIVO,
+    "mesclar-cor": tiposDeSimbolos.QUALITATIVO,
     "borda": tiposDeSimbolos.QUALITATIVO,
     "separar": tiposDeSimbolos.QUALITATIVO,
     "formas-historicas": tiposDeSimbolos.QUALITATIVO,
