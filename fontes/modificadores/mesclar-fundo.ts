@@ -20,7 +20,7 @@ export class MesclarFundo extends Modificador {
         "espaçar": "space",
         "matiz": "hue",
         "saturar": "saturation",
-        "cor": "color",
+        "mesclar-cor": "color",
         "luminosidade": "luminosity",
     }
 
