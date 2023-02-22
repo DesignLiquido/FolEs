@@ -1,5 +1,8 @@
 .minha-classe {
-    cor-destaque: #f4f500;
+    alinhar-conteudo: inseguro;
+    estilo-contorno: herdar;
+    cor-destaque: rgb(12, 13, 24);
+    cor-fundo: vermelho;
     tamanho-fonte: 16px;
     largura-maxima: 20cm;
 }
