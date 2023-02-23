@@ -17,6 +17,42 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             tradutor = new Tradutor();
         });
 
+        it('Caso de Sucesso - Cor válida', () => {
+            for (let index = 0; index < Cores.length; index += 1) {
+                const seletor = new SeletorModificador(Cores[index], 'castanho');
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${Cores[index]}: ${seletor['valor']};`,
+                    "}"
+                ]);
+
+                expect(resultadoLexador.simbolos).toHaveLength(7);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain("brown;");
+            }
+        });
+
         it('Caso de Sucesso - Código #HEX', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], '#f015ca', '');
@@ -120,7 +156,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
-                
+
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
