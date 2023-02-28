@@ -15,6 +15,7 @@ export const valoresGerais: { [valorFolEs: string]: string } = {
     "saltado": "outset",
     "escondido": "hidden",
     "nenhum": "none",
+    "auto": "auto",
     "superior": "top",
     "inferior": "bottom",
     "direita": "right",
