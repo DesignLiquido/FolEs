@@ -35,22 +35,39 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.erros).toHaveLength(0);
 
-                // Avaliador Sintático
-                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                // O Lexador não deve encontrar qualquer número ou quantificador na operação
+                expect(resultadoLexador.simbolos).not.toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    ])
+                );
 
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                //     seletor['nomeFoles']
-                // );
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                //     seletor['propriedadeCss']
-                // );
+                // O Lexador deve classificar o valor recebido como QUALITATIVO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                    ])
+                );
+
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
 
 
                 // // Tradutor
-                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
-
-                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                // expect(resultadoTradutor).toContain('center;');
+                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                
+                expect(resultadoTradutor).toContain('body');
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain('center;');
             }
         });
 
@@ -64,32 +81,42 @@ describe('Testando Seletores de POSIÇÃO', () => {
                     "}"
                 ]);
 
+                // O objeto do Lexados não deve ser montado corretamente
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
                     ])
                 );
+                
+                // O Avaliador Sintático deve retornar um erro
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrow(`Esperado ';' após declaração de valor de modificador '${Posição[index]}'.`);
+            }
+        });
 
+        it('Casos de Falha - Seletor com erro de digitação', () => {
+            for (let index = 0; index < Object.keys(Posição).length; index += 1) {
                 // Causar erro de digitação
                 const seletorIncorreto = Posição[index].replace(Posição[index][0], '')
 
-                const novoLexador = lexador.mapear([
+                const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${seletorIncorreto}: inicio;`,
+                    `${seletorIncorreto}: esquerda;`,
                     "}"
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                // expect(() => {
-                //     avaliador.analisar(novoLexador.simbolos);
-                // }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
-                // expect(() => {
-                //     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
-                // }).toHaveLength(0);
+                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                expect(() => {
+                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+                }).toHaveLength(0);
             }
         });
     });

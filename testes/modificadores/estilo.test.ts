@@ -17,7 +17,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Valor válido', () => {
             for (let index = 0; index < Estilo.length; index += 1) {
                 const seletor = new SeletorModificador(Estilo[index], 'pontilhado', null);
 
@@ -31,6 +31,12 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.erros).toHaveLength(0);
 
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                    ])
+                );
+
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
@@ -40,20 +46,24 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
 
                 // Avaliador Sintático
-                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
 
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                //     seletor['nomeFoles']
-                // );
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                //     seletor['propriedadeCss']
-                // );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
 
                 // // Tradutor
-                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                // expect(resultadoTradutor).toContain('dotted');
+                expect(resultadoTradutor).toContain('body');
+
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain('dotted');
             }
         });
 
@@ -70,30 +80,37 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
                     ])
                 );
 
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrow(`Esperado ';' após declaração de valor de modificador '${Estilo[index]}'.`);
+            }
+        });
 
+        it('Casos de Falha - Seletor com erro de digitação', () => {
+            for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
                 // Causar erro de digitação
-                // const seletorIncorreto = Estilo[index].replace(Estilo[index][0], '')
+                const seletorIncorreto = Estilo[index].replace(Estilo[index][0], '')
 
-                // const novoLexador = lexador.mapear([
-                //     "lmht {",
-                //     `${seletorIncorreto}: solido;`,
-                //     "}"
-                // ]);
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${seletorIncorreto}: solido;`,
+                    "}"
+                ]);
 
-                // // Avaliador Sintático - Erro esperado como retorno
-                // expect(() => {
-                //     avaliador.analisar(novoLexador.simbolos);
-                // }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                // Avaliador Sintático - Erro esperado como retorno
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
 
 
-                // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
-                // expect(() => {
-                //     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
-                // }).toHaveLength(0);
+                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                expect(() => {
+                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+                }).toHaveLength(0);
             }
         });
     });

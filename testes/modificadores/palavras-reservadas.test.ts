@@ -17,7 +17,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
             tradutor = new Tradutor();
         });
 
-        it('Testando seletores de Palavras Reservadas com valores globais', () => {
+        it('Caso de sucesso - Valores globais válidos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 const seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);
 
@@ -35,6 +35,13 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.erros).toHaveLength(0);
 
+                // O Lexador deve classificar o valor como QUALITATIVO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                    ])
+                );
+
                 // O Lexador não deve encontrar qualquer número ou quantificador na operação
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
@@ -43,32 +50,34 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                     ])
                 );
 
-                // // Avaliador Sintático
-                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                //     seletor['nomeFoles']
-                // );
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                //     seletor['propriedadeCss']
-                // );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
 
 
-                // // Tradutor
-                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                // Tradutor
+                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                // expect(resultadoTradutor).toContain('inherit');
+                expect(resultadoTradutor).toContain('body');
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain('revert');
             }
         });
 
-        it('Testando seletores de Palavras Reservadas com os referidos valores aceitos', () => {
+        it('Caso de sucesso - passando valores aceitos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
+                // Seletor inicial
                 let seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);
 
                 // Se há uma lista de valores aceitos, é atribuído o primeiro valor ao seletor.
                 // Se não há, a condicional abaixo não é executada e o seletor segue sendo o da linha acima.
-                if(seletor['valoresAceitos'] !== undefined) {
+                if (seletor['valoresAceitos'] !== undefined) {
                     const valor = Object.keys(seletor['valoresAceitos']);
                     seletor = new SeletorModificador(
                         PalavrasReservadas[index], valor[0], null
@@ -93,10 +102,35 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                         expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
                     ])
                 );
+
+                // O Lexador deve classificar o valor recebido como QUALITATIVO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                    ])
+                );
+
+
+                // Avaliador Sintático deve conter os nomes FolEs e CSS corretamente
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
+
+                // Tradutor deve tranformar o código corretamente em CSS
+                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+
+                expect(resultadoTradutor).toContain('body');
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
         });
 
-        it('Caso de falha - Palavra reservada inválida', () => {
+        it('Caso de falha - Palavra reservada não informada', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -105,15 +139,22 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                     "}"
                 ]);
 
+                // Não deve montar o objeto corretamente
                 expect(resultadoLexador.simbolos).not.toHaveLength(7);
 
+                // Não deve encontrar nenhum QUALITATIVO na operação
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
                     ])
                 );
+                
+                // Av. Sintático deve retornar um erro 
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrow(`Esperado ';' após declaração de valor de modificador '${PalavrasReservadas[index]}'.`);
             }
         });
     });
-    
+
 });
