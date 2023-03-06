@@ -4,7 +4,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class RegrasEstiloColuna extends Modificador {
     constructor(valor: string, quantificador?: string) {
-        super("regras-estilo-coluna", "column-rules-style");
+        super("regras-estilo-coluna", "column-rule-style");
 
         if (!(valor in estilos && !(valor in valoresGlobais))) {
             throw new Error(`Propriedade 'regras-estilo-coluna' com valor ${valor} inválido. Valores aceitos: 

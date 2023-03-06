@@ -11,7 +11,7 @@ export class RegrasLarguraColuna extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string) {
-        super("regras-largura-coluna", "column-rules-width");
+        super("regras-largura-coluna", "column-rule-width");
 
                 // Pode receber valores próprios ou número-quantificador
                 if (Number.isNaN(parseInt(valor)) &&

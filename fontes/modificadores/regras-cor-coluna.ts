@@ -4,7 +4,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class RegrasCorColuna extends Modificador {
     constructor(valor: string, quantificador?: string) {
-        super("regras-cor-coluna", "column-rules-color");
+        super("regras-cor-coluna", "column-rule-color");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para não ocorrer esse problema.
