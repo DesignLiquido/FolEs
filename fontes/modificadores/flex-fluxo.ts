@@ -1,9 +1,34 @@
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class FlexFluxo extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    // Seletor de Atribuição Abreviada (Shorthand).
+    // Pode receber de 1 a 2 valores.
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "linha": "row",
+        "inverter-linha": "row-reverse",
+        "coluna": "column",
+        "inverter-coluna": "column-reverse",
+        "nao-agrupar": "nowrap",
+        "não-agrupar": "nowrap",
+        "agrupar": "wrap",
+        "inverter-agrupamento": "wrap-reverse",
+    }
+
+    constructor(valor: string, quantificador?: string) {
         super("flex-fluxo", "flex-flow");
+
+        if (!(valor in this.valoresAceitos) &&
+            !(valor in valoresGlobais)
+        ) {
+            throw new Error(`Propriedade 'flex-fluxo' com valor ${valor} inválido. Valores aceitos: 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
+        }
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }
