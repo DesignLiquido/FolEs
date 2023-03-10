@@ -4,8 +4,7 @@ import { Modificador } from "./superclasse/modificador";
 export class ComportamentoHorizontalRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
-        "contem": "contain",
-        "contém": "contain",
+        "conter": "contain",
         "nenhum": "none",
     }
 
