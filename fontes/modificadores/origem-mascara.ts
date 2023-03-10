@@ -11,8 +11,6 @@ export class OrigemMascara extends Modificador {
         "completar-caixa": "fill-box",
         "delimitar-caixa": "stroke-box",
         "visualizar-caixa": "view-box",
-        "conteudo": "content",
-        "conteúdo": "content",
         "preenchimento": "padding",
         "borda": "border",
     }

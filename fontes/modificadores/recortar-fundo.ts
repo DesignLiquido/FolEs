@@ -5,8 +5,8 @@ export class RecortarFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "borda": "border-box",
         "preenchimento": "padding-box",
-        "conteudo": "content-box",
-        "conteúdo": "content-box",
+        "conteudo-caixa": "content-box",
+        "conteúdo-caixa": "content-box",
         "texto": "text",
     }
 

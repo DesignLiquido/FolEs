@@ -5,8 +5,8 @@ export class Contem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
         "estrito": "strict",
-        "conteudo": "content",
-        "conteúdo": "content",
+        "modo-conteudo": "content",
+        "modo-conteúdo": "content",
         "tamanho": "size",
         "tamanho-alinhado": "inline-size",
         "layout": "layout",

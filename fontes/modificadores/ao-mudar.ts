@@ -6,8 +6,8 @@ export class AoMudar extends Modificador {
         "auto": "auto",
         "posicao-rolagem": "scroll-position",
         "posição-rolagem": "scroll-position",
-        "conteudo": "contents",
-        "conteúdo": "contents",
+        "mudar-conteudo": "contents",
+        "mudar-conteúdo": "contents",
     }
 
     constructor(valor: string, quantificador?: string) {
