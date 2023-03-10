@@ -1,3 +1,11 @@
+aspas {
+    contém: nenhum;
+    recortar: auto;
+    fluxo: nenhum;
+    conteudo: auto;
+    citações: nenhuma;
+}
+
 .minha-classe {
     alinhar-conteudo: inseguro;
     estilo-contorno: herdar;

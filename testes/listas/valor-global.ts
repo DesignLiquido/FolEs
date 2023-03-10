@@ -81,7 +81,6 @@ export const ValorGlobal: Array<string> = [
     'posição',
     'impressao-ajuste-cor',
     'impressão-ajuste-cor',
-    // 'aspas',
     'redimensionar',
     'girar',
     'parar-encaixe-rolagem-mouse',

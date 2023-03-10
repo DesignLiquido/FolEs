@@ -3,8 +3,8 @@ import { Modificador } from "./superclasse/modificador";
 
 export class TamanhoCaixa extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "conteudo": "content-box",
-        "conteúdo": "content-box",
+        "conteudo-caixa": "content-box",
+        "conteúdo-caixa": "content-box",
         "borda-caixa": "border-box",
     }
 

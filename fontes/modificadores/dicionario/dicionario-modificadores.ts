@@ -18,7 +18,6 @@ import { Animacao } from "../animacao";
 import { AoMudar } from "../ao-mudar";
 import { Aparencia } from "../aparencia";
 import { AreaMascara } from "../area-mascara";
-import { Aspas } from "../aspas";
 import { AtrasoAnimacao } from "../atraso-animacao";
 import { AtrasoTransicao } from "../atraso-transicao";
 import { Borda } from "../borda";
@@ -31,6 +30,7 @@ import { BordaMascara } from "../borda-mascara";
 import { BordaSuperior } from "../borda-superior";
 import { CalhaBarraRolagem } from "../calha-barra-rolagem";
 import { CelulasVazias } from "../celulas-vazias";
+import { Citacoes } from "../citacoes";
 import { ColunaEmGrade } from "../coluna-em-grade";
 import { Colunas } from "../colunas";
 import { CombinarTextoVertical } from "../combinar-texto-vertical";
@@ -391,7 +391,6 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "aparência": Aparencia, 
     "area-mascara": AreaMascara,
     "área-máscara": AreaMascara,
-    "aspas": Aspas,
     "atraso-animacao": AtrasoAnimacao,
     "atraso-animação": AtrasoAnimacao, 
     "atraso-transicao": AtrasoTransicao,
@@ -408,6 +407,8 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "calha-barra-rolagem": CalhaBarraRolagem,
     "celulas-vazias": CelulasVazias,
     "células-vazias": CelulasVazias,
+    "citacoes": Citacoes,
+    "citações": Citacoes,
     "coluna-em-grade": ColunaEmGrade,
     "colunas": Colunas,
     "combinar-texto-vertical": CombinarTextoVertical,

@@ -3,8 +3,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class AjustarObjeto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "contem": "contain",
-        "contém": "contain",
+        "conter": "contain",
         "cobrir": "cover",
         "preencher": "fill",
         "nenhum": "none",

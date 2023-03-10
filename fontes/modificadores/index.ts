@@ -20,7 +20,7 @@ export * from './animacao';
 export * from './ao-mudar';
 export * from './aparencia';
 export * from './area-mascara';
-export * from './aspas';
+export * from './citacoes';
 export * from './atraso-animacao';
 export * from './atraso-transicao';
 export * from './borda-direita';

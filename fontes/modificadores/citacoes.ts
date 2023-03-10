@@ -1,17 +1,17 @@
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
-export class Aspas extends Modificador {
+export class Citacoes extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
         "nenhum": "none",
     }
 
     constructor(valor: string, quantificador?: string) {
-        super("aspas", "quotes");
+        super(["citacoes", "citações"], "quotes");
 
         // OBS.: Também pode receber valores <string>.
-        // Ex.: aspas: "«" "»" "‹" "›";
+        // Ex.: citações: "«" "»" "‹" "›";
         // OBS.2: É uma sintaxe bizarra.
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/string 
@@ -21,7 +21,7 @@ export class Aspas extends Modificador {
         // TODO: Adaptar lógica para cobrir o caso de valores <string>.
         if (!(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'aspas' com valor ${valor} inválido. Valores aceitos: 
+            throw new Error(`Propriedade 'citações' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }

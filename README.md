@@ -246,7 +246,6 @@ ligacao {
 | aparência                               | appearance |
 | area-mascara                            | mask-clip |
 | área-máscara                            | mask-clip |
-| aspas                                   | quotes |
 | atraso-animacao                         | animation-delay |
 | atraso-animação                         | animation-delay |
 | atraso-transicao                        | transition-delay |
@@ -263,6 +262,8 @@ ligacao {
 | calha-barra-rolagem                     | scrollbar-gutter |
 | celulas-vazias                          | empty-cells |
 | células-vazias                          | empty-cells |
+| citacoes                                | quotes |
+| citações                                | quotes |
 | coluna-em-grade                         | grid-column |
 | colunas                                 | columns |
 | combinar-texto-vertical                 | text-combine-upright |
