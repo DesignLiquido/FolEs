@@ -3,7 +3,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class VazamentoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "recortar": "clip",
+        "recortado": "clip",
         "elipse": "ellipsis",
     }
 
