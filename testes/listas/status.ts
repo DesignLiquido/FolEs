@@ -56,7 +56,7 @@ export const StatusAuto: Array<string> = [
 export const StatusNenhum: Array<string> = [
     'modo-preenchimento-animacao',
     'modo-preenchimento-animação',
-    'fluxo',
+    // 'fluxo',
     'flutuar',
     'travar-pontuacao',
     'travar-pontuação',
