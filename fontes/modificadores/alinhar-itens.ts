@@ -7,12 +7,10 @@ export class AlinharItens extends Modificador {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
         "fim-linha-base": "last baseline",
-        "espaco-entre": "space-between",
-        "espaço-entre": "space-between",
-        "espaco-ao-redor": "space-around",
-        "espaço-ao-redor": "space-around",
-        "espaco-uniforme": "space-evenly",
-        "espaço-uniforme": "space-evenly",
+        "linha-base": "baseline",
+        "auto-inicio": "self-start",
+        "auto-início": "self-start",
+        "auto-fim": "self-end",
         "seguro": "safe",
         "inseguro": "unsafe",
     }
@@ -20,9 +18,14 @@ export class AlinharItens extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("alinhar-itens", "align-items");
 
+        // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
+        const posicoesAceitas = Object.keys(posicoes).filter(
+            (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
+        );
+
         // Pode receber valores próprios ou valores da lista de posições
         if (!(valor in this.valoresAceitos) && 
-            !(valor in posicoes) && 
+            !(posicoesAceitas.includes(valor)) && 
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'alinhar-itens' com valor ${valor} inválido. Valores aceitos:

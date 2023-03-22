@@ -7,12 +7,6 @@ export class AlinharSe extends Modificador {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
         "fim-linha-base": "last baseline",
-        "espaco-entre": "space-between",
-        "espaço-entre": "space-between",
-        "espaco-ao-redor": "space-around",
-        "espaço-ao-redor": "space-around",
-        "espaco-uniforme": "space-evenly",
-        "espaço-uniforme": "space-evenly",
         "seguro": "safe",
         "inseguro": "unsafe",
         "auto-inicio": "self-start",
@@ -24,9 +18,14 @@ export class AlinharSe extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("alinhar-se", "align-self");
 
+        // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
+        const posicoesAceitas = Object.keys(posicoes).filter(
+            (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
+        );
+
         // Pode receber valores próprios ou valores da lista de posições
-        if (!(valor in this.valoresAceitos) && 
-            !(valor in posicoes) && 
+        if (!(valor in this.valoresAceitos) &&
+            !(posicoesAceitas.includes(valor)) &&
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Valor ${valor} inválido para 'alinhar-se'. Valores aceitos:

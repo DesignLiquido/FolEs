@@ -3,6 +3,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class AjustarTamanhoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
+        "nenhum": "none",
         "altura-ex": "ex-height",
         "altura-cap": "cap-height",
         "largura-ch": "ch-width",

@@ -8,7 +8,7 @@ export class AlturaMinima extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "nenhuma": "none",
+        "auto": "auto",
     }
 
     constructor(valor: string, quantificador?: string) {
