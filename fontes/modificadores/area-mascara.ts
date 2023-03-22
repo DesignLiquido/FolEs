@@ -15,6 +15,8 @@ export class AreaMascara extends Modificador {
         "não-recortar": "no-clip",
         "borda": "border",
         "preenchimento": "padding",
+        "modo-conteudo": "content",
+        "modo-conteúdo": "content",
         "texto": "text",
     }
 

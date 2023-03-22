@@ -24,6 +24,7 @@ export class Aparencia extends Modificador {
         "apertar-botao": "push-button",
         "apertar-botão": "push-button",
         "radio": "radio",
+        "rádio": "radio",
         "campo-busca": "searchfield",
         "deslizar-horizontal": "slider-horizontal",
         "botao-quadrado": "square-button",
