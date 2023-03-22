@@ -1,4 +1,3 @@
-import { AtrasoAnimacao } from "./atraso-animacao";
 import { valoresGlobais } from "./atributos/globais";
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
