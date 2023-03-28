@@ -33,6 +33,3 @@ export class CorBorda extends Modificador {
         // this.quantificador = quantificador;
     }
 }
-
-const a = new CorBorda('trigo');
-console.log(a);

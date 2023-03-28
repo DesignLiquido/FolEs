@@ -5,6 +5,8 @@ export class CombinarTextoVertical extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
         "tudo": "all",
+        "digitos": "digits",
+        "dígitos": "digits",
     }
 
     constructor(valor: string, quantificador?: string) {
