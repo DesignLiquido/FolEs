@@ -3,14 +3,19 @@ import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class CorDestaque extends Modificador {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "auto": "auto",
+    }
+
     constructor(valor: string, quantificador?: string) {
         super("cor-destaque", "accent-color");
- 
+
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para não ocorrer esse problema.
         const valorString = valor.toString();
-        
+
         if (!(valor in cores) &&
+            !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais) &&
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
@@ -19,6 +24,7 @@ export class CorDestaque extends Modificador {
         ) {
             throw new Error(`Propriedade 'cor-destaque' com valor ${valor} inválido. Valores aceitos:
             rgb, rgba, hsl, #HEX, 
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }

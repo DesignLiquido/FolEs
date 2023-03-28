@@ -3,6 +3,10 @@ import { valoresGlobais } from "./atributos/globais";
 import { Modificador } from "./superclasse/modificador";
 
 export class CorCursor extends Modificador {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "auto": "auto",
+    }
+
     constructor(valor: string, quantificador?: string) {
         super("cor-cursor", "caret-color");
 
@@ -11,14 +15,16 @@ export class CorCursor extends Modificador {
         const valorString = valor.toString();
 
         if (!(valor in cores) &&
+            !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais) &&
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
             !(valorString.includes('hsl')) &&
-            !(valorString.startsWith('#') && valorString.length <= 7) 
+            !(valorString.startsWith('#') && valorString.length <= 7)
         ) {
             throw new Error(`Propriedade 'cor-cursor' com valor ${valor} inválido. Valores aceitos:
             rgb, rgba, hsl, #HEX,
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
