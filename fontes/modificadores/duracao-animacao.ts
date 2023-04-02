@@ -9,6 +9,12 @@ export class DuracaoAnimacao extends Modificador {
             "animation-duration"
         );
 
+        // OBS.: Também aceita receber múltiplos valores. 
+        // Ex.: duração-animação: 10s, 15s, 230ms;
+
+        // A lógica abaixo cobre somente o recebimento de UM valor. 
+        // TODO: Adaptar lógica para cobrir os demais casos. 
+
         if (Number.isNaN(parseInt(valor)) && !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'duração-animação' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)

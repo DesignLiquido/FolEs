@@ -8,13 +8,15 @@ export class EspacoBorda extends Modificador {
 
         // Pode receber também mais de um valor número-quantificador
         // Ex.: espaco-borda: 1cm 2em;
+
         // A lógica abaixo cobre apenas o recebimento de UM único valor
+        // TODO: Adaptar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in valoresGlobais)
         ) {
             throw new Error(
-                `Propriedade 'espaco-borda' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            `Propriedade 'espaco-borda' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
+            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;

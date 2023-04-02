@@ -12,6 +12,8 @@ export class Escala extends Modificador {
 
         // Pode receber de 1 a 4 parâmetros
         // A lógica abaixo cobre somente o recebimento de UM único valor. 
+
+        // TODO: Adaptar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

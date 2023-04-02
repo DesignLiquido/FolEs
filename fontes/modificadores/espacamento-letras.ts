@@ -14,6 +14,7 @@ export class EspacamentoLetras extends Modificador {
         // Ex.: espaçamento-letras: .2rem;
 
         // A lógica abaixo cobre somente o recebimento de valores positivos e negativos
+        // TODO: Adaptar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
