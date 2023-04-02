@@ -32,6 +32,11 @@ export class EnfaseTexto extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
+        // Também aceita receber uma string qualquer como primeiro parâmetro
+        // Ex.: ênfase-texto: "/25B2" #FA55A5;
+
+        // A lógica abaixo cobre somente o recebimento de um dos valores aceitos.
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (!(valor in this.valoresAceitos) &&
             validaçõesCor &&
             validaçõesHEX &&

@@ -8,7 +8,9 @@ export class EstenderBordaImagem extends Modificador {
 
         // Pode receber também mais de um valor número-quantificador
         // Ex.: estender-borda-imagem: 7px 12px 14px 5px;
+
         // A lógica abaixo cobre apenas o recebimento de UM único valor
+        // TODO: Adaptar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in valoresGlobais)
         ) {
