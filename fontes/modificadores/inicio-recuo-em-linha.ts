@@ -20,7 +20,7 @@ export class InicioRecuoEmLinha extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in unidadesMedida) || !(quantificador in ListaDeValorPercentual) || quantificador === undefined) {
+            if (!(quantificador in unidadesMedida) && !(quantificador in ListaDeValorPercentual) || quantificador === undefined) {
                 throw new Error(
                     `Propriedade 'início-recuo-em-linha' com quantificador inválido. Valores aceitos:
                     ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)},

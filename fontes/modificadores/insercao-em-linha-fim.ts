@@ -27,7 +27,7 @@ export class InsercaoEmLinhaFim extends Modificador {
 
         if (Number(parseInt(valor))) {
             if (
-                !(quantificador in unidadesMedida) ||
+                !(quantificador in unidadesMedida) &&
                 !(quantificador in ListaDeValorPercentual) ||
                 quantificador === undefined
             ) {
