@@ -22,7 +22,9 @@ export class Grade extends Modificador {
         // 2. grid-template-column
         // 3. grid-template-rows
 
-        // TODO: Adicionar casos faltantes após encontrar lógica para os seletores listados.
+        // Também aceita as funções minmax() e repeat()
+
+        // TODO: Adicionar casos faltantes.
         if (!(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
         ) {

@@ -8,6 +8,8 @@ export class FlexComprimento extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
+        "ajustar-conteudo": "fit-content",
+        "ajustar-conteúdo": "fit-content",
         "conteudo": "content",
         "conteúdo": "content",
         "auto": "auto",
