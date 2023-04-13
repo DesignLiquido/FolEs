@@ -9,7 +9,11 @@ export class EventosPonteiro extends Modificador {
 
     constructor(valor: string, quantificador?: string) {
         super("eventos-ponteiro", "pointer-events");
+        
+        // Também pode receber valores do tipo SVG
+        // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
 
+        // TODO: Ajustar lógica para cobrir todos os casos de atribuição de valor.
         if (!(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'eventos-ponteiro' com valor ${valor} inválido. Valores aceitos: 

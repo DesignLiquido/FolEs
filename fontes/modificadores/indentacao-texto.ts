@@ -14,6 +14,10 @@ export class IndentacaoTexto extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super(["indentacao-texto", "indentação-texto"], "text-indent");
 
+        // Também pode receber múltiplos valores
+        // Ex.: indentação-texto: 5em inverter cada-linha;
+
+        // TODO: Adaptar lógica para cobrir casos de múltiplos valores atribuídos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

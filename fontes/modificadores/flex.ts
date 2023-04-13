@@ -8,6 +8,7 @@ export class Flex extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
         "nenhum": "none",
+        "inicial": "initial",
         "conteudo-maximo": "max-content",
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",

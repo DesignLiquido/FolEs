@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { unidadesMedida } from "./atributos/quantificadores";
+import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class InsercaoEmBlocoFim extends Modificador {
@@ -27,11 +27,13 @@ export class InsercaoEmBlocoFim extends Modificador {
 
         if (Number(parseInt(valor))) {
             if (
-                !(quantificador in unidadesMedida) ||
+                !(quantificador in unidadesMedida) &&
+                !(quantificador in ListaDeValorPercentual) ||
                 quantificador === undefined
             ) {
                 throw new Error(
                     `Propriedade 'inserção-em-bloco-fim' com quantificador inválido. Valores aceitos:
+                    ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)},
                     ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
