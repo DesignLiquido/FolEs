@@ -88,7 +88,7 @@ export const DicionarioPseudoClasses: { [nomeFolEs: string]: any } = {
     "estrutura-estilo": EstruturaEstilo,
     "vazio":Vazio,
     "n-filho": NFilho, // Recebe parametro 
-    "n-último-filho": NUltimoFilho,// recebe parametro 
+    "n-último-filho": NUltimoFilho,// Recebe parametro 
     "primeiro-filho": PrimeiroFilho,
     "último-filho":UltimoFilho,
     "filho-unico": FilhoUnico,

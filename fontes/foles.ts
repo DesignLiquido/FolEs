@@ -67,5 +67,5 @@ export class FolEs {
     }
 }
 
- const a = new FolEs();
- console.log(a.converterParaCss('../exemplos/exemplo.foles'));
+//  const a = new FolEs();
+//  console.log(a.converterParaCss('../exemplos/exemplo.foles'));
