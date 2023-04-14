@@ -1,13 +1,10 @@
-import { cores } from "./atributos/cores";
-import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { cores } from "../atributos/cores";
+import { valoresGlobais } from "../atributos/globais";
+import { Modificador } from "../superclasse/modificador";
 
-export class DecoracaoCorTexto extends Modificador {
+export class Visitado extends Modificador {
     constructor(valor: string, quantificador?: string) {
-        super(
-            ["decoracao-cor-texto", "decoração-cor-texto"],
-            "text-decoration-color"
-        );
+        super("visitado", "visited");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para não ocorrer esse problema.
@@ -18,10 +15,9 @@ export class DecoracaoCorTexto extends Modificador {
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
             !(valorString.includes('hsl')) &&
-            Number.isNaN(parseInt(valor)) &&
             !(valorString.startsWith('#') && valorString.length <= 7) 
         ) {
-            throw new Error(`Propriedade 'decoração-cor-texto' com valor ${valor} inválido. Valores aceitos:
+            throw new Error(`Propriedade 'visitado' com valor ${valor} inválido. Valores aceitos:
             rgb, rgba, hsl, #HEX,
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
@@ -29,8 +25,5 @@ export class DecoracaoCorTexto extends Modificador {
 
         this.valor = valor;
 
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
-        
     }
 }
