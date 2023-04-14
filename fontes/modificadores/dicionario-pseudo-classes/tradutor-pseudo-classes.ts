@@ -50,8 +50,7 @@ import { UnicoTipo } from "../modificadores-pseudo-classes/unico-tipo";
 
 export const DicionarioPseudoClasses: { [nomeFolEs: string]: any } = {
     "sobrepor": Sobrepor,
-    "direção-de-texto ": DirecaoTexto ,// Recebe parametro montar logica
-    "idioma-global":IdiomaGlobal ,
+    "direção-de-texto ": DirecaoTexto ,// Recebe parametro 
     "todo-link": TodoLink,
     "link": Link, 
     "visitado": Visitado,
@@ -88,14 +87,14 @@ export const DicionarioPseudoClasses: { [nomeFolEs: string]: any } = {
     "usuario-invalido": UsuarioInvalido,
     "estrutura-estilo": EstruturaEstilo,
     "vazio":Vazio,
-    "n-filho": NFilho, // recebe parametro dentro da pseudo classe 
-    "n-último-filho": NUltimoFilho,// recebe parametro dentro da pseudo classe 
+    "n-filho": NFilho, // Recebe parametro 
+    "n-último-filho": NUltimoFilho,// recebe parametro 
     "primeiro-filho": PrimeiroFilho,
     "último-filho":UltimoFilho,
     "filho-unico": FilhoUnico,
-    "n-tipo": NTipo, //recebe parametro dentro da pseudo classe 
-    "n-último-tipo": NUltimoTipo,//recebe parametro dentro da pseudo classe
-    "n-ultimo-tipo": NUltimoTipo,//recebe parametro dentro da pseudo classe
+    "n-tipo": NTipo, //Recebe parametro 
+    "n-último-tipo": NUltimoTipo,//Recebe parametro 
+    "n-ultimo-tipo": NUltimoTipo,//Recebe parametro 
     "primeiro-tipo":PrimeiroTipo,
     "ultimo-tipo":UltimoTipo,
     "unico-tipo": UnicoTipo,
