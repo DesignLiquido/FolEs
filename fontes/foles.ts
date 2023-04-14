@@ -24,11 +24,13 @@ export class FolEs {
         this.tradutorReverso = new TradutorReverso();
     }
 
+    //Texto em FolEs
     private converterParaCssInterno(conteudo: string[]) {
         const resultadoLexador = this.lexador.mapear(conteudo);
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador.simbolos);
         const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
-        return traducao;
+        return traducao; 
+        //Texto em css
     }
 
     private converterParaFolEsInterno(conteudoDoArquivo: string[]) {
@@ -65,5 +67,5 @@ export class FolEs {
     }
 }
 
-// const a = new FolEs();
-// console.log(a.converterParaCss('../exemplos/exemplo.foles'));
+ const a = new FolEs();
+ console.log(a.converterParaCss('../exemplos/exemplo.foles'));
