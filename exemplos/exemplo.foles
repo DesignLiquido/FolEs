@@ -15,6 +15,10 @@ aspas {
     largura-maxima: 20cm;
 }
 
+.minha-classe:sobrepor {
+    cor-fundo: azul;
+}
+
 #elemento-caixa {
     altura: 40px;
 }
