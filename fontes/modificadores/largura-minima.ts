@@ -12,10 +12,11 @@ export class LarguraMinima extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string) {
-        super(["largura-minima", "largura-minima"], "min-width");
+        super(["largura-minima", "largura-mínima"], "min-width");
 
         // Também pode receber a função fit-content(<length-percentage>);
         // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
+        // TODO: Ajustar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

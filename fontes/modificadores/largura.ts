@@ -16,6 +16,7 @@ export class Largura extends Modificador {
 
         // Também pode receber a função fit-content(<length-percentage>).
         // A lógica abaixo cobre somente os demais valores aceitos.
+        // TODO: Ajustar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
