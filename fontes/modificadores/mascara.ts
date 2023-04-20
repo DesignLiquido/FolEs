@@ -12,6 +12,7 @@ export class Mascara extends Modificador {
         "luminância": "luminance",
         "fonte-correspondente": "match-source",
         "auto": "auto",
+        "nenhuma": "none",
         "conter": "contain",
         "cobrir": "cover",
         "repetir-horizontal": "repeat-x",
