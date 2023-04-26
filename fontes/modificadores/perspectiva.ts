@@ -16,8 +16,8 @@ export class Perspectiva extends Modificador {
         ) {
             throw new Error(
                 `Propriedade 'perspectiva' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-    ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
         this.valor = valor;
@@ -29,7 +29,7 @@ export class Perspectiva extends Modificador {
             ) {
                 throw new Error(
                     `Propriedade 'perspectiva' com quantificador inválido. Valores aceitos:
-        ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;
