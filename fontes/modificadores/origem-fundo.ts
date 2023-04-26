@@ -3,7 +3,7 @@ import { Modificador } from "./superclasse/modificador";
 
 export class OrigemFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "borda": "border-box",
+        "borda-caixa": "border-box",
         "preenchimento": "padding-box",
         "conteudo-caixa": "content-box",
         "conteúdo-caixa": "content-box",
