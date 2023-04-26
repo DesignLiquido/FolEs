@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { unidadesMedida } from "./atributos/quantificadores";
+import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class PosicaoEsquerda extends Modificador {
@@ -26,6 +26,7 @@ export class PosicaoEsquerda extends Modificador {
         if (Number(parseInt(valor))) {
             if (
                 !(quantificador in unidadesMedida) ||
+                !(quantificador in ListaDeValorPercentual) ||
                 quantificador === undefined
             ) {
                 throw new Error(
