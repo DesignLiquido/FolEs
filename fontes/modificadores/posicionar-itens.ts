@@ -26,6 +26,10 @@ export class PosicionarItens extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("posicionar-itens", "place-items");
 
+        // Também aceita receber múltiplos valores
+        // Ex.: posicionar-itens: auto início;
+
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (!(valor in this.valoresAceitos) &&
             !(valor in posicoes) &&
             !(valor in valoresGlobais)
