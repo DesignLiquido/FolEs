@@ -3,12 +3,18 @@ import { valoresGlobais } from "../atributos/globais";
 import { Modificador } from "../superclasse/modificador";
 
 export class Sobrepor extends Modificador {
+
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "cor-fundo":"background-color",
+        
+        }
    
     constructor(valor: string, quantificador?: string) {
         super("sobrepor", "hover");
         const valorString = valor.toString();
 
         if (!(valor in cores) &&
+        !(valor in this.valoresAceitos)&&
             !(valor in valoresGlobais) &&
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
@@ -17,6 +23,7 @@ export class Sobrepor extends Modificador {
         ) {
             throw new Error(`Propriedade 'hover' com valor ${valor} inválido. Valores aceitos:
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 

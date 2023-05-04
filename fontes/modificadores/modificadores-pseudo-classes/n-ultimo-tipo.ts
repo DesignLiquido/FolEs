@@ -8,6 +8,9 @@ export class NUltimoTipo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
     "n-ultimo-tipo":"nth-last-of-type",
     "n-último-tipo":"nth-last-of-type",
+    "impar":"odd",
+    "ímpar":"odd",
+    "par":"even"
     }
 
     constructor(valor: string, quantificador?: string) {
@@ -21,6 +24,7 @@ export class NUltimoTipo extends Modificador {
             throw new Error(`Propriedade 'n-ultimo-tipo' com valor ${valor} inválido. Valores aceitos: 
             
             ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
