@@ -6,17 +6,26 @@ import { Modificador } from "../superclasse/modificador";
 
 export class NFilho extends Modificador {
 
+    valoresAceitos: { [valorFoles: string]: string } = {
+       "impar":"odd",
+       "ímpar":"odd",
+       "par":"even"
+
+    }
+
     constructor(valor: string, quantificador?: string) {
         super("n-filho", "nth-child");
      
         if (Number.isNaN(parseInt(valor)) &&
            
             !(valor in estilos) &&
+            !(valor in this.valoresAceitos) &&
             !(valor in cores) &&
             !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'n-filho' com valor ${valor} inválido. Valores aceitos: 
             
             ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
