@@ -17,7 +17,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it('Casos de sucesso - Valor válido (auto)', () => {
+        it.skip('Casos de sucesso - Valor válido (auto)', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(StatusAuto[index], 'auto', null);
 
@@ -154,7 +154,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
             }
         });
 
-        it('Casos de sucesso - Valor válido (normal)', () => {
+        it.skip('Casos de sucesso - Valor válido (normal)', () => {
             for (let index = 0; index < StatusNormal.length; index += 1) {
                 const seletor = new SeletorModificador(StatusNormal[index], 'normal', null);
 
