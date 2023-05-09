@@ -6,6 +6,10 @@ export class RecortarMargemVazada extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("recortar-margem-vazada", "overflow-clip-margin");
 
+        // Também pode aceitar dois valores
+        // Ex.: recortar-margem-vazada: conteúdo-caixa 5px;
+
+        // TODO: Implementar lógica para cobrir todos os casos.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in valoresGlobais)
         ) {

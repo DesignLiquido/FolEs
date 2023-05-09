@@ -16,6 +16,10 @@ export class RepetirFundo extends Modificador {
     constructor(valor: string, quantificador?: string) {
         super("repetir-fundo", "background-repeat");
 
+        // Também pode aceitar dois valores
+        // Ex.: repetir-fundo: repetir espaçar;
+
+        // TODO: Implementar lógica para cobrir todos os casos.
         if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'repetir-fundo' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},

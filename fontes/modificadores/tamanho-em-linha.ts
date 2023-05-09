@@ -16,6 +16,8 @@ export class TamanhoEmLinha extends Modificador {
 
         // OBS.: Também pode receber a função fit-content( [ <length> | <percentage> ] )
         // A lógica abaixo cobre somente o recebimento de UM único valor. 
+
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

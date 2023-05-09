@@ -15,6 +15,7 @@ export class TamanhoMascara extends Modificador {
         // OBS.: Pode receber também 2 ou múltiplos valores
         // Ex.: tamanho-máscara: 6px, auto, cobrir;
         // A lógica abaixo cobre somente o recebimento de um único valor
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
