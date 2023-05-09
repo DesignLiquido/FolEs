@@ -485,13 +485,13 @@ export default {
     "amareloesverdeado": tiposDeSimbolos.QUALITATIVO,
 
     //Parametros das Pseudo Classes 
-    "impar":tiposDeSimbolos.MODIFICADOR,
-    "ímpar":tiposDeSimbolos.MODIFICADOR,
-    "par":tiposDeSimbolos.MODIFICADOR,
+    "impar": tiposDeSimbolos.MODIFICADOR,
+    "ímpar": tiposDeSimbolos.MODIFICADOR,
+    "par": tiposDeSimbolos.MODIFICADOR,
 
-    // Modificadores - Ṕalavras reservadas
-    "cor-destaque":tiposDeSimbolos.MODIFICADOR, // Olhar
-    "cor-fundo":tiposDeSimbolos.MODIFICADOR,
+    // Modificadores - Palavras reservadas
+    /* "cor-destaque": tiposDeSimbolos.MODIFICADOR, // Olhar
+    "cor-fundo": tiposDeSimbolos.MODIFICADOR,
     "repetir": tiposDeSimbolos.MODIFICADOR,
     "completar": tiposDeSimbolos.MODIFICADOR,
     "espacar": tiposDeSimbolos.MODIFICADOR,
@@ -784,5 +784,5 @@ export default {
     "de-lado": tiposDeSimbolos.MODIFICADOR,
     "lateral-direita": tiposDeSimbolos.MODIFICADOR,
     "usar-orientacao-glifo": tiposDeSimbolos.MODIFICADOR,
-    "usar-orientação-glifo": tiposDeSimbolos.MODIFICADOR,
+    "usar-orientação-glifo": tiposDeSimbolos.MODIFICADOR, */
 }
