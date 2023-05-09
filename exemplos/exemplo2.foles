@@ -2,6 +2,6 @@ lmht {
     largura-borda-direita: 130mm;
 }
 
-.minha-segunda-classe {
+/* .minha-segunda-classe {
     margem-superior: 13mm;
-}
+} */

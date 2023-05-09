@@ -158,6 +158,22 @@ export class Lexador {
         this.adicionarSimbolo(tipo);
     }
 
+    avancarParaProximaLinha(): void {
+        this.linha++;
+        this.atual = 0;
+    }
+
+    encontrarFimComentarioAsterisco(): void {
+        while (!this.eFinalDoCodigo()) {
+            this.avancar();
+            if (this.simboloAtual() === '*' && this.proximoSimbolo() === '/') {
+                this.avancar();
+                this.avancar();
+                break;
+            }
+        }
+    }
+
     analisarToken(): void {
         const caractere = this.simboloAtual();
 
@@ -219,6 +235,18 @@ export class Lexador {
                 case ';':
                     this.avancar();
                     break;
+            case '/':
+                this.avancar();
+                switch (this.simboloAtual()) {
+                    case '/':
+                        this.avancarParaProximaLinha();
+                        break;
+                    case '*':
+                        this.encontrarFimComentarioAsterisco();
+                        break;
+                }
+
+                break;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
                 else if (this.eAlfabeto(caractere))
