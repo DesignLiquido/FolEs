@@ -187,7 +187,9 @@ export default {
     "escondido": tiposDeSimbolos.QUALITATIVO,
 
     // Modificador - Posição
-    "superior": tiposDeSimbolos.MODIFICADOR,
+    // TODO: Não sei se vamos seguir com essa classificação.
+    // Não deu muito certo na avaliação sintática. 
+    /* "superior": tiposDeSimbolos.MODIFICADOR,
     "inferior": tiposDeSimbolos.MODIFICADOR,
     "direita": tiposDeSimbolos.MODIFICADOR,
     "esquerda": tiposDeSimbolos.MODIFICADOR,
@@ -225,10 +227,12 @@ export default {
     "início-bloco": tiposDeSimbolos.MODIFICADOR,
     "fim-bloco": tiposDeSimbolos.MODIFICADOR,
     "debaixo": tiposDeSimbolos.MODIFICADOR,
-    "de-frente": tiposDeSimbolos.MODIFICADOR,
+    "de-frente": tiposDeSimbolos.MODIFICADOR, */
 
     // Modificadores - Status
-    "auto": tiposDeSimbolos.MODIFICADOR,
+    // TODO: Não sei se vamos seguir com essa classificação.
+    // Não deu muito certo na avaliação sintática. 
+    /* "auto": tiposDeSimbolos.MODIFICADOR,
     "ambos": tiposDeSimbolos.MODIFICADOR,
     "alternar": tiposDeSimbolos.MODIFICADOR,
     "alternar-reverter": tiposDeSimbolos.MODIFICADOR,
@@ -309,7 +313,7 @@ export default {
     "manipulacao": tiposDeSimbolos.MODIFICADOR,
     "manipulação": tiposDeSimbolos.MODIFICADOR,
     "zoom-pinca": tiposDeSimbolos.MODIFICADOR,
-    "zoom-pinça": tiposDeSimbolos.MODIFICADOR,
+    "zoom-pinça": tiposDeSimbolos.MODIFICADOR, */
 
     // Qualitativos - Cores
     "azulpalido": tiposDeSimbolos.QUALITATIVO,

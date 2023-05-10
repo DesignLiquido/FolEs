@@ -1,10 +1,10 @@
-/* aspas {
+aspas {
     contém: nenhum;
     recortar: auto;
     fluxo: nenhum;
     conteudo: auto;
     citações: nenhum;
-} */
+}
 
 .minha-classe {
     alinhar-conteudo: inseguro;
