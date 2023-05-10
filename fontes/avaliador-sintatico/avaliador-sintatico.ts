@@ -142,7 +142,7 @@ export class AvaliadorSintatico {
             this.avancarEDevolverAnterior();
             pseudoclasse = this.consumir(
                 tiposDeSimbolos.IDENTIFICADOR,
-                "Esperado nome do modificador."
+                "Esperado nome de pseudoclasse."
             );
         }
 
