@@ -134,8 +134,17 @@ export class AvaliadorSintatico {
 
     declaracaoDeclaracao(placeholder: string = null): Declaracao {
         let simboloSeletor = this.avancarEDevolverAnterior();
+        let pseudoclasse;
 
         if (placeholder) simboloSeletor = this.avancarEDevolverAnterior();
+
+        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
+            this.avancarEDevolverAnterior();
+            pseudoclasse = this.consumir(
+                tiposDeSimbolos.IDENTIFICADOR,
+                "Esperado nome do modificador."
+            );
+        }
 
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
@@ -149,10 +158,10 @@ export class AvaliadorSintatico {
                 "Esperado nome do modificador."
             );
 
-            if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
-                this.avancarEDevolverAnterior();
-                // Validar pseudo-classe.
-            }
+            this.consumir(
+                tiposDeSimbolos.DOIS_PONTOS,
+                "Esperado ':' após nome do modificador."
+            );
 
             const valorModificador = this.valorModificador();
             let quantificador;
