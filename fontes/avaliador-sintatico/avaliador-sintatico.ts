@@ -149,10 +149,10 @@ export class AvaliadorSintatico {
                 "Esperado nome do modificador."
             );
 
-            this.consumir(
-                tiposDeSimbolos.DOIS_PONTOS,
-                `Esperado ':' após declaração de modificador '${modificador.lexema}'.`
-            );
+            if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
+                this.avancarEDevolverAnterior();
+                // Validar pseudo-classe.
+            }
 
             const valorModificador = this.valorModificador();
             let quantificador;
