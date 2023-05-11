@@ -1,7 +1,7 @@
 import { valoresGlobais } from "./atributos/globais";
 
 export function validarValores(nomePropriedade: string, valor: any, valoresAceitos: { [valorFoles: string]: string }) {
-    if (!(valor in this.valoresAceitos) &&
+    if (!(valor in valoresAceitos) &&
         !(valor in valoresGlobais)
     ) {
         throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos: 
