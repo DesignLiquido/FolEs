@@ -138,6 +138,7 @@ export class AvaliadorSintatico {
 
         if (placeholder) simboloSeletor = this.avancarEDevolverAnterior();
 
+        // TODO: Validar pseudoclasse.
         if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
             this.avancarEDevolverAnterior();
             pseudoclasse = this.consumir(
