@@ -45,6 +45,7 @@
         "typescript": "^4.7.4"
     },
     "dependencies": {
-        "commander": "^9.4.1"
+        "commander": "^9.4.1",
+        "vlq": "^2.0.4"
     }
 }
