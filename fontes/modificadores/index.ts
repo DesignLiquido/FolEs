@@ -344,7 +344,7 @@ export * from './transformar-origem';
 export * from './transformar-texto';
 export * from './transformar';
 export * from './transicao';
-export * from './travar-pontuacao';
+export * from './deslocar-pontuacao';
 export * from './variacao-fonte-alternativa';
 export * from './variacao-fonte-asiatica';
 export * from './variacao-fonte-ligacao';
