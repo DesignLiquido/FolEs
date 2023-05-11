@@ -1,28 +1,22 @@
 import { valoresGlobais } from "./atributos/globais";
+import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador } from "./superclasse/modificador";
 
 export class TransformarOrigem extends Modificador {
-    valoresAceitos: { [valorFoles: string]: string } = {
-        "esquerda": "left",
-        "direita": "right",
-        "superior": "top",
-        "inferior": "bottom",
-        "centro": "center",
-    }
-
     constructor(valor: string, quantificador?: string) {
         super("transformar-origem", "transform-origin");
 
         // Pode receber de 1 a 3 valores;
         // A lógica abaixo cobre somente o recebimento de UM único valor.
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
+            !(valor in posicoesBasicas) &&
             !(valor in valoresGlobais)
         ) {
             throw new Error(
                 `Propriedade 'transformar-origem' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
                 ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
