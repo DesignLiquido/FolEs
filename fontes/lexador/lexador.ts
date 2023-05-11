@@ -115,7 +115,17 @@ export class Lexador {
             this.inicioSimbolo,
             this.atual
         );
-        this.simbolos.push(new Simbolo(tipo, texto || lexema, literal, this.linha + 1));
+        
+        this.simbolos.push(
+            new Simbolo(
+                tipo, 
+                texto || lexema, 
+                literal, 
+                this.linha + 1, 
+                this.inicioSimbolo,
+                this.atual
+            )
+        );
     }
 
     analisarNumero(): void {

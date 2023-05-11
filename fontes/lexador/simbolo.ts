@@ -3,12 +3,23 @@ export class Simbolo {
     tipo: string;
     literal: any;
     linha: number;
+    colunaInicial: number;
+    colunaFinal: number;
 
-    constructor(tipo: string, lexema: string, literal: any, linha: number) {
+    constructor(
+        tipo: string, 
+        lexema: string, 
+        literal: any, 
+        linha: number, 
+        colunaInicial: number, 
+        colunaFinal: number
+    ) {
         this.tipo = tipo;
         this.lexema = lexema;
         this.literal = literal;
         this.linha = linha;
+        this.colunaInicial = colunaInicial;
+        this.colunaFinal = colunaFinal;
     }
 
     paraTexto(): string {
