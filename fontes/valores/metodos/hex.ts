@@ -1,4 +1,3 @@
-import { Simbolo } from "../../lexador";
 import { Metodo } from "./metodo";
 
 export class Hex extends Metodo {

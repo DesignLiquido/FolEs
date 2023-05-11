@@ -184,7 +184,12 @@ export class AvaliadorSintatico {
                 valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
                 quantificador && quantificador.hasOwnProperty('lexema') ?
                     quantificador.lexema :
-                    quantificador
+                    quantificador,
+                { 
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal
+                }
             );
 
             modificadores.push(classeModificadora as Modificador);

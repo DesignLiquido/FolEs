@@ -5,9 +5,9 @@ export class Declaracao {
     modificadores: Modificador[];
     espacoReservado?: string;
 
-    constructor(seletor: string, modificadores: Modificador[], placeholder: string = null) {
+    constructor(seletor: string, modificadores: Modificador[], espacoReservado: string = null) {
         this.seletor = seletor;
         this.modificadores = modificadores;
-        this.espacoReservado = placeholder;
+        this.espacoReservado = espacoReservado;
     }
 }

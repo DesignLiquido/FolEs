@@ -1,7 +1,4 @@
-export interface PragmasModificador {
-    colunaInicial: number;
-    colunaFinal: number;
-}
+import { PragmasModificador } from "./pragmas-modificador";
 
 export class Modificador {
     nomeFoles: string | string[];

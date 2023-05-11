@@ -1,7 +1,8 @@
 import { DicionarioModificadores } from "../dicionario/dicionario-modificadores";
+import { PragmasModificador } from "../../modificadores/superclasse";
 
 export class SeletorModificador {
-    constructor(nomeFolEs: string, valor: string, quantificador?: string) {
+    constructor(nomeFolEs: string, valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         if (
             DicionarioModificadores[nomeFolEs] === undefined || 
             DicionarioModificadores[nomeFolEs] === null
