@@ -19,6 +19,7 @@ export class TamanhoMinimoEmBloco extends Modificador {
 
         // Também pode receber a função fit-content(<length-percentage>);
         // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
