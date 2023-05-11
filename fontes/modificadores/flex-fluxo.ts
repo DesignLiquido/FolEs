@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class FlexFluxo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -15,7 +15,7 @@ export class FlexFluxo extends Modificador {
         "inverter-agrupamento": "wrap-reverse",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("flex-fluxo", "flex-flow");
 
         // A lógica abaixo cobre o caso de recebimento de um único valor

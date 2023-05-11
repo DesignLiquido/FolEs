@@ -12,7 +12,7 @@ export class NTipo extends Modificador {
  
      }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("n-tipo", "nth-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

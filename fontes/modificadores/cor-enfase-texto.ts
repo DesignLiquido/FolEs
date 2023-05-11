@@ -1,6 +1,6 @@
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class CorEnfaseTexto extends Modificador {
     constructor(valor: string, quantificador: string) {

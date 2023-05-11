@@ -1,9 +1,9 @@
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class MargemDireitaRolagemMouse extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("margem-direita-rolagem-mouse", "scroll-margin-right");
 
         if (Number.isNaN(parseInt(valor)) &&

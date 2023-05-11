@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class PrimeiroFilho extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("primeiro-filho", "first-child");
      
         if (Number.isNaN(parseInt(valor)) &&

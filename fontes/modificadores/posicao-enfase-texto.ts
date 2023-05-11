@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class PosicaoEnfaseTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class PosicaoEnfaseTexto extends Modificador {
         "esquerda": "left",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-enfase-texto", "posição-ênfase-texto"],
             "text-emphasis-position"

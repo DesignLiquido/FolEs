@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class VariacaoFonteNumerica extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,7 +20,7 @@ export class VariacaoFonteNumerica extends Modificador {
         "frações-empilhadas": "stacked-fractions",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-numerica", "variação-fonte-numérica"],
             "font-variant-numeric"

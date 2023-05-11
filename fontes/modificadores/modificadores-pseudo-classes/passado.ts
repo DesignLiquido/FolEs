@@ -6,7 +6,7 @@ export class Passado extends Modificador {
 
   
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("passado", "past");
 
         if (!(valor in estilos) &&

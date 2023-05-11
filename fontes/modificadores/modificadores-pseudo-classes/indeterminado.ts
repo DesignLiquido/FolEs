@@ -7,7 +7,7 @@ import { Modificador } from "../superclasse/modificador";
 export class Indeterminado extends Modificador {
 
     
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("indeterminado", "indeterminate");
 
         if (Number.isNaN(parseInt(valor)) &&

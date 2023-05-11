@@ -13,7 +13,7 @@ export class NUltimoTipo extends Modificador {
     "par":"even"
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("n-ultimo-tipo", "nth-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

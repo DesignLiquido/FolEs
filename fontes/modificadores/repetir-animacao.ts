@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class RepetirAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "infinito": "infinite",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["repetir-animacao", "repetir-animação"],
             "animation-iteration-count"

@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class FlexAgrupar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class FlexAgrupar extends Modificador {
         "inverter-agrupamento": "wrap-reverse",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("flex-agrupar", "flex-wrap");
 
         if (!(valor in this.valoresAceitos) &&

@@ -5,7 +5,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class Escopo extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("escopo", "scope");
 
         if (!(valor in cores) &&

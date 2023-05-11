@@ -1,13 +1,13 @@
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class CorContorno extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "inverter": "invert",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("cor-contorno", "outline-color");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

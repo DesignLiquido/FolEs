@@ -7,7 +7,7 @@ import { Modificador } from "../superclasse/modificador";
 export class Reproduzir extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("reproduzir", "playing");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class ToqueTela extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -17,7 +17,7 @@ export class ToqueTela extends Modificador {
         "zoom-pinça": "pinch-zoom",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("toque-tela", "touch-action");
 
         if (!(valor in this.valoresAceitos) &&

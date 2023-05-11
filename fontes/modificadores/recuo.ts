@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Recuo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 4 valores.
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("recuo", "padding");
 
         if (Number.isNaN(parseInt(valor)) &&

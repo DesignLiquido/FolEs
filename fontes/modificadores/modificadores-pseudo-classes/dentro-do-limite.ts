@@ -3,7 +3,7 @@ import { valoresGerais } from "../atributos/gerais";
 import { Modificador } from "../superclasse/modificador";
 
 export class DentroDoLimite extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("dentro-do-limite", "in-range");
         const valorString = valor.toString();
 

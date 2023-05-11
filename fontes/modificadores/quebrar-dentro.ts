@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class QuebrarDentro extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,7 +12,7 @@ export class QuebrarDentro extends Modificador {
         "evitar-região": "avoid-region",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("quebrar-dentro", "break-inside");
 
         if (!(valor in this.valoresAceitos) &&

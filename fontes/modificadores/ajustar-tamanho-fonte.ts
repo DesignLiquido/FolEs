@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class AjustarTamanhoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,7 +11,7 @@ export class AjustarTamanhoFonte extends Modificador {
         "altura-ic": "ic-height",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("ajustar-tamanho-fonte", "font-size-adjust");
 
         // OBS.: Os valores listados só são válidos quando há DOIS valores atribuídos.

@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class Verificado extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("verificado", "checked");
 
         if (Number.isNaN(parseInt(valor)) &&

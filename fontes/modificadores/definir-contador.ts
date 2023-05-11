@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class DefinirContador extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("definir-contador", "counter-set");
 
         // OBS.: A sintaxe desse modificador espera receber:

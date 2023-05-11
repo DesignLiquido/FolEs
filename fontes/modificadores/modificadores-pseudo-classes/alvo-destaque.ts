@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class AlvoDestaque extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("alvo-destaque", "target-within");
 
         if (Number.isNaN(parseInt(valor)) &&

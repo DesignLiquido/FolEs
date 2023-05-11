@@ -14,7 +14,7 @@ export class EstiloPadrao extends Modificador {
        
     }
     
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estilo-padrão", "default");
 
         if (Number.isNaN(parseInt(valor)) &&

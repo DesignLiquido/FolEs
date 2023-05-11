@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class CombinarTextoVertical extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class CombinarTextoVertical extends Modificador {
         "dígitos": "digits",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("combinar-texto-vertical", "text-combine-upright");
 
         // OBS.: Também aceita receber valores do tipo dígito (<digit>).

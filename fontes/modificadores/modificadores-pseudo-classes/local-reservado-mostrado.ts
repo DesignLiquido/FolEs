@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class LocalReservadoMostrado extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("local-reservado-mostrado", "placeholder-shown");
 
 

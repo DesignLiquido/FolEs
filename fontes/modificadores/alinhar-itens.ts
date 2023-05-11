@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class AlinharItens extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,7 +15,7 @@ export class AlinharItens extends Modificador {
         "inseguro": "unsafe",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("alinhar-itens", "align-items");
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'

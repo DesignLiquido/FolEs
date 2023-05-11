@@ -8,7 +8,7 @@ export class IdiomaGlobal extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("idioma-global", "lang");
         const valorString = valor.toString();
 

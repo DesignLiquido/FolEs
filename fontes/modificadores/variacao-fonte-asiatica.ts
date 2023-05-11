@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class VariacaoFonteAsiatica extends Modificador {
     // Os valores que incluem letras e números pertencem à lista <east-asian-variant-values>
@@ -17,7 +17,7 @@ export class VariacaoFonteAsiatica extends Modificador {
         "largura-completa": "full-width",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-asiatica", "variação-fonte-asiática"],
             "font-variant-east-asian"

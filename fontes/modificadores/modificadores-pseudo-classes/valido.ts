@@ -13,7 +13,7 @@ export class Valido extends Modificador {
         
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("valido", "valid");
 
 

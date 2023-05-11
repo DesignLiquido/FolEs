@@ -1,7 +1,7 @@
 import { cores } from "./atributos/cores";
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 import { unidadesMedida } from "./atributos/quantificadores";
 
 export class Borda extends Modificador {
@@ -14,7 +14,7 @@ export class Borda extends Modificador {
         "espessa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("borda", "border");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

@@ -3,7 +3,7 @@ import { valoresGlobais } from "../atributos/globais";
 import { Modificador } from "../superclasse/modificador";
 
 export class LinkLocal extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("link-local", "local-link");
 
         const valorString = valor.toString();

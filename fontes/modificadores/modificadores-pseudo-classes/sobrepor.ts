@@ -9,7 +9,7 @@ export class Sobrepor extends Modificador {
         
         }
    
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("sobrepor", "hover");
         const valorString = valor.toString();
 

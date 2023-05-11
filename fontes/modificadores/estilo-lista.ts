@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class EstiloLista extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -11,7 +11,7 @@ export class EstiloLista extends Modificador {
         "fora": "outside",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estilo-lista", "list-style");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class EmBranco extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("em-branco", "blank");
 
         if (Number.isNaN(parseInt(valor)) &&

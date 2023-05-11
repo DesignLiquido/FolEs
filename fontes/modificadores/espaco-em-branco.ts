@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class EspacoEmBranco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,7 +13,7 @@ export class EspacoEmBranco extends Modificador {
         "quebrar-espaços": "break-spaces",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["espaco-em-branco", "espaço-em-branco"], "white-space");
 
         if (!(valor in this.valoresAceitos) &&

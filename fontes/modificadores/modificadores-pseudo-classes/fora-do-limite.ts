@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class ForaDoLimite extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fora-do-limite", "out-of-range");
 
         const valorString = valor.toString();

@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Altura extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,7 +13,7 @@ export class Altura extends Modificador {
         "ajustar-conteúdo": "fit-content",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("altura", "height");
 
         // OBS.: Também pode receber as funções clamp() e fit-content( [ <length> | <percentage> ] )

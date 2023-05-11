@@ -1,6 +1,6 @@
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class EstiloBorda extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).

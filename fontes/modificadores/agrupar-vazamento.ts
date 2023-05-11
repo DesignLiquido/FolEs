@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { validarValores } from "./comum";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class AgruparVazamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class AgruparVazamento extends Modificador {
         "qualquer-lugar": "anywhere",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("agrupar-vazamento", "overflow-wrap");
 
         validarValores("agrupar-vazamento", valor, this.valoresAceitos);

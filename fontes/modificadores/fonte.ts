@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Fonte extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -48,7 +48,7 @@ export class Fonte extends Modificador {
         "ultra-expandida": "ultra-expanded",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fonte", "font");
 
         if (!(valor in this.valoresAceitos) &&

@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class FonteTexto extends Modificador {
     // OBS.: Optei inicialmente por não traduzir o nome das fontes genéricas. @vitor
@@ -19,7 +19,7 @@ export class FonteTexto extends Modificador {
         "fangsong": "fangsong",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fonte-texto", "font-family");
 
         // OBS.: A lista de valores aceitos inclui todas as FONTES GENÉRICAS (<generic-name>).

@@ -1,9 +1,9 @@
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class DecoracaoCorTexto extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-cor-texto", "decoração-cor-texto"],
             "text-decoration-color"

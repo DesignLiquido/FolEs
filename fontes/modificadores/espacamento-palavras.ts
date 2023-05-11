@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class EspacamentoPalavras extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["espacamento-palavras", "espaçamento-palavras"], "word-spacing");
 
         if (Number.isNaN(parseInt(valor)) &&

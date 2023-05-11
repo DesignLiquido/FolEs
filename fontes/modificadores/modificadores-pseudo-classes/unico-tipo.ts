@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class UnicoTipo extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("unico-tipo", "only-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

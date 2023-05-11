@@ -12,7 +12,7 @@ export class DirecaoTexto extends Modificador {
     }
     valor: string;
     
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["direção-de-texto", "direção-de-texto"], "dir");
 
         // Pode receber valores próprios ou valores da lista de posições

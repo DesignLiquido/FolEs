@@ -4,7 +4,7 @@ import { Modificador } from "../superclasse/modificador";
 import { unidadesMedida } from "../atributos/quantificadores";
 
 export class Habilitado extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super( "habilitado","enabled" );
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

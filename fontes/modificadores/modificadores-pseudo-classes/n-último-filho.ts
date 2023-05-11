@@ -12,7 +12,7 @@ export class NUltimoFilho extends Modificador {
  
      }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("n-último-filho", "nth-last-child");
      
         if (Number.isNaN(parseInt(valor)) &&

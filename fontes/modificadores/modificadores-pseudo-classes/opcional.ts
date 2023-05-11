@@ -6,7 +6,7 @@ import { Modificador } from "../superclasse/modificador";
 export class Opcional extends Modificador {
  
    
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("opcional", "optional");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

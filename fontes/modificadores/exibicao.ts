@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Exibicao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -41,7 +41,7 @@ export class Exibicao extends Modificador {
         "texto-container-rubí": "ruby-text-container",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["exibicao", "exibição"], "display");
 
         // OBS.: Também pode receber múltiplos valores.

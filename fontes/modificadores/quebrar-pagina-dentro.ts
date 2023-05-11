@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class QuebrarPaginaDentro extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
         "evitar": "avoid",
     }
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["quebrar-pagina-dentro", "quebrar-página-dentro"],
             "page-break-inside"

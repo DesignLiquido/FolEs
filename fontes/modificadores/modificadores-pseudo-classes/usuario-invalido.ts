@@ -12,7 +12,7 @@ export class UsuarioInvalido extends Modificador {
        
     }
     
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("usuario-invalido", "user-invalid");
 
         const valorString = valor.toString();

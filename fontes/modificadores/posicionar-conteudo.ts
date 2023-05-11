@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class PosicionarConteudo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -25,7 +25,7 @@ export class PosicionarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicionar-conteudo", "posicionar-conteúdo"],
             "place-content"

@@ -4,7 +4,7 @@ import { Modificador } from "../superclasse/modificador";
 import { unidadesMedida } from "../atributos/quantificadores";
 
 export class Vazio extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super( "vazio","empty" );
 
         const valorString = valor.toString();

@@ -3,7 +3,7 @@ import { valoresGerais } from "../atributos/gerais";
 import { Modificador } from "../superclasse/modificador";
 
 export class FocoInterno extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("foco-interno", "focus-within");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

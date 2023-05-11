@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Mascara extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -43,7 +43,7 @@ export class Mascara extends Modificador {
         "texto": "text",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["mascara", "máscara"], "mask");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

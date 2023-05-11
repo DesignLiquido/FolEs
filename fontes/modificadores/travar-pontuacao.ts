@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class TravarPontuacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,7 +12,7 @@ export class TravarPontuacao extends Modificador {
         "permitir-fim": "allow-end",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["travar-pontuacao", "travar-pontuação"], "hanging-punctuation");
 
         // OBS.: Pode receber de 1 a 3 valores;

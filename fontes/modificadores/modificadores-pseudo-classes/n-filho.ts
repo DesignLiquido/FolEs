@@ -13,7 +13,7 @@ export class NFilho extends Modificador {
 
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("n-filho", "nth-child");
      
         if (Number.isNaN(parseInt(valor)) &&

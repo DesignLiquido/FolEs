@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class RenderizacaoTexto extends Modificador {
     
@@ -13,7 +13,7 @@ export class RenderizacaoTexto extends Modificador {
         "precisãoGeométrica": "geometricPrecision",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["renderizacao-texto", "renderização-texto"],
             "text-rendering"

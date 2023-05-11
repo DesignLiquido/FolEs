@@ -1,9 +1,9 @@
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class EstiloInicioBordaEmLinha extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["estilo-inicio-borda-em-linha", "estilo-início-borda-em-linha"], 
             "border-inline-start-style"

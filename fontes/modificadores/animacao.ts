@@ -1,4 +1,4 @@
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Animacao extends Modificador {
     // Esse seletor pode receber de 2 a 8 valores.

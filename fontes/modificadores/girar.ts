@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
 import { angulos } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Girar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("girar", "rotate");
 
         // OBS.: Também aceita receber múltiplos valores. 

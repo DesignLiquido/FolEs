@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class PosicionarItens extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -23,7 +23,7 @@ export class PosicionarItens extends Modificador {
         "auto-fim": "self-end",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("posicionar-itens", "place-items");
 
         if (!(valor in this.valoresAceitos) &&

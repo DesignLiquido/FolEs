@@ -5,7 +5,7 @@ import { Modificador } from "../superclasse/modificador";
 
 export class FilhoUnico extends Modificador {
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("filho-unico", "only-child");
      
         if (!(valor in estilos) &&

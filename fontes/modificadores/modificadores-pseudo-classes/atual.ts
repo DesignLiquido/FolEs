@@ -3,7 +3,7 @@ import { valoresGerais } from "../atributos/gerais";
 import { Modificador } from "../superclasse/modificador";
 
 export class Atual extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("atual", "current");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

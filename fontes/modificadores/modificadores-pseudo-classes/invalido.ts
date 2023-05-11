@@ -12,7 +12,7 @@ export class Invalido extends Modificador {
             
         }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
 
        
         super("invalido", "invalid");

@@ -2,7 +2,7 @@ import { ValorPercentual } from "../../testes/listas/valor-quantificador";
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse/modificador";
 
 export class Fundo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -34,7 +34,7 @@ export class Fundo extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fundo", "background");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
