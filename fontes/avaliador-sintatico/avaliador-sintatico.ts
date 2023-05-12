@@ -10,6 +10,7 @@ import { SeletorValor } from "../valores/seletor-valor";
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
 import { Seletor } from "../seletores/seletor";
 import { SeletorEstrutura } from "../seletores/seletor-estrutura";
+import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 
 export class AvaliadorSintatico {
     simbolos: Simbolo[];
@@ -126,12 +127,36 @@ export class AvaliadorSintatico {
         }
     }
 
+    protected resolverPseudoclasse() {
+        let pseudoclasse;
+
+        // TODO: Validar pseudoclasse.
+        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
+            this.avancarEDevolverAnterior();
+            pseudoclasse = this.consumir(
+                tiposDeSimbolos.IDENTIFICADOR,
+                "Esperado nome de pseudoclasse."
+            );
+        }
+
+        return pseudoclasse;
+    }
+
     protected seletorPorEspacoReservado(): Seletor {
         return undefined;
     }
 
     protected seletorPorEstrutura(): Seletor {
-        return new SeletorEstrutura();
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorEstruturasLmht(
+            simboloSeletor.lexema,
+            { 
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
     }
 
     protected seletorPorId(): Seletor {
@@ -165,21 +190,6 @@ export class AvaliadorSintatico {
                     break;
             }
         } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
-        
-
-        let simboloSeletor = this.avancarEDevolverAnterior();
-        let pseudoclasse;
-
-        if (placeholder) simboloSeletor = this.avancarEDevolverAnterior();
-
-        // TODO: Validar pseudoclasse.
-        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
-            this.avancarEDevolverAnterior();
-            pseudoclasse = this.consumir(
-                tiposDeSimbolos.IDENTIFICADOR,
-                "Esperado nome de pseudoclasse."
-            );
-        }
 
         return seletores;
     }

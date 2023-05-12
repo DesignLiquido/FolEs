@@ -39,25 +39,33 @@ export class Tradutor {
         let resultado = "";
 
         for (const declaracao of declaracoes) {
-            if (declaracao.espacoReservado) {
+            /* if (declaracao.espacoReservado) {
                 const encontrarHtml = Object.keys(estruturasHtml).filter(
-                    (estrutura) => declaracao.seletor === estrutura
+                    (estrutura) => declaracao.seletores[0] === estrutura
                 );
 
                 if (encontrarHtml.length !== 0) {
                     resultado += `${declaracao.espacoReservado}${
-                        estruturasHtml[declaracao.seletor]
+                        estruturasHtml[declaracao.seletores[0]]
                     } {\n`;
                 } else {
-                    resultado += `${declaracao.espacoReservado}${declaracao.seletor} {\n`;
+                    resultado += `${declaracao.espacoReservado}${declaracao.seletores[0]} {\n`;
                 }
             } else {
-                resultado += `${estruturasHtml[declaracao.seletor]} {\n`;
+                resultado += `${estruturasHtml[declaracao.seletores[0]]} {\n`;
+            } */
+
+            for (const seletor of declaracao.seletores) {
+                resultado += seletor.constructor.name.toLowerCase() + ', ';
             }
+
+            resultado = resultado.slice(0, -2);
+            resultado += ' {\n';
 
             for (const modificador of declaracao.modificadores) {
                 resultado += this.traduzirModificador(modificador);
             }
+
             resultado += `}\n`;
         }
 
