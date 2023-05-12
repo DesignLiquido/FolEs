@@ -3,7 +3,7 @@ import { estilos } from "../atributos/estilo";
 import { valoresGerais } from "../atributos/gerais";
 
 
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class SomenteLeitura extends Modificador {
    

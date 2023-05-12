@@ -1,7 +1,7 @@
 import { cores } from "../atributos/cores";
 import { valoresGerais} from "../atributos/gerais";
 import { unidadesMedida } from "../atributos/quantificadores";
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class Invalido extends Modificador {
 

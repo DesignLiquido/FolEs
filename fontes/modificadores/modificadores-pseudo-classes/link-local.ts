@@ -1,6 +1,6 @@
 import { cores } from "../atributos/cores";
 import { valoresGlobais } from "../atributos/globais";
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class LinkLocal extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {

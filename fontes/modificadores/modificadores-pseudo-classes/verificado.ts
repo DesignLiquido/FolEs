@@ -2,7 +2,7 @@
 import { estilos } from "../atributos/estilo";
 import { valoresGlobais} from "../atributos/globais";
 import { unidadesMedida } from "../atributos/quantificadores";
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class Verificado extends Modificador {
 

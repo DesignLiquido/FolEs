@@ -1,6 +1,6 @@
 import { valoresGlobais } from "../atributos/globais";
 import { estilos } from "../atributos/estilo";
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class Passado extends Modificador {
 

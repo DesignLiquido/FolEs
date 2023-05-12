@@ -1,6 +1,6 @@
 import { cores } from "../atributos/cores";
 import { valoresGerais } from "../atributos/gerais";
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class FocoInterno extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {

@@ -1,12 +1,13 @@
 import { Modificador } from "../modificadores";
+import { Seletor } from "../seletores/seletor";
 
 export class Declaracao {
-    seletor: string;
+    seletores: Seletor[];
     modificadores: Modificador[];
     espacoReservado?: string;
 
-    constructor(seletor: string, modificadores: Modificador[], espacoReservado: string = null) {
-        this.seletor = seletor;
+    constructor(seletores: Seletor[], modificadores: Modificador[], espacoReservado: string = null) {
+        this.seletores = seletores;
         this.modificadores = modificadores;
         this.espacoReservado = espacoReservado;
     }

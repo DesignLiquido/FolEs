@@ -1,13 +1,12 @@
 import { cores } from "../atributos/cores";
 import { valoresGlobais} from "../atributos/globais";
 import { unidadesMedida } from "../atributos/quantificadores";
-import { Modificador } from "../superclasse/modificador";
+import { Modificador, PragmasModificador } from "../superclasse";
 
 export class Desabilitado extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("desabilitado", "disabled");
-
 
         const valorString = valor.toString();
 
