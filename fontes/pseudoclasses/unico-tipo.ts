@@ -2,11 +2,11 @@ import { cores } from "../modificadores/atributos/cores";
 import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGlobais} from "../modificadores/atributos/globais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class UnicoTipo extends Modificador {
+export class UnicoTipo extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("unico-tipo", "only-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

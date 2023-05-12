@@ -1,9 +1,9 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGlobais } from "../modificadores/atributos/globais";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class Visitado extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+export class Visitado extends Pseudoclasse {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("visitado", "visited");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

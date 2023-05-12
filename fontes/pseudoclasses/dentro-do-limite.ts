@@ -1,9 +1,9 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class DentroDoLimite extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+export class DentroDoLimite extends Pseudoclasse {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("dentro-do-limite", "in-range");
         const valorString = valor.toString();
 

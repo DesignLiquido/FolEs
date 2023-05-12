@@ -2,12 +2,12 @@ import { cores } from "../modificadores/atributos/cores";
 import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class Reproduzir extends Modificador {
+export class Reproduzir extends Pseudoclasse {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("reproduzir", "playing");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

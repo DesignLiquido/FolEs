@@ -3,9 +3,9 @@ import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGerais} from "../modificadores/atributos/gerais";
 import { valoresGlobais } from "../modificadores/atributos/globais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class EstiloPadrao extends Modificador {
+export class EstiloPadrao extends Pseudoclasse {
 
     valoresAceitos: { [valorFoles: string]: string } = {
         
@@ -14,7 +14,7 @@ export class EstiloPadrao extends Modificador {
        
     }
     
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("estilo-padrão", "default");
 
         if (Number.isNaN(parseInt(valor)) &&

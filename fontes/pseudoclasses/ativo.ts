@@ -1,10 +1,10 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGlobais } from "../modificadores/atributos/globais";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
 
-export class Ativo extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+export class Ativo extends Pseudoclasse {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super( "ativo","active" );
 
         const valorString = valor.toString();

@@ -1,12 +1,12 @@
 import { valoresGlobais } from "../modificadores/atributos/globais";
 import { estilos } from "../modificadores/atributos/estilo";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class  Futuro extends Modificador {
+export class  Futuro extends Pseudoclasse {
 
   
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("futuro", "future");
 
         if (!(valor in estilos) &&

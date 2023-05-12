@@ -2,11 +2,11 @@ import { cores } from "../modificadores/atributos/cores";
 import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class AlvoDestaque extends Modificador {
+export class AlvoDestaque extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("alvo-destaque", "target-within");
 
         if (Number.isNaN(parseInt(valor)) &&

@@ -1,10 +1,10 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGlobais } from "../modificadores/atributos/globais";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
 
-export class EstruturaEstilo extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+export class EstruturaEstilo extends Pseudoclasse {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super( "estrutura-estilo","root" );
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

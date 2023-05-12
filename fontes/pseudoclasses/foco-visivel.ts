@@ -2,11 +2,11 @@
 import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class FocoVisivel extends Modificador {
+export class FocoVisivel extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("foco-visivel", "focus-visible");
 
         if (Number.isNaN(parseInt(valor)) &&

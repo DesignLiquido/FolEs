@@ -1,5 +1,5 @@
 import { Sobre } from "./sobre";
-import { DirecaoTexto } from "./direcao-do-texto";
+import { DirecaoTexto } from "./direcao-texto";
 import { IdiomaGlobal } from "./idioma-global";
 import { TodoLink } from "./todo-link";
 import { Link } from "./link"; // Olhar

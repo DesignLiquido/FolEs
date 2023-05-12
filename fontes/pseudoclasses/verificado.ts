@@ -2,11 +2,11 @@
 import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGlobais} from "../modificadores/atributos/globais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class Verificado extends Modificador {
+export class Verificado extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("verificado", "checked");
 
         if (Number.isNaN(parseInt(valor)) &&

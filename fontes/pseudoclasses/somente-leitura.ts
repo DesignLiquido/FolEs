@@ -3,11 +3,11 @@ import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 
 
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class SomenteLeitura extends Modificador {
+export class SomenteLeitura extends Pseudoclasse {
    
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("somente-leitura", "read-only");
 
      

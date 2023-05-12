@@ -1,11 +1,11 @@
 import { cores } from "../modificadores/atributos/cores";
 import { estilos } from "../modificadores/atributos/estilo";
 import { valoresGlobais} from "../modificadores/atributos/globais";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class FilhoUnico extends Modificador {
+export class FilhoUnico extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("filho-unico", "only-child");
      
         if (!(valor in estilos) &&

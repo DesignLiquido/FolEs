@@ -1,9 +1,9 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGerais} from "../modificadores/atributos/gerais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class Invalido extends Modificador {
+export class Invalido extends Pseudoclasse {
 
      valoresAceitos: { [valorFoles: string]: string } = {
        
@@ -12,7 +12,7 @@ export class Invalido extends Modificador {
             
         }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
 
        
         super("invalido", "invalid");

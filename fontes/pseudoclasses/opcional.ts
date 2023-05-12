@@ -1,12 +1,12 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGlobais } from "../modificadores/atributos/globais";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class Opcional extends Modificador {
+export class Opcional extends Pseudoclasse {
  
    
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("opcional", "optional");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

@@ -1,8 +1,7 @@
 import { posicoes } from "../modificadores/atributos/posicoes";
-import { Modificador } from "../modificadores";
-import { PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class DirecaoTexto extends Modificador {
+export class DirecaoTexto extends Pseudoclasse {
     valoresAceitos: { [valorFoles: string]: string } = {
         direita: "right",
         esquerda: "left",
@@ -12,7 +11,7 @@ export class DirecaoTexto extends Modificador {
     constructor(
         valor: string,
         quantificador?: string,
-        pragmas?: PragmasModificador
+        pragmas?: PragmasPseudoclasse
     ) {
         super(["direção-do-texto", "direção-do-texto"], "dir");
 

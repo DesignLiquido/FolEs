@@ -1,9 +1,9 @@
 import { cores } from "../modificadores/atributos/cores";
 import { valoresGlobais } from "../modificadores/atributos/globais";
-import { Modificador, PragmasModificador } from "../modificadores/superclasse";
+import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
-export class TodoLink extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+export class TodoLink extends Pseudoclasse {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
         super("todo-link", "any-link");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
