@@ -6,7 +6,7 @@ export class VazamentoVertical extends Modificador {
         "visivel": "visible",
         "visível": "visible",
         "escondido": "hidden",
-        "recortado": "clip",
+        "recortar": "clip",
         "barra-rolagem": "scroll",
         "auto": "auto",
     }
