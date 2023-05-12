@@ -66,7 +66,7 @@ export class Tradutor {
                 resultado += this.traduzirModificador(modificador);
             }
 
-            resultado += `}\n`;
+            resultado += `}\n\n`;
         }
 
         return resultado;

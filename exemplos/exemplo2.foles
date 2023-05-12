@@ -1,7 +1,15 @@
-/* lmht {
+lmht {
     largura-borda-direita: 130mm;
-} */
+}
+
+.minha-classe:sobre {
+    cor-fundo: azul;
+}
 
 .minha-segunda-classe {
     margem-superior: 13mm;
+}
+
+#elemento-caixa {
+    altura: 40px;
 }

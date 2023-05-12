@@ -9,7 +9,7 @@ export class ModoMescla extends Modificador {
         "normal": "normal",
         "multiplicar": "multiply",
         "tela": "screen",
-        "sobrepor": "overlay",
+        "sobre": "overlay",
         "escurecer": "darken",
         "clarear": "lighten",
         "subexpor-cores": "color-dodge",

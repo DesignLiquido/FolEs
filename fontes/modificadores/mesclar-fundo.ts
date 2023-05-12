@@ -6,7 +6,7 @@ export class MesclarFundo extends Modificador {
         "normal": "normal",
         "multiplicar": "multiply",
         "alternar": "screen",
-        "sobrepor": "overlay",
+        "sobre": "overlay",
         "escurecer": "darken",
         "clarear": "normal",
         "subexposicao": "color-dodge",

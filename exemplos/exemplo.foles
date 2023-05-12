@@ -15,7 +15,7 @@ aspas {
     largura-maxima: 20cm;
 }
 
-.minha-classe:sobrepor {
+.minha-classe:sobre {
     cor-fundo: azul;
 }
 

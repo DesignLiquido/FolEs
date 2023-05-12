@@ -640,7 +640,7 @@ export default {
     "não-repetir": tiposDeSimbolos.MODIFICADOR,
     "multiplicar": tiposDeSimbolos.MODIFICADOR,
     "tela": tiposDeSimbolos.MODIFICADOR,
-    "sobrepor": tiposDeSimbolos.MODIFICADOR,
+    "sobre": tiposDeSimbolos.MODIFICADOR,
     "escurecer": tiposDeSimbolos.MODIFICADOR,
     "clarear": tiposDeSimbolos.MODIFICADOR,
     "subexpor-cores": tiposDeSimbolos.MODIFICADOR,
