@@ -8,14 +8,12 @@ import { Valor } from "../valores/valor";
 import { SeletorValor } from "../valores/seletor-valor";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
-import { Seletor } from "../seletores/seletor";
-import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
-import { SeletorClasse } from "../seletores/seletor-classe";
-import { SeletorId } from "../seletores/seletor-id";
-import { SeletorEstrutura } from "../seletores";
 import { Pseudoclasse } from "../pseudoclasses/pseudoclasse";
-import { DicionarioPseudoClasses } from "../pseudoclasses/dicionario-pseudoclasses";
 import { SeletorPseudoclasse } from "../pseudoclasses/seletor-pseudoclasse";
+import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletores";
+import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
+import { Estrutura } from "../estruturas/estrutura";
+
 
 export class AvaliadorSintatico {
     simbolos: Simbolo[];
@@ -170,7 +168,7 @@ export class AvaliadorSintatico {
                     colunaInicial: simboloSeletor.colunaInicial,
                     colunaFinal: simboloSeletor.colunaFinal
                 }
-            ),
+            ) as Estrutura,
             pseudoclasse
         );
     }

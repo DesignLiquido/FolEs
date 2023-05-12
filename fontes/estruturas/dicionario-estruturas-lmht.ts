@@ -4,11 +4,10 @@ import { Area } from "./lmht/area";
 import { AreaTexto } from "./lmht/area-texto";
 import { Cabeca } from "./lmht/cabeca";
 import { Corpo } from "./lmht/corpo";
-import { Estrutura } from "./estrutura";
 import { Lmht } from "./lmht/lmht";
 import { Aspas } from "./lmht/aspas";
 
-export const DicionarioEstruturasLmht: { [nomeFolEs: string]: typeof Estrutura } = {
+export const DicionarioEstruturasLmht: { [nomeFolEs: string]: any } = {
     "abreviacao": Abreviacao,
     "aparte": Aparte,
     "area-texto": AreaTexto,

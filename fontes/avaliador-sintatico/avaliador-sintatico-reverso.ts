@@ -7,7 +7,7 @@ import { SeletorReversoModificador } from "../modificadores/superclasse/seletor-
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
-import { Seletor } from "../seletores/seletor";
+import { Seletor } from "../seletores";
 
 export class AvaliadorSintaticoReverso {
     simbolos: Simbolo[];
@@ -80,7 +80,7 @@ export class AvaliadorSintaticoReverso {
                 colunaInicial: simboloSeletor.colunaInicial,
                 colunaFinal: simboloSeletor.colunaFinal
             }
-        );
+        ) as Seletor;
     }
 
     protected seletorPorId(): Seletor {

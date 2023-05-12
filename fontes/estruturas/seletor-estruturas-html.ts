@@ -1,4 +1,4 @@
-import { PragmasSeletor } from "../seletores/seletor";
+import { PragmasSeletor } from "../seletores";
 import { DicionarioEstruturasHtml } from "./dicionario-estruturas-html";
 
 export class SeletorEstruturasHtml {

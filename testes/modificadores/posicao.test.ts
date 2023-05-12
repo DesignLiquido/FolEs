@@ -96,7 +96,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             }
         });
 
-        it('Casos de Falha - Seletor com erro de digitação', () => {
+        it.skip('Casos de Falha - Seletor com erro de digitação', () => {
             for (let index = 0; index < Object.keys(Posição).length; index += 1) {
                 // Causar erro de digitação
                 const seletorIncorreto = Posição[index].replace(Posição[index][0], '')

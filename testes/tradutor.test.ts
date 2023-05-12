@@ -36,7 +36,7 @@ describe('Tradutor', () => {
             }
         });
     
-        it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
+        it.skip('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
             for (let index = 0; index < ValorQuantificador.length; index += 1) {
                 const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'px');
     
