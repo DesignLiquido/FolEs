@@ -13,6 +13,7 @@ import { SeletorPseudoclasse } from "../pseudoclasses/seletor-pseudoclasse";
 import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletores";
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Estrutura } from "../estruturas/estrutura";
+import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 
 
 export class AvaliadorSintatico {
@@ -154,7 +155,15 @@ export class AvaliadorSintatico {
     }
 
     protected seletorPorEspacoReservado(): Seletor {
-        return undefined;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        return new SeletorEspacoReservado(
+            simboloSeletor.lexema,
+            { 
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
     }
 
     protected seletorPorEstrutura(): Seletor {
