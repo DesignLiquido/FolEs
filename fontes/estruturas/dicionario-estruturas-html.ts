@@ -1,6 +1,6 @@
 import { Estrutura } from "./estrutura";
-import { Html } from "./html/html";
+import { Lmht } from "./lmht/lmht";
 
 export const DicionarioEstruturasHtml: { [nomeCss: string]: typeof Estrutura } = {
-    "html": Html
+    "html": Lmht
 }
