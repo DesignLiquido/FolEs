@@ -11,6 +11,11 @@ export class SeletorEstrutura extends Seletor {
     }
 
     paraTexto() {
-        return this.estrutura.constructor.name.toLowerCase();
+        let resultado = this.estrutura.constructor.name.toLowerCase();
+        if (this.pseudoclasse !== undefined && this.pseudoclasse !== null) {
+            resultado += `:${this.pseudoclasse.pseudoclasseCss}`;
+        }
+
+        return resultado;
     }
 }

@@ -13,6 +13,11 @@ export class SeletorClasse extends Seletor {
     }
 
     paraTexto() {
-        return `.${this.nomeClasse}`;
+        let resultado = `.${this.nomeClasse}`;
+        if (this.pseudoclasse !== undefined && this.pseudoclasse !== null) {
+            resultado += `:${this.pseudoclasse.pseudoclasseCss}`;
+        }
+        
+        return resultado;
     }
 }
