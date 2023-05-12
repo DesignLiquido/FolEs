@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class CelulasVazias extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,7 +7,7 @@ export class CelulasVazias extends Modificador {
         "ocultar": "hide",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["celulas-vazias", "células-vazias"], "empty-cells");
 
         if (!(valor in this.valoresAceitos) &&

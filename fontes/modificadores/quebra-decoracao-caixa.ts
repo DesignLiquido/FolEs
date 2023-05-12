@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class QuebraDecoracaoCaixa extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,7 +7,7 @@ export class QuebraDecoracaoCaixa extends Modificador {
         "clonar": "clone",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["quebra-decoracao-caixa", "quebra-decoração-caixa"], 
             "box-decoration-break"

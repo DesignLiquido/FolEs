@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class VariacaoFonteMaiuscula extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -17,7 +17,7 @@ export class VariacaoFonteMaiuscula extends Modificador {
         "título-maiúsculo": "titling-caps",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
             "font-variant-caps"

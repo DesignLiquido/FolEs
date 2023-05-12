@@ -1,10 +1,18 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class TransformarOrigem extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "esquerda": "left",
+        "direita": "right",
+        "superior": "top",
+        "inferior": "bottom",
+        "centro": "center",
+    }
+
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("transformar-origem", "transform-origin");
 
         // Pode receber de 1 a 3 valores;

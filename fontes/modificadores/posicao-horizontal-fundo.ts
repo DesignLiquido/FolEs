@@ -1,10 +1,18 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PosicaoHorizontalFundo extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "superior": "top",
+        "inferior": "bottom",
+        "esquerda": "left",
+        "direita": "right",
+        "centro": "center",
+    }
+
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-horizontal-fundo", "posição-horizontal-fundo"],
             "background-position-x"

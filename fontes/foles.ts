@@ -1,4 +1,4 @@
-import * as arquivos from 'fs';
+import * as sistemaArquivos from 'fs';
 
 import { AvaliadorSintatico } from "./avaliador-sintatico";
 import { AvaliadorSintaticoReverso } from './avaliador-sintatico/avaliador-sintatico-reverso';
@@ -24,11 +24,13 @@ export class FolEs {
         this.tradutorReverso = new TradutorReverso();
     }
 
+    //Texto em FolEs
     private converterParaCssInterno(conteudo: string[]) {
         const resultadoLexador = this.lexador.mapear(conteudo);
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador.simbolos);
         const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
-        return traducao;
+        return traducao; 
+        //Texto em css
     }
 
     private converterParaFolEsInterno(conteudoDoArquivo: string[]) {
@@ -39,7 +41,7 @@ export class FolEs {
     }
     
     converterParaCss(nomeArquivo: string): string {
-        const dadosDoArquivo: Buffer = arquivos.readFileSync(nomeArquivo);
+        const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(nomeArquivo);
         const conteudoDoArquivo: string[] = dadosDoArquivo
             .toString()
             .split('\n');
@@ -48,7 +50,7 @@ export class FolEs {
     }
 
     converterParaFolEs(nomeArquivo: string): string {
-        const dadosDoArquivo: Buffer = arquivos.readFileSync(nomeArquivo);
+        const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(nomeArquivo);
         const conteudoDoArquivo: string[] = dadosDoArquivo
             .toString()
             .split('\n');
@@ -65,5 +67,5 @@ export class FolEs {
     }
 }
 
-// const a = new FolEs();
-// console.log(a.converterParaCss('../exemplos/exemplo.foles'));
+//  const a = new FolEs();
+//  console.log(a.converterParaCss('../exemplos/exemplo.foles'));

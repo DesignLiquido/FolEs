@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class StatusAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,7 +7,7 @@ export class StatusAnimacao extends Modificador {
         "pausada": "paused"
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["status-animacao", "status-animação"], "animation-play-state");
 
         if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {

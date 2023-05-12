@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DecoracaoLinhaTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,7 +11,7 @@ export class DecoracaoLinhaTexto extends Modificador {
         "piscar": "blink",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-linha-texto", "decoração-linha-texto"],
             "text-decoration-line"

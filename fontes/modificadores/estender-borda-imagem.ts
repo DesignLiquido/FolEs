@@ -1,9 +1,9 @@
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EstenderBordaImagem extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estender-borda-imagem", "border-image-outset");
 
         // Pode receber também mais de um valor número-quantificador

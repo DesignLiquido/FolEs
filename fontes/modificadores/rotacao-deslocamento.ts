@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { angulos } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RotacaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -8,7 +8,7 @@ export class RotacaoDeslocamento extends Modificador {
         "inverter": "revert",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["rotacao-deslocamento", "rotação-deslocamento"],
             "offset-rotate"

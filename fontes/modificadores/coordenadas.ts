@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Coordenadas extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("coordenadas", "translate");
 
         // Aceita de 1 a 3 valores;

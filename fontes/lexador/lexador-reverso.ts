@@ -132,7 +132,17 @@ export class LexadorReverso {
             this.inicioSimbolo,
             this.atual
         );
-        this.simbolos.push(new Simbolo(tipo, texto, literal, this.linha + 1));
+        
+        this.simbolos.push(
+            new Simbolo(
+                tipo, 
+                texto, 
+                literal, 
+                this.linha + 1, 
+                this.inicioSimbolo,
+                this.atual
+            )
+        );
     }
 
     analisarNumero(): void {

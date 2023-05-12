@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class OrientacaoImagem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,7 +7,7 @@ export class OrientacaoImagem extends Modificador {
         "da-imagem": "from-image",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["orientacao-imagem", "orientação-imagem"],
             "image-orientation"

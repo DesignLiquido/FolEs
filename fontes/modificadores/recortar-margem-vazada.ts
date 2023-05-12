@@ -1,9 +1,9 @@
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RecortarMargemVazada extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("recortar-margem-vazada", "overflow-clip-margin");
 
         // Também pode aceitar dois valores

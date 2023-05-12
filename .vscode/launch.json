@@ -21,6 +21,20 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "FolEs > Exemplos > exemplo2.foles",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}exemplo2.foles"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "FolEs > Exemplos > Tradução Reversa > exemplo.css",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",

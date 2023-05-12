@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EstiloFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,7 +10,7 @@ export class EstiloFonte extends Modificador {
         "oblíqua": "oblique",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estilo-fonte", "font-style");
 
         // OBS.: O valor 'oblíqua' pode vir acompanhado de um número-quantificador

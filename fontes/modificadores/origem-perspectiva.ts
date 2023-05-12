@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class OrigemPerspectiva extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,7 +11,7 @@ export class OrigemPerspectiva extends Modificador {
         "inferior": "bottom",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("origem-perspectiva", "perspective-origin");
 
         // OBS.: Também pode receber 2 valores.

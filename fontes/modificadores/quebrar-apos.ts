@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class QuebrarApos extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -23,7 +23,7 @@ export class QuebrarApos extends Modificador {
         "região": "region",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["quebrar-apos", "quebrar-após"], "break-after");
 
         if (!(valor in this.valoresAceitos) &&

@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class SintetizarFonte extends Modificador {
     
@@ -15,7 +15,7 @@ export class SintetizarFonte extends Modificador {
         "maiúsculas-pequenas": "small-caps",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("sintetizar-fonte", "font-synthesis");
 
         if (!(valor in this.valoresAceitos) &&

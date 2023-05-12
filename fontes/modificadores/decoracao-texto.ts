@@ -1,7 +1,7 @@
 import { cores } from "./atributos/cores";
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DecoracaoTexto extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -17,7 +17,7 @@ export class DecoracaoTexto extends Modificador {
         "de-frente": "from-font",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["decoracao-texto", "decoração-texto"], "text-decoration");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

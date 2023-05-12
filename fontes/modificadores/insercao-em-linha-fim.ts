@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class InsercaoEmLinhaFim extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["insercao-em-linha-fim", "inserção-em-linha-fim"],
             "inset-inline-end"

@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class TamanhoLinhasEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,7 +11,7 @@ export class TamanhoLinhasEmGrade extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-linhas-em-grade", "grid-auto-rows");
 
         // OBS.: Também pode receber as funções minmax(min, max) e fit-content( [ <length> | <percentage> ] )

@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class ModoMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class ModoMascara extends Modificador {
         "fonte-correspondente": "match-source",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["modo-mascara", "modo-máscara"], "mask-mode");
 
         if (!(valor in this.valoresAceitos) &&

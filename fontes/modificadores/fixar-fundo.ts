@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class FixarFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -8,7 +8,7 @@ export class FixarFundo extends Modificador {
         "rolar": "scroll",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fixar-fundo", "background-attachment");
 
         if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {

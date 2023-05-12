@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AlinharTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class AlinharTexto extends Modificador {
         "combinar-elemento-pai": "match-parent",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("alinhar-texto", "text-align");
 
         if (!(valor in this.valoresAceitos) &&

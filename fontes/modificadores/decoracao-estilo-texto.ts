@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DecoracaoEstiloTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,7 +12,7 @@ export class DecoracaoEstiloTexto extends Modificador {
         "nenhum": "none",
     }
     
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-estilo-texto", "decoração-estilo-texto"], 
             "text-decoration-style"

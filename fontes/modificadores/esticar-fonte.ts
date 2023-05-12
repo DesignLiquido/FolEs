@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EsticarFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,7 +15,7 @@ export class EsticarFonte extends Modificador {
         "ultra-expandida": "ultra-expanded",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("esticar-fonte", "font-stretch");
 
         // Pode receber valores próprios ou número-quantificador

@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PreencherColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -8,7 +8,7 @@ export class PreencherColuna extends Modificador {
         "equilibrar-tudo": "balance-all",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("preencher-coluna", "column-fill");
 
         if (!(valor in this.valoresAceitos) && 

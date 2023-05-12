@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class VariacaoFonte extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -63,7 +63,7 @@ export class VariacaoFonte extends Modificador {
         "sobrescrito": "super",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["variacao-fonte", "variação-fonte"], "font-variant");
 
         if (!(valor in this.valoresAceitos) &&

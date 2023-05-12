@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Cursor extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -41,7 +41,7 @@ export class Cursor extends Modificador {
         "afastar": "zoom-out",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("cursor", "cursor");
 
         // OBS.: Também pode receber:

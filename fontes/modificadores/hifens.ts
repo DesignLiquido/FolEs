@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Hifens extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -8,7 +8,7 @@ export class Hifens extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["hifens", "hífens"], "hyphens");
 
         if (!(valor in this.valoresAceitos) &&

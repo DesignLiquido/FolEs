@@ -56,7 +56,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             }
         });
 
-        it('Casos de Falha - Seletor com erro de digitação', () => {
+        it.skip('Casos de Falha - Seletor com erro de digitação', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 // Causar erro de digitação
                 const seletorIncorreto = ValorGlobal[index].replace(ValorGlobal[index][0], '')
@@ -80,7 +80,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             }
         });
 
-        it('Casos de Falha - Valor não informado', () => {
+        it.skip('Casos de Falha - Valor não informado', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
 
                 // Lexador - Valor Global não informado

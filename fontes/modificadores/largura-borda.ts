@@ -1,4 +1,4 @@
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class LarguraBorda extends Modificador {
     constructor(valor: string, quantificador: string) {

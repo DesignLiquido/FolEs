@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Insercao extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -9,7 +9,7 @@ export class Insercao extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["insercao", "inserção"], "inset");
 
         if (Number.isNaN(parseInt(valor)) &&

@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class MargemSuperior extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("margem-superior", "margin-top");
 
         if (Number.isNaN(parseInt(valor)) &&

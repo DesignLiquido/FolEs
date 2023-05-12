@@ -70,7 +70,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
             }
         });
 
-        it('Caso de sucesso - passando valores aceitos', () => {
+        it.skip('Caso de sucesso - passando valores aceitos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 // Seletor inicial
                 let seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);

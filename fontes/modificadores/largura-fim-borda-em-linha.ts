@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class LarguraFimBordaEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,7 +10,7 @@ export class LarguraFimBordaEmLinha extends Modificador {
         "grossa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("largura-fim-borda-em-linha", "border-inline-end-width");
 
         // Pode receber valores próprios ou número-quantificador

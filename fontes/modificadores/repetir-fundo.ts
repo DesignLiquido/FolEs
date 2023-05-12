@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RepetirFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,7 +13,7 @@ export class RepetirFundo extends Modificador {
         "não-repetir": "no-repeat",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("repetir-fundo", "background-repeat");
 
         // Também pode aceitar dois valores

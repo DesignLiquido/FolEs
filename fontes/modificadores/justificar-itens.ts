@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class JustificarItens extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,7 +12,7 @@ export class JustificarItens extends Modificador {
         "auto-fim": "self-end",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("justificar-itens", "justify-items");
     
         // Além dos valores listados, aceita também todos os valores da Lista 

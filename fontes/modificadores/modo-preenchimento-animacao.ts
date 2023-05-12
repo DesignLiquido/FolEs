@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class ModoPreenchimentoAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,7 +10,7 @@ export class ModoPreenchimentoAnimacao extends Modificador {
         "ambos": "both"
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["modo-preenchimento-animacao", "modo-preenchimento-animação"], 
             "animation-fill-mode"

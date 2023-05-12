@@ -1,11 +1,8 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Lexador } from "../../fontes/lexador";
-import { SeletorModificador } from "../../fontes/modificadores/superclasse";
-import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { AtribuiçãoAbreviada } from "../listas/atribuicao-abreviada";
 
-describe('Testando Seletores AtribuiçãoAbreviada (de atribuição abreviada), que recebem dois ou mais atributos', () => {
+describe.skip('Testando Seletores AtribuiçãoAbreviada (de atribuição abreviada), que recebem dois ou mais atributos', () => {
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;

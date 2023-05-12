@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class JustificarTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,7 +10,7 @@ export class JustificarTexto extends Modificador {
         "distribuir": "distribute",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("justificar-texto", "text-justify");
 
         if (!(valor in this.valoresAceitos) &&

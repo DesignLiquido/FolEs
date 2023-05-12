@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 import { unidadesMedida } from "./atributos/quantificadores";
 
 export class TamanhoEmBloco extends Modificador {
@@ -11,7 +11,7 @@ export class TamanhoEmBloco extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-em-bloco", "block-size");
 
         // Pode receber valores próprios ou número-quantificador

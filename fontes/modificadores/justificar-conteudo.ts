@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class JustificarConteudo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,7 +16,7 @@ export class JustificarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["justificar-conteudo", "justificar-conteúdo"], 
             "justify-content"

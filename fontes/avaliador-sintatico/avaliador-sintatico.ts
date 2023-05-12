@@ -8,6 +8,14 @@ import { Valor } from "../valores/valor";
 import { SeletorValor } from "../valores/seletor-valor";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
+import { Seletor } from "../seletores/seletor";
+import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
+import { SeletorClasse } from "../seletores/seletor-classe";
+import { SeletorId } from "../seletores/seletor-id";
+import { SeletorEstrutura } from "../seletores";
+import { Pseudoclasse } from "../pseudoclasses/pseudoclasse";
+import { DicionarioPseudoClasses } from "../pseudoclasses/dicionario-pseudoclasses";
+import { SeletorPseudoclasse } from "../pseudoclasses/seletor-pseudoclasse";
 
 export class AvaliadorSintatico {
     simbolos: Simbolo[];
@@ -124,19 +132,107 @@ export class AvaliadorSintatico {
         }
     }
 
-    declaracaoPorSeletor(lexema: string): Declaracao {
-        return this.declaracaoDeclaracao(lexema);
+    protected resolverPseudoclasse(): Pseudoclasse {
+        let pseudoclasse;
+
+        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
+            this.avancarEDevolverAnterior();
+            pseudoclasse = this.consumir(
+                tiposDeSimbolos.IDENTIFICADOR,
+                "Esperado nome de pseudoclasse."
+            );
+
+            return new SeletorPseudoclasse(
+                pseudoclasse.lexema, 
+                {
+                    linha: pseudoclasse.linha,
+                    colunaInicial: pseudoclasse.colunaInicial,
+                    colunaFinal: pseudoclasse.colunaFinal
+                }
+            ) as Pseudoclasse;
+        }
+
+        return pseudoclasse;
     }
 
-    declaracaoPorEstrutura(): Declaracao {
-        return this.declaracaoDeclaracao();
+    protected seletorPorEspacoReservado(): Seletor {
+        return undefined;
     }
 
-    declaracaoDeclaracao(placeholder: string = null): Declaracao {
-        let simboloSeletor = this.avancarEDevolverAnterior();
+    protected seletorPorEstrutura(): Seletor {
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorEstrutura(
+            new SeletorEstruturasLmht(
+                simboloSeletor.lexema,
+                { 
+                    linha: simboloSeletor.linha,
+                    colunaInicial: simboloSeletor.colunaInicial,
+                    colunaFinal: simboloSeletor.colunaFinal
+                }
+            ),
+            pseudoclasse
+        );
+    }
 
-        if (placeholder) simboloSeletor = this.avancarEDevolverAnterior();
+    protected seletorPorId(): Seletor {
+        this.atual += 1;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorId(
+            simboloSeletor.lexema,
+            pseudoclasse,
+            {
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
+    }
 
+    protected seletorPorNomeDeClasse(): Seletor {
+        this.atual += 1;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorClasse(
+            simboloSeletor.lexema,
+            pseudoclasse,
+            {
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
+    }
+
+    /**
+     * Resolve os seletores. Por enquanto resolve apenas um seletor por vez.
+     * @param espacoReservado 
+     */
+    protected resolverSeletores(espacoReservado: string = null): Seletor[] {
+        const seletores: Seletor[] = [];
+
+        do {
+            switch (this.simbolos[this.atual].tipo) {
+                case tiposDeSimbolos.ESTRUTURA:
+                    seletores.push(this.seletorPorEstrutura());
+                    break;
+                case tiposDeSimbolos.PERCENTUAL:
+                    seletores.push(this.seletorPorEspacoReservado());
+                    break;
+                case tiposDeSimbolos.NOME_DE_CLASSE:
+                    seletores.push(this.seletorPorNomeDeClasse());
+                    break;
+                case tiposDeSimbolos.ID_DO_ELEMENTO:
+                    seletores.push(this.seletorPorId());
+                    break;
+            }
+        } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
+
+        return seletores;
+    }
+
+    resolverModificadores(): Modificador[] {
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
@@ -151,7 +247,7 @@ export class AvaliadorSintatico {
 
             this.consumir(
                 tiposDeSimbolos.DOIS_PONTOS,
-                `Esperado ':' após declaração de modificador '${modificador.lexema}'.`
+                "Esperado ':' após nome do modificador."
             );
 
             const valorModificador = this.valorModificador();
@@ -174,35 +270,30 @@ export class AvaliadorSintatico {
                 valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
                 quantificador && quantificador.hasOwnProperty('lexema') ?
                     quantificador.lexema :
-                    quantificador
+                    quantificador,
+                { 
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal
+                }
             );
 
             modificadores.push(classeModificadora as Modificador);
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return new Declaracao(
-            simboloSeletor.lexema,
-            modificadores,
-            placeholder
-        );
+        return modificadores;
     }
 
     declaracao(): any {
         if (this.estaNoFinal()) return null;
-        const simboloAtual = this.simbolos[this.atual];
-        if (!simboloAtual) return null;
+        const seletores = this.resolverSeletores();
+        const modificadores = this.resolverModificadores();
 
-        switch (simboloAtual.tipo) {
-            case tiposDeSimbolos.ESTRUTURA:
-                return this.declaracaoPorEstrutura();
-            case tiposDeSimbolos.PERCENTUAL:
-                return this.declaracaoPorSeletor(simboloAtual.lexema);
-            case tiposDeSimbolos.NOME_DE_CLASSE:
-                return this.declaracaoPorSeletor(simboloAtual.lexema);
-            case tiposDeSimbolos.ID_DO_ELEMENTO:
-                return this.declaracaoPorSeletor(simboloAtual.lexema);
-        }
+        return new Declaracao(
+            seletores,
+            modificadores
+        );
     }
 
     analisar(simbolos: Simbolo[]) {

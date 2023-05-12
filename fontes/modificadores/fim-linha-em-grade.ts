@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class FimLinhaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fim-linha-em-grade", "grid-row-end");
 
         // OBS.: Pode receber também DOIS valores: um número e um valor personalizado (<custom-ident>);

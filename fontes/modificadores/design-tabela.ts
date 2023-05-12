@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DesignTabela extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,7 +7,7 @@ export class DesignTabela extends Modificador {
         "fixo": "fixed",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("design-tabela", "table-layout");
 
         if (!(valor in this.valoresAceitos) &&

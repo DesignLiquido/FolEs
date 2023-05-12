@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class ProporcaoTela extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["proporcao-tela", "proporção-tela"], "aspect-ratio");
 
         // OBS.: Também pode receber dois números separados por uma barra

@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RegrasLarguraColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,7 +10,7 @@ export class RegrasLarguraColuna extends Modificador {
         "grossa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("regras-largura-coluna", "column-rule-width");
 
                 // Pode receber valores próprios ou número-quantificador

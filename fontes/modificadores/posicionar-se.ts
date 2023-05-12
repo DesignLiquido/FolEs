@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PosicionarSe extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -23,7 +23,7 @@ export class PosicionarSe extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("posicionar-se", "place-self");
 
         // Pode receber valores próprios ou valores da lista de posições

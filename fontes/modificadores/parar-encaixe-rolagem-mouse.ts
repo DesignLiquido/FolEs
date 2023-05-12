@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PararEncaixeRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,7 +7,7 @@ export class PararEncaixeRolagemMouse extends Modificador {
         "sempre": "always",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("parar-encaixe-rolagem-mouse", "scroll-snap-stop");
 
         if (!(valor in this.valoresAceitos) &&

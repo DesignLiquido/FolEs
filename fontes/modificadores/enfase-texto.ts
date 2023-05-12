@@ -1,6 +1,6 @@
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EnfaseTexto extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -20,7 +20,7 @@ export class EnfaseTexto extends Modificador {
         "sésamo": "sesame",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

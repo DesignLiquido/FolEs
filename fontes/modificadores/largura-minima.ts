@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class LarguraMinima extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,8 +11,8 @@ export class LarguraMinima extends Modificador {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador?: string) {
-        super(["largura-minima", "largura-mínima"], "min-width");
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+        super(["largura-minima", "largura-minima"], "min-width");
 
         // Também pode receber a função fit-content(<length-percentage>);
         // A lógica abaixo cobre o recebimento de valores próprios ou numéricos

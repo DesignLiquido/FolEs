@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class TamanhoGrade extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -8,7 +8,7 @@ export class TamanhoGrade extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-grade", "grid-area");
 
         // OBS.: Também pode receber outros dois casos de valores:

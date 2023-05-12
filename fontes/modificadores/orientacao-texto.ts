@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class OrientacaoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,7 +12,7 @@ export class OrientacaoTexto extends Modificador {
         "usar-orientação-glifo": "use-glyph-orientation",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["orientacao-texto", "orientação-texto"], 
             "text-orientation"

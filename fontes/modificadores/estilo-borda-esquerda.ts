@@ -1,9 +1,9 @@
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EstiloBordaEsquerda extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estilo-borda-esquerda", "border-left-style");
 
         if (!(valor in estilos && !(valor in valoresGlobais))) {

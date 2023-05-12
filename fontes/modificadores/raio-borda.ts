@@ -1,9 +1,9 @@
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RaioBorda extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("raio-borda", "border-radius");
 
         // OBS.: raio-borda também aceita uma sintaxe específica com uma barra (/) entre os valores

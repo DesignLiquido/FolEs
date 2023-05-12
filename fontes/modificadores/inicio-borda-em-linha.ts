@@ -2,13 +2,13 @@ import { cores } from "./atributos/cores";
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class InicioBordaEmLinha extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-borda-em-linha", "início-borda-em-linha"],
             "border-inline-start"

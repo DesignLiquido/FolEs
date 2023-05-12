@@ -1,0 +1,23 @@
+lmht {
+    largura-borda-direita: 130mm;
+}
+
+aspas {
+    contém: nenhum;
+    recortar: auto;
+    fluxo: nenhum;
+    conteudo: auto;
+    citações: nenhum;
+}
+
+.minha-classe:sobre {
+    cor-fundo: azul;
+}
+
+.minha-segunda-classe {
+    margem-superior: 13mm;
+}
+
+#elemento-caixa {
+    altura: 40px;
+}

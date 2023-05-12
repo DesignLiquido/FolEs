@@ -1,9 +1,9 @@
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DecoracaoCorTexto extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-cor-texto", "decoração-cor-texto"],
             "text-decoration-color"
@@ -18,6 +18,7 @@ export class DecoracaoCorTexto extends Modificador {
             !(valorString.includes('rgb')) &&
             !(valorString.includes('rgba')) &&
             !(valorString.includes('hsl')) &&
+            Number.isNaN(parseInt(valor)) &&
             !(valorString.startsWith('#') && valorString.length <= 7) 
         ) {
             throw new Error(`Propriedade 'decoração-cor-texto' com valor ${valor} inválido. Valores aceitos:
@@ -30,5 +31,6 @@ export class DecoracaoCorTexto extends Modificador {
 
         // Não recebe quantificador
         // this.quantificador = quantificador;
+        
     }
 }

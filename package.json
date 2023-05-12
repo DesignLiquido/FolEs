@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/foles",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Linguagem de folhas de estilo para documentos em geral em português",
     "main": "index.js",
     "scripts": {
@@ -45,6 +45,7 @@
         "typescript": "^4.7.4"
     },
     "dependencies": {
-        "commander": "^9.4.1"
+        "commander": "^9.4.1",
+        "vlq": "^2.0.4"
     }
 }

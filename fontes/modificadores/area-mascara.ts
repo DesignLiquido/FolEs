@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AreaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,7 +20,7 @@ export class AreaMascara extends Modificador {
         "texto": "text",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["area-mascara", "área-máscara"], "mask-clip");
 
         // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.

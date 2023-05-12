@@ -1,9 +1,9 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Opacidade extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("opacidade", "opacity");
 
         // Valor numérico deve estar entre 0 e 1 (<alpha-value>).

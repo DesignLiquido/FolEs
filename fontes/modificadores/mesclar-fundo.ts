@@ -1,12 +1,12 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class MesclarFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "normal": "normal",
         "multiplicar": "multiply",
         "alternar": "screen",
-        "sobrepor": "overlay",
+        "sobre": "overlay",
         "escurecer": "darken",
         "clarear": "normal",
         "subexposicao": "color-dodge",
@@ -24,7 +24,7 @@ export class MesclarFundo extends Modificador {
         "luminosidade": "luminosity",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("mesclar-fundo", "background-blend-mode");
 
         if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {

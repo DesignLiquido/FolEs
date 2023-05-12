@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AlinharConteudo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,7 +20,7 @@ export class AlinharConteudo extends Modificador {
         "auto-fim": "self-end",
     }
     
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
 
         // Pode receber valores próprios ou valores da lista de posições

@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class IndentacaoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,7 +11,7 @@ export class IndentacaoTexto extends Modificador {
     // OBS.: A tradução de 'hanging' para 'inverter' pode parecer estranha,
     // mas a documentação diz que hanging "inverte todas as linhas indentadas".
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["indentacao-texto", "indentação-texto"], "text-indent");
 
         // Também pode receber múltiplos valores

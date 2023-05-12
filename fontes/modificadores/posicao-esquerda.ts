@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
-import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { unidadesMedida } from "./atributos/quantificadores";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PosicaoEsquerda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["posicao-esquerda", "posição-esquerda"], "left");
 
 

@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class TamanhoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -17,7 +17,7 @@ export class TamanhoFonte extends Modificador {
         "menor": "smaller",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-fonte", "font-size");
 
         // Pode receber valores próprios ou número-quantificador

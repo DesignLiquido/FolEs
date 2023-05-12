@@ -1,9 +1,9 @@
 import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PosicaoMascara extends Modificador {
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["posicao-mascara", "posição-máscara"], "mask-position");
 
         // OBS.: Também pode receber DOIS números com quantificador como parâmetro

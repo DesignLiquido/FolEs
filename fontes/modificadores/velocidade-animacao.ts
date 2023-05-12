@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class VelocidadeAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -26,7 +26,7 @@ export class VelocidadeAnimacao extends Modificador {
         "final": "end",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["velocidade-animacao", "velocidade-animação"],
             "animation-timing-function"

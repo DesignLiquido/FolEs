@@ -3,7 +3,7 @@ aspas {
     recortar: auto;
     fluxo: nenhum;
     conteudo: auto;
-    citações: nenhuma;
+    citações: nenhum;
 }
 
 .minha-classe {
@@ -13,6 +13,10 @@ aspas {
     cor-fundo: vermelho;
     tamanho-fonte: 16px;
     largura-maxima: 20cm;
+}
+
+.minha-classe:sobre {
+    cor-fundo: azul;
 }
 
 #elemento-caixa {

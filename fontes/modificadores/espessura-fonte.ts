@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EspessuraFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +9,7 @@ export class EspessuraFonte extends Modificador {
         "mais-escura": "bolder",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("espessura-fonte", "font-weight");
 
         // Aceita valores próprios ou numérico.

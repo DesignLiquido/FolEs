@@ -1,13 +1,13 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class FatiarImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "preencher": "fill",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fatiar-imagem-borda", "border-image-slice");
 
         // OBS.: Pode receber de 1 a 4 valores.

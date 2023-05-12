@@ -2,15 +2,15 @@ import { cores } from "./atributos/cores";
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class SombraCaixa extends Modificador {
     // Seletor pode receber de 1 a 5 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhuma": "none",
     }
-
-    constructor(valor: string, quantificador?: string) {
+    
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("sombra-caixa", "box-shadow");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

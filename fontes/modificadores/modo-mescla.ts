@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class ModoMescla extends Modificador {
 
@@ -9,7 +9,7 @@ export class ModoMescla extends Modificador {
         "normal": "normal",
         "multiplicar": "multiply",
         "tela": "screen",
-        "sobrepor": "overlay",
+        "sobre": "overlay",
         "escurecer": "darken",
         "clarear": "lighten",
         "subexposicao": "color-dodge",
@@ -26,7 +26,7 @@ export class ModoMescla extends Modificador {
         "luminosidade": "luminosity",
     }
 
-    constructor(valor: string, quantificador?: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("modo-mescla", "mix-blend-mode");
 
         if (!(valor in this.valoresAceitos) &&
