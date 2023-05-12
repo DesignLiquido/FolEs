@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { unidadesMedida } from "./atributos/quantificadores";
+import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PosicaoEsquerda extends Modificador {
