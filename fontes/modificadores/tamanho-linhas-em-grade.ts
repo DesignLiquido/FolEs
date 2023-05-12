@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class TamanhoLinhasEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {

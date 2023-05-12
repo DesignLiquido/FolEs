@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Fonte extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).

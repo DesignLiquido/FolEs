@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class LinhasInferiores extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {

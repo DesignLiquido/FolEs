@@ -1,5 +1,9 @@
-import { Modificador } from "../../modificadores";
+import { PragmasEstrutura } from "../pragmas-estrutura";
 
 export class Estrutura {
-    modificadores: Modificador[];
+    pragmas?: PragmasEstrutura;
+
+    constructor(pragmas?: PragmasEstrutura) {
+        this.pragmas = pragmas;
+    }
 }

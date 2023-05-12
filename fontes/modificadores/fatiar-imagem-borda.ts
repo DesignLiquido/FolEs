@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class FatiarImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {

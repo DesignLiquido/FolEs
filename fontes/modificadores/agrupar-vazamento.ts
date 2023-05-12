@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { validarValores } from "./comum";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AgruparVazamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {

@@ -1,4 +1,4 @@
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class NomeAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {

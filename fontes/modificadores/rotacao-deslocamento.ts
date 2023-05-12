@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { angulos } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RotacaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {

@@ -2,7 +2,7 @@ import { cores } from "./atributos/cores";
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class InicioBordaEmBloco extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).

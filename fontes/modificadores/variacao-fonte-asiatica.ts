@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class VariacaoFonteAsiatica extends Modificador {
     // Os valores que incluem letras e números pertencem à lista <east-asian-variant-values>

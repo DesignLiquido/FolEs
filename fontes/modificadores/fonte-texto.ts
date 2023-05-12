@@ -1,5 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class FonteTexto extends Modificador {
     // OBS.: Optei inicialmente por não traduzir o nome das fontes genéricas. @vitor

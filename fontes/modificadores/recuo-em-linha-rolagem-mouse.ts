@@ -1,6 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class RecuoEmLinhaRolagemMouse extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).

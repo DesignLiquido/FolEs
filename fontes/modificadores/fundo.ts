@@ -2,7 +2,7 @@ import { ValorPercentual } from "../../testes/listas/valor-quantificador";
 import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class Fundo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).

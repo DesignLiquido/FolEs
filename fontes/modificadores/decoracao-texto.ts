@@ -1,7 +1,7 @@
 import { cores } from "./atributos/cores";
 import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
-import { Modificador, PragmasModificador } from "./superclasse/modificador";
+import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DecoracaoTexto extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).

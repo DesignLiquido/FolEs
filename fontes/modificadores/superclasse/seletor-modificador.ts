@@ -3,12 +3,11 @@ import { PragmasModificador } from "../../modificadores/superclasse";
 
 export class SeletorModificador {
     constructor(nomeFolEs: string, valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        if (
-            DicionarioModificadores[nomeFolEs] === undefined || 
-            DicionarioModificadores[nomeFolEs] === null
-        ) {
-            throw new Error(`O seletor \'${nomeFolEs}\' não foi encontrado.`);
+        const modificador = DicionarioModificadores[nomeFolEs];
+        if (modificador === undefined || modificador === null) {
+            throw new Error(`O seletor \'${nomeFolEs}\' não existe.`);
         }
-        return new DicionarioModificadores[nomeFolEs](valor, quantificador);
+
+        return new modificador(valor, quantificador, pragmas);
     }
 }
