@@ -3,7 +3,7 @@ import { valoresGerais } from "../modificadores/atributos/gerais";
 import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class DentroDoLimite extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("dentro-do-limite", "in-range");
         const valorString = valor.toString();
 

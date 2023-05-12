@@ -14,7 +14,7 @@ export class EstiloPadrao extends Pseudoclasse {
        
     }
     
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("estilo-padrão", "default");
 
         if (Number.isNaN(parseInt(valor)) &&

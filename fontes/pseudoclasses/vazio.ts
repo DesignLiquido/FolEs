@@ -4,7 +4,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
 
 export class Vazio extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super( "vazio","empty" );
 
         const valorString = valor.toString();

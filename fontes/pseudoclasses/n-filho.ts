@@ -13,7 +13,7 @@ export class NFilho extends Pseudoclasse {
 
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("n-filho", "nth-child");
      
         if (Number.isNaN(parseInt(valor)) &&

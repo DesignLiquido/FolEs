@@ -6,7 +6,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class EmBranco extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("em-branco", "blank");
 
         if (Number.isNaN(parseInt(valor)) &&

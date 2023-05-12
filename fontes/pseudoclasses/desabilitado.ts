@@ -5,7 +5,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class Desabilitado extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("desabilitado", "disabled");
 
         const valorString = valor.toString();

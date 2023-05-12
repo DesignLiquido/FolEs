@@ -6,7 +6,7 @@ export class Passado extends Pseudoclasse {
 
   
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("passado", "past");
 
         if (!(valor in estilos) &&

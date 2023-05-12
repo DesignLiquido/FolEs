@@ -6,7 +6,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class LocalReservadoMostrado extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("local-reservado-mostrado", "placeholder-shown");
 
 

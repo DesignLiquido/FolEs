@@ -6,7 +6,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class UnicoTipo extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("unico-tipo", "only-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

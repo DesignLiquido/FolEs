@@ -7,7 +7,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 export class Pausa extends Pseudoclasse {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("pausa", "paused");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

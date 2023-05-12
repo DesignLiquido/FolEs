@@ -6,7 +6,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class UltimoTipo extends Pseudoclasse {
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("ultimo-tipo", "last-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

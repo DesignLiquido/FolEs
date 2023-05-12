@@ -3,7 +3,7 @@ import { valoresGerais } from "../modificadores/atributos/gerais";
 import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class Atual extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("atual", "current");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

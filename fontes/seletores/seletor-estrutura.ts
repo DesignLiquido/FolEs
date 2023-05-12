@@ -1,11 +1,12 @@
 import { Estrutura } from "../estruturas/estrutura";
+import { Pseudoclasse } from "../pseudoclasses/pseudoclasse";
 import { Seletor } from "./seletor";
 
 export class SeletorEstrutura extends Seletor {
     estrutura: Estrutura;
 
-    constructor(estrutura: Estrutura) {
-        super();
+    constructor(estrutura: Estrutura, pseudoclasse?: Pseudoclasse) {
+        super(pseudoclasse);
         this.estrutura = estrutura;
     }
 

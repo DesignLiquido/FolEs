@@ -6,14 +6,12 @@ export interface PragmasPseudoclasse {
 
 export class Pseudoclasse {
     nomeFoles: string | string[];
-    propriedadeCss: string;
-    valor: string;
-    quantificador: string;
+    pseudoclasseCss: string;
     pragmas?: PragmasPseudoclasse;
 
-    constructor(nomeFoles: string | string[], propriedadeCss: string, pragmas?: PragmasPseudoclasse) {
+    constructor(nomeFoles: string | string[], pseudoclasseCss: string, pragmas?: PragmasPseudoclasse) {
         this.nomeFoles = nomeFoles;
-        this.propriedadeCss = propriedadeCss;
+        this.pseudoclasseCss = pseudoclasseCss;
         this.pragmas = pragmas;
     }
 }

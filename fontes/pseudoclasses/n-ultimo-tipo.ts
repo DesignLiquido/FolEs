@@ -13,7 +13,7 @@ export class NUltimoTipo extends Pseudoclasse {
     "par":"even"
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("n-ultimo-tipo", "nth-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

@@ -3,7 +3,7 @@ import { valoresGlobais } from "../modificadores/atributos/globais";
 import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class Link extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("link", "link");
 
         const valorString = valor.toString();

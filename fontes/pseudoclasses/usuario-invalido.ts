@@ -12,7 +12,7 @@ export class UsuarioInvalido extends Pseudoclasse {
        
     }
     
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("usuario-invalido", "user-invalid");
 
         const valorString = valor.toString();

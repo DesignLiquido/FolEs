@@ -3,7 +3,7 @@ import { valoresGlobais } from "../modificadores/atributos/globais";
 import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class TodoLink extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("todo-link", "any-link");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

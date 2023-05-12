@@ -13,6 +13,9 @@ import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { SeletorClasse } from "../seletores/seletor-classe";
 import { SeletorId } from "../seletores/seletor-id";
 import { SeletorEstrutura } from "../seletores";
+import { Pseudoclasse } from "../pseudoclasses/pseudoclasse";
+import { DicionarioPseudoClasses } from "../pseudoclasses/dicionario-pseudoclasses";
+import { SeletorPseudoclasse } from "../pseudoclasses/seletor-pseudoclasse";
 
 export class AvaliadorSintatico {
     simbolos: Simbolo[];
@@ -129,16 +132,24 @@ export class AvaliadorSintatico {
         }
     }
 
-    protected resolverPseudoclasse() {
+    protected resolverPseudoclasse(): Pseudoclasse {
         let pseudoclasse;
 
-        // TODO: Validar pseudoclasse.
         if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
             this.avancarEDevolverAnterior();
             pseudoclasse = this.consumir(
                 tiposDeSimbolos.IDENTIFICADOR,
                 "Esperado nome de pseudoclasse."
             );
+
+            return new SeletorPseudoclasse(
+                pseudoclasse.lexema, 
+                {
+                    linha: pseudoclasse.linha,
+                    colunaInicial: pseudoclasse.colunaInicial,
+                    colunaFinal: pseudoclasse.colunaFinal
+                }
+            ) as Pseudoclasse;
         }
 
         return pseudoclasse;
@@ -159,15 +170,18 @@ export class AvaliadorSintatico {
                     colunaInicial: simboloSeletor.colunaInicial,
                     colunaFinal: simboloSeletor.colunaFinal
                 }
-            )
+            ),
+            pseudoclasse
         );
     }
 
     protected seletorPorId(): Seletor {
         this.atual += 1;
         const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
         return new SeletorId(
             simboloSeletor.lexema,
+            pseudoclasse,
             {
                 linha: simboloSeletor.linha,
                 colunaInicial: simboloSeletor.colunaInicial,
@@ -179,8 +193,10 @@ export class AvaliadorSintatico {
     protected seletorPorNomeDeClasse(): Seletor {
         this.atual += 1;
         const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
         return new SeletorClasse(
             simboloSeletor.lexema,
+            pseudoclasse,
             {
                 linha: simboloSeletor.linha,
                 colunaInicial: simboloSeletor.colunaInicial,

@@ -12,7 +12,7 @@ export class NTipo extends Pseudoclasse {
  
      }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("n-tipo", "nth-of-type");
      
         if (Number.isNaN(parseInt(valor)) &&

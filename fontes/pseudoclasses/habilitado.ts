@@ -4,7 +4,7 @@ import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 import { unidadesMedida } from "../modificadores/atributos/quantificadores";
 
 export class Habilitado extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super( "habilitado","enabled" );
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

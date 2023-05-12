@@ -6,7 +6,7 @@ export class  Futuro extends Pseudoclasse {
 
   
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("futuro", "future");
 
         if (!(valor in estilos) &&

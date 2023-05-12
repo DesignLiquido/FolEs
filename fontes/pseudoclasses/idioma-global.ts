@@ -8,7 +8,7 @@ export class IdiomaGlobal extends Pseudoclasse {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("idioma-global", "lang");
         const valorString = valor.toString();
 

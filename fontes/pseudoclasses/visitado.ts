@@ -3,7 +3,7 @@ import { valoresGlobais } from "../modificadores/atributos/globais";
 import { Pseudoclasse, PragmasPseudoclasse } from "./pseudoclasse";
 
 export class Visitado extends Pseudoclasse {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasPseudoclasse) {
+    constructor(pragmas?: PragmasPseudoclasse) {
         super("visitado", "visited");
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
