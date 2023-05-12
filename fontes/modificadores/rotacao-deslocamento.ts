@@ -14,7 +14,10 @@ export class RotacaoDeslocamento extends Modificador {
             "offset-rotate"
         );
         
-        // Pode receber valores próprios ou número-quantificador
+        // Também pode receber dois valores
+        // Ex.: rotação-deslocamento: auto 45deg;
+
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

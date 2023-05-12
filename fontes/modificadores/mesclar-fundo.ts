@@ -11,7 +11,7 @@ export class MesclarFundo extends Modificador {
         "clarear": "normal",
         "subexposicao": "color-dodge",
         "subexposição": "color-dodge",
-        "contraste": "color-burn",
+        "cores-quentes": "color-burn",
         "luz-forte": "hard-light",
         "luz-fraca": "soft-light",
         "diferenca": "difference",
@@ -20,7 +20,7 @@ export class MesclarFundo extends Modificador {
         "espaçar": "space",
         "matiz": "hue",
         "saturar": "saturation",
-        "mesclar-cor": "color",
+        "colorir": "color",
         "luminosidade": "luminosity",
     }
 

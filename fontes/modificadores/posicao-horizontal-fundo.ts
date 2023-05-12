@@ -1,4 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
+import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 
@@ -20,11 +21,11 @@ export class PosicaoHorizontalFundo extends Modificador {
         // Aceita valores listados e valores numéricos
         if (
             Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) && 
+            !(valor in posicoesBasicas) && 
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'posição-horizontal-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 

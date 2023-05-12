@@ -1,4 +1,5 @@
 import { valoresGlobais } from "./atributos/globais";
+import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class PosicaoFundo extends Modificador {
@@ -19,11 +20,11 @@ export class PosicaoFundo extends Modificador {
         // 1 valor-quantificador e as palavras reservadas aceitas.
         if (
             Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) && 
+            !(valor in posicoesBasicas) && 
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'posição-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
 

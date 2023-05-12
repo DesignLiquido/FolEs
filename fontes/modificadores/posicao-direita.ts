@@ -25,7 +25,8 @@ export class PosicaoDireita extends Modificador {
         // Logo, o código só passa pela validação caso haja um segundo parâmetro
         // ou caso o primeiro seja diferente de 0.
         if (quantificador !== undefined || valor !== '0') {
-            if (!(quantificador in unidadesMedida)) {
+            if (!(quantificador in unidadesMedida ||
+                !(quantificador in ListaDeValorPercentual))) {
                 throw new Error(
                     `Propriedade 'posição-direita' com quantificador inválido. Valores aceitos:
                     ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);

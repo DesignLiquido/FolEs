@@ -21,6 +21,8 @@ export class JustificarItens extends Modificador {
             posicao !== 'superior' && posicao !== 'inferior'
         );
 
+        // Também pode receber dois valores. A lógica abaixo cobre somente o recebimento de um.
+        // TODO: Ajustar lógica para cobrir todos os casos
         if (!(valor in this.valoresAceitos) && 
             !(posicoesAceitas.includes(valor)) &&
             !(valor in valoresGlobais)

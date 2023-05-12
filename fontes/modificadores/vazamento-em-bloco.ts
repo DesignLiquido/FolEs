@@ -6,6 +6,7 @@ export class VazamentoEmBloco extends Modificador {
         "visivel": "visible",
         "visível": "visible",
         "escondido": "hidden",
+        "recortar": "clip",
         "barra-rolagem": "scroll",
         "auto": "auto",
     }

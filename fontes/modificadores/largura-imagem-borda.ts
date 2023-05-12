@@ -13,6 +13,7 @@ export class LarguraImagemBorda extends Modificador {
         // Pode receber valor 'auto' ou número-quantificador
         // OBS.: Também pode receber também mais de um valor número-quantificador
         // Ex.: largura-imagem-borda: 5% 2em 10% auto;
+        // TODO: Ajustar lógica para cobrir todos os casos possíveis de atribuição de valores.
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

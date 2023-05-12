@@ -4,7 +4,7 @@ import { Modificador, PragmasModificador } from "./superclasse";
 export class StatusAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "executando": "running",
-        "parada": "paused"
+        "pausada": "paused"
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {

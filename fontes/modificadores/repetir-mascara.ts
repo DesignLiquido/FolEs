@@ -8,7 +8,7 @@ export class RepetirMascara extends Modificador {
         "repetir": "repeat",
         "espacar": "space",
         "espaçar": "space",
-        "arredondar": "round",
+        "completar": "round",
         "nao-repetir": "no-repeat",
         "não-repetir": "no-repeat",
     }
@@ -16,6 +16,10 @@ export class RepetirMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["repetir-mascara", "repetir-máscara"], "mask-repeat");
 
+        // Também pode aceitar dois ou múltiplos valores
+        // Ex.: repetir-máscara: repetir espaçar;
+
+        // TODO: Implementar lógica para cobrir todos os casos.
         if (!(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'repetir-máscara' com valor ${valor} inválido. Valores aceitos: 

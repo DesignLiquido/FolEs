@@ -9,6 +9,8 @@ export class NomeAnimacao extends Modificador {
             (identidade-personalizada), cuja sintaxe permite a combinação de letras, números e símbolos.
 
             https://developer.mozilla.org/en-US/docs/Web/CSS/custom-ident
+
+            TODO: Adaptar lógica para cobrir o recebimento correto de valores
         */
 
         this.valor = valor;

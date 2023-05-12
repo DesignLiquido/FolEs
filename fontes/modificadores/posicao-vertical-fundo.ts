@@ -18,6 +18,10 @@ export class PosicaoVerticalFundo extends Modificador {
         );
 
         // Aceita valores listados e valores numéricos
+        // Também pode receber dois valores
+        // Ex.: posição-vertical-fundo: inferior 10%;
+
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (
             Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) && 

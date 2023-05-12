@@ -78,6 +78,7 @@ import { Deslocamento } from "../deslocamento";
 import { DeslocamentoEmAncora } from "../deslocamento-em-ancora";
 import { DeslocamentoTextoSublinhado } from "../deslocamento-texto-sublinhado";
 import { DeslocarContorno } from "../deslocar-contorno";
+import { DeslocarPontuacao } from "../deslocar-pontuacao";
 import { Direcao } from "../direcao";
 import { DirecaoAnimacao } from "../direcao-animacao";
 import { DistanciaDeslocamento } from "../distancia-deslocamento";
@@ -342,7 +343,6 @@ import { TransformarEstilo } from "../transformar-estilo";
 import { TransformarOrigem } from "../transformar-origem";
 import { TransformarTexto } from "../transformar-texto";
 import { Transicao } from "../transicao";
-import { TravarPontuacao } from "../travar-pontuacao";
 import { VariacaoFonte } from "../variacao-fonte";
 import { VariacaoFonteAlternativa } from "../variacao-fonte-alternativa";
 import { VariacaoFonteAsiatica } from "../variacao-fonte-asiatica";
@@ -472,6 +472,8 @@ export const DicionarioModificadores: { [nomeFolEs: string]: typeof Modificador 
     "deslocamento-em-âncora": DeslocamentoEmAncora,
     "deslocamento-texto-sublinhado": DeslocamentoTextoSublinhado,
     "deslocar-contorno": DeslocarContorno,
+    "deslocar-pontuacao": DeslocarPontuacao,
+    "deslocar-pontuação": DeslocarPontuacao,
     "direcao": Direcao,
     "direção": Direcao,
     "direcao-animacao": DirecaoAnimacao,
@@ -836,8 +838,6 @@ export const DicionarioModificadores: { [nomeFolEs: string]: typeof Modificador 
     "transformar-texto": TransformarTexto,
     "transicao": Transicao,
     "transição": Transicao,                
-    "travar-pontuacao": TravarPontuacao,
-    "travar-pontuação": TravarPontuacao,
     "variacao-fonte": VariacaoFonte,
     "variação-fonte": VariacaoFonte,
     "variacao-fonte-alternativa": VariacaoFonteAlternativa,

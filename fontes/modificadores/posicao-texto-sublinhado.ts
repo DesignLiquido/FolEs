@@ -16,6 +16,10 @@ export class PosicaoTextoSublinhado extends Modificador {
             "text-underline-position"
         );
 
+        // Também pode receber dois valores
+        // Ex.: posição-texto-sublinhado: debaixo esquerda;
+
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (!(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
         ) {

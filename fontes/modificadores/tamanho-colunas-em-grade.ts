@@ -16,6 +16,8 @@ export class TamanhoColunasEmGrade extends Modificador {
 
         // OBS.: Também pode receber as funções minmax(min, max) e fit-content( [ <length> | <percentage> ] )
         // A lógica abaixo cobre somente o recebimento de UM único valor. 
+
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)

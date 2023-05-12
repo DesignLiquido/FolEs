@@ -3,7 +3,7 @@ import { Modificador, PragmasModificador } from "./superclasse";
 
 export class TransformarEstilo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "plano": "flat",
+        "achatar": "flat",
         "espaco-3d": "preserve-3d",
         "espaço-3d": "preserve-3d",
     }

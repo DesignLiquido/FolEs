@@ -12,7 +12,9 @@ export class VelocidadeAnimacao extends Modificador {
         "início-final-lento": "ease-in-out",
         "curva-cubica": "cubic-bezier",
         "curva-cúbica": "cubic-bezier",
-        "passos": "steps"
+        "passos": "steps",
+        "passo-inicial": "step-start",
+        "passo-final": "step-start"
     }
 
     termosSalto: { [valorFoles: string]: string } = {
@@ -22,8 +24,6 @@ export class VelocidadeAnimacao extends Modificador {
         "salto-conjunto": "jump-both",
         "inicial": "start",
         "final": "end",
-        "passo-inicial": "step-start",
-        "passo-final": "step-start"
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {

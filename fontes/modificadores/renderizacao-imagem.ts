@@ -12,7 +12,7 @@ export class RenderizacaoImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["renderizacao-imagem", "renderização-imagem"],
-            "imagem-rendering"
+            "image-rendering"
         );
 
         if (!(valor in this.valoresAceitos) &&
