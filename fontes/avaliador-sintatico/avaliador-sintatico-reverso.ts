@@ -4,8 +4,10 @@ import { ErroAvaliadorSintatico } from "./erro-avaliador-sintatico";
 
 import { Modificador } from "../modificadores";
 import { SeletorReversoModificador } from "../modificadores/superclasse/seletor-reverso-modificador";
+import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
+import { Seletor } from "../seletores/seletor";
 
 export class AvaliadorSintaticoReverso {
     simbolos: Simbolo[];
@@ -49,8 +51,75 @@ export class AvaliadorSintaticoReverso {
         return null;
     }
 
-    declaracaoPorTag(): Declaracao {
+    protected resolverPseudoclasse() {
+        let pseudoclasse;
+
+        // TODO: Validar pseudoclasse.
+        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
+            this.avancarEDevolverAnterior();
+            pseudoclasse = this.consumir(
+                tiposDeSimbolos.IDENTIFICADOR,
+                "Esperado nome de pseudoclasse."
+            );
+        }
+
+        return pseudoclasse;
+    }
+
+    protected seletorPorEspacoReservado(): Seletor {
+        return undefined;
+    }
+
+    protected seletorPorEstrutura(): Seletor {
         const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorEstruturasHtml(
+            simboloSeletor.lexema,
+            { 
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
+    }
+
+    protected seletorPorId(): Seletor {
+        return undefined;
+    }
+
+    protected seletorPorNomeDeClasse(): Seletor {
+        return undefined;
+    }
+
+    /**
+     * Resolve os seletores. Por enquanto resolve apenas um seletor por vez.
+     * @param espacoReservado 
+     */
+    protected resolverSeletores(espacoReservado: string = null): Seletor[] {
+        const seletores: Seletor[] = [];
+
+        do {
+            switch (this.simbolos[this.atual].tipo) {
+                case tiposDeSimbolos.TAG:
+                    seletores.push(this.seletorPorEstrutura());
+                    break;
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    seletores.push(this.seletorPorEspacoReservado());
+                    break;
+                case tiposDeSimbolos.PONTO:
+                    seletores.push(this.seletorPorNomeDeClasse());
+                    break;
+                case tiposDeSimbolos.CERQUILHA:
+                    seletores.push(this.seletorPorId());
+                    break;
+            }
+        } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
+
+        return seletores;
+    }
+
+    resolverModificadores(): Modificador[] {
+        // const simboloSeletor = this.avancarEDevolverAnterior();
 
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
@@ -86,20 +155,18 @@ export class AvaliadorSintaticoReverso {
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return new Declaracao(simboloSeletor.lexema, modificadores);
+        return modificadores;
     }
 
     declaracao(): any {
         if (this.estaNoFinal()) return null;
-        const simboloAtual = this.simbolos[this.atual];
-        if (!simboloAtual) return null;
+        const seletores = this.resolverSeletores();
+        const modificadores = this.resolverModificadores();
 
-        switch (simboloAtual.tipo) {
-            case tiposDeSimbolos.TAG:
-                return this.declaracaoPorTag();
-            case tiposDeSimbolos.IDENTIFICADOR:
-                return this.declaracaoPorSeletor();
-        }
+        return new Declaracao(
+            seletores,
+            modificadores
+        );
     }
 
     analisar(simbolos: Simbolo[]) {

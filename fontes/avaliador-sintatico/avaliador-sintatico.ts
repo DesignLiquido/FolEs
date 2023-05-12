@@ -9,7 +9,6 @@ import { SeletorValor } from "../valores/seletor-valor";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
 import { Seletor } from "../seletores/seletor";
-import { SeletorEstrutura } from "../seletores/seletor-estrutura";
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 
 export class AvaliadorSintatico {
@@ -169,9 +168,9 @@ export class AvaliadorSintatico {
 
     /**
      * Resolve os seletores. Por enquanto resolve apenas um seletor por vez.
-     * @param placeholder 
+     * @param espacoReservado 
      */
-    protected resolverSeletores(placeholder: string = null): Seletor[] {
+    protected resolverSeletores(espacoReservado: string = null): Seletor[] {
         const seletores: Seletor[] = [];
 
         do {
@@ -194,7 +193,7 @@ export class AvaliadorSintatico {
         return seletores;
     }
 
-    declaracaoModificadores(): Modificador[] {
+    resolverModificadores(): Modificador[] {
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
@@ -250,7 +249,7 @@ export class AvaliadorSintatico {
     declaracao(): any {
         if (this.estaNoFinal()) return null;
         const seletores = this.resolverSeletores();
-        const modificadores = this.declaracaoModificadores();
+        const modificadores = this.resolverModificadores();
 
         return new Declaracao(
             seletores,

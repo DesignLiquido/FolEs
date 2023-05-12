@@ -15,5 +15,6 @@ export default {
     PONTO: "PONTO",
     PONTO_E_VIRGULA: "PONTO_E_VIRGULA",
     QUANTIFICADOR: "QUANTIFICADOR",
-    TIL: "TIL"
+    TIL: "TIL",
+    VIRGULA: "VIRGULA"
 }
