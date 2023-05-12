@@ -1,4 +1,4 @@
-import { Estrutura } from "../estruturas/lmht/estrutura";
+import { Estrutura } from "../estruturas/estrutura";
 import { Seletor } from "./seletor";
 
 export class SeletorEstrutura extends Seletor {

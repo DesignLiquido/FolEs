@@ -1,5 +1,5 @@
 import { Estrutura } from "../estrutura";
 
-export class Etiqueta extends Estrutura {
+export class Html extends Estrutura {
 
 }

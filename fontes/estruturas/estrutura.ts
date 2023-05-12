@@ -1,4 +1,4 @@
-import { PragmasEstrutura } from "../pragmas-estrutura";
+import { PragmasEstrutura } from "./pragmas-estrutura";
 
 export class Estrutura {
     pragmas?: PragmasEstrutura;
