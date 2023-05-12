@@ -56,7 +56,7 @@ export class Tradutor {
             } */
 
             for (const seletor of declaracao.seletores) {
-                resultado += seletor.constructor.name.toLowerCase() + ', ';
+                resultado += seletor.paraTexto() + ', ';
             }
 
             resultado = resultado.slice(0, -2);

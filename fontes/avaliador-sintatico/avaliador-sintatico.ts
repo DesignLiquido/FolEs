@@ -10,6 +10,9 @@ import { SeletorValor } from "../valores/seletor-valor";
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
 import { Seletor } from "../seletores/seletor";
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
+import { SeletorClasse } from "../seletores/seletor-classe";
+import { SeletorId } from "../seletores/seletor-id";
+import { SeletorEstrutura } from "../seletores";
 
 export class AvaliadorSintatico {
     simbolos: Simbolo[];
@@ -148,9 +151,24 @@ export class AvaliadorSintatico {
     protected seletorPorEstrutura(): Seletor {
         const simboloSeletor = this.avancarEDevolverAnterior();
         const pseudoclasse = this.resolverPseudoclasse();
-        return new SeletorEstruturasLmht(
+        return new SeletorEstrutura(
+            new SeletorEstruturasLmht(
+                simboloSeletor.lexema,
+                { 
+                    linha: simboloSeletor.linha,
+                    colunaInicial: simboloSeletor.colunaInicial,
+                    colunaFinal: simboloSeletor.colunaFinal
+                }
+            )
+        );
+    }
+
+    protected seletorPorId(): Seletor {
+        this.atual += 1;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        return new SeletorId(
             simboloSeletor.lexema,
-            { 
+            {
                 linha: simboloSeletor.linha,
                 colunaInicial: simboloSeletor.colunaInicial,
                 colunaFinal: simboloSeletor.colunaFinal
@@ -158,12 +176,17 @@ export class AvaliadorSintatico {
         );
     }
 
-    protected seletorPorId(): Seletor {
-        return undefined;
-    }
-
     protected seletorPorNomeDeClasse(): Seletor {
-        return undefined;
+        this.atual += 1;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        return new SeletorClasse(
+            simboloSeletor.lexema,
+            {
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
     }
 
     /**

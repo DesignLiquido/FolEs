@@ -8,4 +8,8 @@ export class SeletorEstrutura extends Seletor {
         super();
         this.estrutura = estrutura;
     }
+
+    paraTexto() {
+        return this.estrutura.constructor.name.toLowerCase();
+    }
 }

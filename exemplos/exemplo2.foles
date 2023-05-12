@@ -1,7 +1,7 @@
-lmht {
+/* lmht {
     largura-borda-direita: 130mm;
-}
-
-/* .minha-segunda-classe {
-    margem-superior: 13mm;
 } */
+
+.minha-segunda-classe {
+    margem-superior: 13mm;
+}
