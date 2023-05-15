@@ -9,15 +9,14 @@ export class Altura extends Modificador {
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
         "auto": "auto",
-        "ajustar-conteudo": "fit-content",
-        "ajustar-conteúdo": "fit-content",
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("altura", "height");
 
-        // OBS.: Também pode receber as funções clamp() e fit-content( [ <length> | <percentage> ] )
+        // OBS.: Também pode receber as funções clamp() e fit-content()
         // A lógica abaixo cobre somente o recebimento de UM único valor. 
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in this.valoresAceitos) &&
             !(valor in valoresGlobais)
