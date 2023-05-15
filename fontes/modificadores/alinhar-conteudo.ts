@@ -23,13 +23,18 @@ export class AlinharConteudo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
 
+        // Não aceita os valores 'esquerda' e 'direita'
+        const posicoesAceitas = Object.keys(posicoes).filter(
+            (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
+        );
+
         // Pode receber valores próprios ou valores da lista de posições
         if (!(valor in this.valoresAceitos) && 
-            !(valor in posicoes) && 
+            !(valor in posicoesAceitas) && 
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'alinhar-conteúdo' com valor ${valor} inválido. Valores aceitos:
-            ${Object.keys(posicoes).reduce((final, atual) => final += `, ${atual}`)}, 
+            ${Object.keys(posicoesAceitas).reduce((final, atual) => final += `, ${atual}`)}, 
             ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
