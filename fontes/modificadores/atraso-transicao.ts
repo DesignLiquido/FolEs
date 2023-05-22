@@ -8,7 +8,11 @@ export class AtrasoTransicao extends Modificador {
             ["atraso-transicao", "atraso-transição"],
             "transition-delay"
         );
+        
+        // Também aceita dois valores separados por vírgula
+        // Ex.: atraso-transição: 2s, 4ms;
 
+        // TODO: Adaptar lógica para cobrir todos os casos
         if (Number.isNaN(parseInt(valor)) && 
             !(valor in valoresGlobais)
         ) {
