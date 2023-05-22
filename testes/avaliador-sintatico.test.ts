@@ -32,7 +32,10 @@ describe('Avaliador Sintático', () => {
 
             expect(resultadoAvaliadorSintatico).toBeTruthy();
             expect(resultadoAvaliadorSintatico).toHaveLength(1);
-            expect(resultadoAvaliadorSintatico[0].seletor).toBe('lmht');
+
+            expect(resultadoAvaliadorSintatico[0].seletores[0]['estrutura'].tagHtml).toBe('html');
+            expect(resultadoAvaliadorSintatico[0].seletores[0]['pseudoclasse']).toBe(undefined);
+
             expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                 seletor['nomeFoles']
             );
@@ -80,7 +83,7 @@ describe('Avaliador Sintático', () => {
             // Erro esperado como retorno - seletor não encontrado
             expect(() => {
                 avaliador.analisar(novoLexador.simbolos);
-            }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+            }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
         }
     });
 });
