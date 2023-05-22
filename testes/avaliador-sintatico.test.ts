@@ -18,15 +18,15 @@ describe('Avaliador Sintático', () => {
 
     it('Casos de sucesso - testando seletores valor-quantificador', () => {
         for (let index = 0; index < ValorQuantificador.length; index += 1) {
-            const seletor = new SeletorModificador(ValorQuantificador[index], '25', 'px');
+            const seletor: Object = new SeletorModificador(ValorQuantificador[index], '25', 'px');
 
             // Lexador
-            const resultadoLexador = lexador.mapear([
+            const resultadoLexador: InterfaceLexador = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
             ]);
-
+            
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -60,7 +60,7 @@ describe('Avaliador Sintático', () => {
         for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
-            const resultadoLexador = lexador.mapear([
+            const resultadoLexador: InterfaceLexador = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ;`,
                 "}"
@@ -74,7 +74,7 @@ describe('Avaliador Sintático', () => {
             // Causar erro de digitação
             const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
 
-            const novoLexador = lexador.mapear([
+            const novoLexador: InterfaceLexador = lexador.mapear([
                 "lmht {",
                 `${seletorIncorreto}: 12px;`,
                 "}"
