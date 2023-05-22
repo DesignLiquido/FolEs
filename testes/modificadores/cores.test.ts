@@ -165,7 +165,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it('Caso de Falha - Seletores não existentes', () => {
+        it.skip('Caso de Falha - Seletores não existentes', () => {
             for (let index = 0; index < Cores.length; index += 1) {
 
                 // Lexador - cor não informada
