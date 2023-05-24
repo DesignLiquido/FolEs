@@ -17,11 +17,11 @@ describe('Testando Seletores com STATUS como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Valor válido (auto)', () => {
+        it('Casos de sucesso - Valor válido (auto)', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(StatusAuto[index], 'auto', null);
 
-                // A classe do modificador deve aceitar 'normal' como valor
+                // A classe do modificador deve aceitar 'auto' como valor
                 expect(seletor['valor']).toEqual('auto');
 
                 // Lexador
@@ -35,10 +35,10 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.erros).toHaveLength(0);
 
-                // O valor recebido deve ser mapeado como QUALITATIVO
+                // O valor recebido deve ser mapeado como IDENTIFICADOR
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                     ])
                 );
 
@@ -70,7 +70,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
             }
         });
 
-        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
 
                 // Lexador - Status não informado
@@ -100,7 +100,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
@@ -154,7 +154,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
             }
         });
 
-        it.skip('Casos de sucesso - Valor válido (normal)', () => {
+        it('Casos de sucesso - Valor válido (normal)', () => {
             for (let index = 0; index < StatusNormal.length; index += 1) {
                 const seletor = new SeletorModificador(StatusNormal[index], 'normal', null);
 
@@ -172,10 +172,10 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.erros).toHaveLength(0);
 
-                // O valor recebido deve ser mapeado como QUALITATIVO
+                // O valor recebido deve ser mapeado como IDENTIFICADOR
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                     ])
                 );
 
