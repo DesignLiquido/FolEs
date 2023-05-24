@@ -104,7 +104,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
