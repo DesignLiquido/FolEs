@@ -325,6 +325,8 @@ ligacao {
 | deslocamento-em-âncora                  | offset-anchor |
 | deslocamento-texto-sublinhado           | text-underline-offset |
 | deslocar-contorno                       | outline-offset |
+| deslocar-pontuacao                      |	hanging-punctuation |
+| deslocar-pontuação                      |	hanging-punctuation |
 | direcao                                 | direction |
 | direção                                 | direction |
 | direcao-animacao                        | animation-direction |
@@ -692,8 +694,6 @@ ligacao {
 | transformar-texto                       |	text-transform |
 | transicao                               |	transition |
 | transição                               |	transition |
-| travar-pontuacao                        |	hanging-punctuation |
-| travar-pontuação                        |	hanging-punctuation |
 | variacao-fonte                          |	font-variant |
 | variação-fonte                          |	font-variant |
 | variacao-fonte-alternativa              |	font-variant-alternates |
