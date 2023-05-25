@@ -1,6 +1,7 @@
 import { Declaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
+import { SeletorEstrutura } from "../seletores";
 
 import estruturasHtml from "./estruturas-html";
 
@@ -8,9 +9,8 @@ export class Tradutor {
     traduzirModificador(modificador: Modificador): string {
         // Caso 1: Número-Quantificador ou somente Número.
         if (Number(modificador.valor)) {
-            return `\t${modificador.propriedadeCss}: ${modificador.valor}${
-                modificador.quantificador || ""
-            };\n`;
+            return `\t${modificador.propriedadeCss}: ${modificador.valor}${modificador.quantificador || ""
+                };\n`;
         }
 
         // Caso 2: Tradução do valor contida no objeto 'valoresAceitos'.
@@ -25,9 +25,8 @@ export class Tradutor {
 
         // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um valor do tipo objeto.
         if (typeof modificador.valor === "object") {
-            return `\t${modificador.propriedadeCss}: ${modificador.valor}${
-                modificador.quantificador || ""
-            };\n`;
+            return `\t${modificador.propriedadeCss}: ${modificador.valor}${modificador.quantificador || ""
+                };\n`;
         }
 
         // Caso 4: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
@@ -56,7 +55,13 @@ export class Tradutor {
             } */
 
             for (const seletor of declaracao.seletores) {
-                resultado += seletor.paraTexto() + ', ';
+                if (seletor instanceof SeletorEstrutura){
+                    const tagLmht = seletor.paraTexto();
+                    const traducaoTag = estruturasHtml[tagLmht];
+                    resultado += traducaoTag + ', '; 
+                } else {
+                    resultado += seletor.paraTexto() + ', ';
+                }
             }
 
             resultado = resultado.slice(0, -2);
