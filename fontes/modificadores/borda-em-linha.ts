@@ -19,7 +19,8 @@ export class BordaEmLinha extends Modificador {
             !(valorString.includes('hsl')) && !(valorString.includes('hsla'));
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
-
+        
+        // TODO: Adaptar lógica no futuro para cobrir casos de recebimento de MÚLTIPLOS valores
         if (Number.isNaN(parseInt(valor)) &&
             validaçõesCor &&
             validaçõesHEX &&

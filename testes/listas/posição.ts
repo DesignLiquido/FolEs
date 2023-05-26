@@ -26,8 +26,8 @@ export const Posição: Array<string> = [
     'posicionar-se',
     'alinhar-encaixe-rolagem-mouse',
     'alinhar-texto',
-    'alinhar-ultimo-item',
-    'alinhar-último-item',
+    // 'alinhar-ultimo-item',
+    // 'alinhar-último-item',
 ];
 
 /*
