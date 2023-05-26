@@ -17,7 +17,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
             tradutor = new Tradutor();
         });
 
-        it.skip('Caso de sucesso - Valores globais válidos', () => {
+        it('Caso de sucesso - Valores globais válidos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 const seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);
 
@@ -70,7 +70,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
             }
         });
 
-        it.skip('Caso de sucesso - passando valores aceitos', () => {
+        it('Caso de sucesso - passando valores aceitos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 // Seletor inicial
                 let seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);
@@ -103,10 +103,10 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                     ])
                 );
 
-                // O Lexador deve classificar o valor recebido como QUALITATIVO
+                // O Lexador deve classificar o valor recebido como IDENTIFICADOR
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                     ])
                 );
 

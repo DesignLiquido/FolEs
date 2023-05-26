@@ -18,7 +18,7 @@ describe('Testes: Valor-Quantificador', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < ValorQuantificador.length; index += 1) {
                 const seletor = new SeletorModificador(ValorQuantificador[index], '12', 'px');
 
@@ -36,7 +36,7 @@ describe('Testes: Valor-Quantificador', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
                     ])
                 );
-
+                
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -50,8 +50,10 @@ describe('Testes: Valor-Quantificador', () => {
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
-
+                
+                expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain('12px');
             }
         });
 

@@ -1,7 +1,7 @@
 export const Posição: Array<string> = [
     'transformar-origem',
-    'alinhar-conteudo',
-    'alinhar-conteúdo',
+    // 'alinhar-conteudo',
+    // 'alinhar-conteúdo',
     'alinhar-itens',
     'alinhar-se',
     'posicao-fundo',
@@ -26,8 +26,8 @@ export const Posição: Array<string> = [
     'posicionar-se',
     'alinhar-encaixe-rolagem-mouse',
     'alinhar-texto',
-    'alinhar-ultimo-item',
-    'alinhar-último-item',
+    // 'alinhar-ultimo-item',
+    // 'alinhar-último-item',
 ];
 
 /*

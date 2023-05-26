@@ -26,17 +26,18 @@ describe('Tradutor', () => {
                     "   tamanho-fonte: 60px;",
                     "}"
                 ])
-    
+                // console.log(resultadoLexador.simbolos);
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-    
+                console.log(resultadoAvaliadorSintatico);
+                
                 // Tradutor deve retornar a estrutura HTML correspondente
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
             }
         });
     
-        it.skip('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
+        it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
             for (let index = 0; index < ValorQuantificador.length; index += 1) {
                 const seletor = new SeletorModificador(ValorQuantificador[index], '40', 'px');
     
@@ -60,7 +61,7 @@ describe('Tradutor', () => {
             }
         });
 
-        it.skip('Qualificador', () => {
+        it('Qualificador', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "lmht {",

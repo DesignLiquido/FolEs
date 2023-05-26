@@ -17,7 +17,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Valor válido', () => {
+        it('Casos de sucesso - Valor válido', () => {
             for (let index = 0; index < Estilo.length; index += 1) {
                 const seletor = new SeletorModificador(Estilo[index], 'pontilhado', null);
 
@@ -90,7 +90,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        it.skip('Casos de Falha - Seletor com erro de digitação', () => {
+        it('Casos de Falha - Seletor com erro de digitação', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
                 // Causar erro de digitação
                 const seletorIncorreto = Estilo[index].replace(Estilo[index][0], '')
@@ -104,7 +104,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático

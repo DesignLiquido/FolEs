@@ -26,12 +26,11 @@ export class PosicaoEsquerda extends Modificador {
         if (Number(parseInt(valor))) {
             if (
                 !(quantificador in unidadesMedida) ||
-                !(quantificador in ListaDeValorPercentual) ||
                 quantificador === undefined
             ) {
                 throw new Error(
                     `Propriedade 'posição-esquerda' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
             }
 
             this.quantificador = quantificador;

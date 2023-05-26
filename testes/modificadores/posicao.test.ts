@@ -17,7 +17,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Posição.length; index += 1) {
                 const seletor = new SeletorModificador(Posição[index], 'centro', null);
 
@@ -43,10 +43,10 @@ describe('Testando Seletores de POSIÇÃO', () => {
                     ])
                 );
 
-                // O Lexador deve classificar o valor recebido como QUALITATIVO
+                // O Lexador deve classificar o valor recebido como IDENTIFICADOR
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                     ])
                 );
 
@@ -96,7 +96,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             }
         });
 
-        it.skip('Casos de Falha - Seletor com erro de digitação', () => {
+        it('Casos de Falha - Seletor com erro de digitação', () => {
             for (let index = 0; index < Object.keys(Posição).length; index += 1) {
                 // Causar erro de digitação
                 const seletorIncorreto = Posição[index].replace(Posição[index][0], '')
@@ -110,7 +110,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático

@@ -16,23 +16,26 @@ describe('Avaliador Sintático', () => {
     });
 
 
-    it.skip('Casos de sucesso - testando seletores valor-quantificador', () => {
+    it('Casos de sucesso - testando seletores valor-quantificador', () => {
         for (let index = 0; index < ValorQuantificador.length; index += 1) {
-            const seletor = new SeletorModificador(ValorQuantificador[index], '25', 'px');
+            const seletor: Object = new SeletorModificador(ValorQuantificador[index], '25', 'px');
 
             // Lexador
-            const resultadoLexador = lexador.mapear([
+            const resultadoLexador: InterfaceLexador = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
             ]);
-
+            
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(resultadoAvaliadorSintatico).toBeTruthy();
             expect(resultadoAvaliadorSintatico).toHaveLength(1);
-            // expect(resultadoAvaliadorSintatico[0].seletores).toBe('lmht');
+
+            expect(resultadoAvaliadorSintatico[0].seletores[0]['estrutura'].tagHtml).toBe('html');
+            expect(resultadoAvaliadorSintatico[0].seletores[0]['pseudoclasse']).toBe(undefined);
+
             expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                 seletor['nomeFoles']
             );
@@ -53,11 +56,11 @@ describe('Avaliador Sintático', () => {
         }
     });
 
-    it.skip('Casos de Falha - mensagens de erro esperadas como retorno', () => {
+    it('Casos de Falha - mensagens de erro esperadas como retorno', () => {
         for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
-            const resultadoLexador = lexador.mapear([
+            const resultadoLexador: InterfaceLexador = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ;`,
                 "}"
@@ -71,7 +74,7 @@ describe('Avaliador Sintático', () => {
             // Causar erro de digitação
             const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
 
-            const novoLexador = lexador.mapear([
+            const novoLexador: InterfaceLexador = lexador.mapear([
                 "lmht {",
                 `${seletorIncorreto}: 12px;`,
                 "}"
@@ -80,7 +83,7 @@ describe('Avaliador Sintático', () => {
             // Erro esperado como retorno - seletor não encontrado
             expect(() => {
                 avaliador.analisar(novoLexador.simbolos);
-            }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+            }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
         }
     });
 });

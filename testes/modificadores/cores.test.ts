@@ -17,7 +17,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Caso de Sucesso - Cor válida', () => {
+        it('Caso de Sucesso - Cor válida', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'castanho');
 
@@ -53,7 +53,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Sucesso - Código #HEX', () => {
+        it('Caso de Sucesso - Código #HEX', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], '#f015ca', '');
 
@@ -90,7 +90,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Sucesso - Valor RGB válido', () => {
+        it('Caso de Sucesso - Valor RGB válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'rgb(34, 12, 64)');
 
@@ -127,7 +127,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Falha - Valor RGBA válido', () => {
+        it('Caso de Falha - Valor RGBA válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'rgba(34, 64, 300)');
 
@@ -165,7 +165,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Falha - Seletores não existentes', () => {
+        it('Caso de Falha - Seletores não existentes', () => {
             for (let index = 0; index < Cores.length; index += 1) {
 
                 // Lexador - cor não informada
@@ -193,7 +193,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
@@ -203,7 +203,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Sucesso - Valor HSL válido', () => {
+        it('Caso de Sucesso - Valor HSL válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'hsl(34, 50%, 120%)');
 
@@ -239,7 +239,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Sucesso - Valor HSLA válido', () => {
+        it('Caso de Sucesso - Valor HSLA válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'hsla(34, 50%, 120%)');
 
