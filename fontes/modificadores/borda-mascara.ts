@@ -26,6 +26,7 @@ export class BordaMascara extends Modificador {
         // A constante abaixo é criada para ser possível fazer as validações seguintes.
         const valorString = valor.toString();
 
+        // TODO: Adaptar lógica no futuro para cobrir casos de recebimento de MÚLTIPLOS valores
         if (!(valor in this.valoresAceitos) &&
             Number.isNaN(parseInt(valor)) &&
             !(valorString.includes('url')) &&
