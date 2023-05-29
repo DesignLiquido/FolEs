@@ -23,7 +23,7 @@ export class AlinharUltimoItem extends Modificador {
         );
 
         if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoesAceitas) &&
+            !(posicoesAceitas.includes(valor)) &&
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Valor ${valor} inválido para 'alinhar-último-item'. Valores aceitos:
