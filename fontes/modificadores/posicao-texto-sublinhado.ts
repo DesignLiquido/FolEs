@@ -28,6 +28,8 @@ export class PosicaoTextoSublinhado extends Modificador {
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
 
+        this.valor = valor;
+
         // Não recebe quantificador
         // this.quantificador = quantificador;
     }
