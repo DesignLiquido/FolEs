@@ -43,13 +43,12 @@ describe('Testando Seletores de POSIÇÃO', () => {
                     ])
                 );
 
-                // O Lexador deve classificar o valor recebido como IDENTIFICADOR
+                // O Lexador deve classificar o valor recebido como QUALITATIVO
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
                     ])
                 );
-
 
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);

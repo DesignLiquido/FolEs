@@ -19,7 +19,7 @@ export class AlinharConteudo extends Modificador {
         "auto-início": "self-start",
         "auto-fim": "self-end",
     }
-    
+
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
 
@@ -29,8 +29,8 @@ export class AlinharConteudo extends Modificador {
         );
 
         // Pode receber valores próprios ou valores da lista de posições
-        if (!(valor in this.valoresAceitos) && 
-            !(valor in posicoesAceitas) && 
+        if (!(valor in this.valoresAceitos) &&
+            !(posicoesAceitas.includes(valor)) &&
             !(valor in valoresGlobais)
         ) {
             throw new Error(`Propriedade 'alinhar-conteúdo' com valor ${valor} inválido. Valores aceitos:

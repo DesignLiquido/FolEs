@@ -36,8 +36,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                     ])
                 );
 
-
-                // // Avaliador Sintático
+                // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
@@ -48,7 +47,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 );
 
 
-                // // Tradutor
+                // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
