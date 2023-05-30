@@ -35,12 +35,12 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(resultadoLexador.simbolos).toHaveLength(7);
                 expect(resultadoLexador.erros).toHaveLength(0);
 
-                // // O valor recebido deve ser mapeado como QUALITATIVO
-                // expect(resultadoLexador.simbolos).toEqual(
-                //     expect.arrayContaining([
-                //         expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
-                //     ])
-                // );
+                // O valor recebido deve ser mapeado como QUALITATIVO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                    ])
+                );
 
                 // O Lexador não deve encontrar nenhum número ou quantificador no mapeamento
                 expect(resultadoLexador.simbolos).not.toEqual(
