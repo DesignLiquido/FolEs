@@ -7,8 +7,7 @@ export class SelecaoUsuario extends Modificador {
         "auto": "auto",
         "texto": "text",
         "tudo": "all",
-        "contem": "contain",
-        "contém": "contain",
+        "conter": "contain",
         "elemento": "element",
     }
 

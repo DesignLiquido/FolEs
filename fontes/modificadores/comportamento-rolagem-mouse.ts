@@ -15,7 +15,7 @@ export class ComportamentoRolagemMouse extends Modificador {
         // 1. comportamento-horizontal-rolagem-mouse
         // 2. comportamento-vertical-rolagem-mouse
 
-        // Ex.: comportamento-rolagem-mouse: auto contém;
+        // Ex.: comportamento-rolagem-mouse: auto conter;
 
         // A lógica abaixo cobre somente o recebimento de UM único valor.
         // TODO: Adaptar lógica quando trabalhar com os valores de atribuição abreviada.
