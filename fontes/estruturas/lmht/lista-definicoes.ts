@@ -3,6 +3,6 @@ import { PragmasEstrutura } from "../pragmas-estrutura";
 
 export class ListaDefinicoes extends Estrutura {
     constructor(pragmas?: PragmasEstrutura) {
-        super("", pragmas);
+        super("dl", pragmas);
     }
 }

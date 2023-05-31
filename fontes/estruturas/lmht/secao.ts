@@ -3,6 +3,6 @@ import { PragmasEstrutura } from "../pragmas-estrutura";
 
 export class Secao extends Estrutura {
     constructor(pragmas?: PragmasEstrutura) {
-        super("", pragmas);
+        super("section", pragmas);
     }
 }

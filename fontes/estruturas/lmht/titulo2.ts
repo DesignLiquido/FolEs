@@ -3,6 +3,6 @@ import { PragmasEstrutura } from "../pragmas-estrutura";
 
 export class Titulo2 extends Estrutura {
     constructor(pragmas?: PragmasEstrutura) {
-        super("", pragmas);
+        super("h2", pragmas);
     }
 }

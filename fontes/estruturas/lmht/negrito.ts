@@ -3,6 +3,6 @@ import { PragmasEstrutura } from "../pragmas-estrutura";
 
 export class Negrito extends Estrutura {
     constructor(pragmas?: PragmasEstrutura) {
-        super("", pragmas);
+        super("strong", pragmas);
     }
 }
