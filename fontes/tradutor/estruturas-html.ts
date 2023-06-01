@@ -70,7 +70,6 @@ export default {
     "objeto": "object",
     "opcao": "option",
     "opção": "option",
-    "p": "p",
     "paragrafo": "p",
     "parágrafo": "p",
     "preformatado": "pre",
