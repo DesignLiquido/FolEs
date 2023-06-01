@@ -4,6 +4,7 @@ import { Area } from "./lmht/area";
 import { AreaTexto } from "./lmht/area-texto";
 import { Aspas } from "./lmht/aspas";
 import { Artigo } from "./lmht/artigo";
+import { Audio } from "./lmht/audio";
 import { Botao } from "./lmht/botao";
 import { Cabeca } from "./lmht/cabeca";
 import { CabecaTabela } from "./lmht/cabeca-tabela";
