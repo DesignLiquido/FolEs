@@ -1,8 +1,8 @@
 import { Estrutura } from "../estrutura";
 import { PragmasEstrutura } from "../pragmas-estrutura";
 
-export class Endereco extends Estrutura {
+export class Linha extends Estrutura {
     constructor(pragmas?: PragmasEstrutura) {
-        super("address", pragmas);
+        super("tr", pragmas);
     }
 }
