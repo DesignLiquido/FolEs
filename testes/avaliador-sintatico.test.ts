@@ -1,4 +1,5 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
+import { LexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
@@ -21,7 +22,7 @@ describe('Avaliador Sintático', () => {
             const seletor: Object = new SeletorModificador(ValorQuantificador[index], '25', 'px');
 
             // Lexador
-            const resultadoLexador: InterfaceLexador = lexador.mapear([
+            const resultadoLexador: LexadorInterface = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
@@ -60,7 +61,7 @@ describe('Avaliador Sintático', () => {
         for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
-            const resultadoLexador: InterfaceLexador = lexador.mapear([
+            const resultadoLexador: LexadorInterface = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ;`,
                 "}"
@@ -74,7 +75,7 @@ describe('Avaliador Sintático', () => {
             // Causar erro de digitação
             const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
 
-            const novoLexador: InterfaceLexador = lexador.mapear([
+            const novoLexador: LexadorInterface = lexador.mapear([
                 "lmht {",
                 `${seletorIncorreto}: 12px;`,
                 "}"

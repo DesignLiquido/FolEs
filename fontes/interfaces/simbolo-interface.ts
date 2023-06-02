@@ -1,8 +1,4 @@
-interface InterfaceLexador {
-    simbolos: Array<Simbolos>
-}
-
-interface Simbolos {
+export interface SimboloInterface {
     tipo: string,
     lexema: string,
     literal: string,
