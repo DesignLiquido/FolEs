@@ -58,7 +58,7 @@ export class Tradutor {
                 if (seletor instanceof SeletorEstrutura){
                     const tagLmht = seletor.paraTexto();
                     const traducaoTag = estruturasHtml[tagLmht];
-                    resultado += traducaoTag + ', '; 
+                    resultado += traducaoTag + ', ';
                 } else {
                     resultado += seletor.paraTexto() + ', ';
                 }
