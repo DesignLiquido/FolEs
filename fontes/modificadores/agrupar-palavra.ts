@@ -1,9 +1,21 @@
+import { validarValores } from "./comum";
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AgruparPalavra extends Modificador {
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "normal": "normal",
+        "quebrar-tudo": "break-all",
+        "manter-tudo": "keep-all",
+    }
+
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("agrupar-palavra", "word-break", pragmas);
+
+        validarValores("agrupar-palavra", valor, this.valoresAceitos);
+        
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }

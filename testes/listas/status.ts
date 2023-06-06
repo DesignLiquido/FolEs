@@ -80,6 +80,7 @@ export const StatusNenhum: Array<string> = [
 ];
 
 export const StatusNormal: Array<string> = [
+    'agrupar-palavra',
     'direcao-animacao',
     'direção-animação',
     'esquema-cor',
