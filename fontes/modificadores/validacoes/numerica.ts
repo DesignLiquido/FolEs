@@ -6,7 +6,8 @@ export function validarValorNumerico(nomePropriedade: string, valor: any, valore
             !(valor in valoresAceitos) &&
             !(valor in valoresGlobais)
         ) {
-            throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos: 
+            throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
+            número-quantificador,
             ${Object.keys(valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
@@ -14,8 +15,8 @@ export function validarValorNumerico(nomePropriedade: string, valor: any, valore
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in valoresGlobais)
         ) {
-            throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
+            número-quantificador,
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
         }
     }
