@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class AtrasoAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -9,10 +9,7 @@ export class AtrasoAnimacao extends Modificador {
             "animation-delay"
         );
 
-        if (Number.isNaN(parseInt(valor)) && !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'atraso-animação' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores: 
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValorNumerico('atraso-animação', valor);
 
         this.valor = valor;
 

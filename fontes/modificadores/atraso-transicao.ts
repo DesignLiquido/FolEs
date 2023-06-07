@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class AtrasoTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -11,14 +11,8 @@ export class AtrasoTransicao extends Modificador {
         
         // Também aceita dois valores separados por vírgula
         // Ex.: atraso-transição: 2s, 4ms;
-
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (Number.isNaN(parseInt(valor)) && 
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'atraso-transição' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores: 
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValorNumerico('atraso-transição', valor);
 
         this.valor = valor;
 
@@ -32,3 +26,6 @@ export class AtrasoTransicao extends Modificador {
         }
     }
 }
+
+const a = new AtrasoTransicao('15', 'ms');
+console.log(a)

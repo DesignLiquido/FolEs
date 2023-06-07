@@ -1,4 +1,3 @@
-import { valoresGlobais } from "./atributos/globais";
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
 
@@ -30,15 +29,7 @@ export class AreaMascara extends Modificador {
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
         // TODO: Adaptar lógica para cobrir os demais casos. 
 
-        // if (!(valor in this.valoresAceitos) &&
-        //     !(valor in valoresGlobais)) {
-        //     throw new Error(`Propriedade 'área-máscara' com valor ${valor} inválido. Valores aceitos: 
-        //     ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-        //     ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        // }
-
         validarValores("área-máscara", valor, this.valoresAceitos);
-
 
         this.valor = valor;
 
