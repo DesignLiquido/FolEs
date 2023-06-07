@@ -1,4 +1,4 @@
-import { valoresGlobais } from "./atributos/globais";
+import { valoresGlobais } from "../atributos/globais";
 
 export function validarValores(nomePropriedade: string, valor: any, valoresAceitos: { [valorFoles: string]: string }) {
     if (!(valor in valoresAceitos) &&

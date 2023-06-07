@@ -1,4 +1,4 @@
-import { validarValores } from "./comum";
+import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AgruparPalavra extends Modificador {
