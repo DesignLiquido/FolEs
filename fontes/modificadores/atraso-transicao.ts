@@ -26,6 +26,3 @@ export class AtrasoTransicao extends Modificador {
         }
     }
 }
-
-const a = new AtrasoTransicao('15', 'ms');
-console.log(a)
