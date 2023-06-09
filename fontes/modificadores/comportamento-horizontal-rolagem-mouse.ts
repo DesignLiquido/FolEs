@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class ComportamentoHorizontalRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,12 +11,7 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("comportamento-horizontal-rolagem-mouse", "overscroll-behavior-x");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'comportamento-horizontal-rolagem-mouse' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('comportamento-em-horizontal-rolagem-mouse',valor, this.valoresAceitos);
 
         this.valor = valor;
 

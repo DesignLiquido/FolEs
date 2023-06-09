@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class ComportamentoRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,12 +19,8 @@ export class ComportamentoRolagemMouse extends Modificador {
 
         // A lógica abaixo cobre somente o recebimento de UM único valor.
         // TODO: Adaptar lógica quando trabalhar com os valores de atribuição abreviada.
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'comportamento-rolagem-mouse' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        
+        validarValores('comportamento-rolagem-mouse',valor, this.valoresAceitos);
 
         this.valor = valor;
 
