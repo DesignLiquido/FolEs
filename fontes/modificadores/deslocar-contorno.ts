@@ -1,18 +1,12 @@
-import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class DeslocarContorno extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("deslocar-contorno", "outline-offset");
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'deslocar-contorno' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('deslocar-contorno', valor);
 
         this.valor = valor;
 
