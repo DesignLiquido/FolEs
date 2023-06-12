@@ -3,6 +3,7 @@ import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InicioRecuoEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -11,13 +12,7 @@ export class InicioRecuoEmBloco extends Modificador {
             "padding-block-start"
         );
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-            `Propriedade 'início-recuo-em-bloco' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('início-recuo-em-bloco', valor);
 
         this.valor = valor;
 

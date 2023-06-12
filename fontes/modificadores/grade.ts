@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class Grade extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -25,13 +25,7 @@ export class Grade extends Modificador {
         // Também aceita as funções minmax() e repeat()
 
         // TODO: Adicionar casos faltantes.
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'grade' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('grade', valor, this.valoresAceitos);
 
         this.valor = valor;
 

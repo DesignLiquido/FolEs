@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InsercaoEmBloco extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -12,15 +12,7 @@ export class InsercaoEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["insercao-em-bloco", "inserção-em-bloco"], "inset-block");
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'inserção-em-bloco' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('inserção-em-bloco', valor, this.valoresAceitos);
 
         this.valor = valor;
 
