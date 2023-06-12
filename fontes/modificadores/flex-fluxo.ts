@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class FlexFluxo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -20,13 +20,7 @@ export class FlexFluxo extends Modificador {
 
         // A lógica abaixo cobre o caso de recebimento de um único valor
         // TODO: Ajustar lógica para o recebimento de dois valores.
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'flex-fluxo' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('flex-fluxo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

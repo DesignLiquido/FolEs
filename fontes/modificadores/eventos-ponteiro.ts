@@ -1,5 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class EventosPonteiro extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,12 +15,8 @@ export class EventosPonteiro extends Modificador {
         // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
 
         // TODO: Ajustar lógica para cobrir todos os casos de atribuição de valor.
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'eventos-ponteiro' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+
+        validarValores('eventos-ponteiro', valor, this.valoresAceitos);
 
         this.valor = valor;
 

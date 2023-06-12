@@ -1,16 +1,11 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class FlexReduzir extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("flex-reduzir", "flex-shrink");
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'flex-reduzir' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValorNumerico('flex-reduzir', valor);
 
         this.valor = valor;
         

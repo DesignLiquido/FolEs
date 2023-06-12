@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EstenderBordaImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -11,20 +11,12 @@ export class EstenderBordaImagem extends Modificador {
 
         // A lógica abaixo cobre apenas o recebimento de UM único valor
         // TODO: Adaptar lógica para cobrir todos os casos.
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'estender-borda-imagem' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        
+        validarValorNumerico('estender-borda-imagem', valor);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            
-            // Verificação parte da lista de Comprimento, e não da de Quantificadores,
-            // pois o modificador não aceita valores percentuais. 
             if (
                 !(quantificador in comprimentos) ||
                 quantificador === undefined

@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class Fonte extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -51,14 +51,7 @@ export class Fonte extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fonte", "font");
 
-        if (!(valor in this.valoresAceitos) &&
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'fonte' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
 
