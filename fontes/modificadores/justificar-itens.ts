@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class JustificarItens extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,24 +14,22 @@ export class JustificarItens extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("justificar-itens", "justify-items");
-    
+
         // Além dos valores listados, aceita também todos os valores da Lista 
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'
-        const posicoesAceitas = Object.keys(posicoes).filter((posicao) => 
+        const posicoesAceitas = Object.keys(posicoes).filter((posicao) =>
             posicao !== 'superior' && posicao !== 'inferior'
         );
 
+        // Transforma array em objeto para processo de validação
+        const posicoesValidas = {};
+        posicoesAceitas.forEach((posicao, index) => {
+            posicoesValidas[posicao] = posicoesAceitas[index]
+        })
+
         // Também pode receber dois valores. A lógica abaixo cobre somente o recebimento de um.
         // TODO: Ajustar lógica para cobrir todos os casos
-        if (!(valor in this.valoresAceitos) && 
-            !(posicoesAceitas.includes(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Valor ${valor} inválido para 'justificar-itens'. Valores aceitos:
-            ${posicoesAceitas.reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('justificar-itens', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

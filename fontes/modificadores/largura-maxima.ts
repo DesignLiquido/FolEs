@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LarguraMaxima extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,18 +14,10 @@ export class LarguraMaxima extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["largura-maxima", "largura-máxima"], "max-width");
 
-        // Também pode receber a função fit-content(<length-percentage>);
+        // Também pode receber a função fit-content();
         // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
-        // TODO: Ajustar lógica para cobrir todos os casos..
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'largura-máxima' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-        ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-        ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        // TODO: Ajustar lógica para cobrir todos os casos.
+        validarValorNumerico('largura-máxima', valor, this.valoresAceitos);
 
         this.valor = valor;
 

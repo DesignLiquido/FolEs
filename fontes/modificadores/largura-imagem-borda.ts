@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LarguraImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,19 +10,10 @@ export class LarguraImagemBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("largura-imagem-borda", "border-image-width");
 
-        // Pode receber valor 'auto' ou número-quantificador
         // OBS.: Também pode receber também mais de um valor número-quantificador
         // Ex.: largura-imagem-borda: 5% 2em 10% auto;
         // TODO: Ajustar lógica para cobrir todos os casos possíveis de atribuição de valores.
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'largura-imagem-borda' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('largura-imagem-borda', valor, this.valoresAceitos);
 
         this.valor = valor;
 

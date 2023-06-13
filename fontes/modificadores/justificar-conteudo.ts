@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class JustificarConteudo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,25 +18,23 @@ export class JustificarConteudo extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
-            ["justificar-conteudo", "justificar-conteúdo"], 
+            ["justificar-conteudo", "justificar-conteúdo"],
             "justify-content"
         );
 
         // Além dos valores listados, aceita também todos os valores da Lista 
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'
-        const posicoesAceitas = Object.keys(posicoes).filter((posicao) => 
+        const posicoesAceitas = Object.keys(posicoes).filter((posicao) =>
             posicao !== 'superior' && posicao !== 'inferior'
         );
 
-        if (!(valor in this.valoresAceitos) && 
-            !(posicoesAceitas.includes(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Valor ${valor} inválido para 'justificar-conteúdo'. Valores aceitos:
-            ${posicoesAceitas.reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        // Transforma array em objeto para processo de validação
+        const posicoesValidas = {};
+        posicoesAceitas.forEach((posicao, index) => {
+            posicoesValidas[posicao] = posicoesAceitas[index]
+        })
+
+        validarValoresAdicionais('justificar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 
