@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class OrigemPerspectiva extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,15 +20,7 @@ export class OrigemPerspectiva extends Modificador {
         // A lógica abaixo cobre somente o recebimento de UM valor. 
         // TODO: Adaptar lógica para cobrir os demais casos. 
 
-        // Pode receber tanto os valores aceitos quanto número-quantificador (%)
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'origem-perspectiva' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('origem-perspectiva', valor, this.valoresAceitos);
 
         this.valor = valor;
 
