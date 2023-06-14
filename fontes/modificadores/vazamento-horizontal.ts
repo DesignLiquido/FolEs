@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class VazamentoHorizontal extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,12 +14,7 @@ export class VazamentoHorizontal extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("vazamento-horizontal", "overflow-x");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'vazamento-horizontal' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('vazamento-horizontal', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteAlternativa extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -26,13 +26,8 @@ export class VariacaoFonteAlternativa extends Modificador {
         // Cada uma das funções recebe os próprios parâmetros.
         // A lógica abaixo cobre somente o recebimento dos valores aceitos listados.
         // TODO: Adaptar lógica para cobrir os casos das funções. 
-
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'variação-fonte-alternativa' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        
+        validarValores('variação-fonte-alternativa', valor, this.valoresAceitos);
 
         this.valor = valor;
 
