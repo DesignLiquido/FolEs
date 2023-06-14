@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TamanhoMaximoEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,15 +20,8 @@ export class TamanhoMaximoEmLinha extends Modificador {
         // Também pode receber a função fit-content(<length-percentage>);
         // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'tamanho-máximo-em-linha' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-        ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-        ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+
+        validarValorNumerico('tamanho-máximo-em-linha', valor, this.valoresAceitos);
 
         this.valor = valor;
 

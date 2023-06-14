@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class TamanhoOpticoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,15 +11,9 @@ export class TamanhoOpticoFonte extends Modificador {
         super(
             ["tamanho-optico-fonte", "tamanho-óptico-fonte"],
             "font-optical-sizing"
-        );
+        ); 
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'tamanho-óptico-fonte' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('tamanho-óptico-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
 

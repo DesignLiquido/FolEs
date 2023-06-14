@@ -2,6 +2,7 @@ import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TransformarOrigem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,15 +19,7 @@ export class TransformarOrigem extends Modificador {
         // Pode receber de 1 a 3 valores;
         // A lógica abaixo cobre somente o recebimento de UM único valor.
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in posicoesBasicas) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'transformar-origem' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('transformar-origem', valor, this.valoresAceitos);
 
         this.valor = valor;
 
