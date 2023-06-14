@@ -1,6 +1,10 @@
 import { valoresGlobais } from "../atributos/globais";
 
-export function validarValorNumerico(nomePropriedade: string, valor: any, valoresAceitos?: { [valorFoles: string]: string }) {
+export function validarValorNumerico(
+    nomePropriedade: string, 
+    valor: any, 
+    valoresAceitos?: { [valorFoles: string]: string }) 
+{
     if (valoresAceitos !== undefined) {
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in valoresAceitos) &&
