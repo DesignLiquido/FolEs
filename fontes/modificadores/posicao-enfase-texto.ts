@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class PosicaoEnfaseTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,13 +18,8 @@ export class PosicaoEnfaseTexto extends Modificador {
         // OBS.: Também aceita receber dois valores. 
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
         // TODO: Adaptar lógica para cobrir os demais casos. 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'posição-ênfase-texto' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+
+        validarValores('posição-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

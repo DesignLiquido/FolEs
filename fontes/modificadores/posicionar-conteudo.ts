@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarConteudo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -36,15 +36,7 @@ export class PosicionarConteudo extends Modificador {
         // Ex.: posicionar-conteúdo: primeira linha-de-base espaço-uniforme;
 
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoes) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'posicionar-conteúdo' com valor ${valor} inválido. Valores aceitos:
-            ${Object.keys(posicoes).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('posicionar-conteúdo', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;
 

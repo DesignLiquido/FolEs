@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class PosicaoDireita extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,14 +10,7 @@ export class PosicaoDireita extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["posicao-direita", "posição-direita"], "right");
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'posição-direita' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('posição-direita', valor, this.valoresAceitos);
 
         this.valor = valor;
 

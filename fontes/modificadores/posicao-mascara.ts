@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicaoMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -10,11 +10,7 @@ export class PosicaoMascara extends Modificador {
         // Ex.: posicao-mascara: 25% 75%;
 
         // Porém, essa validação inicial cobre somente as posições e os valores globais
-        if (!(valor in posicoesBasicas) && !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'posição-máscara' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValoresAdicionais('posição-máscara', valor, posicoesBasicas);
 
         this.valor = valor;
 

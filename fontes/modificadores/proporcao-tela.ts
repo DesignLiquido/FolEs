@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ProporcaoTela extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,14 +15,7 @@ export class ProporcaoTela extends Modificador {
         // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático.
         
         // A lógica abaixo cobre somente o recebimento de UM valor numérico.
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'proporção-tela' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
-        ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}, 
-        ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValorNumerico('proporção-tela', valor, this.valoresAceitos);
 
         this.valor = valor;
 

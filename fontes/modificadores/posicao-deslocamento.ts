@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,16 +20,8 @@ export class PosicaoDeslocamento extends Modificador {
         // Ex.: posicao-deslocamento: 25% 75%;
 
         // Porém, essa validação inicial cobre somente as posições e os valores globais
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoesBasicas) && 
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'posição-deslocamento' com valor ${valor} inválido. Valores aceitos:
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
-
+        validarValoresAdicionais('posição-deslocamento', valor, posicoesBasicas, this.valoresAceitos);
+        
         this.valor = valor;
 
 
