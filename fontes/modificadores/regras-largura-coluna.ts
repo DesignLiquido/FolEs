@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RegrasLarguraColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,30 +13,21 @@ export class RegrasLarguraColuna extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("regras-largura-coluna", "column-rule-width");
 
-                // Pode receber valores próprios ou número-quantificador
-                if (Number.isNaN(parseInt(valor)) &&
-                !(valor in this.valoresAceitos) &&
-                !(valor in valoresGlobais)
+        validarValorNumerico('regras-largura-coluna', valor, this.valoresAceitos);
+
+        this.valor = valor;
+
+        if (Number(parseInt(valor))) {
+            if (
+                !(quantificador in unidadesMedida) ||
+                quantificador === undefined
             ) {
                 throw new Error(
-                    `Propriedade 'regras-largura-coluna' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                    ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
-    
-            this.valor = valor;
-    
-            if (Number(parseInt(valor))){
-                if (
-                    !(quantificador in unidadesMedida) ||
-                    quantificador === undefined
-                ) {
-                    throw new Error(
                     `Propriedade 'regras-largura-coluna' com quantificador inválido. Valores aceitos:
                     ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-                }
-        
-                this.quantificador = quantificador;
             }
+
+            this.quantificador = quantificador;
+        }
     }
 }

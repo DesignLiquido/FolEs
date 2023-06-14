@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class RepetirFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,11 +20,7 @@ export class RepetirFundo extends Modificador {
         // Ex.: repetir-fundo: repetir espaçar;
 
         // TODO: Implementar lógica para cobrir todos os casos.
-        if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'repetir-fundo' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('repetir-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

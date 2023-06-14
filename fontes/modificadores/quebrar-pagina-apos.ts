@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class QuebrarPaginaApos extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,12 +18,7 @@ export class QuebrarPaginaApos extends Modificador {
             "page-break-after"
         );
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'quebrar-página-após' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('quebrar-página-após', valor, this.valoresAceitos);
 
         this.valor = valor;
 

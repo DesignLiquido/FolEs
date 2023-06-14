@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { angulos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RotacaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,14 +18,7 @@ export class RotacaoDeslocamento extends Modificador {
         // Ex.: rotação-deslocamento: auto 45deg;
 
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'rotação-deslocamento' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValorNumerico('rotação-deslocamento', valor, this.valoresAceitos);
 
         this.valor = valor;
         

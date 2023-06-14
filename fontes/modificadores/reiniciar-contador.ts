@@ -1,5 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class ReiniciarContador extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,13 +21,11 @@ export class ReiniciarContador extends Modificador {
 
         // A lógica abaixo cobre somente o recebimento de 'nenhum' (único valor aceito) e dos Globais.
         // TODO: Adaptar lógica de acordo com a sintaxe do modificador.
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'reiniciar-contador' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('reiniciar-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }

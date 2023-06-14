@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RaioBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -10,12 +10,7 @@ export class RaioBorda extends Modificador {
         // EX.: raio-borda: 10px / 20px;
         // TODO: Implementar lógica necessária para aceitar esse caso. 
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'raio-borda' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('raio-borda', valor);
 
         this.valor = valor;
 
