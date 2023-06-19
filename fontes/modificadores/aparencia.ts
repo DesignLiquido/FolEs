@@ -37,14 +37,11 @@ export class Aparencia extends Modificador {
         super(["aparencia", "aparência"], "appearance");
 
         // Se for um equivalente, o valor atribuído é 'auto';
-        if (valor in this.valoresEquivalentes) {
-            valor = 'auto';
-        }
+        valor in this.valoresEquivalentes ? valor = 'auto' : null
 
         validarValores('aparência', valor, this.valoresAceitos);
 
         this.valor = valor;
-
 
         // Quantificador não é usado aqui.
         // this.quantificador = quantificador;

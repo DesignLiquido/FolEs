@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class AlturaLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,13 +17,7 @@ export class AlturaLinha extends Modificador {
 
         // Lógica diferente dos demais pois o modificador pode receber valores numéricos s/ quantificador
         if (quantificador !== undefined) {
-            if (
-                !(quantificador in unidadesMedida)
-            ) {
-                throw new Error(
-                    `Propriedade 'altura-linha' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('altura-linha', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }
