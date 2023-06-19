@@ -3,6 +3,7 @@ import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaDireita extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -45,10 +46,7 @@ export class BordaDireita extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in unidadesMedida) || quantificador === undefined) {
-                throw new Error(`Propriedade 'borda-direita' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('borda-direita', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }
