@@ -130,6 +130,15 @@ export const ValorQuantificador: Array<string> = [
     'posição-superior',
     'transformar-origem',
     'coordenadas',
+    'colunas',
+    'deslocamento-em-âncora',
+    'espacamento-coluna-em-grade', 
+    'espaçamento-coluna-em-grade',
+    'estilo-lista',
+    'fim-borda-em-bloco',
+    'fim-borda-em-linha',
+    'flex',
+    'fundo',
 ];
 
 export const ValorComprimento: Array<string> = [
@@ -163,6 +172,8 @@ export const ValorTempo: Array<string> = [
     'atraso-transição',
     'duracao-animacao',
     'duração-animação',
+    'duracao-transicao',
+    'duração-transição'
 ];
 
 /*

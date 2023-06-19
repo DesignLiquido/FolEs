@@ -22,6 +22,7 @@ export const Cores: Array<string> = [
     'decoração-cor-texto',
     'cor-enfase-texto',
     'cor-ênfase-texto',
+    'cor-borda',
 ];
 
 /*
