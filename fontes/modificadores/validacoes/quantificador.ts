@@ -12,7 +12,7 @@ export function validarQuantificador(
             ${Object.keys(quantificadoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
     } else {
-        if (!(quantificador in quantificadoresAceitos) ||
+        if (!(quantificador in quantificadoresAceitos) &&
             !(quantificador in quantificadoresAceitos2) ||
             quantificador === undefined
         ) {
