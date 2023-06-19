@@ -159,6 +159,8 @@ export const ValorPercentual: Array<string> = [
 export const ValorTempo: Array<string> = [
     'atraso-animacao',
     'atraso-animação',
+    'atraso-transicao',
+    'atraso-transição',
     'duracao-animacao',
     'duração-animação',
 ];
