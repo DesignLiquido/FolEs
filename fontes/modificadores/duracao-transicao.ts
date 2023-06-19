@@ -1,6 +1,7 @@
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DuracaoTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -20,10 +21,7 @@ export class DuracaoTransicao extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in valoresTemporais) || quantificador === undefined) {
-                throw new Error(`Propriedade 'duração-transição' com quantificador inválido. Valores aceitos:
-                ${Object.keys(valoresTemporais).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('duração-transição', quantificador, valoresTemporais);
 
             this.quantificador = quantificador;
         }

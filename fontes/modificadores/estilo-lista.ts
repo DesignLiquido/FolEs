@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EstiloLista extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -29,10 +30,7 @@ export class EstiloLista extends Modificador {
         this.valor = valor;
 
         if (quantificador !== undefined) {
-            if (!(quantificador in unidadesMedida)) {
-                throw new Error(`Propriedade 'estilo-lista' com quantificador inválido. Valores aceitos:
-            ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('estilo-lista', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

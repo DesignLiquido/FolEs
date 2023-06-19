@@ -1,6 +1,7 @@
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EsticarFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -24,14 +25,7 @@ export class EsticarFonte extends Modificador {
 
         // O único quantificador aceito pelo seletor é o Percentual (%)
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in ListaDeValorPercentual) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'esticar-fonte' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('esticar-fonte', quantificador, ListaDeValorPercentual);
 
             this.quantificador = quantificador;
         }

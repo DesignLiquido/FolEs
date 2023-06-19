@@ -1,6 +1,7 @@
-import { unidadesMedida } from "./atributos/quantificadores";
+import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacoBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -17,17 +18,7 @@ export class EspacoBorda extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-
-            // Verificação parte da lista de Comprimento, e não da de Quantificadores,
-            // pois o modificador não aceita valores percentuais. 
-            if (
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'espaco-borda' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('espaço', quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

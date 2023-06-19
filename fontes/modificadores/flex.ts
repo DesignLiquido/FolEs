@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Flex extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -25,10 +26,7 @@ export class Flex extends Modificador {
         this.valor = valor;
 
         if (quantificador !== undefined) {
-            if (!(quantificador in unidadesMedida)) {
-                throw new Error(`Propriedade 'flex' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('flex', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

@@ -1,6 +1,7 @@
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fonte extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -56,13 +57,7 @@ export class Fonte extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in valoresFonte) &&
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined) {
-                throw new Error(`Propriedade 'fonte' com quantificador inválido. Valores aceitos:
-                ${Object.keys(valoresFonte).reduce((final, atual) => final += `, ${atual}`)}.
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('fonte', quantificador, unidadesMedida, valoresFonte);
 
             this.quantificador = quantificador;
         }

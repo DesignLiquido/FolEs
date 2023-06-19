@@ -3,6 +3,7 @@ import { cores } from "./atributos/cores";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fundo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -62,13 +63,7 @@ export class Fundo extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in unidadesMedida) &&
-                !(quantificador in ValorPercentual) ||
-                quantificador === undefined) {
-                throw new Error(`Propriedade 'fundo' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('fundo', quantificador, unidadesMedida, ValorPercentual);
 
             this.quantificador = quantificador;
         }

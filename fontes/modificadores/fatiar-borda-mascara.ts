@@ -1,6 +1,7 @@
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FatiarBordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,13 +23,7 @@ export class FatiarBordaMascara extends Modificador {
         // Aceita somente o valor percentual (%) como quantificador
         // Também pode receber somente o valor numérico, sem quantificador
         if (quantificador !== undefined) {
-            if (
-                !(quantificador in ListaDeValorPercentual)
-            ) {
-                throw new Error(
-                    `Propriedade 'fatiar-borda-máscara' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('fatiar-borda-máscara', quantificador, ListaDeValorPercentual);
 
             this.quantificador = quantificador;
         }

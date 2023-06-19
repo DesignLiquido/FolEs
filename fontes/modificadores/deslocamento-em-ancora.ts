@@ -1,6 +1,8 @@
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DeslocamentoEmAncora extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -25,22 +27,12 @@ export class DeslocamentoEmAncora extends Modificador {
 
         // A lógica abaixo cobre apenas o recebimento de UM único valor.
         // TODO: Adaptar lógica futuramente para cobrir todos os casos. 
-        if (!(valor in this.valoresAceitos) &&
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'deslocamento-em-âncora' com valor ${valor} inválido. Valores aceitos:
-            número-quantificador,
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('deslocamento-em-âncora', valor, this.valoresAceitos);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in unidadesMedida) || quantificador === undefined) {
-                throw new Error(`Propriedade 'deslocamento-em-âncora' com quantificador ${quantificador} inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('deslocamento-em-âncora', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }
