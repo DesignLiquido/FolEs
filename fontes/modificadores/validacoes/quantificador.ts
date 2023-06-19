@@ -1,6 +1,6 @@
 export function validarQuantificador(
     nomePropriedade: string,
-    quantificador: any,
+    quantificador: string,
     quantificadoresAceitos: { [valorFoles: string]: string },
     quantificadoresAceitos2?: any) 
 {
