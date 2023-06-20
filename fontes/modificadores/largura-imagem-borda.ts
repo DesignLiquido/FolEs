@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -21,13 +22,7 @@ export class LarguraImagemBorda extends Modificador {
         // pois o modificador aceita receber valores numéricos sem quantificador
         // Exemplo: largura-imagem-borda: 3;
         if (quantificador !== undefined) {
-            if (
-                !(quantificador in unidadesMedida)
-            ) {
-                throw new Error(
-                    `Propriedade 'largura-imagem-borda' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('largura-imagem-borda', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

@@ -1,5 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class LimiteFormaImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -17,10 +18,6 @@ export class LimiteFormaImagem extends Modificador {
         this.valor = valor;
 
         // Não recebe quantificador, apenas o valor numérico.
-        // Logo, deve retornar um erro se recebido um segundo parâmetro. 
-        if (quantificador !== undefined) {
-            throw new Error(
-                `Propriedade 'limite-forma-imagem' aceita somente valores numéricos. O quantificador ${quantificador} é inválido para esta operação.`);
-        }
+        proibirQuantificador('limite-forma-imagem', quantificador);
     }
 }

@@ -1,6 +1,7 @@
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraContorno extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,14 +19,7 @@ export class LarguraContorno extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in comprimentos) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'largura-contorno' com quantificador inválido. Valores aceitos:
-        ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('largura-contorno', quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

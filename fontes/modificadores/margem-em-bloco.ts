@@ -1,6 +1,7 @@
-import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemEmBloco extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -17,16 +18,7 @@ export class MargemEmBloco extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in unidadesMedida) &&
-                !(quantificador in ListaDeValorPercentual) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'margem-em-bloco' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.
-                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('margem-em-bloco', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

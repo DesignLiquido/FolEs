@@ -148,7 +148,13 @@ export const ValorQuantificador: Array<string> = [
     "inserção-em-linha", 
     "insercao-em-linha", 
     "inserção", 
-    "insercao", 
+    "insercao",
+    "margem-em-bloco-rolagem-mouse",
+    "margem-em-bloco",
+    "margem-em-linha-rolagem-mouse",
+    "margem-em-linha",
+    "margem-rolagem-mouse",
+    "margem",
 ];
 
 export const ValorComprimento: Array<string> = [

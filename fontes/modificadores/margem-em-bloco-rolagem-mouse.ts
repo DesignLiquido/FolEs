@@ -1,6 +1,7 @@
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemEmBlocoRolagemMouse extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -14,11 +15,7 @@ export class MargemEmBlocoRolagemMouse extends Modificador {
         this.valor = valor;
 
         if (quantificador !== undefined) {
-            if (!(quantificador in comprimentos)) {
-                throw new Error(
-                    `Propriedade 'margem-em-bloco-rolagem-mouse' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('margem-em-bloco-rolagem-mouse', quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

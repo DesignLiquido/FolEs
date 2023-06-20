@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemDireita extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,14 +16,7 @@ export class MargemDireita extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'margem-direita' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('margem-direita', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

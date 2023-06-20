@@ -1,6 +1,7 @@
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemInferiorRolagemMouse extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -11,11 +12,7 @@ export class MargemInferiorRolagemMouse extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in comprimentos) || quantificador === undefined) {
-                throw new Error(
-                    `Propriedade 'margem-inferior-rolagem-mouse' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('margem-inferior-rolagem-mouse', quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

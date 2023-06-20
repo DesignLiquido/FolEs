@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraInicioBordaEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -21,14 +22,7 @@ export class LarguraInicioBordaEmBloco extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))){
-            if (
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                `Propriedade 'largura-início-borda-em-bloco' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('largura-início-borda-em-bloco', quantificador, unidadesMedida);
     
             this.quantificador = quantificador;
         }
