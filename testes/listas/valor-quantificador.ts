@@ -139,6 +139,16 @@ export const ValorQuantificador: Array<string> = [
     'fim-borda-em-linha',
     'flex',
     'fundo',
+    'início-borda-em-linha',
+    'inicio-borda-em-linha',
+    'início-borda-em-bloco',
+    'inicio-borda-em-bloco',
+    "inserção-em-bloco", 
+    "insercao-em-bloco", 
+    "inserção-em-linha", 
+    "insercao-em-linha", 
+    "inserção", 
+    "insercao", 
 ];
 
 export const ValorComprimento: Array<string> = [

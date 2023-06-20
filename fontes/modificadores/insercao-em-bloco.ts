@@ -1,6 +1,7 @@
-import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InsercaoEmBloco extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -17,16 +18,7 @@ export class InsercaoEmBloco extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in unidadesMedida) &&
-                !(quantificador in ListaDeValorPercentual) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'inserção-em-bloco' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.
-                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('inserção-em-bloco', quantificador, unidadesMedida);          
 
             this.quantificador = quantificador;
         }

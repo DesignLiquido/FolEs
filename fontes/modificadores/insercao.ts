@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Insercao extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -17,14 +18,7 @@ export class Insercao extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'inserção' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('inserção', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

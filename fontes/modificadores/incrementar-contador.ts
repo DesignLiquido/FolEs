@@ -1,5 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
-import { validarValores } from "./validacoes/comum";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class IncrementarContador extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,9 +15,9 @@ export class IncrementarContador extends Modificador {
 
         // Ex.: incrementar-contador: meu-contador -4;
         
-        // A lógica abaixo cobre somente o recebimento de 'nenhum' (único valor aceito) e dos Globais.
+        // A lógica abaixo cobre somente o recebimento de 'nenhum' e de números positivos.
         // TODO: Adaptar lógica de acordo com a sintaxe do modificador.
-        validarValores('incrementar-contador', valor, this.valoresAceitos);
+        validarValorNumerico('incrementar-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
 
