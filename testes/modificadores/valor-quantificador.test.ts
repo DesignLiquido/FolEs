@@ -1,10 +1,9 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Lexador } from "../../fontes/lexador";
-import { unidadesMedida } from "../../fontes/modificadores/atributos/quantificadores";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
+import { ValorComprimento, ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
 
 describe('Testes: Valor-Quantificador', () => {
     describe('Testando Seletores que aceitam QUALQUER Valor e Quantificador', () => {
@@ -151,6 +150,55 @@ describe('Testes: Valor-Quantificador', () => {
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorTempo[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                    "}"
+                ]);
+
+                expect(resultadoLexador.simbolos).toHaveLength(8);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
+
+                // Tradutor
+                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            }
+        });
+    });
+
+    describe('Testando Seletores que recebem Quantificador DE COMPRIMENTO', () => {
+        let lexador: Lexador;
+        let avaliador: AvaliadorSintatico;
+        let tradutor: Tradutor;
+
+        beforeEach(() => {
+            lexador = new Lexador();
+            avaliador = new AvaliadorSintatico();
+            tradutor = new Tradutor();
+        });
+
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+            for (let index = 0; index < ValorComprimento.length; index += 1) {
+                const seletor = new SeletorModificador(ValorComprimento[index], '12', 'cm');
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${ValorComprimento[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                     "}"
                 ]);
 
