@@ -1,6 +1,7 @@
 import { angulos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RotacaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -24,14 +25,7 @@ export class RotacaoDeslocamento extends Modificador {
         
         // Quantificador deve ser do tipo ângulo (<angle>)
         if (Number(parseInt(valor))){
-            if (
-                !(quantificador in angulos)  ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                `Propriedade 'rotação-deslocamento' com quantificador inválido. Valores aceitos:
-                ${Object.keys(angulos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('rotação-deslocamento', quantificador, angulos);
     
             this.quantificador = quantificador;
         }

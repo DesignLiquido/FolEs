@@ -1,6 +1,7 @@
 import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RaioBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -15,11 +16,7 @@ export class RaioBorda extends Modificador {
         this.valor = valor;
 
         if (quantificador !== undefined) {
-            if (!(quantificador in comprimentos) && !(quantificador in ListaDeValorPercentual)) {
-                throw new Error(`Propriedade 'raio-borda' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.
-                ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('raio-borda', quantificador, comprimentos, ListaDeValorPercentual);
 
             this.quantificador = quantificador;
         }
