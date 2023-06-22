@@ -155,6 +155,8 @@ export const ValorQuantificador: Array<string> = [
     "margem-em-linha",
     "margem-rolagem-mouse",
     "margem",
+    "posição-fundo",
+    "posicao-fundo",
 ];
 
 export const ValorComprimento: Array<string> = [
@@ -179,6 +181,7 @@ export const ValorPercentual: Array<string> = [
     'fatiar-borda-mascara',
     'fatiar-borda-máscara',
     'origem-perspectiva',
+    "opacidade",
 ];
 
 export const ValorTempo: Array<string> = [

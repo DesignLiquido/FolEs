@@ -24,7 +24,6 @@ export class PosicaoDeslocamento extends Modificador {
         
         this.valor = valor;
 
-
         // Quantificador fica inutilizado no momento
         // this.quantificador = quantificador;
     }

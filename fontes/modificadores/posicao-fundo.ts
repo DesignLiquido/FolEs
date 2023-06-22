@@ -1,6 +1,7 @@
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -15,15 +16,17 @@ export class PosicaoFundo extends Modificador {
 
         this.valor = valor;
 
-        if (Number(parseInt(valor))){
-            const quantificadoresAceitos = [
-                'px', '%', 'rem', 'vmin', 'vmax'
-            ];
-    
-            if (!quantificadoresAceitos.includes(quantificador) || quantificador === undefined) {
-                throw new Error(`Propriedade 'posição-fundo' com quantificador ${quantificador} inválido. Valores aceitos: ${quantificadoresAceitos}.`);
-            }
-    
+        if (Number(parseInt(valor))) {
+            const quantificadoresAceitos = {
+                'px': 'px',
+                '%': '%',
+                'rem': 'rem',
+                'vmin': 'vmin',
+                'vmax': 'vmax'
+            };
+
+            validarQuantificador('posição-fundo', quantificador, quantificadoresAceitos);
+
             this.quantificador = quantificador;
         }
     }

@@ -1,6 +1,7 @@
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Perspectiva extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,14 +16,7 @@ export class Perspectiva extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in comprimentos) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'perspectiva' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('perspectiva', quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

@@ -1,6 +1,7 @@
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class OrigemPerspectiva extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -26,15 +27,8 @@ export class OrigemPerspectiva extends Modificador {
 
         // Aceita somente o valor percentual (%) como quantificador
         // Também pode receber somente o valor numérico, sem quantificador
-        if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in ListaDeValorPercentual) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                `Propriedade 'origem-perspectiva' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+        if (Number(parseInt(valor)) && quantificador !== undefined) {
+            validarQuantificador('origem-perspectiva', quantificador, ListaDeValorPercentual);
 
             this.quantificador = quantificador;
         }
