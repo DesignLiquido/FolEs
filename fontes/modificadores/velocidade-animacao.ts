@@ -38,17 +38,17 @@ export class VelocidadeAnimacao extends Modificador {
         // onde p1 e p3 devem estar na faixa de 0 a 1.
         // Ex.: curva-cúbica(1, 5, 0, 6);
 
-        if (['curva-cubica', 'curva-cúbica'].includes(valor)){
-            // Lógica para validar 4 parâmetros
-        }
+        // if (['curva-cubica', 'curva-cúbica'].includes(valor)){
+        //     Lógica para validar 4 parâmetros
+        // }
 
         // steps(n, <jumpterm>) -> passos, que recebe dois parâmetros: um número e um termo de salto.
         // O número indica quantas pausas terão entre os saltos. O termo deve ser um dos listados em termosSalto.
         // Ex.: passos(3, salto-inicial);
 
-        if (['passos'].includes(valor)){
-            // Lógica para validar 2 parâmetros
-        }
+        // if (['passos'].includes(valor)){
+        //     Lógica para validar 2 parâmetros
+        // }
 
         // TODO: Pensar em uma lógica para as duas condicionais acima.
         

@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TamanhoFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,11 +20,8 @@ export class TamanhoFundo extends Modificador {
 
         this.valor = valor;
 
-        if (Number(parseInt(valor))){  
-            if (!(quantificador in unidadesMedida) || quantificador === undefined) {
-                throw new Error(`Propriedade 'tamanho-fundo' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+        if (Number(parseInt(valor))){ 
+            validarQuantificador('tamanho-fundo', quantificador, unidadesMedida);
     
             this.quantificador = quantificador;
         }

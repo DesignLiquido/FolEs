@@ -1,6 +1,7 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TamanhoMaximoEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -26,14 +27,7 @@ export class TamanhoMaximoEmLinha extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'tamanho-máximo-em-linha' com quantificador inválido. Valores aceitos:
-            ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('tamanho-máximo-em-linha', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }
