@@ -3,7 +3,7 @@ import { validarValores } from "./validacoes/comum";
 
 export class ImagemFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhuma": "none",
+        "nenhum": "none",
         "url": "url",
     }
 

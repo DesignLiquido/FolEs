@@ -1,6 +1,6 @@
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
-import { validarValores } from "./validacoes/comum";
+import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fonte extends Modificador {
@@ -52,7 +52,7 @@ export class Fonte extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fonte", "font");
 
-        validarValores('fonte', valor, this.valoresAceitos);
+        validarValorNumerico('fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
 

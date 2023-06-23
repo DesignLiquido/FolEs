@@ -164,6 +164,7 @@ export const ValorQuantificador: Array<string> = [
     'recuo-em-linha',
     'recuo-rolagem-mouse',
     'sombra-caixa',
+    'fonte',
 ];
 
 export const ValorComprimento: Array<string> = [
@@ -202,7 +203,9 @@ export const ValorTempo: Array<string> = [
     'duracao-animacao',
     'duração-animação',
     'duracao-transicao',
-    'duração-transição'
+    'duração-transição',
+    'transição',
+    'transicao',
 ];
 
 /*
