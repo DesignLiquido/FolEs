@@ -17,19 +17,18 @@ describe('Tradutor', () => {
     });
 
     describe('Casos de Sucesso', () => {
-        it.skip('Testando tradução das estruturas HTML', () => {
+        it('Testando tradução das estruturas HTML', () => {
             for (let index = 0; index < Object.keys(estruturasHtml).length; index += 1) {
-    
                 // Lexador recebe as estruturas FolEs
                 const resultadoLexador = lexador.mapear([
                     `${Object.keys(estruturasHtml)[index]} {`,
                     "   tamanho-fonte: 60px;",
                     "}"
                 ])
-                // console.log(resultadoLexador.simbolos);
+
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                console.log(resultadoAvaliadorSintatico);
+                // console.log(resultadoAvaliadorSintatico);
                 
                 // Tradutor deve retornar a estrutura HTML correspondente
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
@@ -78,8 +77,7 @@ describe('Tradutor', () => {
             expect(resultadoTradutor).toBeTruthy();
             expect(resultadoTradutor).toContain("html");
             expect(resultadoTradutor).toContain("outline-style");
-            // TODO: Trocar 'pontilhado' por 'dotted' na tradução.
-            // expect(resultadoTradutor).toContain('dotted');
+            expect(resultadoTradutor).toContain('dotted');
         });
     });
 

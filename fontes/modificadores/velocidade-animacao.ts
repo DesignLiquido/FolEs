@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class VelocidadeAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -38,26 +38,22 @@ export class VelocidadeAnimacao extends Modificador {
         // onde p1 e p3 devem estar na faixa de 0 a 1.
         // Ex.: curva-cúbica(1, 5, 0, 6);
 
-        if (['curva-cubica', 'curva-cúbica'].includes(valor)){
-            // Lógica para validar 4 parâmetros
-        }
+        // if (['curva-cubica', 'curva-cúbica'].includes(valor)){
+        //     Lógica para validar 4 parâmetros
+        // }
 
         // steps(n, <jumpterm>) -> passos, que recebe dois parâmetros: um número e um termo de salto.
         // O número indica quantas pausas terão entre os saltos. O termo deve ser um dos listados em termosSalto.
         // Ex.: passos(3, salto-inicial);
 
-        if (['passos'].includes(valor)){
-            // Lógica para validar 2 parâmetros
-        }
+        // if (['passos'].includes(valor)){
+        //     Lógica para validar 2 parâmetros
+        // }
 
         // TODO: Pensar em uma lógica para as duas condicionais acima.
         
         // Demais valores aceitos
-        if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
-            throw new Error(`Valor ${valor} inválido para 'velocidade-animação'. Valores aceitos:  
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('velocidade-animação', valor, this.valoresAceitos);
 
         this.valor = valor;
 

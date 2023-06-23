@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharConteudo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -24,20 +24,17 @@ export class AlinharConteudo extends Modificador {
         super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
 
         // Não aceita os valores 'esquerda' e 'direita'
-        const posicoesAceitas = Object.keys(posicoes).filter(
+        let posicoesAceitas = Object.keys(posicoes).filter(
             (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
         );
+        
+        // Transforma array em objeto para processo de validação
+        const posicoesValidas = {};
+        posicoesAceitas.forEach((posicao, index) => {
+            posicoesValidas[posicao] = posicoesAceitas[index]
+        })
 
-        // Pode receber valores próprios ou valores da lista de posições
-        if (!(valor in this.valoresAceitos) &&
-            !(posicoesAceitas.includes(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'alinhar-conteúdo' com valor ${valor} inválido. Valores aceitos:
-            ${Object.keys(posicoesAceitas).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('alinhar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

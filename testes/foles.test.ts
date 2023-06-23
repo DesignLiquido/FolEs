@@ -1,6 +1,6 @@
 import { FolEs } from "../fontes/foles";
 
-describe('Classe FolEs', () => {
+describe('Classe FolEs - Tradução de Textos', () => {
     describe('FolEs para CSS', () => {
         let foles: FolEs;
 
@@ -47,3 +47,39 @@ describe('Classe FolEs', () => {
         });
     });
 });
+
+describe('Classe FolEs - Tradução de Arquivos', () => {
+    describe('FolEs para CSS', () => {
+        let foles: FolEs;
+
+        beforeEach(() => {
+            foles = new FolEs();
+        });
+
+        it('converterParaCss - caso de sucesso', () => {
+            const resultado = foles.converterParaCss('testes/modelos/arquivo-modelo.foles');
+            // console.log(resultado);
+            expect(resultado).toBeTruthy();
+            expect(resultado).toContain('q');
+            expect(resultado).toContain('contain');
+            expect(resultado).toContain('none');
+        });
+    });
+
+    describe('CSS para FolEs', () => {
+        let foles: FolEs;
+
+        beforeEach(() => {
+            foles = new FolEs();
+        });
+
+        it('converterParaFolEs - caso de sucesso', () => {
+            const resultado = foles.converterParaFolEs('testes/modelos/arquivo-modelo.css');
+            // console.log(resultado);
+            expect(resultado).toBeTruthy();
+            expect(resultado).toContain('lmht');
+            expect(resultado).toContain('largura-maxima');
+            expect(resultado).toContain('140px');
+        });
+    });
+})

@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class Flutuar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,13 +13,8 @@ export class Flutuar extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("flutuar", "float");
-
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'flutuar' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        
+        validarValores('flutuar', valor, this.valoresAceitos);
 
         this.valor = valor;
 

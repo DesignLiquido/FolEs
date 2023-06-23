@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class Aparencia extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -36,23 +36,12 @@ export class Aparencia extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["aparencia", "aparência"], "appearance");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in this.valoresEquivalentes) &&
-            !(valor in valoresGlobais)) {
-            
-            throw new Error(`Propriedade 'aparência' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(this.valoresEquivalentes).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
-
         // Se for um equivalente, o valor atribuído é 'auto';
-        // Para os demais casos aceitos, o valor é o próprio parâmetro. 
-        if(valor in this.valoresEquivalentes) {
-            this.valor = 'auto';
-        } else {
-            this.valor = valor;
-        }
+        valor in this.valoresEquivalentes ? valor = 'auto' : null
+
+        validarValores('aparência', valor, this.valoresAceitos);
+
+        this.valor = valor;
 
         // Quantificador não é usado aqui.
         // this.quantificador = quantificador;

@@ -1,16 +1,10 @@
-import { valoresGlobais } from "./atributos/globais";
+import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoVerticalFundo extends Modificador {
-    valoresAceitos: { [valorFoles: string]: string } = {
-        "superior": "top",
-        "inferior": "bottom",
-        "esquerda": "left",
-        "direita": "right",
-        "centro": "center",
-    }
-
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-vertical-fundo", "posição-vertical-fundo"],
@@ -22,23 +16,13 @@ export class PosicaoVerticalFundo extends Modificador {
         // Ex.: posição-vertical-fundo: inferior 10%;
 
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) && 
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'posição-vertical-fundo' com valor ${valor} inválido. Valor deve ser um número ou um dos valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+
+        validarValorNumerico('posição-vertical-fundo', valor, posicoesBasicas);
 
         this.valor = valor;
         
-        if (Number(parseInt(valor))){   
-            if (!(quantificador in unidadesMedida) || quantificador === undefined) {
-                throw new Error(`Propriedade 'posição-vertical-fundo' com quantificador inválido. Valores aceitos: 
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+        if (Number(parseInt(valor))){
+            validarQuantificador('posição-vertical-fundo', quantificador, unidadesMedida);
     
             this.quantificador = quantificador;
         }

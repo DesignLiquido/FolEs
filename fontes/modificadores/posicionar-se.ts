@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarSe extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -31,15 +31,7 @@ export class PosicionarSe extends Modificador {
         // Ex.: posicionar-se: auto início;
 
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoes) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Valor ${valor} inválido para 'posicionar-se'. Valores aceitos:
-            ${Object.keys(posicoes).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('posicionar-se', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;
 

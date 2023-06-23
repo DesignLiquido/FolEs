@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class EstiloListaPosicao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,13 +13,7 @@ export class EstiloListaPosicao extends Modificador {
             "list-style-position"
         );
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'estilo-lista-posição' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('estilo-lista-posição', valor, this.valoresAceitos);
 
         this.valor = valor;
 

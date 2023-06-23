@@ -27,6 +27,7 @@ export const ValorNumerico: Array<string> = [
     'tabulação',
     'indice-z',
     'índice-z',
+    'coluna-em-grade',
 ];
 
 /*

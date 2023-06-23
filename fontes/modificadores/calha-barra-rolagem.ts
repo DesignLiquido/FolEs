@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class CalhaBarraRolagem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,12 +12,7 @@ export class CalhaBarraRolagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("calha-barra-rolagem", "scrollbar-gutter");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'calha-barra-rolagem' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores("calha-barra-rolagem", valor, this.valoresAceitos);
 
         this.valor = valor;
 

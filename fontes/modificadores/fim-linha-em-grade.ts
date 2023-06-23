@@ -1,5 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FimLinhaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,22 +14,12 @@ export class FimLinhaEmGrade extends Modificador {
         // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático.
 
         // A lógica abaixo cobre somente o recebimento de UM valor numérico.
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'fim-linha-em-grade' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores:
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValorNumerico('fim-linha-em-grade', valor, this.valoresAceitos);
 
         this.valor = valor;
 
         // Não recebe quantificador, apenas o valor numérico.
-        // Logo, deve retornar um erro se recebido um segundo parâmetro. 
-        if (quantificador !== undefined) {
-            throw new Error(
-                `Propriedade 'fim-linha-em-grade' aceita somente valores numéricos. O quantificador ${quantificador} é inválido para esta operação.`);
-        }
+        // Logo, deve retornar um erro se recebido um segundo parâmetro.
+        proibirQuantificador('fim-linha-em-grade', quantificador);
     }
 }

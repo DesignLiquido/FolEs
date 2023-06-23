@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharUltimoItem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,15 +22,13 @@ export class AlinharUltimoItem extends Modificador {
             (posicao) => posicao !== 'superior' && posicao !== 'inferior'
         );
 
-        if (!(valor in this.valoresAceitos) &&
-            !(posicoesAceitas.includes(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Valor ${valor} inválido para 'alinhar-último-item'. Valores aceitos:
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(posicoesAceitas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        // Transforma array em objeto para processo de validação
+        const posicoesValidas = {};
+        posicoesAceitas.forEach((posicao, index) => {
+            posicoesValidas[posicao] = posicoesAceitas[index]
+        })
+
+        validarValoresAdicionais('alinhar-último-item', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

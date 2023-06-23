@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class ModoMescla extends Modificador {
 
@@ -29,12 +29,7 @@ export class ModoMescla extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("modo-mescla", "mix-blend-mode");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'modo-mescla' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('modo-mescla', valor, this.valoresAceitos);
 
         this.valor = valor;
 

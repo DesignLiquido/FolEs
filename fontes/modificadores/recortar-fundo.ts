@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class RecortarFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,11 +13,7 @@ export class RecortarFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("recortar-fundo", "background-clip");
 
-        if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
-            throw new Error(`Valor ${valor} inválido para 'recortar-fundo'. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('recortar-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

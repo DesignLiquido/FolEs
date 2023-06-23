@@ -1,0 +1,9 @@
+aspas {
+    contém: nenhum;
+    recortar: auto;
+    fluxo: nenhum;
+    conteudo: auto;
+    citações: nenhum;
+    tamanho-fonte: 16px;
+    largura-maxima: 20cm;
+}

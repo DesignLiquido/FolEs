@@ -1,6 +1,7 @@
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Flex extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -20,22 +21,12 @@ export class Flex extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("flex", "flex");
 
-        if (!(valor in this.valoresAceitos) &&
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'flex' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('flex', valor, this.valoresAceitos);
 
         this.valor = valor;
 
         if (quantificador !== undefined) {
-            if (!(quantificador in unidadesMedida)) {
-                throw new Error(`Propriedade 'flex' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('flex', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

@@ -3,6 +3,7 @@ import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class SombraCaixa extends Modificador {
     // Seletor pode receber de 1 a 5 valores.
@@ -41,10 +42,7 @@ export class SombraCaixa extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in unidadesMedida) || quantificador === undefined) {
-                throw new Error(`Propriedade 'sombra-caixa' com quantificador inválido. Valores aceitos:
-                ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('sombra-caixa', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

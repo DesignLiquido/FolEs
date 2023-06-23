@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class Citacoes extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,12 +19,7 @@ export class Citacoes extends Modificador {
 
         // A lógica abaixo cobre somente o recebimento dos Valores Aceitos
         // TODO: Adaptar lógica para cobrir o caso de valores <string>.
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'citações' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores("citações", valor, this.valoresAceitos);
 
         this.valor = valor;
 

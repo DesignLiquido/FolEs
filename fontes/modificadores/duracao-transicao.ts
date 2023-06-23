@@ -1,6 +1,7 @@
-import { valoresGlobais } from "./atributos/globais";
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DuracaoTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -14,21 +15,13 @@ export class DuracaoTransicao extends Modificador {
         
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
         // TODO: Adaptar lógica para cobrir os demais casos. 
-
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'duração-transição' com valor ${valor} inválido. Valor deve ser numérico ou um dos valores: 
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        
+        validarValorNumerico('duração-transição', valor);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in valoresTemporais) || quantificador === undefined) {
-                throw new Error(`Propriedade 'duração-transição' com quantificador inválido. Valores aceitos:
-                ${Object.keys(valoresTemporais).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('duração-transição', quantificador, valoresTemporais);
 
             this.quantificador = quantificador;
         }

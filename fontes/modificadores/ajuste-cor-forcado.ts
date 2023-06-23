@@ -1,4 +1,4 @@
-import { valoresGlobais } from "./atributos/globais";
+import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AjusteCorForcado extends Modificador {
@@ -13,13 +13,7 @@ export class AjusteCorForcado extends Modificador {
             "forced-color-adjust"
         );
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'ajuste-cor-forçado' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
 
         this.valor = valor;
 

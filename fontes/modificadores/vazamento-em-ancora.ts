@@ -1,5 +1,6 @@
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class VazamentoEmAncora extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,12 +14,7 @@ export class VazamentoEmAncora extends Modificador {
             "overflow-anchor"
         );
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'vazamento-em-âncora' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('vazamento-em-âncora', valor, this.valoresAceitos);
 
         this.valor = valor;
 

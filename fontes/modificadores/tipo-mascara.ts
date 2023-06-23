@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class TipoMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,14 +10,8 @@ export class TipoMascara extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["tipo-mascara", "tipo-máscara"], "mask-type");
-
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'tipo-máscara' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        
+        validarValores('tipo-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
 

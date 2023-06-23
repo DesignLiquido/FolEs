@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class Mascara extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -42,25 +42,13 @@ export class Mascara extends Modificador {
         "conteudo": "content",
         "conteúdo": "content",
         "texto": "text",
+        "url": "url",
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["mascara", "máscara"], "mask");
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações.
-        const valorString = valor.toString();
-
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoesBasicas) &&
-            !(valorString.includes('url')) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'máscara' com valor ${valor} inválido. Valores aceitos: 
-            URL,
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('máscara', valor, posicoesBasicas, this.valoresAceitos);
 
         this.valor = valor;
 

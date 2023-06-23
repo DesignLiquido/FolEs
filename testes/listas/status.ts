@@ -51,6 +51,7 @@ export const StatusAuto: Array<string> = [
     'ao-mudar',
     'indice-z',
     'índice-z',
+    'vazamento'
 ];
 
 export const StatusNenhum: Array<string> = [
@@ -77,9 +78,11 @@ export const StatusNenhum: Array<string> = [
     'toque-tela',
     'selecao-usuario',
     'seleção-usuario',
+    'imagem-fundo',
 ];
 
 export const StatusNormal: Array<string> = [
+    'agrupar-palavra',
     'direcao-animacao',
     'direção-animação',
     'esquema-cor',

@@ -1,6 +1,7 @@
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Espacamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -11,25 +12,13 @@ export class Espacamento extends Modificador {
         
         // A lógica abaixo cobre somente o recebimento de UM único valor.
         // TODO: Adaptar lógica para cobrir todos os casos.
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-                `Propriedade 'espaçamento' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+
+        validarValorNumerico('espaçamento', valor);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (
-                !(quantificador in unidadesMedida) ||
-                quantificador === undefined
-            ) {
-                throw new Error(
-                    `Propriedade 'espaçamento' com quantificador inválido. Valores aceitos:
-                    ${Object.keys(unidadesMedida).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('espaçamento', quantificador, unidadesMedida);
 
             this.quantificador = quantificador;
         }

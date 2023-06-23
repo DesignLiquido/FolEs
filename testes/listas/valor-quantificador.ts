@@ -130,6 +130,41 @@ export const ValorQuantificador: Array<string> = [
     'posição-superior',
     'transformar-origem',
     'coordenadas',
+    'colunas',
+    'deslocamento-em-âncora',
+    'espacamento-coluna-em-grade', 
+    'espaçamento-coluna-em-grade',
+    'estilo-lista',
+    'fim-borda-em-bloco',
+    'fim-borda-em-linha',
+    'flex',
+    'fundo',
+    'início-borda-em-linha',
+    'inicio-borda-em-linha',
+    'início-borda-em-bloco',
+    'inicio-borda-em-bloco',
+    'inserção-em-bloco', 
+    'insercao-em-bloco', 
+    'inserção-em-linha', 
+    'insercao-em-linha', 
+    'inserção', 
+    'insercao',
+    'margem-em-bloco-rolagem-mouse',
+    'margem-em-bloco',
+    'margem-em-linha-rolagem-mouse',
+    'margem-em-linha',
+    'margem-rolagem-mouse',
+    'margem',
+    'posição-fundo',
+    'posicao-fundo',
+    'recuo-direito',
+    'recuo-em-bloco-rolagem-mouse',
+    'recuo-em-bloco',
+    'recuo-em-linha-rolagem-mouse',
+    'recuo-em-linha',
+    'recuo-rolagem-mouse',
+    'sombra-caixa',
+    'fonte',
 ];
 
 export const ValorComprimento: Array<string> = [
@@ -146,6 +181,9 @@ export const ValorComprimento: Array<string> = [
     'tabulação',
     'espacamento-palavras',
     'espaçamento-palavras',
+    'raio-borda',
+    'recuo',
+    'regras-coluna',
 ];
 
 
@@ -154,13 +192,20 @@ export const ValorPercentual: Array<string> = [
     'fatiar-borda-mascara',
     'fatiar-borda-máscara',
     'origem-perspectiva',
+    "opacidade",
 ];
 
 export const ValorTempo: Array<string> = [
     'atraso-animacao',
     'atraso-animação',
+    'atraso-transicao',
+    'atraso-transição',
     'duracao-animacao',
     'duração-animação',
+    'duracao-transicao',
+    'duração-transição',
+    'transição',
+    'transicao',
 ];
 
 /*

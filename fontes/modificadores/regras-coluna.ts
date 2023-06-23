@@ -3,6 +3,7 @@ import { estilos } from "./atributos/estilo";
 import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RegrasColuna extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -43,10 +44,7 @@ export class RegrasColuna extends Modificador {
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in comprimentos) || quantificador === undefined) {
-                throw new Error(`Propriedade 'regras-coluna' com quantificador inválido. Valores aceitos:
-                ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('regras-coluna', quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

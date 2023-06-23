@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarItens extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -30,15 +30,7 @@ export class PosicionarItens extends Modificador {
         // Ex.: posicionar-itens: auto início;
 
         // TODO: Adaptar lógica para cobrir todos os casos
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoes) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'posicionar-itens' com valor ${valor} inválido. Valores aceitos:
-            ${Object.keys(posicoes).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('posicionar-itens', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;
 

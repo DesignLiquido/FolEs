@@ -1,6 +1,6 @@
 import { estilos } from "./atributos/estilo";
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloInicioBordaEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -9,11 +9,7 @@ export class EstiloInicioBordaEmLinha extends Modificador {
             "border-inline-start-style"
         );
 
-        if (!(valor in estilos && !(valor in valoresGlobais))) {
-            throw new Error(`Propriedade 'estilo-inicio-borda-em-linha' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValoresAdicionais('estilo-início-borda-em-linha', valor, estilos);
 
         this.valor = valor;
 

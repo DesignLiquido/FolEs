@@ -1,6 +1,7 @@
-import { valoresGlobais } from "./atributos/globais";
 import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Recuo extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -9,23 +10,12 @@ export class Recuo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("recuo", "padding");
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'contorno' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('recuo', valor);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in comprimentos) && 
-                !(quantificador in ListaDeValorPercentual) || 
-                quantificador === undefined) {
-                throw new Error(`Propriedade 'contorno' com quantificador inválido. Valores aceitos:
-                ${Object.keys(ListaDeValorPercentual).reduce((final, atual) => final += `, ${atual}`)}.
-                ${Object.keys(comprimentos).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('recuo', quantificador, comprimentos, ListaDeValorPercentual);
 
             this.quantificador = quantificador;
         }

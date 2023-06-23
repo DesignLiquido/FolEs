@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharSe extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -23,16 +23,13 @@ export class AlinharSe extends Modificador {
             (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
         );
 
-        // Pode receber valores próprios ou valores da lista de posições
-        if (!(valor in this.valoresAceitos) &&
-            !(posicoesAceitas.includes(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Valor ${valor} inválido para 'alinhar-se'. Valores aceitos:
-            ${Object.keys(posicoes).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        // Transforma array em objeto para processo de validação
+        const posicoesValidas = {};
+        posicoesAceitas.forEach((posicao, index) => {
+            posicoesValidas[posicao] = posicoesAceitas[index]
+        })
+
+        validarValoresAdicionais('alinhar-se', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class FonteTexto extends Modificador {
     // OBS.: Optei inicialmente por não traduzir o nome das fontes genéricas. @vitor
@@ -33,13 +33,7 @@ export class FonteTexto extends Modificador {
 
         // A lógica abaixo cobre somente o recebimento dos valores genéricos.
         // TODO: Adaptar lógica para cobrir o caso de receber 2 parâmetros. 
-
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'fonte-texto' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('fonte-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

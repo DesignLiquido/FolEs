@@ -1,6 +1,6 @@
-import { valoresGlobais } from "./atributos/globais";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,15 +12,7 @@ export class AlinharTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("alinhar-texto", "text-align");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in posicoesBasicas) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Valor ${valor} inválido para 'alinhar-texto'. Valores aceitos:
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)}, 
-            ${Object.keys(posicoesBasicas).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValoresAdicionais('alinhar-texto', valor, posicoesBasicas, this.valoresAceitos);
 
         this.valor = valor;
 

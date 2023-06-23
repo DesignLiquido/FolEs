@@ -1,6 +1,7 @@
-import { valoresGlobais } from "./atributos/globais";
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Transicao extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
@@ -22,24 +23,12 @@ export class Transicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["transicao", "transição"], "transition");
 
-        if (!(valor in this.valoresAceitos) &&
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(
-            `Propriedade 'transição' com valor ${valor} inválido. O valor deve ser numérico ou um dos valores:
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValorNumerico('transição', valor, this.valoresAceitos);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            if (!(quantificador in valoresTemporais) || quantificador === undefined) {
-                throw new Error(
-                    `Propriedade 'transição' com quantificador inválido. Valores aceitos:
-                ${Object.keys(valoresTemporais).reduce((final, atual) => final += `, ${atual}`)}.`);
-            }
+            validarQuantificador('transição', quantificador, valoresTemporais);
 
             this.quantificador = quantificador;
         }

@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class PosicaoLegenda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,11 +16,7 @@ export class PosicaoLegenda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["posicao-legenda", "posição-legenda"], "caption-side");
 
-        if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'posição-legenda' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('posição-legenda', valor, this.valoresAceitos);
 
         this.valor = valor;
 

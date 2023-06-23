@@ -1,17 +1,16 @@
 import { estilos } from "./atributos/estilo";
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloContorno extends Modificador {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "auto": "auto",
+    }
+
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estilo-contorno", "outline-style");
 
-        // Pode receber 'auto' além das opções da Lista de Estilos
-        if (!(valor in estilos) && valor !== 'auto' && !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'estilo-contorno' com valor ${valor} inválido. Valores aceitos: 
-            auto, ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValoresAdicionais('estilo-contorno', valor, estilos, this.valoresAceitos);
 
         this.valor = valor;
 

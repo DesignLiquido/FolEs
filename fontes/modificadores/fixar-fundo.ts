@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class FixarFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,11 +11,7 @@ export class FixarFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("fixar-fundo", "background-attachment");
 
-        if (!(valor in this.valoresAceitos) && !(valor in valoresGlobais)) {
-            throw new Error(`Valor ${valor} inválido para 'fixar-fundo'. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
-        }
+        validarValores('fixar-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

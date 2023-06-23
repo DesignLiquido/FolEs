@@ -1,5 +1,5 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class EspacoEmBranco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,13 +16,7 @@ export class EspacoEmBranco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["espaco-em-branco", "espaço-em-branco"], "white-space");
 
-        if (!(valor in this.valoresAceitos) &&
-            !(valor in valoresGlobais)
-        ) {
-            throw new Error(`Propriedade 'espaço-em-branco' com valor ${valor} inválido. Valores aceitos: 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
-        }
+        validarValores('espaço-em-branco', valor, this.valoresAceitos);
 
         this.valor = valor;
 
