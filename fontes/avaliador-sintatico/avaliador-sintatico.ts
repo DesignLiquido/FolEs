@@ -156,8 +156,20 @@ export class AvaliadorSintatico {
 
     protected seletorPorEspacoReservado(): Seletor {
         const simboloSeletor = this.avancarEDevolverAnterior();
+
+        // Aqui não tem problema o espaço reservado usar um nome de estrutura.
+        if (![
+                tiposDeSimbolos.IDENTIFICADOR,
+                tiposDeSimbolos.ESTRUTURA
+            ].includes(this.simbolos[this.atual].tipo)
+        ) {
+            throw this.erro(this.simbolos[this.atual], "Esperado identificador válido para espaço reservado.");
+        }
+
+        const nomeEspacoReservado = this.avancarEDevolverAnterior();
+
         return new SeletorEspacoReservado(
-            simboloSeletor.lexema,
+            nomeEspacoReservado.lexema,
             { 
                 linha: simboloSeletor.linha,
                 colunaInicial: simboloSeletor.colunaInicial,

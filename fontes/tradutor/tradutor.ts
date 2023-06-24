@@ -2,6 +2,7 @@ import { Declaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { SeletorEstrutura } from "../seletores";
+import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 
 import estruturasHtml from "./estruturas-html";
 
@@ -54,7 +55,15 @@ export class Tradutor {
                 resultado += `${estruturasHtml[declaracao.seletores[0]]} {\n`;
             } */
 
+            let deveImprimir = true;
+
             for (const seletor of declaracao.seletores) {
+                // Espaços reservados não são escritos diretamente no CSS.
+                if (seletor instanceof SeletorEspacoReservado) {
+                    deveImprimir = false;
+                    continue;
+                }
+
                 if (seletor instanceof SeletorEstrutura){
                     const tagLmht = seletor.paraTexto();
                     const traducaoTag = estruturasHtml[tagLmht];
@@ -62,6 +71,10 @@ export class Tradutor {
                 } else {
                     resultado += seletor.paraTexto() + ', ';
                 }
+            }
+
+            if (!deveImprimir) {
+                continue;
             }
 
             resultado = resultado.slice(0, -2);
