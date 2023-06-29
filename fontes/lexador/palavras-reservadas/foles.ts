@@ -160,10 +160,17 @@ export default {
     "ms": tiposDeSimbolos.QUANTIFICADOR,
 
     // Métodos
-    "rgb": tiposDeSimbolos.METODO,
-    "rgba": tiposDeSimbolos.METODO,
+    "cubic-bezier": tiposDeSimbolos.METODO,
+    "fit-content": tiposDeSimbolos.METODO,
     "hsl": tiposDeSimbolos.METODO,
     "hsla": tiposDeSimbolos.METODO,
+    "hex": tiposDeSimbolos.METODO,
+    "linear": tiposDeSimbolos.METODO,
+    "minmax": tiposDeSimbolos.METODO,
+    "rgb": tiposDeSimbolos.METODO,
+    "rgba": tiposDeSimbolos.METODO,
+    "steps": tiposDeSimbolos.METODO,
+    "url": tiposDeSimbolos.METODO,
 
     // Qualitativos - Globais
     "herdar": tiposDeSimbolos.QUALITATIVO,
