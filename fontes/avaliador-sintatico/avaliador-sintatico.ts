@@ -111,10 +111,38 @@ export class AvaliadorSintatico {
                 );
 
             case "#":
-                const codigoHEX =  this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
+                const codigoHEX = this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
                 return new SeletorValor(
                     'hex',
                     [codigoHEX.lexema],
+                );
+
+            case "linear":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'linear'.");
+                const valor1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método linear.");
+                const valor2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método linear.");
+                const valor3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após terceiro argumento do método linear.");
+                return new SeletorValor(
+                    lexema,
+                    [valor1, valor2, valor3]
+                );
+
+            case "cubic-bezier":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
+                const parametro1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
+                const parametro2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método cubic-bezier.");
+                const parametro3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método cubic-bezier.");
+                const parametro4 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método cubic-bezier.");
+                return new SeletorValor(
+                    lexema,
+                    [parametro1, parametro2, parametro3, parametro4]
                 );
         }
         return null;
@@ -142,7 +170,7 @@ export class AvaliadorSintatico {
             );
 
             return new SeletorPseudoclasse(
-                pseudoclasse.lexema, 
+                pseudoclasse.lexema,
                 {
                     linha: pseudoclasse.linha,
                     colunaInicial: pseudoclasse.colunaInicial,
@@ -159,9 +187,9 @@ export class AvaliadorSintatico {
 
         // Aqui não tem problema o espaço reservado usar um nome de estrutura.
         if (![
-                tiposDeSimbolos.IDENTIFICADOR,
-                tiposDeSimbolos.ESTRUTURA
-            ].includes(this.simbolos[this.atual].tipo)
+            tiposDeSimbolos.IDENTIFICADOR,
+            tiposDeSimbolos.ESTRUTURA
+        ].includes(this.simbolos[this.atual].tipo)
         ) {
             throw this.erro(this.simbolos[this.atual], "Esperado identificador válido para espaço reservado.");
         }
@@ -170,7 +198,7 @@ export class AvaliadorSintatico {
 
         return new SeletorEspacoReservado(
             nomeEspacoReservado.lexema,
-            { 
+            {
                 linha: simboloSeletor.linha,
                 colunaInicial: simboloSeletor.colunaInicial,
                 colunaFinal: simboloSeletor.colunaFinal
@@ -184,7 +212,7 @@ export class AvaliadorSintatico {
         return new SeletorEstrutura(
             new SeletorEstruturasLmht(
                 simboloSeletor.lexema,
-                { 
+                {
                     linha: simboloSeletor.linha,
                     colunaInicial: simboloSeletor.colunaInicial,
                     colunaFinal: simboloSeletor.colunaFinal
@@ -290,7 +318,7 @@ export class AvaliadorSintatico {
                 quantificador && quantificador.hasOwnProperty('lexema') ?
                     quantificador.lexema :
                     quantificador,
-                { 
+                {
                     linha: modificador.linha,
                     colunaInicial: modificador.colunaInicial,
                     colunaFinal: modificador.colunaFinal
