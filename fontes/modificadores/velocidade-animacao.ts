@@ -14,10 +14,7 @@ export class VelocidadeAnimacao extends Modificador {
         "curva-cúbica": "cubic-bezier",
         "passos": "steps",
         "passo-inicial": "step-start",
-        "passo-final": "step-start"
-    }
-
-    termosSalto: { [valorFoles: string]: string } = {
+        "passo-final": "step-start",
         "salto-inicial": "jump-start",
         "salto-final": "jump-end",
         "salto-nenhum": "jump-none",
@@ -53,7 +50,8 @@ export class VelocidadeAnimacao extends Modificador {
         // TODO: Pensar em uma lógica para as duas condicionais acima.
         
         // Demais valores aceitos
-        validarValores('velocidade-animação', valor, this.valoresAceitos);
+        const valoresExtra = ['cubic-bezier', 'steps'];
+        validarValores('velocidade-animação', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

@@ -17,7 +17,8 @@ export class AlturaMaxima extends Modificador {
 
         // Também pode receber a função fit-content(<length-percentage>);
         // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
-        validarValorNumerico('altura-máxima', valor, this.valoresAceitos);
+        const valoresExtra = ['fit-content'];
+        validarValorNumerico('altura-máxima', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

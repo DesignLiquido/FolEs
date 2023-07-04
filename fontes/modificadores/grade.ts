@@ -25,7 +25,8 @@ export class Grade extends Modificador {
         // Também aceita as funções minmax() e repeat()
 
         // TODO: Adicionar casos faltantes.
-        validarValores('grade', valor, this.valoresAceitos);
+        const valoresExtra = ['minmax'];
+        validarValores('grade', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 
