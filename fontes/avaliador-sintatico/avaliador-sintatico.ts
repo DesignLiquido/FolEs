@@ -144,6 +144,58 @@ export class AvaliadorSintatico {
                     lexema,
                     [parametro1, parametro2, parametro3, parametro4]
                 );
+
+            case "steps":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'steps'.");
+                const valorNumerico = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método steps.");
+                const termoSalto = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método steps.");
+                return new SeletorValor(
+                    lexema,
+                    [valorNumerico, termoSalto]
+                );
+
+            case "fit-content":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'fit-content'.");
+                const valorFit = this.avancarEDevolverAnterior();
+                const quantificadorFit = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método fit-content.");
+                return new SeletorValor(
+                    lexema,
+                    [valorFit['lexema'], quantificadorFit['lexema']]
+                );
+
+            case "minmax":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'minmax'.");
+                const valor01 = this.avancarEDevolverAnterior();
+                let parametro01 = null;
+                if (Number(valor01['lexema'])) {
+                    const quantificador01 = this.avancarEDevolverAnterior();
+                    parametro01 = `${valor01['lexema']}${quantificador01['lexema']}`
+                    console.log(parametro01)
+                }
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método minmax.");
+                const valor02 = this.avancarEDevolverAnterior();
+                let parametro02 = null;
+                if (Number(valor02['lexema'])) {
+                    const quantificador02 = this.avancarEDevolverAnterior();
+                    parametro02 = `${valor02['lexema']}${quantificador02['lexema']}`
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método minmax.");
+
+                if (parametro01 !== null) {
+                    return new SeletorValor(
+                        lexema,
+                        [parametro01, valor02['lexema']]
+                    );
+                } else if (parametro02 !== null) {
+                    return new SeletorValor(
+                        lexema,
+                        [valor01['lexema'], parametro02]
+                    );
+                }
+
         }
         return null;
     }
