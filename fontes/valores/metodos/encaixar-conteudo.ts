@@ -1,7 +1,7 @@
 import { Simbolo } from "../../lexador";
 import { Metodo } from "./metodo";
 
-export class FitContent extends Metodo {
+export class EncaixarConteudo extends Metodo {
     valor: number;
     quantificador: string;
 
