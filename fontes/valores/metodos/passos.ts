@@ -1,14 +1,23 @@
 import { Simbolo } from "../../lexador";
 import { Metodo } from "./metodo";
 
-export class Steps extends Metodo {
+export class Passos extends Metodo {
     numero: number;
     salto: string;
+
+    saltos = {
+        "salto-inicial": "jump-start",
+        "salto-final": "jump-end",
+        "salto-nenhum": "jump-none",
+        "salto-conjunto": "jump-both",
+        "inicial": "start",
+        "final": "end",
+    }
 
     constructor(numero: Simbolo, salto: string) {
         super();
         this.numero = Number(numero.lexema);
-        this.salto = salto;
+        this.salto = this.saltos[salto['lexema']];
     }
 
     toString() {
