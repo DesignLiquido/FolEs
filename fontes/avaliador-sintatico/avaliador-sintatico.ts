@@ -130,7 +130,7 @@ export class AvaliadorSintatico {
                     [valor1, valor2, valor3]
                 );
 
-            case "cubic-bezier":
+            case "curva-cúbica" || "curva-cubica":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
                 const parametro1 = this.avancarEDevolverAnterior();
                 this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
@@ -145,22 +145,22 @@ export class AvaliadorSintatico {
                     [parametro1, parametro2, parametro3, parametro4]
                 );
 
-            case "steps":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'steps'.");
+            case "passos":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'passos'.");
                 const valorNumerico = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método steps.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método passos.");
                 const termoSalto = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método steps.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método passos.");
                 return new SeletorValor(
                     lexema,
                     [valorNumerico, termoSalto]
                 );
 
-            case "fit-content":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'fit-content'.");
+            case "encaixar-conteúdo" || "encaixar-conteudo":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'encaixar-conteúdo'.");
                 const valorFit = this.avancarEDevolverAnterior();
                 const quantificadorFit = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método fit-content.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método encaixar-conteúdo.");
                 return new SeletorValor(
                     lexema,
                     [valorFit['lexema'], quantificadorFit['lexema']]
@@ -173,7 +173,6 @@ export class AvaliadorSintatico {
                 if (Number(valor01['lexema'])) {
                     const quantificador01 = this.avancarEDevolverAnterior();
                     parametro01 = `${valor01['lexema']}${quantificador01['lexema']}`
-                    console.log(parametro01)
                 }
                 this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método minmax.");
                 const valor02 = this.avancarEDevolverAnterior();
