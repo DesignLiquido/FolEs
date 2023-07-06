@@ -15,10 +15,8 @@ export class LarguraMinima extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["largura-minima", "largura-minima"], "min-width");
 
-        // Também pode receber a função fit-content(<length-percentage>);
-        // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
-        // TODO: Ajustar lógica para cobrir todos os casos.
-        validarValorNumerico('largura-minima', valor, this.valoresAceitos);
+        const valoresExtra = ['fit-content'];
+        validarValorNumerico('largura-minima', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

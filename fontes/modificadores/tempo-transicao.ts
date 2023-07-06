@@ -26,13 +26,6 @@ export class TempoTransicao extends Modificador {
             "transition-timing-function"
         );
 
-        // OBS.: Também aceita receber: 
-        // 1. A função cubic-bezier(p1, p2, p3, p4);
-        // 2. A função steps(n, <jumpterm>);
-        // 3. múltiplos valores. 
-
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
         const valoresExtra = ['cubic-bezier', 'steps'];
 
         validarValores('tempo-transição', valor, this.valoresAceitos, valoresExtra);

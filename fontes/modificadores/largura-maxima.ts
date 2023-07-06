@@ -15,10 +15,8 @@ export class LarguraMaxima extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["largura-maxima", "largura-máxima"], "max-width");
 
-        // Também pode receber a função fit-content();
-        // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
-        // TODO: Ajustar lógica para cobrir todos os casos.
-        validarValorNumerico('largura-máxima', valor, this.valoresAceitos);
+        const valoresExtra = ['fit-content'];
+        validarValorNumerico('largura-máxima', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 
