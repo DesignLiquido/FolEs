@@ -194,6 +194,21 @@ export class AvaliadorSintatico {
                         [valor01['lexema'], parametro02]
                     );
                 }
+            case "limitar":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'limitar'.");
+                const valorMin = this.avancarEDevolverAnterior();
+                const quantificadorMin = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'limitar'.");
+                const valorMed = this.avancarEDevolverAnterior();
+                const quantificadorMed = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método 'limitar'.");
+                const valorMax = this.avancarEDevolverAnterior();
+                const quantificadorMax = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método limitar.");
+                return new SeletorValor(
+                    lexema,
+                    [valorMin, quantificadorMin, valorMed, quantificadorMed, valorMax, quantificadorMax]
+                );
 
         }
         return null;

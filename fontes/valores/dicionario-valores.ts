@@ -3,6 +3,7 @@ import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
 import { Hex } from "./metodos/hex";
 import { Hsl } from "./metodos/hsl";
 import { Hsla } from "./metodos/hsla";
+import { Limitar } from "./metodos/limitar";
 import { Linear } from "./metodos/linear";
 import { MinMax } from "./metodos/minmax";
 import { Rgb } from "./metodos/rgb";
@@ -18,6 +19,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "hsl": Hsl,
     "hsla": Hsla,
     "hex": Hex,
+    "limitar": Limitar,
     "linear": Linear,
     "minmax": MinMax,
     "passos": Passos,
