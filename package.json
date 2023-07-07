@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/foles",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "Linguagem de folhas de estilo para documentos em geral em português",
     "main": "index.js",
     "scripts": {
