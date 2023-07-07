@@ -1,23 +1,11 @@
 lmht {
-    largura-borda-direita: 130mm;
+    tempo-transicao: curva-cúbica(0.42, 0.0, 1.0, 1.0);
+    cor-destaque: rgb(100, 200, 300);
 }
 
-aspas {
-    contém: nenhum;
-    recortar: auto;
-    fluxo: nenhum;
-    conteudo: auto;
-    citações: nenhum;
-}
-
-.minha-classe:sobre {
-    cor-fundo: azul;
-}
-
-.minha-segunda-classe {
-    margem-superior: 13mm;
-}
-
-#elemento-caixa {
-    altura: 40px;
+.classe {
+    tempo-transicao: passos(3, final);
+    tamanho-colunas-em-grade: minmax(200px, auto);
+    altura-máxima: encaixar-conteúdo(5cm);
+    altura: limitar(1px, 2vw, 2.5rem);
 }

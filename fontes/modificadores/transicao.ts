@@ -23,7 +23,9 @@ export class Transicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["transicao", "transição"], "transition");
 
-        validarValorNumerico('transição', valor, this.valoresAceitos);
+        const valoresExtra = ['linear'];
+
+        validarValorNumerico('transição', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

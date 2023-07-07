@@ -12,17 +12,12 @@ export class TempoTransicao extends Modificador {
         "linear": "linear",
         "passo-inicial": "step-start",
         "passo-final": "step-end",
-    }
-
-    termosSalto: { [valorFoles: string]: string } = {
         "salto-inicial": "jump-start",
         "salto-final": "jump-end",
         "salto-nenhum": "jump-none",
         "salto-conjunto": "jump-both",
         "inicial": "start",
         "final": "end",
-        "passo-inicial": "step-start",
-        "passo-final": "step-start"
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -31,15 +26,9 @@ export class TempoTransicao extends Modificador {
             "transition-timing-function"
         );
 
-        // OBS.: Também aceita receber: 
-        // 1. A função cubic-bezier(p1, p2, p3, p4);
-        // 2. A função steps(n, <jumpterm>);
-        // 3. múltiplos valores. 
+        const valoresExtra = ['cubic-bezier', 'steps'];
 
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
-        
-        validarValores('tempo-transição', valor, this.valoresAceitos);
+        validarValores('tempo-transição', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

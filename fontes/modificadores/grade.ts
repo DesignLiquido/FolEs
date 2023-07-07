@@ -22,10 +22,9 @@ export class Grade extends Modificador {
         // 2. grid-template-column
         // 3. grid-template-rows
 
-        // Também aceita as funções minmax() e repeat()
-
         // TODO: Adicionar casos faltantes.
-        validarValores('grade', valor, this.valoresAceitos);
+        const valoresExtra = ['minmax'];
+        validarValores('grade', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

@@ -111,11 +111,105 @@ export class AvaliadorSintatico {
                 );
 
             case "#":
-                const codigoHEX =  this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
+                const codigoHEX = this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
                 return new SeletorValor(
                     'hex',
                     [codigoHEX.lexema],
                 );
+
+            case "linear":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'linear'.");
+                const valor1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método linear.");
+                const valor2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método linear.");
+                const valor3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após terceiro argumento do método linear.");
+                return new SeletorValor(
+                    lexema,
+                    [valor1, valor2, valor3]
+                );
+
+            case "curva-cúbica" || "curva-cubica":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
+                const parametro1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
+                const parametro2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método cubic-bezier.");
+                const parametro3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método cubic-bezier.");
+                const parametro4 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método cubic-bezier.");
+                return new SeletorValor(
+                    lexema,
+                    [parametro1, parametro2, parametro3, parametro4]
+                );
+
+            case "passos":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'passos'.");
+                const valorNumerico = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método passos.");
+                const termoSalto = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método passos.");
+                return new SeletorValor(
+                    lexema,
+                    [valorNumerico, termoSalto]
+                );
+
+            case "encaixar-conteúdo" || "encaixar-conteudo":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'encaixar-conteúdo'.");
+                const valorFit = this.avancarEDevolverAnterior();
+                const quantificadorFit = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método encaixar-conteúdo.");
+                return new SeletorValor(
+                    lexema,
+                    [valorFit['lexema'], quantificadorFit['lexema']]
+                );
+
+            case "minmax":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'minmax'.");
+                const valor01 = this.avancarEDevolverAnterior();
+                let parametro01 = null;
+                if (Number(valor01['lexema'])) {
+                    const quantificador01 = this.avancarEDevolverAnterior();
+                    parametro01 = `${valor01['lexema']}${quantificador01['lexema']}`
+                }
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método minmax.");
+                const valor02 = this.avancarEDevolverAnterior();
+                let parametro02 = null;
+                if (Number(valor02['lexema'])) {
+                    const quantificador02 = this.avancarEDevolverAnterior();
+                    parametro02 = `${valor02['lexema']}${quantificador02['lexema']}`
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método minmax.");
+
+                if (parametro01 !== null) {
+                    return new SeletorValor(
+                        lexema,
+                        [parametro01, valor02['lexema']]
+                    );
+                } else if (parametro02 !== null) {
+                    return new SeletorValor(
+                        lexema,
+                        [valor01['lexema'], parametro02]
+                    );
+                }
+            case "limitar":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'limitar'.");
+                const valorMin = this.avancarEDevolverAnterior();
+                const quantificadorMin = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'limitar'.");
+                const valorMed = this.avancarEDevolverAnterior();
+                const quantificadorMed = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método 'limitar'.");
+                const valorMax = this.avancarEDevolverAnterior();
+                const quantificadorMax = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método limitar.");
+                return new SeletorValor(
+                    lexema,
+                    [valorMin, quantificadorMin, valorMed, quantificadorMed, valorMax, quantificadorMax]
+                );
+
         }
         return null;
     }
@@ -142,7 +236,7 @@ export class AvaliadorSintatico {
             );
 
             return new SeletorPseudoclasse(
-                pseudoclasse.lexema, 
+                pseudoclasse.lexema,
                 {
                     linha: pseudoclasse.linha,
                     colunaInicial: pseudoclasse.colunaInicial,
@@ -159,9 +253,9 @@ export class AvaliadorSintatico {
 
         // Aqui não tem problema o espaço reservado usar um nome de estrutura.
         if (![
-                tiposDeSimbolos.IDENTIFICADOR,
-                tiposDeSimbolos.ESTRUTURA
-            ].includes(this.simbolos[this.atual].tipo)
+            tiposDeSimbolos.IDENTIFICADOR,
+            tiposDeSimbolos.ESTRUTURA
+        ].includes(this.simbolos[this.atual].tipo)
         ) {
             throw this.erro(this.simbolos[this.atual], "Esperado identificador válido para espaço reservado.");
         }
@@ -170,7 +264,7 @@ export class AvaliadorSintatico {
 
         return new SeletorEspacoReservado(
             nomeEspacoReservado.lexema,
-            { 
+            {
                 linha: simboloSeletor.linha,
                 colunaInicial: simboloSeletor.colunaInicial,
                 colunaFinal: simboloSeletor.colunaFinal
@@ -184,7 +278,7 @@ export class AvaliadorSintatico {
         return new SeletorEstrutura(
             new SeletorEstruturasLmht(
                 simboloSeletor.lexema,
-                { 
+                {
                     linha: simboloSeletor.linha,
                     colunaInicial: simboloSeletor.colunaInicial,
                     colunaFinal: simboloSeletor.colunaFinal
@@ -290,7 +384,7 @@ export class AvaliadorSintatico {
                 quantificador && quantificador.hasOwnProperty('lexema') ?
                     quantificador.lexema :
                     quantificador,
-                { 
+                {
                     linha: modificador.linha,
                     colunaInicial: modificador.colunaInicial,
                     colunaFinal: modificador.colunaFinal

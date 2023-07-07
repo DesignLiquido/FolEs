@@ -15,9 +15,8 @@ export class TamanhoLinhasEmGrade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-linhas-em-grade", "grid-auto-rows");
 
-        // OBS.: Também pode receber as funções minmax(min, max) e fit-content( [ <length> | <percentage> ] )
-        // A lógica abaixo cobre somente o recebimento de UM único valor.
-        validarValorNumerico('tamanho-linhas-em-grade', valor, this.valoresAceitos);
+        const valoresExtra = ['minmax', 'fit-content'];
+        validarValorNumerico('tamanho-linhas-em-grade', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

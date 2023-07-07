@@ -160,10 +160,26 @@ export default {
     "ms": tiposDeSimbolos.QUANTIFICADOR,
 
     // Métodos
-    "rgb": tiposDeSimbolos.METODO,
-    "rgba": tiposDeSimbolos.METODO,
+    "curva-cubica": tiposDeSimbolos.METODO,
+    "curva-cúbica": tiposDeSimbolos.METODO,
+    "encaixar-conteudo": tiposDeSimbolos.METODO,
+    "encaixar-conteúdo": tiposDeSimbolos.METODO,
     "hsl": tiposDeSimbolos.METODO,
     "hsla": tiposDeSimbolos.METODO,
+    "hex": tiposDeSimbolos.METODO,
+    "limitar": tiposDeSimbolos.METODO,
+    "linear": tiposDeSimbolos.METODO,
+    "minmax": tiposDeSimbolos.METODO,
+    "rgb": tiposDeSimbolos.METODO,
+    "rgba": tiposDeSimbolos.METODO,
+    "passos": tiposDeSimbolos.METODO,
+    "url": tiposDeSimbolos.METODO,
+
+    "salto-inicial": tiposDeSimbolos.QUALITATIVO,
+    "salto-final": tiposDeSimbolos.QUALITATIVO,
+    "salto-nenhum": tiposDeSimbolos.QUALITATIVO,
+    "salto-conjunto": tiposDeSimbolos.QUALITATIVO,
+    "final": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Globais
     "herdar": tiposDeSimbolos.QUALITATIVO,
@@ -225,7 +241,7 @@ export default {
     "início-bloco": tiposDeSimbolos.QUALITATIVO,
     "fim-bloco": tiposDeSimbolos.QUALITATIVO,
     "debaixo": tiposDeSimbolos.QUALITATIVO,
-    "de-frente": tiposDeSimbolos.QUALITATIVO, 
+    "de-frente": tiposDeSimbolos.QUALITATIVO,
 
     // Modificadores - Status
     "auto": tiposDeSimbolos.QUALITATIVO,
@@ -241,7 +257,7 @@ export default {
     "campo-texto": tiposDeSimbolos.QUALITATIVO,
     "visivel": tiposDeSimbolos.QUALITATIVO,
     "visível": tiposDeSimbolos.QUALITATIVO,
-    "conter":tiposDeSimbolos.QUALITATIVO,
+    "conter": tiposDeSimbolos.QUALITATIVO,
     "conteudo-maximo": tiposDeSimbolos.QUALITATIVO,
     "conteúdo-máximo": tiposDeSimbolos.QUALITATIVO,
     "conteudo-minimo": tiposDeSimbolos.QUALITATIVO,
@@ -254,7 +270,7 @@ export default {
     "pagina": tiposDeSimbolos.QUALITATIVO,
     "página": tiposDeSimbolos.QUALITATIVO,
     "frente": tiposDeSimbolos.QUALITATIVO,
-    "verso": tiposDeSimbolos.QUALITATIVO, 
+    "verso": tiposDeSimbolos.QUALITATIVO,
     "evitar-coluna": tiposDeSimbolos.QUALITATIVO,
     "evitar-regiao": tiposDeSimbolos.QUALITATIVO,
     "evitar-região": tiposDeSimbolos.QUALITATIVO,
@@ -307,7 +323,7 @@ export default {
     "manipulacao": tiposDeSimbolos.QUALITATIVO,
     "manipulação": tiposDeSimbolos.QUALITATIVO,
     "zoom-pinca": tiposDeSimbolos.QUALITATIVO,
-    "zoom-pinça": tiposDeSimbolos.QUALITATIVO, 
+    "zoom-pinça": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Cores
     "azulpalido": tiposDeSimbolos.QUALITATIVO,
@@ -690,6 +706,12 @@ export default {
     "linear": tiposDeSimbolos.MODIFICADOR,
     "passo-inicial": tiposDeSimbolos.MODIFICADOR,
     "passo-final": tiposDeSimbolos.MODIFICADOR,
+    "salto-inicial": "jump-start",
+    "salto-final": "jump-end",
+    "salto-nenhum": "jump-none",
+    "salto-conjunto": "jump-both",
+    "inicial": "start",
+    "final": "end",
     "embutir": tiposDeSimbolos.MODIFICADOR,
     "substituir-bidirecional": tiposDeSimbolos.MODIFICADOR,
     "substituir-isolar": tiposDeSimbolos.MODIFICADOR,

@@ -18,11 +18,8 @@ export class TamanhoMaximoEmLinha extends Modificador {
             "max-inline-size"
         );
 
-        // Também pode receber a função fit-content(<length-percentage>);
-        // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
-        // TODO: Adaptar lógica para cobrir todos os casos
-
-        validarValorNumerico('tamanho-máximo-em-linha', valor, this.valoresAceitos);
+        const valoresExtra = ['fit-content'];
+        validarValorNumerico('tamanho-máximo-em-linha', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

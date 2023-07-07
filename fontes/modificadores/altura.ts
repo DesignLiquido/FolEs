@@ -15,10 +15,8 @@ export class Altura extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("altura", "height");
 
-        // OBS.: Também pode receber as funções clamp() e fit-content()
-        // A lógica abaixo cobre somente o recebimento dos valores listados e numéricos. 
-        // TODO: Adaptar lógica para cobrir todos os casos
-        validarValorNumerico('altura', valor, this.valoresAceitos);
+        const valoresExtra = ['fit-content', 'clamp'];
+        validarValorNumerico('altura', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

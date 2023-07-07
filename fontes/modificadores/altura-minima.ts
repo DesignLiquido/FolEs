@@ -15,9 +15,8 @@ export class AlturaMinima extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["altura-minima", "altura-mínima"], "min-height");
 
-        // Também pode receber a função fit-content(<length-percentage>);
-        // A lógica abaixo cobre o recebimento de valores próprios ou numéricos
-        validarValorNumerico('altura-mínima', valor, this.valoresAceitos);
+        const valoresExtra = ['fit-content'];
+        validarValorNumerico('altura-mínima', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

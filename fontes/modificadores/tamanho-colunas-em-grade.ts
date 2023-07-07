@@ -15,12 +15,8 @@ export class TamanhoColunasEmGrade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-colunas-em-grade", "grid-auto-columns");
 
-        // OBS.: Também pode receber as funções minmax(min, max) e fit-content( [ <length> | <percentage> ] )
-        // A lógica abaixo cobre somente o recebimento de UM único valor. 
-
-        // TODO: Adaptar lógica para cobrir todos os casos
-        
-        validarValorNumerico('tamanho-colunas-em-grade', valor, this.valoresAceitos);
+        const valoresExtra = ['minmax', 'fit-content'];
+        validarValorNumerico('tamanho-colunas-em-grade', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 
