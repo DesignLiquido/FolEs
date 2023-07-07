@@ -123,7 +123,7 @@ ligacao {
 
 Encontra todas as estruturas de um documento LMHT cujo nome da estrutura seja ligação:
 
-```lmht
+```xml
 <lmht>
     <cabeça>
     </cabeça>
@@ -147,7 +147,7 @@ Podemos ainda selecionar por um identificador único:
 
 Para o exemplo modificado:
 
-```lmht
+```xml
 <lmht>
     <cabeça>
     </cabeça>
@@ -169,7 +169,7 @@ Iremos encontrar uma estrutura. Ainda, podemos usar algo assim:
 
 E modificar o exemplo mais uma vez:
 
-```lmht
+```xml
 <lmht>
     <cabeça>
     </cabeça>
