@@ -11,7 +11,7 @@ export class EncaixarConteudo extends Metodo {
         this.quantificador = quantificador;
     }
 
-    toString() {
+    paraTexto() {
         return `fit-content(${this.valor}${this.quantificador})`
     }
 }

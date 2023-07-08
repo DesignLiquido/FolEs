@@ -17,7 +17,7 @@ export class CurvaCubica extends Metodo {
         this.traducao = 'cubic-bezier';
     }
 
-    toString() {
+    paraTexto() {
         return `cubic-bezier(${this.valor1}, ${this.valor2}, ${this.valor3}, ${this.valor4})`
     }
 }

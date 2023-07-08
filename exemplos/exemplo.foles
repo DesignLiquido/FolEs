@@ -1,3 +1,11 @@
+lmht {
+    largura-borda-direita: 130mm;
+}
+
+corpo {
+    imagem-fundo: url(https://teste.com/teste.png);
+}
+
 aspas {
     contém: nenhum;
     recortar: auto;
@@ -21,10 +29,6 @@ aspas {
 
 #elemento-caixa {
     altura: 40px;
-}
-
-lmht {
-    largura-borda-direita: 130mm;
 }
 
 .minha-segunda-classe {

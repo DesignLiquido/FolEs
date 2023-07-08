@@ -19,7 +19,7 @@ export class Limitar extends Metodo {
         this.quantificadorMax = quantificadorMax['lexema'];
     }
 
-    toString() {
+    paraTexto() {
         return `clamp(${this.valorMin}${this.quantificadorMin}, ${this.valorMed}${this.quantificadorMed}, ${this.valorMax}${this.quantificadorMax})`
     }
 }

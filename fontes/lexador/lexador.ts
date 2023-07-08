@@ -110,18 +110,22 @@ export class Lexador {
         }
     }
 
-    adicionarSimbolo(tipo: any, literal: any = null, lexema: string = null): void {
+    adicionarSimbolo(
+        tipo: any,
+        literal: any = null,
+        lexema: string = null
+    ): void {
         const texto: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
-        
+
         this.simbolos.push(
             new Simbolo(
-                tipo, 
-                texto || lexema, 
-                literal, 
-                this.linha + 1, 
+                tipo,
+                texto || lexema,
+                literal,
+                this.linha + 1,
                 this.inicioSimbolo,
                 this.atual
             )
@@ -151,6 +155,27 @@ export class Lexador {
         );
     }
 
+    analisarTexto(delimitador = '"'): void {
+        while (this.simboloAtual() !== delimitador && !this.eFinalDoCodigo()) {
+            this.avancar();
+        }
+
+        if (this.eFinalDoCodigo()) {
+            this.erros.push({
+                linha: this.linha + 1,
+                caractere: this.simbolos[this.atual - 1].lexema,
+                mensagem: "Texto não finalizado.",
+            } as ErroLexador);
+            return;
+        }
+
+        const valor = this.codigo[this.linha].substring(
+            this.inicioSimbolo + 1,
+            this.atual
+        );
+        this.adicionarSimbolo(tiposDeSimbolos.TEXTO, valor);
+    }
+
     identificarPalavraChave(): void {
         while (this.eAlfabetoOuDigito(this.simboloAtual())) {
             this.avancar();
@@ -176,7 +201,7 @@ export class Lexador {
     encontrarFimComentarioAsterisco(): void {
         while (!this.eFinalDoCodigo()) {
             this.avancar();
-            if (this.simboloAtual() === '*' && this.proximoSimbolo() === '/') {
+            if (this.simboloAtual() === "*" && this.proximoSimbolo() === "/") {
                 this.avancar();
                 this.avancar();
                 break;
@@ -204,58 +229,108 @@ export class Lexador {
                 this.adicionarSimbolo(tiposDeSimbolos.PARENTESE_DIREITO);
                 this.avancar();
                 break;
-            case ':':
+            case ":":
                 this.adicionarSimbolo(tiposDeSimbolos.DOIS_PONTOS);
                 this.avancar();
                 break;
-            case ';':
+            case ";":
                 this.adicionarSimbolo(tiposDeSimbolos.PONTO_E_VIRGULA);
                 this.avancar();
                 break;
-            case ',':
+            case ",":
                 this.adicionarSimbolo(tiposDeSimbolos.VIRGULA);
                 this.avancar();
                 break;
-            case '%':
+            case "%":
                 if (this.atual === 0) {
-                    this.adicionarSimbolo(tiposDeSimbolos.PERCENTUAL, null, '%');
+                    this.adicionarSimbolo(
+                        tiposDeSimbolos.PERCENTUAL,
+                        null,
+                        "%"
+                    );
                 } else {
-                    this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, '%');
+                    this.adicionarSimbolo(
+                        tiposDeSimbolos.QUANTIFICADOR,
+                        null,
+                        "%"
+                    );
                 }
                 this.avancar();
                 break;
-            case '.':
-                if(this.atual === 0) {
-                    this.adicionarSimbolo(tiposDeSimbolos.NOME_DE_CLASSE, null, '.');
-                }
-                this.avancar();
-                break;
-            case '#':
-                if(this.atual === 0) {
-                    this.adicionarSimbolo(tiposDeSimbolos.ID_DO_ELEMENTO, null, '#');
+            case ".":
+                if (this.atual === 0) {
+                    this.adicionarSimbolo(
+                        tiposDeSimbolos.NOME_DE_CLASSE,
+                        null,
+                        "."
+                    );
                 } else {
-                    this.adicionarSimbolo(tiposDeSimbolos.METODO, null, '#');
+                    this.adicionarSimbolo(
+                        tiposDeSimbolos.PONTO,
+                        null,
+                        "."
+                    );
                 }
                 this.avancar();
                 break;
-            case ' ':
-                case '\0':
-                case '\r':
-                case '\t':
-                case ';':
+            case "#":
+                if (this.atual === 0) {
+                    this.adicionarSimbolo(
+                        tiposDeSimbolos.ID_DO_ELEMENTO,
+                        null,
+                        "#"
+                    );
+                } else {
+                    this.adicionarSimbolo(tiposDeSimbolos.METODO, null, "#");
+                }
+                this.avancar();
+                break;
+            case " ":
+            case "\0":
+            case "\r":
+            case "\t":
+            case ";":
+                this.avancar();
+                break;
+            case "/":
+                // Se houver um dois-pontos antes da primeira barra, pode ser uma url.
+                if (
+                    this.atual > 0 &&
+                    this.codigo[this.linha].charAt(this.atual - 1) === ":"
+                ) {
                     this.avancar();
+                    this.adicionarSimbolo(tiposDeSimbolos.BARRA, null, "/");
                     break;
-            case '/':
-                this.avancar();
-                switch (this.simboloAtual()) {
-                    case '/':
-                        this.avancarParaProximaLinha();
-                        break;
-                    case '*':
-                        this.encontrarFimComentarioAsterisco();
-                        break;
+                } else {
+                    this.avancar();
+                    switch (this.simboloAtual()) {
+                        case "/":
+                            this.avancarParaProximaLinha();
+                            break;
+                        case "*":
+                            this.encontrarFimComentarioAsterisco();
+                            break;
+                        default:
+                            this.adicionarSimbolo(
+                                tiposDeSimbolos.BARRA,
+                                null,
+                                "/"
+                            );
+                            break;
+                    }
                 }
 
+                break;
+            case '"':
+                this.avancar();
+                this.analisarTexto('"');
+                this.avancar();
+                break;
+
+            case "'":
+                this.avancar();
+                this.analisarTexto("'");
+                this.avancar();
                 break;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
@@ -287,9 +362,9 @@ export class Lexador {
             this.analisarToken();
         }
 
-        return { 
+        return {
             simbolos: this.simbolos,
-            erros: this.erros
-        }
+            erros: this.erros,
+        };
     }
 }
