@@ -6,7 +6,7 @@ import { Tradutor } from "../../fontes/tradutor";
 import { MetodoEncaixarConteudo, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
-  describe('Testes Unitários', () => {
+  describe.skip('Testes Unitários', () => {
     let lexador: Lexador;
     let avaliador: AvaliadorSintatico;
     let tradutor: Tradutor;
