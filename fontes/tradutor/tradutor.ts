@@ -3,6 +3,7 @@ import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { SeletorEstrutura } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
+import { Metodo } from "../valores/metodos/metodo";
 
 import estruturasHtml from "./estruturas-html";
 
@@ -24,10 +25,9 @@ export class Tradutor {
             return `\t${modificador.propriedadeCss}: ${valorTraduzido};\n`;
         }
 
-        // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um valor do tipo objeto.
-        if (typeof modificador.valor === "object") {
-            return `\t${modificador.propriedadeCss}: ${modificador.valor}${modificador.quantificador || ""
-                };\n`;
+        // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
+        if (modificador.valor instanceof Metodo) {
+            return `\t${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""};\n`;
         }
 
         // Caso 4: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
@@ -39,22 +39,6 @@ export class Tradutor {
         let resultado = "";
 
         for (const declaracao of declaracoes) {
-            /* if (declaracao.espacoReservado) {
-                const encontrarHtml = Object.keys(estruturasHtml).filter(
-                    (estrutura) => declaracao.seletores[0] === estrutura
-                );
-
-                if (encontrarHtml.length !== 0) {
-                    resultado += `${declaracao.espacoReservado}${
-                        estruturasHtml[declaracao.seletores[0]]
-                    } {\n`;
-                } else {
-                    resultado += `${declaracao.espacoReservado}${declaracao.seletores[0]} {\n`;
-                }
-            } else {
-                resultado += `${estruturasHtml[declaracao.seletores[0]]} {\n`;
-            } */
-
             let deveImprimir = true;
 
             for (const seletor of declaracao.seletores) {

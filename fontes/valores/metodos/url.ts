@@ -8,7 +8,7 @@ export class Url extends Metodo {
         this.link = link;
     }
 
-    toString() {
+    paraTexto() {
         return `url('${this.link}')`
     }
 }

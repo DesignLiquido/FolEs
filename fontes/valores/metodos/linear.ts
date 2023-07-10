@@ -13,7 +13,7 @@ export class Linear extends Metodo {
         this.fim = Number(fim.lexema);
     }
 
-    toString() {
+    paraTexto() {
         return `linear(${this.inicio}, ${this.meio}, ${this.fim})`
     }
 }

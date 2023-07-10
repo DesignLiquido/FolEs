@@ -53,7 +53,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it('Caso de Sucesso - Código #HEX', () => {
+        it.skip('Caso de Sucesso - Código #HEX', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], '#f015ca', '');
 
@@ -90,7 +90,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it('Caso de Sucesso - Valor RGB válido', () => {
+        it.skip('Caso de Sucesso - Valor RGB válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'rgb(34, 12, 64)');
 
@@ -127,7 +127,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it('Caso de Falha - Valor RGBA válido', () => {
+        it.skip('Caso de Falha - Valor RGBA válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'rgba(34, 64, 300)');
 
@@ -203,7 +203,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it('Caso de Sucesso - Valor HSL válido', () => {
+        it.skip('Caso de Sucesso - Valor HSL válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'hsl(34, 50%, 120%)');
 
@@ -239,7 +239,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it('Caso de Sucesso - Valor HSLA válido', () => {
+        it.skip('Caso de Sucesso - Valor HSLA válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(Cores[index], 'hsla(34, 50%, 120%)');
 

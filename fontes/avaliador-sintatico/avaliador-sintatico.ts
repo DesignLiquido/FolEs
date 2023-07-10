@@ -3,7 +3,6 @@ import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
 import { SeletorModificador } from "../modificadores/superclasse";
-import { Metodo } from "../valores/metodos/metodo";
 import { Valor } from "../valores/valor";
 import { SeletorValor } from "../valores/seletor-valor";
 
@@ -14,6 +13,7 @@ import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletore
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
+import { SimboloInterface } from "../interfaces";
 
 
 export class AvaliadorSintatico {
@@ -54,30 +54,36 @@ export class AvaliadorSintatico {
 
     resolverMetodo(lexema: string): Valor {
         switch (lexema) {
-            case "rgb":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
-                const vermelho = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
-                const verde = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
-                const azul = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+            case "#":
+                const codigoHEX = this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
                 return new SeletorValor(
-                    lexema,
-                    [vermelho, verde, azul]
+                    'hex',
+                    [codigoHEX.lexema],
                 );
 
-            case "rgba":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgba'.");
-                const vermelhoRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
-                const verdeRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
-                const azulRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgba'.");
+            case "curva-cúbica" || "curva-cubica":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
+                const parametro1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
+                const parametro2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método cubic-bezier.");
+                const parametro3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método cubic-bezier.");
+                const parametro4 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método cubic-bezier.");
                 return new SeletorValor(
                     lexema,
-                    [vermelhoRgba, verdeRgba, azulRgba]
+                    [parametro1, parametro2, parametro3, parametro4]
+                );
+
+            case "encaixar-conteúdo" || "encaixar-conteudo":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'encaixar-conteúdo'.");
+                const valorFit = this.avancarEDevolverAnterior();
+                const quantificadorFit = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método encaixar-conteúdo.");
+                return new SeletorValor(
+                    lexema,
+                    [valorFit['lexema'], quantificadorFit['lexema']]
                 );
 
             case "hsl":
@@ -110,11 +116,46 @@ export class AvaliadorSintatico {
                     [HdeHSLA, SdeHSLA, LdeHSLA]
                 );
 
-            case "#":
-                const codigoHEX = this.consumir(tiposDeSimbolos.IDENTIFICADOR, "Esperado código HEX válido após #'.");
+            case "rgb":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                const vermelho = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verde = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
+                const azul = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
                 return new SeletorValor(
-                    'hex',
-                    [codigoHEX.lexema],
+                    lexema,
+                    [vermelho, verde, azul]
+                );
+
+            case "rgba":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgba'.");
+                const vermelhoRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verdeRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
+                const azulRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgba'.");
+                return new SeletorValor(
+                    lexema,
+                    [vermelhoRgba, verdeRgba, azulRgba]
+                );
+
+            case "limitar":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'limitar'.");
+                const valorMin = this.avancarEDevolverAnterior();
+                const quantificadorMin = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'limitar'.");
+                const valorMed = this.avancarEDevolverAnterior();
+                const quantificadorMed = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método 'limitar'.");
+                const valorMax = this.avancarEDevolverAnterior();
+                const quantificadorMax = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método limitar.");
+                return new SeletorValor(
+                    lexema,
+                    [valorMin, quantificadorMin, valorMed, quantificadorMed, valorMax, quantificadorMax]
                 );
 
             case "linear":
@@ -128,42 +169,6 @@ export class AvaliadorSintatico {
                 return new SeletorValor(
                     lexema,
                     [valor1, valor2, valor3]
-                );
-
-            case "curva-cúbica" || "curva-cubica":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
-                const parametro1 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
-                const parametro2 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método cubic-bezier.");
-                const parametro3 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método cubic-bezier.");
-                const parametro4 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método cubic-bezier.");
-                return new SeletorValor(
-                    lexema,
-                    [parametro1, parametro2, parametro3, parametro4]
-                );
-
-            case "passos":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'passos'.");
-                const valorNumerico = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método passos.");
-                const termoSalto = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método passos.");
-                return new SeletorValor(
-                    lexema,
-                    [valorNumerico, termoSalto]
-                );
-
-            case "encaixar-conteúdo" || "encaixar-conteudo":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'encaixar-conteúdo'.");
-                const valorFit = this.avancarEDevolverAnterior();
-                const quantificadorFit = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método encaixar-conteúdo.");
-                return new SeletorValor(
-                    lexema,
-                    [valorFit['lexema'], quantificadorFit['lexema']]
                 );
 
             case "minmax":
@@ -194,24 +199,67 @@ export class AvaliadorSintatico {
                         [valor01['lexema'], parametro02]
                     );
                 }
-            case "limitar":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'limitar'.");
-                const valorMin = this.avancarEDevolverAnterior();
-                const quantificadorMin = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'limitar'.");
-                const valorMed = this.avancarEDevolverAnterior();
-                const quantificadorMed = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método 'limitar'.");
-                const valorMax = this.avancarEDevolverAnterior();
-                const quantificadorMax = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método limitar.");
+
+            case "passos":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'passos'.");
+                const valorNumerico = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método passos.");
+                const termoSalto = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método passos.");
                 return new SeletorValor(
                     lexema,
-                    [valorMin, quantificadorMin, valorMed, quantificadorMed, valorMax, quantificadorMax]
+                    [valorNumerico, termoSalto]
                 );
 
+            case "url":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'url'.");
+                const url = this.validacaoUrl();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumento do método url.");
+                return new SeletorValor(
+                    lexema,
+                    [url]
+                );
         }
-        return null;
+        
+        throw new Error(`Método ${lexema} não reconhecido em FolEs.`);
+    }
+
+    private validacaoUrl() {
+        const primeiroSimbolo = this.avancarEDevolverAnterior();
+        switch (primeiroSimbolo.tipo) {
+            case tiposDeSimbolos.IDENTIFICADOR:
+                return this.validacaoUrlSimbolos(primeiroSimbolo);
+            default:
+                return this.validacaoUrlTexto(primeiroSimbolo.literal);
+        }
+    }
+
+    private validacaoUrlSimbolos(primeiroSimbolo: SimboloInterface) {
+        if (!['http', 'https'].includes(primeiroSimbolo.lexema.toLowerCase())) {
+            throw new Error(`URL inválida. URLs devem começar com 'http' ou 'https'.`);
+        }
+
+        this.consumir(tiposDeSimbolos.DOIS_PONTOS, `Esperado dois-pontos após '${primeiroSimbolo.lexema}'.`);
+        this.consumir(tiposDeSimbolos.BARRA, `Esperado barra após '${primeiroSimbolo.lexema + ':'}'`);
+        this.consumir(tiposDeSimbolos.BARRA, `Esperado segunda barra após '${primeiroSimbolo.lexema + ':/'}'`);
+
+        let url = `${primeiroSimbolo.lexema}://`;
+
+        while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PARENTESE_DIREITO) {
+            let proximoSimbolo = this.avancarEDevolverAnterior();
+            url += proximoSimbolo.literal || proximoSimbolo.lexema;
+        }
+
+        this.validacaoUrlTexto(url);
+        return url;
+    }
+
+    private validacaoUrlTexto(textoUrl: string) {
+        if (!/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/gi.test(textoUrl)) {
+            throw new Error(`URL ${textoUrl} inválida.`);
+        }
+
+        return textoUrl;
     }
 
     valorModificador(): any {
@@ -226,7 +274,7 @@ export class AvaliadorSintatico {
     }
 
     protected resolverPseudoclasse(): Pseudoclasse {
-        let pseudoclasse;
+        let pseudoclasse: any;
 
         if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
             this.avancarEDevolverAnterior();

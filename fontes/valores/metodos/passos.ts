@@ -20,7 +20,7 @@ export class Passos extends Metodo {
         this.salto = this.saltos[salto['lexema']];
     }
 
-    toString() {
+    paraTexto() {
         return `steps(${this.numero}, ${this.salto})`
     }
 }

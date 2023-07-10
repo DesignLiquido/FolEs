@@ -18,7 +18,7 @@ export class MinMax extends Metodo {
         this.traducao[maximo] === undefined ? this.maximo = maximo : this.maximo = this.traducao[maximo];
     }
 
-    toString() {
+    paraTexto() {
         return `minmax(${this.minimo}, ${this.maximo})`
     }
 }

@@ -13,7 +13,7 @@ export class Rgba extends Metodo {
         this.azul = Number(azul.lexema);
     }
 
-    toString() {
+    paraTexto() {
         return `rgba(${this.vermelho}, ${this.verde}, ${this.azul})`
     }
 }

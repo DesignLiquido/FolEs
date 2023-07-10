@@ -8,7 +8,7 @@ export class Hex extends Metodo {
         this.codigo = codigo;
     }
 
-    toString() {
+    paraTexto() {
         return `#${this.codigo}`;
     }
 }

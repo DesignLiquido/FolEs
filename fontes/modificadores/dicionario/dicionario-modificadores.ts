@@ -362,9 +362,7 @@ import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
 
-import { Modificador } from "../superclasse";
-
-export const DicionarioModificadores: { [nomeFolEs: string]: typeof Modificador } = {
+export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "agrupar-palavra": AgruparPalavra,
     "agrupar-vazamento": AgruparVazamento,
     "ajustar-objeto": AjustarObjeto,

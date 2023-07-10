@@ -13,7 +13,7 @@ export class Hsl extends Metodo {
         this.luminosidade = Number(luminosidade.lexema);
     }
 
-    toString() {
+    paraTexto() {
         return `hsl(${this.matiz}, ${this.saturacao}%, ${this.luminosidade}%)`
     }
 }
