@@ -29,11 +29,10 @@ export function validarValorNumerico(
     }
 
     if (valoresAceitos !== undefined && valoresExtra !== undefined) {
-        const valorString = valor.toString();
         let metodoValido = false;
         for (let index = 0; index < valoresExtra.length; index++) {
             if(metodoValido === false) {
-                metodoValido = valorString.includes(valoresExtra[index]);
+                metodoValido = valor['traducao'] === valoresExtra[index];
             }
         }
 
