@@ -3,14 +3,9 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { Url } from "../listas/url";
+import { TraducaoUrl, Url } from "../listas/url";
 
 describe('Testando Seletores que recebem URL como atributo', () => {
-    const atributos = [
-        'url("img_tree.gif")',
-        'url("https://www.showmetech.com.br/wp-content/uploads//2018/12/email_ss_1920-1920x1024.png")',
-    ];
-
     describe('Testes Unitários', () => {
         let lexador: Lexador;
         let avaliador: AvaliadorSintatico;
@@ -22,47 +17,42 @@ describe('Testando Seletores que recebem URL como atributo', () => {
             tradutor = new Tradutor();
         });
 
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
-            for (let index = 0; index < Url.length; index += 1) {
-                const seletor = new SeletorModificador(Url[index], 'url("img_tree.gif")', null);
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+            const URLexemplo = 'url("https://www.showmetech.com.br/wp-content/uploads//2018/12/email_ss_1920-1920x1024.png")';
 
+            for (let index = 0; index < Url.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Url[index]}: ${seletor['valor']};`,
+                    `${Url[index]}: ${URLexemplo};`,
                     "}"
                 ]);
 
-                expect(resultadoLexador.simbolos).toHaveLength(7);
+                expect(resultadoLexador.simbolos).toHaveLength(10);
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
-                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_URL }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
                     ])
                 );
-
 
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    TraducaoUrl[Url[index]]
                 );
 
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('url("img_tree.gif")');
+                expect(resultadoTradutor).toContain(TraducaoUrl[Url[index]]);
+                expect(resultadoTradutor).toContain('url');
             }
         });
 
-        it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Url.length; index += 1) {
-
                 // Lexador - URL não informada
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -72,7 +62,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
 
                 expect(resultadoLexador.simbolos).not.toEqual(
                     expect.arrayContaining([
-                        // expect.objectContaining({ tipo: tiposDeSimbolos.ATRIBUTO_URL }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
                     ])
                 );
 
@@ -88,7 +78,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não foi encontrado.`);
+                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
