@@ -24,8 +24,8 @@ export class EstiloLista extends Modificador {
         // 2. estilo-lista-imagem
 
         // TODO: Acrescentar esses valores quando os dois seletores estiverem finalizados.
-
-        validarValorNumerico('estilo-lista', valor, this.valoresAceitos);
+        const valoresExtra = ['url'];
+        validarValorNumerico('estilo-lista', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

@@ -15,8 +15,8 @@ export class OrigemBordaMascara extends Modificador {
         // OBS.: Também aceita receber valores do tipo URL (link externo da imagem). 
         // A lógica abaixo cobre somente o recebimento dos valores aceitos listados. 
         // TODO: Adaptar lógica para cobrir os demais casos.
-
-        validarValores('origem-borda-máscara', valor, this.valoresAceitos);
+        const valoresExtra = ['url'];    
+        validarValores('origem-borda-máscara', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

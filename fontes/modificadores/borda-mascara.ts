@@ -23,14 +23,15 @@ export class BordaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["borda-mascara", "borda-máscara"], "mask-border");
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações seguintes.
-        const valorString = valor.toString();
-
+        let valorURL;
+        if(valor['traducao'] !== undefined) {
+            valorURL = valor['traducao'];
+        }
+        
         // TODO: Adaptar lógica no futuro para cobrir casos de recebimento de MÚLTIPLOS valores
         if (!(valor in this.valoresAceitos) &&
             Number.isNaN(parseInt(valor)) &&
-            !(valorString.includes('url')) &&
+            !(valorURL.includes('url')) &&
             !(valor in valoresGlobais)) {
             throw new Error(`Propriedade 'borda-mascara' com valor ${valor} inválido. Valores aceitos: 
             número-quantificador, URL, 
