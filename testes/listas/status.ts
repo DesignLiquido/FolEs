@@ -79,6 +79,7 @@ export const StatusNenhum: Array<string> = [
     'selecao-usuario',
     'seleção-usuario',
     'imagem-fundo',
+    'filtro-fundo',
 ];
 
 export const StatusNormal: Array<string> = [
@@ -88,6 +89,8 @@ export const StatusNormal: Array<string> = [
     'esquema-cor',
     'espacamento-fonte',
     'espaçamento-fonte',
+    'animacao',
+    'animação',
 ];
 
 /*

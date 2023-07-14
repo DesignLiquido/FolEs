@@ -13,6 +13,8 @@ export const Url: Array<string> = [
     'imagem-mascara',
     'imagem-máscara',
     'forma-externa',
+    'conteudo',
+    'conteúdo',
 ];
 
 export const TraducaoUrl: Object = {
@@ -30,6 +32,8 @@ export const TraducaoUrl: Object = {
     'imagem-mascara': 'mask-image',
     'imagem-máscara': 'mask-image',
     'forma-externa': 'shape-outside',
+    'conteudo': 'content',
+    'conteúdo': 'content',
 };
 
 /*
