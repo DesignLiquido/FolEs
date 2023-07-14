@@ -1,9 +1,22 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class FiltroFundo extends Modificador {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "nenhum": "none",
+    }
+
     constructor(valor: string, quantificador: string) {
         super("filtro-fundo", "backdrop-filter");
+
+        // Também pode receber as DEZ funções do tipo <filter-function-list>
+        // TODO: Complementar lógica com casos faltantes
+        const valoresExtra = ['url'];
+        validarValores('filtro-fundo', valor, this.valoresAceitos, valoresExtra);
+
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        // Não recebe quantificador
+        // this.quantificador = quantificador;
     }
 }
