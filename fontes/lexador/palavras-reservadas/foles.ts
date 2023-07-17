@@ -175,11 +175,16 @@ export default {
     "passos": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
+    // Qualitativos
     "salto-inicial": tiposDeSimbolos.QUALITATIVO,
     "salto-final": tiposDeSimbolos.QUALITATIVO,
     "salto-nenhum": tiposDeSimbolos.QUALITATIVO,
     "salto-conjunto": tiposDeSimbolos.QUALITATIVO,
     "final": tiposDeSimbolos.QUALITATIVO,
+    "sub-grade": tiposDeSimbolos.QUALITATIVO,
+    "alvenaria": tiposDeSimbolos.QUALITATIVO,
+    "margem-caixa": tiposDeSimbolos.QUALITATIVO,
+    "caixa-batida": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Globais
     "herdar": tiposDeSimbolos.QUALITATIVO,
