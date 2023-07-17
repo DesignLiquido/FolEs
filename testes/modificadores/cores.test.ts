@@ -3,7 +3,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { Cores } from "../listas/cores";
+import { Cores, CoresNomeFolEs } from "../listas/cores";
 
 describe('Testando Seletores que recebem COR como atributo', () => {
     describe('Testes Unitários', () => {
@@ -53,14 +53,12 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Sucesso - Código #HEX', () => {
+        it('Caso de Sucesso - Código #HEX', () => {
             for (let index = 0; index < Cores.length; index += 1) {
-                const seletor = new SeletorModificador(Cores[index], '#f015ca', '');
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: ${seletor['valor']};`,
+                    `${Cores[index]}: #f015ca;`,
                     "}"
                 ]);
 
@@ -75,29 +73,24 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    CoresNomeFolEs[Cores[index]]
                 );
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("#f015ca;");
             }
         });
 
-        it.skip('Caso de Sucesso - Valor RGB válido', () => {
+        it('Caso de Sucesso - Valor RGB válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
-                const seletor = new SeletorModificador(Cores[index], 'rgb(34, 12, 64)');
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: ${seletor['valor']};`,
+                    `${Cores[index]}: rgb(34, 12, 64);`,
                     "}"
                 ]);
 
@@ -112,29 +105,24 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    CoresNomeFolEs[Cores[index]]
                 );
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("rgb(34, 12, 64);");
             }
         });
 
-        it.skip('Caso de Falha - Valor RGBA válido', () => {
+        it('Caso de Falha - Valor RGBA válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
-                const seletor = new SeletorModificador(Cores[index], 'rgba(34, 64, 300)');
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: ${seletor['valor']};`,
+                    `${Cores[index]}: rgba(34, 64, 300);`,
                     "}"
                 ]);
 
@@ -150,17 +138,14 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    CoresNomeFolEs[Cores[index]]
                 );
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("rgba(34, 64, 300);");
             }
         });
@@ -203,14 +188,12 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        it.skip('Caso de Sucesso - Valor HSL válido', () => {
+        it('Caso de Sucesso - Valor HSL válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
-                const seletor = new SeletorModificador(Cores[index], 'hsl(34, 50%, 120%)');
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: ${seletor['valor']};`,
+                    `${Cores[index]}: hsl(34, 50%, 120%);`,
                     "}"
                 ]);
 
@@ -224,29 +207,24 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    CoresNomeFolEs[Cores[index]]
                 );
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("hsl(34, 50%, 120%);");
             }
         });
 
-        it.skip('Caso de Sucesso - Valor HSLA válido', () => {
+        it('Caso de Sucesso - Valor HSLA válido', () => {
             for (let index = 0; index < Cores.length; index += 1) {
-                const seletor = new SeletorModificador(Cores[index], 'hsla(34, 50%, 120%)');
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: ${seletor['valor']};`,
+                    `${Cores[index]}: hsla(34, 50%, 120%);`,
                     "}"
                 ]);
 
@@ -260,17 +238,14 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
-                );
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    CoresNomeFolEs[Cores[index]]
                 );
 
                 // Tradutor
                 const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("hsla(34, 50%, 120%);");
             }
         });

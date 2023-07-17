@@ -8,6 +8,7 @@ export class Limitar extends Metodo {
     quantificadorMed: string;
     valorMax: number;
     quantificadorMax: string;
+    traducao: string;
 
     constructor(valorMin: Simbolo, quantificadorMin: string, valorMed: number, quantificadorMed: string,valorMax: number, quantificadorMax: string) {
         super();
@@ -17,6 +18,7 @@ export class Limitar extends Metodo {
         this.quantificadorMed = quantificadorMed['lexema'];
         this.valorMax = Number(valorMax['lexema']);
         this.quantificadorMax = quantificadorMax['lexema'];
+        this.traducao = 'clamp';
     }
 
     paraTexto() {

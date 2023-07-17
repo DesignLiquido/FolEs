@@ -1,12 +1,11 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Lexador } from "../../fontes/lexador";
-import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
-import { MetodoEncaixarConteudo, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos } from "../listas/metodos";
+import { MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
-  describe.skip('Testes Unitários', () => {
+  describe('Testes Unitários', () => {
     let lexador: Lexador;
     let avaliador: AvaliadorSintatico;
     let tradutor: Tradutor;
@@ -19,8 +18,6 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
     it('Atribuindo Método "encaixar-conteúdo" (fit-content)', () => {
       for (let index = 0; index < MetodoEncaixarConteudo.length; index += 1) {
-        const seletor = new SeletorModificador(MetodoEncaixarConteudo[index], 'fit-content(200px)');
-
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
@@ -51,26 +48,20 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        // // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-          seletor['nomeFoles']
-        );
         expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-          seletor['propriedadeCss']
+          TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]
         );
 
         // // // Tradutor
         const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]);
         expect(resultadoTradutor).toContain('fit-content(200px)');
       }
     });
 
     it('Atribuindo Método "limitar" (clamp)', () => {
       for (let index = 0; index < MetodoLimitar.length; index += 1) {
-        const seletor = new SeletorModificador(MetodoLimitar[index], 'clamp(10vw, 20em, 100vw)');
-
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
@@ -100,26 +91,22 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        // // // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-          seletor['nomeFoles']
-        );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+
         expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-          seletor['propriedadeCss']
+          TraducaoValoresMetodos[MetodoLimitar[index]]
         );
 
-        // // // // Tradutor
+        // Tradutor
         const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLimitar[index]]);
         expect(resultadoTradutor).toContain('clamp(10vw, 20em, 100vw);');
       }
     });
 
     it('Atribuindo Método "minmax()"', () => {
       for (let index = 0; index < MetodoMinMax.length; index += 1) {
-        const seletor = new SeletorModificador(MetodoMinMax[index], 'minmax(100px, max-content)');
-
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
@@ -149,26 +136,22 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        // // // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-          seletor['nomeFoles']
-        );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+
         expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-          seletor['propriedadeCss']
+           TraducaoValoresMetodos[MetodoMinMax[index]]
         );
 
         // // // // Tradutor
         const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+        expect(resultadoTradutor).toContain( TraducaoValoresMetodos[MetodoMinMax[index]]);
         expect(resultadoTradutor).toContain('minmax(100px, max-content);');
       }
     });
 
     it('Atribuindo Método "passos" (steps)', () => {
       for (let index = 0; index < MetodoPassos.length; index += 1) {
-        const seletor = new SeletorModificador(MetodoPassos[index], 'steps(2, jump-start)');
-
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
@@ -198,30 +181,25 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        // // // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-          seletor['nomeFoles']
-        );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
         expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-          seletor['propriedadeCss']
+           TraducaoValoresMetodos[MetodoPassos[index]]
         );
 
         // // // // Tradutor
         const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+        expect(resultadoTradutor).toContain( TraducaoValoresMetodos[MetodoPassos[index]]);
         expect(resultadoTradutor).toContain('steps(2, jump-start);');
       }
     });
 
     it('Atribuindo Método "curva-cúbica" (cubic-bezier)', () => {
-      for (let index = 0; index < MetodoPassos.length; index += 1) {
-        const seletor = new SeletorModificador(MetodoPassos[index], 'cubic-bezier(0.42, 0.0, 1.0, 1.0)');
-
+      for (let index = 0; index < MetodoCurvaCubica.length; index += 1) {
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
-          `${MetodoPassos[index]}: curva-cúbica(0.42, 0.0, 1.0, 1.0);`,
+          `${MetodoCurvaCubica[index]}: curva-cúbica(0.42, 0.0, 1.0, 1.0);`,
           "}"
         ]);
 
@@ -246,26 +224,21 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        // // // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-          seletor['nomeFoles']
-        );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
         expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-          seletor['propriedadeCss']
+           TraducaoValoresMetodos[MetodoCurvaCubica[index]]
         );
 
         // // // // Tradutor
         const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+        expect(resultadoTradutor).toContain( TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
         expect(resultadoTradutor).toContain('cubic-bezier(0.42, 0, 1, 1);');
       }
     });
 
     it('Atribuindo Método "linear()"', () => {
       for (let index = 0; index < MetodoLinear.length; index += 1) {
-        const seletor = new SeletorModificador(MetodoLinear[index], 'linear(0, 0.25, 1)');
-
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
@@ -294,18 +267,16 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        // // // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-          seletor['nomeFoles']
-        );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+
         expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-          seletor['propriedadeCss']
+          TraducaoValoresMetodos[MetodoLinear[index]]
         );
 
         // // // // Tradutor
         const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
 
-        expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLinear[index]]);
         expect(resultadoTradutor).toContain('linear(0, 0.25, 1);');
       }
     });

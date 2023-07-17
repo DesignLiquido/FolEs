@@ -55,7 +55,6 @@ export const PalavrasReservadas: Array<string> = [
     'estilo-ênfase-texto',
     'orientacao-texto',
     'orientação-texto',
-    'transformar',
     'nome-animacao',
     'nome-animação',
     'status-animacao',

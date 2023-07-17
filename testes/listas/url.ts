@@ -13,7 +13,30 @@ export const Url: Array<string> = [
     'imagem-mascara',
     'imagem-máscara',
     'forma-externa',
+    'conteudo',
+    'conteúdo',
+    'trajeto-deslocamento',
 ];
+
+export const TraducaoUrl: Object = {
+    'imagem-fundo': 'background-image',
+    'imagem-borda': 'border-image',
+    'fatiar-imagem-borda': 'border-image-slice',
+    'origem-imagem-borda': 'border-image-source',
+    'filtro': 'filter',
+    'estilo-lista': 'list-style',
+    'estilo-lista-imagem': 'list-style-image',
+    'borda-mascara': 'mask-border',
+    'borda-máscara': 'mask-border',
+    'origem-borda-mascara': 'mask-border-source',
+    'origem-borda-máscara': 'mask-border-source',
+    'imagem-mascara': 'mask-image',
+    'imagem-máscara': 'mask-image',
+    'forma-externa': 'shape-outside',
+    'conteudo': 'content',
+    'conteúdo': 'content',
+    'trajeto-deslocamento': 'offset-path',
+};
 
 /*
 

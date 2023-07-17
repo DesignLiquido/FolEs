@@ -1,13 +1,31 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Animacao extends Modificador {
-    // Esse seletor pode receber de 2 a 8 valores.
-    // Os valores aceitos são bem específicos. TODO: Pensar em uma lógica de validação.
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+  // Atribuição Abreviada: Esse seletor pode receber de 2 a 8 valores.
+  valoresAceitos: { [valorFoles: string]: string } = {
+    "normal": "normal",
+    "reverter": "reverse",
+    "alternar": "alternate",
+    "alternar-reverter": "alternate-reverse",
+    'infinite': 'infinito',
+    "nenhum": "none",
+    "para-frente": "forwards",
+    "para-tras": "backwards",
+    "para-trás": "backwards",
+    "ambos": "both",
+    "executando": "running",
+    "pausada": "paused"
+  }
 
-    constructor(valor: string, quantificador: string) {
-        super(["animacao", "animação"], "animation");
-        this.valor = valor;
-        this.quantificador = quantificador;
-    }
+  constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    super(["animacao", "animação"], "animation");
+
+    const valoresExtra = ['linear', 'cubic-bezier', 'steps'];
+    validarValorNumerico('animação', valor, this.valoresAceitos, valoresExtra);
+    this.valor = valor;
+
+    // Não recebe quantificador
+    // this.quantificador = quantificador;
+  }
 }

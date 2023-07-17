@@ -16,11 +16,10 @@ export function validarValores(
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`)
     }
     } else {
-        const valorString = valor.toString();
         let metodoValido = false;
         for (let index = 0; index < valoresExtra.length; index++) {
             if(metodoValido === false) {
-                metodoValido = valorString.includes(valoresExtra[index]);
+                metodoValido = valor['traducao'] === valoresExtra[index];
             }
         }
 

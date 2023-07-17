@@ -175,11 +175,16 @@ export default {
     "passos": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
+    // Qualitativos
     "salto-inicial": tiposDeSimbolos.QUALITATIVO,
     "salto-final": tiposDeSimbolos.QUALITATIVO,
     "salto-nenhum": tiposDeSimbolos.QUALITATIVO,
     "salto-conjunto": tiposDeSimbolos.QUALITATIVO,
     "final": tiposDeSimbolos.QUALITATIVO,
+    "sub-grade": tiposDeSimbolos.QUALITATIVO,
+    "alvenaria": tiposDeSimbolos.QUALITATIVO,
+    "margem-caixa": tiposDeSimbolos.QUALITATIVO,
+    "caixa-batida": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Globais
     "herdar": tiposDeSimbolos.QUALITATIVO,
@@ -202,7 +207,7 @@ export default {
     "saltado": tiposDeSimbolos.QUALITATIVO,
     "escondido": tiposDeSimbolos.QUALITATIVO,
 
-    // Modificador - Posição
+    // Qualitativos - Posição
     "superior": tiposDeSimbolos.QUALITATIVO,
     "inferior": tiposDeSimbolos.QUALITATIVO,
     "direita": tiposDeSimbolos.QUALITATIVO,
@@ -243,7 +248,7 @@ export default {
     "debaixo": tiposDeSimbolos.QUALITATIVO,
     "de-frente": tiposDeSimbolos.QUALITATIVO,
 
-    // Modificadores - Status
+    // Qualitativos - Status
     "auto": tiposDeSimbolos.QUALITATIVO,
     "ambos": tiposDeSimbolos.QUALITATIVO,
     "alternar": tiposDeSimbolos.QUALITATIVO,
@@ -324,6 +329,14 @@ export default {
     "manipulação": tiposDeSimbolos.QUALITATIVO,
     "zoom-pinca": tiposDeSimbolos.QUALITATIVO,
     "zoom-pinça": tiposDeSimbolos.QUALITATIVO,
+    "abrir-citacao": tiposDeSimbolos.QUALITATIVO,
+    "abrir-citação": tiposDeSimbolos.QUALITATIVO,
+    "fechar-citacao": tiposDeSimbolos.QUALITATIVO,
+    "fechar-citação": tiposDeSimbolos.QUALITATIVO,
+    "nao-abrir-citacao": tiposDeSimbolos.QUALITATIVO,
+    "não-abrir-citação": tiposDeSimbolos.QUALITATIVO,
+    "nao-fechar-citacao": tiposDeSimbolos.QUALITATIVO,
+    "não-fechar-citação": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Cores
     "azulpalido": tiposDeSimbolos.QUALITATIVO,

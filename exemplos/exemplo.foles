@@ -17,7 +17,8 @@ aspas {
 .minha-classe {
     alinhar-conteudo: inseguro;
     estilo-contorno: herdar;
-    cor-destaque: rgb(12, 13, 24);
+    cor-destaque: hsl(12, 13%, 24%);
+    cor: #f100ff;
     cor-fundo: vermelho;
     tamanho-fonte: 16px;
     largura-maxima: 20cm;

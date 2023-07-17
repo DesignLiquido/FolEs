@@ -165,6 +165,8 @@ export const ValorQuantificador: Array<string> = [
     'recuo-rolagem-mouse',
     'sombra-caixa',
     'fonte',
+    'deslocamento',
+    'sombra-texto',
 ];
 
 export const ValorComprimento: Array<string> = [

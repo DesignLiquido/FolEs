@@ -4,6 +4,7 @@ import { Metodo } from "./metodo";
 export class Passos extends Metodo {
     numero: number;
     salto: string;
+    traducao: string;
 
     saltos = {
         "salto-inicial": "jump-start",
@@ -18,6 +19,7 @@ export class Passos extends Metodo {
         super();
         this.numero = Number(numero.lexema);
         this.salto = this.saltos[salto['lexema']];
+        this.traducao = 'steps';
     }
 
     paraTexto() {
