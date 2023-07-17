@@ -15,6 +15,7 @@ export const Url: Array<string> = [
     'forma-externa',
     'conteudo',
     'conteúdo',
+    'trajeto-deslocamento',
 ];
 
 export const TraducaoUrl: Object = {
@@ -34,6 +35,7 @@ export const TraducaoUrl: Object = {
     'forma-externa': 'shape-outside',
     'conteudo': 'content',
     'conteúdo': 'content',
+    'trajeto-deslocamento': 'offset-path',
 };
 
 /*

@@ -20,6 +20,7 @@ export const MetodoEncaixarConteudo: Array<string> = [
     'tamanho-mínimo-em-bloco',
     'tamanho-minimo-em-linha',
     'tamanho-mínimo-em-linha',
+    'modelo-em-grade',
 ];
 
 export const MetodoLimitar: Array<string> = [
@@ -30,6 +31,8 @@ export const MetodoMinMax: Array<string> = [
     'grade',
     'tamanho-colunas-em-grade',
     'tamanho-linhas-em-grade',
+    'modelo-colunas-em-grade',
+    'modelo-linhas-em-grade',
 ];
 
 export const MetodoPassos: Array<string> = [
@@ -52,7 +55,7 @@ export const MetodoLinear: Array<string> = [
 ];
 
 
-export const TraducaoValoresMetodos : Object = {
+export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
     'altura-minima': 'min-height',
@@ -81,4 +84,7 @@ export const TraducaoValoresMetodos : Object = {
     'velocidade-animação': 'animation-timing-function',
     'transicao': 'transition',
     'transição': 'transition',
+    'modelo-colunas-em-grade': 'grid-template-columns',
+    'modelo-em-grade': 'grid-template',
+    'modelo-linhas-em-grade': 'grid-template-rows',
 }

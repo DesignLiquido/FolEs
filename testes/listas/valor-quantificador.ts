@@ -166,6 +166,7 @@ export const ValorQuantificador: Array<string> = [
     'sombra-caixa',
     'fonte',
     'deslocamento',
+    'sombra-texto',
 ];
 
 export const ValorComprimento: Array<string> = [
