@@ -18,7 +18,7 @@ export class Animacao extends Modificador {
     "pausada": "paused"
   }
 
-  constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+  constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
     super(["animacao", "animação"], "animation");
 
     const valoresExtra = ['linear', 'cubic-bezier', 'steps'];

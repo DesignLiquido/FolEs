@@ -6,7 +6,7 @@ export class FiltroFundo extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("filtro-fundo", "backdrop-filter");
 
         // Também pode receber as DEZ funções do tipo <filter-function-list>

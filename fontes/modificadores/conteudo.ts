@@ -15,7 +15,7 @@ export class Conteudo extends Modificador {
         "não-fechar-citação": "no-close-quote",
     }
 
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["conteudo", "conteúdo"], "content");
 
         // Também aceita como valor as funções linear-gradient(), image-set() e counter()

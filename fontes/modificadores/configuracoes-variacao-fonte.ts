@@ -6,7 +6,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
             "font-variation-settings"
