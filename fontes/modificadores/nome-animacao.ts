@@ -1,6 +1,11 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class NomeAnimacao extends Modificador {
+    valoresAceitos: { [valorFoles: string]: string } = {
+        "nenhum": "none",
+    }
+
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["nome-animacao", "nome-animação"], "animation-name");
 
@@ -13,6 +18,7 @@ export class NomeAnimacao extends Modificador {
             TODO: Adaptar lógica para cobrir o recebimento correto de valores
         */
 
+        validarValores('nome-animação', valor, this.valoresAceitos);
         this.valor = valor;
 
         // Não recebe quantificador
