@@ -1,7 +1,7 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class EstiloListaTipo extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("estilo-lista-tipo", "list-style-type");
 
         // Modificador recebe uma lista imensa de valores específicos,

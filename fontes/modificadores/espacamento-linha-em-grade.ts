@@ -1,12 +1,21 @@
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValorNumerico } from "./validacoes/numerica";
+import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacamentoLinhaEmGrade extends Modificador {
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
-            ["espacamento-linha-em-grade", "espaçamento-linha-em-grade"], 
+            ["espacamento-linha-em-grade", "espaçamento-linha-em-grade"],
             "grid-row-gap"
         );
+
+        validarValorNumerico('espaçamento-linha-em-grade', valor)
         this.valor = valor;
-        this.quantificador = quantificador;
+
+        if (quantificador !== undefined) {
+            validarQuantificador('espaçamento-linha-em-grade', quantificador, unidadesMedida);
+            this.quantificador = quantificador;
+        }
     }
 }

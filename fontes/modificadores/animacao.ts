@@ -15,7 +15,8 @@ export class Animacao extends Modificador {
     "para-trás": "backwards",
     "ambos": "both",
     "executando": "running",
-    "pausada": "paused"
+    "pausada": "paused",
+    "deslizar": "slidein",
   }
 
   constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -25,7 +26,9 @@ export class Animacao extends Modificador {
     validarValorNumerico('animação', valor, this.valoresAceitos, valoresExtra);
     this.valor = valor;
 
-    // Não recebe quantificador
-    // this.quantificador = quantificador;
+    // if (quantificador !== undefined) {
+    //   validarQuantificador('animação', quantificador, valoresTemporais);
+    //   this.quantificador = quantificador;
+    // }
   }
 }
