@@ -25,6 +25,7 @@ export class FolEs {
         this.lexadorReverso = new LexadorReverso();
         this.importador = new Importador(this.lexador);
         this.importadorReverso = new Importador(this.lexadorReverso);
+        this.importadorReverso.extensaoPadrao = ".css";
         this.avaliadorSintatico = new AvaliadorSintatico(this.importador);
         this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(this.importadorReverso);
         this.tradutor = new Tradutor();
