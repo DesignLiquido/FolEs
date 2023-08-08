@@ -1,4 +1,6 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
+import { Importador } from "../../fontes/importador";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
@@ -6,14 +8,16 @@ import { Tradutor } from "../../fontes/tradutor";
 import { ValorComprimento, ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
 
 describe('Testes: Valor-Quantificador', () => {
-    describe('Testando Seletores que aceitam QUALQUER Valor e Quantificador', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
+    let lexador: LexadorInterface;
+    let importador: ImportadorInterface;
+    let avaliador: AvaliadorSintaticoInterface;
+    let tradutor: Tradutor;
 
+    describe('Testando Seletores que aceitam QUALQUER Valor e Quantificador', () => {
         beforeEach(() => {
             lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
             tradutor = new Tradutor();
         });
 
@@ -83,13 +87,10 @@ describe('Testes: Valor-Quantificador', () => {
     });
 
     describe('Testando Seletores que recebem Quantificador PERCENTUAL', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
-
         beforeEach(() => {
             lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
             tradutor = new Tradutor();
         });
 
@@ -132,13 +133,10 @@ describe('Testes: Valor-Quantificador', () => {
     });
 
     describe('Testando Seletores que recebem Quantificador DE TEMPO', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
-
         beforeEach(() => {
             lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
             tradutor = new Tradutor();
         });
 
@@ -181,13 +179,10 @@ describe('Testes: Valor-Quantificador', () => {
     });
 
     describe('Testando Seletores que recebem Quantificador DE COMPRIMENTO', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
-
         beforeEach(() => {
             lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
             tradutor = new Tradutor();
         });
 

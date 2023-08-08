@@ -1,69 +1,75 @@
-import * as sistemaArquivos from 'fs';
-
 import { AvaliadorSintatico } from "./avaliador-sintatico";
 import { AvaliadorSintaticoReverso } from './avaliador-sintatico/avaliador-sintatico-reverso';
 import { Lexador } from "./lexador";
 import { LexadorReverso } from './lexador/lexador-reverso';
 import { Tradutor } from "./tradutor";
 import { TradutorReverso } from './tradutor/tradutor-reverso';
+import { Importador } from './importador';
+import { ResultadoLexadorInterface, SimboloInterface } from './interfaces';
 
+/**
+ * O núcleo da linguagem FolEs.
+ */
 export class FolEs {
     lexador: Lexador;
     lexadorReverso: LexadorReverso;
     avaliadorSintatico: AvaliadorSintatico;
     avaliadorSintaticoReverso: AvaliadorSintaticoReverso;
+    importador: Importador;
+    importadorReverso: Importador;
     tradutor: Tradutor;
     tradutorReverso: TradutorReverso;
 
     constructor() {
         this.lexador = new Lexador();
         this.lexadorReverso = new LexadorReverso();
-        this.avaliadorSintatico = new AvaliadorSintatico();
-        this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso();
+        this.importador = new Importador(this.lexador);
+        this.importadorReverso = new Importador(this.lexadorReverso);
+        this.avaliadorSintatico = new AvaliadorSintatico(this.importador);
+        this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(this.importadorReverso);
         this.tradutor = new Tradutor();
         this.tradutorReverso = new TradutorReverso();
     }
 
-    //Texto em FolEs
-    private converterParaCssInterno(conteudo: string[]) {
-        const resultadoLexador = this.lexador.mapear(conteudo);
-        const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador.simbolos);
+    /**
+     * Método comum de conversão de texto FolEs para CSS.
+     * @param conteudo O conteúdo em FolEs.
+     * @returns O resultado da tradução em CSS.
+     */
+    private converterParaCssInterno(simbolos: SimboloInterface[]): string {
+        const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(simbolos);
         const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
-        return traducao; 
-        //Texto em css
+        return traducao;
     }
 
-    private converterParaFolEsInterno(conteudoDoArquivo: string[]) {
-        const resultadoLexadorReverso = this.lexadorReverso.mapear(conteudoDoArquivo);
-        const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(resultadoLexadorReverso.simbolos);
+    private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {
+        const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(simbolos);
         const traducaoReversa = this.tradutorReverso.traduzir(resultadoAvaliadorSintaticoReverso);
         return traducaoReversa;
     }
     
     converterParaCss(nomeArquivo: string): string {
-        const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(nomeArquivo);
-        const conteudoDoArquivo: string[] = dadosDoArquivo
-            .toString()
-            .split('\n');
+        const resultadoLexador: ResultadoLexadorInterface = 
+            this.importador.importar(nomeArquivo);
 
-        return this.converterParaCssInterno(conteudoDoArquivo);
+        return this.converterParaCssInterno(resultadoLexador.simbolos);
     }
 
     converterParaFolEs(nomeArquivo: string): string {
-        const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(nomeArquivo);
-        const conteudoDoArquivo: string[] = dadosDoArquivo
-            .toString()
-            .split('\n');
+        const resultadoLexador: ResultadoLexadorInterface = 
+            this.importadorReverso.importar(nomeArquivo);
 
-        return this.converterParaFolEsInterno(conteudoDoArquivo);
+        return this.converterParaFolEsInterno(resultadoLexador.simbolos);
     }
 
     converterTextoParaCss(texto: string): string {
-        return this.converterParaCssInterno([texto]);
+        const resultadoLexador = this.lexador.mapear(texto.split('\n'));
+        return this.converterParaCssInterno(resultadoLexador.simbolos);
     }
 
     converterTextoParaFolEs(texto: string): string {
-        return this.converterParaFolEsInterno([texto]);
+        const resultadoLexadorReverso = this.lexadorReverso.mapear(texto.split('\n'));
+        return this.converterParaFolEsInterno(resultadoLexadorReverso.simbolos);
     }
 }
 

@@ -1,4 +1,6 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
+import { Importador } from "../../fontes/importador";
+import { ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
@@ -7,13 +9,15 @@ import { TraducaoUrl, Url } from "../listas/url";
 
 describe('Testando Seletores que recebem URL como atributo', () => {
     describe('Testes Unitários', () => {
-        let lexador: Lexador;
+        let lexador: LexadorInterface;
+        let importador: ImportadorInterface;
         let avaliador: AvaliadorSintatico;
         let tradutor: Tradutor;
 
         beforeEach(() => {
             lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
             tradutor = new Tradutor();
         });
 

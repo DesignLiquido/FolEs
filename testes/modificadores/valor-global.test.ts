@@ -1,4 +1,6 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
+import { Importador } from "../../fontes/importador";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
@@ -8,13 +10,15 @@ import { ValorGlobal } from "../listas/valor-global";
 
 describe('Testando Seletores com VALORES GLOBAIS', () => {
     describe('Testes Unitários', () => {
-        let lexador: Lexador;
-        let avaliador: AvaliadorSintatico;
+        let lexador: LexadorInterface;
+        let importador: ImportadorInterface;
+        let avaliadorSintatico: AvaliadorSintaticoInterface;
         let tradutor: Tradutor;
 
         beforeEach(() => {
             lexador = new Lexador();
-            avaliador = new AvaliadorSintatico();
+            importador = new Importador(lexador);
+            avaliadorSintatico = new AvaliadorSintatico(importador);
             tradutor = new Tradutor();
         });
 
@@ -37,7 +41,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 );
 
                 // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
                 expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
@@ -68,13 +72,13 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
+                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+                    tradutor.traduzir(avaliadorSintatico.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -107,13 +111,13 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
                 // Avaliador Sintático - Erro esperado como retorno
                 expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
+                    avaliadorSintatico.analisar(novoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
+                    tradutor.traduzir(avaliadorSintatico.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

@@ -1,18 +1,21 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
-import { LexadorInterface } from "../fontes/interfaces";
+import { Importador } from "../fontes/importador";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 
 describe('Avaliador Sintático', () => {
-    let lexador: Lexador;
-    let avaliador: AvaliadorSintatico;
+    let lexador: LexadorInterface;
+    let importador: ImportadorInterface;
+    let avaliadorSintatico: AvaliadorSintaticoInterface;
     let tradutor: Tradutor;
 
     beforeEach(() => {
         lexador = new Lexador();
-        avaliador = new AvaliadorSintatico();
+        importador = new Importador(lexador);
+        avaliadorSintatico = new AvaliadorSintatico(importador);
         tradutor = new Tradutor();
     });
 
@@ -22,14 +25,14 @@ describe('Avaliador Sintático', () => {
             const seletor: Object = new SeletorModificador(ValorQuantificador[index], '25', 'px');
 
             // Lexador
-            const resultadoLexador: LexadorInterface = lexador.mapear([
+            const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
             ]);
             
             // Avaliador Sintático
-            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
             expect(resultadoAvaliadorSintatico).toBeTruthy();
             expect(resultadoAvaliadorSintatico).toHaveLength(1);
@@ -61,7 +64,7 @@ describe('Avaliador Sintático', () => {
         for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
-            const resultadoLexador: LexadorInterface = lexador.mapear([
+            let resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
                 "lmht {",
                 `${ValorQuantificador[index]}: ;`,
                 "}"
@@ -69,13 +72,13 @@ describe('Avaliador Sintático', () => {
 
             // Avaliador Sintático deve retornar erro
             expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
             }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
 
             // Causar erro de digitação
             const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
 
-            const novoLexador: LexadorInterface = lexador.mapear([
+            resultadoLexador = lexador.mapear([
                 "lmht {",
                 `${seletorIncorreto}: 12px;`,
                 "}"
@@ -83,7 +86,7 @@ describe('Avaliador Sintático', () => {
 
             // Erro esperado como retorno - seletor não encontrado
             expect(() => {
-                avaliador.analisar(novoLexador.simbolos);
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
             }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
         }
     });

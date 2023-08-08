@@ -4,15 +4,19 @@ import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Tradutor } from "../fontes/tradutor";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 import estruturasHtml from "../fontes/tradutor/estruturas-html";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
+import { Importador } from "../fontes/importador";
 
 describe('Tradutor', () => {
-    let lexador: Lexador;
-    let avaliador: AvaliadorSintatico;
+    let lexador: LexadorInterface;
+    let importador: ImportadorInterface;
+    let avaliador: AvaliadorSintaticoInterface;
     let tradutor: Tradutor;
 
     beforeEach(() => {
         lexador = new Lexador();
-        avaliador = new AvaliadorSintatico();
+        importador = new Importador(lexador);
+        avaliador = new AvaliadorSintatico(importador);
         tradutor = new Tradutor();
     });
 

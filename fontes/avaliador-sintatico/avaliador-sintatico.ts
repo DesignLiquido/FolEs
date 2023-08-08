@@ -13,16 +13,19 @@ import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletore
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
-import { SimboloInterface } from "../interfaces";
+import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 
 
-export class AvaliadorSintatico {
+
+export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
+    importador: ImportadorInterface;
 
     atual: number;
 
-    constructor() {
+    constructor(importador: ImportadorInterface) {
+        this.importador = importador;
         this.simbolos = [];
     }
 
@@ -457,7 +460,7 @@ export class AvaliadorSintatico {
         );
     }
 
-    analisar(simbolos: Simbolo[]) {
+    analisar(simbolos: Simbolo[]): Declaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
