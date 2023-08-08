@@ -11,31 +11,34 @@ import { LexadorInterface, ResultadoLexadorInterface } from "../interfaces";
 export class Importador {
     diretorioBase: string = process.cwd();
     lexador: LexadorInterface;
+    extensaoPadrao: string;
 
     constructor(lexador: LexadorInterface) {
         this.lexador = lexador;
+        this.extensaoPadrao = '.foles';
     }
 
     importar(
         caminhoRelativoArquivo: string,
         importacaoInicial: boolean = false
     ): ResultadoLexadorInterface {
-        const nomeArquivo = caminho.basename(caminhoRelativoArquivo);
+        if (!caminhoRelativoArquivo.endsWith(this.extensaoPadrao)) {
+            caminhoRelativoArquivo += this.extensaoPadrao;
+        }
+
         let caminhoAbsolutoArquivo = caminho.resolve(this.diretorioBase, caminhoRelativoArquivo);
         if (importacaoInicial) {
+            this.diretorioBase = caminho.dirname(caminhoRelativoArquivo);
             caminhoAbsolutoArquivo = caminho.resolve(caminhoRelativoArquivo);
         }
 
         // TODO: Verificar se `hashArquivo` será necessário em algum momento.
         // const hashArquivo = this.cyrb53(caminhoAbsolutoArquivo.toLowerCase());
 
-        if (!sistemaArquivos.existsSync(nomeArquivo)) {
-            // TODO: Terminar.
-            /* throw new ErroEmTempoDeExecucao(
-                declaracao.simboloFechamento,
-                'Não foi possível encontrar arquivo importado.',
-                declaracao.linha
-            ); */
+        if (!sistemaArquivos.existsSync(caminhoAbsolutoArquivo)) {
+            throw new Error(
+                `Não foi possível encontrar arquivo importado: ${caminhoAbsolutoArquivo}`
+            );
         }
 
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);

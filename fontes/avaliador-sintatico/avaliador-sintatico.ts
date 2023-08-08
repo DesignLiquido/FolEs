@@ -16,7 +16,9 @@ import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 
 
-
+/**
+ * Implementação do avaliador sintático.
+ */
 export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
@@ -451,13 +453,23 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     declaracao(): any {
         if (this.estaNoFinal()) return null;
-        const seletores = this.resolverSeletores();
-        const modificadores = this.resolverModificadores();
-
-        return new Declaracao(
-            seletores,
-            modificadores
-        );
+        switch (this.simbolos[this.atual].tipo) {
+            case tiposDeSimbolos.IMPORTAR:
+                this.avancarEDevolverAnterior();
+                const caminhoArquivo = this.simbolos[this.atual];
+                const resultadoImportacao = this.importador.importar(caminhoArquivo.literal, false);
+                this.simbolos.splice(this.atual - 1, 2, ...resultadoImportacao.simbolos);
+                this.atual -= 1;
+                return null;
+            default:
+                const seletores = this.resolverSeletores();
+                const modificadores = this.resolverModificadores();
+        
+                return new Declaracao(
+                    seletores,
+                    modificadores
+                );
+        }
     }
 
     analisar(simbolos: Simbolo[]): Declaracao[] {
@@ -470,6 +482,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             declaracoes.push(this.declaracao());
         }
 
-        return declaracoes;
+        return declaracoes.filter(d => d);
     }
 }

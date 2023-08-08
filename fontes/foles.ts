@@ -50,7 +50,7 @@ export class FolEs {
     
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: ResultadoLexadorInterface = 
-            this.importador.importar(nomeArquivo);
+            this.importador.importar(nomeArquivo, true);
 
         return this.converterParaCssInterno(resultadoLexador.simbolos);
     }
