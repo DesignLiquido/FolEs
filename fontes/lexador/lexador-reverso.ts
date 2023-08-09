@@ -3,8 +3,9 @@ import { Simbolo } from "./simbolo";
 
 import palavrasReservadas from "./palavras-reservadas/css";
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
+import { LexadorInterface } from "../interfaces";
 
-export class LexadorReverso {
+export class LexadorReverso implements LexadorInterface {
     linha: number;
     atual: number;
     inicioSimbolo: number;

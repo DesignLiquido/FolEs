@@ -1,4 +1,6 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
+import { Importador } from "../../fontes/importador";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Tradutor } from "../../fontes/tradutor";
@@ -6,13 +8,15 @@ import { MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoLimitar, MetodoLinear,
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
-    let lexador: Lexador;
-    let avaliador: AvaliadorSintatico;
+    let lexador: LexadorInterface;
+    let importador: ImportadorInterface;
+    let avaliador: AvaliadorSintaticoInterface;
     let tradutor: Tradutor;
 
     beforeEach(() => {
       lexador = new Lexador();
-      avaliador = new AvaliadorSintatico();
+      importador = new Importador(lexador);
+      avaliador = new AvaliadorSintatico(importador);
       tradutor = new Tradutor();
     });
 

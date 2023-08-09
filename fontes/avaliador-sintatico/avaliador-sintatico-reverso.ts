@@ -8,14 +8,17 @@ import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
 import { Seletor } from "../seletores";
+import { AvaliadorSintaticoInterface, ImportadorInterface } from "../interfaces";
 
-export class AvaliadorSintaticoReverso {
+export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
+    importador: ImportadorInterface;
 
     atual: number;
     
-    constructor() {
+    constructor(importador: ImportadorInterface) {
+        this.importador = importador;
         this.simbolos = [];
     }
 

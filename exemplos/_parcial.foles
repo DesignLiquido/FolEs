@@ -1,0 +1,4 @@
+lmht {
+    tempo-transicao: curva-cúbica(0.42, 0.0, 1.0, 1.0);
+    cor-destaque: rgb(100, 200, 300);
+}

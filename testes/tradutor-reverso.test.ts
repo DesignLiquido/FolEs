@@ -3,15 +3,19 @@ import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
 import { TradutorReverso } from "../fontes/tradutor/tradutor-reverso";
 
 import estruturasLmht from "../fontes/tradutor/estruturas-lmht";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
+import { Importador } from "../fontes/importador";
 
 describe('Tradutor Reverso', () => {
-    let lexadorReverso: LexadorReverso;
-    let avaliadorReverso: AvaliadorSintaticoReverso;
+    let lexadorReverso: LexadorInterface;
+    let importador: ImportadorInterface;
+    let avaliadorReverso: AvaliadorSintaticoInterface;
     let tradutorReverso: TradutorReverso;
 
     beforeEach(() => {
         lexadorReverso = new LexadorReverso();
-        avaliadorReverso = new AvaliadorSintaticoReverso();
+        importador = new Importador(lexadorReverso);
+        avaliadorReverso = new AvaliadorSintaticoReverso(importador);
         tradutorReverso = new TradutorReverso();
     });
 

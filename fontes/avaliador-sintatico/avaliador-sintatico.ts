@@ -13,16 +13,21 @@ import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletore
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
-import { SimboloInterface } from "../interfaces";
+import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 
 
-export class AvaliadorSintatico {
+/**
+ * Implementação do avaliador sintático.
+ */
+export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
+    importador: ImportadorInterface;
 
     atual: number;
 
-    constructor() {
+    constructor(importador: ImportadorInterface) {
+        this.importador = importador;
         this.simbolos = [];
     }
 
@@ -448,16 +453,26 @@ export class AvaliadorSintatico {
 
     declaracao(): any {
         if (this.estaNoFinal()) return null;
-        const seletores = this.resolverSeletores();
-        const modificadores = this.resolverModificadores();
-
-        return new Declaracao(
-            seletores,
-            modificadores
-        );
+        switch (this.simbolos[this.atual].tipo) {
+            case tiposDeSimbolos.IMPORTAR:
+                this.avancarEDevolverAnterior();
+                const caminhoArquivo = this.simbolos[this.atual];
+                const resultadoImportacao = this.importador.importar(caminhoArquivo.literal, false);
+                this.simbolos.splice(this.atual - 1, 2, ...resultadoImportacao.simbolos);
+                this.atual -= 1;
+                return null;
+            default:
+                const seletores = this.resolverSeletores();
+                const modificadores = this.resolverModificadores();
+        
+                return new Declaracao(
+                    seletores,
+                    modificadores
+                );
+        }
     }
 
-    analisar(simbolos: Simbolo[]) {
+    analisar(simbolos: Simbolo[]): Declaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
@@ -467,6 +482,6 @@ export class AvaliadorSintatico {
             declaracoes.push(this.declaracao());
         }
 
-        return declaracoes;
+        return declaracoes.filter(d => d);
     }
 }

@@ -3,8 +3,13 @@ import { Simbolo } from "./simbolo";
 
 import palavrasReservadas from "./palavras-reservadas/foles";
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
+import { LexadorInterface } from "../interfaces";
+import { ResultadoLexadorInterface } from "../interfaces/resultado-lexador-interface";
 
-export class Lexador {
+/**
+ * O Lexador de FolEs, baseado no Lexador de [Delégua](https://github.com/DesignLiquido/delegua/blob/principal/fontes/lexador/lexador.ts).
+ */
+export class Lexador implements LexadorInterface {
     codigo: string[];
     simbolos: Simbolo[];
     erros: ErroLexador[];
@@ -47,7 +52,7 @@ export class Lexador {
         return this.atual >= this.codigo[this.linha].length;
     }
 
-    simboloAtual(): string {
+    caractereAtual(): string {
         if (this.eFinalDaLinha()) return "\0";
         return this.codigo[this.linha].charAt(this.atual);
     }
@@ -133,14 +138,14 @@ export class Lexador {
     }
 
     analisarNumero(): void {
-        while (this.eDigito(this.simboloAtual())) {
+        while (this.eDigito(this.caractereAtual())) {
             this.avancar();
         }
 
-        if (this.simboloAtual() == "." && this.eDigito(this.proximoSimbolo())) {
+        if (this.caractereAtual() == "." && this.eDigito(this.proximoSimbolo())) {
             this.avancar();
 
-            while (this.eDigito(this.simboloAtual())) {
+            while (this.eDigito(this.caractereAtual())) {
                 this.avancar();
             }
         }
@@ -155,15 +160,36 @@ export class Lexador {
         );
     }
 
+    analisarDiretiva(): void {
+        this.avancar();
+        while (this.eAlfabetoOuDigito(this.caractereAtual())) {
+            this.avancar();
+        }
+
+        const nomeDiretiva: string = this.codigo[this.linha].substring(
+            this.inicioSimbolo + 1,
+            this.atual
+        );
+
+        switch (nomeDiretiva) {
+            case 'importar':
+                this.avancar(); // Espaço esperado entre @importar e o texto do arquivo
+                this.adicionarSimbolo(tiposDeSimbolos.IMPORTAR, null, null);
+                break;
+            default:
+                throw new Error(`Diretiva não reconhecida: ${nomeDiretiva}`);
+        }        
+    }
+
     analisarTexto(delimitador = '"'): void {
-        while (this.simboloAtual() !== delimitador && !this.eFinalDoCodigo()) {
+        while (this.caractereAtual() !== delimitador && !this.eFinalDoCodigo()) {
             this.avancar();
         }
 
         if (this.eFinalDoCodigo()) {
             this.erros.push({
                 linha: this.linha + 1,
-                caractere: this.simbolos[this.atual - 1].lexema,
+                caractere: this.codigo[this.linha].charAt(this.atual - 1),
                 mensagem: "Texto não finalizado.",
             } as ErroLexador);
             return;
@@ -177,7 +203,7 @@ export class Lexador {
     }
 
     identificarPalavraChave(): void {
-        while (this.eAlfabetoOuDigito(this.simboloAtual())) {
+        while (this.eAlfabetoOuDigito(this.caractereAtual())) {
             this.avancar();
         }
 
@@ -201,7 +227,7 @@ export class Lexador {
     encontrarFimComentarioAsterisco(): void {
         while (!this.eFinalDoCodigo()) {
             this.avancar();
-            if (this.simboloAtual() === "*" && this.proximoSimbolo() === "/") {
+            if (this.caractereAtual() === "*" && this.proximoSimbolo() === "/") {
                 this.avancar();
                 this.avancar();
                 break;
@@ -210,7 +236,7 @@ export class Lexador {
     }
 
     analisarToken(): void {
-        const caractere = this.simboloAtual();
+        const caractere = this.caractereAtual();
 
         switch (caractere) {
             case "{":
@@ -303,7 +329,7 @@ export class Lexador {
                     break;
                 } else {
                     this.avancar();
-                    switch (this.simboloAtual()) {
+                    switch (this.caractereAtual()) {
                         case "/":
                             this.avancarParaProximaLinha();
                             break;
@@ -332,6 +358,9 @@ export class Lexador {
                 this.analisarTexto("'");
                 this.avancar();
                 break;
+            case "@":
+                this.analisarDiretiva();
+                break;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
                 else if (this.eAlfabeto(caractere))
@@ -347,7 +376,7 @@ export class Lexador {
         }
     }
 
-    mapear(codigo: string[]) {
+    mapear(codigo: string[]): ResultadoLexadorInterface {
         this.atual = 0;
         this.linha = 0;
         this.inicioSimbolo = 0;
