@@ -487,7 +487,6 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "list-style-type": EstiloListaTipo,
     "pointer-events": EventosPonteiro,
     "display": Exibicao,
-
     "fatiar-borda-mascara": FatiarBordaMascara,
     "fatiar-borda-máscara": FatiarBordaMascara,
     "fatiar-imagem-borda": FatiarImagemBorda,
@@ -756,7 +755,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "tamanho-colunas-em-grade": TamanhoColunasEmGrade,
     "tamanho-em-bloco": TamanhoEmBloco,
     "tamanho-em-linha": TamanhoEmLinha,
-    "tamanho-fonte": TamanhoFonte,
+    "font-size": TamanhoFonte,
     "tamanho-fundo": TamanhoFundo,
     "tamanho-grade": TamanhoGrade,
     "tamanho-linhas-em-grade": TamanhoLinhasEmGrade,
