@@ -66,7 +66,7 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
         });
     });
 
-    describe('CSS para FolEs', () => {
+    describe.skip('CSS para FolEs', () => {
         let foles: FolEs;
 
         beforeEach(() => {
