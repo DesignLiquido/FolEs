@@ -372,7 +372,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     }
 
     /**
-     * Resolve os seletores. Por enquanto resolve apenas um seletor por vez.
+     * Resolve os seletores.
      * @param espacoReservado 
      */
     protected resolverSeletores(espacoReservado: string = null): Seletor[] {
@@ -386,7 +386,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 case tiposDeSimbolos.PERCENTUAL:
                     seletores.push(this.seletorPorEspacoReservado());
                     break;
-                case tiposDeSimbolos.NOME_DE_CLASSE:
+                case tiposDeSimbolos.PONTO:
                     seletores.push(this.seletorPorNomeDeClasse());
                     break;
                 case tiposDeSimbolos.ID_DO_ELEMENTO:
@@ -398,60 +398,77 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return seletores;
     }
 
-    resolverModificadores(): Modificador[] {
+    private resolverModificador(): Modificador {
+        const modificador = this.consumir(
+            tiposDeSimbolos.IDENTIFICADOR,
+            "Esperado nome do modificador."
+        );
+
+        this.consumir(
+            tiposDeSimbolos.DOIS_PONTOS,
+            "Esperado ':' após nome do modificador."
+        );
+
+        const valorModificador = this.valorModificador();
+        let quantificador;
+        // TODO: Pensar num teste melhor pra isso.
+        /*if (!(valorModificador instanceof Metodo)) {
+            quantificador = this.avancarEDevolverAnterior();
+        }*/
+        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
+            quantificador = this.avancarEDevolverAnterior();
+        }
+
+        this.consumir(
+            tiposDeSimbolos.PONTO_E_VIRGULA,
+            `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
+        );
+
+        const classeModificadora = new SeletorModificador(
+            modificador.lexema,
+            valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
+            quantificador && quantificador.hasOwnProperty('lexema') ?
+                quantificador.lexema :
+                quantificador,
+            {
+                linha: modificador.linha,
+                colunaInicial: modificador.colunaInicial,
+                colunaFinal: modificador.colunaFinal
+            }
+        );
+
+        return classeModificadora as Modificador;
+    }
+
+    resolverModificadoresEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: Declaracao[] } {
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
         );
 
         const modificadores: Modificador[] = [];
+        const declaracoesAninhadas: Declaracao[] = [];
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
-            const modificador = this.consumir(
-                tiposDeSimbolos.IDENTIFICADOR,
-                "Esperado nome do modificador."
-            );
-
-            this.consumir(
-                tiposDeSimbolos.DOIS_PONTOS,
-                "Esperado ':' após nome do modificador."
-            );
-
-            const valorModificador = this.valorModificador();
-            let quantificador;
-            // TODO: Pensar num teste melhor pra isso.
-            /*if (!(valorModificador instanceof Metodo)) {
-                quantificador = this.avancarEDevolverAnterior();
-            }*/
-            if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
-                quantificador = this.avancarEDevolverAnterior();
+            switch (this.simbolos[this.atual].tipo) {
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    const modificador = this.resolverModificador();
+                    modificadores.push(modificador);
+                    break;
+                default:
+                    const declaracaoAninhada = this.declaracao();
+                    declaracoesAninhadas.push(declaracaoAninhada);
+                    break;
             }
-
-            this.consumir(
-                tiposDeSimbolos.PONTO_E_VIRGULA,
-                `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
-            );
-
-            const classeModificadora = new SeletorModificador(
-                modificador.lexema,
-                valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
-                quantificador && quantificador.hasOwnProperty('lexema') ?
-                    quantificador.lexema :
-                    quantificador,
-                {
-                    linha: modificador.linha,
-                    colunaInicial: modificador.colunaInicial,
-                    colunaFinal: modificador.colunaFinal
-                }
-            );
-
-            modificadores.push(classeModificadora as Modificador);
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return modificadores;
+        return { 
+            modificadores,
+            declaracoesAninhadas
+        };
     }
 
-    declaracao(): any {
+    declaracao(): Declaracao | null {
         if (this.estaNoFinal()) return null;
         switch (this.simbolos[this.atual].tipo) {
             case tiposDeSimbolos.IMPORTAR:
@@ -463,11 +480,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return null;
             default:
                 const seletores = this.resolverSeletores();
-                const modificadores = this.resolverModificadores();
+                const modificadoresEDeclaracoesAninhadas = this.resolverModificadoresEDeclaracoesAninhadas();
         
                 return new Declaracao(
                     seletores,
-                    modificadores
+                    modificadoresEDeclaracoesAninhadas.modificadores,
+                    modificadoresEDeclaracoesAninhadas.declaracoesAninhadas
                 );
         }
     }

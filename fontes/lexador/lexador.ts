@@ -284,19 +284,11 @@ export class Lexador implements LexadorInterface {
                 this.avancar();
                 break;
             case ".":
-                if (this.atual === 0) {
-                    this.adicionarSimbolo(
-                        tiposDeSimbolos.NOME_DE_CLASSE,
-                        null,
-                        "."
-                    );
-                } else {
-                    this.adicionarSimbolo(
-                        tiposDeSimbolos.PONTO,
-                        null,
-                        "."
-                    );
-                }
+                this.adicionarSimbolo(
+                    tiposDeSimbolos.PONTO,
+                    null,
+                    "."
+                );
                 this.avancar();
                 break;
             case "#":
