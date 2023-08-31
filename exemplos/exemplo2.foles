@@ -8,4 +8,8 @@ lmht {
     tamanho-colunas-em-grade: minmax(200px, auto);
     altura-máxima: encaixar-conteúdo(5cm);
     altura: limitar(1px, 2vw, 2.5rem);
+
+    .outra-classe {
+        tamanho-fonte: 24px;
+    }
 }

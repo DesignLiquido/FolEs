@@ -7,12 +7,19 @@ import { Metodo } from "../valores/metodos/metodo";
 
 import estruturasHtml from "./estruturas-html";
 
+/**
+ * A classe que traduz FolEs para CSS.
+ */
 export class Tradutor {
-    traduzirModificador(modificador: Modificador): string {
+    private traduzirModificador(
+        modificador: Modificador,
+        indentacao: number = 0
+    ): string {
         // Caso 1: Número-Quantificador ou somente Número.
         if (Number(modificador.valor)) {
-            return `\t${modificador.propriedadeCss}: ${modificador.valor}${modificador.quantificador || ""
-                };\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                modificador.valor
+            }${modificador.quantificador || ""};\n`;
         }
 
         // Caso 2: Tradução do valor contida no objeto 'valoresAceitos'.
@@ -22,20 +29,31 @@ export class Tradutor {
         ) {
             const objetoValores = modificador["valoresAceitos"];
             const valorTraduzido = objetoValores[modificador.valor];
-            return `\t${modificador.propriedadeCss}: ${valorTraduzido};\n`;
+            return `${" ".repeat(indentacao)}${
+                modificador.propriedadeCss
+            }: ${valorTraduzido};\n`;
         }
 
         // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
         if (modificador.valor instanceof Metodo) {
-            return `\t${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""};\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                modificador.valor.paraTexto() || ""
+            };\n`;
         }
 
         // Caso 4: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
-        return `\t${modificador.propriedadeCss}: ${valorTraduzido};\n`;
+        return `${" ".repeat(indentacao)}${
+            modificador.propriedadeCss
+        }: ${valorTraduzido};\n`;
     }
 
-    traduzir(declaracoes: Declaracao[]) {
+    /**
+     * O processo de tradução. É recursivo.
+     * @param declaracoes As declaracoes.
+     * @returns Uma string com o resultado da tradução.
+     */
+    traduzir(declaracoes: Declaracao[], indentacao: number = 0) {
         let resultado = "";
 
         for (const declaracao of declaracoes) {
@@ -48,12 +66,12 @@ export class Tradutor {
                     continue;
                 }
 
-                if (seletor instanceof SeletorEstrutura){
-                    const tagLmht = seletor.paraTexto();
-                    const traducaoTag = estruturasHtml[tagLmht];
-                    resultado += traducaoTag + ', ';
+                if (seletor instanceof SeletorEstrutura) {
+                    const seletorLmht = seletor.paraTexto();
+                    const traducaoSeletor = estruturasHtml[seletorLmht];
+                    resultado += " ".repeat(indentacao) + traducaoSeletor + ", ";
                 } else {
-                    resultado += seletor.paraTexto() + ', ';
+                    resultado += " ".repeat(indentacao) + seletor.paraTexto() + ", ";
                 }
             }
 
@@ -62,13 +80,20 @@ export class Tradutor {
             }
 
             resultado = resultado.slice(0, -2);
-            resultado += ' {\n';
+            resultado += " {\n";
 
             for (const modificador of declaracao.modificadores) {
-                resultado += this.traduzirModificador(modificador);
+                resultado += this.traduzirModificador(
+                    modificador,
+                    indentacao + 2
+                );
             }
 
-            resultado += `}\n\n`;
+            resultado += this.traduzir(
+                declaracao.declaracoesAninhadas,
+                indentacao + 2
+            );
+            resultado += `${" ".repeat(indentacao)}}\n\n`;
         }
 
         return resultado;
