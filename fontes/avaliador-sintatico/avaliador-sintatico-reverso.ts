@@ -168,7 +168,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
         return new Declaracao(
             seletores,
-            modificadores
+            modificadores,
+            []
         );
     }
 
