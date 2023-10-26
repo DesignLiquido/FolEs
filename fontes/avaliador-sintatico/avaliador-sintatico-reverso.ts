@@ -9,6 +9,7 @@ import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
 import { Seletor } from "../seletores";
 import { AvaliadorSintaticoInterface, ImportadorInterface } from "../interfaces";
+import { HexadecimalCor } from "../valores/metodos/hexadecimal-cor";
 
 export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
@@ -121,59 +122,96 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return seletores;
     }
 
-    resolverModificadores(): Modificador[] {
-        // const simboloSeletor = this.avancarEDevolverAnterior();
+    private resolverCor() {
+        const codigoCor = this.avancarEDevolverAnterior();
+        return new HexadecimalCor(codigoCor.lexema);
+    }
 
+    private valorModificador() {
+        const valorModificador = this.avancarEDevolverAnterior();
+
+        switch (valorModificador.tipo) {
+            case tiposDeSimbolos.CERQUILHA:
+                return this.resolverCor();
+            default:
+                return valorModificador;
+        }
+    }
+
+    private resolverModificador(): Modificador {
+        const modificador = this.consumir(
+            tiposDeSimbolos.IDENTIFICADOR,
+            "Esperado nome do atributo de identificação."
+        );
+
+        this.consumir(
+            tiposDeSimbolos.DOIS_PONTOS,
+            `Esperado ':' após declaração de modificador '${modificador.lexema}'.`
+        );
+
+        const valorModificador = this.valorModificador();
+        let quantificador;
+        if (valorModificador instanceof Simbolo && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
+            quantificador = this.avancarEDevolverAnterior();
+        }
+
+        this.consumir(
+            tiposDeSimbolos.PONTO_E_VIRGULA,
+            `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
+        );
+
+        const classeModificadora = new SeletorReversoModificador(
+            modificador.lexema,
+            valorModificador instanceof Simbolo ? valorModificador.lexema : valorModificador,
+            quantificador && quantificador.hasOwnProperty('lexema') ? 
+                quantificador.lexema :
+                quantificador
+        );
+        
+        return classeModificadora as Modificador;
+    }
+
+    resolverModificadorEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: Declaracao[] } {
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
         );
 
         const modificadores: Modificador[] = [];
+        const declaracoesAninhadas: Declaracao[] = [];
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
-            const modificador = this.consumir(
-                tiposDeSimbolos.IDENTIFICADOR,
-                "Esperado nome do atributo de identificação."
-            );
-
-            this.consumir(
-                tiposDeSimbolos.DOIS_PONTOS,
-                `Esperado ':' após declaração de modificador '${modificador.lexema}'.`
-            );
-
-            const valorModificador = this.avancarEDevolverAnterior();
-            const quantificador = this.avancarEDevolverAnterior();
-
-            this.consumir(
-                tiposDeSimbolos.PONTO_E_VIRGULA,
-                `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
-            );
-
-            const classeModificadora = new SeletorReversoModificador(
-                modificador.lexema,
-                valorModificador.lexema,
-                quantificador.lexema
-            );
-            modificadores.push(classeModificadora as Modificador);
+            switch (this.simbolos[this.atual].tipo) {
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    const modificador = this.resolverModificador();
+                    modificadores.push(modificador);
+                    break;
+                default:
+                    const declaracaoAninhada = this.declaracao();
+                    declaracoesAninhadas.push(declaracaoAninhada);
+                    break;
+            }
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return modificadores;
+        return { 
+            modificadores,
+            declaracoesAninhadas
+        };
     }
 
-    declaracao(): any {
+    declaracao(): Declaracao | null {
         if (this.estaNoFinal()) return null;
         const seletores = this.resolverSeletores();
-        const modificadores = this.resolverModificadores();
+        const modificadorEDeclaracoesAninhadas = this.resolverModificadorEDeclaracoesAninhadas();
 
         return new Declaracao(
             seletores,
-            modificadores,
-            []
+            modificadorEDeclaracoesAninhadas.modificadores,
+            modificadorEDeclaracoesAninhadas.declaracoesAninhadas
         );
     }
 
-    analisar(simbolos: Simbolo[]) {
+    analisar(simbolos: Simbolo[]): Declaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
