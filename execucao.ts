@@ -7,6 +7,11 @@ const principal = () => {
 
     analisadorArgumentos
         .argument('[arquivos...]', 'Nomes dos arquivos (opcional)')
+        .option(
+            '-a, --aninhamento',
+            'Gera CSS com aninhamento. Não recomendado usar se o CSS executar em navegadores antigos.',
+            false
+        )
         .action((arquivos) => {
             if (arquivos.length > 0) {
                 nomeArquivo = arquivos[0];
@@ -26,7 +31,9 @@ const principal = () => {
     if (nomeArquivo.endsWith("foles")) {
         console.log(foles.converterParaCss(nomeArquivo));
         return;
-    } else if (nomeArquivo.endsWith("css")) {
+    } 
+    
+    if (nomeArquivo.endsWith("css")) {
         const retorno = foles.converterParaFolEs(nomeArquivo);
         console.log(retorno);
         return;

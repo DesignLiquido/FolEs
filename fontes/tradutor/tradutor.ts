@@ -9,8 +9,18 @@ import estruturasHtml from "./estruturas-html";
 
 /**
  * A classe que traduz FolEs para CSS.
+ * 
+ * Normalmente o CSS traduzido é desaninhado por uma questão de compatibilidade
+ * entre navegadores. Até então, CSS aninhado é uma funcionalidade nova, e 
+ * apenas navegadores mais recentes a implementam.
  */
 export class Tradutor {
+    traduzirComAninhamentos: boolean;
+
+    constructor(traduzirComAninhamentos: boolean = false) {
+        this.traduzirComAninhamentos = traduzirComAninhamentos;
+    }
+
     private traduzirModificador(
         modificador: Modificador,
         indentacao: number = 0
