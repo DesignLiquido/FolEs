@@ -5,7 +5,7 @@ describe('Classe FolEs - Tradução de Textos', () => {
         let foles: FolEs;
 
         beforeEach(() => {
-            foles = new FolEs();
+            foles = new FolEs(false);
         });
 
         it('converterTextoParaCss - caso de sucesso', () => {
@@ -28,7 +28,7 @@ describe('Classe FolEs - Tradução de Textos', () => {
         let foles: FolEs;
 
         beforeEach(() => {
-            foles = new FolEs();
+            foles = new FolEs(false);
         });
 
         it('converterTextoParaFolEs - caso de sucesso', () => {
@@ -53,7 +53,7 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
         let foles: FolEs;
 
         beforeEach(() => {
-            foles = new FolEs();
+            foles = new FolEs(false);
         });
 
         it('converterParaCss - caso de sucesso', () => {
@@ -70,7 +70,7 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
         let foles: FolEs;
 
         beforeEach(() => {
-            foles = new FolEs();
+            foles = new FolEs(false);
         });
 
         it('converterParaFolEs - caso de sucesso', () => {
