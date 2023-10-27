@@ -1,6 +1,9 @@
 import { Declaracao } from "../declaracoes";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
+import { Modificador } from "../modificadores";
+import { PragmasModificador, SeletorModificador } from "../modificadores/superclasse";
 import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
+import { Metodo } from "../valores/metodos/metodo";
 
 import estruturasHtml from "./estruturas-html";
 
@@ -25,6 +28,18 @@ export class Tradutor {
         return novosPragmasSeletor;
     }
 
+    private calcularPragmasModificador(modificador: Modificador) {
+        const novosPragmasModificador: PragmasModificador = {
+            linha: this.linha,
+            colunaInicial: this.atual,
+            colunaFinal: this.atual
+        }
+
+        this.atual += modificador.propriedadeCss.length;
+        novosPragmasModificador.colunaFinal = this.atual;
+        return novosPragmasModificador;
+    }
+
     private traduzirSeletorEstrutura(seletor: SeletorEstrutura): Seletor {
         const seletorLmht = seletor.paraTexto();
         const traducaoSeletor = estruturasHtml[seletorLmht];
@@ -43,6 +58,7 @@ export class Tradutor {
 
         for (const declaracao of declaracoes) {
             const seletoresTraduzidos: Seletor[] = [];
+            const modificadoresTraduzidos: Modificador[] = [];
 
             for (const seletor of declaracao.seletores) {
                 this.linha = seletor.pragmas.linha;
@@ -53,10 +69,22 @@ export class Tradutor {
                 }                
             }
 
+            for (const modificador of declaracao.modificadores) {
+                this.linha = modificador.pragmas.linha;
+                modificadoresTraduzidos.push(
+                    new SeletorModificador(
+                        Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles,
+                        modificador.valor instanceof Metodo ? modificador.valor.paraTexto() : modificador.valor,
+                        modificador.quantificador,
+                        this.calcularPragmasModificador(modificador)
+                    ) as Modificador
+                );       
+            }
+
             declaracoesTraduzidas.push(
                 new Declaracao(
                     seletoresTraduzidos, 
-                    [],
+                    modificadoresTraduzidos,
                     []
                 )
             )
