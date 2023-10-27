@@ -6,8 +6,12 @@ import { Seletor } from "./seletor";
 export class SeletorEstrutura extends Seletor {
     estrutura: Estrutura;
 
-    constructor(estrutura: Estrutura, pseudoclasse?: Pseudoclasse, pragmas?: PragmasSeletor) {
-        super(pseudoclasse, pragmas);
+    constructor(estrutura: Estrutura, pseudoclasse?: Pseudoclasse) {
+        super(pseudoclasse, {
+            linha: estrutura.pragmas.linha,
+            colunaInicial: estrutura.pragmas.colunaInicial,
+            colunaFinal: estrutura.pragmas.colunaFinal
+        });
         this.estrutura = estrutura;
     }
 
