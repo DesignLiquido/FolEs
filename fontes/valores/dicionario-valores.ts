@@ -1,6 +1,6 @@
 import { CurvaCubica } from "./metodos/curva-cubica";
 import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
-import { Hex } from "./metodos/hex";
+import { HexadecimalCor } from "./metodos/hexadecimal-cor";
 import { Hsl } from "./metodos/hsl";
 import { Hsla } from "./metodos/hsla";
 import { Limitar } from "./metodos/limitar";
@@ -18,7 +18,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "encaixar-conteúdo": EncaixarConteudo,
     "hsl": Hsl,
     "hsla": Hsla,
-    "hex": Hex,
+    "hex": HexadecimalCor,
     "limitar": Limitar,
     "linear": Linear,
     "minmax": MinMax,

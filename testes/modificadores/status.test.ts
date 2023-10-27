@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Tradutor } from "../../fontes/tradutor";
+import { Serializador } from "../../fontes/serializadores";
 import { StatusAuto, StatusNenhum, StatusNormal } from "../listas/status";
 
 describe('Testando Seletores com STATUS como atributo', () => {
@@ -12,13 +12,13 @@ describe('Testando Seletores com STATUS como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Tradutor;
+        let tradutor: Serializador;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Valor válido (auto)', () => {
@@ -67,7 +67,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
@@ -109,7 +109,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
+                    tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -151,7 +151,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('none');
@@ -195,7 +195,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('normal');

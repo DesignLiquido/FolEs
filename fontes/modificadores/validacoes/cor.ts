@@ -1,4 +1,4 @@
-import { Hex } from "../../valores/metodos/hex";
+import { HexadecimalCor } from "../../valores/metodos/hexadecimal-cor";
 import { Metodo } from "../../valores/metodos/metodo";
 import { cores } from "../atributos/cores";
 import { valoresGlobais } from "../atributos/globais";
@@ -9,7 +9,7 @@ export function validarValorCor(
     valoresAceitos?: { [valorFoles: string]: string },
     valoresExtra?: { [valorFoles: string]: string }) {
     if (valor instanceof Metodo) {
-        if (valor instanceof Hex) {
+        if (valor instanceof HexadecimalCor) {
             if (valor['codigo'].length !== 3 && valor['codigo'].length !== 6) {
                 throw new Error(`Propriedade '${nomePropriedade}' com hexadecimal inválido: '${valor['codigo']}'. Hexadecimais
                     devem ter 3 ou 6 caracteres após a cerquilha, sendo cada caracter de 0 até 9 ou de A até F.`);

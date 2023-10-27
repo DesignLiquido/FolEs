@@ -4,7 +4,7 @@ import { ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Tradutor } from "../../fontes/tradutor";
+import { Serializador } from "../../fontes/serializadores";
 import { TraducaoUrl, Url } from "../listas/url";
 
 describe('Testando Seletores que recebem URL como atributo', () => {
@@ -12,13 +12,13 @@ describe('Testando Seletores que recebem URL como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintatico;
-        let tradutor: Tradutor;
+        let tradutor: Serializador;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -48,7 +48,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(TraducaoUrl[Url[index]]);
                 expect(resultadoTradutor).toContain('url');
@@ -87,7 +87,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
+                    tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

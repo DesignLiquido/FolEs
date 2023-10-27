@@ -2,8 +2,8 @@ import { AvaliadorSintatico } from "./avaliador-sintatico";
 import { AvaliadorSintaticoReverso } from './avaliador-sintatico/avaliador-sintatico-reverso';
 import { Lexador } from "./lexador";
 import { LexadorReverso } from './lexador/lexador-reverso';
-import { Tradutor } from "./tradutor";
-import { TradutorReverso } from './tradutor/tradutor-reverso';
+import { Serializador } from "./serializadores";
+import { SerializadorReverso } from './serializadores/serializador-reverso';
 import { Importador } from './importador';
 import { ResultadoLexadorInterface, SimboloInterface } from './interfaces';
 
@@ -17,10 +17,10 @@ export class FolEs {
     avaliadorSintaticoReverso: AvaliadorSintaticoReverso;
     importador: Importador;
     importadorReverso: Importador;
-    tradutor: Tradutor;
-    tradutorReverso: TradutorReverso;
+    tradutor: Serializador;
+    tradutorReverso: SerializadorReverso;
 
-    constructor() {
+    constructor(traduzirComAninhamentos: boolean) {
         this.lexador = new Lexador();
         this.lexadorReverso = new LexadorReverso();
         this.importador = new Importador(this.lexador);
@@ -28,8 +28,8 @@ export class FolEs {
         this.importadorReverso.extensaoPadrao = ".css";
         this.avaliadorSintatico = new AvaliadorSintatico(this.importador);
         this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(this.importadorReverso);
-        this.tradutor = new Tradutor();
-        this.tradutorReverso = new TradutorReverso();
+        this.tradutor = new Serializador(traduzirComAninhamentos);
+        this.tradutorReverso = new SerializadorReverso(traduzirComAninhamentos);
     }
 
     /**
@@ -39,13 +39,13 @@ export class FolEs {
      */
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(simbolos);
-        const traducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
+        const traducao = this.tradutor.serializar(resultadoAvaliadorSintatico);
         return traducao;
     }
 
     private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(simbolos);
-        const traducaoReversa = this.tradutorReverso.traduzir(resultadoAvaliadorSintaticoReverso);
+        const traducaoReversa = this.tradutorReverso.serializar(resultadoAvaliadorSintaticoReverso);
         return traducaoReversa;
     }
     

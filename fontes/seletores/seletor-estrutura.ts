@@ -1,12 +1,17 @@
 import { Estrutura } from "../estruturas/estrutura";
 import { Pseudoclasse } from "../pseudoclasses/pseudoclasse";
+import { PragmasSeletor } from "./pragmas-seletor";
 import { Seletor } from "./seletor";
 
 export class SeletorEstrutura extends Seletor {
     estrutura: Estrutura;
 
     constructor(estrutura: Estrutura, pseudoclasse?: Pseudoclasse) {
-        super(pseudoclasse);
+        super(pseudoclasse, {
+            linha: estrutura.pragmas.linha,
+            colunaInicial: estrutura.pragmas.colunaInicial,
+            colunaFinal: estrutura.pragmas.colunaFinal
+        });
         this.estrutura = estrutura;
     }
 

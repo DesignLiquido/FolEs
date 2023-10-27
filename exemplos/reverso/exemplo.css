@@ -1,2 +1,12 @@
-html{font-size:12px;}
-body{font-size:16px;max-width:20cm;}
+html {
+    font-size:12px;
+}
+
+body {
+    font-size:16px;
+    max-width:20cm;
+
+    p {
+        color: #999;
+    }
+}

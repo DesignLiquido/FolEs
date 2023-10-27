@@ -5,13 +5,23 @@ import { SeletorEstrutura } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { Metodo } from "../valores/metodos/metodo";
 
-import estruturasHtml from "./estruturas-html";
+import estruturasHtml from "../tradutores/estruturas-html";
 
 /**
- * A classe que traduz FolEs para CSS.
+ * A classe que efetivamente traduz FolEs para CSS.
+ * 
+ * Normalmente o CSS traduzido é desaninhado por uma questão de compatibilidade
+ * entre navegadores. Até então, CSS aninhado é uma funcionalidade nova, e 
+ * apenas navegadores mais recentes a implementam.
  */
-export class Tradutor {
-    private traduzirModificador(
+export class Serializador {
+    serializarComAninhamentos: boolean;
+
+    constructor(serializarComAninhamentos: boolean = false) {
+        this.serializarComAninhamentos = serializarComAninhamentos;
+    }
+
+    private serializarModificador(
         modificador: Modificador,
         indentacao: number = 0
     ): string {
@@ -53,10 +63,15 @@ export class Tradutor {
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    traduzir(declaracoes: Declaracao[], indentacao: number = 0) {
+    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
+        let textoSeletorAnterior = "";
+        if (seletorAnterior !== undefined) {
+            textoSeletorAnterior = seletorAnterior;
+        }
 
         for (const declaracao of declaracoes) {
+            const prefixos = [];
             let deveImprimir = true;
 
             for (const seletor of declaracao.seletores) {
@@ -66,13 +81,17 @@ export class Tradutor {
                     continue;
                 }
 
+                let prefixo: string;
                 if (seletor instanceof SeletorEstrutura) {
                     const seletorLmht = seletor.paraTexto();
                     const traducaoSeletor = estruturasHtml[seletorLmht];
-                    resultado += " ".repeat(indentacao) + traducaoSeletor + ", ";
+                    prefixo = (textoSeletorAnterior + " " + traducaoSeletor).trimStart();
                 } else {
-                    resultado += " ".repeat(indentacao) + seletor.paraTexto() + ", ";
+                    prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
                 }
+
+                prefixos.push(prefixo);
+                resultado += " ".repeat(indentacao) + prefixo + ", ";
             }
 
             if (!deveImprimir) {
@@ -83,17 +102,29 @@ export class Tradutor {
             resultado += " {\n";
 
             for (const modificador of declaracao.modificadores) {
-                resultado += this.traduzirModificador(
+                resultado += this.serializarModificador(
                     modificador,
                     indentacao + 2
                 );
             }
 
-            resultado += this.traduzir(
-                declaracao.declaracoesAninhadas,
-                indentacao + 2
-            );
-            resultado += `${" ".repeat(indentacao)}}\n\n`;
+            if (this.serializarComAninhamentos) {
+                resultado += this.serializar(
+                    declaracao.declaracoesAninhadas,
+                    indentacao + 2
+                );
+                resultado += `${" ".repeat(indentacao)}}\n\n`;
+            } else {
+                resultado += `${" ".repeat(indentacao)}}\n\n`;
+
+                for (const prefixo of prefixos) {
+                    resultado += this.serializar(
+                        declaracao.declaracoesAninhadas,
+                        indentacao,
+                        prefixo
+                    );
+                }
+            }
         }
 
         return resultado;

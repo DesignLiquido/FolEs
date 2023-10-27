@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Tradutor } from "../../fontes/tradutor";
+import { Serializador } from "../../fontes/serializadores";
 import { Estilo } from "../listas/estilo";
 
 describe('Testando Seletores com ESTILO como atributo', () => {
@@ -12,13 +12,13 @@ describe('Testando Seletores com ESTILO como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Tradutor;
+        let tradutor: Serializador;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Valor válido', () => {
@@ -62,7 +62,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
 
                 // // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain('body');
 
@@ -113,7 +113,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+                    tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

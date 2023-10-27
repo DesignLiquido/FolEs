@@ -1,0 +1,3 @@
+# Tradutores
+
+Inicialmente implementados como classes que montavam _strings_ de saída, os tradutores de FolEs recebem estruturas de dados do avaliador sintático e geram outras, com o recálculo dos pragmas (linha, coluna inicial e coluna final de cada símbolo). A ideia com isso é de gerar não apenas o arquivo de saída com a tradução como também seu respectivo mapa de símbolos, que pode ser usado em navegadores de internet (inspetor) para entender como cada símbolo foi transformado.
