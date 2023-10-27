@@ -26,7 +26,7 @@ const principal = () => {
         return;
     }
 
-    const foles = new FolEs();
+    const foles = new FolEs(opcoes.aninhamento);
 
     if (nomeArquivo.endsWith("foles")) {
         console.log(foles.converterParaCss(nomeArquivo));

@@ -20,7 +20,7 @@ export class FolEs {
     tradutor: Tradutor;
     tradutorReverso: TradutorReverso;
 
-    constructor() {
+    constructor(traduzirComAninhamentos: boolean) {
         this.lexador = new Lexador();
         this.lexadorReverso = new LexadorReverso();
         this.importador = new Importador(this.lexador);
@@ -28,8 +28,8 @@ export class FolEs {
         this.importadorReverso.extensaoPadrao = ".css";
         this.avaliadorSintatico = new AvaliadorSintatico(this.importador);
         this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(this.importadorReverso);
-        this.tradutor = new Tradutor();
-        this.tradutorReverso = new TradutorReverso();
+        this.tradutor = new Tradutor(traduzirComAninhamentos);
+        this.tradutorReverso = new TradutorReverso(traduzirComAninhamentos);
     }
 
     /**
