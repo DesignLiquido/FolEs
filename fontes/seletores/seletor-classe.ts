@@ -7,9 +7,8 @@ export class SeletorClasse extends Seletor {
     pragmas?: PragmasSeletor;
 
     constructor(nomeClasse: string, pseudoclasse?: Pseudoclasse, pragmas?: PragmasSeletor) {
-        super(pseudoclasse);
+        super(pseudoclasse, pragmas);
         this.nomeClasse = nomeClasse;
-        this.pragmas = pragmas;
     }
 
     paraTexto() {

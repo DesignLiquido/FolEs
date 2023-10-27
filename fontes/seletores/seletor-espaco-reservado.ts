@@ -6,12 +6,10 @@ import { Seletor } from "./seletor";
  */
 export class SeletorEspacoReservado extends Seletor {
     nome: string;
-    pragmas?: PragmasSeletor;
 
     constructor(nome: string, pragmas?: PragmasSeletor) {
-        super(undefined);
+        super(undefined, pragmas);
         this.nome = nome;
-        this.pragmas = pragmas;
     }
 
     paraTexto() {
