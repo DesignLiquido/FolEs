@@ -3,17 +3,17 @@ import { Modificador } from "../modificadores";
 import { Metodo } from "../valores/metodos/metodo";
 
 /**
- * O tradutor reverso traduz de CSS para FolEs. Pode traduzir tanto FolEs
+ * O serializador reverso traduz de CSS para FolEs. Pode traduzir tanto FolEs
  * aninhado quanto desaninhado.
  */
-export class TradutorReverso {
-    traduzirComAninhamentos: boolean;
+export class SerializadorReverso {
+    serializarComAninhamentos: boolean;
 
-    constructor(traduzirComAninhamentos: boolean = true) {
-        this.traduzirComAninhamentos = traduzirComAninhamentos;
+    constructor(serializarComAninhamentos: boolean = true) {
+        this.serializarComAninhamentos = serializarComAninhamentos;
     }
 
-    traduzirModificador(modificador: Modificador, indentacao: number = 0): string {
+    serializarModificador(modificador: Modificador, indentacao: number = 0): string {
         let quantificador = "";
         if (modificador.hasOwnProperty("quantificador")) {
             quantificador = modificador.quantificador;
@@ -30,7 +30,7 @@ export class TradutorReverso {
             `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador};\n`;
     }
 
-    traduzir(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
+    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -50,11 +50,11 @@ export class TradutorReverso {
             resultado += ' {\n';
             
             for (const modificador of declaracao.modificadores) {
-                resultado += this.traduzirModificador(modificador, indentacao + 2);
+                resultado += this.serializarModificador(modificador, indentacao + 2);
             }
 
-            if (this.traduzirComAninhamentos) {
-                resultado += this.traduzir(
+            if (this.serializarComAninhamentos) {
+                resultado += this.serializar(
                     declaracao.declaracoesAninhadas,
                     indentacao + 2
                 );
@@ -64,7 +64,7 @@ export class TradutorReverso {
                 resultado += `${" ".repeat(indentacao)}}\n\n`;
 
                 for (const prefixo of prefixos) {
-                    resultado += this.traduzir(
+                    resultado += this.serializar(
                         declaracao.declaracoesAninhadas,
                         indentacao,
                         prefixo

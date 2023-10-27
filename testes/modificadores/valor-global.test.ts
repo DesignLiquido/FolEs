@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Tradutor } from "../../fontes/serializadores";
+import { Serializador } from "../../fontes/serializadores";
 import { Valor } from "../../fontes/valores/valor";
 import { ValorGlobal } from "../listas/valor-global";
 
@@ -13,13 +13,13 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliadorSintatico: AvaliadorSintaticoInterface;
-        let tradutor: Tradutor;
+        let tradutor: Serializador;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliadorSintatico = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -52,7 +52,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('inherit');
@@ -78,7 +78,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliadorSintatico.analisar(resultadoLexador.simbolos));
+                    tradutor.serializar(avaliadorSintatico.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -117,7 +117,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliadorSintatico.analisar(novoLexador.simbolos));
+                    tradutor.serializar(avaliadorSintatico.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

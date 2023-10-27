@@ -1,22 +1,22 @@
 import { AvaliadorSintaticoReverso } from "../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
-import { TradutorReverso } from "../fontes/serializadores/tradutor-reverso";
+import { SerializadorReverso } from "../fontes/serializadores/serializador-reverso";
 
 import estruturasLmht from "../fontes/tradutor/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 
-describe('Tradutor Reverso', () => {
+describe('Serializador Reverso', () => {
     let lexadorReverso: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorReverso: AvaliadorSintaticoInterface;
-    let tradutorReverso: TradutorReverso;
+    let tradutorReverso: SerializadorReverso;
 
     beforeEach(() => {
         lexadorReverso = new LexadorReverso();
         importador = new Importador(lexadorReverso);
         avaliadorReverso = new AvaliadorSintaticoReverso(importador);
-        tradutorReverso = new TradutorReverso();
+        tradutorReverso = new SerializadorReverso();
     });
 
     // TODO: Finalizar a lógica em `declaracaoPorSeletor()` (avaliador sintático reverso)
@@ -34,7 +34,7 @@ describe('Tradutor Reverso', () => {
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
             // Tradutor deve retornar a estrutura HTML correspondente
-            const resultadoTradutor = tradutorReverso.traduzir(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutorReverso.serializar(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(Object.values(estruturasLmht)[index]);
         }
     });

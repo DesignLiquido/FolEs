@@ -1,23 +1,23 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
-import { Tradutor } from "../fontes/serializadores";
+import { Serializador } from "../fontes/serializadores";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 import estruturasHtml from "../fontes/tradutor/estruturas-html";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 
-describe('Tradutor', () => {
+describe('Serializador', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Tradutor;
+    let tradutor: Serializador;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        tradutor = new Tradutor();
+        tradutor = new Serializador();
     });
 
     describe('Casos de Sucesso', () => {
@@ -35,7 +35,7 @@ describe('Tradutor', () => {
                 // console.log(resultadoAvaliadorSintatico);
                 
                 // Tradutor deve retornar a estrutura HTML correspondente
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
             }
         });
@@ -55,7 +55,7 @@ describe('Tradutor', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
     
                 // Tradutor deve funcionar de acordo
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
     
                 expect(resultadoTradutor).toBeTruthy();
                 expect(resultadoTradutor).toContain("html");
@@ -76,7 +76,7 @@ describe('Tradutor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Tradutor deve funcionar de acordo
-            const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toBeTruthy();
             expect(resultadoTradutor).toContain("html");
@@ -98,11 +98,11 @@ describe('Tradutor', () => {
     
                 // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+                    tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
                 }).not.toBeTruthy;
     
                 expect(() => {
-                    tradutor.traduzir(avaliador.analisar(resultadoLexador.simbolos));
+                    tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

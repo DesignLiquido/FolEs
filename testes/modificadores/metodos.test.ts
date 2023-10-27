@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Tradutor } from "../../fontes/serializadores";
+import { Serializador } from "../../fontes/serializadores";
 import { MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
@@ -11,13 +11,13 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Tradutor;
+    let tradutor: Serializador;
 
     beforeEach(() => {
       lexador = new Lexador();
       importador = new Importador(lexador);
       avaliador = new AvaliadorSintatico(importador);
-      tradutor = new Tradutor();
+      tradutor = new Serializador();
     });
 
     it('Atribuindo Método "encaixar-conteúdo" (fit-content)', () => {
@@ -57,7 +57,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // // // Tradutor
-        const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]);
         expect(resultadoTradutor).toContain('fit-content(200px)');
@@ -102,7 +102,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLimitar[index]]);
         expect(resultadoTradutor).toContain('clamp(10vw, 20em, 100vw);');
@@ -147,7 +147,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // // // // Tradutor
-        const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain( TraducaoValoresMetodos[MetodoMinMax[index]]);
         expect(resultadoTradutor).toContain('minmax(100px, max-content);');
@@ -191,7 +191,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // // // // Tradutor
-        const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain( TraducaoValoresMetodos[MetodoPassos[index]]);
         expect(resultadoTradutor).toContain('steps(2, jump-start);');
@@ -234,7 +234,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // // // // Tradutor
-        const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain( TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
         expect(resultadoTradutor).toContain('cubic-bezier(0.42, 0, 1, 1);');
@@ -278,7 +278,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // // // // Tradutor
-        const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLinear[index]]);
         expect(resultadoTradutor).toContain('linear(0, 0.25, 1);');

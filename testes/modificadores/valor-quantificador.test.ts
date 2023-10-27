@@ -4,21 +4,21 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Tradutor } from "../../fontes/serializadores";
+import { Serializador } from "../../fontes/serializadores";
 import { ValorComprimento, ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
 
 describe('Testes: Valor-Quantificador', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Tradutor;
+    let tradutor: Serializador;
 
     describe('Testando Seletores que aceitam QUALQUER Valor e Quantificador', () => {
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -52,7 +52,7 @@ describe('Testes: Valor-Quantificador', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
                 
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -91,7 +91,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -125,7 +125,7 @@ describe('Testes: Valor-Quantificador', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
@@ -137,7 +137,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -171,7 +171,7 @@ describe('Testes: Valor-Quantificador', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
@@ -183,7 +183,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Tradutor();
+            tradutor = new Serializador();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -217,7 +217,7 @@ describe('Testes: Valor-Quantificador', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }

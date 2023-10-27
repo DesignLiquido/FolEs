@@ -8,20 +8,20 @@ import { Metodo } from "../valores/metodos/metodo";
 import estruturasHtml from "../tradutor/estruturas-html";
 
 /**
- * A classe que traduz FolEs para CSS.
+ * A classe que efetivamente traduz FolEs para CSS.
  * 
  * Normalmente o CSS traduzido é desaninhado por uma questão de compatibilidade
  * entre navegadores. Até então, CSS aninhado é uma funcionalidade nova, e 
  * apenas navegadores mais recentes a implementam.
  */
-export class Tradutor {
-    traduzirComAninhamentos: boolean;
+export class Serializador {
+    serializarComAninhamentos: boolean;
 
-    constructor(traduzirComAninhamentos: boolean = false) {
-        this.traduzirComAninhamentos = traduzirComAninhamentos;
+    constructor(serializarComAninhamentos: boolean = false) {
+        this.serializarComAninhamentos = serializarComAninhamentos;
     }
 
-    private traduzirModificador(
+    private serializarModificador(
         modificador: Modificador,
         indentacao: number = 0
     ): string {
@@ -63,7 +63,7 @@ export class Tradutor {
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    traduzir(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
+    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -102,14 +102,14 @@ export class Tradutor {
             resultado += " {\n";
 
             for (const modificador of declaracao.modificadores) {
-                resultado += this.traduzirModificador(
+                resultado += this.serializarModificador(
                     modificador,
                     indentacao + 2
                 );
             }
 
-            if (this.traduzirComAninhamentos) {
-                resultado += this.traduzir(
+            if (this.serializarComAninhamentos) {
+                resultado += this.serializar(
                     declaracao.declaracoesAninhadas,
                     indentacao + 2
                 );
@@ -118,7 +118,7 @@ export class Tradutor {
                 resultado += `${" ".repeat(indentacao)}}\n\n`;
 
                 for (const prefixo of prefixos) {
-                    resultado += this.traduzir(
+                    resultado += this.serializar(
                         declaracao.declaracoesAninhadas,
                         indentacao,
                         prefixo

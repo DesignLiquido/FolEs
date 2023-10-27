@@ -1,2 +1,2 @@
-export * from './tradutor';
-export * from './tradutor-reverso';
+export * from './serializador';
+export * from './serializador-reverso';
