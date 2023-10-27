@@ -3,7 +3,7 @@ import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Serializador } from "../fontes/serializadores";
 import { ValorQuantificador } from "./listas/valor-quantificador"
-import estruturasHtml from "../fontes/tradutor/estruturas-html";
+import estruturasHtml from "../fontes/tradutores/estruturas-html";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 

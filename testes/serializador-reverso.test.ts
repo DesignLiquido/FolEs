@@ -2,7 +2,7 @@ import { AvaliadorSintaticoReverso } from "../fontes/avaliador-sintatico/avaliad
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
 import { SerializadorReverso } from "../fontes/serializadores/serializador-reverso";
 
-import estruturasLmht from "../fontes/tradutor/estruturas-lmht";
+import estruturasLmht from "../fontes/tradutores/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 
