@@ -1,7 +1,7 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
-import { Tradutor } from "../fontes/tradutor";
+import { Tradutor } from "../fontes/serializadores";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 import estruturasHtml from "../fontes/tradutor/estruturas-html";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";

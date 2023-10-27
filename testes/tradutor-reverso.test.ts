@@ -1,6 +1,6 @@
 import { AvaliadorSintaticoReverso } from "../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
-import { TradutorReverso } from "../fontes/tradutor/tradutor-reverso";
+import { TradutorReverso } from "../fontes/serializadores/tradutor-reverso";
 
 import estruturasLmht from "../fontes/tradutor/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";

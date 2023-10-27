@@ -2,8 +2,8 @@ import { AvaliadorSintatico } from "./avaliador-sintatico";
 import { AvaliadorSintaticoReverso } from './avaliador-sintatico/avaliador-sintatico-reverso';
 import { Lexador } from "./lexador";
 import { LexadorReverso } from './lexador/lexador-reverso';
-import { Tradutor } from "./tradutor";
-import { TradutorReverso } from './tradutor/tradutor-reverso';
+import { Tradutor } from "./serializadores";
+import { TradutorReverso } from './serializadores/tradutor-reverso';
 import { Importador } from './importador';
 import { ResultadoLexadorInterface, SimboloInterface } from './interfaces';
 

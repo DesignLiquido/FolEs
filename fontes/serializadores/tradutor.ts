@@ -5,7 +5,7 @@ import { SeletorEstrutura } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { Metodo } from "../valores/metodos/metodo";
 
-import estruturasHtml from "./estruturas-html";
+import estruturasHtml from "../tradutor/estruturas-html";
 
 /**
  * A classe que traduz FolEs para CSS.

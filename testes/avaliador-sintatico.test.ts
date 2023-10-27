@@ -3,7 +3,7 @@ import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
-import { Tradutor } from "../fontes/tradutor";
+import { Tradutor } from "../fontes/serializadores";
 import { ValorQuantificador } from "./listas/valor-quantificador"
 
 describe('Avaliador Sintático', () => {
