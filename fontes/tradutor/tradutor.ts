@@ -63,10 +63,15 @@ export class Tradutor {
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    traduzir(declaracoes: Declaracao[], indentacao: number = 0) {
+    traduzir(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
+        let textoSeletorAnterior = "";
+        if (seletorAnterior !== undefined) {
+            textoSeletorAnterior = seletorAnterior;
+        }
 
         for (const declaracao of declaracoes) {
+            const prefixos = [];
             let deveImprimir = true;
 
             for (const seletor of declaracao.seletores) {
@@ -76,13 +81,17 @@ export class Tradutor {
                     continue;
                 }
 
+                let prefixo: string;
                 if (seletor instanceof SeletorEstrutura) {
                     const seletorLmht = seletor.paraTexto();
                     const traducaoSeletor = estruturasHtml[seletorLmht];
-                    resultado += " ".repeat(indentacao) + traducaoSeletor + ", ";
+                    prefixo = (textoSeletorAnterior + " " + traducaoSeletor).trimStart();
                 } else {
-                    resultado += " ".repeat(indentacao) + seletor.paraTexto() + ", ";
+                    prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
                 }
+
+                prefixos.push(prefixo);
+                resultado += " ".repeat(indentacao) + prefixo + ", ";
             }
 
             if (!deveImprimir) {
@@ -99,11 +108,23 @@ export class Tradutor {
                 );
             }
 
-            resultado += this.traduzir(
-                declaracao.declaracoesAninhadas,
-                indentacao + 2
-            );
-            resultado += `${" ".repeat(indentacao)}}\n\n`;
+            if (this.traduzirComAninhamentos) {
+                resultado += this.traduzir(
+                    declaracao.declaracoesAninhadas,
+                    indentacao + 2
+                );
+                resultado += `${" ".repeat(indentacao)}}\n\n`;
+            } else {
+                resultado += `${" ".repeat(indentacao)}}\n\n`;
+
+                for (const prefixo of prefixos) {
+                    resultado += this.traduzir(
+                        declaracao.declaracoesAninhadas,
+                        indentacao,
+                        prefixo
+                    );
+                }
+            }
         }
 
         return resultado;

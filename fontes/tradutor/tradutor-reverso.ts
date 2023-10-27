@@ -54,13 +54,10 @@ export class TradutorReverso {
             }
 
             if (this.traduzirComAninhamentos) {
-                for (const prefixo of prefixos) {
-                    resultado += this.traduzir(
-                        declaracao.declaracoesAninhadas,
-                        indentacao + 2,
-                        prefixo
-                    );
-                }
+                resultado += this.traduzir(
+                    declaracao.declaracoesAninhadas,
+                    indentacao + 2
+                );
 
                 resultado += `${" ".repeat(indentacao)}}\n\n`;
             } else {
