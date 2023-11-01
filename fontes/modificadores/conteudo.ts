@@ -16,7 +16,7 @@ export class Conteudo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["conteudo", "conteúdo"], "content");
+        super(["conteudo", "conteúdo"], "content", pragmas);
 
         // Também aceita como valor as funções linear-gradient(), image-set() e counter()
         // TODO: Adaptar lógica para cobrir todos os casos. 

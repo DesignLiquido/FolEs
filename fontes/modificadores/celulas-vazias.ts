@@ -8,7 +8,7 @@ export class CelulasVazias extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["celulas-vazias", "células-vazias"], "empty-cells");
+        super(["celulas-vazias", "células-vazias"], "empty-cells", pragmas);
 
         validarValores("células-vazias", valor, this.valoresAceitos);
 

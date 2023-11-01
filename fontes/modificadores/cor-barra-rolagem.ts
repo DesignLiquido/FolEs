@@ -7,7 +7,7 @@ export class CorBarraRolagem extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-barra-rolagem", "scrollbar-color");
+        super("cor-barra-rolagem", "scrollbar-color", pragmas);
 
         validarValorCor('cor-barra-rolagem', valor, this.valoresAceitos);
         this.valor = valor;

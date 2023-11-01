@@ -10,7 +10,7 @@ export class CombinarTextoVertical extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("combinar-texto-vertical", "text-combine-upright");
+        super("combinar-texto-vertical", "text-combine-upright", pragmas);
 
         // OBS.: Também aceita receber valores do tipo dígito (<digit>).
         // Ex.:  combinar-texto-vertical: digits 4; 

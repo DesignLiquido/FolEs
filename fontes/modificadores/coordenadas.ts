@@ -10,7 +10,7 @@ export class Coordenadas extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("coordenadas", "translate");
+        super("coordenadas", "translate", pragmas);
 
         // Aceita de 1 a 3 valores;
         // A lógica abaixo cobre o recebimento de UM único valor.

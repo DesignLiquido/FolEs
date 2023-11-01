@@ -5,7 +5,7 @@ export class CorBorda extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 4 valores.
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-borda", "border-color");
+        super("cor-borda", "border-color", pragmas);
 
         validarValorCor('cor-borda', valor);
 

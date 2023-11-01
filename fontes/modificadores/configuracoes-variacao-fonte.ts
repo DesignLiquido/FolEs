@@ -9,7 +9,8 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
-            "font-variation-settings"
+            "font-variation-settings", 
+            pragmas
         );
         
         // OBS.: Pode receber um caso especial de string + número

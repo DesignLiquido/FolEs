@@ -7,7 +7,8 @@ export class CorInicioBordaEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["cor-inicio-borda-em-linha", "cor-início-borda-em-linha"],
-            "border-inline-start-color"
+            "border-inline-start-color", 
+            pragmas
         );
 
         validarValorCor('cor-início-borda-em-linha', valor);

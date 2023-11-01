@@ -7,7 +7,7 @@ export class CorCursor extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-cursor", "caret-color");
+        super("cor-cursor", "caret-color", pragmas);
 
         validarValorCor('cor-cursor', valor, this.valoresAceitos);
 

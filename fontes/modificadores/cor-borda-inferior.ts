@@ -3,7 +3,7 @@ import { validarValorCor } from "./validacoes/cor";
 
 export class CorBordaInferior extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-borda-inferior", "border-bottom-color");
+        super("cor-borda-inferior", "border-bottom-color", pragmas);
 
         validarValorCor('cor-borda-inferior', valor);
 

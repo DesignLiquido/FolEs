@@ -3,7 +3,7 @@ import { validarValorCor } from "./validacoes/cor";
 
 export class Cor extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor", "color");
+        super("cor", "color", pragmas);
 
         validarValorCor('cor', valor);
 

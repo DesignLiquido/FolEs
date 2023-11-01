@@ -5,7 +5,8 @@ export class CorInicioBordaEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["cor-inicio-borda-em-bloco", "cor-início-borda-em-bloco"],
-            "border-block-start-color"
+            "border-block-start-color", 
+            pragmas
         );
 
         validarValorCor('cor-início-borda-em-bloco', valor);

@@ -9,7 +9,7 @@ export class ComportamentoRolagemMouse extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("comportamento-rolagem-mouse", "overscroll-behavior");
+        super("comportamento-rolagem-mouse", "overscroll-behavior", pragmas);
 
         // Modificador também pode servir como shorthand (atribuição abreviada) para:
         // 1. comportamento-horizontal-rolagem-mouse

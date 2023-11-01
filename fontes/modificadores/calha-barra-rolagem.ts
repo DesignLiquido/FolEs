@@ -10,7 +10,7 @@ export class CalhaBarraRolagem extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("calha-barra-rolagem", "scrollbar-gutter");
+        super("calha-barra-rolagem", "scrollbar-gutter", pragmas);
 
         validarValores("calha-barra-rolagem", valor, this.valoresAceitos);
 
