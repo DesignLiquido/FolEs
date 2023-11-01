@@ -14,7 +14,8 @@ export class AlinharUltimoItem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["alinhar-ultimo-item", "alinhar-último-item"],
-            "text-align-last"
+            "text-align-last",
+            pragmas
         );
 
         // O modificador não aceita os valores posicionais 'superior' e 'inferior'

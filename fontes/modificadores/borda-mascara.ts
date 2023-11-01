@@ -21,7 +21,7 @@ export class BordaMascara extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["borda-mascara", "borda-máscara"], "mask-border");
+        super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
 
         let valorURL;
         if(valor['traducao'] !== undefined) {

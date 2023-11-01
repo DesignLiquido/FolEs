@@ -13,7 +13,7 @@ export class Altura extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("altura", "height");
+        super("altura", "height", pragmas);
 
         const valoresExtra = ['fit-content', 'clamp'];
         validarValorNumerico('altura', valor, this.valoresAceitos, valoresExtra);

@@ -11,7 +11,7 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("alinhar-encaixe-rolagem-mouse", "scroll-snap-align");
+        super("alinhar-encaixe-rolagem-mouse", "scroll-snap-align", pragmas);
         
         validarValores("alinhar-encaixe-rolagem-mouse", valor, this.valoresAceitos);
 

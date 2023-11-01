@@ -13,7 +13,7 @@ export class AlturaMaxima extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["altura-maxima", "altura-máxima"], "max-height");
+        super(["altura-maxima", "altura-máxima"], "max-height", pragmas);
 
         const valoresExtra = ['fit-content'];
         validarValorNumerico('altura-máxima', valor, this.valoresAceitos, valoresExtra);

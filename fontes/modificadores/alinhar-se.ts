@@ -16,7 +16,7 @@ export class AlinharSe extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("alinhar-se", "align-self");
+        super("alinhar-se", "align-self", pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
         const posicoesAceitas = Object.keys(posicoes).filter(

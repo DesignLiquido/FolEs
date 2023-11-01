@@ -16,7 +16,7 @@ export class AlinharVertical extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("alinhar-vertical", "vertical-align");
+        super("alinhar-vertical", "vertical-align", pragmas);
 
         validarValorNumerico('alinhar-vertical', valor, this.valoresAceitos);
 

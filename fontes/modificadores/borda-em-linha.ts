@@ -10,7 +10,7 @@ export class BordaEmLinha extends Modificador {
     // Pode receber de 1 a 3 valores.
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("borda-em-linha", "border-inline");
+        super("borda-em-linha", "border-inline", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações seguintes.

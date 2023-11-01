@@ -34,7 +34,7 @@ export class Aparencia extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["aparencia", "aparência"], "appearance");
+        super(["aparencia", "aparência"], "appearance", pragmas);
 
         // Se for um equivalente, o valor atribuído é 'auto';
         valor in this.valoresEquivalentes ? valor = 'auto' : null

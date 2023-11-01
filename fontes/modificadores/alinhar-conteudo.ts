@@ -21,7 +21,7 @@ export class AlinharConteudo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content");
+        super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content", pragmas);
 
         // Não aceita os valores 'esquerda' e 'direita'
         let posicoesAceitas = Object.keys(posicoes).filter(

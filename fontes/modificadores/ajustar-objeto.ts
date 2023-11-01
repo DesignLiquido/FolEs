@@ -11,7 +11,7 @@ export class AjustarObjeto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("ajustar-objeto", "object-fit");
+        super("ajustar-objeto", "object-fit", pragmas);
 
         validarValores("ajustar-objeto", valor, this.valoresAceitos);
 
