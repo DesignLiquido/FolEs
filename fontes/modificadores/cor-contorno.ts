@@ -7,7 +7,7 @@ export class CorContorno extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-contorno", "outline-color");
+        super("cor-contorno", "outline-color", pragmas);
 
         validarValorCor('cor-contorno', valor, this.valoresAceitos);
 

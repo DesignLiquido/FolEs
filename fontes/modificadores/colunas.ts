@@ -12,7 +12,7 @@ export class Colunas extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("colunas", "columns");
+        super("colunas", "columns", pragmas);
 
         validarValorNumerico('colunas', valor, this.valoresAceitos);
 

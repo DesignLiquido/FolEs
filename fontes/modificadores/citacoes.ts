@@ -8,7 +8,7 @@ export class Citacoes extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["citacoes", "citações"], "quotes");
+        super(["citacoes", "citações"], "quotes", pragmas);
 
         // OBS.: Também pode receber valores <string>.
         // Ex.: citações: "«" "»" "‹" "›";

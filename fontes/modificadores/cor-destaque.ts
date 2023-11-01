@@ -7,7 +7,7 @@ export class CorDestaque extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-destaque", "accent-color");
+        super("cor-destaque", "accent-color", pragmas);
 
         validarValorCor('cor-destaque', valor, this.valoresAceitos);
 

@@ -8,7 +8,7 @@ export class ComportamentoRolagem extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("comportamento-rolagem", "scroll-behavior");
+        super("comportamento-rolagem", "scroll-behavior", pragmas);
 
         validarValores('comportamento-rolagem',valor, this.valoresAceitos);
 

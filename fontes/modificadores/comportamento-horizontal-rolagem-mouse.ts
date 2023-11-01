@@ -9,7 +9,7 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("comportamento-horizontal-rolagem-mouse", "overscroll-behavior-x");
+        super("comportamento-horizontal-rolagem-mouse", "overscroll-behavior-x", pragmas);
 
         validarValores('comportamento-em-horizontal-rolagem-mouse',valor, this.valoresAceitos);
 

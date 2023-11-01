@@ -16,7 +16,7 @@ export class Contorno extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("contorno", "outline");
+        super("contorno", "outline", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações seguintes.

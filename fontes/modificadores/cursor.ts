@@ -42,7 +42,7 @@ export class Cursor extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cursor", "cursor");
+        super("cursor", "cursor", pragmas);
 
         // OBS.: Também pode receber:
         // 1. Um link externo de uma imagem (URL);

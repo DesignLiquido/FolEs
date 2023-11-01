@@ -8,7 +8,7 @@ export class ContarColuna extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("contar-coluna", "column-count");
+        super("contar-coluna", "column-count", pragmas);
 
         validarValorNumerico('contar-coluna', valor, this.valoresAceitos);
 

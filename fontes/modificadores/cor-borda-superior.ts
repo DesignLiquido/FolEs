@@ -3,7 +3,7 @@ import { validarValorCor } from "./validacoes/cor";
 
 export class CorBordaSuperior extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("cor-borda-superior", "border-top-color");
+        super("cor-borda-superior", "border-top-color", pragmas);
 
         validarValorCor('cor-borda-superior', valor);
 

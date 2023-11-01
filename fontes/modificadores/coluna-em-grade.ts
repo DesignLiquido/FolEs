@@ -9,7 +9,7 @@ export class ColunaEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("coluna-em-grade", "grid-column");
+        super("coluna-em-grade", "grid-column", pragmas);
 
         // OBS.: Também pode receber outros dois casos de valores:
         // 1. custom-indent

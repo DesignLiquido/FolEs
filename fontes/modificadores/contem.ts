@@ -15,7 +15,7 @@ export class Contem extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["contem", "contém"], "contain");
+        super(["contem", "contém"], "contain", pragmas);
 
         // OBS.: Também pode receber múltiplos valores.
         // A lógica abaixo cobre somente o recebimento de UM único valor.
