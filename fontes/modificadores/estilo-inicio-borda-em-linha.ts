@@ -6,7 +6,8 @@ export class EstiloInicioBordaEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["estilo-inicio-borda-em-linha", "estilo-início-borda-em-linha"], 
-            "border-inline-start-style"
+            "border-inline-start-style", 
+            pragmas
         );
 
         validarValoresAdicionais('estilo-início-borda-em-linha', valor, estilos);

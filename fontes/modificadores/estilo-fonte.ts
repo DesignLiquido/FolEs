@@ -11,7 +11,7 @@ export class EstiloFonte extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("estilo-fonte", "font-style");
+        super("estilo-fonte", "font-style", pragmas);
 
         // OBS.: O valor 'oblíqua' pode vir acompanhado de um número-quantificador
         // que representa o ÂNGULO de inclinação da fonte.

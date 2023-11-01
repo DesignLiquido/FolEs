@@ -20,7 +20,8 @@ export class EstiloEnfaseTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
-            "text-emphasis-style"
+            "text-emphasis-style", 
+            pragmas
         );
 
         // OBS.: O seletor também aceita receber STRINGS, desde que essas contenham UM caractere.

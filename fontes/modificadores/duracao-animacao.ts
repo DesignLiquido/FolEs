@@ -7,7 +7,8 @@ export class DuracaoAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["duracao-animacao", "duração-animação"],
-            "animation-duration"
+            "animation-duration", 
+            pragmas
         );
 
         // OBS.: Também aceita receber múltiplos valores. 

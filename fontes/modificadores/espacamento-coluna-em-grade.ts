@@ -11,7 +11,8 @@ export class EspacamentoColunaEmGrade extends Modificador {
     constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
         super(
             ["espacamento-coluna-em-grade", "espaçamento-coluna-em-grade"],
-            "grid-column-gap"
+            "grid-column-gap", 
+            pragmas
         );
 
         validarValorNumerico('espaçamento-coluna-em-grade', valor, this.valoresAceitos);

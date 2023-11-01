@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacamentoLinhas extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["espacamento-linhas", "espaçamento-linhas"], "row-gap");
+        super(["espacamento-linhas", "espaçamento-linhas"], "row-gap", pragmas);
 
         validarValorNumerico('espaçamento-linhas', valor);
 

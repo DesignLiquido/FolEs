@@ -8,7 +8,7 @@ export class DesignTabela extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("design-tabela", "table-layout");
+        super("design-tabela", "table-layout", pragmas);
         
         validarValores('design-tabela', valor, this.valoresAceitos);
 

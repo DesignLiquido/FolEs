@@ -9,7 +9,11 @@ export class EspacamentoFonte extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["espacamento-fonte", "espaçamento-fonte"], "font-kerning");
+        super(
+            ["espacamento-fonte", "espaçamento-fonte"], 
+            "font-kerning", 
+            pragmas
+        );
 
         validarValores('espaçamento-fonte', valor, this.valoresAceitos);
 

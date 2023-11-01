@@ -10,7 +10,7 @@ export class DeslocamentoTextoSublinhado extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("deslocamento-texto-sublinhado", "text-underline-offset");
+        super("deslocamento-texto-sublinhado", "text-underline-offset", pragmas);
         
         validarValorNumerico('deslocamento-texto-sublinhado', valor, this.valoresAceitos);
 

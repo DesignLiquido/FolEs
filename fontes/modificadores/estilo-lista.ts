@@ -13,7 +13,7 @@ export class EstiloLista extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("estilo-lista", "list-style");
+        super("estilo-lista", "list-style", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações.

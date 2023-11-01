@@ -12,8 +12,12 @@ export class DeslocarPontuacao extends Modificador {
         "permitir-fim": "allow-end",
     }
 
-    constructor(valor: string, quantificador?: string) {
-        super(["deslocar-pontuacao", "deslocar-pontuação"], "hanging-punctuation");
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+        super(
+            ["deslocar-pontuacao", "deslocar-pontuação"], 
+            "hanging-punctuation", 
+            pragmas
+        );
 
         // OBS.: Pode receber de 1 a 3 valores;
         // A lógica abaixo cobre apenas o recebimento de UM único valor.

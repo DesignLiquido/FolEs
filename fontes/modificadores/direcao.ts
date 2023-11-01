@@ -8,7 +8,7 @@ export class Direcao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["direcao", "direção"], "direction");
+        super(["direcao", "direção"], "direction", pragmas);
 
         validarValores('direção', valor, this.valoresAceitos);
 

@@ -10,7 +10,7 @@ export class Deslocamento extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("deslocamento", "offset");
+        super("deslocamento", "offset", pragmas);
 
         // Também aceita receber as funções path() e ray()
         // TODO: Implementar casos faltantes

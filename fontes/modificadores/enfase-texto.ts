@@ -22,7 +22,7 @@ export class EnfaseTexto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["enfase-texto", "ênfase-texto"], "text-emphasis");
+        super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
         // Também aceita receber uma string qualquer como primeiro parâmetro
         // Ex.: ênfase-texto: "/25B2" #FA55A5;3

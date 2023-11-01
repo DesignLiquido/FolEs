@@ -8,7 +8,7 @@ export class EstenderColuna extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("estender-coluna", "column-span");
+        super("estender-coluna", "column-span", pragmas);
 
         validarValores('estender-coluna', valor, this.valoresAceitos);
 

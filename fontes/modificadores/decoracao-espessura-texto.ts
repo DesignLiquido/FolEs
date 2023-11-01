@@ -12,7 +12,8 @@ export class DecoracaoEspessuraTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-espessura-texto", "decoração-espessura-texto"],
-            "text-decoration-thickness"
+            "text-decoration-thickness", 
+            pragmas
         );
         
         validarValorNumerico('decoração-espessura-texto', valor, this.valoresAceitos);

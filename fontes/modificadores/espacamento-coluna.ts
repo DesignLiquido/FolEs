@@ -9,7 +9,7 @@ export class EspacamentoColuna extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["espacamento-coluna", "espaçamento-coluna"], "column-gap");
+        super(["espacamento-coluna", "espaçamento-coluna"], "column-gap", pragmas);
 
         validarValorNumerico('espaçamento-coluna', valor, this.valoresAceitos);
 

@@ -14,7 +14,7 @@ export class EspacoEmBranco extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["espaco-em-branco", "espaço-em-branco"], "white-space");
+        super(["espaco-em-branco", "espaço-em-branco"], "white-space", pragmas);
 
         validarValores('espaço-em-branco', valor, this.valoresAceitos);
 
