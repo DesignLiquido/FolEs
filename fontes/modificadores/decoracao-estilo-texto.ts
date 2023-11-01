@@ -15,7 +15,8 @@ export class DecoracaoEstiloTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-estilo-texto", "decoração-estilo-texto"], 
-            "text-decoration-style"
+            "text-decoration-style", 
+            pragmas
         );
         
         validarValores('decoração-estilo-texto', valor, this.valoresAceitos);

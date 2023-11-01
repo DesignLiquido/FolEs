@@ -7,7 +7,8 @@ export class EspacamentoLinhaEmGrade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["espacamento-linha-em-grade", "espaçamento-linha-em-grade"],
-            "grid-row-gap"
+            "grid-row-gap", 
+            pragmas
         );
 
         validarValorNumerico('espaçamento-linha-em-grade', valor)

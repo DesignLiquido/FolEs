@@ -6,8 +6,8 @@ export class EstiloListaImagem extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador: string) {
-        super("estilo-lista-imagem", "list-style-image");
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+        super("estilo-lista-imagem", "list-style-image", pragmas);
 
         const valoresExtra = ['url'];
         validarValores('estilo-lista-imagem', valor, this.valoresAceitos, valoresExtra);

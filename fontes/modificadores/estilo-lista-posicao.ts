@@ -10,7 +10,8 @@ export class EstiloListaPosicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["estilo-lista-posicao", "estilo-lista-posição"],
-            "list-style-position"
+            "list-style-position", 
+            pragmas
         );
 
         validarValores('estilo-lista-posição', valor, this.valoresAceitos);

@@ -7,7 +7,8 @@ export class DistanciaDeslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["distancia-deslocamento", "distância-deslocamento"],
-            "offset-distance"
+            "offset-distance", 
+            pragmas
         );
 
         validarValorNumerico('distância-deslocamento', valor);

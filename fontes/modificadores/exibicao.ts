@@ -42,7 +42,7 @@ export class Exibicao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["exibicao", "exibição"], "display");
+        super(["exibicao", "exibição"], "display", pragmas);
 
         // OBS.: Também pode receber múltiplos valores.
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 

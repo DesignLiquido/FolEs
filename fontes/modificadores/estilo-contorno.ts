@@ -8,7 +8,7 @@ export class EstiloContorno extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("estilo-contorno", "outline-style");
+        super("estilo-contorno", "outline-style", pragmas);
 
         validarValoresAdicionais('estilo-contorno', valor, estilos, this.valoresAceitos);
 

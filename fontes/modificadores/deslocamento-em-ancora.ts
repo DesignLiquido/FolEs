@@ -17,7 +17,8 @@ export class DeslocamentoEmAncora extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["deslocamento-em-ancora", "deslocamento-em-âncora"],
-            "offset-anchor"
+            "offset-anchor", 
+            pragmas
         );
 
         // Pode receber de 1 a 4 valores;

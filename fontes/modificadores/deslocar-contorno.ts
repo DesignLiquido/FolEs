@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DeslocarContorno extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("deslocar-contorno", "outline-offset");
+        super("deslocar-contorno", "outline-offset", pragmas);
 
         validarValorNumerico('deslocar-contorno', valor);
 

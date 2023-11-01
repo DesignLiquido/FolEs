@@ -18,7 +18,7 @@ export class DecoracaoTexto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["decoracao-texto", "decoração-texto"], "text-decoration");
+        super(["decoracao-texto", "decoração-texto"], "text-decoration", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações seguintes.

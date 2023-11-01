@@ -7,7 +7,8 @@ export class DuracaoTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["duracao-transicao", "duração-transição"],
-            "transition-duration"
+            "transition-duration", 
+            pragmas
         );
 
         // OBS.: Também aceita receber múltiplos valores. 

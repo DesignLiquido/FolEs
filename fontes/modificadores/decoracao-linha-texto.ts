@@ -14,7 +14,8 @@ export class DecoracaoLinhaTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-linha-texto", "decoração-linha-texto"],
-            "text-decoration-line"
+            "text-decoration-line", 
+            pragmas
         );
 
         // OBS.: Também aceita receber múltiplos valores. 

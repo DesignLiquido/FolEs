@@ -4,7 +4,7 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloBordaInferior extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("estilo-borda-inferior", "border-bottom-style");
+        super("estilo-borda-inferior", "border-bottom-style", pragmas);
 
         validarValoresAdicionais('estilo-borda-inferior', valor, estilos);
 

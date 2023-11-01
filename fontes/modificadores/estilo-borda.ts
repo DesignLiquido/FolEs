@@ -6,8 +6,8 @@ export class EstiloBorda extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 4 valores.
 
-    constructor(valor: string, quantificador: string) {
-        super("estilo-borda", "border-style");
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+        super("estilo-borda", "border-style", pragmas);
 
         validarValoresAdicionais('estilo-borda', valor, estilos);
 

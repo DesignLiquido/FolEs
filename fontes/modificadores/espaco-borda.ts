@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacoBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["espaco-borda", "espaço-borda"], "border-spacing");
+        super(["espaco-borda", "espaço-borda"], "border-spacing", pragmas);
 
         // Pode receber também mais de um valor número-quantificador
         // Ex.: espaco-borda: 1cm 2em;

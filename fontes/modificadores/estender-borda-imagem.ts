@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EstenderBordaImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("estender-borda-imagem", "border-image-outset");
+        super("estender-borda-imagem", "border-image-outset", pragmas);
 
         // Pode receber também mais de um valor número-quantificador
         // Ex.: estender-borda-imagem: 7px 12px 14px 5px;

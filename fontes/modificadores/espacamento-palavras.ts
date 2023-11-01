@@ -9,7 +9,11 @@ export class EspacamentoPalavras extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["espacamento-palavras", "espaçamento-palavras"], "word-spacing");
+        super(
+            ["espacamento-palavras", "espaçamento-palavras"], 
+            "word-spacing", 
+            pragmas
+        );
 
         validarValorNumerico('espaçamento-palavras', valor, this.valoresAceitos);
 

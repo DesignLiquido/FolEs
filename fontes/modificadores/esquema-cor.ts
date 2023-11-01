@@ -10,7 +10,7 @@ export class EsquemaCor extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("esquema-cor", "color-scheme");
+        super("esquema-cor", "color-scheme", pragmas);
         
         // OBS.: Também pode receber duas palavras dos valores aceitos.
         // Ex.: esquema-cor: apenas claro;

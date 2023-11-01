@@ -7,7 +7,8 @@ export class DecoracaoCorTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["decoracao-cor-texto", "decoração-cor-texto"],
-            "text-decoration-color"
+            "text-decoration-color", 
+            pragmas
         );
         
         validarValorCor('decoração-cor-texto', valor)
