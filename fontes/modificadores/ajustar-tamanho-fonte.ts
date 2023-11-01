@@ -13,7 +13,7 @@ export class AjustarTamanhoFonte extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("ajustar-tamanho-fonte", "font-size-adjust");
+        super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
         // OBS.: Os valores aceitos listados só são válidos quando há DOIS valores atribuídos.
         // Ex.: ajustar-tamanho-fonte: altura-cap 0.5;

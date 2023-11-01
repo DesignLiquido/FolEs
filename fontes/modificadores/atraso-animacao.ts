@@ -7,7 +7,8 @@ export class AtrasoAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["atraso-animacao", "atraso-animação"],
-            "animation-delay"
+            "animation-delay", 
+            pragmas
         );
 
         validarValorNumerico('atraso-animação', valor);

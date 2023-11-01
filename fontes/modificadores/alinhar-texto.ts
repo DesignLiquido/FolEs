@@ -10,7 +10,7 @@ export class AlinharTexto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("alinhar-texto", "text-align");
+        super("alinhar-texto", "text-align", pragmas);
 
         validarValoresAdicionais('alinhar-texto', valor, posicoesBasicas, this.valoresAceitos);
 

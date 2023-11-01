@@ -16,7 +16,7 @@ export class BordaDireita extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("borda-direita", "border-right");
+        super("borda-direita", "border-right", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações seguintes.

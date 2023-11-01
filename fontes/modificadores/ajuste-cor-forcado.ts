@@ -10,7 +10,8 @@ export class AjusteCorForcado extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["ajuste-cor-forcado", "ajuste-cor-forçado"],
-            "forced-color-adjust"
+            "forced-color-adjust",
+            pragmas
         );
 
         validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);

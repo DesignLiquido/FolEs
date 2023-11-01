@@ -7,7 +7,8 @@ export class AtrasoTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["atraso-transicao", "atraso-transição"],
-            "transition-delay"
+            "transition-delay", 
+            pragmas
         );
         
         // Também aceita dois valores separados por vírgula

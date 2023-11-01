@@ -20,7 +20,7 @@ export class Animacao extends Modificador {
   }
 
   constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-    super(["animacao", "animação"], "animation");
+    super(["animacao", "animação"], "animation", pragmas);
 
     const valoresExtra = ['linear', 'cubic-bezier', 'steps'];
     validarValorNumerico('animação', valor, this.valoresAceitos, valoresExtra);

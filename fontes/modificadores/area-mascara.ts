@@ -21,7 +21,7 @@ export class AreaMascara extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["area-mascara", "área-máscara"], "mask-clip");
+        super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
 
         // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.
         // Ex.: área-máscara: visualizar-caixa, completar-caixa, borda-caixa;

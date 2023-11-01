@@ -12,7 +12,7 @@ export class AoMudar extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("ao-mudar", "will-change");
+        super("ao-mudar", "will-change", pragmas);
 
         // OBS.: Também pode receber valores personalizados (<custom-ident>);
         // A lógica abaixo cobre somente o recebimento dos valores aceitos.
