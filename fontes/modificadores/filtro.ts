@@ -7,7 +7,7 @@ export class Filtro extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("filtro", "filter");
+        super("filtro", "filter", pragmas);
 
         // Também pode receber uma lista de funções próprias
         // EXEMPLOS:

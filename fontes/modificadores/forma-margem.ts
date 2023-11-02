@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FormaMargem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("forma-margem", "shape-margin");
+        super("forma-margem", "shape-margin", pragmas);
 
         validarValorNumerico('forma-margem', valor);
 

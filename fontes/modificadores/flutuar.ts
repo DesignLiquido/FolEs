@@ -12,7 +12,7 @@ export class Flutuar extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("flutuar", "float");
+        super("flutuar", "float", pragmas);
         
         validarValores('flutuar', valor, this.valoresAceitos);
 

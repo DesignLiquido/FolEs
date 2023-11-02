@@ -8,7 +8,7 @@ export class FimLinhaEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fim-linha-em-grade", "grid-row-end");
+        super("fim-linha-em-grade", "grid-row-end", pragmas);
 
         // OBS.: Pode receber também DOIS valores: um número e um valor personalizado (<custom-ident>);
         // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático.

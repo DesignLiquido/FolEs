@@ -4,7 +4,7 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FlexCrescimento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("flex-crescimento", "flex-grow");
+        super("flex-crescimento", "flex-grow", pragmas);
 
         validarValorNumerico('flex-crescimento', valor);
 

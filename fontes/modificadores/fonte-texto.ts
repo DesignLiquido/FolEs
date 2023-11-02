@@ -20,7 +20,7 @@ export class FonteTexto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fonte-texto", "font-family");
+        super("fonte-texto", "font-family", pragmas);
 
         // OBS.: A lista de valores aceitos inclui todas as FONTES GENÉRICAS (<generic-name>).
         // Porém, o modificador também pode receber DOIS PARÂMETROS,
