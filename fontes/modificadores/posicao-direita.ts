@@ -9,7 +9,7 @@ export class PosicaoDireita extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-direita", "posição-direita"], "right");
+        super(["posicao-direita", "posição-direita"], "right", pragmas);
 
         validarValorNumerico('posição-direita', valor, this.valoresAceitos);
 

@@ -14,7 +14,7 @@ export class PosicaoLegenda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-legenda", "posição-legenda"], "caption-side");
+        super(["posicao-legenda", "posição-legenda"], "caption-side", pragmas);
 
         validarValores('posição-legenda', valor, this.valoresAceitos);
 

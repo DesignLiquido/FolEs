@@ -24,7 +24,7 @@ export class QuebrarAntes extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("quebrar-antes", "break-before");
+        super("quebrar-antes", "break-before", pragmas);
 
         validarValores('quebrar-antes', valor, this.valoresAceitos);
 

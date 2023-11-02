@@ -16,7 +16,7 @@ export class OrigemMascara extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["origem-mascara", "origem-máscara"], "mask-origin");
+        super(["origem-mascara", "origem-máscara"], "mask-origin", pragmas);
 
         // OBS.: Também aceita receber múltiplos valores. 
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 

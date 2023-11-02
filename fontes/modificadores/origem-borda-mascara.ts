@@ -9,7 +9,8 @@ export class OrigemBordaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["origem-borda-mascara", "origem-borda-máscara"],
-            "mask-border-source"
+            "mask-border-source", 
+            pragmas
         );
 
         // OBS.: Também aceita receber valores do tipo URL (link externo da imagem). 

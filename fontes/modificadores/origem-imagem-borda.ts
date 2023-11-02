@@ -7,7 +7,7 @@ export class OrigemImagemBorda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("origem-imagem-borda", "border-image-source");
+        super("origem-imagem-borda", "border-image-source", pragmas);
 
         // OBS.: Também pode receber a função linear-gradient
         // TODO: Adaptar lógica no futuro para cobrir todos os casos

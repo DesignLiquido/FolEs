@@ -10,7 +10,7 @@ export class OrigemFundo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("origem-fundo", "background-origin");
+        super("origem-fundo", "background-origin", pragmas);
 
         validarValores('origem-fundo', valor, this.valoresAceitos);
 

@@ -4,7 +4,7 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class Ordenar extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("ordenar", "order");
+        super("ordenar", "order", pragmas);
         
         validarValorNumerico('ordenar', valor);
 

@@ -8,7 +8,8 @@ export class PosicaoHorizontalFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-horizontal-fundo", "posição-horizontal-fundo"],
-            "background-position-x"
+            "background-position-x", 
+            pragmas
         );
 
         validarValorNumerico('posição-horizontal-fundo', valor, posicoesBasicas);

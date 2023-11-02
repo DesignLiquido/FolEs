@@ -8,7 +8,7 @@ export class PararEncaixeRolagemMouse extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("parar-encaixe-rolagem-mouse", "scroll-snap-stop");
+        super("parar-encaixe-rolagem-mouse", "scroll-snap-stop", pragmas);
 
         validarValores('parar-encaixe-rolagem-mouse', valor, this.valoresAceitos);
 

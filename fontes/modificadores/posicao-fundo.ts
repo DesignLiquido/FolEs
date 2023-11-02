@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-fundo", "posição-fundo"], "background-position");
+        super(["posicao-fundo", "posição-fundo"], "background-position", pragmas);
 
         // OBS.: posição-fundo pode receber dois valores-quantificadores também
         // Exemplo: posição-fundo: 25% 75%;

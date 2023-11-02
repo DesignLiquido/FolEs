@@ -13,7 +13,7 @@ export class OrigemPerspectiva extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("origem-perspectiva", "perspective-origin");
+        super("origem-perspectiva", "perspective-origin", pragmas);
 
         // OBS.: Também pode receber 2 valores.
         // Ex.: origem-perspectiva: superior direita;

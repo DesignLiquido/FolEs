@@ -9,7 +9,7 @@ export class PosicaoInferior extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-inferior", "posição-inferior"], "bottom");
+        super(["posicao-inferior", "posição-inferior"], "bottom", pragmas);
 
         validarValorNumerico('posição-inferior', valor, this.valoresAceitos);
 

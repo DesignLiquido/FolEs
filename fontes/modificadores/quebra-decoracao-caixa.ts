@@ -10,7 +10,8 @@ export class QuebraDecoracaoCaixa extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["quebra-decoracao-caixa", "quebra-decoração-caixa"], 
-            "box-decoration-break"
+            "box-decoration-break", 
+            pragmas
         );
         
         validarValores('quebra-decoração-caixa', valor, this.valoresAceitos);

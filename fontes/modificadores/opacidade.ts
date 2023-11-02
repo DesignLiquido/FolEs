@@ -6,7 +6,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Opacidade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("opacidade", "opacity");
+        super("opacidade", "opacity", pragmas);
 
         // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
         // Caso haja um quantificador %, pode ser qualquer número. 

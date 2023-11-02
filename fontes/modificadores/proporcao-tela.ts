@@ -7,7 +7,7 @@ export class ProporcaoTela extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["proporcao-tela", "proporção-tela"], "aspect-ratio");
+        super(["proporcao-tela", "proporção-tela"], "aspect-ratio", pragmas);
 
         // OBS.: Também pode receber dois números separados por uma barra
         // Ex.: proporcao-tela: 1 / 1;
