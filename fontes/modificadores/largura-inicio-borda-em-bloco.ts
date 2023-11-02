@@ -14,7 +14,8 @@ export class LarguraInicioBordaEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["largura-inicio-borda-em-bloco", "largura-início-borda-em-bloco"],
-            "border-block-start-width"
+            "border-block-start-width", 
+            pragmas
         );
 
         validarValorNumerico('largura-início-borda-em-bloco', valor, this.valoresAceitos);

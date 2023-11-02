@@ -4,7 +4,7 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class LinhasInferiores extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("linhas-inferiores", "orphans");
+        super("linhas-inferiores", "orphans", pragmas);
 
         validarValorNumerico('linhas-inferiores', valor);
 

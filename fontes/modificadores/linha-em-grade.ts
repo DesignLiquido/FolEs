@@ -9,7 +9,7 @@ export class LinhaEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("linha-em-grade", "grid-row");
+        super("linha-em-grade", "grid-row", pragmas);
 
         // OBS.: Também pode receber outros dois casos de valores:
         // 1. custom-indent

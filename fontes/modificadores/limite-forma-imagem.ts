@@ -4,7 +4,7 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class LimiteFormaImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("limite-forma-imagem", "shape-image-threshold");
+        super("limite-forma-imagem", "shape-image-threshold", pragmas);
 
         // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
         if ((Number(parseInt(valor)) < 0 || Number(parseInt(valor)) > 1) &&

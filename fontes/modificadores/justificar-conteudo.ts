@@ -19,7 +19,8 @@ export class JustificarConteudo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["justificar-conteudo", "justificar-conteúdo"],
-            "justify-content"
+            "justify-content", 
+            pragmas
         );
 
         // Além dos valores listados, aceita também todos os valores da Lista 

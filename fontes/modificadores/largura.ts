@@ -13,7 +13,7 @@ export class Largura extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("largura", "width");
+        super("largura", "width", pragmas);
 
         const valoresExtra = ['fit-content'];
         validarValorNumerico('largura', valor, this.valoresAceitos, valoresExtra);
