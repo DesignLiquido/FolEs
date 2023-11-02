@@ -17,7 +17,7 @@ export class FlexComprimento extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("flex-comprimento", "flex-basis");
+        super("flex-comprimento", "flex-basis", pragmas);
 
         validarValorNumerico('flex-comprimento', valor, this.valoresAceitos);
 

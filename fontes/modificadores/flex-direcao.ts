@@ -10,7 +10,7 @@ export class FlexDirecao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["flex-direcao", "flex-direção"], "flex-direction");
+        super(["flex-direcao", "flex-direção"], "flex-direction", pragmas);
 
         validarValores('flex-direção', valor, this.valoresAceitos);
 

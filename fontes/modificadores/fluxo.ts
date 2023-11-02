@@ -13,7 +13,7 @@ export class Fluxo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fluxo", "clear");
+        super("fluxo", "clear", pragmas);
         
         validarValores('fluxo', valor, this.valoresAceitos);
 

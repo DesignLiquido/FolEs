@@ -9,7 +9,7 @@ export class FluxoEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fluxo-em-grade", "grid-auto-flow");
+        super("fluxo-em-grade", "grid-auto-flow", pragmas);
 
         // OBS.: Também aceita receber múltiplos valores. 
         // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 

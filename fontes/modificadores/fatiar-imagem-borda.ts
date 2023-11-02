@@ -9,7 +9,7 @@ export class FatiarImagemBorda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fatiar-imagem-borda", "border-image-slice");
+        super("fatiar-imagem-borda", "border-image-slice", pragmas);
 
         // OBS.: Pode receber de 1 a 4 valores.
         // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático. 

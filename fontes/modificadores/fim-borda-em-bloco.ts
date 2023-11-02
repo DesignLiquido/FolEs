@@ -9,7 +9,7 @@ export class FimBordaEmBloco extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 3 valores.
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fim-borda-em-bloco", "border-block-end");
+        super("fim-borda-em-bloco", "border-block-end", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações seguintes.

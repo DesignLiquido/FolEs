@@ -19,7 +19,7 @@ export class Flex extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("flex", "flex");
+        super("flex", "flex", pragmas);
 
         validarValorNumerico('flex', valor, this.valoresAceitos);
 

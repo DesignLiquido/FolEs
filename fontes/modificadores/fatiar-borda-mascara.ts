@@ -11,7 +11,8 @@ export class FatiarBordaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["fatiar-borda-mascara", "fatiar-borda-máscara"],
-            "mask-border-slice"
+            "mask-border-slice", 
+            pragmas
         );
 
         // OBS.: Pode receber de 1 a 4 valores

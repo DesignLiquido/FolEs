@@ -50,7 +50,7 @@ export class Fonte extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fonte", "font");
+        super("fonte", "font", pragmas);
 
         validarValorNumerico('fonte', valor, this.valoresAceitos);
 

@@ -8,7 +8,7 @@ export class FimColunaEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("fim-coluna-em-grade", "grid-column-end");
+        super("fim-coluna-em-grade", "grid-column-end", pragmas);
 
         // OBS.: Pode receber também DOIS valores: um número e um valor personalizado (<custom-ident>);
         // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático.
