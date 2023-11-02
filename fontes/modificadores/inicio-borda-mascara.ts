@@ -7,7 +7,8 @@ export class InicioBordaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-borda-mascara", "início-borda-máscara"],
-            "mask-border-outset"
+            "mask-border-outset", 
+            pragmas
         );
 
         // OBS.: Pode receber de 1 a 4 valores

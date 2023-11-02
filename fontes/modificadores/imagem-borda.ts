@@ -7,7 +7,7 @@ export class ImagemBorda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("imagem-borda", "border-image");
+        super("imagem-borda", "border-image", pragmas);
 
         const valoresExtra = ['url'];
         validarValores('imagem-máscara', valor, this.valoresAceitos, valoresExtra);

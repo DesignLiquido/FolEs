@@ -10,7 +10,8 @@ export class InicioLinhaEmGrade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-linha-em-grade", "início-linha-em-grade"],
-            "grid-row-start"
+            "grid-row-start", 
+            pragmas
         );
 
         // OBS.: Pode receber também DOIS valores: um número e um valor personalizado (<custom-ident>);

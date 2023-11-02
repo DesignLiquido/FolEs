@@ -12,7 +12,8 @@ export class InicioBordaEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-borda-em-linha", "início-borda-em-linha"],
-            "border-inline-start"
+            "border-inline-start", 
+            pragmas
         );
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().

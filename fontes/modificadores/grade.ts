@@ -15,7 +15,7 @@ export class Grade extends Modificador {
         "denso": "dense",
     }
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("grade", "grid");
+        super("grade", "grid", pragmas);
 
         // OBS.: Também aceita receber os valores válidos para os seletores: 
         // 1. grid-template-areas

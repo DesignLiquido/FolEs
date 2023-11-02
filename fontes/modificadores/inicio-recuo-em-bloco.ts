@@ -7,7 +7,8 @@ export class InicioRecuoEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-recuo-em-bloco", "início-recuo-em-bloco"],
-            "padding-block-start"
+            "padding-block-start", 
+            pragmas
         );
 
         validarValorNumerico('início-recuo-em-bloco', valor);

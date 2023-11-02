@@ -10,7 +10,8 @@ export class InicioColunaEmGrade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-coluna-em-grade", "início-coluna-em-grade"],
-            "grid-column-start"
+            "grid-column-start", 
+            pragmas
         );
 
         // OBS.: Pode receber também DOIS valores: um número e um valor personalizado (<custom-ident>);

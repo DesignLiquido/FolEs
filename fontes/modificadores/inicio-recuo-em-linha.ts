@@ -7,7 +7,8 @@ export class InicioRecuoEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-recuo-em-linha", "início-recuo-em-linha"],
-            "padding-inline-start"
+            "padding-inline-start", 
+            pragmas
         );
 
         validarValorNumerico('início-recuo-em-linha', valor);

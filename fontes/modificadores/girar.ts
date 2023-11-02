@@ -9,7 +9,7 @@ export class Girar extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("girar", "rotate");
+        super("girar", "rotate", pragmas);
 
         // OBS.: Também aceita receber múltiplos valores. 
         // Ex.: girar: z 1.57rad;

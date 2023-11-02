@@ -6,8 +6,8 @@ export class ImagemMascara extends Modificador {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador: string) {
-        super(["imagem-mascara", "imagem-máscara"], "mask-image");
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+        super(["imagem-mascara", "imagem-máscara"], "mask-image", pragmas);
 
         // OBS.: Também pode receber funções específicas do grupo <image>
         // Ex.: mask-image: linear-gradient(rgba(0, 0, 0, 1), transparent);

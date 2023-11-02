@@ -9,7 +9,7 @@ export class Hifens extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["hifens", "hífens"], "hyphens");
+        super(["hifens", "hífens"], "hyphens", pragmas);
 
         validarValores('hífens', valor, this.valoresAceitos);
 
