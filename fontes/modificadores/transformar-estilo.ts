@@ -9,7 +9,7 @@ export class TransformarEstilo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("transformar-estilo", "transform-style");
+        super("transformar-estilo", "transform-style", pragmas);
         
         validarValores('transformar-estilo', valor, this.valoresAceitos);
 

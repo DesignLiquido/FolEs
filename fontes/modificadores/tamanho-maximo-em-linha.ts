@@ -15,7 +15,8 @@ export class TamanhoMaximoEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["tamanho-maximo-em-linha", "tamanho-máximo-em-linha"],
-            "max-inline-size"
+            "max-inline-size", 
+            pragmas
         );
 
         const valoresExtra = ['fit-content'];

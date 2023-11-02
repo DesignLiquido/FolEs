@@ -12,7 +12,7 @@ export class TransformarCaixa extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("transformar-caixa", "transform-box");
+        super("transformar-caixa", "transform-box", pragmas);
 
         validarValores('transformar-caixa', valor, this.valoresAceitos);
 

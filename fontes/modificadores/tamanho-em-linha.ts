@@ -13,7 +13,7 @@ export class TamanhoEmLinha extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("tamanho-em-linha", "inline-size");
+        super("tamanho-em-linha", "inline-size", pragmas);
 
         const valoresExtra = ['fit-content'];
         validarValorNumerico('tamanho-em-linha', valor, this.valoresAceitos, valoresExtra);

@@ -15,7 +15,8 @@ export class TamanhoMinimoEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["tamanho-minimo-em-linha", "tamanho-mínimo-em-linha"],
-            "min-inline-size"
+            "min-inline-size", 
+            pragmas
         );
 
         const valoresExtra = ['fit-content'];

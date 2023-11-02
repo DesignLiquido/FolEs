@@ -9,7 +9,7 @@ export class TipoMascara extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["tipo-mascara", "tipo-máscara"], "mask-type");
+        super(["tipo-mascara", "tipo-máscara"], "mask-type", pragmas);
         
         validarValores('tipo-máscara', valor, this.valoresAceitos);
 

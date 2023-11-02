@@ -15,7 +15,8 @@ export class TamanhoMinimoEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["tamanho-minimo-em-bloco", "tamanho-mínimo-em-bloco"],
-            "min-block-size"
+            "min-block-size", 
+            pragmas
         );
 
         const valoresExtra = ['fit-content'];

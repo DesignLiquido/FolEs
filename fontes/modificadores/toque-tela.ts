@@ -18,7 +18,7 @@ export class ToqueTela extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("toque-tela", "touch-action");
+        super("toque-tela", "touch-action", pragmas);
 
         validarValores('toque-tela', valor, this.valoresAceitos);
 

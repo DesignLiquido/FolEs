@@ -6,7 +6,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TransformarOrigem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("transformar-origem", "transform-origin");
+        super("transformar-origem", "transform-origin", pragmas);
 
         // Pode receber de 1 a 3 valores;
         // A lógica abaixo cobre somente o recebimento de UM único valor.

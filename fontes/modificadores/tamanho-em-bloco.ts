@@ -13,7 +13,7 @@ export class TamanhoEmBloco extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("tamanho-em-bloco", "block-size");
+        super("tamanho-em-bloco", "block-size", pragmas);
 
         validarValorNumerico('tamanho-em-bloco', valor, this.valoresAceitos);
         

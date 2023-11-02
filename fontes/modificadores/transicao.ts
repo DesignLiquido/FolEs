@@ -21,7 +21,7 @@ export class Transicao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["transicao", "transição"], "transition");
+        super(["transicao", "transição"], "transition", pragmas);
 
         const valoresExtra = ['linear'];
 

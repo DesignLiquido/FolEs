@@ -13,7 +13,7 @@ export class TamanhoColunasEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("tamanho-colunas-em-grade", "grid-auto-columns");
+        super("tamanho-colunas-em-grade", "grid-auto-columns", pragmas);
 
         const valoresExtra = ['minmax', 'fit-content'];
         validarValorNumerico('tamanho-colunas-em-grade', valor, this.valoresAceitos, valoresExtra);

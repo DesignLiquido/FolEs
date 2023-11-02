@@ -11,7 +11,7 @@ export class TamanhoFundo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("tamanho-fundo", "background-size");
+        super("tamanho-fundo", "background-size", pragmas);
 
         // Aceita valores listados e número-quantificador
         // OBS.: Também aceita receber DOIS valores. A lógica abaixo cobre o recebimento de UM valor.

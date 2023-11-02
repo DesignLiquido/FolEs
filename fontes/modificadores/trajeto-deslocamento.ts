@@ -9,7 +9,7 @@ export class TrajetoDeslocamento extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("trajeto-deslocamento", "offset-path");
+        super("trajeto-deslocamento", "offset-path", pragmas);
 
         // OBS.: Também pode receber a função ray()
         // Ex.: offset-path: ray(45deg);
