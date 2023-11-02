@@ -9,7 +9,7 @@ export class ImagemFundo extends Modificador {
     }
 
     constructor(valor: Metodo | string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("imagem-fundo", "background-image");
+        super("imagem-fundo", "background-image", pragmas);
 
         // Valor deve ser um link URL ou 'nenhuma' (none)
         if (valor instanceof Metodo) {

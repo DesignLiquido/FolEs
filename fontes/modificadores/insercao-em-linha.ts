@@ -11,7 +11,7 @@ export class InsercaoEmLinha extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["insercao-em-linha", "inserção-em-linha"], "inset-inline");
+        super(["insercao-em-linha", "inserção-em-linha"], "inset-inline", pragmas);
 
         validarValorNumerico('inserção-em-linha', valor, this.valoresAceitos);
 

@@ -8,10 +8,11 @@ export class InicioInsercaoEmLinha extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador: string) {
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-insercao-em-linha", "início-inserção-em-linha"],
-            "inset-inline-start"
+            "inset-inline-start", 
+            pragmas
         );
         
         validarValorNumerico('início-inserção-em-linha', valor, this.valoresAceitos);

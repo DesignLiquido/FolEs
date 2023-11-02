@@ -11,7 +11,8 @@ export class InicioInsercaoEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["inicio-insercao-em-bloco", "início-inserção-em-bloco"],
-            "inset-block-start"
+            "inset-block-start", 
+            pragmas
         );
         
         validarValorNumerico('início-inserção-em-bloco', valor, this.valoresAceitos);

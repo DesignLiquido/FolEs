@@ -11,7 +11,8 @@ export class InsercaoEmBlocoFim extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["insercao-em-bloco-fim", "inserção-em-bloco-fim"],
-            "inset-block-end"
+            "inset-block-end", 
+            pragmas
         );
 
         validarValorNumerico('inserção-em-bloco-fim', valor, this.valoresAceitos);

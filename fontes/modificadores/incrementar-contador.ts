@@ -7,7 +7,7 @@ export class IncrementarContador extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("incrementar-contador", "counter-increment");
+        super("incrementar-contador", "counter-increment", pragmas);
 
         // OBS.: A sintaxe desse modificador espera receber:
         // 1. o NOME do contador (<custom-ident>);

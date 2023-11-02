@@ -10,7 +10,8 @@ export class ImpressaoAjusteCor extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["impressao-ajuste-cor", "impressão-ajuste-cor"],
-            "print-color-adjust"
+            "print-color-adjust", 
+            pragmas
         );
 
         validarValores('impressão-ajuste-cor', valor, this.valoresAceitos);

@@ -11,7 +11,7 @@ export class Insercao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["insercao", "inserção"], "inset");
+        super(["insercao", "inserção"], "inset", pragmas);
 
         validarValorNumerico('inserção', valor, this.valoresAceitos);
 

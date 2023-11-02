@@ -11,7 +11,8 @@ export class InsercaoEmLinhaFim extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["insercao-em-linha-fim", "inserção-em-linha-fim"],
-            "inset-inline-end"
+            "inset-inline-end", 
+            pragmas
         );
 
         validarValorNumerico('inserção-em-linha-fim', valor, this.valoresAceitos);
