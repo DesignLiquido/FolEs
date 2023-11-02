@@ -24,7 +24,7 @@ export class QuebrarApos extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["quebrar-apos", "quebrar-após"], "break-after");
+        super(["quebrar-apos", "quebrar-após"], "break-after", pragmas);
 
         validarValores('quebrar-após', valor, this.valoresAceitos);
 

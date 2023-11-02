@@ -12,7 +12,8 @@ export class PosicaoEnfaseTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-enfase-texto", "posição-ênfase-texto"],
-            "text-emphasis-position"
+            "text-emphasis-position", 
+            pragmas
         );
 
         // OBS.: Também aceita receber dois valores. 

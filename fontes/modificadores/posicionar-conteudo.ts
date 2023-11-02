@@ -28,7 +28,8 @@ export class PosicionarConteudo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicionar-conteudo", "posicionar-conteúdo"],
-            "place-content"
+            "place-content", 
+            pragmas
         );
 
         // Pode receber valores próprios ou valores da lista de posições

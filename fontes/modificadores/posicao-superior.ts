@@ -9,7 +9,7 @@ export class PosicaoSuperior extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-superior", "posição-superior"], "top");
+        super(["posicao-superior", "posição-superior"], "top", pragmas);
 
         validarValorNumerico('posição-superior', valor, this.valoresAceitos);
 

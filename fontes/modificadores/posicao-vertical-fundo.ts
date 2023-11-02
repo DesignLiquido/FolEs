@@ -8,7 +8,8 @@ export class PosicaoVerticalFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-vertical-fundo", "posição-vertical-fundo"],
-            "background-position-y"
+            "background-position-y", 
+            pragmas
         );
 
         // Aceita valores listados e valores numéricos

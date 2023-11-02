@@ -9,7 +9,7 @@ export class PreencherColuna extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("preencher-coluna", "column-fill");
+        super("preencher-coluna", "column-fill", pragmas);
 
         validarValores('preencher-coluna', valor, this.valoresAceitos);
 

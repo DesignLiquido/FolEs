@@ -10,7 +10,8 @@ export class OrientacaoImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["orientacao-imagem", "orientação-imagem"],
-            "image-orientation"
+            "image-orientation", 
+            pragmas
         );
         
         validarValores('orientação-imagem', valor, this.valoresAceitos);

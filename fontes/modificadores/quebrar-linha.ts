@@ -11,7 +11,7 @@ export class QuebrarLinha extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("quebrar-linha", "line-break");
+        super("quebrar-linha", "line-break", pragmas);
 
         validarValores('quebrar-linha', valor, this.valoresAceitos);
 

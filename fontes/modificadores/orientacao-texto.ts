@@ -15,7 +15,8 @@ export class OrientacaoTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["orientacao-texto", "orientação-texto"], 
-            "text-orientation"
+            "text-orientation", 
+            pragmas
         );
 
         validarValores('orientação-texto', valor, this.valoresAceitos);

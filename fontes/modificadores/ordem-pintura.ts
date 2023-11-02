@@ -11,7 +11,7 @@ export class OrdemPintura extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("ordem-pintura", "paint-order");
+        super("ordem-pintura", "paint-order", pragmas);
         
         // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.
         // Ex.: ordem-pintura: traçado preencher;

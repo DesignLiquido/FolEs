@@ -10,7 +10,8 @@ export class QuebrarPaginaDentro extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["quebrar-pagina-dentro", "quebrar-página-dentro"],
-            "page-break-inside"
+            "page-break-inside", 
+            pragmas
         );
 
         validarValores('quebrar-página-dentro', valor, this.valoresAceitos);

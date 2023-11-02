@@ -4,7 +4,7 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicaoMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-mascara", "posição-máscara"], "mask-position");
+        super(["posicao-mascara", "posição-máscara"], "mask-position", pragmas);
 
         // OBS.: Também pode receber DOIS números com quantificador como parâmetro
         // Ex.: posicao-mascara: 25% 75%;

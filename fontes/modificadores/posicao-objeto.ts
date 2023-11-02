@@ -4,7 +4,7 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicaoObjeto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["posicao-objeto", "posição-objeto"], "object-position");
+        super(["posicao-objeto", "posição-objeto"], "object-position", pragmas);
 
         // OBS.: Também pode receber DOIS números com quantificador como parâmetro
         // Ex.: posicao-objeto: 25% 75%;

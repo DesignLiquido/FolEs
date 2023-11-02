@@ -24,7 +24,7 @@ export class PosicionarSe extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("posicionar-se", "place-self");
+        super("posicionar-se", "place-self", pragmas);
 
         // Pode receber valores próprios ou valores da lista de posições
         // Também aceita receber múltiplos valores

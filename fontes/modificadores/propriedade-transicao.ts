@@ -10,7 +10,8 @@ export class PropriedadeTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["propriedade-transicao", "propriedade-transição"],
-            "transition-property"
+            "transition-property", 
+            pragmas
         );
 
         // OBS.: Também aceita receber valores do tipo <custom-ident>

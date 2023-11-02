@@ -10,7 +10,8 @@ export class PosicaoDeslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-deslocamento", "posição-deslocamento"], 
-            "offset-position"
+            "offset-position", 
+            pragmas
         );
 
         // OBS.: Esse modificador está listado como Experimental

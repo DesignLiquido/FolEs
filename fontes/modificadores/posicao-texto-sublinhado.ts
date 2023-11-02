@@ -13,7 +13,8 @@ export class PosicaoTextoSublinhado extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["posicao-texto-sublinhado", "posição-texto-sublinhado"],
-            "text-underline-position"
+            "text-underline-position", 
+            pragmas
         );
 
         // Também pode receber dois valores

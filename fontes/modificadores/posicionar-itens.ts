@@ -24,7 +24,7 @@ export class PosicionarItens extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("posicionar-itens", "place-items");
+        super("posicionar-itens", "place-items", pragmas);
 
         // Também aceita receber múltiplos valores
         // Ex.: posicionar-itens: auto início;
