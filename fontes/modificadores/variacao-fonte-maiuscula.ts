@@ -20,7 +20,8 @@ export class VariacaoFonteMaiuscula extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
-            "font-variant-caps"
+            "font-variant-caps", 
+            pragmas
         );
 
         validarValores('variação-fonte-maiúscula', valor, this.valoresAceitos);

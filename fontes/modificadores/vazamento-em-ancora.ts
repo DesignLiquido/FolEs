@@ -11,7 +11,8 @@ export class VazamentoEmAncora extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["vazamento-em-ancora", "vazamento-em-âncora"],
-            "overflow-anchor"
+            "overflow-anchor", 
+            pragmas
         );
 
         validarValores('vazamento-em-âncora', valor, this.valoresAceitos);

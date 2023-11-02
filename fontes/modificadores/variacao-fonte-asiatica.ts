@@ -20,7 +20,8 @@ export class VariacaoFonteAsiatica extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-asiatica", "variação-fonte-asiática"],
-            "font-variant-east-asian"
+            "font-variant-east-asian", 
+            pragmas
         );
 
         // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.

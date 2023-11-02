@@ -25,7 +25,8 @@ export class VariacaoFonteLigacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-ligacao", "variação-fonte-ligação"],
-            "font-variant-ligatures"
+            "font-variant-ligatures", 
+            pragmas
         );
 
         validarValores('variação-fonte-ligação', valor, this.valoresAceitos);

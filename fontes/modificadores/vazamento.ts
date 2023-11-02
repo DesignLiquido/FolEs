@@ -14,7 +14,7 @@ export class Vazamento extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("vazamento", "overflow");
+        super("vazamento", "overflow", pragmas);
 
         validarValores('vazamento', valor, this.valoresAceitos);
 

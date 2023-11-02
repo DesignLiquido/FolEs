@@ -23,7 +23,8 @@ export class VelocidadeAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["velocidade-animacao", "velocidade-animação"],
-            "animation-timing-function"
+            "animation-timing-function", 
+            pragmas
         );
         
         // Demais valores aceitos
