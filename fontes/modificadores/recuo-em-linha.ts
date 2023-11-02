@@ -8,7 +8,7 @@ export class RecuoEmLinha extends Modificador {
     // Pode receber de 1 a 2 valores.
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recuo-em-linha", "padding-inline");
+        super("recuo-em-linha", "padding-inline", pragmas);
 
         validarValorNumerico('recuo-em-linha', valor);
 

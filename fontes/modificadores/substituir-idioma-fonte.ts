@@ -7,7 +7,7 @@ export class SubstituirIdiomaFonte extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("substituir-idioma-fonte", "font-language-override");
+        super("substituir-idioma-fonte", "font-language-override", pragmas);
 
         // OBS.: Também aceita receber valores do tipo <string> que representem o idioma
         // Ex.: substituir-idioma-fonte: "ENG";

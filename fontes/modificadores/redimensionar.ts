@@ -13,7 +13,7 @@ export class Redimensionar extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("redimensionar", "resize");
+        super("redimensionar", "resize", pragmas);
 
         validarValores('redimensionar', valor, this.valoresAceitos);
 

@@ -11,7 +11,7 @@ export class RecuoRolagemMouse extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recuo-rolagem-mouse", "scroll-padding");
+        super("recuo-rolagem-mouse", "scroll-padding", pragmas);
 
         validarValorNumerico('recuo-rolagem-mouse', valor, this.valoresAceitos);
 

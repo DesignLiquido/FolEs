@@ -11,7 +11,7 @@ export class RecuoEmLinhaRolagemMouse extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recuo-em-linha-rolagem-mouse", "scroll-padding-inline");
+        super("recuo-em-linha-rolagem-mouse", "scroll-padding-inline", pragmas);
 
         validarValorNumerico('recuo-em-linha-rolagem-mouse', valor, this.valoresAceitos);
 

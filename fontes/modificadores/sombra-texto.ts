@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class SombraTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("sombra-texto", "text-shadow");
+        super("sombra-texto", "text-shadow", pragmas);
 
         // OBS.: Também aceita receber múltiplos valores, sendo um dos parâmetros do tipo COR
         // Ex.: text-shadow: 1px 1px 2px black;

@@ -11,7 +11,7 @@ export class RecortarFundo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recortar-fundo", "background-clip");
+        super("recortar-fundo", "background-clip", pragmas);
 
         validarValores('recortar-fundo', valor, this.valoresAceitos);
 

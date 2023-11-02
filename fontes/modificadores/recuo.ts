@@ -8,7 +8,7 @@ export class Recuo extends Modificador {
     // Pode receber de 1 a 4 valores.
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recuo", "padding");
+        super("recuo", "padding", pragmas);
 
         validarValorNumerico('recuo', valor);
 

@@ -15,7 +15,8 @@ export class RenderizacaoTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["renderizacao-texto", "renderização-texto"],
-            "text-rendering"
+            "text-rendering", 
+            pragmas
         );
 
         validarValores('renderização-texto', valor, this.valoresAceitos);

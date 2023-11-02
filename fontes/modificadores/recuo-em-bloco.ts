@@ -7,7 +7,7 @@ export class RecuoEmBloco extends Modificador {
     // Seletor de Atribuição Abreviada (Shorthand).
     // Pode receber de 1 a 2 valores.
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recuo-em-bloco", "padding-block");
+        super("recuo-em-bloco", "padding-block", pragmas);
 
         validarValorNumerico('recuo-em-bloco', valor);
 

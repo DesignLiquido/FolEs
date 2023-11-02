@@ -16,7 +16,7 @@ export class SintetizarFonte extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("sintetizar-fonte", "font-synthesis");
+        super("sintetizar-fonte", "font-synthesis", pragmas);
 
         validarValores('sintetizar-fonte', valor, this.valoresAceitos);
 

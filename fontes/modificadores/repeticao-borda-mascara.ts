@@ -13,7 +13,8 @@ export class RepeticaoBordaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["repeticao-borda-mascara", "repetição-borda-máscara"],
-            "mask-border-repeat"
+            "mask-border-repeat", 
+            pragmas
         );
 
         // OBS.: Também aceita receber múltiplos valores. 

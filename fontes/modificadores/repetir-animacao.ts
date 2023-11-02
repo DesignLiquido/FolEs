@@ -10,7 +10,8 @@ export class RepetirAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["repetir-animacao", "repetir-animação"],
-            "animation-iteration-count"
+            "animation-iteration-count", 
+            pragmas
         );
         
         validarValorNumerico('repetir-animação', valor, this.valoresAceitos);

@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RaioEsquerdoBordaSuperior extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("raio-esquerdo-borda-superior", "border-top-left-radius");
+        super("raio-esquerdo-borda-superior", "border-top-left-radius", pragmas);
 
         // Pode receber também dois valores número-quantificador
         // Ex.: raio-esquerdo-borda-superior: 20% 20%;

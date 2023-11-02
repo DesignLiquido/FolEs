@@ -12,7 +12,8 @@ export class RenderizacaoImagem extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["renderizacao-imagem", "renderização-imagem"],
-            "image-rendering"
+            "image-rendering", 
+            pragmas
         );
 
         validarValores('renderização-imagem', valor, this.valoresAceitos);
