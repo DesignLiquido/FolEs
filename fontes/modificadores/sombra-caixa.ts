@@ -12,7 +12,7 @@ export class SombraCaixa extends Modificador {
     }
     
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("sombra-caixa", "box-shadow");
+        super("sombra-caixa", "box-shadow", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
         // A constante abaixo é criada para ser possível fazer as validações seguintes.

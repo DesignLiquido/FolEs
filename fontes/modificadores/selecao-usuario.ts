@@ -12,7 +12,7 @@ export class SelecaoUsuario extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["selecao-usuario", "seleção-usuário"], "user-select");
+        super(["selecao-usuario", "seleção-usuário"], "user-select", pragmas);
 
         validarValores('seleção-usuário', valor, this.valoresAceitos);
 

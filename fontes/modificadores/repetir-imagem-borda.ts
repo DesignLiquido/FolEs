@@ -11,7 +11,7 @@ export class RepetirImagemBorda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("repetir-imagem-borda", "border-image-repeat");
+        super("repetir-imagem-borda", "border-image-repeat", pragmas);
         
         validarValores('repetir-imagem-borda', valor, this.valoresAceitos);
 

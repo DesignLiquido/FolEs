@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RecuoEmBlocoFim extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recuo-em-bloco-fim", "padding-block-end");
+        super("recuo-em-bloco-fim", "padding-block-end", pragmas);
 
         validarValorNumerico('recuo-em-bloco-fim', valor);
 

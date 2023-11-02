@@ -8,7 +8,7 @@ export class StatusAnimacao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["status-animacao", "status-animação"], "animation-play-state");
+        super(["status-animacao", "status-animação"], "animation-play-state", pragmas);
 
         validarValores('status-animação', valor, this.valoresAceitos);
 

@@ -10,7 +10,7 @@ export class RecortarMargemVazada extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recortar-margem-vazada", "overflow-clip-margin");
+        super("recortar-margem-vazada", "overflow-clip-margin", pragmas);
 
         // Também pode aceitar dois valores
         // Ex.: recortar-margem-vazada: conteúdo-caixa 5px;

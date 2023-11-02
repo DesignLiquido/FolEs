@@ -3,7 +3,7 @@ import { Modificador, PragmasModificador } from "./superclasse";
 
 export class ReiniciarTudo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("reiniciar-tudo", "all");
+        super("reiniciar-tudo", "all", pragmas);
         
         // Aceita somente os valores globais
         if (!(valor in valoresGlobais)) {

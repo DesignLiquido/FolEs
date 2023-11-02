@@ -14,7 +14,7 @@ export class RepetirMascara extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["repetir-mascara", "repetir-máscara"], "mask-repeat");
+        super(["repetir-mascara", "repetir-máscara"], "mask-repeat", pragmas);
 
         // Também pode aceitar dois ou múltiplos valores
         // Ex.: repetir-máscara: repetir espaçar;

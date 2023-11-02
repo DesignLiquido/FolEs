@@ -5,7 +5,7 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class RegrasEstiloColuna extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("regras-estilo-coluna", "column-rule-style");
+        super("regras-estilo-coluna", "column-rule-style", pragmas);
 
         validarValoresAdicionais('regras-estilo-coluna', valor, estilos);
 

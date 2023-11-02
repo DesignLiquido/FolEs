@@ -12,7 +12,8 @@ export class RotacaoDeslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["rotacao-deslocamento", "rotação-deslocamento"],
-            "offset-rotate"
+            "offset-rotate", 
+            pragmas
         );
         
         // Também pode receber dois valores

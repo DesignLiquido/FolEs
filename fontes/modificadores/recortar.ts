@@ -7,7 +7,7 @@ export class Recortar extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("recortar", "clip");
+        super("recortar", "clip", pragmas);
 
         // OBS.: Também pode receber a função do tipo <shape> - rect(<top>, <right>, <bottom>, <left>)
         // OBS.2: A documentação informa que o uso desse seletor não é mais recomendado

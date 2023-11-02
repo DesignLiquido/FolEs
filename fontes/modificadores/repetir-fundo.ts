@@ -14,7 +14,7 @@ export class RepetirFundo extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("repetir-fundo", "background-repeat");
+        super("repetir-fundo", "background-repeat", pragmas);
 
         // Também pode aceitar dois valores
         // Ex.: repetir-fundo: repetir espaçar;
