@@ -12,7 +12,8 @@ export class VisibilidadeConteudo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["visibilidade-conteudo", "visibilidade-conteúdo"],
-            "content-visibility"
+            "content-visibility", 
+            pragmas
         );
 
         validarValores('visibilidade-conteúdo', valor, this.valoresAceitos);

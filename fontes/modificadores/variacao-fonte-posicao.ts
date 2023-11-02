@@ -11,7 +11,8 @@ export class VariacaoFontePosicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-posicao", "variação-fonte-posição"],
-            "font-variant-position"
+            "font-variant-position", 
+            pragmas
         );
         
         validarValores('variação-fonte-posição', valor, this.valoresAceitos);

@@ -11,7 +11,8 @@ export class VariacaoFonteAlternativa extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-alternativa", "variação-fonte-alternativa"],
-            "font-variant-alternates"
+            "font-variant-alternates", 
+            pragmas
         );
 
         // OBS.: Há também uma lista de funções que o modificador aceita como valor:

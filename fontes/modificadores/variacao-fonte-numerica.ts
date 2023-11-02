@@ -23,7 +23,8 @@ export class VariacaoFonteNumerica extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["variacao-fonte-numerica", "variação-fonte-numérica"],
-            "font-variant-numeric"
+            "font-variant-numeric", 
+            pragmas
         );
 
         // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.

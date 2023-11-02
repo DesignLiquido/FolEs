@@ -12,7 +12,7 @@ export class VazamentoEmBloco extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("vazamento-em-bloco", "overflow-block");
+        super("vazamento-em-bloco", "overflow-block", pragmas);
 
         validarValores('vazamento-em-bloco', valor, this.valoresAceitos);
 

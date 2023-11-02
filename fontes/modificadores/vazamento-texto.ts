@@ -7,8 +7,8 @@ export class VazamentoTexto extends Modificador {
         "elipse": "ellipsis",
     }
 
-    constructor(valor: string, quantificador: string) {
-        super("vazamento-texto", "text-overflow");
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+        super("vazamento-texto", "text-overflow", pragmas);
 
         // OBS.: Também aceita receber:
         // 1. Valores <string>;

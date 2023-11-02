@@ -12,7 +12,7 @@ export class VazamentoVertical extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("vazamento-vertical", "overflow-y");
+        super("vazamento-vertical", "overflow-y", pragmas);
 
         validarValores('vazamento-vertical', valor, this.valoresAceitos);
 

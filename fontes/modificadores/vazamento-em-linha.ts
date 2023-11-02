@@ -12,7 +12,7 @@ export class VazamentoEmLinha extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("vazamento-em-linha", "overflow-inline");
+        super("vazamento-em-linha", "overflow-inline", pragmas);
 
         validarValores('vazamento-em-linha', valor, this.valoresAceitos);
 
