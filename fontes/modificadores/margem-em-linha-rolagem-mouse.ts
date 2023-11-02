@@ -8,7 +8,7 @@ export class MargemEmLinhaRolagemMouse extends Modificador {
     // Pode receber de 1 a 2 valores.
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("margem-em-linha-rolagem-mouse", "scroll-margin-inline");
+        super("margem-em-linha-rolagem-mouse", "scroll-margin-inline", pragmas);
 
         validarValorNumerico('margem-em-linha-rolagem-mouse', valor);
 

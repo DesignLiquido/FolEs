@@ -9,7 +9,7 @@ export class MargemEmBlocoFim extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("margem-em-bloco-fim", "margin-block-end");
+        super("margem-em-bloco-fim", "margin-block-end", pragmas);
         
         validarValorNumerico('margem-em-bloco-fim', valor, this.valoresAceitos);
 

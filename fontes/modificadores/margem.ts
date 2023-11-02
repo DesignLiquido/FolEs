@@ -12,7 +12,7 @@ export class Margem extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("margem", "margin");
+        super("margem", "margin", pragmas);
 
         validarValorNumerico('margem', valor, this.valoresAceitos);
 

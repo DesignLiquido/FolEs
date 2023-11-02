@@ -7,7 +7,7 @@ export class ModeloGeralEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("modelo-geral-em-grade", "grid-template-areas");
+        super("modelo-geral-em-grade", "grid-template-areas", pragmas);
 
         // OBS.: Também aceita receber valores do tipo string e matriz
         // Ex.: grid-template-areas:

@@ -13,7 +13,8 @@ export class ModoPreenchimentoAnimacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["modo-preenchimento-animacao", "modo-preenchimento-animação"], 
-            "animation-fill-mode"
+            "animation-fill-mode", 
+            pragmas
         );
 
         validarValores('modo-preenchimento-animação', valor, this.valoresAceitos);
