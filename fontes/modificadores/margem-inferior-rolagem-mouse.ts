@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemInferiorRolagemMouse extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("margem-inferior-rolagem-mouse", "scroll-margin-bottom");
+        super("margem-inferior-rolagem-mouse", "scroll-margin-bottom", pragmas);
 
         validarValorNumerico('margem-inferior-rolagem-mouse', valor);
 

@@ -16,7 +16,7 @@ export class ModeloLinhasEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("modelo-linhas-em-grade", "grid-template-rows");
+        super("modelo-linhas-em-grade", "grid-template-rows", pragmas);
 
         // OBS.: Também aceita receber o valor do tipo [linename]
         // TODO: Adaptar lógica para cobrir todos os casos de valores

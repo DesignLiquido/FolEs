@@ -7,7 +7,7 @@ export class NomeAnimacao extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["nome-animacao", "nome-animação"], "animation-name");
+        super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
 
         /* 
             nome-animação pode receber qualquer valor correspondente ao <custom-ident>,

@@ -9,7 +9,7 @@ export class ModoEscrita extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("modo-escrita", "writing-mode");
+        super("modo-escrita", "writing-mode", pragmas);
 
         validarValores('modo-escrita', valor, this.valoresAceitos);
 
