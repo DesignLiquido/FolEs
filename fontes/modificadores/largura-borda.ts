@@ -12,7 +12,7 @@ export class LarguraBorda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("largura-borda", "border-width");
+        super("largura-borda", "border-width", pragmas);
 
         validarValorNumerico('largura-borda', valor, this.valoresAceitos);
         this.valor = valor;

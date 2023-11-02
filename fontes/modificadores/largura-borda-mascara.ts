@@ -11,7 +11,8 @@ export class LarguraBordaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["largura-borda-mascara", "largura-borda-máscara"],
-            "mask-border-width"
+            "mask-border-width", 
+            pragmas
         );
 
         // OBS.: Pode receber de 1 a 4 valores

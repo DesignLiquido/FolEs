@@ -11,7 +11,7 @@ export class JustificarTexto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("justificar-texto", "text-justify");
+        super("justificar-texto", "text-justify", pragmas);
 
         validarValores('justificar-texto', valor, this.valoresAceitos);
 

@@ -11,8 +11,8 @@ export class LarguraBordaEmBloco extends Modificador {
         "grossa": "thick",
     }
 
-    constructor(valor: string, quantificador: string) {
-        super("largura-borda-em-bloco", "border-block-width");
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+        super("largura-borda-em-bloco", "border-block-width", pragmas);
 
         validarValorNumerico('largura-borda-em-bloco', valor, this.valoresAceitos);
 

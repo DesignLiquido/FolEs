@@ -12,7 +12,7 @@ export class LarguraContorno extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("largura-contorno", "outline-width");
+        super("largura-contorno", "outline-width", pragmas);
 
         validarValorNumerico('largura-contorno', valor, this.valoresAceitos);
 

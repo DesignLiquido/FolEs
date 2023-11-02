@@ -14,7 +14,8 @@ export class LarguraInicioBordaEmLinha extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["largura-inicio-borda-em-linha", "largura-início-borda-em-linha"],
-            "border-inline-start-width"
+            "border-inline-start-width", 
+            pragmas
         );
 
         validarValorNumerico('largura-início-borda-em-linha', valor, this.valoresAceitos);

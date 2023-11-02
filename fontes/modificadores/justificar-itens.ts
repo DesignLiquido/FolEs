@@ -13,7 +13,7 @@ export class JustificarItens extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("justificar-itens", "justify-items");
+        super("justificar-itens", "justify-items", pragmas);
 
         // Além dos valores listados, aceita também todos os valores da Lista 
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'

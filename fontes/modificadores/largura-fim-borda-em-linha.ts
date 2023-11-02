@@ -12,7 +12,7 @@ export class LarguraFimBordaEmLinha extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("largura-fim-borda-em-linha", "border-inline-end-width");
+        super("largura-fim-borda-em-linha", "border-inline-end-width", pragmas);
 
         validarValorNumerico('largura-fim-borda-em-linha', valor, this.valoresAceitos);
 

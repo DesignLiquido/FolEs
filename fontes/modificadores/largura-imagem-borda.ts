@@ -9,7 +9,7 @@ export class LarguraImagemBorda extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("largura-imagem-borda", "border-image-width");
+        super("largura-imagem-borda", "border-image-width", pragmas);
 
         // OBS.: Também pode receber também mais de um valor número-quantificador
         // Ex.: largura-imagem-borda: 5% 2em 10% auto;

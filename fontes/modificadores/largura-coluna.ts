@@ -9,7 +9,7 @@ export class LarguraColuna extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("largura-coluna", "column-width");
+        super("largura-coluna", "column-width", pragmas);
 
         validarValorNumerico('largura-coluna', valor, this.valoresAceitos);
 
