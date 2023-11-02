@@ -9,7 +9,7 @@ export class TamanhoGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("tamanho-grade", "grid-area");
+        super("tamanho-grade", "grid-area", pragmas);
 
         // OBS.: Também pode receber outros dois casos de valores:
         // 1. custom-indent

@@ -5,7 +5,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Tabulacao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super(["tabulacao", "tabulação"], "tab-size");
+        super(["tabulacao", "tabulação"], "tab-size", pragmas);
 
         validarValorNumerico('tabulação', valor)
 

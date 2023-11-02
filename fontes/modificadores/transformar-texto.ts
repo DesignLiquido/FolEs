@@ -14,7 +14,7 @@ export class TransformarTexto extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("transformar-texto", "text-transform");
+        super("transformar-texto", "text-transform", pragmas);
 
         validarValores('transformar-texto', valor, this.valoresAceitos);
 

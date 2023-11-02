@@ -23,7 +23,8 @@ export class TempoTransicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["tempo-transicao", "tempo-transição"],
-            "transition-timing-function"
+            "transition-timing-function", 
+            pragmas
         );
 
         const valoresExtra = ['cubic-bezier', 'steps'];

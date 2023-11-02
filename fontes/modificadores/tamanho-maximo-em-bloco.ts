@@ -15,7 +15,8 @@ export class TamanhoMaximoEmBloco extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["tamanho-maximo-em-bloco", "tamanho-máximo-em-bloco"],
-            "max-block-size"
+            "max-block-size", 
+            pragmas
         );
 
         const valoresExtra = ['fit-content'];

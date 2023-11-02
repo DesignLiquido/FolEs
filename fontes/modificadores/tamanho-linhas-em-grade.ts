@@ -13,7 +13,7 @@ export class TamanhoLinhasEmGrade extends Modificador {
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
-        super("tamanho-linhas-em-grade", "grid-auto-rows");
+        super("tamanho-linhas-em-grade", "grid-auto-rows", pragmas);
 
         const valoresExtra = ['minmax', 'fit-content'];
         validarValorNumerico('tamanho-linhas-em-grade', valor, this.valoresAceitos, valoresExtra);

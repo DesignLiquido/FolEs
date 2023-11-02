@@ -10,7 +10,8 @@ export class TamanhoOpticoFonte extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["tamanho-optico-fonte", "tamanho-óptico-fonte"],
-            "font-optical-sizing"
+            "font-optical-sizing", 
+            pragmas
         ); 
 
         validarValores('tamanho-óptico-fonte', valor, this.valoresAceitos);
