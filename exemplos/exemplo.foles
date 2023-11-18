@@ -10,7 +10,7 @@ aspas {
     contém: nenhum;
     recortar: auto;
     fluxo: nenhum;
-    conteudo: auto;
+    conteudo: normal;
     citações: nenhum;
 }
 
