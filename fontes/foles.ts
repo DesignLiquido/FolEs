@@ -17,8 +17,8 @@ export class FolEs {
     avaliadorSintaticoReverso: AvaliadorSintaticoReverso;
     importador: Importador;
     importadorReverso: Importador;
-    tradutor: Serializador;
-    tradutorReverso: SerializadorReverso;
+    serializador: Serializador;
+    serializadorReverso: SerializadorReverso;
 
     constructor(traduzirComAninhamentos: boolean) {
         this.lexador = new Lexador();
@@ -28,8 +28,8 @@ export class FolEs {
         this.importadorReverso.extensaoPadrao = ".css";
         this.avaliadorSintatico = new AvaliadorSintatico(this.importador);
         this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(this.importadorReverso);
-        this.tradutor = new Serializador(traduzirComAninhamentos);
-        this.tradutorReverso = new SerializadorReverso(traduzirComAninhamentos);
+        this.serializador = new Serializador(traduzirComAninhamentos);
+        this.serializadorReverso = new SerializadorReverso(traduzirComAninhamentos);
     }
 
     /**
@@ -39,13 +39,13 @@ export class FolEs {
      */
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(simbolos);
-        const traducao = this.tradutor.serializar(resultadoAvaliadorSintatico);
+        const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
         return traducao;
     }
 
     private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(simbolos);
-        const traducaoReversa = this.tradutorReverso.serializar(resultadoAvaliadorSintaticoReverso);
+        const traducaoReversa = this.serializadorReverso.serializar(resultadoAvaliadorSintaticoReverso);
         return traducaoReversa;
     }
     

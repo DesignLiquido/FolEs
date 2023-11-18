@@ -28,7 +28,7 @@ export default {
     "samp": ["exemplo"],
     "form": ["formulario", "formulário"],
     "colgroup": ["grupo-colunas", "grupo-opcoes"],
-    "optgroup": ["grupo-opçoes", "grupo-opções"],
+    "optgroup": ["grupo-opcoes", "grupo-opções"],
     "img": ["imagem"],
     "ins": ["inserido"],
     "template": ["invisivel", "invisível"],

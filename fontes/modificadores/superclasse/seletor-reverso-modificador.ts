@@ -10,6 +10,6 @@ export class SeletorReversoModificador {
         ) {
             throw new Error(`O seletor \'${nomeCss}\' não foi encontrado.`);
         }
-        return new DicionarioReversoModificadores[nomeCss](valor, quantificador);
+        return new DicionarioReversoModificadores[nomeCss](valor, quantificador, pragmas);
     }
 }
