@@ -24,7 +24,7 @@ export class Tradutor {
         }
         
         this.atual += traducaoSeletor.length;
-        novosPragmasSeletor.colunaFinal = this.atual;
+        novosPragmasSeletor.colunaFinal = this.atual - 1;
         return novosPragmasSeletor;
     }
 
@@ -36,18 +36,35 @@ export class Tradutor {
         }
 
         this.atual += modificador.propriedadeCss.length;
-        novosPragmasModificador.colunaFinal = this.atual;
+        novosPragmasModificador.colunaFinal = this.atual - 1;
         return novosPragmasModificador;
     }
 
     private traduzirSeletorEstrutura(seletor: SeletorEstrutura): Seletor {
-        const seletorLmht = seletor.paraTexto();
-        const traducaoSeletor = estruturasHtml[seletorLmht];
+        const seletorLmht: string = seletor.paraTexto();
+        const traducaoSeletor: string = estruturasHtml[seletorLmht];
         const novosPragmasSeletor = this.calcularPragmasSeletor(traducaoSeletor);
-        return new SeletorEstruturasHtml(
+        const seletorTraduzido = new SeletorEstruturasHtml(
             traducaoSeletor,
-            novosPragmasSeletor
+            seletor.pragmas
         ) as Seletor;
+        seletorTraduzido.pragmasTraducao = novosPragmasSeletor;
+        return seletorTraduzido;
+    }
+
+    private traduzirModificador(modificador) {
+        this.linha = modificador.pragmas.linha;
+        const novosPragmasModificador = this.calcularPragmasModificador(modificador);
+        const modificadorTraduzido = 
+            new SeletorModificador(
+                Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles,
+                modificador.valor instanceof Metodo ? modificador.valor.paraTexto() : modificador.valor,
+                modificador.quantificador,
+                modificador.pragmas
+            ) as Modificador;
+        
+            modificadorTraduzido.pragmasTraducao = novosPragmasModificador;
+        return modificadorTraduzido;
     }
 
     traduzir(declaracoes: Declaracao[]): Declaracao[] {
@@ -70,15 +87,7 @@ export class Tradutor {
             }
 
             for (const modificador of declaracao.modificadores) {
-                this.linha = modificador.pragmas.linha;
-                modificadoresTraduzidos.push(
-                    new SeletorModificador(
-                        Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles,
-                        modificador.valor instanceof Metodo ? modificador.valor.paraTexto() : modificador.valor,
-                        modificador.quantificador,
-                        this.calcularPragmasModificador(modificador)
-                    ) as Modificador
-                );       
+                modificadoresTraduzidos.push(this.traduzirModificador(modificador));
             }
 
             declaracoesTraduzidas.push(
@@ -91,5 +100,38 @@ export class Tradutor {
         }
 
         return declaracoesTraduzidas;
+    }
+
+    /**
+     * Gera o mapa de fontes (source map) de FolEs para CSS.
+     * {
+        "version": 3,
+        "file": "greet.js",
+        "sourceRoot": "",
+        "sources": [
+            "greet.ts"
+        ],
+        "names": [],
+        "mappings": "AAAA,IAAM,KAAK,GAAG,UAAC,IAAY;IACzB,OAAO,WAAS,IAAM,CAAA;AACxB,CAAC,CAAA"
+        }
+     * @param declaracoes As declarações já traduzidas.
+     */
+    gerarMapaFontes(declaracoes: Declaracao[]): any {
+        const retorno = {
+            version: 3,
+            file: "teste.css",
+            sourceRoot: "",
+            sources: [
+                "teste.foles"
+            ],
+            names: [],
+            mappings: ""
+        };
+
+        for (const declaracao of declaracoes) {
+
+        }
+
+        return retorno;
     }
 }
