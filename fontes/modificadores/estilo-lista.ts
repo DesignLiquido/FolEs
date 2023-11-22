@@ -10,6 +10,7 @@ export class EstiloLista extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "dentro": "inside",
         "fora": "outside",
+        "nenhum": "none",
     }
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
@@ -19,11 +20,6 @@ export class EstiloLista extends Modificador {
         // A constante abaixo é criada para ser possível fazer as validações.
         const valorString = valor.toString();
 
-        // OBS.: Também pode receber os valores válidos para os seletores:
-        // 1. estilo-lista-tipo
-        // 2. estilo-lista-imagem
-
-        // TODO: Acrescentar esses valores quando os dois seletores estiverem finalizados.
         const valoresExtra = ['url'];
         validarValorNumerico('estilo-lista', valor, this.valoresAceitos, valoresExtra);
 

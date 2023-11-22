@@ -18,8 +18,6 @@ export class FlexFluxo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        // A lógica abaixo cobre o caso de recebimento de um único valor
-        // TODO: Ajustar lógica para o recebimento de dois valores.
         validarValores('flex-fluxo', valor, this.valoresAceitos);
 
         this.valor = valor;

@@ -9,13 +9,6 @@ export class Filtro extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("filtro", "filter", pragmas);
 
-        // Também pode receber uma lista de funções próprias
-        // EXEMPLOS:
-        // filter: blur(5px);
-        // filter: brightness(0.4);
-        // filter: contrast(200%);
-        // TODO: Implementar lista de funções como valores aceitos
-
         const valoresExtra = ['url'];
 
         validarValores('filtro', valor, this.valoresAceitos, valoresExtra);
