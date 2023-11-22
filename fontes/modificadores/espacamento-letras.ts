@@ -15,12 +15,6 @@ export class EspacamentoLetras extends Modificador {
             pragmas
         );
 
-        // Também pode receber valores numéricos com ponto (.) na frente
-        // Ex.: espaçamento-letras: .2rem;
-
-        // A lógica abaixo cobre somente o recebimento de valores positivos e negativos
-        // TODO: Adaptar lógica para cobrir todos os casos.
-
         validarValorNumerico('espaçamento-letras', valor, this.valoresAceitos);
 
         this.valor = valor;

@@ -34,9 +34,6 @@ export class EstiloEnfaseTexto extends Modificador {
         // possui 1 caractere não seria suficiente. A própria documentação não é muito clara sobre esse exemplo.
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style 
 
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos.
-        
         validarValores('estilo-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;

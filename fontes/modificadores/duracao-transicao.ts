@@ -10,12 +10,6 @@ export class DuracaoTransicao extends Modificador {
             "transition-duration", 
             pragmas
         );
-
-        // OBS.: Também aceita receber múltiplos valores. 
-        // Ex.: duração-transição: 10s, 15s, 230ms;
-        
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
         
         validarValorNumerico('duração-transição', valor);
 

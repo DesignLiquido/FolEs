@@ -17,7 +17,6 @@ export class AjustarTamanhoFonte extends Modificador {
 
         // OBS.: Os valores aceitos listados só são válidos quando há DOIS valores atribuídos.
         // Ex.: ajustar-tamanho-fonte: altura-cap 0.5;
-        // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático.
 
         validarValorNumerico('ajustar-tamanho-fonte', valor, this.valoresAceitos);
 

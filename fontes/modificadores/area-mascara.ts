@@ -23,12 +23,6 @@ export class AreaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
 
-        // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.
-        // Ex.: área-máscara: visualizar-caixa, completar-caixa, borda-caixa;
-
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
-
         validarValores("área-máscara", valor, this.valoresAceitos);
 
         this.valor = valor;

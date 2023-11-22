@@ -27,7 +27,6 @@ export class Borda extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
-        // TODO: Adaptar lógica no futuro para cobrir casos de recebimento de MÚLTIPLOS valores
         if (!(valor in this.valoresAceitos) &&
             Number.isNaN(parseInt(valor)) &&
             validaçõesCor &&

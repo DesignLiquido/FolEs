@@ -10,12 +10,6 @@ export class DuracaoAnimacao extends Modificador {
             "animation-duration", 
             pragmas
         );
-
-        // OBS.: Também aceita receber múltiplos valores. 
-        // Ex.: duração-animação: 10s, 15s, 230ms;
-
-        // A lógica abaixo cobre somente o recebimento de UM valor. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
         
         validarValorNumerico('duração-animação', valor);
 
