@@ -12,10 +12,6 @@ export class IndentacaoTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["indentacao-texto", "indentação-texto"], "text-indent", pragmas);
 
-        // Também pode receber múltiplos valores
-        // Ex.: indentação-texto: 5em inverter cada-linha;
-
-        // TODO: Adaptar lógica para cobrir casos de múltiplos valores atribuídos.
         validarValorNumerico('indentação-texto', valor, this.valoresAceitos);
 
         this.valor = valor;

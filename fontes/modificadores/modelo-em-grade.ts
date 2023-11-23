@@ -24,7 +24,6 @@ export class ModeloEmGrade extends Modificador {
         //      "a a a" 20%
         //      "b b b" auto;
 
-        // TODO: Adaptar lógica para cobrir todos os casos de valores
         const valoresExtra = ['fit-content'];
         validarValorNumerico('modelo-em-grade', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;

@@ -11,9 +11,6 @@ export class LarguraImagemBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("largura-imagem-borda", "border-image-width", pragmas);
 
-        // OBS.: Também pode receber também mais de um valor número-quantificador
-        // Ex.: largura-imagem-borda: 5% 2em 10% auto;
-        // TODO: Ajustar lógica para cobrir todos os casos possíveis de atribuição de valores.
         validarValorNumerico('largura-imagem-borda', valor, this.valoresAceitos);
 
         this.valor = valor;
