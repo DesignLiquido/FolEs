@@ -12,6 +12,8 @@ export class Deslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("deslocamento", "offset", pragmas);
 
+        // Também aceita receber as funções path() e ray()
+
         const valoresExtra = ['url'];
         validarValorNumerico('deslocamento', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;

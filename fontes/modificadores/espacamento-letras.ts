@@ -10,10 +10,13 @@ export class EspacamentoLetras extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
-            ["espacamento-letras", "espaçamento-letras"], 
-            "letter-spacing", 
+            ["espacamento-letras", "espaçamento-letras"],
+            "letter-spacing",
             pragmas
         );
+        
+        // Também pode receber valores numéricos com ponto (.) na frente
+        // Ex.: espaçamento-letras: .2rem;
 
         validarValorNumerico('espaçamento-letras', valor, this.valoresAceitos);
 

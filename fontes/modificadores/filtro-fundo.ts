@@ -9,6 +9,8 @@ export class FiltroFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("filtro-fundo", "backdrop-filter", pragmas);
 
+        // Também pode receber as DEZ funções do tipo <filter-function-list>
+        
         const valoresExtra = ['url'];
         validarValores('filtro-fundo', valor, this.valoresAceitos, valoresExtra);
 
