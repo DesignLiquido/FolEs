@@ -1,3 +1,5 @@
+import * as vlq from 'vlq';
+
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico";
 import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
@@ -17,18 +19,49 @@ describe('Tradutor', () => {
         tradutor = new Tradutor();
     });
 
-    describe('Casos de Sucesso', () => {
+    describe('Tradução', () => {
+        describe('Casos de Sucesso', () => {
+            it('Trivial', () => {
+                const resultadoLexador = lexador.mapear([
+                    'lmht {',
+                    '    largura-borda-direita: 130mm;',
+                    '}'
+                ]);
+    
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                const resultado = tradutor.traduzir(resultadoAvaliadorSintatico);
+    
+                expect(resultado).toBeTruthy();
+            });
+        });
+    });
+
+    describe('Geração de mapas de fontes', () => {
         it('Trivial', () => {
-            const resultadoLexador = lexador.mapear([
+            const fonteOriginal = [
                 'lmht {',
                 '    largura-borda-direita: 130mm;',
                 '}'
-            ]);
+            ];
+            const resultadoLexador = lexador.mapear(fonteOriginal);
 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-            const resultado = tradutor.traduzir(resultadoAvaliadorSintatico);
+            const resultadoTraducao = tradutor.traduzir(resultadoAvaliadorSintatico);
+            const resultado = tradutor.gerarMapaFontes(resultadoTraducao, fonteOriginal.join('\n'));
 
-            expect(resultado).toBeTruthy();
+            /* 
+            for (const linha of resultado.mappings.split(';')) {
+                for (const pragma of linha.split(',')) {
+                    console.log(vlq.decode(pragma));
+                }
+            }
+
+            console.log(resultado); */
+            expect(resultado.version).toBe(3);
+            expect(resultado.file).toBeTruthy();
+            expect(resultado.sources.length).toBeGreaterThan(0);
+            expect(resultado.sourcesContent).toBeTruthy();
+            expect(resultado.mappings.length).toBeGreaterThan(0);
         });
-    });
+    })
 });
