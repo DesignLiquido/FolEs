@@ -17,10 +17,6 @@ export class PosicaoTextoSublinhado extends Modificador {
             pragmas
         );
 
-        // Também pode receber dois valores
-        // Ex.: posição-texto-sublinhado: debaixo esquerda;
-
-        // TODO: Adaptar lógica para cobrir todos os casos
         validarValores('posição-texto-sublinhado', valor, this.valoresAceitos);
 
         this.valor = valor;

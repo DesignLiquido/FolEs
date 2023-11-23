@@ -16,10 +16,6 @@ export class PosicaoEnfaseTexto extends Modificador {
             pragmas
         );
 
-        // OBS.: Também aceita receber dois valores. 
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
-
         validarValores('posição-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;

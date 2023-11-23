@@ -15,12 +15,6 @@ export class OrigemPerspectiva extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("origem-perspectiva", "perspective-origin", pragmas);
 
-        // OBS.: Também pode receber 2 valores.
-        // Ex.: origem-perspectiva: superior direita;
-
-        // A lógica abaixo cobre somente o recebimento de UM valor. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
-
         validarValorNumerico('origem-perspectiva', valor, this.valoresAceitos);
 
         this.valor = valor;
