@@ -38,9 +38,14 @@ describe('Tradutor', () => {
 
     describe('Geração de mapas de fontes', () => {
         it('Trivial', () => {
-            const fonteOriginal = [
+            /* const fonteOriginal = [
                 'lmht {',
                 '    largura-borda-direita: 130mm;',
+                '}'
+            ]; */
+            const fonteOriginal = [
+                'paragrafo {',
+                '    tamanho-fonte: 14px;',
                 '}'
             ];
             const resultadoLexador = lexador.mapear(fonteOriginal);
@@ -57,6 +62,7 @@ describe('Tradutor', () => {
             }
 
             console.log(resultado); */
+            console.log(resultado);
             expect(resultado.version).toBe(3);
             expect(resultado.file).toBeTruthy();
             expect(resultado.sources.length).toBeGreaterThan(0);
