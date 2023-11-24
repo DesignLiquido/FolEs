@@ -10,15 +10,6 @@ export class Citacoes extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["citacoes", "citações"], "quotes", pragmas);
 
-        // OBS.: Também pode receber valores <string>.
-        // Ex.: citações: "«" "»" "‹" "›";
-        // OBS.2: É uma sintaxe bizarra.
-
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/string 
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes 
-
-        // A lógica abaixo cobre somente o recebimento dos Valores Aceitos
-        // TODO: Adaptar lógica para cobrir o caso de valores <string>.
         validarValores("citações", valor, this.valoresAceitos);
 
         this.valor = valor;

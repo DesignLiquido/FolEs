@@ -12,12 +12,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             "font-variation-settings", 
             pragmas
         );
-        
-        // OBS.: Pode receber um caso especial de string + número
-        // EX.:  configurações-variação-fonte: "XHGT" 0.7;
-        
-        // A validação abaixo cobre somente valores aceitos e numéricos
-        // TODO: Adaptar lógica para cobrir caso especial
+
         validarValorNumerico('configurações-variação-fonte', valor, this.valoresAceitos);
         this.valor = valor;
 

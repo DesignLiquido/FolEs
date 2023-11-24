@@ -21,13 +21,6 @@ export class DeslocamentoEmAncora extends Modificador {
             pragmas
         );
 
-        // Pode receber de 1 a 4 valores;
-        // Para os casos de múltiplos valores, o modificador também aceita número-quantificador.
-        // Ex.1: deslocamento-em-âncora: 25% 75%;
-        // Ex.2: deslocamento-em-âncora: inferior 10px direita 20px;
-
-        // A lógica abaixo cobre apenas o recebimento de UM único valor.
-        // TODO: Adaptar lógica futuramente para cobrir todos os casos. 
         validarValorNumerico('deslocamento-em-âncora', valor, this.valoresAceitos);
 
         this.valor = valor;

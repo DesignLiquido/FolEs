@@ -14,10 +14,6 @@ export class InicioLinhaEmGrade extends Modificador {
             pragmas
         );
 
-        // OBS.: Pode receber também DOIS valores: um número e um valor personalizado (<custom-ident>);
-        // TODO: Implementar lógica restante no futuro, tendo em vista a estrutura do Av.Sintático.
-
-        // A lógica abaixo cobre somente o recebimento de UM valor numérico.
         validarValorNumerico('início-linha-em-grade', valor, this.valoresAceitos);
 
         this.valor = valor;

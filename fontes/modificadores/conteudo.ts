@@ -19,7 +19,7 @@ export class Conteudo extends Modificador {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
         // Também aceita como valor as funções linear-gradient(), image-set() e counter()
-        // TODO: Adaptar lógica para cobrir todos os casos. 
+
         const valoresExtra = ['url'];
         validarValores('conteúdo', valor, this.valoresAceitos, valoresExtra);
 

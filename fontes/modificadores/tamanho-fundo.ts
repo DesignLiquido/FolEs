@@ -13,9 +13,6 @@ export class TamanhoFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-fundo", "background-size", pragmas);
 
-        // Aceita valores listados e número-quantificador
-        // OBS.: Também aceita receber DOIS valores. A lógica abaixo cobre o recebimento de UM valor.
-        // TODO: Adaptar lógica no futuro
         validarValorNumerico('tamanho-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;

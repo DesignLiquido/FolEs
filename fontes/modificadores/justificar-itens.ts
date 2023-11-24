@@ -27,8 +27,6 @@ export class JustificarItens extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
 
-        // Também pode receber dois valores. A lógica abaixo cobre somente o recebimento de um.
-        // TODO: Ajustar lógica para cobrir todos os casos
         validarValoresAdicionais('justificar-itens', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;

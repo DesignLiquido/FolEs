@@ -32,11 +32,6 @@ export class PosicionarConteudo extends Modificador {
             pragmas
         );
 
-        // Pode receber valores próprios ou valores da lista de posições
-        // Também aceita receber múltiplos valores
-        // Ex.: posicionar-conteúdo: primeira linha-de-base espaço-uniforme;
-
-        // TODO: Adaptar lógica para cobrir todos os casos
         validarValoresAdicionais('posicionar-conteúdo', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;

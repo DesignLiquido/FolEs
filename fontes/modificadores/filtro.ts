@@ -14,10 +14,8 @@ export class Filtro extends Modificador {
         // filter: blur(5px);
         // filter: brightness(0.4);
         // filter: contrast(200%);
-        // TODO: Implementar lista de funções como valores aceitos
 
         const valoresExtra = ['url'];
-
         validarValores('filtro', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;

@@ -19,10 +19,6 @@ export class DeslocarPontuacao extends Modificador {
             pragmas
         );
 
-        // OBS.: Pode receber de 1 a 3 valores;
-        // A lógica abaixo cobre apenas o recebimento de UM único valor.
-        // TODO: Adaptar lógica para cobrir o recebimento de múltiplos valores.
-
         validarValores('deslocar-pontuação', valor, this.valoresAceitos);
 
         this.valor = valor;

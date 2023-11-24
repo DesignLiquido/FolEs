@@ -11,12 +11,6 @@ export class TamanhoGrade extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("tamanho-grade", "grid-area", pragmas);
 
-        // OBS.: Também pode receber outros dois casos de valores:
-        // 1. custom-indent
-        // 2. valores separados por uma barra (ex.: auto / auto)
-
-        // TODO: Implementar lógica para cobrir esses dois casos.
-
         validarValorNumerico('tamanho-grade', valor, this.valoresAceitos);
 
         this.valor = valor;

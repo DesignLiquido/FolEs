@@ -32,7 +32,6 @@ export class FonteTexto extends Modificador {
         // OBS.3: O segundo parâmetro é obrigatório para o caso da primeira fonte não estar disponível.
 
         // A lógica abaixo cobre somente o recebimento dos valores genéricos.
-        // TODO: Adaptar lógica para cobrir o caso de receber 2 parâmetros. 
         validarValores('fonte-texto', valor, this.valoresAceitos);
 
         this.valor = valor;

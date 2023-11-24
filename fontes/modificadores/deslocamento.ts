@@ -13,7 +13,7 @@ export class Deslocamento extends Modificador {
         super("deslocamento", "offset", pragmas);
 
         // Também aceita receber as funções path() e ray()
-        // TODO: Implementar casos faltantes
+
         const valoresExtra = ['url'];
         validarValorNumerico('deslocamento', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;

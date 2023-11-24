@@ -28,7 +28,6 @@ export class BordaMascara extends Modificador {
             valorURL = valor['traducao'];
         }
         
-        // TODO: Adaptar lógica no futuro para cobrir casos de recebimento de MÚLTIPLOS valores
         if (!(valor in this.valoresAceitos) &&
             Number.isNaN(parseInt(valor)) &&
             !(valorURL.includes('url')) &&

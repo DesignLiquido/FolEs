@@ -23,10 +23,6 @@ export class SombraCaixa extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
-        // Também pode aceitar múltiplos valores
-        // Ex.: sombra-caixa: 10px 5px 5px preto;
-
-        // TODO: Implementar lógica para cobrir todos os casos.
         if (!(valor in this.valoresAceitos) &&
             validaçõesCor && validaçõesHEX &&
             Number.isNaN(parseInt(valor)) &&

@@ -9,10 +9,6 @@ export class Transformar extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("transformar", "transform", pragmas);
 
-        // OBS.: Também aceita receber as funções do tipo <transform-function>
-        // Checar documentação: https://developer.mozilla.org/en-US/docs/Web/CSS/transform 
-        // TODO: Adaptar lógica
-
         validarValores('transformar', valor, this.valoresAceitos);
         this.valor = valor;
 

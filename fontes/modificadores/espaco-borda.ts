@@ -7,12 +7,6 @@ export class EspacoBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["espaco-borda", "espaço-borda"], "border-spacing", pragmas);
 
-        // Pode receber também mais de um valor número-quantificador
-        // Ex.: espaco-borda: 1cm 2em;
-
-        // A lógica abaixo cobre apenas o recebimento de UM único valor
-        // TODO: Adaptar lógica para cobrir todos os casos.
-
         validarValorNumerico('espaço-borda', valor);
 
         this.valor = valor;

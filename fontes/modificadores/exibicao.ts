@@ -44,10 +44,6 @@ export class Exibicao extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["exibicao", "exibição"], "display", pragmas);
 
-        // OBS.: Também pode receber múltiplos valores.
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
-
         validarValores('exibição', valor, this.valoresAceitos);
 
         this.valor = valor;

@@ -44,14 +44,9 @@ export class Cursor extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("cursor", "cursor", pragmas);
 
-        // OBS.: Também pode receber:
-        // 1. Um link externo de uma imagem (URL);
-        // 2. Coordenadas x e y que definem o ponto de partida do cursor.
+        const valoresExtra = ['url'];
 
-        // A lógica abaixo cobre somente o recebimento dos valores aceitos listados.
-        // TODO: Adaptar lógica para cobrir os demais casos. 
-
-        validarValores('cursor', valor, this.valoresAceitos);
+        validarValores('cursor', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

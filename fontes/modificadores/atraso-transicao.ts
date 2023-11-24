@@ -11,9 +11,6 @@ export class AtrasoTransicao extends Modificador {
             pragmas
         );
         
-        // Também aceita dois valores separados por vírgula
-        // Ex.: atraso-transição: 2s, 4ms;
-        // TODO: Adaptar lógica para cobrir todos os casos
         validarValorNumerico('atraso-transição', valor);
 
         this.valor = valor;

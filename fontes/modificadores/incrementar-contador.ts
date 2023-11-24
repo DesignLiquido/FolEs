@@ -16,7 +16,6 @@ export class IncrementarContador extends Modificador {
         // Ex.: incrementar-contador: meu-contador -4;
         
         // A lógica abaixo cobre somente o recebimento de 'nenhum' e de números positivos.
-        // TODO: Adaptar lógica de acordo com a sintaxe do modificador.
         validarValorNumerico('incrementar-contador', valor, this.valoresAceitos);
 
         this.valor = valor;

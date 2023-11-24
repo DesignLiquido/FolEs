@@ -14,7 +14,6 @@ export class ModeloGeralEmGrade extends Modificador {
         //      "a b b"
         //      "a c d";
 
-        // TODO: Adaptar lógica para cobrir todos os casos
         validarValores('modelo-geral-em-grade', valor, this.valoresAceitos);
         this.valor = valor;
 

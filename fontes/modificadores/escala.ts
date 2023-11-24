@@ -12,11 +12,6 @@ export class Escala extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("escala", "scale", pragmas);
 
-        // Pode receber de 1 a 4 parâmetros
-        // A lógica abaixo cobre somente o recebimento de UM único valor. 
-
-        // TODO: Adaptar lógica para cobrir todos os casos.
-
         validarValorNumerico('escala', valor, this.valoresAceitos);
 
         this.valor = valor;

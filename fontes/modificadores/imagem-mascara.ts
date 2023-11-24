@@ -14,7 +14,6 @@ export class ImagemMascara extends Modificador {
         // Ex.: mask-image: image(url(mask.png), skyblue);
 
         // A validação abaixo cobre os valores aceitos e extras
-        // TODO: Implementar modificador para também aceitar as funções específicas
 
         const valoresExtra = ['url'];
         validarValores('imagem-máscara', valor, this.valoresAceitos, valoresExtra);

@@ -24,10 +24,6 @@ export class EnfaseTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
-        // Também aceita receber uma string qualquer como primeiro parâmetro
-        // Ex.: ênfase-texto: "/25B2" #FA55A5;3
-        // A lógica abaixo cobre somente o recebimento de um dos valores aceitos.
-        // TODO: Adaptar lógica para cobrir todos os casos
         validarValorCor('ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
