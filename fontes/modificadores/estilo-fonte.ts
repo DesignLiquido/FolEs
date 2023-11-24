@@ -23,7 +23,7 @@ export class EstiloFonte extends Modificador {
         // que representa o ÂNGULO de inclinação da fonte.
 
         // EX.: estilo-fonte: obliqua 10deg;
-        // TODO: Descomentar lógica abaixo quando permitido atribuir múltiplos valores a um seletor FolEs
+        // OBS: Descomentar lógica abaixo quando permitido atribuir múltiplos valores a um seletor FolEs
 
         // if (valor === 'obliqua' || valor === 'oblíqua') {
         //     validarQuantificador('estilo-fonte', quantificador, angulos);

@@ -12,11 +12,6 @@ export class RecortarMargemVazada extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("recortar-margem-vazada", "overflow-clip-margin", pragmas);
 
-        // Também pode aceitar dois valores
-        // Ex.: recortar-margem-vazada: conteúdo-caixa 5px;
-
-        // TODO: Implementar lógica para cobrir todos os casos.
-
         validarValorNumerico('recortar-margem-vazada', valor, this.valoresAceitos);
 
         this.valor = valor;

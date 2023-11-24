@@ -14,19 +14,6 @@ export class VariacaoFonteAlternativa extends Modificador {
             "font-variant-alternates", 
             pragmas
         );
-
-        // OBS.: Há também uma lista de funções que o modificador aceita como valor:
-
-        // - stylistic()
-        // - styleset()
-        // - character-variant()
-        // - swash()
-        // - ornaments()
-        //  - annotation()
-
-        // Cada uma das funções recebe os próprios parâmetros.
-        // A lógica abaixo cobre somente o recebimento dos valores aceitos listados.
-        // TODO: Adaptar lógica para cobrir os casos das funções. 
         
         validarValores('variação-fonte-alternativa', valor, this.valoresAceitos);
 

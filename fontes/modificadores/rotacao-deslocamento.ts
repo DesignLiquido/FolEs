@@ -16,10 +16,6 @@ export class RotacaoDeslocamento extends Modificador {
             pragmas
         );
         
-        // Também pode receber dois valores
-        // Ex.: rotação-deslocamento: auto 45deg;
-
-        // TODO: Adaptar lógica para cobrir todos os casos
         validarValorNumerico('rotação-deslocamento', valor, this.valoresAceitos);
 
         this.valor = valor;

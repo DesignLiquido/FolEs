@@ -7,11 +7,6 @@ export class RaioEsquerdoBordaInferior extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("raio-esquerdo-borda-inferior", "border-bottom-left-radius", pragmas);
 
-        // Pode receber também dois valores número-quantificador
-        // Ex.: raio-esquerdo-borda-inferior: 20% 20%;
-        // A lógica abaixo cobre apenas o recebimento de UM único valor
-        // TODO: Adaptar lógica para cobrir o recebimento de múltiplos valores
-
         validarValorNumerico('raio-esquerdo-borda-inferior', valor);
 
         this.valor = valor;

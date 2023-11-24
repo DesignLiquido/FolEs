@@ -11,14 +11,6 @@ export class TrajetoDeslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("trajeto-deslocamento", "offset-path", pragmas);
 
-        // OBS.: Também pode receber a função ray()
-        // Ex.: offset-path: ray(45deg);
-
-        // E funções do tipo <basic-shape>
-        // Ex.: offset-path: circle(50% at 25% 25%);
-
-        // TODO: Adaptar lógica
-
         const valoresExtra = ['url'];
         validarValores('trajeto-deslocamento', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;

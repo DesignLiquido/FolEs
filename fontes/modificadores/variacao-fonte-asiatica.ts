@@ -24,11 +24,6 @@ export class VariacaoFonteAsiatica extends Modificador {
             pragmas
         );
 
-        // OBS.: Também aceita receber múltiplos valores, desde que sejam os listados.
-        // Ex.: variacao-fonte-asiatica: rubi largura-completa jis83;
-
-        // A lógica abaixo cobre somente o recebimento de UM dos valores aceitos listados. 
-        // TODO: Adaptar lógica para cobrir os demais casos. 
         validarValores('variação-fonte-asiática', valor, this.valoresAceitos);
 
         this.valor = valor;

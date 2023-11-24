@@ -13,11 +13,6 @@ export class TamanhoMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["tamanho-mascara", "tamanho-máscara"], "mask-size", pragmas);
 
-        // OBS.: Pode receber também 2 ou múltiplos valores
-        // Ex.: tamanho-máscara: 6px, auto, cobrir;
-        // A lógica abaixo cobre somente o recebimento de um único valor
-        // TODO: Adaptar lógica para cobrir todos os casos
-
         validarValorNumerico('tamanho-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
