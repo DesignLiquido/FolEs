@@ -6,11 +6,22 @@ const principal = () => {
     let nomeArquivo: string;
 
     analisadorArgumentos
+        .helpOption('-?, --ajuda', 'Exibe a ajuda para o comando.')
         .argument('[arquivos...]', 'Nomes dos arquivos (opcional)')
         .option(
             '-a, --aninhamento',
             'Gera CSS com aninhamento. Não recomendado usar se o CSS executar em navegadores antigos.',
             false
+        )
+        .option(
+            '-m, --mapas',
+            'Gera CSS com mapas de fontes.',
+            true
+        )
+        .option(
+            '-s, --saida <arquivo-saida>',
+            'Escreve a saída da tradução em um arquivo especificado por parâmetro.',
+            null
         )
         .action((arquivos) => {
             if (arquivos.length > 0) {
@@ -39,6 +50,7 @@ const principal = () => {
         return;
     }
 
+    process.exitCode = 70;
     throw new Error("Formato de arquivo não reconhecido.");
 }
 
