@@ -19,8 +19,8 @@ const principal = () => {
             true
         )
         .option(
-            '-s, --saida <arquivo-saida>',
-            'Escreve a saída da tradução em um arquivo especificado por parâmetro.',
+            '-c, --console',
+            'Escreve a saída da tradução em console.',
             null
         )
         .action((arquivos) => {
@@ -33,25 +33,31 @@ const principal = () => {
     const opcoes = analisadorArgumentos.opts();
 
     if (!nomeArquivo) {
-        console.error('Favor informar nome do arquivo a ser traduzido.', 70);
-        return;
+        console.error('Favor informar nome do arquivo a ser traduzido.');
+        process.exit(70);
     }
 
     const foles = new FolEs(opcoes.aninhamento);
+    let resultadoTraducao: string;
 
     if (nomeArquivo.endsWith("foles")) {
-        console.log(foles.converterParaCss(nomeArquivo));
-        return;
-    } 
-    
-    if (nomeArquivo.endsWith("css")) {
-        const retorno = foles.converterParaFolEs(nomeArquivo);
-        console.log(retorno);
+        resultadoTraducao = foles.converterParaCss(nomeArquivo);
+    } else if (nomeArquivo.endsWith("css")) {
+        resultadoTraducao = foles.converterParaFolEs(nomeArquivo);
+    } else {
+        console.error("Formato de arquivo não reconhecido.");
+        process.exit(70);
+    }
+
+    if (opcoes.console) {
+        console.log(resultadoTraducao);
         return;
     }
 
-    process.exitCode = 70;
-    throw new Error("Formato de arquivo não reconhecido.");
+    if (opcoes.mapas) {
+        const resultadoMapas = foles.converterParaCssComMapas(nomeArquivo);
+        console.log(resultadoMapas);
+    }
 }
 
 principal();

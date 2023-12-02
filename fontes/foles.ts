@@ -6,6 +6,9 @@ import { Serializador } from "./serializadores";
 import { SerializadorReverso } from './serializadores/serializador-reverso';
 import { Importador } from './importador';
 import { ResultadoLexadorInterface, SimboloInterface } from './interfaces';
+import { Tradutor } from "./tradutores/tradutor";
+import { TradutorReverso } from "./tradutores/tradutor-reverso";
+import { Base64 } from "./utilidades/base64";
 
 /**
  * O núcleo da linguagem FolEs.
@@ -19,6 +22,8 @@ export class FolEs {
     importadorReverso: Importador;
     serializador: Serializador;
     serializadorReverso: SerializadorReverso;
+    tradutor: Tradutor;
+    tradutorReverso: TradutorReverso;
 
     constructor(traduzirComAninhamentos: boolean) {
         this.lexador = new Lexador();
@@ -30,6 +35,8 @@ export class FolEs {
         this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(this.importadorReverso);
         this.serializador = new Serializador(traduzirComAninhamentos);
         this.serializadorReverso = new SerializadorReverso(traduzirComAninhamentos);
+        this.tradutor = new Tradutor();
+        this.tradutorReverso = new TradutorReverso();
     }
 
     /**
@@ -50,17 +57,31 @@ export class FolEs {
     }
     
     converterParaCss(nomeArquivo: string): string {
-        const resultadoLexador: ResultadoLexadorInterface = 
+        const resultadoLexador: [string[], ResultadoLexadorInterface] = 
             this.importador.importar(nomeArquivo, true);
 
-        return this.converterParaCssInterno(resultadoLexador.simbolos);
+        return this.converterParaCssInterno(resultadoLexador[1].simbolos);
+    }
+
+    converterParaCssComMapas(nomeArquivo: string): [string, string] {
+        const resultadoLexador: [string[], ResultadoLexadorInterface] = 
+            this.importador.importar(nomeArquivo, true);
+        const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador[1].simbolos);
+        const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
+        const resultadoTraducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
+        const mapa = this.tradutor.gerarMapaFontes(resultadoTraducao, resultadoLexador[0].join('\n'));
+
+        return [
+            traducao, 
+            new Base64().encode(JSON.stringify(mapa))
+        ];
     }
 
     converterParaFolEs(nomeArquivo: string): string {
-        const resultadoLexador: ResultadoLexadorInterface = 
+        const resultadoLexador: [string[], ResultadoLexadorInterface] = 
             this.importadorReverso.importar(nomeArquivo);
 
-        return this.converterParaFolEsInterno(resultadoLexador.simbolos);
+        return this.converterParaFolEsInterno(resultadoLexador[1].simbolos);
     }
 
     converterTextoParaCss(texto: string): string {

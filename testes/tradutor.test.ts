@@ -50,7 +50,7 @@ describe('Tradutor', () => {
             ];
             const resultadoLexador = lexador.mapear(fonteOriginal);
 
-            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador[1].simbolos);
             const resultadoTraducao = tradutor.traduzir(resultadoAvaliadorSintatico);
             const resultado = tradutor.gerarMapaFontes(resultadoTraducao, fonteOriginal.join('\n'));
 
