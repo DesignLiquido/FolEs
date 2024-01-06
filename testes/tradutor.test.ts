@@ -38,11 +38,6 @@ describe('Tradutor', () => {
 
     describe('Geração de mapas de fontes', () => {
         it('Trivial', () => {
-            /* const fonteOriginal = [
-                'lmht {',
-                '    largura-borda-direita: 130mm;',
-                '}'
-            ]; */
             const fonteOriginal = [
                 'paragrafo {',
                 '    tamanho-fonte: 14px;',
@@ -50,7 +45,7 @@ describe('Tradutor', () => {
             ];
             const resultadoLexador = lexador.mapear(fonteOriginal);
 
-            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador[1].simbolos);
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
             const resultadoTraducao = tradutor.traduzir(resultadoAvaliadorSintatico);
             const resultado = tradutor.gerarMapaFontes(resultadoTraducao, fonteOriginal.join('\n'));
 
