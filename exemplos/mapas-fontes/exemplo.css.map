@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "file": "exemplo.css",
+  "sourceRoot": "",
+  "sources": [ "exemplo.foles" ],
+  "sourcesContent": ["paragrafo {\n    tamanho-texto: 14px;\n}"],
+  "names": [],
+  "mappings": "AAAA,CAAS;CACG,MAAa,EAAE,IAAI;"
+}

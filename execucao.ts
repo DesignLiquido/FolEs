@@ -1,3 +1,4 @@
+import { Exportador } from './fontes/exportador';
 import { FolEs } from './fontes/foles';
 import { Command } from 'commander';
 
@@ -6,11 +7,22 @@ const principal = () => {
     let nomeArquivo: string;
 
     analisadorArgumentos
+        .helpOption('-?, --ajuda', 'Exibe a ajuda para o comando.')
         .argument('[arquivos...]', 'Nomes dos arquivos (opcional)')
         .option(
             '-a, --aninhamento',
             'Gera CSS com aninhamento. Não recomendado usar se o CSS executar em navegadores antigos.',
             false
+        )
+        .option(
+            '-m, --mapas',
+            'Gera CSS com mapas de fontes.',
+            true
+        )
+        .option(
+            '-c, --console',
+            'Escreve a saída da tradução em console.',
+            null
         )
         .action((arquivos) => {
             if (arquivos.length > 0) {
@@ -22,24 +34,36 @@ const principal = () => {
     const opcoes = analisadorArgumentos.opts();
 
     if (!nomeArquivo) {
-        console.error('Favor informar nome do arquivo a ser traduzido.', 70);
-        return;
+        console.error('Favor informar nome do arquivo a ser traduzido.');
+        process.exit(70);
     }
 
     const foles = new FolEs(opcoes.aninhamento);
+    let resultadoTraducao: string;
 
     if (nomeArquivo.endsWith("foles")) {
-        console.log(foles.converterParaCss(nomeArquivo));
-        return;
-    } 
-    
-    if (nomeArquivo.endsWith("css")) {
-        const retorno = foles.converterParaFolEs(nomeArquivo);
-        console.log(retorno);
+        resultadoTraducao = foles.converterParaCss(nomeArquivo);
+    } else if (nomeArquivo.endsWith("css")) {
+        resultadoTraducao = foles.converterParaFolEs(nomeArquivo);
+    } else {
+        console.error("Formato de arquivo não reconhecido.");
+        process.exit(70);
+    }
+
+    if (opcoes.console) {
+        console.log(resultadoTraducao);
         return;
     }
 
-    throw new Error("Formato de arquivo não reconhecido.");
+    if (opcoes.mapas) {
+        const resultadoMapas = foles.converterParaCssComMapas(nomeArquivo);
+        const exportador = new Exportador();
+        if (nomeArquivo.endsWith('foles')) {
+            exportador.exportar('css', nomeArquivo, resultadoMapas[0], resultadoMapas[1]);
+        } else {
+            exportador.exportar('foles', nomeArquivo, resultadoMapas[0], resultadoMapas[1]);
+        }
+    }
 }
 
 principal();

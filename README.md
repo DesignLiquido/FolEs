@@ -717,3 +717,11 @@ ligacao {
 | [visibilidade-conteudo](https://github.com/DesignLiquido/FolEs/wiki/Modificador-visibilidade-conte%C3%BAdo)                   |	[content-visibility](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility) |
 | [visibilidade-conteúdo](https://github.com/DesignLiquido/FolEs/wiki/Modificador-visibilidade-conte%C3%BAdo)                   |	[content-visibility](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility) |
 | [visibilidade-fundo](https://github.com/DesignLiquido/FolEs/wiki/Modificador-visibilidade-fundo)                      |	[backface-visibility](https://developer.mozilla.org/pt-BR/docs/Web/CSS/backface-visibility) |
+
+# Recursos para desenvolvedores
+
+Alguns sites são fundamentais para entender a implementação feita aqui:
+
+- https://sokra.github.io/source-map-visualization/#custom
+- https://evanw.github.io/source-map-visualization
+- https://lachlan-miller.me/articles/decoding-variable-length-quantity-vlq-for-source-maps

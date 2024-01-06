@@ -7,13 +7,43 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "FolEs > Menu de Ajuda",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "-?"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "FolEs > Exemplos > exemplo.foles",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--console",
                 "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}exemplo.foles"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "FolEs > Exemplos > exemplo.foles (com mapas)",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--mapas",
+                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}mapas-fontes${pathSeparator}exemplo.foles"
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
@@ -27,6 +57,7 @@
             "console": "integratedTerminal",
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--console",
                 "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}exemplo2.foles"
             ],
             "runtimeExecutable": "node",
@@ -41,6 +72,7 @@
             "console": "integratedTerminal",
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--console",
                 "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}importacao.foles"
             ],
             "runtimeExecutable": "node",
@@ -55,6 +87,7 @@
             "console": "integratedTerminal",
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
+                "--console",
                 "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}reverso${pathSeparator}exemplo.css"
             ],
             "runtimeExecutable": "node",

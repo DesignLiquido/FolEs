@@ -7,6 +7,7 @@ export class Modificador {
     valor: Metodo | string;
     quantificador: string;
     pragmas?: PragmasModificador;
+    pragmasTraducao?: PragmasModificador;
 
     constructor(nomeFoles: string | string[], propriedadeCss: string, pragmas?: PragmasModificador) {
         this.nomeFoles = nomeFoles;

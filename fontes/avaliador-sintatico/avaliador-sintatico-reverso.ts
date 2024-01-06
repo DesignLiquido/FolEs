@@ -7,9 +7,10 @@ import { SeletorReversoModificador } from "../modificadores/superclasse/seletor-
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
-import { Seletor } from "../seletores";
+import { Seletor, SeletorEstrutura } from "../seletores";
 import { AvaliadorSintaticoInterface, ImportadorInterface } from "../interfaces";
 import { HexadecimalCor } from "../valores/metodos/hexadecimal-cor";
+import { Estrutura } from "../estruturas/estrutura";
 
 export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
@@ -77,14 +78,17 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     protected seletorPorEstrutura(): Seletor {
         const simboloSeletor = this.avancarEDevolverAnterior();
         const pseudoclasse = this.resolverPseudoclasse();
-        return new SeletorEstruturasHtml(
-            simboloSeletor.lexema,
-            { 
-                linha: simboloSeletor.linha,
-                colunaInicial: simboloSeletor.colunaInicial,
-                colunaFinal: simboloSeletor.colunaFinal
-            }
-        ) as Seletor;
+        return new SeletorEstrutura(
+            new SeletorEstruturasHtml(
+                simboloSeletor.lexema,
+                { 
+                    linha: simboloSeletor.linha,
+                    colunaInicial: simboloSeletor.colunaInicial,
+                    colunaFinal: simboloSeletor.colunaFinal
+                }
+            ) as Estrutura,
+            pseudoclasse
+        );
     }
 
     protected seletorPorId(): Seletor {
@@ -165,7 +169,12 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
             valorModificador instanceof Simbolo ? valorModificador.lexema : valorModificador,
             quantificador && quantificador.hasOwnProperty('lexema') ? 
                 quantificador.lexema :
-                quantificador
+                quantificador,
+            {
+                linha: modificador.linha,
+                colunaInicial: modificador.colunaInicial,
+                colunaFinal: modificador.colunaFinal
+            }
         );
         
         return classeModificadora as Modificador;

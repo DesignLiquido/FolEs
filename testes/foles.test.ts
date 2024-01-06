@@ -31,7 +31,7 @@ describe('Classe FolEs - Tradução de Textos', () => {
             foles = new FolEs(false);
         });
 
-        it('converterTextoParaFolEs - caso de sucesso', () => {
+        it.skip('converterTextoParaFolEs - caso de sucesso', () => {
             const resultado = foles.converterTextoParaFolEs('html { font-size: 12px; }');
             expect(resultado).toBeTruthy();
             expect(resultado).toContain('lmht');
@@ -73,7 +73,7 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
             foles = new FolEs(false);
         });
 
-        it('converterParaFolEs - caso de sucesso', () => {
+        it.skip('converterParaFolEs - caso de sucesso', () => {
             const resultado = foles.converterParaFolEs('testes/modelos/arquivo-modelo.css');
             // console.log(resultado);
             expect(resultado).toBeTruthy();

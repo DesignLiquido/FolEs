@@ -21,7 +21,7 @@ export class Importador {
     importar(
         caminhoRelativoArquivo: string,
         importacaoInicial: boolean = false
-    ): ResultadoLexadorInterface {
+    ): [string[], ResultadoLexadorInterface] {
         if (!caminhoRelativoArquivo.endsWith(this.extensaoPadrao)) {
             caminhoRelativoArquivo += this.extensaoPadrao;
         }
@@ -42,7 +42,10 @@ export class Importador {
         }
 
         const dadosDoArquivo: Buffer = sistemaArquivos.readFileSync(caminhoAbsolutoArquivo);
-        const conteudoDoArquivo: string[] = dadosDoArquivo.toString().replace(sistemaOperacional.EOL, '\n').split('\n');
+        const conteudoDoArquivo: string[] = dadosDoArquivo
+            .toString()
+            .replace(sistemaOperacional.EOL, '\n')
+            .split('\n');
 
         for (let linha = 0; linha < conteudoDoArquivo.length; linha++) {
             conteudoDoArquivo[linha] += '\0';
@@ -51,6 +54,9 @@ export class Importador {
         // TODO: Verificar se isso será necessário.
         // this.arquivosAbertos[hashArquivo] = caminho.resolve(caminhoRelativoArquivo);
 
-        return this.lexador.mapear(conteudoDoArquivo);
+        return [
+            conteudoDoArquivo,
+            this.lexador.mapear(conteudoDoArquivo)
+        ];
     }
 }

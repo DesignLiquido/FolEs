@@ -131,7 +131,7 @@ export class Lexador implements LexadorInterface {
                 texto || lexema,
                 literal,
                 this.linha + 1,
-                this.inicioSimbolo,
+                this.inicioSimbolo + 1,
                 this.atual
             )
         );

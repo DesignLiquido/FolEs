@@ -475,7 +475,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 this.avancarEDevolverAnterior();
                 const caminhoArquivo = this.simbolos[this.atual];
                 const resultadoImportacao = this.importador.importar(caminhoArquivo.literal, false);
-                this.simbolos.splice(this.atual - 1, 2, ...resultadoImportacao.simbolos);
+                this.simbolos.splice(this.atual - 1, 2, ...resultadoImportacao[1].simbolos);
                 this.atual -= 1;
                 return null;
             default:
