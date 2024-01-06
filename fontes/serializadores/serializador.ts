@@ -104,14 +104,14 @@ export class Serializador {
             for (const modificador of declaracao.modificadores) {
                 resultado += this.serializarModificador(
                     modificador,
-                    indentacao + 2
+                    indentacao + 4
                 );
             }
 
             if (this.serializarComAninhamentos) {
                 resultado += this.serializar(
                     declaracao.declaracoesAninhadas,
-                    indentacao + 2
+                    indentacao + 4
                 );
                 resultado += `${" ".repeat(indentacao)}}\n\n`;
             } else {

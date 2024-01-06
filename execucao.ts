@@ -1,3 +1,4 @@
+import { Exportador } from './fontes/exportador';
 import { FolEs } from './fontes/foles';
 import { Command } from 'commander';
 
@@ -56,7 +57,12 @@ const principal = () => {
 
     if (opcoes.mapas) {
         const resultadoMapas = foles.converterParaCssComMapas(nomeArquivo);
-        console.log(resultadoMapas);
+        const exportador = new Exportador();
+        if (nomeArquivo.endsWith('foles')) {
+            exportador.exportar('css', nomeArquivo, resultadoMapas[0], resultadoMapas[1]);
+        } else {
+            exportador.exportar('foles', nomeArquivo, resultadoMapas[0], resultadoMapas[1]);
+        }
     }
 }
 
