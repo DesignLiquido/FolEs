@@ -7,11 +7,16 @@ import { SeletorReversoModificador } from "../modificadores/superclasse/seletor-
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
-import { Seletor, SeletorEstrutura } from "../seletores";
+import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletores";
 import { AvaliadorSintaticoInterface, ImportadorInterface } from "../interfaces";
 import { HexadecimalCor } from "../valores/metodos/hexadecimal-cor";
 import { Estrutura } from "../estruturas/estrutura";
 
+/**
+ * O avaliador sintático reverso avalia símbolos de arquivos CSS, 
+ * transformando-os em estruturas de alto nível prontas para
+ * serem traduzidas para FolEs.
+ */
 export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     simbolos: Simbolo[];
     erros: ErroAvaliadorSintatico[];
@@ -71,10 +76,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return pseudoclasse;
     }
 
-    protected seletorPorEspacoReservado(): Seletor {
-        return undefined;
-    }
-
     protected seletorPorEstrutura(): Seletor {
         const simboloSeletor = this.avancarEDevolverAnterior();
         const pseudoclasse = this.resolverPseudoclasse();
@@ -92,11 +93,33 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     }
 
     protected seletorPorId(): Seletor {
-        return undefined;
+        this.atual += 1;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorId(
+            simboloSeletor.lexema,
+            pseudoclasse,
+            {
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
     }
 
     protected seletorPorNomeDeClasse(): Seletor {
-        return undefined;
+        this.atual += 1;
+        const simboloSeletor = this.avancarEDevolverAnterior();
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorClasse(
+            simboloSeletor.lexema,
+            pseudoclasse,
+            {
+                linha: simboloSeletor.linha,
+                colunaInicial: simboloSeletor.colunaInicial,
+                colunaFinal: simboloSeletor.colunaFinal
+            }
+        );
     }
 
     /**
@@ -112,8 +135,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     seletores.push(this.seletorPorEstrutura());
                     break;
                 case tiposDeSimbolos.IDENTIFICADOR:
-                    seletores.push(this.seletorPorEspacoReservado());
-                    break;
+                    throw new Error("Não deveria cair aqui.");
                 case tiposDeSimbolos.PONTO:
                     seletores.push(this.seletorPorNomeDeClasse());
                     break;
