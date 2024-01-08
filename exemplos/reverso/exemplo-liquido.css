@@ -1,0 +1,21 @@
+.minha-classe {
+    accent-color: #f4f500;
+    font-size: 16px;
+    max-width: 20cm;
+}
+
+#elemento-caixa {
+    height: 40px;
+}
+
+html {
+    border-right-width: 130mm;
+}
+
+.minha-segunda-classe {
+    margin-top: 13mm;
+}
+
+#meu-segundo-id {
+    width: 400mm;
+}

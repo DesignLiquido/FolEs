@@ -294,7 +294,7 @@ export class Lexador implements LexadorInterface {
             case "#":
                 if (this.atual === 0) {
                     this.adicionarSimbolo(
-                        tiposDeSimbolos.ID_DO_ELEMENTO,
+                        tiposDeSimbolos.CERQUILHA,
                         null,
                         "#"
                     );

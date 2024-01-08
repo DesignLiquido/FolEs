@@ -389,7 +389,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 case tiposDeSimbolos.PONTO:
                     seletores.push(this.seletorPorNomeDeClasse());
                     break;
-                case tiposDeSimbolos.ID_DO_ELEMENTO:
+                case tiposDeSimbolos.CERQUILHA:
                     seletores.push(this.seletorPorId());
                     break;
             }

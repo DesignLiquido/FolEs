@@ -88,7 +88,7 @@
             "args": [
                 "${workspaceFolder}${pathSeparator}execucao.ts",
                 "--console",
-                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}reverso${pathSeparator}exemplo.css"
+                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}reverso${pathSeparator}exemplo-liquido.css"
             ],
             "runtimeExecutable": "node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]

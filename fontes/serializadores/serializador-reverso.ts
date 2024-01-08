@@ -41,7 +41,7 @@ export class SerializadorReverso {
             const prefixos = [];
             
             for (const seletor of declaracao.seletores) {
-                const prefixo = (textoSeletorAnterior + " " + seletor.constructor.name.toLowerCase()).trimStart();
+                const prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
                 prefixos.push(prefixo);
                 resultado += " ".repeat(indentacao) + prefixo + ', ';
             }
