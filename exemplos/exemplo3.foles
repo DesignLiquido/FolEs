@@ -1,0 +1,12 @@
+lmht {
+    linhas-superiores: 2;
+    altura: 30px;
+    colunas: 2;
+    opacidade: 0.5;
+    indice-z: 5;
+}
+
+lmht {
+    colunas: 20px;
+    opacidade: 80%;
+}

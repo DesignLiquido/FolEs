@@ -14,6 +14,7 @@ import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
+import { ValorNumerico, ValorNumericoComQuantificador } from "../../testes/listas/valor-numerico";
 
 
 /**
@@ -403,7 +404,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.IDENTIFICADOR,
             "Esperado nome do modificador."
         );
-
+            
         this.consumir(
             tiposDeSimbolos.DOIS_PONTOS,
             "Esperado ':' após nome do modificador."
@@ -415,8 +416,27 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         /*if (!(valorModificador instanceof Metodo)) {
             quantificador = this.avancarEDevolverAnterior();
         }*/
-        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
-            quantificador = this.avancarEDevolverAnterior();
+        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
+
+            // IF - Se for um valor fora da lista de valores numéricos, executa o trecho.
+            // ELSE - Se estiver na lista de valores numéricos, não executa esse trecho.
+            if(!(ValorNumerico.includes(modificador.lexema))) {
+                // IF - Se estiver na segunda lista, verifica a existência do quantificador
+                // ELSE - Se não estiver, busca direto o quantificador
+                if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
+                    const encontrarQuantificador = this.simbolos.find((simbolo) => 
+                        simbolo.tipo === 'QUANTIFICADOR' && simbolo.linha === modificador.linha
+                    );
+
+                    // IF - Encontrou quantificador? Executa o trecho e guarda o quantificador na variável.
+                    // ELSE - Não encontrou quantificador? Não executa o trecho.
+                    if (encontrarQuantificador) {
+                        quantificador = this.avancarEDevolverAnterior();
+                    }
+                } else {
+                    quantificador = this.avancarEDevolverAnterior();
+                }
+            }
         }
 
         this.consumir(
@@ -494,7 +514,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
-
+        
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
