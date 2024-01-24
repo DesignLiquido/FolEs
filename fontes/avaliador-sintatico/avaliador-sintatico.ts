@@ -14,6 +14,8 @@ import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
+import { ValorNumerico, ValorNumericoComQuantificador } from "../../testes/listas/valor-numerico";
+import { log } from "console";
 
 
 /**
@@ -403,7 +405,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.IDENTIFICADOR,
             "Esperado nome do modificador."
         );
-
+            
         this.consumir(
             tiposDeSimbolos.DOIS_PONTOS,
             "Esperado ':' após nome do modificador."
@@ -415,8 +417,17 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         /*if (!(valorModificador instanceof Metodo)) {
             quantificador = this.avancarEDevolverAnterior();
         }*/
-        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
-            quantificador = this.avancarEDevolverAnterior();
+
+        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
+            if(!(ValorNumerico.includes(modificador.lexema))) {
+                if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
+                    if(this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificador = this.avancarEDevolverAnterior();
+                    }
+                } else {
+                    quantificador = this.avancarEDevolverAnterior();
+                }
+            }
         }
 
         this.consumir(
@@ -494,7 +505,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
-
+        
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());

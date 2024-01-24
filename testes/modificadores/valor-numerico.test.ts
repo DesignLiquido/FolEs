@@ -46,20 +46,20 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 // Avaliador Sintático - AINDA NÃO ACEITA VALORES NUMÉRICOS S/ QUANTIFICADOR
                 // STATUS: Aguardando resolução de Issue #57 para descomentar as linhas abaixo
                 
-                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                //     seletor['nomeFoles']
-                // );
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                //     seletor['propriedadeCss']
-                // );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
 
 
                 // // Tradutor
-                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
         });
 
@@ -79,25 +79,23 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                     ])
                 );
 
-                // Causar erro de digitação
-                // const seletorIncorreto = ValorNumerico[index].replace(ValorNumerico[index][0], '')
-
-                // const novoLexador = lexador.mapear([
-                //     "lmht {",
-                //     `${seletorIncorreto}: 1.5;`,
-                //     "}"
-                // ]);
+                // Tentando passar um quantificador para os modificadores (o que não deve ser permitido)
+                const novoLexador = lexador.mapear([
+                    "lmht {",
+                        `${ValorNumerico[index]}: 15px;`,
+                    "}"
+                ]);
 
                 // // Avaliador Sintático - Erro esperado como retorno
-                // expect(() => {
-                //     avaliador.analisar(novoLexador.simbolos);
-                // }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+                expect(() => {
+                    avaliador.analisar(novoLexador.simbolos);
+                }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorNumerico[index]}'.`);
 
 
                 // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
-                // expect(() => {
-                //     tradutor.traduzir(avaliador.analisar(novoLexador.simbolos));
-                // }).toHaveLength(0);
+                expect(() => {
+                    tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
+                }).toHaveLength(0);
             }
         });
     });
