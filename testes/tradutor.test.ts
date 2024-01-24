@@ -57,7 +57,7 @@ describe('Tradutor', () => {
             }
 
             console.log(resultado); */
-            console.log(resultado);
+            // console.log(resultado);
             expect(resultado.version).toBe(3);
             expect(resultado.file).toBeTruthy();
             expect(resultado.sources.length).toBeGreaterThan(0);
