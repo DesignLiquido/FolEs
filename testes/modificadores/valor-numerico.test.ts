@@ -46,20 +46,20 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO como atributo', () => {
                 // Avaliador Sintático - AINDA NÃO ACEITA VALORES NUMÉRICOS S/ QUANTIFICADOR
                 // STATUS: Aguardando resolução de Issue #57 para descomentar as linhas abaixo
                 
-                // const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
-                //     seletor['nomeFoles']
-                // );
-                // expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                //     seletor['propriedadeCss']
-                // );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
 
 
                 // // Tradutor
-                // const resultadoTradutor = tradutor.traduzir(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-                // expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
         });
 
