@@ -280,6 +280,18 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
     }
 
+    private tratarValorNumerico(modificador: Simbolo): Boolean {
+        if(!(ValorNumerico.includes(modificador.lexema))) {
+            if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
+                if(this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+    }
+
     protected resolverPseudoclasse(): Pseudoclasse {
         let pseudoclasse: any;
 
@@ -419,14 +431,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }*/
 
         if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
-            if(!(ValorNumerico.includes(modificador.lexema))) {
-                if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
-                    if(this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
-                        quantificador = this.avancarEDevolverAnterior();
-                    }
-                } else {
-                    quantificador = this.avancarEDevolverAnterior();
-                }
+            const tratarValorNumerico = this.tratarValorNumerico(modificador);
+            if(tratarValorNumerico) {
+                quantificador = this.avancarEDevolverAnterior();
             }
         }
 
