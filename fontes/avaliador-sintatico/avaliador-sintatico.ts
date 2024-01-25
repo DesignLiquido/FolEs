@@ -285,11 +285,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
                 if(this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                     return true;
+                } else {
+                    return false;
                 }
             } else {
                 return true;
             }
         }
+
+        return false;
     }
 
     protected resolverPseudoclasse(): Pseudoclasse {
@@ -432,6 +436,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
             const tratarValorNumerico = this.tratarValorNumerico(modificador);
+
             if(tratarValorNumerico) {
                 quantificador = this.avancarEDevolverAnterior();
             }
