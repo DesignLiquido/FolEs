@@ -426,22 +426,26 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.DOIS_PONTOS,
             "Esperado ':' após nome do modificador."
         );
-
-        const valorModificador = this.valorModificador();
+        
+        let valorModificador;
         let quantificador;
-        // TODO: Pensar num teste melhor pra isso.
-        /*if (!(valorModificador instanceof Metodo)) {
-            quantificador = this.avancarEDevolverAnterior();
-        }*/
+        while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+            valorModificador = this.valorModificador();
 
-        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
-            const tratarValorNumerico = this.tratarValorNumerico(modificador);
-
-            if(tratarValorNumerico) {
+            // TODO: Pensar num teste melhor pra isso.
+            /*if (!(valorModificador instanceof Metodo)) {
                 quantificador = this.avancarEDevolverAnterior();
-            }
+            }*/
+    
+            if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
+                const tratarValorNumerico = this.tratarValorNumerico(modificador);
+    
+                if(tratarValorNumerico) {
+                    quantificador = this.avancarEDevolverAnterior();
+                }
+            }      
         }
-
+        
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
