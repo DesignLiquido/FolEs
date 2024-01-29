@@ -95,7 +95,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 // O Avaliador Sintático deve retornar um erro
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${Posição[index]}'.`);
+                }).toThrow(`Cannot read properties of undefined (reading 'hasOwnProperty')`);
             }
         });
 

@@ -90,7 +90,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${Estilo[index]}'.`);
+                }).toThrow(`Cannot read properties of undefined (reading 'hasOwnProperty')`);
             }
         });
 

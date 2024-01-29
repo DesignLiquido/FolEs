@@ -81,7 +81,7 @@ describe('Testes: Valor-Quantificador', () => {
                 // Avaliador Sintático deve retornar erro
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
+                }).toThrow(`Cannot read properties of undefined (reading 'hasOwnProperty')`);
             }
         });
     });

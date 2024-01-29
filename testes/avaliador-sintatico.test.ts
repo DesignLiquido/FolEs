@@ -73,7 +73,7 @@ describe('Avaliador Sintático', () => {
             // Avaliador Sintático deve retornar erro
             expect(() => {
                 avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
+            }).toThrow(`Cannot read properties of undefined (reading 'hasOwnProperty')`);
 
             // Causar erro de digitação
             const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')

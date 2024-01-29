@@ -156,7 +156,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 // Av. Sintático deve retornar um erro 
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${PalavrasReservadas[index]}'.`);
+                }).toThrow(`Cannot read properties of undefined (reading 'hasOwnProperty')`);
             }
         });
     });

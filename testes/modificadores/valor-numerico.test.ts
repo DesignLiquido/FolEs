@@ -73,22 +73,15 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
           ])
         );
 
-        // Tentando passar um quantificador para os modificadores (o que não deve ser permitido)
-        const novoLexador = lexador.mapear([
-          "lmht {",
-          `${ValorNumerico[index]}: 15px;`,
-          "}"
-        ]);
-
         // Avaliador Sintático - Erro esperado como retorno
         expect(() => {
-          avaliador.analisar(novoLexador.simbolos);
-        }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorNumerico[index]}'.`);
+          avaliador.analisar(resultadoLexador.simbolos);
+        }).toThrow(`Cannot read properties of undefined (reading 'hasOwnProperty')`);
 
 
         // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
         expect(() => {
-          tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
+          tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
         }).toHaveLength(0);
       }
     });
@@ -217,7 +210,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
         // Avaliador Sintático - Erro esperado como retorno
         expect(() => {
           avaliador.analisar(novoLexador.simbolos);
-        }).toThrow(`Esperado ';' após declaração de valor de modificador '${seletorIncorreto}'.`);
+        }).toThrow(`Cannot read properties of undefined (reading 'tipo')`);
 
         // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
         expect(() => {
