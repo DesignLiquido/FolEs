@@ -68,6 +68,19 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [codigoHEX.lexema],
                 );
 
+            case "calcular":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'calcular'.");
+                const valorCalc1 = this.avancarEDevolverAnterior();
+                const quantificadorCalc1 = this.avancarEDevolverAnterior();
+                const operadorCalc = this.avancarEDevolverAnterior();
+                const valorCalc2 = this.avancarEDevolverAnterior();
+                const quantificadorCalc2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'calcular'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorCalc1, quantificadorCalc1, operadorCalc, valorCalc2, quantificadorCalc2]
+                );
+
             case "curva-cúbica" || "curva-cubica":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
                 const parametro1 = this.avancarEDevolverAnterior();

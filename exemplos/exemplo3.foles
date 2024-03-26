@@ -10,3 +10,7 @@ lmht {
     colunas: 20px;
     opacidade: 80%;
 }
+
+lmht {
+    espacamento: calcular(100px - 80px);
+}

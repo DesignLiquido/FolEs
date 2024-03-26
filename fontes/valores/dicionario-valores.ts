@@ -1,3 +1,4 @@
+import { Calcular } from "./metodos/calcular";
 import { CurvaCubica } from "./metodos/curva-cubica";
 import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
 import { HexadecimalCor } from "./metodos/hexadecimal-cor";
@@ -12,6 +13,7 @@ import { Passos } from "./metodos/passos";
 import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
+    "calcular": Calcular,
     "curva-cubica": CurvaCubica,
     "curva-cúbica": CurvaCubica,
     "encaixar-conteudo": EncaixarConteudo,
