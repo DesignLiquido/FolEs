@@ -54,6 +54,10 @@ export const MetodoLinear: Array<string> = [
     'transição',
 ];
 
+export const MetodoCalcular: Array<string> = [
+    'espacamento',
+    'espaçamento',
+];
 
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
@@ -87,4 +91,6 @@ export const TraducaoValoresMetodos: Object = {
     'modelo-colunas-em-grade': 'grid-template-columns',
     'modelo-em-grade': 'grid-template',
     'modelo-linhas-em-grade': 'grid-template-rows',
+    'espaçamento': 'gap',
+    'espacamento': 'gap',
 }
