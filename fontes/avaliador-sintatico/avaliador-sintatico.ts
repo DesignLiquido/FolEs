@@ -105,6 +105,61 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorFit['lexema'], quantificadorFit['lexema']]
                 );
+                
+            case "gradiente-linear":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'gradiente-linear'.");
+                const valorAngulo = this.avancarEDevolverAnterior();
+                let quantificadorAngulo;
+                if (valorAngulo.tipo === 'QUALITATIVO') {
+                    switch (valorAngulo.lexema) {
+                        case 'superior':
+                            valorAngulo.lexema = '0'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        case 'direita':
+                            valorAngulo.lexema = '90'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        case 'inferior':
+                            valorAngulo.lexema = '180'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        case 'esquerda':
+                            valorAngulo.lexema = '270'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    quantificadorAngulo = this.avancarEDevolverAnterior();
+                }
+                
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método gradiente-linear.");
+                const cor1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método gradiente-linear.");
+                const cor2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'gradiente-linear'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorAngulo, quantificadorAngulo, cor1, cor2]
+                );
 
             case "hsl":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hsl'.");

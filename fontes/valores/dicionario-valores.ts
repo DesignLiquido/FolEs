@@ -1,6 +1,7 @@
 import { Calcular } from "./metodos/calcular";
 import { CurvaCubica } from "./metodos/curva-cubica";
 import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
+import { GradienteLinear } from "./metodos/gradiente-linear";
 import { HexadecimalCor } from "./metodos/hexadecimal-cor";
 import { Hsl } from "./metodos/hsl";
 import { Hsla } from "./metodos/hsla";
@@ -18,6 +19,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "curva-cúbica": CurvaCubica,
     "encaixar-conteudo": EncaixarConteudo,
     "encaixar-conteúdo": EncaixarConteudo,
+    "gradiente-linear": GradienteLinear,
     "hsl": Hsl,
     "hsla": Hsla,
     "hex": HexadecimalCor,

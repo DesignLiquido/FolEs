@@ -9,7 +9,7 @@ export class OrigemImagemBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("origem-imagem-borda", "border-image-source", pragmas);
 
-        const valoresExtra = ['url'];
+        const valoresExtra = ['url', 'linear-gradient'];
         validarValores('origem-imagem-borda', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;
 
