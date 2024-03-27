@@ -59,6 +59,14 @@ export const MetodoCalcular: Array<string> = [
     'espaçamento',
 ];
 
+export const MetodoGradienteLinear: Array<string> = [
+    'imagem-mascara',
+    'imagem-máscara',
+    'origem-imagem-borda',
+    'conteudo',
+    'conteúdo',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
@@ -93,4 +101,9 @@ export const TraducaoValoresMetodos: Object = {
     'modelo-linhas-em-grade': 'grid-template-rows',
     'espaçamento': 'gap',
     'espacamento': 'gap',
+    'imagem-mascara': 'mask-image',
+    'imagem-máscara': 'mask-image',
+    'origem-imagem-borda': 'border-image-source',
+    'conteudo': 'content',
+    'conteúdo': 'content',
 }
