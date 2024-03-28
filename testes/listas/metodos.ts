@@ -67,6 +67,11 @@ export const MetodoGradienteLinear: Array<string> = [
     'conteúdo',
 ];
 
+export const MetodoContraste: Array<string> = [
+    'filtro',
+];
+
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
@@ -106,4 +111,5 @@ export const TraducaoValoresMetodos: Object = {
     'origem-imagem-borda': 'border-image-source',
     'conteudo': 'content',
     'conteúdo': 'content',
+    'filtro': 'filter',
 }
