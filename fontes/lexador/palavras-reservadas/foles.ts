@@ -161,6 +161,7 @@ export default {
 
     // Métodos
     "calcular": tiposDeSimbolos.METODO,
+    "contraste": tiposDeSimbolos.METODO,
     "curva-cubica": tiposDeSimbolos.METODO,
     "curva-cúbica": tiposDeSimbolos.METODO,
     "encaixar-conteudo": tiposDeSimbolos.METODO,

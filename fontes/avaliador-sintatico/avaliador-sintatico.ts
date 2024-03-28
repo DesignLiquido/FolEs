@@ -81,6 +81,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorCalc1, quantificadorCalc1, operadorCalc, valorCalc2, quantificadorCalc2]
                 );
 
+            case "contraste":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contraste'.");
+                const valorContraste = this.avancarEDevolverAnterior();
+                let quantificadorContraste;               
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorContraste = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorContraste = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");                
+                return new SeletorValor(
+                    lexema,
+                    [valorContraste, quantificadorContraste]
+                );
+
             case "curva-cúbica" || "curva-cubica":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
                 const parametro1 = this.avancarEDevolverAnterior();
@@ -105,7 +120,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorFit['lexema'], quantificadorFit['lexema']]
                 );
-                
+
             case "gradiente-linear":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'gradiente-linear'.");
                 const valorAngulo = this.avancarEDevolverAnterior();
@@ -150,7 +165,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 } else {
                     quantificadorAngulo = this.avancarEDevolverAnterior();
                 }
-                
+
                 this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método gradiente-linear.");
                 const cor1 = this.avancarEDevolverAnterior();
                 this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método gradiente-linear.");
@@ -295,7 +310,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [url]
                 );
         }
-        
+
         throw new Error(`Método ${lexema} não reconhecido em FolEs.`);
     }
 
@@ -349,9 +364,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     }
 
     private tratarValorNumerico(modificador: Simbolo): Boolean {
-        if(!(ValorNumerico.includes(modificador.lexema))) {
+        if (!(ValorNumerico.includes(modificador.lexema))) {
             if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
-                if(this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                     return true;
                 } else {
                     return false;
@@ -489,7 +504,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.IDENTIFICADOR,
             "Esperado nome do modificador."
         );
-            
+
         this.consumir(
             tiposDeSimbolos.DOIS_PONTOS,
             "Esperado ':' após nome do modificador."
@@ -502,10 +517,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             quantificador = this.avancarEDevolverAnterior();
         }*/
 
-        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {       
+        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
             const tratarValorNumerico = this.tratarValorNumerico(modificador);
 
-            if(tratarValorNumerico) {
+            if (tratarValorNumerico) {
                 quantificador = this.avancarEDevolverAnterior();
             }
         }
@@ -553,7 +568,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
 
         this.avancarEDevolverAnterior(); // chave direita
-        return { 
+        return {
             modificadores,
             declaracoesAninhadas
         };
@@ -572,7 +587,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             default:
                 const seletores = this.resolverSeletores();
                 const modificadoresEDeclaracoesAninhadas = this.resolverModificadoresEDeclaracoesAninhadas();
-        
+
                 return new Declaracao(
                     seletores,
                     modificadoresEDeclaracoesAninhadas.modificadores,
@@ -585,7 +600,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
-        
+
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());

@@ -15,7 +15,7 @@ export class Filtro extends Modificador {
         // filter: brightness(0.4);
         // filter: contrast(200%);
 
-        const valoresExtra = ['url'];
+        const valoresExtra = ['url', 'contrast'];
         validarValores('filtro', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;

@@ -1,4 +1,5 @@
 import { Calcular } from "./metodos/calcular";
+import { Contraste } from "./metodos/contraste";
 import { CurvaCubica } from "./metodos/curva-cubica";
 import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
 import { GradienteLinear } from "./metodos/gradiente-linear";
@@ -15,6 +16,7 @@ import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "calcular": Calcular,
+    "contraste": Contraste,
     "curva-cubica": CurvaCubica,
     "curva-cúbica": CurvaCubica,
     "encaixar-conteudo": EncaixarConteudo,
