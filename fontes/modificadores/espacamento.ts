@@ -10,7 +10,8 @@ export class Espacamento extends Modificador {
         // Pode receber também dois valores. Ex.: espacamento: 10px 2mm;
         // Também pode receber a função calc. Ex.: espacamento: calc(20% + 20px);
 
-        validarValorNumerico('espaçamento', valor);
+        const valoresExtra = ['calc'];
+        validarValorNumerico('espaçamento', valor, undefined, valoresExtra);
 
         this.valor = valor;
 
