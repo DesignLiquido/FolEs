@@ -18,9 +18,8 @@ export class Conteudo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
-        // Também aceita como valor as funções linear-gradient(), image-set() e counter()
-
-        const valoresExtra = ['url'];
+        // Também aceita como valor as funções image-set() e counter()
+        const valoresExtra = ['url', 'linear-gradient'];
         validarValores('conteúdo', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
