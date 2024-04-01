@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoGradienteLinear, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoGradienteLinear, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos, MetodoRaio, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -437,7 +437,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
     it('Atribuindo Método "contrast()"', () => {
       for (let index = 0; index < MetodoContraste.length; index += 1) {
-        
+
         const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
@@ -609,6 +609,106 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBrilho[index]]);
           expect(resultadoTradutor).toContain(`brightness(${valoresAceitos[valIndex]});`);
         }
+      }
+    });
+
+    it('Atribuindo Método "ray()" com valores de posição e número/quantificador', () => {
+      for (let index = 0; index < MetodoRaio.length; index += 1) {
+
+        const valoresAceitos = ['lado-mais-próximo', 'lado-mais-proximo', 'canto-mais-próximo', 'canto-mais-proximo', 'lado-mais-distante', 'canto-mais-distante', 'lados', 'conter'];
+
+        const traducaoValoresAceitos = ['closest-side', 'closest-side', 'closest-corner', 'closest-corner', 'farthest-side', 'farthest-corner', 'sides', 'contain'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodoRaio[index]}: raio(${valoresAceitos[valIndex]} 200deg);`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 12
+          expect(resultadoLexador.simbolos).toHaveLength(12);
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+            ])
+          );
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodoRaio[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir raio para ray
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
+          expect(resultadoTradutor).toContain(`ray(${traducaoValoresAceitos[valIndex]} 200deg);`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "ray()" com somente número/quantificador', () => {
+      for (let index = 0; index < MetodoRaio.length; index += 1) {
+
+
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodoRaio[index]}: raio(200deg);`,
+          "}"
+        ]);
+
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // O Lexador deve montar um objeto de comprimento 11
+        expect(resultadoLexador.simbolos).toHaveLength(11);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+          ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          TraducaoValoresMetodos[MetodoRaio[index]]
+        );
+
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+        // O Tradutor deve serializar de acordo e traduzir raio para ray
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
+        expect(resultadoTradutor).toContain(`ray(200deg);`);
+
       }
     });
   });

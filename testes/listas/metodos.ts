@@ -79,6 +79,11 @@ export const MetodoBrilho: Array<string> = [
     'filtro',
 ];
 
+export const MetodoRaio: Array<string> = [
+    'deslocamento',
+    'trajeto-deslocamento',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
@@ -119,4 +124,6 @@ export const TraducaoValoresMetodos: Object = {
     'conteudo': 'content',
     'conteúdo': 'content',
     'filtro': 'filter',
+    'deslocamento': 'offset',
+    'trajeto-deslocamento': 'offset-path',
 }
