@@ -1,3 +1,5 @@
+import { Borrar } from "./metodos/borrar";
+import { Brilho } from "./metodos/brilho";
 import { Calcular } from "./metodos/calcular";
 import { Contraste } from "./metodos/contraste";
 import { CurvaCubica } from "./metodos/curva-cubica";
@@ -15,6 +17,8 @@ import { Passos } from "./metodos/passos";
 import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
+    "borrar": Borrar,
+    "brilho": Brilho,
     "calcular": Calcular,
     "contraste": Contraste,
     "curva-cubica": CurvaCubica,

@@ -68,6 +68,36 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [codigoHEX.lexema],
                 );
 
+            case "borrar":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contraste'.");
+                const valorBorrar = this.avancarEDevolverAnterior();
+                let quantificadorBorrar;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorBorrar = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorBorrar = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorBorrar, quantificadorBorrar]
+                );
+
+            case "brilho":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contraste'.");
+                const valorBrilho = this.avancarEDevolverAnterior();
+                let quantificadorBrilho;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorBrilho = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorBrilho = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorBrilho, quantificadorBrilho]
+                );
+
             case "calcular":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'calcular'.");
                 const valorCalc1 = this.avancarEDevolverAnterior();
@@ -84,13 +114,13 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             case "contraste":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contraste'.");
                 const valorContraste = this.avancarEDevolverAnterior();
-                let quantificadorContraste;               
+                let quantificadorContraste;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                     quantificadorContraste = this.avancarEDevolverAnterior();
                 } else {
                     quantificadorContraste = null;
                 }
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");                
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");
                 return new SeletorValor(
                     lexema,
                     [valorContraste, quantificadorContraste]

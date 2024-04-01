@@ -160,6 +160,8 @@ export default {
     "ms": tiposDeSimbolos.QUANTIFICADOR,
 
     // Métodos
+    "borrar": tiposDeSimbolos.METODO,
+    "brilho": tiposDeSimbolos.METODO,
     "calcular": tiposDeSimbolos.METODO,
     "contraste": tiposDeSimbolos.METODO,
     "curva-cubica": tiposDeSimbolos.METODO,
