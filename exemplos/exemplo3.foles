@@ -25,3 +25,8 @@ lmht {
 lmht {
     filtro: contraste(10px); 
 }
+
+lmht {
+    trajeto-deslocamento: raio(lado-mais-próximo 45deg);
+    deslocamento: raio(contem 200deg);
+}

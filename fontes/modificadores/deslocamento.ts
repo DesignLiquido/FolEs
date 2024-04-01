@@ -12,13 +12,15 @@ export class Deslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("deslocamento", "offset", pragmas);
 
-        // Também aceita receber as funções path() e ray()
-
-        const valoresExtra = ['url'];
+        // Também aceita receber a função path()
+        const valoresExtra = ['url', 'ray'];
         validarValorNumerico('deslocamento', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;
 
-        validarQuantificador('deslocamento', quantificador, unidadesMedida, angulos);
+        if (quantificador) {
+            validarQuantificador('deslocamento', quantificador, unidadesMedida, angulos);
+        }
+
         this.quantificador = quantificador;
     }
 }
