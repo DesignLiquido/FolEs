@@ -175,6 +175,7 @@ export default {
     "limitar": tiposDeSimbolos.METODO,
     "linear": tiposDeSimbolos.METODO,
     "minmax": tiposDeSimbolos.METODO,
+    "raio": tiposDeSimbolos.METODO,
     "rgb": tiposDeSimbolos.METODO,
     "rgba": tiposDeSimbolos.METODO,
     "passos": tiposDeSimbolos.METODO,
@@ -252,6 +253,13 @@ export default {
     "fim-bloco": tiposDeSimbolos.QUALITATIVO,
     "debaixo": tiposDeSimbolos.QUALITATIVO,
     "de-frente": tiposDeSimbolos.QUALITATIVO,
+    "lado-mais-próximo": tiposDeSimbolos.QUALITATIVO,
+    "lado-mais-proximo": tiposDeSimbolos.QUALITATIVO,
+    "canto-mais-próximo": tiposDeSimbolos.QUALITATIVO,
+    "canto-mais-proximo": tiposDeSimbolos.QUALITATIVO,
+    "lado-mais-distante": tiposDeSimbolos.QUALITATIVO,
+    "canto-mais-distante": tiposDeSimbolos.QUALITATIVO,
+    "lados": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Status
     "auto": tiposDeSimbolos.QUALITATIVO,

@@ -69,7 +69,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
 
             case "borrar":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contraste'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'borrar'.");
                 const valorBorrar = this.avancarEDevolverAnterior();
                 let quantificadorBorrar;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
@@ -77,14 +77,14 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 } else {
                     quantificadorBorrar = null;
                 }
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'borrar'.");
                 return new SeletorValor(
                     lexema,
                     [valorBorrar, quantificadorBorrar]
                 );
 
             case "brilho":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contraste'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'brilho'.");
                 const valorBrilho = this.avancarEDevolverAnterior();
                 let quantificadorBrilho;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
@@ -92,7 +92,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 } else {
                     quantificadorBrilho = null;
                 }
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contraste'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'brilho'.");
                 return new SeletorValor(
                     lexema,
                     [valorBrilho, quantificadorBrilho]
@@ -234,6 +234,22 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(
                     lexema,
                     [HdeHSLA, SdeHSLA, LdeHSLA]
+                );
+
+            case "raio":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'raio'.");
+                let posicaoRaio;
+                if (this.simbolos[this.atual].tipo === 'QUALITATIVO') {
+                    posicaoRaio = this.avancarEDevolverAnterior();
+                } else {
+                    posicaoRaio = null;
+                }
+                const numeroRaio = this.avancarEDevolverAnterior();
+                const quantificadorRaio = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'raio'.");
+                return new SeletorValor(
+                    lexema,
+                    [posicaoRaio, numeroRaio, quantificadorRaio]
                 );
 
             case "rgb":

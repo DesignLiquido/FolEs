@@ -11,6 +11,7 @@ import { Hsla } from "./metodos/hsla";
 import { Limitar } from "./metodos/limitar";
 import { Linear } from "./metodos/linear";
 import { MinMax } from "./metodos/minmax";
+import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
 import { Passos } from "./metodos/passos";
@@ -33,6 +34,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "linear": Linear,
     "minmax": MinMax,
     "passos": Passos,
+    "raio": Raio,
     "rgb": Rgb,
     "rgba": Rgba,
     "url": Url,

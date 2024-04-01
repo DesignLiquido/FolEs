@@ -22,3 +22,14 @@ export const posicoesBasicas: { [valorFolEs: string]: string } = {
     "esquerda": "left",
     "centro": "center",
 }
+
+export const posicoesRaio: { [valorFolEs: string]: string } = {
+    "lado-mais-próximo": "closest-side",
+    "lado-mais-proximo": "closest-side",
+    "canto-mais-próximo": "closest-corner",
+    "canto-mais-proximo": "closest-corner",
+    "lado-mais-distante": "farthest-side",
+    "canto-mais-distante": "farthest-corner",
+    "lados": "sides",
+    "conter": "contain",
+}
