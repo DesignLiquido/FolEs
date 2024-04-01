@@ -71,6 +71,14 @@ export const MetodoContraste: Array<string> = [
     'filtro',
 ];
 
+export const MetodoBorrar: Array<string> = [
+    'filtro',
+];
+
+export const MetodoBrilho: Array<string> = [
+    'filtro',
+];
+
 
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',

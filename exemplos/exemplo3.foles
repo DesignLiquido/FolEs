@@ -15,5 +15,13 @@ lmht {
     espacamento: calcular(100px - 80px);
     imagem-máscara: gradiente-linear(inferior, azul, vermelho);
     origem-imagem-borda: gradiente-linear(90deg, verde, amarelo);
-    filtro: contraste(1.75rem);
+    filtro: borrar(80%); 
+}
+
+lmht {
+    filtro: brilho(0.4); 
+}
+
+lmht {
+    filtro: contraste(10px); 
 }
