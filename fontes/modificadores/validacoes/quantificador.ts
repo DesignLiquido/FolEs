@@ -17,7 +17,8 @@ export function validarQuantificador(
             quantificador === undefined
         ) {
             throw new Error(`Propriedade ${nomePropriedade} com quantificador inválido. Valores aceitos:
-            ${Object.keys(quantificadoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
+            ${Object.keys(quantificadoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+            ${Object.keys(quantificadoresAceitos2).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
     }
 }
