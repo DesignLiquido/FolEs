@@ -17,6 +17,7 @@ import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
 import { Passos } from "./metodos/passos";
 import { Url } from "./metodos/url";
+import { Inverter } from "./metodos/inverter";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "borrar": Borrar,
@@ -32,6 +33,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "hsl": Hsl,
     "hsla": Hsla,
     "hex": HexadecimalCor,
+    "inverter": Inverter,
     "limitar": Limitar,
     "linear": Linear,
     "minmax": MinMax,

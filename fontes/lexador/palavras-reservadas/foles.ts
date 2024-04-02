@@ -173,6 +173,7 @@ export default {
     "hsl": tiposDeSimbolos.METODO,
     "hsla": tiposDeSimbolos.METODO,
     "hex": tiposDeSimbolos.METODO,
+    "inverter": tiposDeSimbolos.METODO,
     "limitar": tiposDeSimbolos.METODO,
     "linear": tiposDeSimbolos.METODO,
     "minmax": tiposDeSimbolos.METODO,

@@ -251,6 +251,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [HdeHSLA, SdeHSLA, LdeHSLA]
                 );
 
+            case "inverter":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'inverter'.");
+                const valorInverter = this.avancarEDevolverAnterior();
+                let quantificadorInverter;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInverter = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInverter = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'inverter'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorInverter, quantificadorInverter]
+                );
+
             case "raio":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'raio'.");
                 let posicaoRaio;
