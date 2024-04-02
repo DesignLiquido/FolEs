@@ -266,48 +266,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorInverter, quantificadorInverter]
                 );
 
-            case "raio":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'raio'.");
-                let posicaoRaio;
-                if (this.simbolos[this.atual].tipo === 'QUALITATIVO') {
-                    posicaoRaio = this.avancarEDevolverAnterior();
-                } else {
-                    posicaoRaio = null;
-                }
-                const numeroRaio = this.avancarEDevolverAnterior();
-                const quantificadorRaio = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'raio'.");
-                return new SeletorValor(
-                    lexema,
-                    [posicaoRaio, numeroRaio, quantificadorRaio]
-                );
-
-            case "rgb":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
-                const vermelho = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
-                const verde = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
-                const azul = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
-                return new SeletorValor(
-                    lexema,
-                    [vermelho, verde, azul]
-                );
-
-            case "rgba":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgba'.");
-                const vermelhoRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
-                const verdeRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
-                const azulRgba = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgba'.");
-                return new SeletorValor(
-                    lexema,
-                    [vermelhoRgba, verdeRgba, azulRgba]
-                );
-
             case "limitar":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'limitar'.");
                 const valorMin = this.avancarEDevolverAnterior();
@@ -390,6 +348,48 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(
                     lexema,
                     [valorNumerico, termoSalto]
+                );
+
+            case "raio":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'raio'.");
+                let posicaoRaio;
+                if (this.simbolos[this.atual].tipo === 'QUALITATIVO') {
+                    posicaoRaio = this.avancarEDevolverAnterior();
+                } else {
+                    posicaoRaio = null;
+                }
+                const numeroRaio = this.avancarEDevolverAnterior();
+                const quantificadorRaio = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'raio'.");
+                return new SeletorValor(
+                    lexema,
+                    [posicaoRaio, numeroRaio, quantificadorRaio]
+                );
+
+            case "rgb":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                const vermelho = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verde = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
+                const azul = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+                return new SeletorValor(
+                    lexema,
+                    [vermelho, verde, azul]
+                );
+
+            case "rgba":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgba'.");
+                const vermelhoRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verdeRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
+                const azulRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgba'.");
+                return new SeletorValor(
+                    lexema,
+                    [vermelhoRgba, verdeRgba, azulRgba]
                 );
 
             case "url":
