@@ -177,10 +177,11 @@ export default {
     "limitar": tiposDeSimbolos.METODO,
     "linear": tiposDeSimbolos.METODO,
     "minmax": tiposDeSimbolos.METODO,
+    "opaco": tiposDeSimbolos.METODO,
+    "passos": tiposDeSimbolos.METODO,
     "raio": tiposDeSimbolos.METODO,
     "rgb": tiposDeSimbolos.METODO,
     "rgba": tiposDeSimbolos.METODO,
-    "passos": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
     // Qualitativos

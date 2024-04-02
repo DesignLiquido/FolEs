@@ -366,6 +366,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     );
                 }
 
+            case "opaco":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'opaco'.");
+                const valorOpaco = this.avancarEDevolverAnterior();
+                let quantificadorOpaco;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorOpaco = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorOpaco = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'opaco'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorOpaco, quantificadorOpaco]
+                );
+
             case "passos":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'passos'.");
                 const valorNumerico = this.avancarEDevolverAnterior();
