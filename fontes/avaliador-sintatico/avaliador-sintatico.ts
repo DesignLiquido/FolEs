@@ -151,6 +151,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorFit['lexema'], quantificadorFit['lexema']]
                 );
 
+            case "escala-cinza":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escala-cinza'.");
+                const valorEscala = this.avancarEDevolverAnterior();
+                let quantificadorEscala;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorEscala = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorEscala = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'escala-cinza'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorEscala, quantificadorEscala]
+                );
+
             case "gradiente-linear":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'gradiente-linear'.");
                 const valorAngulo = this.avancarEDevolverAnterior();

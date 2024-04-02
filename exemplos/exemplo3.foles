@@ -28,5 +28,6 @@ lmht {
 
 lmht {
     trajeto-deslocamento: raio(lado-mais-próximo 45deg);
-    deslocamento: raio(contem 200deg);
+    deslocamento: raio(conter 45deg);
+    filtro-fundo: escala-cinza(60%);
 }

@@ -168,6 +168,7 @@ export default {
     "curva-cúbica": tiposDeSimbolos.METODO,
     "encaixar-conteudo": tiposDeSimbolos.METODO,
     "encaixar-conteúdo": tiposDeSimbolos.METODO,
+    "escala-cinza": tiposDeSimbolos.METODO,
     "gradiente-linear": tiposDeSimbolos.METODO,
     "hsl": tiposDeSimbolos.METODO,
     "hsla": tiposDeSimbolos.METODO,

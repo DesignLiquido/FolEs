@@ -11,7 +11,7 @@ export class FiltroFundo extends Modificador {
 
         // Também pode receber as DEZ funções do tipo <filter-function-list>
         
-        const valoresExtra = ['url'];
+        const valoresExtra = ['url', 'grayscale'];
         validarValores('filtro-fundo', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
