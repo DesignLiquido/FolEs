@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos, MetodoRaio, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoRaio, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -494,7 +494,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     });
 
     it('Atribuindo Método "inverter()"', () => {
-      for (let index = 0; index < MetodoEscalaCinza.length; index += 1) {
+      for (let index = 0; index < MetodoInverter.length; index += 1) {
 
         const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
 
@@ -502,7 +502,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // Lexador
           const resultadoLexador = lexador.mapear([
             "lmht {",
-            `${MetodoEscalaCinza[index]}: inverter(${valoresAceitos[valIndex]});`,
+            `${MetodoInverter[index]}: inverter(${valoresAceitos[valIndex]});`,
             "}"
           ]);
 
@@ -539,14 +539,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
           expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-            TraducaoValoresMetodos[MetodoEscalaCinza[index]]
+            TraducaoValoresMetodos[MetodoInverter[index]]
           );
 
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
           // O Tradutor deve serializar de acordo e traduzir inverter para invert
-          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEscalaCinza[index]]);
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoInverter[index]]);
           expect(resultadoTradutor).toContain(`invert(${valoresAceitos[valIndex]});`);
         }
       }
@@ -686,8 +686,8 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
-    it('Atribuindo Método "opaco()"', () => {
-      for (let index = 0; index < MetodoEscalaCinza.length; index += 1) {
+    it('Atribuindo Método "opacar()"', () => {
+      for (let index = 0; index < MetodoOpacar.length; index += 1) {
 
         const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
 
@@ -695,7 +695,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // Lexador
           const resultadoLexador = lexador.mapear([
             "lmht {",
-            `${MetodoEscalaCinza[index]}: opaco(${valoresAceitos[valIndex]});`,
+            `${MetodoOpacar[index]}: opacar(${valoresAceitos[valIndex]});`,
             "}"
           ]);
 
@@ -732,14 +732,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
           expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-            TraducaoValoresMetodos[MetodoEscalaCinza[index]]
+            TraducaoValoresMetodos[MetodoOpacar[index]]
           );
 
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
           // O Tradutor deve serializar de acordo e traduzir opaco para opacity
-          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEscalaCinza[index]]);
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoOpacar[index]]);
           expect(resultadoTradutor).toContain(`opacity(${valoresAceitos[valIndex]});`);
         }
       }

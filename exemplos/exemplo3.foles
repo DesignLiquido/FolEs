@@ -29,5 +29,5 @@ lmht {
 lmht {
     trajeto-deslocamento: raio(lado-mais-próximo 45deg);
     deslocamento: raio(conter 45deg);
-    filtro-fundo: opaco(0.6);
+    filtro-fundo: opacar(0.6);
 }

@@ -324,7 +324,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     );
                 }
 
-            case "opaco":
+            case "opacar":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'opaco'.");
                 const valorOpaco = this.avancarEDevolverAnterior();
                 let quantificadorOpaco;

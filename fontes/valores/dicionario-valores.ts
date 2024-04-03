@@ -13,7 +13,7 @@ import { Inverter } from "./metodos/inverter";
 import { Limitar } from "./metodos/limitar";
 import { Linear } from "./metodos/linear";
 import { MinMax } from "./metodos/minmax";
-import { Opaco } from "./metodos/opaco";
+import { Opacar } from "./metodos/opaco";
 import { Passos } from "./metodos/passos";
 import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
@@ -38,7 +38,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "limitar": Limitar,
     "linear": Linear,
     "minmax": MinMax,
-    "opaco": Opaco,
+    "opacar": Opacar,
     "passos": Passos,
     "raio": Raio,
     "rgb": Rgb,

@@ -1,7 +1,7 @@
 import { Simbolo } from "../../lexador";
 import { Metodo } from "./metodo";
 
-export class Opaco extends Metodo {
+export class Opacar extends Metodo {
     valor: number;
     quantificador: string;
     traducao: string;

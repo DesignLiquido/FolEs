@@ -177,7 +177,7 @@ export default {
     "limitar": tiposDeSimbolos.METODO,
     "linear": tiposDeSimbolos.METODO,
     "minmax": tiposDeSimbolos.METODO,
-    "opaco": tiposDeSimbolos.METODO,
+    "opacar": tiposDeSimbolos.METODO,
     "passos": tiposDeSimbolos.METODO,
     "raio": tiposDeSimbolos.METODO,
     "rgb": tiposDeSimbolos.METODO,

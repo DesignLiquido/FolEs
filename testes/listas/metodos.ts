@@ -92,7 +92,7 @@ export const MetodoInverter: Array<string> = [
     'filtro-fundo',
 ];
 
-export const MetodoOpaco: Array<string> = [
+export const MetodoOpacar: Array<string> = [
     'filtro-fundo',
 ];
 
