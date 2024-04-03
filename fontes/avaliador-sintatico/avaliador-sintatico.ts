@@ -141,7 +141,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [parametro1, parametro2, parametro3, parametro4]
                 );
 
-            case "encaixar-conteúdo" || "encaixar-conteudo":
+            case "encaixar-conteudo":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'encaixar-conteúdo'.");
                 const valorFit = this.avancarEDevolverAnterior();
                 const quantificadorFit = this.avancarEDevolverAnterior();
@@ -151,6 +151,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorFit['lexema'], quantificadorFit['lexema']]
                 );
 
+            case "encaixar-conteúdo":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'encaixar-conteúdo'.");
+                const valorFit1 = this.avancarEDevolverAnterior();
+                const quantificadorFit1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método encaixar-conteúdo.");
+                return new SeletorValor(
+                    lexema,
+                    [valorFit1['lexema'], quantificadorFit1['lexema']]
+                );
             case "escala-cinza":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escala-cinza'.");
                 const valorEscala = this.avancarEDevolverAnterior();
