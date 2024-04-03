@@ -407,6 +407,36 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorSaturar, quantificadorSaturar]
                 );
 
+            case "sepia":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'sepia'.");
+                const valorSepia = this.avancarEDevolverAnterior();
+                let quantificadorSepia;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorSepia = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorSepia = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'sepia'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorSepia, quantificadorSepia]
+                );
+
+            case "sépia":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'sépia'.");
+                const valorSépia = this.avancarEDevolverAnterior();
+                let quantificadorSépia;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorSépia = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorSépia = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'sépia'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorSépia, quantificadorSépia]
+                );
+
             case "url":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'url'.");
                 const url = this.validacaoUrl();

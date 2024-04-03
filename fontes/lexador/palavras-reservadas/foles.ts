@@ -183,6 +183,8 @@ export default {
     "rgb": tiposDeSimbolos.METODO,
     "rgba": tiposDeSimbolos.METODO,
     "saturar": tiposDeSimbolos.METODO,
+    "sepia": tiposDeSimbolos.METODO,
+    "sépia": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
     // Qualitativos

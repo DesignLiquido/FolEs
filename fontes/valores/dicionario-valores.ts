@@ -19,6 +19,7 @@ import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
 import { Saturar } from "./metodos/saturar";
+import { Sepia } from "./metodos/sepia";
 import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
@@ -45,5 +46,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "rgb": Rgb,
     "rgba": Rgba,
     "saturar": Saturar,
+    "sepia": Sepia,
+    "sépia": Sepia,
     "url": Url,
 }
