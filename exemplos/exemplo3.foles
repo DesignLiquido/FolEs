@@ -24,6 +24,7 @@ lmht {
 
 lmht {
     filtro: contraste(10px); 
+    filtro-fundo: saturar(50%);
 }
 
 lmht {

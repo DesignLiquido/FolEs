@@ -18,6 +18,7 @@ import { Passos } from "./metodos/passos";
 import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
+import { Saturar } from "./metodos/saturar";
 import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
@@ -43,5 +44,6 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "raio": Raio,
     "rgb": Rgb,
     "rgba": Rgba,
+    "saturar": Saturar,
     "url": Url,
 }
