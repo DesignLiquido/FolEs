@@ -96,6 +96,14 @@ export const MetodoOpacar: Array<string> = [
     'filtro-fundo',
 ];
 
+export const MetodoSaturar: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoSepia: Array<string> = [
+    'filtro-fundo',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
