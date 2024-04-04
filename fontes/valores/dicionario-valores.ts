@@ -18,6 +18,7 @@ import { Passos } from "./metodos/passos";
 import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
+import { RotacionarMatiz } from "./metodos/rotacionar-matiz";
 import { Saturar } from "./metodos/saturar";
 import { Sepia } from "./metodos/sepia";
 import { Url } from "./metodos/url";
@@ -45,6 +46,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "raio": Raio,
     "rgb": Rgb,
     "rgba": Rgba,
+    "rotacionar-matiz": RotacionarMatiz,
     "saturar": Saturar,
     "sepia": Sepia,
     "sépia": Sepia,

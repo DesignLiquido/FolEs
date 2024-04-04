@@ -24,7 +24,7 @@ lmht {
 
 lmht {
     filtro: contraste(10px); 
-    filtro-fundo: sépia(0.20);
+    filtro-fundo: rotacionar-matiz(0.314rad);
 }
 
 lmht {

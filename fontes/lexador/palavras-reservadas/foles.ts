@@ -182,6 +182,7 @@ export default {
     "raio": tiposDeSimbolos.METODO,
     "rgb": tiposDeSimbolos.METODO,
     "rgba": tiposDeSimbolos.METODO,
+    "rotacionar-matiz": tiposDeSimbolos.METODO,
     "saturar": tiposDeSimbolos.METODO,
     "sepia": tiposDeSimbolos.METODO,
     "sépia": tiposDeSimbolos.METODO,

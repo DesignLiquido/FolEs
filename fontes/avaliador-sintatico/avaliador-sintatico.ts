@@ -175,6 +175,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorFit1['lexema'], quantificadorFit1['lexema']]
                 );
+
             case "escala-cinza":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escala-cinza'.");
                 const valorEscala = this.avancarEDevolverAnterior();
@@ -414,6 +415,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(
                     lexema,
                     [vermelhoRgba, verdeRgba, azulRgba]
+                );
+
+            case "rotacionar-matiz":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotacionar-matiz'.");
+                const valorRotacao = this.avancarEDevolverAnterior();
+                let quantificadorRotacao;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacao = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacao = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotacionar-matiz'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorRotacao, quantificadorRotacao]
                 );
 
             case "saturar":
