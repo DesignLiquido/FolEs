@@ -179,6 +179,7 @@ export default {
     "minmax": tiposDeSimbolos.METODO,
     "opacar": tiposDeSimbolos.METODO,
     "passos": tiposDeSimbolos.METODO,
+    "projetar-sombra": tiposDeSimbolos.METODO,
     "raio": tiposDeSimbolos.METODO,
     "rgb": tiposDeSimbolos.METODO,
     "rgba": tiposDeSimbolos.METODO,

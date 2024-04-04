@@ -24,11 +24,11 @@ lmht {
 
 lmht {
     filtro: contraste(10px); 
-    filtro-fundo: rotacionar-matiz(0.314rad);
+    filtro-fundo: projetar-sombra(vermelho 0.5rem 0.5rem);
 }
 
 lmht {
     trajeto-deslocamento: raio(lado-mais-próximo 45deg);
     deslocamento: raio(conter 45deg);
-    filtro-fundo: opacar(0.6);
+    filtro-fundo: projetar-sombra(15px 15px 15px azul);
 }
