@@ -126,19 +126,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorContraste, quantificadorContraste]
                 );
 
-            case "curva-cúbica" || "curva-cubica":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
+            case "curva-cúbica":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'curva-cúbica'.");
                 const parametro1 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método curva-cúbica.");
                 const parametro2 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método cubic-bezier.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método curva-cúbica.");
                 const parametro3 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método cubic-bezier.");
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método curva-cúbica.");
                 const parametro4 = this.avancarEDevolverAnterior();
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método cubic-bezier.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método curva-cúbica.");
                 return new SeletorValor(
                     lexema,
                     [parametro1, parametro2, parametro3, parametro4]
+                );
+
+            case "curva-cubica":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'curva-cúbica'.");
+                const parametro1cc = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método curva-cúbica.");
+                const parametro2cc = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método curva-cúbica.");
+                const parametro3cc = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método curva-cúbica.");
+                const parametro4cc = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método curva-cúbica.");
+                return new SeletorValor(
+                    lexema,
+                    [parametro1cc, parametro2cc, parametro3cc, parametro4cc]
                 );
 
             case "encaixar-conteudo":
