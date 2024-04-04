@@ -9,7 +9,7 @@ export class FiltroFundo extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("filtro-fundo", "backdrop-filter", pragmas);
        
-        const valoresExtra = ['drop-shadow', 'grayscale', 'hue-rotate', 'invert', 'opacity', 'saturate', 'sepia', 'url'];
+        const valoresExtra = ['blur', 'brightness', 'contrast', 'drop-shadow', 'grayscale', 'hue-rotate', 'invert', 'opacity', 'saturate', 'sepia', 'url'];
         validarValores('filtro-fundo', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
