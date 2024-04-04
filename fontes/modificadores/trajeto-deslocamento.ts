@@ -11,11 +11,11 @@ export class TrajetoDeslocamento extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("trajeto-deslocamento", "offset-path", pragmas);
 
-        const valoresExtra = ['url'];
+        const valoresExtra = ['url', 'ray'];
         validarValores('trajeto-deslocamento', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;
 
-        // Não recebe quantificador - mas as funções <basic-shape> recebem. Descomentar ao resolver TODO acima.
+        // Não recebe quantificador
         // this.quantificador = quantificador;
     }
 }

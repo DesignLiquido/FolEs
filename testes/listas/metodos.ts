@@ -71,6 +71,46 @@ export const MetodoContraste: Array<string> = [
     'filtro',
 ];
 
+export const MetodoBorrar: Array<string> = [
+    'filtro',
+];
+
+export const MetodoBrilho: Array<string> = [
+    'filtro',
+];
+
+export const MetodoRaio: Array<string> = [
+    'deslocamento',
+    'trajeto-deslocamento',
+];
+
+export const MetodoEscalaCinza: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoInverter: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoOpacar: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoSaturar: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoSepia: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoRotacionarMatiz: Array<string> = [
+    'filtro-fundo',
+];
+
+export const MetodoProjetarSombra: Array<string> = [
+    'filtro-fundo',
+];
 
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
@@ -78,11 +118,25 @@ export const TraducaoValoresMetodos: Object = {
     'altura-minima': 'min-height',
     'altura-mínima': 'min-height',
     'altura': 'height',
+    'conteudo': 'content',
+    'conteúdo': 'content',
+    'deslocamento': 'offset',
+    'espaçamento': 'gap',
+    'espacamento': 'gap',
+    'filtro': 'filter',
+    'filtro-fundo': 'backdrop-filter',
+    'grade': 'grid',
+    'imagem-mascara': 'mask-image',
+    'imagem-máscara': 'mask-image',
     'largura-maxima': 'max-width',
     'largura-máxima': 'max-width',
     'largura-minima': 'min-width',
     'largura-mínima': 'min-width',
     'largura': 'width',
+    'modelo-colunas-em-grade': 'grid-template-columns',
+    'modelo-em-grade': 'grid-template',
+    'modelo-linhas-em-grade': 'grid-template-rows',
+    'origem-imagem-borda': 'border-image-source',
     'tamanho-colunas-em-grade': 'grid-auto-columns',
     'tamanho-em-linha': 'inline-size',
     'tamanho-linhas-em-grade': 'grid-auto-rows',
@@ -94,22 +148,11 @@ export const TraducaoValoresMetodos: Object = {
     'tamanho-mínimo-em-bloco': 'min-block-size',
     'tamanho-minimo-em-linha': 'min-inline-size',
     'tamanho-mínimo-em-linha': 'min-inline-size',
-    'grade': 'grid',
     'tempo-transicao': 'transition-timing-function',
     'tempo-transição': 'transition-timing-function',
-    'velocidade-animacao': 'animation-timing-function',
-    'velocidade-animação': 'animation-timing-function',
+    'trajeto-deslocamento': 'offset-path',
     'transicao': 'transition',
     'transição': 'transition',
-    'modelo-colunas-em-grade': 'grid-template-columns',
-    'modelo-em-grade': 'grid-template',
-    'modelo-linhas-em-grade': 'grid-template-rows',
-    'espaçamento': 'gap',
-    'espacamento': 'gap',
-    'imagem-mascara': 'mask-image',
-    'imagem-máscara': 'mask-image',
-    'origem-imagem-borda': 'border-image-source',
-    'conteudo': 'content',
-    'conteúdo': 'content',
-    'filtro': 'filter',
+    'velocidade-animação': 'animation-timing-function',
+    'velocidade-animacao': 'animation-timing-function',
 }

@@ -1,24 +1,35 @@
 export const posicoes: { [valorFolEs: string]: string } = {
-    "superior": "top",
-    "inferior": "bottom",
+    "centro": "center",
     "direita": "right",
     "esquerda": "left",
-    "inicio": "start",
-    "início": "start",
-    "fim": "end",
-    "normal": "normal",
     "esticar": "stretch",
-    "centro": "center",
-    "linha-base": "baseline",
+    "fim": "end",
+    "flex-fim": "flex-end",
     "flex-inicio": "flex-start",
     "flex-início": "flex-start",
-    "flex-fim": "flex-end",
+    "inferior": "bottom",
+    "inicio": "start",
+    "início": "start",
+    "linha-base": "baseline",
+    "normal": "normal",
+    "superior": "top",
 }
 
 export const posicoesBasicas: { [valorFolEs: string]: string } = {
-    "superior": "top",
-    "inferior": "bottom",
+    "centro": "center",
     "direita": "right",
     "esquerda": "left",
-    "centro": "center",
+    "inferior": "bottom",
+    "superior": "top",
+}
+
+export const posicoesRaio: { [valorFolEs: string]: string } = {
+    "canto-mais-distante": "farthest-corner",
+    "canto-mais-próximo": "closest-corner",
+    "canto-mais-proximo": "closest-corner",
+    "conter": "contain",
+    "lado-mais-próximo": "closest-side",
+    "lado-mais-proximo": "closest-side",
+    "lado-mais-distante": "farthest-side",
+    "lados": "sides",
 }
