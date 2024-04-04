@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -786,6 +786,102 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPassos[index]]);
         expect(resultadoTradutor).toContain('steps(2, jump-start);');
+      }
+    });
+
+    it('Atribuindo Método "projetar-sombra()" com valores de comprimento somente', () => {
+      for (let index = 0; index < MetodoProjetarSombra.length; index += 1) {
+        const comprimentos = ['15px 15px', '15px 15px 15px', '0.5rem 0.5rem', '0.5rem 0.5rem 1rem'];
+        for (let posIndex = 0; posIndex < comprimentos.length; posIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodoProjetarSombra[index]}: projetar-sombra(${comprimentos[posIndex]});`,
+            "}"
+          ]);          
+
+          // O Lexador deve montar um objeto de acordo, sem retornar nenhum erro
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador também deve sempre encontrar valores e quantificadores na operação
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+
+            ])
+          );
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodoProjetarSombra[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+          
+          // O Tradutor deve serializar de acordo e traduzir projetar-sombra para drop-shadow  
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
+          expect(resultadoTradutor).toContain(`drop-shadow(${comprimentos[posIndex]});`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "projetar-sombra()" com valores de cor e de comprimento', () => {
+      for (let index = 0; index < MetodoProjetarSombra.length; index += 1) {
+        const comprimentos = ['15px 15px vermelho', '15px 15px 15px vermelho', 'vermelho 0.5rem 0.5rem', 'vermelho 0.5rem 0.5rem 1rem'];
+        for (let posIndex = 0; posIndex < comprimentos.length; posIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodoProjetarSombra[index]}: projetar-sombra(${comprimentos[posIndex]});`,
+            "}"
+          ]);          
+
+          // O Lexador deve montar um objeto de acordo, sem retornar nenhum erro
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador também deve sempre encontrar valores e quantificadores na operação
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+
+            ])
+          );
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodoProjetarSombra[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+          
+          // O Tradutor deve serializar de acordo e traduzir vermelho para red
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
+          expect(resultadoTradutor).toContain('red');
+        }
       }
     });
 

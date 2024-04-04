@@ -24,7 +24,7 @@ lmht {
 
 lmht {
     filtro: contraste(10px); 
-    filtro-fundo: projetar-sombra(vermelho 0.5rem 0.5rem);
+    filtro-fundo: projetar-sombra(0.5rem 0.5rem);
 }
 
 lmht {
