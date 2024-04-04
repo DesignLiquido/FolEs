@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoRaio, MetodoSaturar, MetodoSepia, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -738,7 +738,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir opaco para opacity
+          // O Tradutor deve serializar de acordo e traduzir opacar para opacity
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoOpacar[index]]);
           expect(resultadoTradutor).toContain(`opacity(${valoresAceitos[valIndex]});`);
         }
@@ -889,6 +889,65 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
+    it('Atribuindo Método "rotacionar-matiz()"', () => {
+      for (let index = 0; index < MetodoRotacionarMatiz.length; index += 1) {
+
+        const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodoRotacionarMatiz[index]}: rotacionar-matiz(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+          if (valIndex === 0 || valIndex === 1) {
+            expect(resultadoLexador.simbolos).toHaveLength(11);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir rotacionar-matiz para hue-rotate
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]);
+          expect(resultadoTradutor).toContain(`hue-rotate(${valoresAceitos[valIndex]});`);
+        }
+      }
+    });
+
     it('Atribuindo Método "saturar()"', () => {
       for (let index = 0; index < MetodoSaturar.length; index += 1) {
 
@@ -941,7 +1000,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir opaco para opacity
+          // O Tradutor deve serializar de acordo e traduzir saturar para saturate
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoSaturar[index]]);
           expect(resultadoTradutor).toContain(`saturate(${valoresAceitos[valIndex]});`);
         }
@@ -1000,7 +1059,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir opaco para opacity
+          // O Tradutor deve serializar de acordo e traduzir sépia para sepia
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoSepia[index]]);
           expect(resultadoTradutor).toContain(`sepia(${valoresAceitos[valIndex]});`);
         }

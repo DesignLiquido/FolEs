@@ -104,6 +104,10 @@ export const MetodoSepia: Array<string> = [
     'filtro-fundo',
 ];
 
+export const MetodoRotacionarMatiz: Array<string> = [
+    'filtro-fundo',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
