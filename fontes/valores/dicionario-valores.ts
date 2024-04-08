@@ -20,6 +20,7 @@ import { ProjetarSombra } from "./metodos/projetar-sombra";
 import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
+import { Rotacionar } from "./metodos/rotacionar";
 import { RotacionarMatiz } from "./metodos/rotacionar-matiz";
 import { Saturar } from "./metodos/saturar";
 import { Sepia } from "./metodos/sepia";
@@ -50,6 +51,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "raio": Raio,
     "rgb": Rgb,
     "rgba": Rgba,
+    "rotacionar": Rotacionar,
     "rotacionar-matiz": RotacionarMatiz,
     "saturar": Saturar,
     "sepia": Sepia,

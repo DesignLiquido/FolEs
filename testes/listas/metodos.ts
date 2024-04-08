@@ -116,6 +116,10 @@ export const MetodoPerspectivar: Array<string> = [
     'transformar',
 ];
 
+export const MetodosRotacionar: Array<string> = [
+    'transformar',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',

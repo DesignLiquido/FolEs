@@ -34,5 +34,5 @@ lmht {
 }
 
 lmht {
-    transformar: perspectivar(6.5cm);
+    transformar: rotacionar(3.142rad);
 }
