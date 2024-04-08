@@ -32,3 +32,7 @@ lmht {
     deslocamento: raio(conter 45deg);
     filtro-fundo: projetar-sombra(15px 15px 15px azul);
 }
+
+lmht {
+    transformar: perspectivar(6.5cm);
+}

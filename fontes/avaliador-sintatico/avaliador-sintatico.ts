@@ -375,6 +375,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorNumerico, termoSalto]
                 );
 
+            case "perspectivar":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'perspectivar'.");
+                const valorPerspectivar = this.avancarEDevolverAnterior();
+                let quantificadorPerspectivar;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorPerspectivar = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorPerspectivar = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'perspectivar'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorPerspectivar, quantificadorPerspectivar]
+                );
+
             case "projetar-sombra":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'projetar-sombra'.");
                 let corSombra = null;

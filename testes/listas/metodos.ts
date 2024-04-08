@@ -112,6 +112,10 @@ export const MetodoProjetarSombra: Array<string> = [
     'filtro-fundo',
 ];
 
+export const MetodoPerspectivar: Array<string> = [
+    'transformar',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
@@ -151,6 +155,7 @@ export const TraducaoValoresMetodos: Object = {
     'tempo-transicao': 'transition-timing-function',
     'tempo-transição': 'transition-timing-function',
     'trajeto-deslocamento': 'offset-path',
+    'transformar': 'transform',
     'transicao': 'transition',
     'transição': 'transition',
     'velocidade-animação': 'animation-timing-function',

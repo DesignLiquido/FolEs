@@ -15,6 +15,7 @@ import { Linear } from "./metodos/linear";
 import { MinMax } from "./metodos/minmax";
 import { Opacar } from "./metodos/opacar";
 import { Passos } from "./metodos/passos";
+import { Perspectivar } from "./metodos/perspectivar";
 import { ProjetarSombra } from "./metodos/projetar-sombra";
 import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
@@ -44,6 +45,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "minmax": MinMax,
     "opacar": Opacar,
     "passos": Passos,
+    "perspectivar": Perspectivar,
     "projetar-sombra": ProjetarSombra,
     "raio": Raio,
     "rgb": Rgb,

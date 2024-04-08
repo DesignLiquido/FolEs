@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, TraducaoValoresMetodos } from "../listas/metodos";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -786,6 +786,72 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPassos[index]]);
         expect(resultadoTradutor).toContain('steps(2, jump-start);');
+      }
+    });
+
+    it('Atribuindo Método "perspectivar()"', () => {
+      for (let index = 0; index < MetodoPerspectivar.length; index += 1) {
+
+        const valoresAceitos = ['800px', '6.5cm', '0.1', '0', '1', '1.75', 'nenhuma'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodoPerspectivar[index]}: perspectivar(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+          if (valIndex === 0 || valIndex === 1) {
+            expect(resultadoLexador.simbolos).toHaveLength(11);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else if (valIndex !== 6) {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodoPerspectivar[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir perspectivar para perspective
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPerspectivar[index]]);
+          expect(resultadoTradutor).toContain(`perspective(${valoresAceitos[valIndex]});`);
+        }
       }
     });
 
