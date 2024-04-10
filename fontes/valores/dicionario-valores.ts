@@ -10,6 +10,8 @@ import { HexadecimalCor } from "./metodos/hexadecimal-cor";
 import { Hsl } from "./metodos/hsl";
 import { Hsla } from "./metodos/hsla";
 import { Inclinar } from "./metodos/inclinar";
+import { InclinarHorizontal } from "./metodos/inclinar-horizontal";
+import { InclinarVertical } from "./metodos/inclinar-vertical";
 import { Inverter } from "./metodos/inverter";
 import { Limitar } from "./metodos/limitar";
 import { Linear } from "./metodos/linear";
@@ -45,6 +47,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "hsla": Hsla,
     "hex": HexadecimalCor,
     "inclinar": Inclinar,
+    "inclinar-horizontal": InclinarHorizontal,
+    "inclinar-vertical": InclinarVertical,
     "inverter": Inverter,
     "limitar": Limitar,
     "linear": Linear,

@@ -298,11 +298,41 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorInclinar2 = null;
                     quantificadorInclinar2 = null;
                 }
-                
+
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'inclinar'.");
                 return new SeletorValor(
                     lexema,
                     [valorInclinar1, quantificadorInclinar1, valorInclinar2, quantificadorInclinar2]
+                );
+
+            case "inclinar-horizontal":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'inclinar-horizontal'.");
+                const valorInclinarX = this.avancarEDevolverAnterior();
+                let quantificadorInclinarX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInclinarX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInclinarX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'inclinar-horizontal'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorInclinarX, quantificadorInclinarX]
+                );
+
+            case "inclinar-vertical":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'inclinar-vertical'.");
+                const valorInclinarY = this.avancarEDevolverAnterior();
+                let quantificadorInclinarY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInclinarY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInclinarY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'inclinar-vertical'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorInclinarY, quantificadorInclinarY]
                 );
 
             case "inverter":
