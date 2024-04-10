@@ -2,7 +2,7 @@ import { Simbolo } from "../../lexador";
 import { Metodo } from "./metodo";
 
 export class RotacionarVertical extends Metodo {
-    valor: number | string;
+    valor: number;
     quantificador: string;
     traducao: string;
     
