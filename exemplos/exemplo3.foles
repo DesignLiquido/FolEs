@@ -34,13 +34,13 @@ lmht {
 }
 
 lmht {
-    transformar: rotacionar-horizontal(0.2turn);
+    transformar: inclinar(0);
 }
 
 lmht {
-    transformar: rotacionar-eixo-z(45deg);
+    transformar: inclinar(0.312rad);
 }
 
 lmht {
-    transformar: rotacionar-vertical(3.142rad);
+    transformar: inclinar(0.06turn, 18deg);
 }

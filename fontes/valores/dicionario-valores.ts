@@ -9,6 +9,7 @@ import { GradienteLinear } from "./metodos/gradiente-linear";
 import { HexadecimalCor } from "./metodos/hexadecimal-cor";
 import { Hsl } from "./metodos/hsl";
 import { Hsla } from "./metodos/hsla";
+import { Inclinar } from "./metodos/inclinar";
 import { Inverter } from "./metodos/inverter";
 import { Limitar } from "./metodos/limitar";
 import { Linear } from "./metodos/linear";
@@ -43,6 +44,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "hsl": Hsl,
     "hsla": Hsla,
     "hex": HexadecimalCor,
+    "inclinar": Inclinar,
     "inverter": Inverter,
     "limitar": Limitar,
     "linear": Linear,

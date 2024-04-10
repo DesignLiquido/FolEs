@@ -276,6 +276,35 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [HdeHSLA, SdeHSLA, LdeHSLA]
                 );
 
+            case "inclinar":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'inclinar'.");
+
+                const valorInclinar1 = this.avancarEDevolverAnterior();
+
+                let quantificadorInclinar1;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInclinar1 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInclinar1 = null;
+                }
+
+                let valorInclinar2;
+                let quantificadorInclinar2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'inclinar'.");
+                    valorInclinar2 = this.avancarEDevolverAnterior();
+                    quantificadorInclinar2 = this.avancarEDevolverAnterior();
+                } else {
+                    valorInclinar2 = null;
+                    quantificadorInclinar2 = null;
+                }
+                
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'inclinar'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorInclinar1, quantificadorInclinar1, valorInclinar2, quantificadorInclinar2]
+                );
+
             case "inverter":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'inverter'.");
                 const valorInverter = this.avancarEDevolverAnterior();
