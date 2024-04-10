@@ -864,7 +864,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             "lmht {",
             `${MetodoProjetarSombra[index]}: projetar-sombra(${comprimentos[posIndex]});`,
             "}"
-          ]);          
+          ]);
 
           // O Lexador deve montar um objeto de acordo, sem retornar nenhum erro
           expect(resultadoLexador.erros).toHaveLength(0);
@@ -895,7 +895,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-          
+
           // O Tradutor deve serializar de acordo e traduzir projetar-sombra para drop-shadow  
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
           expect(resultadoTradutor).toContain(`drop-shadow(${comprimentos[posIndex]});`);
@@ -912,7 +912,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             "lmht {",
             `${MetodoProjetarSombra[index]}: projetar-sombra(${comprimentos[posIndex]});`,
             "}"
-          ]);          
+          ]);
 
           // O Lexador deve montar um objeto de acordo, sem retornar nenhum erro
           expect(resultadoLexador.erros).toHaveLength(0);
@@ -943,7 +943,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-          
+
           // O Tradutor deve serializar de acordo e traduzir vermelho para red
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
           expect(resultadoTradutor).toContain('red');
@@ -1054,7 +1054,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "rotacionar()"', () => {
       for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
-        const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
+        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1106,6 +1106,124 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // O Tradutor deve serializar de acordo e traduzir rotacionar para rotate
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
           expect(resultadoTradutor).toContain(`rotate(${valoresAceitos[valIndex]});`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "rotacionar-eixo-z()"', () => {
+      for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+
+        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodosRotacionar[index]}: rotacionar-eixo-z(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+          if (valIndex === 0 || valIndex === 1) {
+            expect(resultadoLexador.simbolos).toHaveLength(11);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodosRotacionar[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir rotacionar-eixo-z para rotateZ
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+          expect(resultadoTradutor).toContain(`rotateZ(${valoresAceitos[valIndex]});`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "rotacionar-horizontal()"', () => {
+      for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+
+        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodosRotacionar[index]}: rotacionar-horizontal(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+          if (valIndex === 0 || valIndex === 1) {
+            expect(resultadoLexador.simbolos).toHaveLength(11);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodosRotacionar[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir rotacionar-horizontal para rotateX
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+          expect(resultadoTradutor).toContain(`rotateX(${valoresAceitos[valIndex]});`);
         }
       }
     });
@@ -1165,6 +1283,65 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // O Tradutor deve serializar de acordo e traduzir rotacionar-matiz para hue-rotate
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]);
           expect(resultadoTradutor).toContain(`hue-rotate(${valoresAceitos[valIndex]});`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "rotacionar-vertical()"', () => {
+      for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+
+        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodosRotacionar[index]}: rotacionar-vertical(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+          if (valIndex === 0 || valIndex === 1) {
+            expect(resultadoLexador.simbolos).toHaveLength(11);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodosRotacionar[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir rotacionar-vertical para rotateY
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+          expect(resultadoTradutor).toContain(`rotateY(${valoresAceitos[valIndex]});`);
         }
       }
     });
