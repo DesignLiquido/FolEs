@@ -21,7 +21,10 @@ import { Raio } from "./metodos/raio";
 import { Rgb } from "./metodos/rgb";
 import { Rgba } from "./metodos/rgba";
 import { Rotacionar } from "./metodos/rotacionar";
+import { RotacionarEixoZ } from "./metodos/rotacionar-eixo-z";
+import { RotacionarHorizontal } from "./metodos/rotacionar-horizontal";
 import { RotacionarMatiz } from "./metodos/rotacionar-matiz";
+import { RotacionarVertical } from "./metodos/rotacionar-vertical";
 import { Saturar } from "./metodos/saturar";
 import { Sepia } from "./metodos/sepia";
 import { Url } from "./metodos/url";
@@ -52,7 +55,10 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "rgb": Rgb,
     "rgba": Rgba,
     "rotacionar": Rotacionar,
+    "rotacionar-eixo-z": RotacionarEixoZ,
+    "rotacionar-horizontal": RotacionarHorizontal,
     "rotacionar-matiz": RotacionarMatiz,
+    "rotacionar-vertical": RotacionarVertical,
     "saturar": Saturar,
     "sepia": Sepia,
     "sépia": Sepia,

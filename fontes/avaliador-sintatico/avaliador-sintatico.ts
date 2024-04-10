@@ -480,6 +480,36 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorRotacionar, quantificadorRotacionar]
                 );
 
+            case "rotacionar-eixo-z":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotacionar-eixo-z'.");
+                const valorRotacionarZ = this.avancarEDevolverAnterior();
+                let quantificadorRotacionarZ;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionarZ = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionarZ = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotacionar-eixo-z'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorRotacionarZ, quantificadorRotacionarZ]
+                );
+
+            case "rotacionar-horizontal":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotacionar-horizontal'.");
+                const valorRotacionarX = this.avancarEDevolverAnterior();
+                let quantificadorRotacionarX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionarX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionarX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotacionar-horizontal'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorRotacionarX, quantificadorRotacionarX]
+                );
+
             case "rotacionar-matiz":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotacionar-matiz'.");
                 const valorRotacao = this.avancarEDevolverAnterior();
@@ -493,6 +523,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(
                     lexema,
                     [valorRotacao, quantificadorRotacao]
+                );
+
+            case "rotacionar-vertical":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotacionar-vertical'.");
+                const valorRotacionarY = this.avancarEDevolverAnterior();
+                let quantificadorRotacionarY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionarY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionarY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotacionar-vertical'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorRotacionarY, quantificadorRotacionarY]
                 );
 
             case "saturar":

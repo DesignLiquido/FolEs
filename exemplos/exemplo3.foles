@@ -34,5 +34,13 @@ lmht {
 }
 
 lmht {
-    transformar: rotacionar(3.142rad);
+    transformar: rotacionar-horizontal(0.2turn);
+}
+
+lmht {
+    transformar: rotacionar-eixo-z(45deg);
+}
+
+lmht {
+    transformar: rotacionar-vertical(3.142rad);
 }
