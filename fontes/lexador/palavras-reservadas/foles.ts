@@ -199,6 +199,8 @@ export default {
     "translação": tiposDeSimbolos.METODO,
     "translacao-horizontal": tiposDeSimbolos.METODO,
     "translação-horizontal": tiposDeSimbolos.METODO,
+    "translacao-vertical": tiposDeSimbolos.METODO,
+    "translação-vertical": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
     // Qualitativos

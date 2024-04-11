@@ -644,36 +644,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorSépia, quantificadorSépia]
                 );
 
-            case "translação-horizontal":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-horizontal'.");
-                const valorTranslaçaoX = this.avancarEDevolverAnterior();
-                let quantificadorTranslaçaoX;
-                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
-                    quantificadorTranslaçaoX = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorTranslaçaoX = null;
-                }
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-horizontal'.");
-                return new SeletorValor(
-                    lexema,
-                    [valorTranslaçaoX, quantificadorTranslaçaoX]
-                );
-
-            case "translacao-horizontal":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-horizontal'.");
-                const valorTranslacaoX = this.avancarEDevolverAnterior();
-                let quantificadorTranslacaoX;
-                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
-                    quantificadorTranslacaoX = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorTranslacaoX = null;
-                }
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-horizontal'.");
-                return new SeletorValor(
-                    lexema,
-                    [valorTranslacaoX, quantificadorTranslacaoX]
-                );
-
             case "translação":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação'.");
 
@@ -730,6 +700,66 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(
                     lexema,
                     [valorTranslacao01, quantificadorTranlacao01, valorTranslacao02, quantificadorTranlacao02]
+                );
+
+            case "translação-horizontal":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-horizontal'.");
+                const valorTranslaçaoX = this.avancarEDevolverAnterior();
+                let quantificadorTranslaçaoX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslaçaoX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslaçaoX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-horizontal'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslaçaoX, quantificadorTranslaçaoX]
+                );
+
+            case "translacao-horizontal":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-horizontal'.");
+                const valorTranslacaoX = this.avancarEDevolverAnterior();
+                let quantificadorTranslacaoX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslacaoX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslacaoX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-horizontal'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacaoX, quantificadorTranslacaoX]
+                );
+
+            case "translação-vertical":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-vertical'.");
+                const valorTranslaçaoY = this.avancarEDevolverAnterior();
+                let quantificadorTranslaçaoY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslaçaoY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslaçaoY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-vertical'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslaçaoY, quantificadorTranslaçaoY]
+                );
+
+            case "translacao-vertical":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-vertical'.");
+                const valorTranslacaoY = this.avancarEDevolverAnterior();
+                let quantificadorTranslacaoY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslacaoY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslacaoY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-vertical'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacaoY, quantificadorTranslacaoY]
                 );
 
             case "url":

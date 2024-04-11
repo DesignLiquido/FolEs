@@ -9,7 +9,7 @@ export class Transformar extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("transformar", "transform", pragmas);
 
-        const valoresExtra = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'skew', 'skewX', 'skewY', 'translate', 'translateX'];
+        const valoresExtra = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'skew', 'skewX', 'skewY', 'translate', 'translateX', 'translateY'];
         
         validarValores('transformar', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;

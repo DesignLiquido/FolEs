@@ -34,13 +34,13 @@ lmht {
 }
 
 lmht {
-    transformar: translação-horizontal(0);
+    transformar: translacao-vertical(0);
 }
 
 lmht {
-    transformar: translação-horizontal(42px);
+    transformar: translacao-vertical(42px);
 }
 
 lmht {
-    transformar: translação-horizontal(3ch);
+    transformar: translacao-vertical(3ch);
 }

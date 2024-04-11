@@ -32,6 +32,7 @@ import { Saturar } from "./metodos/saturar";
 import { Sepia } from "./metodos/sepia";
 import { Translacao } from "./metodos/translacao";
 import { TranslacaoHorizontal } from "./metodos/translacao-horizontal";
+import { TranslacaoVertical } from "./metodos/translacao-vertical";
 import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
@@ -74,5 +75,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "translação": Translacao,
     "translacao-horizontal": TranslacaoHorizontal,
     "translação-horizontal": TranslacaoHorizontal,
+    "translacao-vertical": TranslacaoVertical,
+    "translação-vertical": TranslacaoVertical,
     "url": Url,
 }
