@@ -197,6 +197,8 @@ export default {
     "sépia": tiposDeSimbolos.METODO,
     "translacao": tiposDeSimbolos.METODO,
     "translação": tiposDeSimbolos.METODO,
+    "translacao-horizontal": tiposDeSimbolos.METODO,
+    "translação-horizontal": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
     // Qualitativos
