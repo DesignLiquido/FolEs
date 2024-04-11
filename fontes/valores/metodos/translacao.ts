@@ -4,7 +4,7 @@ import { Metodo } from "./metodo";
 export class Translacao extends Metodo {
     valor1: number;
     quantificador1: string;
-    valor2: number | string;
+    valor2: number;
     quantificador2: string;
     traducao: string;
     
