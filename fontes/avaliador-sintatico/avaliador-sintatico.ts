@@ -702,6 +702,36 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorTranslacao01, quantificadorTranlacao01, valorTranslacao02, quantificadorTranlacao02]
                 );
 
+            case "translação-eixo-z":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-eixo-z'.");
+                const valorTranslaçaoZ = this.avancarEDevolverAnterior();
+                let quantificadorTranslaçaoZ;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslaçaoZ = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslaçaoZ = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-eixo-z'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslaçaoZ, quantificadorTranslaçaoZ]
+                );
+
+            case "translacao-eixo-z":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-eixo-z'.");
+                const valorTranslacaoZ = this.avancarEDevolverAnterior();
+                let quantificadorTranslacaoZ;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslacaoZ = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslacaoZ = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-eixo-z'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacaoZ, quantificadorTranslacaoZ]
+                );
+
             case "translação-horizontal":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-horizontal'.");
                 const valorTranslaçaoX = this.avancarEDevolverAnterior();
