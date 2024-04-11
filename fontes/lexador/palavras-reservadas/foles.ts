@@ -195,6 +195,8 @@ export default {
     "saturar": tiposDeSimbolos.METODO,
     "sepia": tiposDeSimbolos.METODO,
     "sépia": tiposDeSimbolos.METODO,
+    "translacao": tiposDeSimbolos.METODO,
+    "translação": tiposDeSimbolos.METODO,
     "url": tiposDeSimbolos.METODO,
 
     // Qualitativos

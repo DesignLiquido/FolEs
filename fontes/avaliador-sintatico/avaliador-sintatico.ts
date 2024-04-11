@@ -644,6 +644,64 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorSépia, quantificadorSépia]
                 );
 
+            case "translação":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação'.");
+
+                const valorTranslacao1 = this.avancarEDevolverAnterior();
+
+                let quantificadorTranlacao1;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranlacao1 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranlacao1 = null;
+                }
+
+                let valorTranslacao2;
+                let quantificadorTranlacao2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação'.");
+                    valorTranslacao2 = this.avancarEDevolverAnterior();
+                    quantificadorTranlacao2 = this.avancarEDevolverAnterior();
+                } else {
+                    valorTranslacao2 = null;
+                    quantificadorTranlacao2 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacao1, quantificadorTranlacao1, valorTranslacao2, quantificadorTranlacao2]
+                );
+
+            case "translacao":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação'.");
+
+                const valorTranslacao01 = this.avancarEDevolverAnterior();
+
+                let quantificadorTranlacao01;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranlacao01 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranlacao01 = null;
+                }
+
+                let valorTranslacao02;
+                let quantificadorTranlacao02;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação'.");
+                    valorTranslacao02 = this.avancarEDevolverAnterior();
+                    quantificadorTranlacao02 = this.avancarEDevolverAnterior();
+                } else {
+                    valorTranslacao02 = null;
+                    quantificadorTranlacao02 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacao01, quantificadorTranlacao01, valorTranslacao02, quantificadorTranlacao02]
+                );
+
             case "url":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'url'.");
                 const url = this.validacaoUrl();

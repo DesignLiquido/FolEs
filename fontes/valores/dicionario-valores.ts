@@ -30,6 +30,7 @@ import { RotacionarMatiz } from "./metodos/rotacionar-matiz";
 import { RotacionarVertical } from "./metodos/rotacionar-vertical";
 import { Saturar } from "./metodos/saturar";
 import { Sepia } from "./metodos/sepia";
+import { Translacao } from "./metodos/translacao";
 import { Url } from "./metodos/url";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
@@ -68,5 +69,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "saturar": Saturar,
     "sepia": Sepia,
     "sépia": Sepia,
+    "translacao": Translacao,
+    "translação": Translacao,
     "url": Url,
 }
