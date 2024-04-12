@@ -1790,6 +1790,96 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
+    it('Atribuindo Método "translação-3d()"', () => {
+      for (let index = 0; index < MetodosTranslacao.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodosTranslacao[index]}: translacao-3d(5ch, 0.4in, 5em);`,
+          "}"
+        ]);
+
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // O Lexador deve montar um objeto de comprimento 17
+        expect(resultadoLexador.simbolos).toHaveLength(17);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+          ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          TraducaoValoresMetodos[MetodosTranslacao[index]]
+        );
+
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+        // O Tradutor deve serializar de acordo e traduzir translação-3d para translate3d
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+        expect(resultadoTradutor).toContain(`translate3d(5ch, 0.4in, 5em);`);
+      }
+    });
+
+    it('Atribuindo Método "translacao-3d()" recebendo 0 como um dos atributos', () => {
+      for (let index = 0; index < MetodosTranslacao.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodosTranslacao[index]}: translacao-3d(2.7rem, 0, 1rem);`,
+          "}"
+        ]);
+
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // O Lexador deve montar um objeto de comprimento 16
+        expect(resultadoLexador.simbolos).toHaveLength(16);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+          ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          TraducaoValoresMetodos[MetodosTranslacao[index]]
+        );
+
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+        // O Tradutor deve serializar de acordo e traduzir translacao-3d para translate3d
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+        expect(resultadoTradutor).toContain(`translate3d(2.7rem, 0, 1rem);`);
+      }
+    });
+
     it('Atribuindo Método "translação-eixo-z()"', () => {
       for (let index = 0; index < MetodosTranslacao.length; index += 1) {
 
