@@ -702,6 +702,102 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorTranslacao01, quantificadorTranlacao01, valorTranslacao02, quantificadorTranlacao02]
                 );
 
+            case "translação-3d":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-3d'.");
+
+                const valorTranslacao3d1 = this.avancarEDevolverAnterior();
+
+                let quantificadorTranlacao3d1;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranlacao3d1 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranlacao3d1 = null;
+                }
+
+                let valorTranslacao3d2;
+                let quantificadorTranlacao3d2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação-3d'.");
+                    valorTranslacao3d2 = this.avancarEDevolverAnterior();
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorTranlacao3d2 = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorTranlacao3d2 = null;
+                    }
+                } else {
+                    valorTranslacao3d2 = null;
+                    quantificadorTranlacao3d2 = null;
+                }
+
+                let valorTranslacao3d3;
+                let quantificadorTranlacao3d3;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação-3d'.");
+                    valorTranslacao3d3 = this.avancarEDevolverAnterior();
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorTranlacao3d3 = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorTranlacao3d3 = null;
+                    }
+                } else {
+                    valorTranslacao3d3 = null;
+                    quantificadorTranlacao3d3 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-3d'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacao3d1, quantificadorTranlacao3d1, valorTranslacao3d2, quantificadorTranlacao3d2, valorTranslacao3d3, quantificadorTranlacao3d3]
+                );
+
+            case "translacao-3d":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-3d'.");
+
+                const valorTranslacao3d01 = this.avancarEDevolverAnterior();
+
+                let quantificadorTranlacao3d01;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranlacao3d01 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranlacao3d01 = null;
+                }
+
+                let valorTranslacao3d02;
+                let quantificadorTranlacao3d02;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação-3d'.");
+                    valorTranslacao3d02 = this.avancarEDevolverAnterior();
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorTranlacao3d02 = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorTranlacao3d02 = null;
+                    }
+                } else {
+                    valorTranslacao3d02 = null;
+                    quantificadorTranlacao3d02 = null;
+                }
+
+                let valorTranslacao3d03;
+                let quantificadorTranlacao3d03;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação-3d'.");
+                    valorTranslacao3d03 = this.avancarEDevolverAnterior();
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorTranlacao3d03 = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorTranlacao3d03 = null;
+                    }
+                } else {
+                    valorTranslacao3d03 = null;
+                    quantificadorTranlacao3d03 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-3d'.");
+                return new SeletorValor(
+                    lexema,
+                    [valorTranslacao3d01, quantificadorTranlacao3d01, valorTranslacao3d02, quantificadorTranlacao3d02,  valorTranslacao3d03, quantificadorTranlacao3d03]
+                );
+
             case "translação-eixo-z":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translação-eixo-z'.");
                 const valorTranslaçaoZ = this.avancarEDevolverAnterior();

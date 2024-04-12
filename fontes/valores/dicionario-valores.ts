@@ -31,6 +31,7 @@ import { RotacionarVertical } from "./metodos/rotacionar-vertical";
 import { Saturar } from "./metodos/saturar";
 import { Sepia } from "./metodos/sepia";
 import { Translacao } from "./metodos/translacao";
+import { Translacao3d } from "./metodos/translacao-3d";
 import { TranslacaoEixoZ } from "./metodos/translacao-eixo-z";
 import { TranslacaoHorizontal } from "./metodos/translacao-horizontal";
 import { TranslacaoVertical } from "./metodos/translacao-vertical";
@@ -74,6 +75,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "sépia": Sepia,
     "translacao": Translacao,
     "translação": Translacao,
+    "translacao-3d": Translacao3d,
+    "translação-3d": Translacao3d,
     "translacao-eixo-z": TranslacaoEixoZ,
     "translação-eixo-z": TranslacaoEixoZ,
     "translacao-horizontal": TranslacaoHorizontal,

@@ -197,6 +197,8 @@ export default {
     "sépia": tiposDeSimbolos.METODO,
     "translacao": tiposDeSimbolos.METODO,
     "translação": tiposDeSimbolos.METODO,
+    "translacao-3d": tiposDeSimbolos.METODO,
+    "translação-3d": tiposDeSimbolos.METODO,
     "translacao-eixo-z": tiposDeSimbolos.METODO,
     "translação-eixo-z": tiposDeSimbolos.METODO,
     "translacao-horizontal": tiposDeSimbolos.METODO,
