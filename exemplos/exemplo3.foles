@@ -34,13 +34,13 @@ lmht {
 }
 
 lmht {
-    transformar: escalamento(0.7);
+    transformar: escalamento-3d(1, 1, 1);
 }
 
 lmht {
-    transformar: escalamento(1.3, 0.4);
+    transformar: escalamento-3d(1.3, 1.3, 1.3);
 }
 
 lmht {
-    transformar: escalamento(1);
+    transformar: escalamento-3d(1.8, 1, 0.5);
 }

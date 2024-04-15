@@ -206,6 +206,19 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorScale1, valorScale2]
                 );
 
+            case "escalamento-3d":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escalamento-3d'.");
+                const valorScale3d1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método escalamento-3d.");
+                const valorScale3d2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método escalamento-3d.");
+                const valorScale3d3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método escalamento-3d.");
+                return new SeletorValor(
+                    lexema,
+                    [valorScale3d1, valorScale3d2, valorScale3d3]
+                );
+
             case "escalamento-eixo-z":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escalamento-eixo-z'.");
                 const valorScaleZ = this.avancarEDevolverAnterior();

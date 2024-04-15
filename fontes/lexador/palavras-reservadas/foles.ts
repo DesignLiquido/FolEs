@@ -170,6 +170,7 @@ export default {
     "encaixar-conteúdo": tiposDeSimbolos.METODO,
     "escala-cinza": tiposDeSimbolos.METODO,
     "escalamento": tiposDeSimbolos.METODO,
+    "escalamento-3d": tiposDeSimbolos.METODO,
     "escalamento-eixo-z": tiposDeSimbolos.METODO,
     "escalamento-horizontal": tiposDeSimbolos.METODO,
     "escalamento-vertical": tiposDeSimbolos.METODO,
