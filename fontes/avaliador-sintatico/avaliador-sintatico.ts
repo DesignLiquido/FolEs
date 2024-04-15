@@ -191,6 +191,22 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorEscala, quantificadorEscala]
                 );
 
+            case "escalamento":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escalamento'.");
+                const valorScale1 = this.avancarEDevolverAnterior();
+
+                let valorScale2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método escalamento.");
+                    valorScale2 = this.avancarEDevolverAnterior();
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método escalamento.");
+                return new SeletorValor(
+                    lexema,
+                    [valorScale1, valorScale2]
+                );
+
+            // if (this.simbolos[this.atual].tipo === 'VIRGULA')
             case "gradiente-linear":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'gradiente-linear'.");
                 const valorAngulo = this.avancarEDevolverAnterior();
@@ -795,7 +811,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação-3d'.");
                 return new SeletorValor(
                     lexema,
-                    [valorTranslacao3d01, quantificadorTranlacao3d01, valorTranslacao3d02, quantificadorTranlacao3d02,  valorTranslacao3d03, quantificadorTranlacao3d03]
+                    [valorTranslacao3d01, quantificadorTranlacao3d01, valorTranslacao3d02, quantificadorTranlacao3d02, valorTranslacao3d03, quantificadorTranlacao3d03]
                 );
 
             case "translação-eixo-z":

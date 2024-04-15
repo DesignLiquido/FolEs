@@ -5,6 +5,7 @@ import { Contraste } from "./metodos/contraste";
 import { CurvaCubica } from "./metodos/curva-cubica";
 import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
 import { EscalaCinza } from "./metodos/escala-cinza";
+import { Escalamento } from "./metodos/escalamento";
 import { GradienteLinear } from "./metodos/gradiente-linear";
 import { HexadecimalCor } from "./metodos/hexadecimal-cor";
 import { Hsl } from "./metodos/hsl";
@@ -47,6 +48,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "encaixar-conteudo": EncaixarConteudo,
     "encaixar-conteúdo": EncaixarConteudo,
     "escala-cinza": EscalaCinza,
+    "escalamento": Escalamento,
     "gradiente-linear": GradienteLinear,
     "hsl": Hsl,
     "hsla": Hsla,
