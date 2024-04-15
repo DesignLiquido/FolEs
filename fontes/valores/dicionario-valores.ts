@@ -6,6 +6,9 @@ import { CurvaCubica } from "./metodos/curva-cubica";
 import { EncaixarConteudo } from "./metodos/encaixar-conteudo";
 import { EscalaCinza } from "./metodos/escala-cinza";
 import { Escalamento } from "./metodos/escalamento";
+import { EscalamentoEixoZ } from "./metodos/escalamento-eixo-z";
+import { EscalamentoHorizontal } from "./metodos/escalamento-horizontal";
+import { EscalamentoVertical } from "./metodos/escalamento-vertical";
 import { GradienteLinear } from "./metodos/gradiente-linear";
 import { HexadecimalCor } from "./metodos/hexadecimal-cor";
 import { Hsl } from "./metodos/hsl";
@@ -49,6 +52,9 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "encaixar-conteúdo": EncaixarConteudo,
     "escala-cinza": EscalaCinza,
     "escalamento": Escalamento,
+    "escalamento-eixo-z": EscalamentoEixoZ,
+    "escalamento-horizontal": EscalamentoHorizontal,
+    "escalamento-vertical": EscalamentoVertical,
     "gradiente-linear": GradienteLinear,
     "hsl": Hsl,
     "hsla": Hsla,

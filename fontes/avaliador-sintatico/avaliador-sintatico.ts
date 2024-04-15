@@ -206,7 +206,33 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [valorScale1, valorScale2]
                 );
 
-            // if (this.simbolos[this.atual].tipo === 'VIRGULA')
+            case "escalamento-eixo-z":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escalamento-eixo-z'.");
+                const valorScaleZ = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método escalamento-eixo-z.");
+                return new SeletorValor(
+                    lexema,
+                    [valorScaleZ]
+                );
+
+            case "escalamento-horizontal":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escalamento-horizontal'.");
+                const valorScaleX = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método escalamento-horizontal.");
+                return new SeletorValor(
+                    lexema,
+                    [valorScaleX]
+                );
+
+            case "escalamento-vertical":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'escalamento-vertical'.");
+                const valorScaleY = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método escalamento-vertical.");
+                return new SeletorValor(
+                    lexema,
+                    [valorScaleY]
+                );
+
             case "gradiente-linear":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'gradiente-linear'.");
                 const valorAngulo = this.avancarEDevolverAnterior();
