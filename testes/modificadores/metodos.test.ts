@@ -480,6 +480,50 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
+    it('Atribuindo Método "escalamento-3d()"', () => {
+      for (let index = 0; index < MetodosEscalamento.length; index += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodosEscalamento[index]}: escalamento-3d(0.5, 1, 1.7);`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 14
+          expect(resultadoLexador.simbolos).toHaveLength(14);
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            ])
+          );
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodosEscalamento[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir escalamento-3d para scale3d
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+          expect(resultadoTradutor).toContain(`scale3d(0.5, 1, 1.7);`);
+      }
+    });
+
     it('Atribuindo Método "escalamento-eixo-z()"', () => {
       for (let index = 0; index < MetodosEscalamento.length; index += 1) {
 
