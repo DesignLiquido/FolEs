@@ -50,10 +50,6 @@ export class Translacao3d extends Metodo {
             return `translate3d(${this.valor1}${this.quantificador1}, ${this.valor2}, ${this.valor3})`
         }
 
-        if (!this.quantificador3 && !this.quantificador2 && !this.quantificador1) {
-            return `translate3d(${this.valor1}, ${this.valor2}, ${this.valor3})`
-        }
-
         return `translate3d(${this.valor1}${this.quantificador1}, ${this.valor2}${this.quantificador2}, ${this.valor3}${this.quantificador3})`
     }
 }

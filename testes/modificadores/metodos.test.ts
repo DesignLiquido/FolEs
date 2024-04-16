@@ -2128,9 +2128,10 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           '2.7rem, 0, 1rem', 
           '5ch, 0.4in, 0',
           '0, 0, 135px', 
-          '2.7rem, 0, 0', 
+          '0, 2.7rem, 0', 
           '5ch, 0, 0',
           '42px, 62px, 135px', 
+          '0, 0, 0',
         ];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
@@ -2175,12 +2176,19 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
               ])
             );
-          } else {
+          } else if (valIndex === 7) {
             expect(resultadoLexador.simbolos).toHaveLength(17);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
                 expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
                 expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(14);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
               ])
             );
           }
@@ -2198,7 +2206,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir translação-3d para translate3d
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-          expect(resultadoTradutor).toContain(`translate3d(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 8) {
+            expect(resultadoTradutor).toContain(`translate3d(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`translate3d(0);`);
+          }
         }
       }
     });
