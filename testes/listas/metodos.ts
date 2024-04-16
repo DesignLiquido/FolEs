@@ -128,6 +128,10 @@ export const MetodosTranslacao: Array<string> = [
     'transformar',
 ];
 
+export const MetodosEscalamento: Array<string> = [
+    'transformar',
+];
+
 export const TraducaoValoresMetodos: Object = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
