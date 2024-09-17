@@ -23,9 +23,12 @@ export class Inclinar extends Metodo {
         }
 
         if (!this.valor2 && !this.quantificador2) {
+            this.quantificador1 === 'graus' ? this.quantificador1 = 'deg' : null;
             return `skew(${this.valor1}${this.quantificador1})`
         }
 
+        this.quantificador1 === 'graus' ? this.quantificador1 = 'deg' : null;
+        this.quantificador2 === 'graus' ? this.quantificador2 = 'deg' : null;
         return `skew(${this.valor1}${this.quantificador1}, ${this.valor2}${this.quantificador2})`
     }
 }

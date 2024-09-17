@@ -15,6 +15,7 @@ export class InclinarVertical extends Metodo {
 
     paraTexto() {
         if (this.quantificador) {
+            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `skewY(${this.valor}${this.quantificador})`
         }
 

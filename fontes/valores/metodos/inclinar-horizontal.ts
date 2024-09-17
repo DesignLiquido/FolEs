@@ -15,6 +15,7 @@ export class InclinarHorizontal extends Metodo {
 
     paraTexto() {
         if (this.quantificador) {
+            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `skewX(${this.valor}${this.quantificador})`
         }
 
