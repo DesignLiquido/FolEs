@@ -15,6 +15,7 @@ export class RotacionarEixoZ extends Metodo {
 
     paraTexto() {
         if (this.quantificador) {
+            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `rotateZ(${this.valor}${this.quantificador})`
         }
 
