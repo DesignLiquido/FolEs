@@ -19,6 +19,7 @@ export class Raio extends Metodo {
     paraTexto() {
         if (this.posicao) {
             this.posicao = posicoesRaio[this.posicao];
+            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `ray(${this.posicao} ${this.valor}${this.quantificador})`
         }
 
