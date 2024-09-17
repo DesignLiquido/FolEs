@@ -4,6 +4,8 @@ lmht {
     colunas: 2;
     opacidade: 0.5;
     indice-z: 5;
+    transformar: translação(15graus);
+    deslocamento: raio(conter 200graus);
 }
 
 lmht {
@@ -13,7 +15,7 @@ lmht {
 
 lmht {
     espacamento: calcular(100px - 80px);
-    imagem-máscara: gradiente-linear(inferior, azul, vermelho);
+    imagem-máscara: gradiente-linear(90graus, azul, vermelho);
     origem-imagem-borda: gradiente-linear(90deg, verde, amarelo);
     filtro: borrar(80%); 
 }
