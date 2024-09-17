@@ -152,6 +152,7 @@ export default {
     // Quantificadores de ângulo
     "deg": tiposDeSimbolos.QUANTIFICADOR,
     "grad": tiposDeSimbolos.QUANTIFICADOR,
+    "graus": tiposDeSimbolos.QUANTIFICADOR,
     "rad": tiposDeSimbolos.QUANTIFICADOR,
     "turn": tiposDeSimbolos.QUANTIFICADOR,
 
