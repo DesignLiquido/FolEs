@@ -1524,7 +1524,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           // Lexador
           const resultadoLexador = lexador.mapear([
             "lmht {",
-            `${MetodoRaio[index]}: raio(${valoresAceitos[valIndex]} 200deg);`,
+            `${MetodoRaio[index]}: raio(${valoresAceitos[valIndex]} 200graus);`,
             "}"
           ]);
 
@@ -1567,8 +1567,6 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
     it('Atribuindo Método "raio()" com somente número/quantificador', () => {
       for (let index = 0; index < MetodoRaio.length; index += 1) {
-
-
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
@@ -1616,7 +1614,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "rotacionar()"', () => {
       for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
-        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+        const valoresAceitos = ['45graus', '45deg', '3.142rad', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1637,7 +1635,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -1667,7 +1665,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir rotacionar para rotate
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
-          expect(resultadoTradutor).toContain(`rotate(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`rotate(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`rotate(45deg);`);
+
+          }
         }
       }
     });
@@ -1675,7 +1678,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "rotacionar-eixo-z()"', () => {
       for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
-        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+        const valoresAceitos = ['45graus', '45deg', '3.142rad', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1696,7 +1699,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -1726,7 +1729,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir rotacionar-eixo-z para rotateZ
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
-          expect(resultadoTradutor).toContain(`rotateZ(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`rotateZ(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`rotateZ(45deg);`);
+          }
         }
       }
     });
@@ -1734,7 +1741,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "rotacionar-horizontal()"', () => {
       for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
-        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+        const valoresAceitos = ['45graus', '45deg', '3.142rad', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1755,7 +1762,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -1785,7 +1792,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir rotacionar-horizontal para rotateX
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
-          expect(resultadoTradutor).toContain(`rotateX(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`rotateX(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`rotateX(45deg);`);
+          }
         }
       }
     });
@@ -1852,7 +1863,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "rotacionar-vertical()"', () => {
       for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
-        const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
+        const valoresAceitos = ['45graus', '45deg', '3.142rad', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1873,7 +1884,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -1903,7 +1914,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir rotacionar-vertical para rotateY
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
-          expect(resultadoTradutor).toContain(`rotateY(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`rotateY(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`rotateY(45deg);`);
+          }
         }
       }
     });
