@@ -2044,7 +2044,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "translação()"', () => {
       for (let index = 0; index < MetodosTranslacao.length; index += 1) {
 
-        const valoresAceitos = ['18deg', '3.142rad', '0', '1'];
+        const valoresAceitos = ['270graus', '18deg', '3.142rad', '0', '1'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -2065,7 +2065,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -2095,7 +2095,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir translação para translate
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-          expect(resultadoTradutor).toContain(`translate(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`translate(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`translate(270deg);`);
+          }
         }
       }
     });
