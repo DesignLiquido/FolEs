@@ -671,12 +671,56 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
-    it('Atribuindo Método "gradiente-linear()" com valor de ângulo', () => {
+    it('Atribuindo Método "gradiente-linear()" com valor de ângulo deg', () => {
       for (let index = 0; index < MetodoGradienteLinear.length; index += 1) {
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
           `${MetodoGradienteLinear[index]}: gradiente-linear(90deg, verde, amarelo);`,
+          "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 15 sem retornar nenhum erro
+        expect(resultadoLexador.simbolos).toHaveLength(15);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // O Lexador também deve encontrar número e quantificador no mapeamento
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+          ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          TraducaoValoresMetodos[MetodoGradienteLinear[index]]
+        );
+
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
+        expect(resultadoTradutor).toContain('linear-gradient(90deg, green, yellow);');
+      }
+    });
+
+    it('Atribuindo Método "gradiente-linear()" com valor de ângulo graus', () => {
+      for (let index = 0; index < MetodoGradienteLinear.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodoGradienteLinear[index]}: gradiente-linear(90graus, verde, amarelo);`,
           "}"
         ]);
 
