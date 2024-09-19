@@ -874,11 +874,10 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
           // O Tradutor deve serializar de acordo e traduzir inclinar para skew
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
           if (valIndex !== 0) {
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
             expect(resultadoTradutor).toContain(`skew(${valoresAceitos[valIndex]});`);
           } else {
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
             expect(resultadoTradutor).toContain(`skew(90deg);`);
           }
         }
@@ -933,7 +932,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "inclinar-horizontal()"', () => {
       for (let index = 0; index < MetodosInclinar.length; index += 1) {
 
-        const valoresAceitos = ['18deg', '3.142rad', '0', '1'];
+        const valoresAceitos = ['180graus', '18deg', '3.142rad', '0', '1'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -954,7 +953,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -984,7 +983,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir inclinar-horizontal para skewX
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
-          expect(resultadoTradutor).toContain(`skewX(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`skewX(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`skewX(180deg);`);
+          }
         }
       }
     });
@@ -992,7 +995,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "inclinar-vertical()"', () => {
       for (let index = 0; index < MetodosInclinar.length; index += 1) {
 
-        const valoresAceitos = ['18deg', '3.142rad', '0', '1'];
+        const valoresAceitos = ['180graus', '18deg', '3.142rad', '0', '1'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1013,7 +1016,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -1043,7 +1046,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir inclinar-vertical para skewY
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
-          expect(resultadoTradutor).toContain(`skewY(${valoresAceitos[valIndex]});`);
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`skewY(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`skewY(180deg);`);
+          }
         }
       }
     });
