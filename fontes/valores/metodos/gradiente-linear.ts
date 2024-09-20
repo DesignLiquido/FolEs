@@ -21,6 +21,8 @@ export class GradienteLinear extends Metodo {
     paraTexto() {
         this.cor1 = cores[this.cor1];
         this.cor2 = cores[this.cor2];
+        this.quantificadorAngulo === 'graus' ? this.quantificadorAngulo = 'deg' : null;
+        
         return `linear-gradient(${this.valorAngulo}${this.quantificadorAngulo}, ${this.cor1}, ${this.cor2})`
     }
 }

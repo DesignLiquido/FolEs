@@ -15,6 +15,7 @@ export class RotacionarMatiz extends Metodo {
 
     paraTexto() {
         if (this.quantificador) {
+            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `hue-rotate(${this.valor}${this.quantificador})`
         }
 

@@ -114,6 +114,7 @@ export const valoresTemporais: { [valorFolEs: string]: string } = {
 export const angulos: { [valorFolEs: string]: string } = {
     "deg": "deg",
     "grad": "grad",
+    "graus": "graus",
     "rad": "rad",
     "turn": "turn",
 }

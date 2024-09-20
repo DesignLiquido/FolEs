@@ -15,6 +15,7 @@ export class Rotacionar extends Metodo {
 
     paraTexto() {
         if (this.quantificador) {
+            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `rotate(${this.valor}${this.quantificador})`
         }
 
