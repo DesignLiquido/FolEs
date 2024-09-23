@@ -994,15 +994,33 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return textoUrl;
     }
 
-    valorModificador(): any {
-        const valorModificador = this.avancarEDevolverAnterior();
+    valorModificador(): Array<any> {
+        const modificadores = [];
+        // console.log(this.simbolos[this.atual]);
+        
+        while(this.simbolos[this.atual].hasOwnProperty('tipo') && this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+            const valorModificador = this.avancarEDevolverAnterior();
 
-        switch (valorModificador.tipo) {
-            case tiposDeSimbolos.METODO:
-                return this.resolverMetodo(valorModificador.lexema);
-            default:
-                return valorModificador;
+            switch (valorModificador.tipo) {
+                case tiposDeSimbolos.METODO:
+                    const metodo = this.resolverMetodo(valorModificador.lexema);
+                    modificadores.push(metodo);
+                default:
+                    const modificador = valorModificador;
+                    modificadores.push(modificador);
+            }
         }
+
+        return modificadores;
+
+        // const valorModificador = this.avancarEDevolverAnterior();
+
+        // switch (valorModificador.tipo) {
+        //     case tiposDeSimbolos.METODO:
+        //         return this.resolverMetodo(valorModificador.lexema);
+        //     default:
+        //         return valorModificador;
+        // }
     }
 
     private tratarValorNumerico(modificador: Simbolo): Boolean {
@@ -1152,32 +1170,59 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             "Esperado ':' após nome do modificador."
         );
 
-        const valorModificador = this.valorModificador();
-        let quantificador;
+        // while(valorModificador.tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+
+        // }
+        const valoresModificador = this.valorModificador();
+        console.log(valoresModificador);
+        
+        let quantificadores;
+        // let quantificadores = [];
+        for (const [index, valorModificador] of valoresModificador.entries()) {
+            if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
+                
+                const tratarValorNumerico = this.tratarValorNumerico(valorModificador);
+                
+                if (tratarValorNumerico) {
+                    // quantificador = this.avancarEDevolverAnterior();
+                    quantificadores = valoresModificador[index + 1];
+                    // quantificadores.push(valoresModificador[index + 1]);
+                }
+            }
+        }
+        
+        // const valorModificador = this.valorModificador();
+
+        // let quantificador;
+        // if (valoresModificador.hasOwnProperty('tipo') && valoresModificador.tipo === tiposDeSimbolos.NUMERO) {
+        //     const tratarValorNumerico = this.tratarValorNumerico(modificador);
+            
+        //     if (tratarValorNumerico) {
+        //         quantificador = this.avancarEDevolverAnterior();
+        //     }
+        // }
+        
         // TODO: Pensar num teste melhor pra isso.
         /*if (!(valorModificador instanceof Metodo)) {
             quantificador = this.avancarEDevolverAnterior();
         }*/
-
-        if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
-            const tratarValorNumerico = this.tratarValorNumerico(modificador);
-
-            if (tratarValorNumerico) {
-                quantificador = this.avancarEDevolverAnterior();
-            }
-        }
-
+        // console.log(quantificadores);
+        
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
 
+        // if (valoresModificador.length <= 1) {
+
+        // }
         const classeModificadora = new SeletorModificador(
             modificador.lexema,
-            valorModificador.hasOwnProperty('lexema') ? valorModificador.lexema : valorModificador,
-            quantificador && quantificador.hasOwnProperty('lexema') ?
-                quantificador.lexema :
-                quantificador,
+            // valoresModificador.hasOwnProperty('lexema') ? valoresModificador.lexema : valoresModificador,
+            '',
+            quantificadores && quantificadores.hasOwnProperty('lexema') ?
+                quantificadores.lexema :
+                quantificadores,
             {
                 linha: modificador.linha,
                 colunaInicial: modificador.colunaInicial,
