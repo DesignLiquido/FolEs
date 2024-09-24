@@ -994,7 +994,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return textoUrl;
     }
 
-    valorModificador(): Array<any> {
+    valoresModificador(): Array<any> {
         const modificadores = [];
         // console.log(this.simbolos[this.atual]);
         
@@ -1173,10 +1173,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         // while(valorModificador.tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
 
         // }
-        const valoresModificador = this.valorModificador();
-        console.log(valoresModificador);
+        const valoresModificador = this.valoresModificador();
         
-        let quantificadores;
+        let quantificador;
         // let quantificadores = [];
         for (const [index, valorModificador] of valoresModificador.entries()) {
             if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
@@ -1185,11 +1184,13 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 
                 if (tratarValorNumerico) {
                     // quantificador = this.avancarEDevolverAnterior();
-                    quantificadores = valoresModificador[index + 1];
+                    quantificador = valoresModificador[index + 1];
+                    valoresModificador.splice(index + 1, 1);
                     // quantificadores.push(valoresModificador[index + 1]);
                 }
             }
         }
+        console.log(valoresModificador);
         
         // const valorModificador = this.valorModificador();
 
@@ -1213,24 +1214,22 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
 
-        // if (valoresModificador.length <= 1) {
-
-        // }
-        const classeModificadora = new SeletorModificador(
-            modificador.lexema,
-            // valoresModificador.hasOwnProperty('lexema') ? valoresModificador.lexema : valoresModificador,
-            '',
-            quantificadores && quantificadores.hasOwnProperty('lexema') ?
-                quantificadores.lexema :
-                quantificadores,
-            {
-                linha: modificador.linha,
-                colunaInicial: modificador.colunaInicial,
-                colunaFinal: modificador.colunaFinal
-            }
-        );
-
-        return classeModificadora as Modificador;
+        if (valoresModificador.length <= 1 || (valoresModificador.length === 2 && valoresModificador[1].tipo === tiposDeSimbolos.METODO)) {
+            const classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador,
+                quantificador && quantificador.hasOwnProperty('lexema') ?
+                quantificador.lexema :
+                quantificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal
+                }
+            );
+            
+            return classeModificadora as Modificador;
+        }
     }
 
     resolverModificadoresEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: Declaracao[] } {
