@@ -1212,7 +1212,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             quantificador = this.avancarEDevolverAnterior();
         }*/
         // console.log(quantificadores);
-        
+
+        if(valoresModificador.length === 0) {
+            const proximoSimbolo = this.avancarEDevolverAnterior();
+            valoresModificador.push(proximoSimbolo);
+        }
+
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
