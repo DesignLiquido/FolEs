@@ -1189,6 +1189,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     // quantificadores.push(valoresModificador[index + 1]);
                 }
             }
+
+            if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.METODO) {
+                valoresModificador.splice(index, 1);
+            }
         }
         console.log(valoresModificador);
         
@@ -1213,8 +1217,11 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
-
-        if (valoresModificador.length <= 1 || (valoresModificador.length === 2 && valoresModificador[1].tipo === tiposDeSimbolos.METODO)) {
+        // console.log(valoresModificador[0]);
+        
+        if (valoresModificador.length <= 1) {
+            console.log('entra');
+            
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador,
@@ -1227,6 +1234,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     colunaFinal: modificador.colunaFinal
                 }
             );
+            console.log('resolve');
             
             return classeModificadora as Modificador;
         }
