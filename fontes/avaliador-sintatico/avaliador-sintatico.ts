@@ -1219,7 +1219,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
         // console.log(valoresModificador[0]);
         
-        if (valoresModificador.length <= 1) {           
+        if (valoresModificador.length === 1) {           
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador[0],
