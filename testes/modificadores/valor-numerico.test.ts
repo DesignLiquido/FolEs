@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { ValorNumerico, ValorNumericoComQuantificador } from "../listas/valor-numerico";
+import { ValorNumerico, ValorNumericoApenas, ValorNumericoComQuantificador } from "../listas/valor-numerico";
 
 describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () => {
   describe('Testes Unitários', () => {
@@ -58,12 +58,12 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
     });
 
     it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
-      for (let index = 0; index < Object.keys(ValorNumerico).length; index += 1) {
+      for (let index = 0; index < Object.keys(ValorNumericoApenas).length; index += 1) {
 
         // Lexador - valor numérico não informado
         const resultadoLexador = lexador.mapear([
           "lmht {",
-          `${ValorNumerico[index]}: ;`,
+          `${ValorNumericoApenas[index]}: ;`,
           "}"
         ]);
 
@@ -76,14 +76,24 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         // Tentando passar um quantificador para os modificadores (o que não deve ser permitido)
         const novoLexador = lexador.mapear([
           "lmht {",
-          `${ValorNumerico[index]}: 15px;`,
+          `${ValorNumericoApenas[index]}: 15px;`,
           "}"
         ]);
 
         // Avaliador Sintático - Erro esperado como retorno
-        expect(() => {
-          avaliador.analisar(novoLexador.simbolos);
-        }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorNumerico[index]}'.`);
+        const regex = /[~çáéíóúÁÉÍÓÚ]/;
+        
+        if (!regex.test(ValorNumericoApenas[index]) && regex.test(ValorNumericoApenas[index + 1])){
+          expect(() => {
+            avaliador.analisar(novoLexador.simbolos);
+          }).toThrow(`A propriedade ${ValorNumericoApenas[index + 1]} aceita somente valores numéricos. O quantificador px é inválido para esta operação.`);
+        } else {
+          expect(() => {
+            avaliador.analisar(novoLexador.simbolos);
+          }).toThrow(`A propriedade ${ValorNumericoApenas[index]} aceita somente valores numéricos. O quantificador px é inválido para esta operação.`);
+        }
+
+        // A propriedade linhas-superiores aceita somente valores numéricos. O quantificador px é inválido para esta operação.
 
 
         // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
@@ -217,7 +227,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
         // Avaliador Sintático - Erro esperado como retorno
         expect(() => {
           avaliador.analisar(novoLexador.simbolos);
-        }).toThrow(`Esperado ';' após declaração de valor de modificador '${seletorIncorreto}'.`);
+        }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
         // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
         expect(() => {
