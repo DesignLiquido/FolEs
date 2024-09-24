@@ -1194,7 +1194,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 valoresModificador.splice(index, 1);
             }
         }
-        console.log(valoresModificador);
+        // console.log(valoresModificador);
         
         // const valorModificador = this.valorModificador();
 
@@ -1219,12 +1219,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
         // console.log(valoresModificador[0]);
         
-        if (valoresModificador.length <= 1) {
-            console.log('entra');
-            
+        if (valoresModificador.length <= 1) {           
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
-                valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador,
+                valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador[0],
                 quantificador && quantificador.hasOwnProperty('lexema') ?
                 quantificador.lexema :
                 quantificador,
@@ -1234,7 +1232,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     colunaFinal: modificador.colunaFinal
                 }
             );
-            console.log('resolve');
             
             return classeModificadora as Modificador;
         }

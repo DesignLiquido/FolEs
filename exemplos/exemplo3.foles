@@ -8,3 +8,42 @@ lmht {
     transformar: translação(15graus);
     deslocamento: raio(conter 200graus);
 }
+
+lmht {
+    colunas: 20px;
+    opacidade: 80%;
+}
+
+lmht {
+    espacamento: calcular(100px - 80px);
+    imagem-máscara: gradiente-linear(90graus, azul, vermelho);
+    origem-imagem-borda: gradiente-linear(90deg, verde, amarelo);
+    filtro: borrar(80%); 
+}
+
+lmht {
+    filtro: brilho(0.4); 
+}
+
+lmht {
+    filtro: contraste(10px); 
+    filtro-fundo: projetar-sombra(0.5rem 0.5rem);
+}
+
+lmht {
+    trajeto-deslocamento: raio(lado-mais-próximo 45deg);
+    deslocamento: raio(conter 45deg);
+    filtro-fundo: projetar-sombra(15px 15px 15px azul);
+}
+
+lmht {
+    transformar: escalamento-3d(1, 1, 1);
+}
+
+lmht {
+    transformar: escalamento-3d(1.3, 1.3, 1.3);
+}
+
+lmht {
+    transformar: escalamento-3d(1.8, 1, 0.5);
+}
