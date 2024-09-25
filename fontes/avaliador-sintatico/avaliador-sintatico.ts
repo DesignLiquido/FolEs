@@ -996,9 +996,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     valoresModificador(): Array<any> {
         const modificadores = [];
-        // console.log(this.simbolos[this.atual]);
         
-        while(this.simbolos[this.atual].hasOwnProperty('tipo') && this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+        while (this.simbolos[this.atual].hasOwnProperty('tipo') && this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
             const valorModificador = this.avancarEDevolverAnterior();
 
             switch (valorModificador.tipo) {
@@ -1013,6 +1012,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         return modificadores;
 
+        // IMPLEMENTAÇÃO ANTERIOR
         // const valorModificador = this.avancarEDevolverAnterior();
 
         // switch (valorModificador.tipo) {
@@ -1170,9 +1170,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             "Esperado ':' após nome do modificador."
         );
 
-        // while(valorModificador.tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
-
-        // }
         const valoresModificador = this.valoresModificador();
         
         let quantificador;
@@ -1194,8 +1191,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 valoresModificador.splice(index, 1);
             }
         }
+
         // console.log(valoresModificador);
+
+        if (valoresModificador.length === 0) {
+            const proximoSimbolo = this.avancarEDevolverAnterior();
+            valoresModificador.push(proximoSimbolo);
+        }
         
+        // IMPLEMENTAÇÃO ANTERIOR
         // const valorModificador = this.valorModificador();
 
         // let quantificador;
@@ -1211,18 +1215,11 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         /*if (!(valorModificador instanceof Metodo)) {
             quantificador = this.avancarEDevolverAnterior();
         }*/
-        // console.log(quantificadores);
-
-        if(valoresModificador.length === 0) {
-            const proximoSimbolo = this.avancarEDevolverAnterior();
-            valoresModificador.push(proximoSimbolo);
-        }
 
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
-        // console.log(valoresModificador[0]);
         
         if (valoresModificador.length === 1) {           
             const classeModificadora = new SeletorModificador(
