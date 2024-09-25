@@ -1170,10 +1170,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             "Esperado ':' após nome do modificador."
         );
 
-        const valoresModificador = this.valoresModificador();
+        const valoresModificador: Array<any> = this.valoresModificador();
 
-        let quantificador;
-        let quantificadores = [];
+        let quantificador: any;
+        let quantificadores: Array<any> = [];
         for (const [index, valorModificador] of valoresModificador.entries()) {
             if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
 
@@ -1239,7 +1239,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             // console.log('singular', quantificador);
             // console.log('plural', quantificadores);
 
-            let atribuicaoAbreviada = '';
+            let atribuicaoAbreviada: string = '';
             for (let i = 0; i < valoresModificador.length; i += 1) {
                 // console.log(`${valoresModificador[i].lexema}${quantificadores[i].lexema}`);
                 if (i > 0) {
@@ -1249,7 +1249,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
                 }
             }
-            // console.log(atribuicaoAbreviada);
 
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
