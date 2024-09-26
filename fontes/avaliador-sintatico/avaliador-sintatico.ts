@@ -996,7 +996,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     private valoresModificador(): Array<any> {
         const modificadores = [];
-        // const simboloAtual: Simbolo = this.simbolos[this.atual];
         while (this.simbolos[this.atual].hasOwnProperty('tipo') && this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
             const valorModificador = this.avancarEDevolverAnterior();
 
@@ -1015,6 +1014,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     
     private tratarAtribuicaoAbreviada(valoresModificador: Array<any>): string {
         let atribuicaoAbreviada: string = '';
+
         for (let i = 0; i < valoresModificador.length; i += 1) {
             if (i === 0) {
                 atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
@@ -1036,6 +1036,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 }
             }
         }
+
         return atribuicaoAbreviada;
     }
 

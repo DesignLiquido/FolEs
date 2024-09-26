@@ -1,5 +1,5 @@
 lmht {
     opacidade: 80%;
-    recuo: 10px 10px 15px 20px;
+    recuo: 10px 10px auto 20px;
     altura: 50%;
 }
