@@ -1179,7 +1179,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 valoresModificador.splice(index, 1);
             }
         }
-        
+
         // TODO: Pensar num teste melhor pra isso.
         /*if (!(valorModificador instanceof Metodo)) {
             quantificador = this.avancarEDevolverAnterior();
@@ -1214,11 +1214,24 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         let atribuicaoAbreviada: string = '';
         for (let i = 0; i < valoresModificador.length; i += 1) {
-            if (i > 0) {
-                atribuicaoAbreviada += ' ';
-                atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
+            if (i === 0) {
+                atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
             } else {
-                atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
+                switch (valoresModificador[i].tipo) {
+                    case tiposDeSimbolos.QUANTIFICADOR:
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+                        break;
+                    case tiposDeSimbolos.NUMERO:
+                        atribuicaoAbreviada += ' ';
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+                        break;
+                    case tiposDeSimbolos.QUALITATIVO:
+                        atribuicaoAbreviada += ' ';
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
