@@ -996,7 +996,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     valoresModificador(): Array<any> {
         const modificadores = [];
-
+        // const simboloAtual: Simbolo = this.simbolos[this.atual];
         while (this.simbolos[this.atual].hasOwnProperty('tipo') && this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
             const valorModificador = this.avancarEDevolverAnterior();
 
@@ -1011,16 +1011,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
 
         return modificadores;
-
-        // IMPLEMENTAÇÃO ANTERIOR
-        // const valorModificador = this.avancarEDevolverAnterior();
-
-        // switch (valorModificador.tipo) {
-        //     case tiposDeSimbolos.METODO:
-        //         return this.resolverMetodo(valorModificador.lexema);
-        //     default:
-        //         return valorModificador;
-        // }
     }
 
     private tratarValorNumerico(modificador: Simbolo): Boolean {
@@ -1182,7 +1172,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 if (tratarValorNumerico) {
                     quantificador = valoresModificador[index + 1];
                     quantificadores.push(valoresModificador[index + 1]);
-                    valoresModificador.splice(index + 1, 1);
                 }
             }
 
@@ -1190,7 +1179,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 valoresModificador.splice(index, 1);
             }
         }
-
+        
         // TODO: Pensar num teste melhor pra isso.
         /*if (!(valorModificador instanceof Metodo)) {
             quantificador = this.avancarEDevolverAnterior();
@@ -1200,12 +1189,13 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             const proximoSimbolo = this.avancarEDevolverAnterior();
             valoresModificador.push(proximoSimbolo);
         }
+
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
 
-        if (valoresModificador.length === 1) {
+        if (valoresModificador.length <= 2) {
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador[0],
@@ -1220,32 +1210,32 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             );
 
             return classeModificadora as Modificador;
-        } else {
-            let atribuicaoAbreviada: string = '';
-            for (let i = 0; i < valoresModificador.length; i += 1) {
-                if (i > 0) {
-                    atribuicaoAbreviada += ' ';
-                    atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
-                } else {
-                    atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
-                }
-            }
-
-            const classeModificadora = new SeletorModificador(
-                modificador.lexema,
-                atribuicaoAbreviada,
-                quantificador && quantificador.hasOwnProperty('lexema') ?
-                    quantificador.lexema :
-                    quantificador,
-                {
-                    linha: modificador.linha,
-                    colunaInicial: modificador.colunaInicial,
-                    colunaFinal: modificador.colunaFinal
-                }
-            );
-
-            return classeModificadora as Modificador;
         }
+
+        let atribuicaoAbreviada: string = '';
+        for (let i = 0; i < valoresModificador.length; i += 1) {
+            if (i > 0) {
+                atribuicaoAbreviada += ' ';
+                atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
+            } else {
+                atribuicaoAbreviada += `${valoresModificador[i].lexema}${quantificadores[i].lexema}`;
+            }
+        }
+
+        const classeModificadora = new SeletorModificador(
+            modificador.lexema,
+            atribuicaoAbreviada,
+            quantificador && quantificador.hasOwnProperty('lexema') ?
+                quantificador.lexema :
+                quantificador,
+            {
+                linha: modificador.linha,
+                colunaInicial: modificador.colunaInicial,
+                colunaFinal: modificador.colunaFinal
+            }
+        );
+
+        return classeModificadora as Modificador;
     }
 
     resolverModificadoresEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: Declaracao[] } {
