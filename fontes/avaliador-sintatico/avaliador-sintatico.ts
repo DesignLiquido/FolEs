@@ -994,7 +994,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return textoUrl;
     }
 
-    valoresModificador(): Array<any> {
+    private valoresModificador(): Array<any> {
         const modificadores = [];
         // const simboloAtual: Simbolo = this.simbolos[this.atual];
         while (this.simbolos[this.atual].hasOwnProperty('tipo') && this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
@@ -1011,6 +1011,32 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
 
         return modificadores;
+    }
+    
+    private tratarAtribuicaoAbreviada(valoresModificador: Array<any>): string {
+        let atribuicaoAbreviada: string = '';
+        for (let i = 0; i < valoresModificador.length; i += 1) {
+            if (i === 0) {
+                atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+            } else {
+                switch (valoresModificador[i].tipo) {
+                    case tiposDeSimbolos.QUANTIFICADOR:
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+                        break;
+                    case tiposDeSimbolos.NUMERO:
+                        atribuicaoAbreviada += ' ';
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+                        break;
+                    case tiposDeSimbolos.QUALITATIVO:
+                        atribuicaoAbreviada += ' ';
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return atribuicaoAbreviada;
     }
 
     private tratarValorNumerico(modificador: Simbolo): Boolean {
@@ -1212,28 +1238,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             return classeModificadora as Modificador;
         }
 
-        let atribuicaoAbreviada: string = '';
-        for (let i = 0; i < valoresModificador.length; i += 1) {
-            if (i === 0) {
-                atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
-            } else {
-                switch (valoresModificador[i].tipo) {
-                    case tiposDeSimbolos.QUANTIFICADOR:
-                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
-                        break;
-                    case tiposDeSimbolos.NUMERO:
-                        atribuicaoAbreviada += ' ';
-                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
-                        break;
-                    case tiposDeSimbolos.QUALITATIVO:
-                        atribuicaoAbreviada += ' ';
-                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        const atribuicaoAbreviada = this.tratarAtribuicaoAbreviada(valoresModificador);
 
         const classeModificadora = new SeletorModificador(
             modificador.lexema,
