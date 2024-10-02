@@ -25,22 +25,14 @@ export const AtribuicaoAbreviadaVQePR: Array<string> = [
 export const AtribuicaoAbreviadaPR: Array<string> = [
     'contorno',
     'borda-direita',
-    'borda-em-bloco',
-    'borda-em-linha',
     'borda-esquerda',
     'borda-inferior',
     'decoracao-texto',
     'decoração-texto',
     'estilo-borda',
-    'fim-borda-em-bloco',
-    'fim-borda-em-linha',
-    'inicio-borda-em-bloco',
-    'início-borda-em-bloco',
-    'inicio-borda-em-linha',
-    'início-borda-em-linha',
+    'regras-coluna',
     'posicionar-conteudo',
     'posicionar-itens',
-    'regras-coluna',
 ]
 
 export const AtribuicaoAbreviadaVQ: Array<string> = [
