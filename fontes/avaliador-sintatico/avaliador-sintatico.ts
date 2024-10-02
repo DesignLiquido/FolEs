@@ -1011,7 +1011,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         return modificadores;
     }
-    
+
     private tratarAtribuicaoAbreviada(valoresModificador: Array<any>): string {
         let atribuicaoAbreviada: string = '';
 
@@ -1023,15 +1023,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     case tiposDeSimbolos.QUANTIFICADOR:
                         atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
                         break;
-                    case tiposDeSimbolos.NUMERO:
-                        atribuicaoAbreviada += ' ';
-                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
-                        break;
-                    case tiposDeSimbolos.QUALITATIVO:
-                        atribuicaoAbreviada += ' ';
-                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
-                        break;
                     default:
+                        atribuicaoAbreviada += ' ';
+                        atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
                         break;
                 }
             }
