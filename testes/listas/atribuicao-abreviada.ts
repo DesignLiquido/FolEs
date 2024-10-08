@@ -1,25 +1,89 @@
-export const AtribuicaoAbreviadaVQePR: Array<string> = [
-    'animacao',
-    'animação',
-    'borda',
-    'borda-direita',
-    'borda-em-bloco',
-    'borda-em-linha',
-    'borda-esquerda',
-    'borda-inferior',
-    'borda-superior',
-    'colunas',
-    'contorno',
-    'cor-borda',
-    'fim-borda-em-bloco',
-    'fim-borda-em-linha',
-    'inicio-borda-em-bloco',
-    'início-borda-em-bloco',
-    'inicio-borda-em-linha',
-    'início-borda-em-linha',
-    'regras-coluna',
-    'transicao',
-    'transição',
+export const AtribuicaoAbreviadaVQePR: Array<object> = [
+    {
+        modificador: 'animacao',
+        valor: '3s alternar 1s deslizar',
+    },
+    {
+        modificador: 'animação',
+        valor: '3s alternar 1s deslizar',
+    },
+    {
+        modificador: 'borda',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-direita',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-em-linha',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-esquerda',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-inferior',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-superior',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'colunas',
+        valor: '6rem auto',
+    },
+    {
+        modificador: 'contorno',
+        valor: '1rem grossa',
+    },
+    {
+        modificador: 'cor-borda',
+        valor: 'vermelho amarelo verde azul',
+    },
+    {
+        modificador: 'fim-borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'fim-borda-em-linha',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'inicio-borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'início-borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'inicio-borda-em-linha',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'início-borda-em-linha',
+        valor: '2px pontilhado',
+    },
+
+    {
+        modificador: 'regras-coluna',
+        valor: 'grossa 8px',
+    },
+    {
+        modificador: 'transicao',
+        valor: 'linear 4s',
+    },
+    {
+        modificador: 'transição',
+        valor: 'linear 4s',
+    },
 ];
 
 export const AtribuicaoAbreviadaPR: Array<string> = [
