@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { Serializador } from "../../fontes/serializadores";
-import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaVQ } from "../listas/atribuicao-abreviada";
+import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR } from "../listas/atribuicao-abreviada";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 
@@ -83,7 +83,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 } else {
                     seletor = new SeletorModificador(AtribuicaoAbreviadaPR[index], 'centro', null);
                 }
-                
+
                 const valoresAceitos: Array<string> = Object.keys(seletor.valoresAceitos);
                 let valorPR: string = '';
                 for (let valIndex = 0; valIndex < 2; valIndex += 1) {
@@ -92,11 +92,11 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                         valorPR += ' ';
                     }
                 }
-                
+
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `${AtribuicaoAbreviadaPR[index]}: ${valorPR};`,
+                    `${AtribuicaoAbreviadaPR[index]}: ${valorPR};`,
                     "}"
                 ]);
 
@@ -117,10 +117,58 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
 
                 // Tradutor
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-                
+
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            }
+        });
+
+        it('Seletores que recebem tanto palavras reservadas quanto valor-quantificador como atributo', () => {
+            for (let index = 0; index < AtribuicaoAbreviadaVQePR.length; index += 1) {
+
+                const seletor = new SeletorModificador(
+                    AtribuicaoAbreviadaVQePR[index]['modificador'], 
+                    AtribuicaoAbreviadaVQePR[index]['valor'], 
+                    'px'
+                );
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                        `${AtribuicaoAbreviadaVQePR[index]['modificador']}: ${AtribuicaoAbreviadaVQePR[index]['valor']};`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve conter tanto NUMERO quanto QUANTIFICADOR
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo
+                expect(resultadoTradutor).toContain('html');
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                // expect(resultadoTradutor).toContain(valoresAceitos[valIndex]);
             }
         });
     });

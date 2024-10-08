@@ -44,10 +44,6 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
         valor: '1rem grossa',
     },
     {
-        modificador: 'cor-borda',
-        valor: 'vermelho amarelo verde azul',
-    },
-    {
         modificador: 'fim-borda-em-bloco',
         valor: '2px pontilhado',
     },
@@ -70,19 +66,6 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
     {
         modificador: 'início-borda-em-linha',
         valor: '2px pontilhado',
-    },
-
-    {
-        modificador: 'regras-coluna',
-        valor: 'grossa 8px',
-    },
-    {
-        modificador: 'transicao',
-        valor: 'linear 4s',
-    },
-    {
-        modificador: 'transição',
-        valor: 'linear 4s',
     },
 ];
 
