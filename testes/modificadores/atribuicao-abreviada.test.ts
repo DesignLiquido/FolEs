@@ -168,7 +168,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                // expect(resultadoTradutor).toContain(valoresAceitos[valIndex]);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['valor']);
             }
         });
     });
