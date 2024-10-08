@@ -8,7 +8,7 @@ export class Animacao extends Modificador {
     "reverter": "reverse",
     "alternar": "alternate",
     "alternar-reverter": "alternate-reverse",
-    'infinite': 'infinito',
+    'infinito': 'infinite',
     "nenhum": "none",
     "para-frente": "forwards",
     "para-tras": "backwards",
