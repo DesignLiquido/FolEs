@@ -24,6 +24,26 @@ export const ValorNumerico: Array<string> = [
     'coluna-em-grade',    
 ];
 
+export const ValorNumericoApenas: Array<string> = [
+    'linhas-superiores',
+    'repetir-animacao',
+    'repetir-animação',
+    'contar-coluna',
+    'flex-crescimento',
+    'flex-reduzir',
+    'ajustar-tamanho-fonte',
+    'espessura-fonte',
+    'fim-coluna-em-grade',
+    'inicio-coluna-em-grade',
+    'início-coluna-em-grade',
+    'fim-linha-em-grade',
+    'inicio-linha-em-grade',
+    'início-linha-em-grade',
+    'ordenar',
+    'linhas-inferiores',
+];
+
+
 // A lista abaixo inclui modificadores que aceitam tanto somente valores numéricos 
 // quanto valores numéricos c/ quantificador.
 export const ValorNumericoComQuantificador = [

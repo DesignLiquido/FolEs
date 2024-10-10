@@ -51,7 +51,14 @@ export class Serializador {
             };\n`;
         }
 
-        // Caso 4: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
+        // Caso 4: Atribuição Abreviada | Múltiplos valores
+        if (modificador.valor.includes(' ')) {
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                modificador.valor
+            };\n`;
+        }
+        
+        // Caso 5: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
         return `${" ".repeat(indentacao)}${
             modificador.propriedadeCss

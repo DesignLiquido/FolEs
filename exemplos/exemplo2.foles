@@ -1,15 +1,5 @@
 lmht {
-    tempo-transicao: curva-cúbica(0.42, 0.0, 1.0, 1.0);
-    cor-destaque: rgb(100, 200, 300);
-}
-
-.classe {
-    tempo-transicao: passos(3, final);
-    tamanho-colunas-em-grade: minmax(200px, auto);
-    altura-máxima: encaixar-conteúdo(5cm);
-    altura: limitar(1px, 2vw, 2.5rem);
-
-    .outra-classe {
-        tamanho-fonte: 24px;
-    }
+    opacidade: 80%;
+    recuo: 10px 10px auto 20px;
+    altura: 50%;
 }

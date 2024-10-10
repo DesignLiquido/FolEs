@@ -1,6 +1,7 @@
 lmht {
     linhas-superiores: 2;
     altura: 30px;
+    largura: herdar;
     colunas: 2;
     opacidade: 0.5;
     indice-z: 5;

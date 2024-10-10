@@ -1,68 +1,116 @@
-export const AtribuiçãoAbreviada: Array<string> = [
-    'animacao',
-    'animação',
-    'borda',
-    'borda-em-bloco',
-    'fim-borda-em-bloco',
-    'inicio-borda-em-bloco',
-    'início-borda-em-bloco',
-    'borda-inferior',
-    'cor-borda',
-    'borda-em-linha',
-    'fim-borda-em-linha',
-    'inicio-borda-em-linha',
-    'início-borda-em-linha',
-    'borda-esquerda',
-    'borda-direita',
-    'estilo-borda',
-    'borda-superior',
-    'sombra-caixa',
-    'colunas',
-    'flex',
-    'fonte',
-    'insercao',
-    'inserção',
-    'estilo-lista',
-    'margem',
-    'mascara',
-    'máscara',
-    'borda-mascara',
-    'borda-máscara',
+export const AtribuicaoAbreviadaVQePR: Array<object> = [
+    {
+        modificador: 'animacao',
+        valor: '3s alternar 1s deslizar',
+    },
+    {
+        modificador: 'animação',
+        valor: '3s alternar 1s deslizar',
+    },
+    {
+        modificador: 'borda',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-direita',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-em-linha',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-esquerda',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-inferior',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'borda-superior',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'colunas',
+        valor: '6rem auto',
+    },
+    {
+        modificador: 'contorno',
+        valor: '1rem grossa',
+    },
+    {
+        modificador: 'fim-borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'fim-borda-em-linha',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'inicio-borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'início-borda-em-bloco',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'inicio-borda-em-linha',
+        valor: '2px pontilhado',
+    },
+    {
+        modificador: 'início-borda-em-linha',
+        valor: '2px pontilhado',
+    },
+];
+
+export const AtribuicaoAbreviadaPR: Array<string> = [
     'contorno',
-    'recuo',
-    'recuo-em-linha',
-    'posicionar-itens',
-    'margem-rolagem-mouse',
+    'borda-direita',
+    'borda-esquerda',
+    'borda-inferior',
     'decoracao-texto',
     'decoração-texto',
-    'transicao',
-    'transição',
+    'estilo-borda',
     'regras-coluna',
     'posicionar-conteudo',
-    'posicionar-se',
-    'raio-borda',
+    'posicionar-itens',
+]
+
+export const AtribuicaoAbreviadaVQ: Array<string> = [
+    'colunas',
+    'deslocamento',
+    'flex',
+    'insercao',
+    'inserção',
     'inserção-em-bloco',
     'insercao-em-linha',
+    'margem',
     'margem-em-bloco',
-    'margem-em-linha',
-    'recuo-em-bloco',
-    'margem-rolagem-mouse',
     'margem-em-bloco-rolagem-mouse',
+    'margem-em-linha',
     'margem-em-linha-rolagem-mouse',
-    'recuo-rolagem-mouse',
+    'margem-rolagem-mouse',
+    'raio-borda',
+    'recuo',
+    'recuo-em-bloco',
     'recuo-em-bloco-rolagem-mouse',
+    'recuo-em-linha',
     'recuo-em-linha-rolagem-mouse',
-    'linha-em-grade',
-    'coluna-em-grade',
-    'deslocamento',
-    'vazamento',
-    'modelo-em-grade',
-    'fundo',
-];
+    'recuo-rolagem-mouse',
+]
 
 /*
 
-QUANTOS ATRIBUTOS RECEBE CADA UM DESSES SELETORES?
+PR = Palavras Reservadas
+VQ = Valor-Quantificador
+
+ATÉ QUANTOS ATRIBUTOS RECEBE CADA UM DESSES SELETORES?
 
 animacao (8)
 borda (3)
