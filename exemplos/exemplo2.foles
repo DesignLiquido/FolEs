@@ -3,3 +3,11 @@ lmht {
     recuo: 10px 10px auto 20px;
     altura: 50%;
 }
+
+lmht {
+    coluna-em-grade: auto / auto;
+    linha-em-grade: 1 / 3;
+    proporção-tela: 16 / 9;
+    tamanho-grade: auto / auto / auto / auto;
+    raio-borda: 10px / 10px;
+}

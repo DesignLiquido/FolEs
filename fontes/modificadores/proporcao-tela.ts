@@ -9,11 +9,14 @@ export class ProporcaoTela extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["proporcao-tela", "proporção-tela"], "aspect-ratio", pragmas);
 
-        // OBS.: Também pode receber dois números separados por uma barra
-        // Ex.: proporcao-tela: 1 / 1;
-        // Essa sintaxe é chamada de <ratio>.
-
-        validarValorNumerico('proporção-tela', valor, this.valoresAceitos);
+        if (valor.includes('/')) {
+            const separarValores = valor.split(' / ');
+            separarValores.forEach((valorIndividual) => {
+                validarValorNumerico('proporção-tela', valorIndividual, this.valoresAceitos);
+            })
+        } else {
+            validarValorNumerico('proporção-tela', valor, this.valoresAceitos);
+        }
 
         this.valor = valor;
 

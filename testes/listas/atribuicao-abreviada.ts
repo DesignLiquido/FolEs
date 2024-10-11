@@ -105,6 +105,30 @@ export const AtribuicaoAbreviadaVQ: Array<string> = [
     'recuo-rolagem-mouse',
 ]
 
+export const AtribuicaoSeparadaPorBarra: Array<object> = [
+    {
+        modificador: 'coluna-em-grade',
+        valor: 'auto / auto',
+    },
+    {
+        modificador: 'tamanho-grade',
+        valor: 'auto / auto / auto / auto',
+    },
+    {
+        modificador: 'linha-em-grade',
+        valor: '1 / 3',
+    },
+    {
+        modificador: 'proporção-tela',
+        valor: '16 / 9',
+    },
+    {
+        modificador: 'raio-borda',
+        valor: '10px / 10px',
+    },
+];
+
+
 /*
 
 PR = Palavras Reservadas

@@ -7,7 +7,15 @@ export class RaioBorda extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("raio-borda", "border-radius", pragmas);
 
-        validarValorNumerico('raio-borda', valor);
+        if (valor.includes('/')) {
+            let separarValores = valor.replace(`/${quantificador}/g`, '').split(' / ');
+
+            separarValores.forEach((valorIndividual) => {
+                validarValorNumerico('raio-borda', valorIndividual);
+            })
+        } else {
+            validarValorNumerico('raio-borda', valor);
+        }
 
         this.valor = valor;
 
