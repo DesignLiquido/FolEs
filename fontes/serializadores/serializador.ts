@@ -51,13 +51,13 @@ export class Serializador {
             };\n`;
         }
 
-        // Caso 4: Atribuição Abreviada | Múltiplos valores
+        // Caso 4: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(' ')) {
             if (modificador.valor.includes(',')) {
-                const separarValores = modificador.valor.split(', ');
+                const separarValores: Array<string> = modificador.valor.split(', ');
                 
-                let valoresTraduzidos = '';
-                separarValores.forEach((valorIndividual, indexIndividual) => {
+                let valoresTraduzidos: string = '';
+                separarValores.forEach((valorIndividual: string, indexIndividual: number) => {
                     if (modificador["valoresAceitos"] && modificador["valoresAceitos"].hasOwnProperty(valorIndividual)) {
                         const objetoValores = modificador["valoresAceitos"];
                         valoresTraduzidos += objetoValores[valorIndividual];
