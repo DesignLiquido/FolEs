@@ -11,7 +11,15 @@ export class AtrasoTransicao extends Modificador {
             pragmas
         );
         
-        validarValorNumerico('atraso-transição', valor);
+        if (valor.includes(',')) {
+            const separarValores = valor.split(', ');
+            
+            separarValores.forEach((valorIndividual) => {
+                validarValorNumerico('atraso-transição', valorIndividual);
+            });
+        } else {
+            validarValorNumerico('atraso-transição', valor);
+        }
 
         this.valor = valor;
 
