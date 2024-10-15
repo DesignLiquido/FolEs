@@ -1023,6 +1023,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     case tiposDeSimbolos.QUANTIFICADOR:
                         atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
                         break;
+                    case tiposDeSimbolos.VIRGULA:
+                        atribuicaoAbreviada += ',';
+                        break;
                     default:
                         atribuicaoAbreviada += ' ';
                         atribuicaoAbreviada += `${valoresModificador[i].lexema}`;
@@ -1030,7 +1033,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 }
             }
         }
-
+        
         return atribuicaoAbreviada;
     }
 
