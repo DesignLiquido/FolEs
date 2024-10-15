@@ -53,6 +53,31 @@ export class Serializador {
 
         // Caso 4: Atribuição Abreviada | Múltiplos valores
         if (modificador.valor.includes(' ')) {
+            if (modificador.valor.includes(',')) {
+                const separarValores = modificador.valor.split(', ');
+                
+                let valoresTraduzidos = '';
+                separarValores.forEach((valorIndividual, indexIndividual) => {
+                    if (modificador["valoresAceitos"] && modificador["valoresAceitos"].hasOwnProperty(valorIndividual)) {
+                        const objetoValores = modificador["valoresAceitos"];
+                        valoresTraduzidos += objetoValores[valorIndividual];
+                        if (indexIndividual < separarValores.length - 1) {
+                            valoresTraduzidos += ', ';
+                        }
+                    }
+                });
+
+                if (valoresTraduzidos.length !== 0) {
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                        valoresTraduzidos
+                    };\n`;
+                } else {
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                        modificador.valor
+                    };\n`;
+                }
+            }
+
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
                 modificador.valor
             };\n`;
