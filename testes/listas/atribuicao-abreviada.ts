@@ -135,7 +135,7 @@ export const AtribuicaoSeparadaPorVirgula: Array<object> = [
         traducao: 'view-box, fill-box, border-box',
     },
     {
-        modificador: 'área-mascara',
+        modificador: 'área-máscara',
         valor: 'visualizar-caixa, completar-caixa, borda-caixa',
         traducao: 'view-box, fill-box, border-box',
     },
