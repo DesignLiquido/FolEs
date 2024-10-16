@@ -1186,7 +1186,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         const valoresModificador: Array<any> = this.valoresModificador();
         let quantificador: any;
-        let quantificadores: Array<any> = [];
 
         for (const [index, valorModificador] of valoresModificador.entries()) {
             if (valorModificador.hasOwnProperty('tipo') && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
@@ -1195,7 +1194,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 if (tratarValorNumerico) {
                     quantificador = valoresModificador[index + 1];
-                    quantificadores.push(valoresModificador[index + 1]);
                 }
             }
 
