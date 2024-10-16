@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { Serializador } from "../../fontes/serializadores";
-import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra } from "../listas/atribuicao-abreviada";
+import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../listas/atribuicao-abreviada";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 
@@ -172,7 +172,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             }
         });
 
-        it('Seletores que recebem atribuição de valores separados por barra', () => {
+        it('Seletores que recebem atribuição de valores separados por BARRA', () => {
             for (let index = 0; index < AtribuicaoSeparadaPorBarra.length; index += 1) {
 
                 const seletor = new SeletorModificador(
@@ -231,6 +231,62 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain(AtribuicaoSeparadaPorBarra[index]['valor']);
+            }
+        });
+
+        it('Seletores que recebem atribuição de valores separados por VÍRGULA', () => {
+            for (let index = 0; index < AtribuicaoSeparadaPorVirgula.length; index += 1) {
+
+                const seletor = new SeletorModificador(
+                    AtribuicaoSeparadaPorVirgula[index]['modificador'], 
+                    AtribuicaoSeparadaPorVirgula[index]['valor'], 
+                    's'
+                );
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                        `${AtribuicaoSeparadaPorVirgula[index]['modificador']}: ${AtribuicaoSeparadaPorVirgula[index]['valor']};`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O Lexador deve mapear os devidos símbolos de acordo com o seletor recebido
+                if (index <= 1) {
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        ])
+                    );
+                } else {
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        ])
+                    );
+                }
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo
+                expect(resultadoTradutor).toContain('html');
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(AtribuicaoSeparadaPorVirgula[index]['traducao']);
             }
         });
     });
