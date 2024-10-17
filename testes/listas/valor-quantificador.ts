@@ -214,6 +214,11 @@ export const ValorTempo: Array<string> = [
     'transicao',
 ];
 
+export const ValorAngulo: Array<string> = [
+    'girar',
+    'rotação-deslocamento',
+]
+
 export const ValorQuantificadorInvalido: Array<string> = [
     'borda-mascara',
     'borda-máscara',
