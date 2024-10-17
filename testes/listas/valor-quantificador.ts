@@ -171,6 +171,10 @@ export const ValorQuantificador: Array<string> = [
     'modelo-colunas-em-grade',
     'modelo-linhas-em-grade',
     'modelo-em-grade',
+    "espacamento-em-grade",
+    "espaçamento-em-grade",
+    "espacamento-linha-em-grade",
+    "espaçamento-linha-em-grade",
 ];
 
 export const ValorComprimento: Array<string> = [
