@@ -128,6 +128,39 @@ export const AtribuicaoSeparadaPorBarra: Array<object> = [
     },
 ];
 
+export const AtribuicaoSeparadaPorVirgula: Array<object> = [
+    {
+        modificador: 'area-mascara',
+        valor: 'visualizar-caixa, completar-caixa, borda-caixa',
+        traducao: 'view-box, fill-box, border-box',
+    },
+    {
+        modificador: 'área-máscara',
+        valor: 'visualizar-caixa, completar-caixa, borda-caixa',
+        traducao: 'view-box, fill-box, border-box',
+    },
+    {
+        modificador: 'atraso-transicao',
+        valor: '2s, 4ms',
+        traducao: '2s, 4ms',
+    },
+    {
+        modificador: 'atraso-transição',
+        valor: '2s, 4ms',
+        traducao: '2s, 4ms',
+    },
+    {
+        modificador: 'duracao-animacao',
+        valor: '10s, 35s, 230ms',
+        traducao: '10s, 35s, 230ms',
+    },
+    {
+        modificador: 'duração-animação',
+        valor: '10s, 35s, 230ms',
+        traducao: '10s, 35s, 230ms',
+    },
+];
+
 
 /*
 

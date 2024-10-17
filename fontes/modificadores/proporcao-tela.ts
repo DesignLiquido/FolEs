@@ -13,7 +13,7 @@ export class ProporcaoTela extends Modificador {
             const separarValores = valor.split(' / ');
             separarValores.forEach((valorIndividual) => {
                 validarValorNumerico('proporção-tela', valorIndividual, this.valoresAceitos);
-            })
+            });
         } else {
             validarValorNumerico('proporção-tela', valor, this.valoresAceitos);
         }

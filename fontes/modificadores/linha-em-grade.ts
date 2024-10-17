@@ -13,7 +13,7 @@ export class LinhaEmGrade extends Modificador {
             const separarValores = valor.split(' / ');
             separarValores.forEach((valorIndividual) => {
                 validarValorNumerico('linha-em-grade', valorIndividual, this.valoresAceitos);
-            })
+            });
         } else {
             validarValorNumerico('linha-em-grade', valor, this.valoresAceitos);
         }

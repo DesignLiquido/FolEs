@@ -13,7 +13,7 @@ export class ColunaEmGrade extends Modificador {
             const separarValores = valor.split(' / ');
             separarValores.forEach((valorIndividual) => {
                 validarValorNumerico('coluna-em-grade', valorIndividual, this.valoresAceitos);
-            })
+            });
         } else {
             validarValorNumerico('coluna-em-grade', valor, this.valoresAceitos);
         }

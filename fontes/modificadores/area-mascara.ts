@@ -23,7 +23,15 @@ export class AreaMascara extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
 
-        validarValores("área-máscara", valor, this.valoresAceitos);
+        if (valor.includes(',')) {
+            const separarValores = valor.split(', ');
+            
+            separarValores.forEach((valorIndividual) => {
+                validarValores('área-máscara', valorIndividual, this.valoresAceitos);
+            });
+        } else {
+            validarValores('área-máscara', valor, this.valoresAceitos);
+        }
 
         this.valor = valor;
 

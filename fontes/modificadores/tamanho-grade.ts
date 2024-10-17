@@ -13,7 +13,7 @@ export class TamanhoGrade extends Modificador {
             const separarValores = valor.split(' / ');
             separarValores.forEach((valorIndividual) => {
                 validarValorNumerico('tamanho-grade', valorIndividual, this.valoresAceitos);
-            })
+            });
         } else {
             validarValorNumerico('tamanho-grade', valor, this.valoresAceitos);
         }

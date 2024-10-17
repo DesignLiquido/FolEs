@@ -51,8 +51,33 @@ export class Serializador {
             };\n`;
         }
 
-        // Caso 4: Atribuição Abreviada | Múltiplos valores
+        // Caso 4: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(' ')) {
+            if (modificador.valor.includes(',')) {
+                const separarValores: Array<string> = modificador.valor.split(', ');
+                
+                let valoresTraduzidos: string = '';
+                separarValores.forEach((valorIndividual: string, indexIndividual: number) => {
+                    if (modificador["valoresAceitos"] && modificador["valoresAceitos"].hasOwnProperty(valorIndividual)) {
+                        const objetoValores = modificador["valoresAceitos"];
+                        valoresTraduzidos += objetoValores[valorIndividual];
+                        if (indexIndividual < separarValores.length - 1) {
+                            valoresTraduzidos += ', ';
+                        }
+                    }
+                });
+
+                if (valoresTraduzidos.length !== 0) {
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                        valoresTraduzidos
+                    };\n`;
+                } else {
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                        modificador.valor
+                    };\n`;
+                }
+            }
+
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
                 modificador.valor
             };\n`;

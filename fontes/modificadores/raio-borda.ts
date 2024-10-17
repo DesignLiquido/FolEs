@@ -12,7 +12,7 @@ export class RaioBorda extends Modificador {
 
             separarValores.forEach((valorIndividual) => {
                 validarValorNumerico('raio-borda', valorIndividual);
-            })
+            });
         } else {
             validarValorNumerico('raio-borda', valor);
         }
