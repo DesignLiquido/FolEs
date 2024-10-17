@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { Estilo } from "../listas/estilo";
+import { Estilo, EstiloBorda } from "../listas/estilo";
 
 describe('Testando Seletores com ESTILO como atributo', () => {
     describe('Testes Unitários', () => {
@@ -115,6 +115,24 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(() => {
                     tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
+            }
+        });
+
+        it('Casos de falha - Valor inválido deve retornar erro', () => {
+            for (let index = 0; index < EstiloBorda.length; index += 1) {
+                const valorInvalido = 'pontilado';
+                
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                        `${EstiloBorda[index]}: ${valorInvalido};`,
+                    "}"
+                ]);
+
+                // Avaliador Sintático
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrowError(`Propriedade '${EstiloBorda[index]}' com valor ${valorInvalido} inválido.`);
             }
         });
     });
