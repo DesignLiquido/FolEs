@@ -36,7 +36,7 @@ export const EstiloBorda: Array<string> = [
     'borda-esquerda',
     'borda-inferior',
     'borda-superior',
-    'borda'
+    'borda',
 ]
 
 

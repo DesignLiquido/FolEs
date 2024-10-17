@@ -118,7 +118,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        it('Casos de falha - Valor inválido deve retornar erro', () => {
+        it('Casos de falha - Valor inválido de estilo de borda deve retornar erro', () => {
             for (let index = 0; index < EstiloBorda.length; index += 1) {
                 const valorInvalido = 'pontilado';
                 
