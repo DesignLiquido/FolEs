@@ -29,6 +29,17 @@ export const Estilo: Array<string> = [
     'decoração-estilo-texto',
 ]
 
+export const EstiloBorda: Array<string> = [
+    'borda-direita',
+    'borda-em-bloco',
+    'borda-em-linha',
+    'borda-esquerda',
+    'borda-inferior',
+    'borda-superior',
+    'borda',
+]
+
+
 /*
 
 VALORES DE ESTILO

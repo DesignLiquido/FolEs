@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { ValorComprimento, ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
+import { ValorAngulo, ValorComprimento, ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
 
 describe('Testes: Valor-Quantificador', () => {
     let lexador: LexadorInterface;
@@ -194,6 +194,52 @@ describe('Testes: Valor-Quantificador', () => {
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValorComprimento[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                    "}"
+                ]);
+
+                expect(resultadoLexador.simbolos).toHaveLength(8);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            }
+        });
+    });
+
+    describe('Testando Seletores que recebem Quantificador DE ÂNGULO', () => {
+        beforeEach(() => {
+            lexador = new Lexador();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
+            tradutor = new Serializador();
+        });
+
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+            for (let index = 0; index < ValorAngulo.length; index += 1) {
+                const seletor = new SeletorModificador(ValorAngulo[index], '12', 'deg');
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${ValorAngulo[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                     "}"
                 ]);
 

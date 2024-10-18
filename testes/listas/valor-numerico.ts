@@ -41,8 +41,13 @@ export const ValorNumericoApenas: Array<string> = [
     'início-linha-em-grade',
     'ordenar',
     'linhas-inferiores',
+    'configuracoes-variacao-fonte', 
+    'configurações-variação-fonte',
 ];
 
+export const ValorNumericoZeroUm: Array<string> = [
+    'limite-forma-imagem',
+];
 
 // A lista abaixo inclui modificadores que aceitam tanto somente valores numéricos 
 // quanto valores numéricos c/ quantificador.

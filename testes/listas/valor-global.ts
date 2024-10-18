@@ -126,6 +126,19 @@ export const ValorGlobal: Array<string> = [
     'reiniciar-tudo',
 ];
 
+export const ValorGlobalInvalido: Array<string> = [
+    'contorno',
+    'decoração-texto',
+    'fundo',
+    'fim-borda-em-linha',
+    'fim-borda-em-bloco',
+    'início-borda-em-bloco',
+    'início-borda-em-linha',
+    'regras-coluna',
+    'reiniciar-tudo',
+    'sombra-caixa'
+];
+
 /*
 
 VALORES GLOBAIS
