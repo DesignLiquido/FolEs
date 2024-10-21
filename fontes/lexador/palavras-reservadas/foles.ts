@@ -268,7 +268,7 @@ export default {
     "unico-tipo": tiposDeSimbolos.PSEUDO_CLASSE,
     "único-tipo": tiposDeSimbolos.PSEUDO_CLASSE,
     "usuario-invalido": tiposDeSimbolos.PSEUDO_CLASSE,
-    "único-inválido": tiposDeSimbolos.PSEUDO_CLASSE,
+    "usuário-inválido": tiposDeSimbolos.PSEUDO_CLASSE,
     "valido": tiposDeSimbolos.PSEUDO_CLASSE,
     "válido": tiposDeSimbolos.PSEUDO_CLASSE,
     "vazio": tiposDeSimbolos.PSEUDO_CLASSE,
