@@ -101,6 +101,7 @@ export class Serializador {
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
         }
+        
 
         for (const declaracao of declaracoes) {
             const prefixos = [];
@@ -115,9 +116,19 @@ export class Serializador {
 
                 let prefixo: string;
                 if (seletor instanceof SeletorEstrutura) {
-                    const seletorLmht = seletor.paraTexto();
-                    const traducaoSeletor = estruturasHtml[seletorLmht];
-                    prefixo = (textoSeletorAnterior + " " + traducaoSeletor).trimStart();
+                    if (seletor.pseudoclasse) {
+                        const seletorLmht = seletor.paraTexto();
+                        const seletorSemPseudoclasse = seletorLmht.split(":")[0];
+
+                        const traducaoSeletor = estruturasHtml[seletorSemPseudoclasse];
+                        const traducaoPseudoclasse = seletor.pseudoclasse.pseudoclasseCss;
+                        
+                        prefixo = (textoSeletorAnterior + " " + `${traducaoSeletor}:${traducaoPseudoclasse}`).trimStart();
+                    } else {
+                        const seletorLmht = seletor.paraTexto();
+                        const traducaoSeletor = estruturasHtml[seletorLmht];
+                        prefixo = (textoSeletorAnterior + " " + traducaoSeletor).trimStart();
+                    }
                 } else {
                     prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
                 }
@@ -132,6 +143,7 @@ export class Serializador {
 
             resultado = resultado.slice(0, -2);
             resultado += " {\n";
+            
 
             for (const modificador of declaracao.modificadores) {
                 resultado += this.serializarModificador(
