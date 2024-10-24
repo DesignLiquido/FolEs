@@ -6,7 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Valor } from "../../fontes/valores/valor";
-import { ValorGlobal } from "../listas/valor-global";
+import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
 
 describe('Testando Seletores com VALORES GLOBAIS', () => {
     describe('Testes Unitários', () => {
@@ -119,6 +119,24 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 expect(() => {
                     tradutor.serializar(avaliadorSintatico.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
+            }
+        });
+
+        it('Casos de falha - Valores globais inválidos', () => {
+            for (let index = 0; index < ValorGlobalInvalido.length; index += 1) {
+                const valorInvalido = 'aut';
+                
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                        `${ValorGlobalInvalido[index]}: ${valorInvalido};`,
+                    "}"
+                ]);
+
+                // Avaliador Sintático
+                expect(() => {
+                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
+                }).toThrowError(`Propriedade '${ValorGlobalInvalido[index]}' com valor ${valorInvalido} inválido.`);
             }
         });
     });

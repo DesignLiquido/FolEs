@@ -167,6 +167,14 @@ export const ValorQuantificador: Array<string> = [
     'fonte',
     'deslocamento',
     'sombra-texto',
+    'largura-borda',
+    'modelo-colunas-em-grade',
+    'modelo-linhas-em-grade',
+    'modelo-em-grade',
+    "espacamento-em-grade",
+    "espaçamento-em-grade",
+    "espacamento-linha-em-grade",
+    "espaçamento-linha-em-grade",
 ];
 
 export const ValorComprimento: Array<string> = [
@@ -209,6 +217,20 @@ export const ValorTempo: Array<string> = [
     'transição',
     'transicao',
 ];
+
+export const ValorAngulo: Array<string> = [
+    'girar',
+    'rotação-deslocamento',
+]
+
+export const ValorQuantificadorInvalido: Array<string> = [
+    'borda-mascara',
+    'borda-máscara',
+    'girar',
+    'modelo-colunas-em-grade',
+    'modelo-linhas-em-grade',
+    'modelo-em-grade',
+]
 
 /*
 
