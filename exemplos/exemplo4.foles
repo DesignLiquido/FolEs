@@ -1,0 +1,11 @@
+divisão:ativo {
+    tamanho-fonte: 12px;
+}
+
+divisao:foco {
+    tamanho-fonte: 12px;
+}
+
+paragrafo:futuro {
+    tamanho-fonte: 20px;
+}

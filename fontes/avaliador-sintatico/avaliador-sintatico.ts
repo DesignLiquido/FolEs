@@ -1059,10 +1059,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
             this.avancarEDevolverAnterior();
             pseudoclasse = this.consumir(
-                tiposDeSimbolos.IDENTIFICADOR,
+                tiposDeSimbolos.PSEUDO_CLASSE,
                 "Esperado nome de pseudoclasse."
             );
-
+            
             return new SeletorPseudoclasse(
                 pseudoclasse.lexema,
                 {

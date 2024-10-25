@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { ValorNumerico, ValorNumericoApenas, ValorNumericoComQuantificador } from "../listas/valor-numerico";
+import { ValorNumerico, ValorNumericoApenas, ValorNumericoComQuantificador, ValorNumericoZeroUm } from "../listas/valor-numerico";
 
 describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () => {
   describe('Testes Unitários', () => {
@@ -93,13 +93,25 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
           }).toThrow(`A propriedade ${ValorNumericoApenas[index]} aceita somente valores numéricos. O quantificador px é inválido para esta operação.`);
         }
 
-        // A propriedade linhas-superiores aceita somente valores numéricos. O quantificador px é inválido para esta operação.
-
-
         // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
         expect(() => {
           tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
         }).toHaveLength(0);
+      }
+    });
+
+    it('Casos de falha - Modificadores que só aceitam zero ou um como valor numérico', () => {
+      for (let index = 0; index < ValorNumericoZeroUm.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "corpo {",
+            `${ValorNumericoZeroUm[index]}: 2;`,
+          "}"
+        ]);
+
+        expect(() => {
+          avaliador.analisar(resultadoLexador.simbolos);
+        }).toThrowError(`Propriedade '${ValorNumericoZeroUm[index]}' com valor 2 inválido. O valor deve estar entre 0 e 1 ou ser um dos valores:`);
       }
     });
   });
