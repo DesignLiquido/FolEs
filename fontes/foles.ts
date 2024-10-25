@@ -9,6 +9,7 @@ import { ResultadoLexadorInterface, SimboloInterface } from './interfaces';
 import { Tradutor } from "./tradutores/tradutor";
 import { TradutorReverso } from "./tradutores/tradutor-reverso";
 import { Base64 } from "./utilidades/base64";
+import { GeradorMapaCss } from "./gerador-mapa";
 
 /**
  * O núcleo da linguagem FolEs.
@@ -24,6 +25,8 @@ export class FolEs {
     serializadorReverso: SerializadorReverso;
     tradutor: Tradutor;
     tradutorReverso: TradutorReverso;
+    geradorMapaCss: GeradorMapaCss;
+
 
     constructor(traduzirComAninhamentos: boolean) {
         this.lexador = new Lexador();
@@ -37,6 +40,7 @@ export class FolEs {
         this.serializadorReverso = new SerializadorReverso(traduzirComAninhamentos);
         this.tradutor = new Tradutor();
         this.tradutorReverso = new TradutorReverso();
+        this.geradorMapaCss = new GeradorMapaCss();
     }
 
     /**
@@ -70,7 +74,7 @@ export class FolEs {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador[1].simbolos);
         const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
         const resultadoTraducao = this.tradutor.traduzir(resultadoAvaliadorSintatico);
-        const mapa = this.tradutor.gerarMapaFontes(resultadoTraducao, resultadoLexador[0].join('\n'));
+        const mapa = this.geradorMapaCss.gerarMapaFontes(resultadoTraducao, resultadoLexador[0].join('\n'));
 
         return [
             traducao, 

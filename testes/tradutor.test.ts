@@ -5,18 +5,21 @@ import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador";
 import { Tradutor } from "../fontes/tradutores/tradutor";
+import {GeradorMapaCss} from "../fontes/gerador-mapa"
 
 describe('Tradutor', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
     let tradutor: Tradutor;
+    let geradorMapaCss: GeradorMapaCss;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
         tradutor = new Tradutor();
+        geradorMapaCss = new GeradorMapaCss;
     });
 
     describe('Tradução', () => {
@@ -47,7 +50,7 @@ describe('Tradutor', () => {
 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
             const resultadoTraducao = tradutor.traduzir(resultadoAvaliadorSintatico);
-            const resultado = tradutor.gerarMapaFontes(resultadoTraducao, fonteOriginal.join('\n'));
+            const resultado = geradorMapaCss.gerarMapaFontes(resultadoTraducao, fonteOriginal.join('\n'));
 
             /* 
             for (const linha of resultado.mappings.split(';')) {
