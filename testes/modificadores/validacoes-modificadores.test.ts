@@ -78,4 +78,78 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             }).toThrow(`Propriedade 'conteúdo' com valor linear-gradiente inválido.`);
         });
     });
+
+    describe('Validação de valores com condição extra', () => {
+        let lexador: LexadorInterface;
+        let importador: ImportadorInterface;
+        let avaliador: AvaliadorSintaticoInterface;
+        let tradutor: Serializador;
+
+        beforeEach(() => {
+            lexador = new Lexador();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
+            tradutor = new Serializador();
+        });
+
+        it('Caso de sucesso - Validações não retornam erros', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'alinhar-itens: seguro;',
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+            expect(resultadoLexador.simbolos).toHaveLength(7);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear o tipo de símbolo Qualitativo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // Serializador
+            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+            // O Serializador deve traduzir devidamente os termos
+            expect(resultadoTradutor).toContain('div');
+            expect(resultadoTradutor).toContain('align-items');
+            expect(resultadoTradutor).toContain('safe;');
+        });
+
+        it('Caso de falha - Validação retorna erro de valor inválido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'alinhar-itens: seuro;',
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliador.analisar(resultadoLexador.simbolos);
+            }).toThrow(`Propriedade 'alinhar-itens' com valor seuro inválido.`);
+        });
+
+        it('Caso de falha - Validação retorna erro de valor extra inválido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'estilo-borda-direita: desconhecido;',
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliador.analisar(resultadoLexador.simbolos);
+            }).toThrow(`Propriedade 'estilo-borda-direita' com valor desconhecido inválido.`);
+        });
+    });
 });
+
