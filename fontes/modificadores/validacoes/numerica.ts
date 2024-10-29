@@ -4,8 +4,7 @@ export function validarValorNumerico(
     nomePropriedade: string,
     valor: any,
     valoresAceitos?: { [valorFoles: string]: string },
-    valoresExtra?: any) 
-{
+    valoresExtra?: any) {
     if (valoresAceitos === undefined && valoresExtra === undefined) {
         if (Number.isNaN(parseInt(valor)) &&
             !(valor in valoresGlobais)
@@ -31,7 +30,7 @@ export function validarValorNumerico(
     if (valoresAceitos !== undefined && valoresExtra !== undefined) {
         let metodoValido = false;
         for (let index = 0; index < valoresExtra.length; index++) {
-            if(metodoValido === false) {
+            if (metodoValido === false) {
                 metodoValido = valor['traducao'] === valoresExtra[index];
             }
         }
