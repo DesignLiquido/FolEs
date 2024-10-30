@@ -393,7 +393,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
                 "}"
             ]);
 
-            // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+            // O Lexador deve montar um objeto de comprimento 8 sem retornar nenhum erro
             expect(resultadoLexador.simbolos).toHaveLength(8);
             expect(resultadoLexador.erros).toHaveLength(0);
 
