@@ -86,11 +86,11 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         if (!regex.test(ValorNumericoApenas[index]) && regex.test(ValorNumericoApenas[index + 1])){
           expect(() => {
             avaliador.analisar(novoLexador.simbolos);
-          }).toThrow(`A propriedade ${ValorNumericoApenas[index + 1]} aceita somente valores numéricos. O quantificador px é inválido para esta operação.`);
+          }).toThrow(`A propriedade '${ValorNumericoApenas[index + 1]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
         } else {
           expect(() => {
             avaliador.analisar(novoLexador.simbolos);
-          }).toThrow(`A propriedade ${ValorNumericoApenas[index]} aceita somente valores numéricos. O quantificador px é inválido para esta operação.`);
+          }).toThrow(`A propriedade '${ValorNumericoApenas[index]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
         }
 
         // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
