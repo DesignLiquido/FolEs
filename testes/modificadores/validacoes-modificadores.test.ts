@@ -371,5 +371,79 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             }).toThrow(`Propriedade 'cor-barra-rolagem' com valor desconhecido inválido.`);
         });
     });
+
+    describe('Validação de quantificadores', () => {
+        let lexador: LexadorInterface;
+        let importador: ImportadorInterface;
+        let avaliador: AvaliadorSintaticoInterface;
+        let tradutor: Serializador;
+
+        beforeEach(() => {
+            lexador = new Lexador();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
+            tradutor = new Serializador();
+        });
+
+        it('Caso de sucesso - Validações não retornam erros', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'deslocamento: 90deg;',
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+            expect(resultadoLexador.simbolos).toHaveLength(8);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear os tipos de símbolo Número e Quantificador
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // Serializador
+            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+            // O Serializador deve traduzir devidamente os termos
+            expect(resultadoTradutor).toContain('div');
+            expect(resultadoTradutor).toContain('offset');
+            expect(resultadoTradutor).toContain('90deg;');
+        });
+
+        it('Caso de falha - Validação retorna erro de quantificador inválido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'alinhar-vertical: 10ab;',
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliador.analisar(resultadoLexador.simbolos);
+            }).toThrow(`Propriedade 'alinhar-vertical' com quantificador inválido.`);
+        });
+
+        it('Caso de falha - Validação retorna erro de quantificador extra inválido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'deslocamento: 10a;',
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliador.analisar(resultadoLexador.simbolos);
+            }).toThrow(`Propriedade 'deslocamento' com quantificador inválido.`);
+        });
+    });
 });
 

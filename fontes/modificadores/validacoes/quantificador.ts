@@ -2,13 +2,12 @@ export function validarQuantificador(
     nomePropriedade: string,
     quantificador: string,
     quantificadoresAceitos: { [valorFoles: string]: string },
-    quantificadoresAceitos2?: any) 
-{
+    quantificadoresAceitos2?: any) {
     if (quantificadoresAceitos2 === undefined) {
         if (!(quantificador in quantificadoresAceitos) ||
             quantificador === undefined
         ) {
-            throw new Error(`Propriedade ${nomePropriedade} com quantificador inválido. Valores aceitos:
+            throw new Error(`Propriedade '${nomePropriedade}' com quantificador inválido. Valores aceitos:
             ${Object.keys(quantificadoresAceitos).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
     } else {
@@ -16,7 +15,7 @@ export function validarQuantificador(
             !(quantificador in quantificadoresAceitos2) ||
             quantificador === undefined
         ) {
-            throw new Error(`Propriedade ${nomePropriedade} com quantificador inválido. Valores aceitos:
+            throw new Error(`Propriedade '${nomePropriedade}' com quantificador inválido. Valores aceitos:
             ${Object.keys(quantificadoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(quantificadoresAceitos2).reduce((final, atual) => final += `, ${atual}`)}.`);
         }
