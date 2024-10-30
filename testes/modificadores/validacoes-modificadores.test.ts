@@ -445,5 +445,33 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             }).toThrow(`Propriedade 'deslocamento' com quantificador inválido.`);
         });
     });
+
+    describe('Testando método de proibir quantificadores', () => {
+        let lexador: LexadorInterface;
+        let importador: ImportadorInterface;
+        let avaliador: AvaliadorSintaticoInterface;
+        let tradutor: Serializador;
+
+        beforeEach(() => {
+            lexador = new Lexador();
+            importador = new Importador(lexador);
+            avaliador = new AvaliadorSintatico(importador);
+            tradutor = new Serializador();
+        });
+
+        it('Caso de falha - Validação retorna erro de quantificador proibido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                'divisão {',
+                    'ajustar-tamanho-fonte: 10px;',
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliador.analisar(resultadoLexador.simbolos);
+            }).toThrow(`A propriedade 'ajustar-tamanho-fonte' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
+        });
+    });
 });
 
