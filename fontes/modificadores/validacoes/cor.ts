@@ -2,7 +2,6 @@ import { HexadecimalCor } from "../../valores/metodos/hexadecimal-cor";
 import { Metodo } from "../../valores/metodos/metodo";
 import { cores } from "../atributos/cores";
 import { valoresGlobais } from "../atributos/globais";
-//
 
 export function validarValorCor(
     nomePropriedade: string,
