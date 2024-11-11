@@ -95,7 +95,6 @@ describe('Testando seletores e estruturas', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
-        console.log(resultadoAvaliadorSintatico[0].seletores[0]);
 
         // O Avaliador deve mapear uma instância da classe SeletorClasse e com o nome 'classe-personalizada'
         expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorClasse);
