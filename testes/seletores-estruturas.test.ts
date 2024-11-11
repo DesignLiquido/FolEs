@@ -42,7 +42,6 @@ describe('Testando seletores e estruturas', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
-        console.log(resultadoAvaliadorSintatico);
 
         // O Avaliador Sintático deve executar as operações normalmente, sem retornar erros
         expect(resultadoAvaliadorSintatico).toBeTruthy();
@@ -103,6 +102,94 @@ describe('Testando seletores e estruturas', () => {
         // O Avaliador deve mapear devidamente a pseudoclasse
         expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse).toBeTruthy();
         expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse['nomeFoles']).toBe('foco');
+
+        // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        expect(resultadoTradutor).toBeTruthy();
+    });
+
+    it('Seletor Id - caso de sucesso', () => {
+        // Lexador
+        const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+            "#meu-id {",
+                "margem-superior: 13mm;",
+            "}"
+        ]);
+        
+        // O Lexador deve montar um objeto de comprimento 9 sem retornar nenhum erro
+        expect(resultadoLexador.simbolos).toHaveLength(9);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear os tipos de símbolo Cerquilha e Identificador que compõem a nomenclatura de um Id
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.CERQUILHA }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+            ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador Sintático deve executar as operações normalmente, sem retornar erros
+        expect(resultadoAvaliadorSintatico).toBeTruthy();
+        expect(resultadoAvaliadorSintatico).toHaveLength(1);
+
+        // O Avaliador deve mapear uma instância da classe SeletorClasse
+        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorId);
+
+        // O id mapeado deve ter o nome 'meu-id'
+        expect(resultadoAvaliadorSintatico[0].seletores[0]['id']).toBe('meu-id');
+
+        // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        expect(resultadoTradutor).toBeTruthy();
+    });
+
+    it('Seletor Id - caso de falha', () => {
+        // Lexador - nome de classe escrito sem o ponto como prefixo
+        const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+            "meu-id {",
+                "margem-superior: 13mm;",
+            "}"
+        ]);
+
+        // Avaliador Sintático deve retornar um erro por não reconhecer o identificador como nome de classe
+        expect(() => {
+            avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        }).toThrow(`Esperado '{' após declaração de seletor.`);
+    });
+
+    it('Seletor Id com pseudoclasse', () => {
+        // Lexador
+        const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+            "#id-personalizado:escopo {",
+                "margem-superior: 13mm;",
+            "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 11 sem retornar nenhum erro
+        expect(resultadoLexador.simbolos).toHaveLength(11);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear os tipos de símbolo Cerquilha e Identificador que compõem o id
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.CERQUILHA }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+            ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve mapear uma instância de SeletorId e com o nome 'id-personalizado'
+        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorId);
+        expect(resultadoAvaliadorSintatico[0].seletores[0]['id']).toBe('id-personalizado');
+
+        // O Avaliador deve mapear devidamente a pseudoclasse
+        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse).toBeTruthy();
+        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse['nomeFoles']).toBe('escopo');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
