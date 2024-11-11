@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, Res
 import { Lexador } from "../fontes/lexador"
 import { Serializador } from "../fontes/serializadores";
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
-import { SeletorClasse } from "../fontes/seletores";
+import { SeletorClasse, SeletorId } from "../fontes/seletores";
 
 
 describe('Testando seletores e estruturas', () => {
@@ -71,5 +71,42 @@ describe('Testando seletores e estruturas', () => {
         expect(() => {
             avaliadorSintatico.analisar(resultadoLexador.simbolos);
         }).toThrow(`Esperado '{' após declaração de seletor.`);
+    });
+
+    it('Seletor Classe com pseudoclasse', () => {
+        // Lexador
+        const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+            ".classe-personalizada:foco {",
+                "margem-superior: 13mm;",
+            "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 11 sem retornar nenhum erro
+        expect(resultadoLexador.simbolos).toHaveLength(11);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear os tipos de símbolo Ponto e Identificador que compõem o nome da classe
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.PONTO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+            ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        console.log(resultadoAvaliadorSintatico[0].seletores[0]);
+
+        // O Avaliador deve mapear uma instância da classe SeletorClasse e com o nome 'classe-personalizada'
+        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorClasse);
+        expect(resultadoAvaliadorSintatico[0].seletores[0]['nomeClasse']).toBe('classe-personalizada');
+
+        // O Avaliador deve mapear devidamente a pseudoclasse
+        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse).toBeTruthy();
+        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse['nomeFoles']).toBe('foco');
+
+        // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        expect(resultadoTradutor).toBeTruthy();
     });
 });
