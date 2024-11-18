@@ -5,6 +5,7 @@ import { Lexador } from "../fontes/lexador"
 import { Serializador } from "../fontes/serializadores";
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
 import { SeletorClasse, SeletorId } from "../fontes/seletores";
+import { SeletorEspacoReservado } from "../fontes/seletores/seletor-espaco-reservado";
 
 
 describe('Testando seletores e estruturas', () => {
@@ -24,7 +25,7 @@ describe('Testando seletores e estruturas', () => {
         // Lexador
         const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
             ".minha-classe {",
-                "margem-superior: 13mm;",
+            "margem-superior: 13mm;",
             "}"
         ]);
 
@@ -62,7 +63,7 @@ describe('Testando seletores e estruturas', () => {
         // Lexador - nome de classe escrito sem o ponto como prefixo
         const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
             "minha-classe {",
-                "margem-superior: 13mm;",
+            "margem-superior: 13mm;",
             "}"
         ]);
 
@@ -76,7 +77,7 @@ describe('Testando seletores e estruturas', () => {
         // Lexador
         const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
             ".classe-personalizada:foco {",
-                "margem-superior: 13mm;",
+            "margem-superior: 13mm;",
             "}"
         ]);
 
@@ -112,10 +113,10 @@ describe('Testando seletores e estruturas', () => {
         // Lexador
         const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
             "#meu-id {",
-                "margem-superior: 13mm;",
+            "margem-superior: 13mm;",
             "}"
         ]);
-        
+
         // O Lexador deve montar um objeto de comprimento 9 sem retornar nenhum erro
         expect(resultadoLexador.simbolos).toHaveLength(9);
         expect(resultadoLexador.erros).toHaveLength(0);
@@ -150,7 +151,7 @@ describe('Testando seletores e estruturas', () => {
         // Lexador - nome de classe escrito sem o ponto como prefixo
         const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
             "meu-id {",
-                "margem-superior: 13mm;",
+            "margem-superior: 13mm;",
             "}"
         ]);
 
@@ -164,7 +165,7 @@ describe('Testando seletores e estruturas', () => {
         // Lexador
         const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
             "#id-personalizado:escopo {",
-                "margem-superior: 13mm;",
+            "margem-superior: 13mm;",
             "}"
         ]);
 
@@ -194,5 +195,67 @@ describe('Testando seletores e estruturas', () => {
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toBeTruthy();
+    });
+
+    it('Seletor Espaço Reservado - caso de sucesso', () => {
+        // Lexador
+        const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+            "%meu-seletor {",
+            "borda: 13mm;",
+            "}"
+        ]);
+        console.log(resultadoLexador.simbolos);
+
+        // O Lexador deve montar um objeto de comprimento 9 sem retornar nenhum erro
+        expect(resultadoLexador.simbolos).toHaveLength(9);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear os tipos de símbolo Percentual e Identificador que compõem a estrutura de espaço reservado
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.PERCENTUAL }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+            ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador Sintático deve executar as operações normalmente, sem retornar erros
+        expect(resultadoAvaliadorSintatico).toBeTruthy();
+        expect(resultadoAvaliadorSintatico).toHaveLength(1);
+
+        // O Avaliador deve mapear uma instância da classe SeletorEspaçoReservado
+        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorEspacoReservado);
+
+        // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        expect(resultadoTradutor).toHaveLength(0);
+    });
+
+    it('Seletor Espaço Reservado - caso de falha', () => {
+        // Lexador
+        const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+            "% {",
+            ": 13mm;",
+            "}"
+        ]);
+        console.log(resultadoLexador.simbolos);
+
+        // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+        expect(resultadoLexador.simbolos).toHaveLength(7);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear o tipo de símbolo Percentual
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.PERCENTUAL }),
+            ])
+        );
+
+        // Avaliador Sintático deve retornar um erro por não reconhecer o identificador
+        expect(() => {
+            avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        }).toThrow('Esperado identificador válido para espaço reservado.');
     });
 });
