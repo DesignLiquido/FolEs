@@ -204,7 +204,6 @@ describe('Testando seletores e estruturas', () => {
             "borda: 13mm;",
             "}"
         ]);
-        console.log(resultadoLexador.simbolos);
 
         // O Lexador deve montar um objeto de comprimento 9 sem retornar nenhum erro
         expect(resultadoLexador.simbolos).toHaveLength(9);
