@@ -10,17 +10,17 @@ describe('Serializador Reverso', () => {
     let lexadorReverso: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorReverso: AvaliadorSintaticoInterface;
-    let tradutorReverso: SerializadorReverso;
+    let serializadorReverso: SerializadorReverso;
 
     beforeEach(() => {
         lexadorReverso = new LexadorReverso();
         importador = new Importador(lexadorReverso);
         avaliadorReverso = new AvaliadorSintaticoReverso(importador);
-        tradutorReverso = new SerializadorReverso();
+        serializadorReverso = new SerializadorReverso();
     });
 
     // TODO: Finalizar a lógica em `declaracaoPorSeletor()` (avaliador sintático reverso)
-    it.skip('Testando tradução das estruturas HTML', () => {
+    it('Testando tradução das estruturas HTML', () => {
         for (let index = 0; index < Object.keys(estruturasLmht).length; index += 1) {
 
             // Lexador recebe as estruturas FolEs
@@ -34,8 +34,15 @@ describe('Serializador Reverso', () => {
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
             // Tradutor deve retornar a estrutura HTML correspondente
-            const resultadoTradutor = tradutorReverso.serializar(resultadoAvaliadorSintatico);
-            expect(resultadoTradutor).toContain(Object.values(estruturasLmht)[index]);
+            const resultadoTradutor = serializadorReverso.serializar(resultadoAvaliadorSintatico);
+            
+            if (Object.values(estruturasLmht)[index].length > 1) {
+                const estruturaString = Object.values(estruturasLmht)[index][0].toString();
+                expect(resultadoTradutor).toContain(estruturaString);
+            } else {
+                const estruturaString = Object.values(estruturasLmht)[index].toString();
+                expect(resultadoTradutor).toContain(estruturaString);
+            }
         }
     });
 });
