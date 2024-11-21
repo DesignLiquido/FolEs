@@ -30,18 +30,22 @@ describe('Serializador Reverso', () => {
                 "}"
             ])
 
+            // Lexador deve montar um objeto de 8 símbolos sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(8);
+            expect(resultadoLexador.erros).toHaveLength(0);
+            
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
             // Tradutor deve retornar a estrutura HTML correspondente
-            const resultadoTradutor = serializadorReverso.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializadorReverso.serializar(resultadoAvaliadorSintatico);
             
             if (Object.values(estruturasLmht)[index].length > 1) {
-                const estruturaString = Object.values(estruturasLmht)[index][0].toString();
-                expect(resultadoTradutor).toContain(estruturaString);
+                const estruturaLmhtString = Object.values(estruturasLmht)[index][0].toString();
+                expect(resultadoSerializador).toContain(estruturaLmhtString);
             } else {
-                const estruturaString = Object.values(estruturasLmht)[index].toString();
-                expect(resultadoTradutor).toContain(estruturaString);
+                const estruturaLmhtString = Object.values(estruturasLmht)[index].toString();
+                expect(resultadoSerializador).toContain(estruturaLmhtString);
             }
         }
     });
