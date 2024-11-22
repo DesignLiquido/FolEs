@@ -128,13 +128,14 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
      */
     protected resolverSeletores(espacoReservado: string = null): Seletor[] {
         const seletores: Seletor[] = [];
+
         do {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.TAG:
                     seletores.push(this.seletorPorEstrutura());
                     break;
-                // case tiposDeSimbolos.IDENTIFICADOR:
-                //     throw new Error("Não deveria cair aqui.");
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    throw new Error("Não deveria cair aqui.");
                 case tiposDeSimbolos.PONTO:
                     seletores.push(this.seletorPorNomeDeClasse());
                     break;
@@ -209,8 +210,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
         const modificadores: Modificador[] = [];
         const declaracoesAninhadas: Declaracao[] = [];
-        
-        while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {            
+        while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.IDENTIFICADOR:
                     const modificador = this.resolverModificador();
@@ -232,11 +232,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
     declaracao(): Declaracao | null {
         if (this.estaNoFinal()) return null;
-
-        let seletores;
-        if (this.simbolos[this.atual].tipo !== tiposDeSimbolos.IDENTIFICADOR) {
-            seletores = this.resolverSeletores();
-        }
+        const seletores = this.resolverSeletores();
         const modificadorEDeclaracoesAninhadas = this.resolverModificadorEDeclaracoesAninhadas();
 
         return new Declaracao(
