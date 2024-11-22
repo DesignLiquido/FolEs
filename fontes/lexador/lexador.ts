@@ -124,7 +124,8 @@ export class Lexador implements LexadorInterface {
             this.inicioSimbolo,
             this.atual
         );
-
+        console.log(tipo);
+        
         this.simbolos.push(
             new Simbolo(
                 tipo,
@@ -215,7 +216,7 @@ export class Lexador implements LexadorInterface {
             codigo in palavrasReservadas
                 ? palavrasReservadas[codigo]
                 : tiposDeSimbolos.IDENTIFICADOR;
-
+        
         this.adicionarSimbolo(tipo);
     }
 

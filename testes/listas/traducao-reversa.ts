@@ -40,15 +40,7 @@ export const TraducaoReversa: Array<Object> = [
         css: 'tab-size',
     },
     {
-        foles: 'tabulação',
-        css: 'tab-size',
-    },
-    {
         foles: 'espacamento-palavras',
-        css: 'word-spacing',
-    },
-    {
-        foles: 'espaçamento-palavras',
         css: 'word-spacing',
     },
     {
@@ -61,6 +53,6 @@ export const TraducaoReversa: Array<Object> = [
     },
     {
         foles: 'regras-coluna',
-        css: 'column-rules',
+        css: 'column-rule',
     },
 ];
