@@ -1,5 +1,4 @@
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
-
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/css";
 
 describe('Lexador Reverso', () => {
@@ -18,7 +17,8 @@ describe('Lexador Reverso', () => {
 
         expect(resultadoLexador).toBeTruthy();
         expect(resultadoLexador.simbolos).toHaveLength(8);
-
+        expect(resultadoLexador.erros).toHaveLength(0);
+        
         // Tipos devem estar mapeados
         expect(resultadoLexador.simbolos).toEqual(
             expect.arrayContaining([
@@ -27,7 +27,7 @@ describe('Lexador Reverso', () => {
                 expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
                 expect.objectContaining({ tipo: tiposDeSimbolos.DOIS_PONTOS }),
                 expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-                // expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
                 expect.objectContaining({ tipo: tiposDeSimbolos.PONTO_E_VIRGULA }),
                 expect.objectContaining({ tipo: tiposDeSimbolos.CHAVE_DIREITA }),
             ])
