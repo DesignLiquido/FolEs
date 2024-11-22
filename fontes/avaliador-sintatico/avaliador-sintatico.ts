@@ -15,7 +15,6 @@ import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 import { ValorNumerico, ValorNumericoComQuantificador } from "../../testes/listas/valor-numerico";
-import { log } from "console";
 
 
 /**

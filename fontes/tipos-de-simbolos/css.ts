@@ -10,6 +10,7 @@ export default {
     TAG: "TAG",
     IDENTIFICADOR: "IDENTIFICADOR",
     MAIOR: "MAIOR",
+    METODO: "METODO",
     NUMERO: "NUMERO",
     PERCENTUAL: "PERCENTUAL",
     PONTO: "PONTO",

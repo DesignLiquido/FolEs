@@ -153,12 +153,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return new HexadecimalCor(codigoCor.lexema);
     }
 
+    // TODO: Implementar lógica para resolver método
+    // private resolverMetodo(lexema: string): Valor {
+        
+    // }
+
     private valorModificador() {
         const valorModificador = this.avancarEDevolverAnterior();
-
+        console.log(valorModificador);
+        
         switch (valorModificador.tipo) {
             case tiposDeSimbolos.CERQUILHA:
                 return this.resolverCor();
+            // case tiposDeSimbolos.METODO:
+            //     return this.resolverMetodo();
             default:
                 return valorModificador;
         }
