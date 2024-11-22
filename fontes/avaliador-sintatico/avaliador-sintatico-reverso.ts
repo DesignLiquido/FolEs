@@ -160,7 +160,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
     private valorModificador() {
         const valorModificador = this.avancarEDevolverAnterior();
-        console.log(valorModificador);
         
         switch (valorModificador.tipo) {
             case tiposDeSimbolos.CERQUILHA:

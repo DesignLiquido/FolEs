@@ -111,7 +111,8 @@ export default {
     'minmax': tiposDeSimbolos.METODO,
     'opacity': tiposDeSimbolos.METODO,
     'steps': tiposDeSimbolos.METODO,
-    'perspective': tiposDeSimbolos.METODO,
+    // AVALIAR: perspective é a tradução tanto de um modificador quanto de um método
+    // 'perspective': tiposDeSimbolos.METODO,
     'drop-shadow': tiposDeSimbolos.METODO,
     'rgb': tiposDeSimbolos.METODO,
     'rgba': tiposDeSimbolos.METODO,

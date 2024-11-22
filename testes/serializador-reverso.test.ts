@@ -59,7 +59,7 @@ describe('Serializador Reverso', () => {
                 `   ${TraducaoReversa[index]['css']}: 60px;`,
                 "}"
             ])
-
+            
             // Avaliador Sintático Reverso
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
