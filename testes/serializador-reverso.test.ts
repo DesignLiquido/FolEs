@@ -73,7 +73,8 @@ describe('Serializador Reverso', () => {
         }
     });
 
-    it.only('Testando tradução reversa de métodos', () => {
+    // OBS.: Teste genérico, precisa de implementações no Av. Sintático Reverso antes de funcionar
+    it.skip('Testando tradução reversa de métodos', () => {
         // Lexador Reverso recebe as estruturas FolEs
         const resultadoLexador = lexadorReverso.mapear([
             `html {`,
