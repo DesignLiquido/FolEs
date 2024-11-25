@@ -3,7 +3,7 @@ import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { SeletorEstrutura } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
-import { Metodo } from "../valores/metodos/metodo";
+import { Metodo } from "../valores/metodos/foles/metodo";
 
 import estruturasHtml from "../tradutores/estruturas-html";
 

@@ -5,7 +5,7 @@ import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import { Modificador } from "../modificadores";
 import { PragmasModificador, SeletorModificador } from "../modificadores/superclasse";
 import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
-import { Metodo } from "../valores/metodos/metodo";
+import { Metodo } from "../valores/metodos/foles/metodo";
 
 import estruturasHtml from "./estruturas-html";
 

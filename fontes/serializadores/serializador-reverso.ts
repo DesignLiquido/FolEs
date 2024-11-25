@@ -1,6 +1,6 @@
 import { Declaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
-import { Metodo } from "../valores/metodos/metodo";
+import { Metodo } from "../valores/metodos/foles/metodo";
 
 /**
  * O serializador reverso traduz de CSS para FolEs. Pode traduzir tanto FolEs

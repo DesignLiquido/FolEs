@@ -361,6 +361,7 @@ import { VelocidadeAnimacao } from "../velocidade-animacao";
 import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
+import { Blur } from "../../valores/metodos/css/blur";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -726,4 +727,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "visibility": Visibilidade,
     "content-visibility": VisibilidadeConteudo,
     "backface-visibility": VisibilidadeFundo,
+
+    // METODOS
+    "blur": Blur,
 }

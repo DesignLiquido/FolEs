@@ -1,4 +1,4 @@
-import { Metodo } from "../valores/metodos/metodo";
+import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 

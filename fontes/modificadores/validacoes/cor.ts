@@ -1,5 +1,5 @@
-import { HexadecimalCor } from "../../valores/metodos/hexadecimal-cor";
-import { Metodo } from "../../valores/metodos/metodo";
+import { HexadecimalCor } from "../../valores/metodos/foles/hexadecimal-cor";
+import { Metodo } from "../../valores/metodos/foles/metodo";
 import { cores } from "../atributos/cores";
 import { valoresGlobais } from "../atributos/globais";
 
