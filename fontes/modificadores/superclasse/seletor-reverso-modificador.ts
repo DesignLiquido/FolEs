@@ -3,7 +3,7 @@ import { DicionarioReversoModificadores } from "../dicionario/dicionario-reverso
 import { PragmasModificador } from "./pragmas-modificador";
 
 export class SeletorReversoModificador {
-    constructor(nomeCss: string, valor: string | Valor, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(nomeCss: string, valor: string | Valor, quantificador?: string, pragmas?: PragmasModificador) {
         if (
             DicionarioReversoModificadores[nomeCss] === undefined || 
             DicionarioReversoModificadores[nomeCss] === null

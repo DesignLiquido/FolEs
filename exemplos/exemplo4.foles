@@ -13,3 +13,7 @@ paragrafo:futuro {
 divisão:direcao-texto {
     altura: 20px;
 }
+
+lmht {
+    filtro-fundo: borrar(10px);
+}
