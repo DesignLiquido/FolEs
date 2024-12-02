@@ -11,7 +11,7 @@ export class Blur extends MetodoCss {
         this.valor = Number(valor.lexema);
         
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'borrar';
+        this.traducao = 'blur';
     }
 
     paraTexto() {        

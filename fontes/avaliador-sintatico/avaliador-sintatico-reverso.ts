@@ -12,6 +12,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface } from "../interfaces"
 import { HexadecimalCor } from "../valores/metodos/foles/hexadecimal-cor";
 import { Estrutura } from "../estruturas/estrutura";
 import { Valor } from "../valores/valor";
+import { Metodo } from "../valores/metodos/foles/metodo";
 
 /**
  * O avaliador sintático reverso avalia símbolos de arquivos CSS, 
@@ -209,7 +210,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
-
+        
         const classeModificadora = new SeletorReversoModificador(
             modificador.lexema,
             valorModificador instanceof Simbolo ? valorModificador.lexema : valorModificador,

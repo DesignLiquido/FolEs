@@ -1,5 +1,6 @@
 import { Declaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
+import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
 
 /**
@@ -20,13 +21,15 @@ export class SerializadorReverso {
         }
 
         let valor = "";
-        if (modificador.valor instanceof Metodo) {
+        if (modificador.valor instanceof MetodoCss) {
+            valor = (<MetodoCss>modificador.valor).paraTexto();
+        } else if (modificador.valor instanceof Metodo) {
             valor = (<Metodo>modificador.valor).paraTexto();
         } else {
             valor = modificador.valor;
         }
 
-        return " ".repeat(indentacao) + 
+        return " ".repeat(indentacao) +
             `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador};\n`;
     }
 
@@ -39,7 +42,7 @@ export class SerializadorReverso {
 
         for (const declaracao of declaracoes) {
             const prefixos = [];
-            
+
             for (const seletor of declaracao.seletores) {
                 const prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
                 prefixos.push(prefixo);
@@ -48,7 +51,7 @@ export class SerializadorReverso {
 
             resultado = resultado.slice(0, -2);
             resultado += ' {\n';
-            
+
             for (const modificador of declaracao.modificadores) {
                 resultado += this.serializarModificador(modificador, indentacao + 4);
             }
