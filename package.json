@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/foles ./bin/foles.cmd ./dist && yarn copyfiles -V ./package.json ./dist && yarn copyfiles -V ./README.md ./dist",
-        "testes-unitarios": "jest --coverage",
-        "testes-unitarios:insignias": "jest-coverage-badges --output ./recursos/imagens"
+        "testes-unitarios": "yarn jest --coverage",
+        "testes-unitarios:insignias": "yarn jest-coverage-badges --output ./recursos/imagens"
     },
     "keywords": [
         "foles",
