@@ -9,3 +9,11 @@ divisao:foco {
 paragrafo:futuro {
     tamanho-fonte: 20px;
 }
+
+divisão:direcao-texto {
+    altura: 20px;
+}
+
+lmht {
+    filtro-fundo: borrar(10px);
+}

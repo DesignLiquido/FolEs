@@ -5,7 +5,7 @@ import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Modificador } from "../modificadores";
 import { PragmasModificador, SeletorModificador } from "../modificadores/superclasse";
 import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
-import { Metodo } from "../valores/metodos/metodo";
+import { Metodo } from "../valores/metodos/foles/metodo";
 
 import estruturasLmht from "./estruturas-lmht";
 

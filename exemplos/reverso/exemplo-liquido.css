@@ -19,3 +19,7 @@ html {
 #meu-segundo-id {
     width: 400mm;
 }
+
+div {
+    backdrop-filter: brightness(10px);
+}

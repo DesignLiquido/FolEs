@@ -30,7 +30,7 @@ export class LexadorReverso implements LexadorInterface {
      * @returns Verdadeiro se contador de linhas está na última linha.
      *          Falso caso contrário.
      */
-     eUltimaLinha(): boolean {
+    eUltimaLinha(): boolean {
         return this.linha >= this.codigo.length - 1;
     }
 
@@ -133,13 +133,13 @@ export class LexadorReverso implements LexadorInterface {
             this.inicioSimbolo,
             this.atual
         );
-        
+
         this.simbolos.push(
             new Simbolo(
-                tipo, 
-                texto || lexema, 
-                literal, 
-                this.linha + 1, 
+                tipo,
+                texto || lexema,
+                literal,
+                this.linha + 1,
                 this.inicioSimbolo + 1,
                 this.atual
             )
@@ -181,6 +181,14 @@ export class LexadorReverso implements LexadorInterface {
                 this.adicionarSimbolo(tiposDeSimbolos.CHAVE_DIREITA);
                 this.avancar();
                 break;
+            case "(":
+                this.adicionarSimbolo(tiposDeSimbolos.PARENTESE_ESQUERDO);
+                this.avancar();
+                break;
+            case ")":
+                this.adicionarSimbolo(tiposDeSimbolos.PARENTESE_DIREITO);
+                this.avancar();
+                break;
             case ':':
                 this.adicionarSimbolo(tiposDeSimbolos.DOIS_PONTOS);
                 this.avancar();
@@ -202,12 +210,12 @@ export class LexadorReverso implements LexadorInterface {
                 this.avancar();
                 break;
             case ' ':
-                case '\0':
-                case '\r':
-                case '\t':
-                case ';':
-                    this.avancar();
-                    break;
+            case '\0':
+            case '\r':
+            case '\t':
+            case ';':
+                this.avancar();
+                break;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
                 else if (this.eAlfabeto(caractere))
@@ -238,7 +246,7 @@ export class LexadorReverso implements LexadorInterface {
             this.analisarToken();
         }
 
-        return { 
+        return {
             simbolos: this.simbolos,
             erros: this.erros
         }

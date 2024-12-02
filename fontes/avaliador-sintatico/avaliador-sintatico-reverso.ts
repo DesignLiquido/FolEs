@@ -9,8 +9,9 @@ import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import tiposDeSimbolos from "../tipos-de-simbolos/css";
 import { Seletor, SeletorClasse, SeletorEstrutura, SeletorId } from "../seletores";
 import { AvaliadorSintaticoInterface, ImportadorInterface } from "../interfaces";
-import { HexadecimalCor } from "../valores/metodos/hexadecimal-cor";
+import { HexadecimalCor } from "../valores/metodos/foles/hexadecimal-cor";
 import { Estrutura } from "../estruturas/estrutura";
+import { Valor } from "../valores/valor";
 
 /**
  * O avaliador sintático reverso avalia símbolos de arquivos CSS, 
@@ -153,12 +154,51 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return new HexadecimalCor(codigoCor.lexema);
     }
 
+    // TODO: Implementar lógica para resolver método
+    private resolverMetodo(lexema: string): Valor {
+        switch (lexema) {
+            case "blur":                
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'blur'.");
+                const valorBorrar = this.avancarEDevolverAnterior();
+                let quantificadorBorrar;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorBorrar = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorBorrar = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'blur'.");
+                return new SeletorReversoModificador(
+                    lexema,
+                    valorBorrar,
+                    quantificadorBorrar.length !== 0 ? quantificadorBorrar : null,
+                );
+            
+                case "brightness":
+                    this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'brightness'.");
+                    const valorBrilho = this.avancarEDevolverAnterior();                    
+                    let quantificadorBrilho;
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorBrilho = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorBrilho = null;
+                    }
+                    this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'brightness'.");
+                    return new SeletorReversoModificador(
+                        lexema,
+                        valorBrilho, 
+                        quantificadorBrilho.length !== 0 ? quantificadorBrilho : null,
+                    );
+        }
+    }
+
     private valorModificador() {
         const valorModificador = this.avancarEDevolverAnterior();
-
+        
         switch (valorModificador.tipo) {
             case tiposDeSimbolos.CERQUILHA:
                 return this.resolverCor();
+            case tiposDeSimbolos.METODO:
+                return this.resolverMetodo(valorModificador.lexema);
             default:
                 return valorModificador;
         }
@@ -185,7 +225,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
-
+        
         const classeModificadora = new SeletorReversoModificador(
             modificador.lexema,
             valorModificador instanceof Simbolo ? valorModificador.lexema : valorModificador,

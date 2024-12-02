@@ -1,9 +1,9 @@
-import { Metodo } from "../../valores/metodos/metodo";
+import { Valor } from "../../valores/valor";
 import { DicionarioReversoModificadores } from "../dicionario/dicionario-reverso-modificadores";
 import { PragmasModificador } from "./pragmas-modificador";
 
 export class SeletorReversoModificador {
-    constructor(nomeCss: string, valor: string | Metodo, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(nomeCss: string, valor: string | Valor, quantificador?: string, pragmas?: PragmasModificador) {
         if (
             DicionarioReversoModificadores[nomeCss] === undefined || 
             DicionarioReversoModificadores[nomeCss] === null

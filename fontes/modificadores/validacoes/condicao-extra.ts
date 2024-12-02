@@ -1,9 +1,9 @@
 import { valoresGlobais } from "../atributos/globais";
 
 export function validarValoresAdicionais(
-    nomePropriedade: string, 
-    valor: any, 
-    valoresAdicionais: { [valorFoles: string]: string }, 
+    nomePropriedade: string,
+    valor: any,
+    valoresAdicionais: { [valorFoles: string]: string },
     valoresAceitos?: { [valorFoles: string]: string }) {
     if (valoresAceitos !== undefined) {
         if (!(valor in valoresAdicionais) &&

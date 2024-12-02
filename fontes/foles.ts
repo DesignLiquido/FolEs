@@ -50,7 +50,7 @@ export class FolEs {
      */
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(simbolos);
-        
+
         const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
         return traducao;
     }
@@ -60,16 +60,16 @@ export class FolEs {
         const traducaoReversa = this.serializadorReverso.serializar(resultadoAvaliadorSintaticoReverso);
         return traducaoReversa;
     }
-    
+
     converterParaCss(nomeArquivo: string): string {
-        const resultadoLexador: [string[], ResultadoLexadorInterface] = 
+        const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);
-        
+
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }
 
     converterParaCssComMapas(nomeArquivo: string): [string, string] {
-        const resultadoLexador: [string[], ResultadoLexadorInterface] = 
+        const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(resultadoLexador[1].simbolos);
         const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
@@ -77,15 +77,15 @@ export class FolEs {
         const mapa = this.geradorMapaCss.gerarMapaFontes(resultadoTraducao, resultadoLexador[0].join('\n'));
 
         return [
-            traducao, 
+            traducao,
             new Base64().encode(JSON.stringify(mapa))
         ];
     }
 
     converterParaFolEs(nomeArquivo: string): string {
-        const resultadoLexador: [string[], ResultadoLexadorInterface] = 
+        const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importadorReverso.importar(nomeArquivo);
-
+        
         return this.converterParaFolEsInterno(resultadoLexador[1].simbolos);
     }
 
@@ -102,4 +102,5 @@ export class FolEs {
 
 //  const a = new FolEs(false);
 //  console.log(a.converterParaCss('../exemplos/exemplo4.foles'));
-//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-liquido.css'));
+//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-liquido.css'));/
+//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
