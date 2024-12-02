@@ -1,7 +1,7 @@
 import { Simbolo } from "../../../lexador";
 import { MetodoCss } from "./metodo-css";
 
-export class Blur extends MetodoCss {
+export class Brightness extends MetodoCss {
     valor: number;
     quantificador: string;
     traducao: string;
@@ -11,14 +11,14 @@ export class Blur extends MetodoCss {
         this.valor = Number(valor.lexema);
         
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'blur';
+        this.traducao = 'brightness';
     }
 
     paraTexto() {        
         if (this.quantificador) {
-            return `borrar(${this.valor}${this.quantificador})`
+            return `brilho(${this.valor}${this.quantificador})`
         }
 
-        return `borrar(${this.valor})`
+        return `brilho(${this.valor})`
     }
 }

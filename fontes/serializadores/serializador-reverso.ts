@@ -19,7 +19,7 @@ export class SerializadorReverso {
         if (modificador.hasOwnProperty("quantificador")) {
             quantificador = modificador.quantificador;
         }
-
+        
         let valor = "";
         if (modificador.valor instanceof MetodoCss) {
             valor = (<MetodoCss>modificador.valor).paraTexto();

@@ -362,6 +362,7 @@ import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
 import { Blur } from "../../valores/metodos/css/blur";
+import { Brightness } from "../../valores/metodos/css/brightness";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -730,4 +731,5 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
 
     // METODOS
     "blur": Blur,
+    "brightness": Brightness,
 }
