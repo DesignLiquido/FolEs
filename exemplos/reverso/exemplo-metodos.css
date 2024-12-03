@@ -1,5 +1,6 @@
 div {
-    backdrop-filter: blur(10px);
-    backdrop-filter: brightness(10px);
+    backdrop-filter: blur(10);
+    backdrop-filter: brightness(10);
     gap: calc(100px - 10px);
+    filter: contrast(50);
 }

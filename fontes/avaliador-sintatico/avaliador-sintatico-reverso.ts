@@ -195,14 +195,29 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 const operadorCalc = this.avancarEDevolverAnterior();
                 const valorCalc2 = this.avancarEDevolverAnterior();
                 const quantificadorCalc2 = this.avancarEDevolverAnterior();
-                
+
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'calc'.");
                 return new SeletorValorReverso(
                     lexema,
                     [valorCalc1, quantificadorCalc1, operadorCalc, valorCalc2, quantificadorCalc2],
                 );
 
-
+            case "contrast":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contrast'.");
+                const valorContraste = this.avancarEDevolverAnterior();
+                let quantificadorContraste;
+                
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorContraste = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorContraste = null;
+                }
+                
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contrast'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorContraste, quantificadorContraste]
+                );
         }
     }
 
