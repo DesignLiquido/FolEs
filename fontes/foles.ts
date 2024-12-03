@@ -64,7 +64,8 @@ export class FolEs {
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);
-
+        console.log(resultadoLexador[1].simbolos);
+        
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }
 
@@ -101,6 +102,6 @@ export class FolEs {
 }
 
 //  const a = new FolEs(false);
-//  console.log(a.converterParaCss('../exemplos/exemplo4.foles'));
-//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-liquido.css'));/
+//  console.log(a.converterParaCss('../exemplos/exemplo.foles'));
+//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
 //  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
