@@ -5,4 +5,10 @@ div {
     filter: contrast(50);
     animation: cubic-bezier(0, 0, 1, 1);
     height: fit-content(10%);
+    transform: scaleZ(20);
+}
+
+p {
+    backdrop-filter: grayscale(10%);
+    transform: scale3d(1, 1, 1);
 }

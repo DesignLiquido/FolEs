@@ -367,6 +367,12 @@ import { Calc } from "../../valores/metodos/css/calc";
 import { Contrast } from "../../valores/metodos/css/constrast";
 import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
 import { FitContent } from "../../valores/metodos/css/fit-content";
+import { Grayscale } from "../../valores/metodos/css/grayscale";
+import { Scale3d } from "../../valores/metodos/css/scale3d";
+import { Scale } from "../../valores/metodos/css/scale";
+import { ScaleX } from "../../valores/metodos/css/scaleX";
+import { ScaleY } from "../../valores/metodos/css/scaleY";
+import { ScaleZ } from "../../valores/metodos/css/scaleZ";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -740,4 +746,10 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "contrast": Contrast,
     "cubic-bezier": CubicBezier,
     "fit-content": FitContent,
+    "grayscale": Grayscale,
+    "scale3d": Scale3d,
+    // "scale": Scale,
+    "scaleX": ScaleX,
+    "scaleY": ScaleY,
+    "scaleZ": ScaleZ,
 }

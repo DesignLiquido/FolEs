@@ -243,6 +243,76 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorFit['lexema'], quantificadorFit['lexema']]
                 );
+
+            case "grayscale":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'grayscale'.");
+                const valorEscala = this.avancarEDevolverAnterior();
+                let quantificadorEscala;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorEscala = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorEscala = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'grayscale'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorEscala, quantificadorEscala]
+                );
+
+            case "scale":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'scale'.");
+                const valorScale1 = this.avancarEDevolverAnterior();
+
+                let valorScale2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método scale.");
+                    valorScale2 = this.avancarEDevolverAnterior();
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método scale.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorScale1, valorScale2]
+                );
+
+            case "scale3d":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'scale3d'.");
+                const valorScale3d1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método scale3d.");
+                const valorScale3d2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método scale3d.");
+                const valorScale3d3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método scale3d.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorScale3d1, valorScale3d2, valorScale3d3]
+                );
+
+            case "scaleZ":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'scaleZ'.");
+                const valorScaleZ = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método scaleZ.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorScaleZ]
+                );
+
+            case "scaleX":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'scaleX'.");
+                const valorScaleX = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método scaleX.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorScaleX]
+                );
+
+            case "scaleY":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'scaleY'.");
+                const valorScaleY = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método scaleY.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorScaleY]
+                );
         }
     }
 
