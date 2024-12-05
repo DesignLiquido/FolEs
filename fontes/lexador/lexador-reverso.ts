@@ -201,6 +201,10 @@ export class LexadorReverso implements LexadorInterface {
                 this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, '%');
                 this.avancar();
                 break;
+            case ',':
+                this.adicionarSimbolo(tiposDeSimbolos.VIRGULA, null,',');
+                this.avancar();
+                break;
             case ".":
                 this.adicionarSimbolo(
                     tiposDeSimbolos.PONTO,

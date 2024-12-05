@@ -206,17 +206,34 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'contrast'.");
                 const valorContraste = this.avancarEDevolverAnterior();
                 let quantificadorContraste;
-                
+
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                     quantificadorContraste = this.avancarEDevolverAnterior();
                 } else {
                     quantificadorContraste = null;
                 }
-                
+
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'contrast'.");
                 return new SeletorValorReverso(
                     lexema,
                     [valorContraste, quantificadorContraste]
+                );
+
+            case "cubic-bezier":
+                console.log(this.simbolos);
+                
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'cubic-bezier'.");
+                const parametro1 = this.avancarEDevolverAnterior();                
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método cubic-bezier.");
+                const parametro2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método cubic-bezier.");
+                const parametro3 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após terceiro argumento do método cubic-bezier.");
+                const parametro4 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após quarto argumento do método curva-cúbica.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [parametro1, parametro2, parametro3, parametro4]
                 );
         }
     }

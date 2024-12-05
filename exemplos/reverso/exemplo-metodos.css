@@ -3,4 +3,5 @@ div {
     backdrop-filter: brightness(10);
     gap: calc(100px - 10px);
     filter: contrast(50);
+    animation: cubic-bezier(0, 0, 1, 1);
 }
