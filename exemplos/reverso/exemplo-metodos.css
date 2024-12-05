@@ -4,4 +4,5 @@ div {
     gap: calc(100px - 10px);
     filter: contrast(50);
     animation: cubic-bezier(0, 0, 1, 1);
+    height: fit-content(10%);
 }

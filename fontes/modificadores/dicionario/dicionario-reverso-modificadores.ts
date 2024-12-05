@@ -366,6 +366,7 @@ import { Brightness } from "../../valores/metodos/css/brightness";
 import { Calc } from "../../valores/metodos/css/calc";
 import { Contrast } from "../../valores/metodos/css/constrast";
 import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
+import { FitContent } from "../../valores/metodos/css/fit-content";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -738,4 +739,5 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "calc": Calc,
     "contrast": Contrast,
     "cubic-bezier": CubicBezier,
+    "fit-content": FitContent,
 }
