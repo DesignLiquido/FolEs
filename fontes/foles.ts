@@ -64,7 +64,6 @@ export class FolEs {
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);
-        console.log(resultadoLexador[1].simbolos);
         
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }

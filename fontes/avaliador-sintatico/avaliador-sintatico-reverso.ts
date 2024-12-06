@@ -368,6 +368,32 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorAngulo, quantificadorAngulo, cor1, cor2]
                 );
+
+            case "hsl":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hsl'.");
+                const HdeHSL = this.avancarEDevolverAnterior();
+                const SdeHSL = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de saturação (S) no método 'hsl'.");
+                const LdeHSL = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de luminosidade (L) no método 'hsl'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'hsl'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [HdeHSL, SdeHSL, LdeHSL]
+                );
+
+            case "hsla":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hsla'.");
+                const HdeHSLA = this.avancarEDevolverAnterior();
+                const SdeHSLA = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de saturação (S) no método 'hsla'.");
+                const LdeHSLA = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.QUANTIFICADOR, "Esperado símbolo percentual após argumento de luminosidade (L) no método 'hsla'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'hsla'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [HdeHSLA, SdeHSLA, LdeHSLA]
+                );
         }
     }
 

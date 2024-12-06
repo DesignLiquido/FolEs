@@ -29,5 +29,5 @@
 }
 
 lmht {
-    espacamento: calcular(10px + 10px);
+    cor-fundo: hsl(50, 80%, 80%);
 }
