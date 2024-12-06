@@ -394,6 +394,65 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [HdeHSLA, SdeHSLA, LdeHSLA]
                 );
+
+            case "skew":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'skew'.");
+
+                const valorInclinar1 = this.avancarEDevolverAnterior();
+
+                let quantificadorInclinar1;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInclinar1 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInclinar1 = null;
+                }
+
+                let valorInclinar2;
+                let quantificadorInclinar2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'skew'.");
+                    valorInclinar2 = this.avancarEDevolverAnterior();
+                    quantificadorInclinar2 = this.avancarEDevolverAnterior();
+                } else {
+                    valorInclinar2 = null;
+                    quantificadorInclinar2 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'skew'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorInclinar1, quantificadorInclinar1, valorInclinar2, quantificadorInclinar2]
+                );
+
+            case "skewX":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'skewX'.");
+                const valorInclinarX = this.avancarEDevolverAnterior();
+                let quantificadorInclinarX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInclinarX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInclinarX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'skewX'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorInclinarX, quantificadorInclinarX]
+                );
+
+            case "skewY":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'skewY'.");
+                const valorInclinarY = this.avancarEDevolverAnterior();
+                let quantificadorInclinarY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorInclinarY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorInclinarY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'skewY'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorInclinarY, quantificadorInclinarY]
+                );
         }
     }
 
