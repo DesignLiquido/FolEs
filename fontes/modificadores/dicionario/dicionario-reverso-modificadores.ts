@@ -373,6 +373,7 @@ import { Scale } from "../../valores/metodos/css/scale";
 import { ScaleX } from "../../valores/metodos/css/scaleX";
 import { ScaleY } from "../../valores/metodos/css/scaleY";
 import { ScaleZ } from "../../valores/metodos/css/scaleZ";
+import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -747,6 +748,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "cubic-bezier": CubicBezier,
     "fit-content": FitContent,
     "grayscale": Grayscale,
+    "linear-gradient": LinearGradient,
     "scale3d": Scale3d,
     // "scale": Scale,
     "scaleX": ScaleX,

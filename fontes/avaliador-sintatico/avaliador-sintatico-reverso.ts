@@ -313,6 +313,61 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorScaleY]
                 );
+
+            case "linear-gradient":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'linear-gradient'.");
+                const valorAngulo = this.avancarEDevolverAnterior();
+                let quantificadorAngulo;
+                if (valorAngulo.tipo === 'QUALITATIVO') {
+                    switch (valorAngulo.lexema) {
+                        case 'superior':
+                            valorAngulo.lexema = '0'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        case 'direita':
+                            valorAngulo.lexema = '90'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        case 'inferior':
+                            valorAngulo.lexema = '180'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        case 'esquerda':
+                            valorAngulo.lexema = '270'
+                            valorAngulo.tipo = 'NUMERO'
+                            quantificadorAngulo = {
+                                tipo: 'QUANTIFICADOR',
+                                lexema: 'deg',
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    quantificadorAngulo = this.avancarEDevolverAnterior();
+                }
+
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método linear-gradient.");
+                const cor1 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método linear-gradient.");
+                const cor2 = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'linear-gradient'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorAngulo, quantificadorAngulo, cor1, cor2]
+                );
         }
     }
 
