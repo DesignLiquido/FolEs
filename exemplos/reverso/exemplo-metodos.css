@@ -17,4 +17,5 @@ p {
 html {
     background-color: hsla(50 80% 40%);
     transform: skewY(15deg);
+    backdrop-filter: invert(50%);
 }
