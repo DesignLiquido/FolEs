@@ -380,6 +380,7 @@ import { SkewX } from "../../valores/metodos/css/skewX";
 import { SkewY } from "../../valores/metodos/css/skewY";
 import { Skew } from "../../valores/metodos/css/skew";
 import { Invert } from "../../valores/metodos/css/invert";
+import { Clamp } from "../../valores/metodos/css/clamp";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -750,6 +751,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "blur": Blur,
     "brightness": Brightness,
     "calc": Calc,
+    "clamp": Clamp,
     "contrast": Contrast,
     "cubic-bezier": CubicBezier,
     "fit-content": FitContent,

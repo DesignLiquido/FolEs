@@ -468,6 +468,22 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorInverter, quantificadorInverter]
                 );
+
+            case "clamp":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'clamp'.");
+                const valorMin = this.avancarEDevolverAnterior();
+                const quantificadorMin = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'clamp'.");
+                const valorMed = this.avancarEDevolverAnterior();
+                const quantificadorMed = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após segundo argumento do método 'clamp'.");
+                const valorMax = this.avancarEDevolverAnterior();
+                const quantificadorMax = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método clamp.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorMin, quantificadorMin, valorMed, quantificadorMed, valorMax, quantificadorMax]
+                );
         }
     }
 
