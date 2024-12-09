@@ -497,6 +497,35 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valor1, valor2, valor3]
                 );
+
+            case "minmax":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'minmax'.");
+                const valor01 = this.avancarEDevolverAnterior();
+                let parametro01 = null;
+                if (Number(valor01['lexema'])) {
+                    const quantificador01 = this.avancarEDevolverAnterior();
+                    parametro01 = `${valor01['lexema']}${quantificador01['lexema']}`
+                }
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método minmax.");
+                const valor02 = this.avancarEDevolverAnterior();
+                let parametro02 = null;
+                if (Number(valor02['lexema'])) {
+                    const quantificador02 = this.avancarEDevolverAnterior();
+                    parametro02 = `${valor02['lexema']}${quantificador02['lexema']}`
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método minmax.");
+
+                if (parametro01 !== null) {
+                    return new SeletorValorReverso(
+                        lexema,
+                        [parametro01, valor02['lexema']]
+                    );
+                } else if (parametro02 !== null) {
+                    return new SeletorValorReverso(
+                        lexema,
+                        [valor01['lexema'], parametro02]
+                    );
+                }
         }
     }
 

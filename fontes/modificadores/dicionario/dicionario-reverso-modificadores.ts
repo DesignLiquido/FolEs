@@ -382,6 +382,7 @@ import { Skew } from "../../valores/metodos/css/skew";
 import { Invert } from "../../valores/metodos/css/invert";
 import { Clamp } from "../../valores/metodos/css/clamp";
 import { Linear } from "../../valores/metodos/foles/linear";
+import { MinMax } from "../../valores/metodos/css/minmax";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -762,6 +763,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "invert": Invert,
     "linear": Linear,
     "linear-gradient": LinearGradient,
+    "minmax": MinMax,
     "scale3d": Scale3d,
     // "scale": Scale,
     "scaleX": ScaleX,
