@@ -605,7 +605,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "scroll-margin-top": MargemSuperiorRolagemMouse,
     "mask": Mascara,
     "background-blend-mode": MesclarFundo,
-    "grid-template-column": ModeloColunasEmGrade,
+    "grid-template-columns": ModeloColunasEmGrade,
     "grid-template": ModeloEmGrade,
     "grid-template-areas": ModeloGeralEmGrade,
     "grid-template-rows": ModeloLinhasEmGrade,
