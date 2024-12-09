@@ -526,6 +526,21 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         [valor01['lexema'], parametro02]
                     );
                 }
+
+            case "opacity":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'opacity'.");
+                const valorOpaco = this.avancarEDevolverAnterior();
+                let quantificadorOpaco;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorOpaco = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorOpaco = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'opacity'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorOpaco, quantificadorOpaco]
+                );
         }
     }
 
