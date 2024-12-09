@@ -384,6 +384,7 @@ import { Clamp } from "../../valores/metodos/css/clamp";
 import { Linear } from "../../valores/metodos/foles/linear";
 import { MinMax } from "../../valores/metodos/css/minmax";
 import { Opacity } from "../../valores/metodos/css/opacity";
+import { Steps } from "../../valores/metodos/css/steps";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -774,4 +775,5 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "skew": Skew,
     "skewX": SkewX,
     "skewY": SkewY,
+    "steps": Steps,
 }

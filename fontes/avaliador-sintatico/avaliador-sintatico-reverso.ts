@@ -541,6 +541,17 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorOpaco, quantificadorOpaco]
                 );
+
+            case "steps":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'steps'.");
+                const valorNumerico = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método steps.");
+                const termoSalto = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método steps.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorNumerico, termoSalto]
+                );
         }
     }
 
