@@ -381,6 +381,7 @@ import { SkewY } from "../../valores/metodos/css/skewY";
 import { Skew } from "../../valores/metodos/css/skew";
 import { Invert } from "../../valores/metodos/css/invert";
 import { Clamp } from "../../valores/metodos/css/clamp";
+import { Linear } from "../../valores/metodos/foles/linear";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -759,6 +760,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "hsl": Hsl,
     "hsla": Hsla,
     "invert": Invert,
+    "linear": Linear,
     "linear-gradient": LinearGradient,
     "scale3d": Scale3d,
     // "scale": Scale,
