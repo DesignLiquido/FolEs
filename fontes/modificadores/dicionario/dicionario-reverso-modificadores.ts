@@ -388,6 +388,8 @@ import { Steps } from "../../valores/metodos/css/steps";
 import { Perspective } from "../../valores/metodos/css/perspective";
 import { DropShadow } from "../../valores/metodos/css/drop-shadow";
 import { Ray } from "../../valores/metodos/css/ray";
+import { Rgb } from "../../valores/metodos/foles/rgb";
+import { Rgba } from "../../valores/metodos/foles/rgba";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -773,6 +775,8 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     // "opacity": Opacity,
     // "perspective": Perspective,
     "ray": Ray,
+    "rgb": Rgb,
+    "rgba": Rgba,
     "scale3d": Scale3d,
     // "scale": Scale,
     "scaleX": ScaleX,

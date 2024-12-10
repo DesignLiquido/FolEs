@@ -616,6 +616,32 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [posicaoRaio, numeroRaio, quantificadorRaio]
                 );
+
+            case "rgb":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgb'.");
+                const vermelho = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verde = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
+                const azul = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgb'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [vermelho, verde, azul]
+                );
+
+            case "rgba":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rgba'.");
+                const vermelhoRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor vermelha.");
+                const verdeRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após argumento de cor verde.");
+                const azulRgba = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'rgba'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [vermelhoRgba, verdeRgba, azulRgba]
+                );
         }
     }
 

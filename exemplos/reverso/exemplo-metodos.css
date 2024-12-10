@@ -13,6 +13,7 @@ p {
     transform: scale3d(1, 1, 1);
     border-image-source: linear-gradient(45deg, blue, red);
     height: clamp(1.5rem, 2.5vw, 4rem);
+    color: rgba(150, 0, 150);
 }
 
 html {
@@ -27,4 +28,5 @@ div {
     transition-timing-function: steps(4, jump-both);
     backdrop-filter: drop-shadow(5px 5px 15px);
     offset-path: ray(200deg);
+    color: rgb(230, 200, 150);
 }
