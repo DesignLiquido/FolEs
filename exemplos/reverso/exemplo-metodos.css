@@ -1,6 +1,5 @@
 div {
     backdrop-filter: blur(10);
-    backdrop-filter: brightness(10);
     gap: calc(100px - 10px);
     filter: contrast(50);
     animation: cubic-bezier(0, 0, 1, 1);
@@ -29,4 +28,13 @@ div {
     backdrop-filter: drop-shadow(5px 5px 15px);
     offset-path: ray(200deg);
     color: rgb(230, 200, 150);
+    transform: rotateZ(0);
+}
+
+p {
+    backdrop-filter: brightness(10);
+}
+
+a {
+    backdrop-filter: hue-rotate(90deg);
 }

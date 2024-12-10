@@ -642,6 +642,82 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [vermelhoRgba, verdeRgba, azulRgba]
                 );
+
+            case "rotate":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotate'.");
+                const valorRotacionar = this.avancarEDevolverAnterior();
+                let quantificadorRotacionar;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionar = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionar = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotate'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorRotacionar, quantificadorRotacionar]
+                );
+
+            case "rotateZ":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotateZ'.");
+                const valorRotacionarZ = this.avancarEDevolverAnterior();
+                let quantificadorRotacionarZ;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionarZ = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionarZ = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotateZ'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorRotacionarZ, quantificadorRotacionarZ]
+                );
+
+            case "rotateX":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotateX'.");
+                const valorRotacionarX = this.avancarEDevolverAnterior();
+                let quantificadorRotacionarX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionarX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionarX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotateX'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorRotacionarX, quantificadorRotacionarX]
+                );
+
+            case "hue-rotate":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'hue-rotate'.");
+                const valorRotacao = this.avancarEDevolverAnterior();
+                let quantificadorRotacao;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacao = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacao = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'hue-rotate'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorRotacao, quantificadorRotacao]
+                );
+
+            case "rotateY":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'rotateY'.");
+                const valorRotacionarY = this.avancarEDevolverAnterior();
+                let quantificadorRotacionarY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorRotacionarY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionarY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotateY'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorRotacionarY, quantificadorRotacionarY]
+                );
+
         }
     }
 

@@ -390,6 +390,11 @@ import { DropShadow } from "../../valores/metodos/css/drop-shadow";
 import { Ray } from "../../valores/metodos/css/ray";
 import { Rgb } from "../../valores/metodos/foles/rgb";
 import { Rgba } from "../../valores/metodos/foles/rgba";
+import { Rotate } from "../../valores/metodos/css/rotate";
+import { RotateX } from "../../valores/metodos/css/rotateX";
+import { RotateY } from "../../valores/metodos/css/rotateY";
+import { RotateZ } from "../../valores/metodos/css/rotateZ";
+import { HueRotate } from "../../valores/metodos/css/hue-rotate";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -768,6 +773,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "grayscale": Grayscale,
     "hsl": Hsl,
     "hsla": Hsla,
+    "hue-rotate": HueRotate,
     "invert": Invert,
     "linear": Linear,
     "linear-gradient": LinearGradient,
@@ -777,6 +783,10 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "ray": Ray,
     "rgb": Rgb,
     "rgba": Rgba,
+    // "rotate": Rotate,
+    "rotateX":  RotateX,
+    "rotateY": RotateY,
+    "rotateZ": RotateZ,
     "scale3d": Scale3d,
     // "scale": Scale,
     "scaleX": ScaleX,
