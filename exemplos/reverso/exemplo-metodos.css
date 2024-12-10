@@ -25,4 +25,6 @@ html {
 
 div {
     transition-timing-function: steps(4, jump-both);
+    backdrop-filter: drop-shadow(5px 5px 15px);
+    offset-path: ray(200deg);
 }

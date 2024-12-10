@@ -385,6 +385,9 @@ import { Linear } from "../../valores/metodos/foles/linear";
 import { MinMax } from "../../valores/metodos/css/minmax";
 import { Opacity } from "../../valores/metodos/css/opacity";
 import { Steps } from "../../valores/metodos/css/steps";
+import { Perspective } from "../../valores/metodos/css/perspective";
+import { DropShadow } from "../../valores/metodos/css/drop-shadow";
+import { Ray } from "../../valores/metodos/css/ray";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -758,6 +761,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "clamp": Clamp,
     "contrast": Contrast,
     "cubic-bezier": CubicBezier,
+    "drop-shadow": DropShadow,
     "fit-content": FitContent,
     "grayscale": Grayscale,
     "hsl": Hsl,
@@ -767,6 +771,8 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "linear-gradient": LinearGradient,
     "minmax": MinMax,
     // "opacity": Opacity,
+    // "perspective": Perspective,
+    "ray": Ray,
     "scale3d": Scale3d,
     // "scale": Scale,
     "scaleX": ScaleX,

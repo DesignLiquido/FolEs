@@ -552,6 +552,70 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorNumerico, termoSalto]
                 );
+
+            case "perspective":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'perspective'.");
+                const valorPerspectivar = this.avancarEDevolverAnterior();
+                let quantificadorPerspectivar;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorPerspectivar = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorPerspectivar = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'perspective'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorPerspectivar, quantificadorPerspectivar]
+                );
+
+            case "drop-shadow":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'drop-shadow'.");
+                let corSombra = null;
+                if (this.simbolos[this.atual].tipo === 'QUALITATIVO') {
+                    corSombra = this.avancarEDevolverAnterior();
+                }
+
+                const valorSombra1 = this.avancarEDevolverAnterior();
+                const quantificadorSombra1 = this.avancarEDevolverAnterior();
+
+                const valorSombra2 = this.avancarEDevolverAnterior();
+                const quantificadorSombra2 = this.avancarEDevolverAnterior();
+
+                let valorSombra3;
+                let quantificadorSombra3;
+                if (this.simbolos[this.atual].tipo === 'NUMERO') {
+                    valorSombra3 = this.avancarEDevolverAnterior();
+                    quantificadorSombra3 = this.avancarEDevolverAnterior();
+                } else {
+                    valorSombra3 = null;
+                    quantificadorSombra3 = null;
+                }
+
+                if (this.simbolos[this.atual].tipo === 'QUALITATIVO') {
+                    corSombra = this.avancarEDevolverAnterior();
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'drop-shadow'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorSombra1, quantificadorSombra1, valorSombra2, quantificadorSombra2, valorSombra3, quantificadorSombra3, corSombra]
+                );
+
+            case "ray":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'ray'.");
+                let posicaoRaio;
+                if (this.simbolos[this.atual].tipo === 'QUALITATIVO') {
+                    posicaoRaio = this.avancarEDevolverAnterior();
+                } else {
+                    posicaoRaio = null;
+                }
+                const numeroRaio = this.avancarEDevolverAnterior();
+                const quantificadorRaio = this.avancarEDevolverAnterior();
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumentos de método 'ray'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [posicaoRaio, numeroRaio, quantificadorRaio]
+                );
         }
     }
 

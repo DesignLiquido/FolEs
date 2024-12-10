@@ -114,6 +114,7 @@ export default {
     // AVALIAR: perspective é a tradução tanto de um modificador quanto de um método
     // 'perspective': tiposDeSimbolos.METODO,
     'drop-shadow': tiposDeSimbolos.METODO,
+    'ray': tiposDeSimbolos.METODO,
     'rgb': tiposDeSimbolos.METODO,
     'rgba': tiposDeSimbolos.METODO,
     'rotateZ': tiposDeSimbolos.METODO,
