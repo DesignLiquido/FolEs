@@ -31,10 +31,14 @@ div {
     transform: rotateZ(0);
 }
 
-p {
-    backdrop-filter: brightness(10);
-}
-
 a {
     backdrop-filter: hue-rotate(90deg);
+}
+
+p {
+    backdrop-filter: sepia(60%);
+}
+
+div {
+    backdrop-filter: saturate(5);
 }

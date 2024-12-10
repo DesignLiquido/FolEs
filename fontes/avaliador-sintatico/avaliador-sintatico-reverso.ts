@@ -718,6 +718,35 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     [valorRotacionarY, quantificadorRotacionarY]
                 );
 
+            case "saturate":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'saturate'.");
+                const valorSaturar = this.avancarEDevolverAnterior();
+                let quantificadorSaturar;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorSaturar = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorSaturar = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'saturate'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorSaturar, quantificadorSaturar]
+                );
+
+            case "sepia":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'sepia'.");
+                const valorSepia = this.avancarEDevolverAnterior();
+                let quantificadorSepia;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorSepia = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorSepia = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'sepia'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorSepia, quantificadorSepia]
+                );
         }
     }
 

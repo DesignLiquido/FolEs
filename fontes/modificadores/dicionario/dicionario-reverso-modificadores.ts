@@ -395,6 +395,8 @@ import { RotateX } from "../../valores/metodos/css/rotateX";
 import { RotateY } from "../../valores/metodos/css/rotateY";
 import { RotateZ } from "../../valores/metodos/css/rotateZ";
 import { HueRotate } from "../../valores/metodos/css/hue-rotate";
+import { Saturate } from "../../valores/metodos/css/saturate";
+import { Sepia } from "../../valores/metodos/css/sepia";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -787,11 +789,13 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "rotateX":  RotateX,
     "rotateY": RotateY,
     "rotateZ": RotateZ,
+    "saturate": Saturate,
     "scale3d": Scale3d,
     // "scale": Scale,
     "scaleX": ScaleX,
     "scaleY": ScaleY,
     "scaleZ": ScaleZ,
+    "sepia": Sepia,
     "skew": Skew,
     "skewX": SkewX,
     "skewY": SkewY,
