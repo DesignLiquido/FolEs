@@ -703,28 +703,28 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 const valorTranslacao1 = this.avancarEDevolverAnterior();
 
-                let quantificadorTranlacao1;
+                let quantificadorTranslacao1;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
-                    quantificadorTranlacao1 = this.avancarEDevolverAnterior();
+                    quantificadorTranslacao1 = this.avancarEDevolverAnterior();
                 } else {
-                    quantificadorTranlacao1 = null;
+                    quantificadorTranslacao1 = null;
                 }
 
                 let valorTranslacao2;
-                let quantificadorTranlacao2;
+                let quantificadorTranslacao2;
                 if (this.simbolos[this.atual].tipo === 'VIRGULA') {
                     this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translação'.");
                     valorTranslacao2 = this.avancarEDevolverAnterior();
-                    quantificadorTranlacao2 = this.avancarEDevolverAnterior();
+                    quantificadorTranslacao2 = this.avancarEDevolverAnterior();
                 } else {
                     valorTranslacao2 = null;
-                    quantificadorTranlacao2 = null;
+                    quantificadorTranslacao2 = null;
                 }
 
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação'.");
                 return new SeletorValor(
                     lexema,
-                    [valorTranslacao1, quantificadorTranlacao1, valorTranslacao2, quantificadorTranlacao2]
+                    [valorTranslacao1, quantificadorTranslacao1, valorTranslacao2, quantificadorTranslacao2]
                 );
 
             case "translacao":

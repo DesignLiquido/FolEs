@@ -747,6 +747,137 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorSepia, quantificadorSepia]
                 );
+
+            case "translate":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translate'.");
+
+                const valorTranslacao1 = this.avancarEDevolverAnterior();
+
+                let quantificadorTranlacao1;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranlacao1 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranlacao1 = null;
+                }
+
+                let valorTranslacao2;
+                let quantificadorTranlacao2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate'.");
+                    valorTranslacao2 = this.avancarEDevolverAnterior();
+                    quantificadorTranlacao2 = this.avancarEDevolverAnterior();
+                } else {
+                    valorTranslacao2 = null;
+                    quantificadorTranlacao2 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorTranslacao1, quantificadorTranlacao1, valorTranslacao2, quantificadorTranlacao2]
+                );
+
+            case "translate-3d":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translate-3d'.");
+
+                const valorTranslacao3d1 = this.avancarEDevolverAnterior();
+
+                let quantificadorTranlacao3d1;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranlacao3d1 = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranlacao3d1 = null;
+                }
+
+                let valorTranslacao3d2;
+                let quantificadorTranlacao3d2;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate-3d'.");
+                    valorTranslacao3d2 = this.avancarEDevolverAnterior();
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorTranlacao3d2 = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorTranlacao3d2 = null;
+                    }
+                } else {
+                    valorTranslacao3d2 = null;
+                    quantificadorTranlacao3d2 = null;
+                }
+
+                let valorTranslacao3d3;
+                let quantificadorTranlacao3d3;
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate-3d'.");
+                    valorTranslacao3d3 = this.avancarEDevolverAnterior();
+                    if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                        quantificadorTranlacao3d3 = this.avancarEDevolverAnterior();
+                    } else {
+                        quantificadorTranlacao3d3 = null;
+                    }
+                } else {
+                    valorTranslacao3d3 = null;
+                    quantificadorTranlacao3d3 = null;
+                }
+
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translate-3d'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorTranslacao3d1, quantificadorTranlacao3d1, valorTranslacao3d2, quantificadorTranlacao3d2, valorTranslacao3d3, quantificadorTranlacao3d3]
+                );
+
+            case "translateX":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translateX'.");
+                const valorTranslaçaoX = this.avancarEDevolverAnterior();
+                let quantificadorTranslaçaoX;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslaçaoX = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslaçaoX = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translateX'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorTranslaçaoX, quantificadorTranslaçaoX]
+                );
+
+            case "translateY":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translateY'.");
+                const valorTranslaçaoY = this.avancarEDevolverAnterior();
+                let quantificadorTranslaçaoY;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslaçaoY = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslaçaoY = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translateY'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorTranslaçaoY, quantificadorTranslaçaoY]
+                );
+
+            case "translateZ":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translateZ'.");
+                const valorTranslaçaoZ = this.avancarEDevolverAnterior();
+                let quantificadorTranslaçaoZ;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorTranslaçaoZ = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorTranslaçaoZ = null;
+                }
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translateZ'.");
+                return new SeletorValorReverso(
+                    lexema,
+                    [valorTranslaçaoZ, quantificadorTranslaçaoZ]
+                );
+
+            // case "url":
+            //     this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'url'.");
+            //     const url = this.validacaoUrl();
+            //     this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumento do método url.");
+            //     return new SeletorValorReverso(
+            //         lexema,
+            //         [url]
+            //     );
         }
     }
 
