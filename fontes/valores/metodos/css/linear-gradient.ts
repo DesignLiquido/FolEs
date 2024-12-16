@@ -24,8 +24,6 @@ export class LinearGradient extends MetodoCss {
 
         const cor2 = Object.keys(cores).filter(key => cores[key] === this.cor2);
         this.cor2 = cor2.toString();
-
-        this.quantificadorAngulo === 'graus' ? this.quantificadorAngulo = 'deg' : null;
         
         return `gradiente-linear(${this.valorAngulo}${this.quantificadorAngulo}, ${this.cor1}, ${this.cor2})`
     }

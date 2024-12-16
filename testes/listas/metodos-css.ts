@@ -47,7 +47,6 @@ export const MetodoCalcular: Array<string> = [
 
 export const MetodoGradienteLinear: Array<string> = [
     'mask-image',
-    'imagem-máscara',
     'border-image-source',
     'content',
 ];

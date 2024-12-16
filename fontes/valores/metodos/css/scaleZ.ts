@@ -12,6 +12,6 @@ export class ScaleZ extends MetodoCss {
     }
 
     paraTexto() {
-        return `escalamentoZ(${this.valor1})`
+        return `escalamento-eixo-z(${this.valor1})`
     }
 }
