@@ -1,6 +1,6 @@
 import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, TraducaoValoresMetodos } from "../listas/metodos-css";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, TraducaoValoresMetodos } from "../listas/metodos-css";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
 import { LexadorReverso } from "../../fontes/lexador/lexador-reverso";
 import { AvaliadorSintaticoReverso } from "../../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
@@ -143,7 +143,7 @@ describe('Testando MÉTODOS no processo de tradução reversa', () => {
               // Lexador
               const resultadoLexador = lexador.mapear([
                 "div {",
-                `${MetodoCalcular[index]}: calc(100px - 80px);`,
+                    `${MetodoCalcular[index]}: calc(100px - 80px);`,
                 "}"
               ]);
       
@@ -178,6 +178,64 @@ describe('Testando MÉTODOS no processo de tradução reversa', () => {
               const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
               expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCalcular[index]]);
               expect(resultadoTradutor).toContain('calcular(100px - 80px);');
+            }
+        });
+
+        it('Atribuindo Método "contrast()"', () => {
+            for (let index = 0; index < MetodoContraste.length; index += 1) {
+      
+              const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
+      
+              for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                  "div {",
+                        `${MetodoContraste[index]}: contrast(${valoresAceitos[valIndex]});`,
+                  "}"
+                ]);
+      
+                // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+                if (valIndex === 0 || valIndex === 1) {
+                  expect(resultadoLexador.simbolos).toHaveLength(11);
+                  expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                      expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                      expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                  );
+                } else {
+                  expect(resultadoLexador.simbolos).toHaveLength(10);
+                  expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                      expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    ])
+                  );
+                }
+      
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+      
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                  expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                  ])
+                );
+      
+      
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+      
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    MetodoContraste[index]
+                );
+      
+                // Tradutor deve serializar de acordo e traduzir contrast para contraste
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoContraste[index]]);
+                expect(resultadoTradutor).toContain(`contraste(${valoresAceitos[valIndex]});`);
+              }
             }
           });
     });
