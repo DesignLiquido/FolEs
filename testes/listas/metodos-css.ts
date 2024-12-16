@@ -146,5 +146,5 @@ export const TraducaoValoresMetodos: Object = {
     'offset-path': 'trajeto-deslocamento',
     'transform': 'transformar',
     'transition': 'transicao',
-    'animation-timing-function': 'velocidade-animação',
+    'animation-timing-function': 'velocidade-animacao',
 };

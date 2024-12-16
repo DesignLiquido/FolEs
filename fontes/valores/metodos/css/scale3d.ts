@@ -16,6 +16,6 @@ export class Scale3d extends MetodoCss {
     }
 
     paraTexto() {
-        return `escalamento3d(${this.valor1}, ${this.valor2}, ${this.valor3})`
+        return `escalamento-3d(${this.valor1}, ${this.valor2}, ${this.valor3})`
     }
 }
