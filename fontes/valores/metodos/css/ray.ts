@@ -18,7 +18,11 @@ export class Ray extends MetodoCss {
 
     paraTexto() {
         if (this.posicao) {
-            this.posicao = posicoesRaio[this.posicao];
+            for (const key in posicoesRaio) {
+                if(posicoesRaio[key] === this.posicao) {
+                    this.posicao = key;
+                }
+            }
             this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `raio(${this.posicao} ${this.valor}${this.quantificador})`
         }
