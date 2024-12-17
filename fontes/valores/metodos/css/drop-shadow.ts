@@ -26,18 +26,24 @@ export class DropShadow extends MetodoCss {
     }
 
     paraTexto() {
+        if (this.cor) {
+            for (const key in cores) {
+                if (cores[key] === this.cor) {
+                    this.cor = key;
+                }
+            }
+        }
+
         if (!this.valor3) {
             if (!this.cor) {
                 return `projetar-sombra(${this.valor1}${this.quantificador1} ${this.valor2}${this.quantificador2})`
             } else {
-                this.cor = cores[this.cor];
                 return `projetar-sombra(${this.valor1}${this.quantificador1} ${this.valor2}${this.quantificador2} ${this.cor})`
             }
         } else if (!this.cor) {
             return `projetar-sombra(${this.valor1}${this.quantificador1} ${this.valor2}${this.quantificador2} ${this.valor3}${this.quantificador3})`
         }
 
-        this.cor = cores[this.cor];
         return `projetar-sombra(${this.valor1}${this.quantificador1} ${this.valor2}${this.quantificador2} ${this.valor3}${this.quantificador3} ${this.cor})`
     }
 }

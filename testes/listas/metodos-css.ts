@@ -24,7 +24,6 @@ export const MetodoMinMax: Array<string> = [
     'grid-auto-columns',
     'grid-auto-rows',
     'grid-template-columns',
-    'modelo-linhas-em-grade',
 ];
 
 export const MetodoPassos: Array<string> = [

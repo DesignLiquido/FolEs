@@ -1114,5 +1114,58 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 }
             }
         });
+
+        it('Atribuindo Método "drop-shadow()" com valores de cor e de comprimento', () => {
+            for (let index = 0; index < MetodoProjetarSombra.length; index += 1) {
+                const comprimentos = [
+                    '15px 15px red',
+                    '15px 15px 15px red',
+                    'red 0.5rem 0.5rem',
+                    'red 0.5rem 0.5rem 1rem',
+                ];
+
+                for (let posIndex = 0; posIndex < comprimentos.length; posIndex += 1) {
+                    // Lexador                    
+                    const resultadoLexador = lexador.mapear([
+                        "div {",
+                            `${MetodoProjetarSombra[index]}: drop-shadow(${comprimentos[posIndex]});`,
+                        "}"
+                    ]);
+                    
+                    // O Lexador deve montar um objeto de acordo, sem retornar nenhum erro
+                    expect(resultadoLexador.erros).toHaveLength(0);
+
+                    // O valor recebido deve ser mapeado como METODO
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                        ])
+                    );
+
+                    // O Lexador também deve sempre encontrar valores e quantificadores na operação
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+
+                        ])
+                    );
+
+                    // Avaliador Sintático
+                    const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                    // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                        MetodoProjetarSombra[index]
+                    );
+
+                    // Tradutor
+                    const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                    // O Tradutor deve serializar de acordo e traduzir red para vermelho
+                    expect(resultadoTradutor).toContain('vermelho');
+                }
+            }
+        });
     });
 });
