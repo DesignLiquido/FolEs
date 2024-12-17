@@ -310,4 +310,12 @@ export default {
     "whitesmoke": tiposDeSimbolos.QUALITATIVO,
     "yellow": tiposDeSimbolos.QUALITATIVO,
     "yellowgreen": tiposDeSimbolos.QUALITATIVO,
+
+    // 2. POSIÇÕES
+    "closest-side": tiposDeSimbolos.QUALITATIVO, 
+    "closest-corner": tiposDeSimbolos.QUALITATIVO, 
+    "farthest-side": tiposDeSimbolos.QUALITATIVO, 
+    "farthest-corner": tiposDeSimbolos.QUALITATIVO, 
+    "sides": tiposDeSimbolos.QUALITATIVO, 
+    "contain": tiposDeSimbolos.QUALITATIVO,
 }
