@@ -652,6 +652,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 } else {
                     quantificadorRotacionar = null;
                 }
+
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotate'.");
                 return new SeletorValorReverso(
                     lexema,
@@ -667,6 +668,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 } else {
                     quantificadorRotacionarZ = null;
                 }
+
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotateZ'.");
                 return new SeletorValorReverso(
                     lexema,
@@ -777,8 +779,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     [valorTranslacao1, quantificadorTranlacao1, valorTranslacao2, quantificadorTranlacao2]
                 );
 
-            case "translate-3d":
-                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translate-3d'.");
+            case "translate3d":
+                this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'translate3d'.");
 
                 const valorTranslacao3d1 = this.avancarEDevolverAnterior();
 
@@ -792,7 +794,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 let valorTranslacao3d2;
                 let quantificadorTranlacao3d2;
                 if (this.simbolos[this.atual].tipo === 'VIRGULA') {
-                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate-3d'.");
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate3d'.");
                     valorTranslacao3d2 = this.avancarEDevolverAnterior();
                     if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                         quantificadorTranlacao3d2 = this.avancarEDevolverAnterior();
@@ -807,7 +809,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 let valorTranslacao3d3;
                 let quantificadorTranlacao3d3;
                 if (this.simbolos[this.atual].tipo === 'VIRGULA') {
-                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate-3d'.");
+                    this.consumir(tiposDeSimbolos.VIRGULA, "Esperado vírgula após primeiro argumento do método 'translate3d'.");
                     valorTranslacao3d3 = this.avancarEDevolverAnterior();
                     if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                         quantificadorTranlacao3d3 = this.avancarEDevolverAnterior();
@@ -819,7 +821,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorTranlacao3d3 = null;
                 }
 
-                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translate-3d'.");
+                this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translate3d'.");
                 return new SeletorValorReverso(
                     lexema,
                     [valorTranslacao3d1, quantificadorTranlacao3d1, valorTranslacao3d2, quantificadorTranlacao3d2, valorTranslacao3d3, quantificadorTranlacao3d3]
@@ -889,6 +891,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return this.resolverCor();
             case tiposDeSimbolos.METODO:
                 return this.resolverMetodo(valorModificador.lexema);
+            // case tiposDeSimbolos.IDENTIFICADOR:
+            //     return this.resolverMetodo(valorModificador.lexema);
             default:
                 return valorModificador;
         }
@@ -906,6 +910,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         );
 
         const valorModificador = this.valorModificador();
+
         let quantificador;
         if (valorModificador instanceof Simbolo && valorModificador.tipo === tiposDeSimbolos.NUMERO) {
             quantificador = this.avancarEDevolverAnterior();
@@ -915,7 +920,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
-
+        
         const classeModificadora = new SeletorReversoModificador(
             modificador.lexema,
             valorModificador instanceof Simbolo ? valorModificador.lexema : valorModificador,

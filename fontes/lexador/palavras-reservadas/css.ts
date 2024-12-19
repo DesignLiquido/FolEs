@@ -121,7 +121,7 @@ export default {
     'rotateY': tiposDeSimbolos.METODO,
     'hue-rotate': tiposDeSimbolos.METODO,
     'rotateX': tiposDeSimbolos.METODO,
-    'rotate': tiposDeSimbolos.METODO,
+    // 'rotate': tiposDeSimbolos.METODO,
     'saturate': tiposDeSimbolos.METODO,
     'sepia': tiposDeSimbolos.METODO,
     'translate3d': tiposDeSimbolos.METODO,
