@@ -1570,7 +1570,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
-          `${MetodoRaio[index]}: raio(200deg);`,
+          `${MetodoRaio[index]}: raio(200graus);`,
           "}"
         ]);
 
@@ -1804,7 +1804,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "rotacionar-matiz()"', () => {
       for (let index = 0; index < MetodoRotacionarMatiz.length; index += 1) {
 
-        const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
+        const valoresAceitos = ['90graus', '100px', '100%', '0.1', '0', '1', '1.75'];
 
         for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
           // Lexador
@@ -1825,7 +1825,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-          if (valIndex === 0 || valIndex === 1) {
+          if (valIndex <= 2) {
             expect(resultadoLexador.simbolos).toHaveLength(11);
             expect(resultadoLexador.simbolos).toEqual(
               expect.arrayContaining([
@@ -1855,7 +1855,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           // O Tradutor deve serializar de acordo e traduzir rotacionar-matiz para hue-rotate
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]);
-          expect(resultadoTradutor).toContain(`hue-rotate(${valoresAceitos[valIndex]});`);
+
+          if (valIndex !== 0) {
+            expect(resultadoTradutor).toContain(`hue-rotate(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`hue-rotate(90deg);`);
+          }
         }
       }
     });
@@ -2109,7 +2114,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Lexador
         const resultadoLexador = lexador.mapear([
           "lmht {",
-          `${MetodosTranslacao[index]}: translacao(3ch, 3mm);`,
+          `${MetodosTranslacao[index]}: translacao(100graus, 100graus);`,
           "}"
         ]);
 
@@ -2145,7 +2150,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // O Tradutor deve serializar de acordo e traduzir translacao para translate
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-        expect(resultadoTradutor).toContain(`translate(3ch, 3mm);`);
+        expect(resultadoTradutor).toContain(`translate(100deg, 100deg);`);
       }
     });
 
