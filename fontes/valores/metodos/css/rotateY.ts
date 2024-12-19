@@ -15,7 +15,6 @@ export class RotateY extends MetodoCss {
 
     paraTexto() {
         if (this.quantificador) {
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `rotacionar-vertical(${this.valor}${this.quantificador})`
         }
 

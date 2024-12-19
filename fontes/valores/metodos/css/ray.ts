@@ -23,7 +23,6 @@ export class Ray extends MetodoCss {
                     this.posicao = key;
                 }
             }
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `raio(${this.posicao} ${this.valor}${this.quantificador})`
         }
 

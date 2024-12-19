@@ -15,7 +15,6 @@ export class RotateZ extends MetodoCss {
 
     paraTexto() {
         if (this.quantificador) {
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `rotacionar-eixo-z(${this.valor}${this.quantificador})`
         }
 

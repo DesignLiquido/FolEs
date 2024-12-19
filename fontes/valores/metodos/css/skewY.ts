@@ -15,7 +15,6 @@ export class SkewY extends MetodoCss {
 
     paraTexto() {
         if (this.quantificador) {
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `inclinar-vertical(${this.valor}${this.quantificador})`
         }
 

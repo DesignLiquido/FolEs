@@ -15,7 +15,6 @@ export class HueRotate extends MetodoCss {
 
     paraTexto() {
         if (this.quantificador) {
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `rotacionar-matiz(${this.valor}${this.quantificador})`
         }
 

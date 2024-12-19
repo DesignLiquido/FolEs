@@ -15,7 +15,6 @@ export class SkewX extends MetodoCss {
 
     paraTexto() {
         if (this.quantificador) {
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
             return `inclinar-horizontal(${this.valor}${this.quantificador})`
         }
 
