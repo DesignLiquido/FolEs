@@ -4,7 +4,7 @@ import { LexadorReverso } from "../../fontes/lexador/lexador-reverso";
 import { AvaliadorSintaticoReverso } from "../../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
 import { SerializadorReverso } from "../../fontes/serializadores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoPassos, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     describe('Testes Unitários', () => {
@@ -1263,7 +1263,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
-        it.skip('Atribuindo Método "rotate()"', () => {
+        it('Atribuindo Método "rotate()"', () => {
             for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
                 const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];
@@ -1272,13 +1272,13 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     // Lexador
                     const resultadoLexador = lexador.mapear([
                         "div {",
-                            `${MetodosRotacionar[index]}: rotate(${valoresAceitos[valIndex]});`,
+                        `${MetodosRotacionar[index]}: rotate(${valoresAceitos[valIndex]});`,
                         "}"
                     ]);
 
                     // O Lexador não deve encontrar erros
                     expect(resultadoLexador.erros).toHaveLength(0);
-                    
+
                     // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
                     if (valIndex <= 1) {
                         expect(resultadoLexador.simbolos).toHaveLength(11);
