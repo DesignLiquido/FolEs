@@ -271,7 +271,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após segundo argumento do método scale.");
                 return new SeletorValorReverso(
                     lexema,
-                    [valorScale1, valorScale2]
+                    [valorScale1, valorScale2],
+                    true
                 );
 
             case "scale3d":
@@ -525,7 +526,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         lexema,
                         [valor01['lexema'], parametro02]
                     );
-                }
+            }
 
             case "opacity":
                 this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'opacity'.");
@@ -539,7 +540,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'opacity'.");
                 return new SeletorValorReverso(
                     lexema,
-                    [valorOpaco, quantificadorOpaco]
+                    [valorOpaco, quantificadorOpaco],
+                    true
                 );
 
             case "steps":
@@ -565,7 +567,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'perspective'.");
                 return new SeletorValorReverso(
                     lexema,
-                    [valorPerspectivar, quantificadorPerspectivar]
+                    [valorPerspectivar, quantificadorPerspectivar],
+                    true
                 );
 
             case "drop-shadow":
@@ -656,7 +659,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'rotate'.");
                 return new SeletorValorReverso(
                     lexema,
-                    [valorRotacionar, quantificadorRotacionar]
+                    [valorRotacionar, quantificadorRotacionar],
+                    true
                 );
 
             case "rotateZ":
@@ -776,7 +780,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após método 'translação'.");
                 return new SeletorValorReverso(
                     lexema,
-                    [valorTranslacao1, quantificadorTranlacao1, valorTranslacao2, quantificadorTranlacao2]
+                    [valorTranslacao1, quantificadorTranlacao1, valorTranslacao2, quantificadorTranlacao2],
+                    true
                 );
 
             case "translate3d":
@@ -882,8 +887,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return this.resolverCor();
             case tiposDeSimbolos.METODO:
                 return this.resolverMetodo(valorModificador.lexema);
-            // case tiposDeSimbolos.IDENTIFICADOR:
-            //     return this.resolverMetodo(valorModificador.lexema);
+            case tiposDeSimbolos.IDENTIFICADOR:
+                return this.resolverMetodo(valorModificador.lexema);
             default:
                 return valorModificador;
         }
