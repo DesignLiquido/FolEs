@@ -382,6 +382,47 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
+        it('Atribuindo Método "scale()"', () => {
+            for (let index = 0; index < MetodosEscalamento.length; index += 1) {
+
+                const valoresAceitos = ['0.1', '0', '1', '1.75'];
+
+                for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+                    // Lexador
+                    const resultadoLexador = lexador.mapear([
+                        "div {",
+                            `${MetodosEscalamento[index]}: scale(${valoresAceitos[valIndex]});`,
+                        "}"
+                    ]);
+
+                    // O Lexador não deve encontrar erros
+                    expect(resultadoLexador.erros).toHaveLength(0);
+
+                    // O Lexador deve montar um objeto de comprimento 10
+                    expect(resultadoLexador.simbolos).toHaveLength(10);
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        ])
+                    );
+
+                    // Avaliador Sintático
+                    const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                    // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                        MetodosEscalamento[index]
+                    );
+
+                    // Tradutor
+                    const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                    // O Tradutor deve serializar de acordo e traduzir scale para escalamento
+                    expect(resultadoTradutor).toContain(`escalamento(${valoresAceitos[valIndex]});`);
+                }
+            }
+        });
+
         it('Atribuindo Método "scale3d()"', () => {
             for (let index = 0; index < MetodosEscalamento.length; index += 1) {
                 // Lexador
@@ -1035,7 +1076,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     // Lexador
                     const resultadoLexador = lexador.mapear([
                         "div {",
-                            `${MetodoOpacar[index]}: opacity(${valoresAceitos[valIndex]});`,
+                        `${MetodoOpacar[index]}: opacity(${valoresAceitos[valIndex]});`,
                         "}"
                     ]);
 
@@ -1084,63 +1125,63 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
-            it('Atribuindo Método "perspective()"', () => {
-              for (let index = 0; index < MetodoPerspectivar.length; index += 1) {
-        
+        it('Atribuindo Método "perspective()"', () => {
+            for (let index = 0; index < MetodoPerspectivar.length; index += 1) {
+
                 const valoresAceitos = ['800px', '6.5cm', '0.1', '0', '1', '1.75'];
-        
+
                 for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
-                  // Lexador
-                  const resultadoLexador = lexador.mapear([
-                    "div {",
+                    // Lexador
+                    const resultadoLexador = lexador.mapear([
+                        "div {",
                         `${MetodoPerspectivar[index]}: perspective(${valoresAceitos[valIndex]});`,
-                    "}"
-                  ]);
-        
-                  // O Lexador não deve encontrar erros
-                  expect(resultadoLexador.erros).toHaveLength(0);
-        
-                  // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
-                  if (valIndex === 0 || valIndex === 1) {
-                    expect(resultadoLexador.simbolos).toHaveLength(11);
-                    expect(resultadoLexador.simbolos).toEqual(
-                      expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
-                      ])
+                        "}"
+                    ]);
+
+                    // O Lexador não deve encontrar erros
+                    expect(resultadoLexador.erros).toHaveLength(0);
+
+                    // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+                    if (valIndex === 0 || valIndex === 1) {
+                        expect(resultadoLexador.simbolos).toHaveLength(11);
+                        expect(resultadoLexador.simbolos).toEqual(
+                            expect.arrayContaining([
+                                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                            ])
+                        );
+                    } else if (valIndex !== 6) {
+                        expect(resultadoLexador.simbolos).toHaveLength(10);
+                        expect(resultadoLexador.simbolos).toEqual(
+                            expect.arrayContaining([
+                                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                            ])
+                        );
+                    } else {
+                        expect(resultadoLexador.simbolos).toHaveLength(10);
+                        expect(resultadoLexador.simbolos).toEqual(
+                            expect.arrayContaining([
+                                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                            ])
+                        );
+                    }
+
+                    // Avaliador Sintático
+                    const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                    // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                        MetodoPerspectivar[index]
                     );
-                  } else if (valIndex !== 6) {
-                    expect(resultadoLexador.simbolos).toHaveLength(10);
-                    expect(resultadoLexador.simbolos).toEqual(
-                      expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-                      ])
-                    );
-                  } else {
-                    expect(resultadoLexador.simbolos).toHaveLength(10);
-                    expect(resultadoLexador.simbolos).toEqual(
-                      expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
-                      ])
-                    );
-                  }
-        
-                  // Avaliador Sintático
-                  const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-        
-                  // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                  expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    MetodoPerspectivar[index]
-                  );
-        
-                  // Tradutor
-                  const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-        
-                  // O Tradutor deve serializar de acordo e traduzir perspective para perspectivar
-                  expect(resultadoTradutor).toContain(`perspectivar(${valoresAceitos[valIndex]});`);
+
+                    // Tradutor
+                    const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                    // O Tradutor deve serializar de acordo e traduzir perspective para perspectivar
+                    expect(resultadoTradutor).toContain(`perspectivar(${valoresAceitos[valIndex]});`);
                 }
-              }
-            });
+            }
+        });
 
         it('Atribuindo Método "steps()"', () => {
             for (let index = 0; index < MetodoPassos.length; index += 1) {
