@@ -1871,6 +1871,43 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
+        it('Atribuindo Método "translate() com múltiplos valores"', () => {
+            for (let index = 0; index < MetodosTranslacao.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "div {",
+                        `${MetodosTranslacao[index]}: translate(100deg, 100deg);`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O Lexador deve montar um objeto de comprimento 14
+                expect(resultadoLexador.simbolos).toHaveLength(14);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    MetodosTranslacao[index]
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo e traduzir translate para translação
+                expect(resultadoTradutor).toContain(`translação(100deg, 100deg);`);
+            }
+        });
+
         it('Atribuindo Método "translateX()"', () => {
             for (let index = 0; index < MetodosTranslacao.length; index += 1) {
 
