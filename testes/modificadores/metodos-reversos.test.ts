@@ -391,7 +391,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     // Lexador
                     const resultadoLexador = lexador.mapear([
                         "div {",
-                            `${MetodosEscalamento[index]}: scale(${valoresAceitos[valIndex]});`,
+                        `${MetodosEscalamento[index]}: scale(${valoresAceitos[valIndex]});`,
                         "}"
                     ]);
 
@@ -1815,6 +1815,58 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
                     // O Tradutor deve serializar de acordo e traduzir sépia para sepia
                     expect(resultadoTradutor).toContain(`sepia(${valoresAceitos[valIndex]});`);
+                }
+            }
+        });
+
+        it('Atribuindo Método "translate()"', () => {
+            for (let index = 0; index < MetodosTranslacao.length; index += 1) {
+
+                const valoresAceitos = ['18deg', '3.142rad', '0', '1'];
+
+                for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+                    // Lexador
+                    const resultadoLexador = lexador.mapear([
+                        "div {",
+                        `${MetodosTranslacao[index]}: translate(${valoresAceitos[valIndex]});`,
+                        "}"
+                    ]);
+
+                    // O Lexador não deve encontrar erros
+                    expect(resultadoLexador.erros).toHaveLength(0);
+
+                    // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+                    if (valIndex <= 1) {
+                        expect(resultadoLexador.simbolos).toHaveLength(11);
+                        expect(resultadoLexador.simbolos).toEqual(
+                            expect.arrayContaining([
+                                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                            ])
+                        );
+                    } else {
+                        expect(resultadoLexador.simbolos).toHaveLength(10);
+                        expect(resultadoLexador.simbolos).toEqual(
+                            expect.arrayContaining([
+                                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                            ])
+                        );
+                    }
+
+                    // Avaliador Sintático
+                    const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                    // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                        MetodosTranslacao[index]
+                    );
+
+                    // Tradutor
+                    const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                    // O Tradutor deve serializar de acordo e traduzir translate para translação
+                    expect(resultadoTradutor).toContain(`translação(${valoresAceitos[valIndex]});`);
+
                 }
             }
         });
