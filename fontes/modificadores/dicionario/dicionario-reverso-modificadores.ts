@@ -402,7 +402,6 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Translate } from "../../valores/metodos/css/translate";
-import { Url } from "../../valores/metodos/css/url";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -811,5 +810,4 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "translateX": TranslateX,
     "translateY": TranslateY,
     "translateZ": TranslateZ,
-    "url": Url,
 }

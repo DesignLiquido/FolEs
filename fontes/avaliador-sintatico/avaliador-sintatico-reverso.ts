@@ -871,15 +871,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorTranslaçaoZ, quantificadorTranslaçaoZ]
                 );
-
-            // case "url":
-            //     this.consumir(tiposDeSimbolos.PARENTESE_ESQUERDO, "Esperado parêntese esquerdo após método 'url'.");
-            //     const url = this.validacaoUrl();
-            //     this.consumir(tiposDeSimbolos.PARENTESE_DIREITO, "Esperado parêntese direito após argumento do método url.");
-            //     return new SeletorValorReverso(
-            //         lexema,
-            //         [url]
-            //     );
         }
     }
 
