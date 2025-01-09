@@ -8,7 +8,7 @@ export class Perspective extends MetodoCss {
     
     constructor(valor: Simbolo, quantificador: Simbolo) {
         super();
-        this.valor = typeof valor === "number" ? Number((valor as Simbolo).lexema) : (valor as Simbolo).lexema;
+        this.valor = (valor as Simbolo).lexema;
         this.quantificador = quantificador ? quantificador.lexema : null;
         this.traducao = 'perspective';
     }
