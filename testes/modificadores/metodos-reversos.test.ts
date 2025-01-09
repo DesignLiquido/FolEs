@@ -1060,7 +1060,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
-        it('Atribuindo Método "minmax()"', () => {
+        it('Atribuindo Método "minmax()" com valor máximo', () => {
             for (let index = 0; index < MetodoMinMax.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -1100,7 +1100,51 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // Tradutor
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
-                expect(resultadoTradutor).toContain('minmax(100px, conteudo-maximo);');
+                expect(resultadoTradutor).toContain('minmax(100px, conteudo-máximo);');
+            }
+        });
+
+        it('Atribuindo Método "minmax()" com valor mínimo', () => {
+            for (let index = 0; index < MetodoMinMax.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "div {",
+                    `${MetodoMinMax[index]}: minmax(min-content, 100px);`,
+                    "}"
+                ]);
+
+                // O Lexador deve montar um objeto de comprimento 13 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(13);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // O Lexador também deve encontrar número e quantificador no mapeamento
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+
+                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    MetodoMinMax[index]
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
+                expect(resultadoTradutor).toContain('minmax(conteudo-mínimo, 100px);');
             }
         });
 
