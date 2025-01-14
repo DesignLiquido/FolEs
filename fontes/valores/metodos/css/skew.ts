@@ -1,10 +1,10 @@
 import { Simbolo } from "../../../lexador";
-import { Metodo } from "./metodo";
+import { MetodoCss } from "./metodo-css";
 
-export class Translacao extends Metodo {
+export class Skew extends MetodoCss {
     valor1: number;
     quantificador1: string;
-    valor2: number;
+    valor2: number | string;
     quantificador2: string;
     traducao: string;
     
@@ -14,27 +14,18 @@ export class Translacao extends Metodo {
         this.quantificador1 = quantificador1 ? quantificador1.lexema : null;
         this.valor2 = valor2 ? Number(valor2.lexema) : null;
         this.quantificador2 = quantificador2 ? quantificador2.lexema : null;
-        this.traducao = 'translate';
+        this.traducao = 'skew';
     }
 
     paraTexto() {
         if (!this.quantificador1 && !this.valor2 && !this.quantificador2) {
-            return `translate(${this.valor1})`
+            return `inclinar(${this.valor1})`
         }
 
         if (!this.valor2 && !this.quantificador2) {
-            this.quantificador1 === 'graus' ? this.quantificador1 = 'deg' : null;
-            return `translate(${this.valor1}${this.quantificador1})`
+            return `inclinar(${this.valor1}${this.quantificador1})`
         }
 
-        if (this.quantificador1 === 'graus') {
-            this.quantificador1 = 'deg';
-        } 
-            
-        if (this.quantificador2 === 'graus') {
-            this.quantificador2 = 'deg';
-        } 
-
-        return `translate(${this.valor1}${this.quantificador1}, ${this.valor2}${this.quantificador2})`
+        return `inclinar(${this.valor1}${this.quantificador1}, ${this.valor2}${this.quantificador2})`
     }
 }

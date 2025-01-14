@@ -1,8 +1,8 @@
 import { Simbolo } from "../../../lexador";
-import { Metodo } from "./metodo";
 import { posicoesRaio } from "../../../modificadores/atributos/posicoes";
+import { MetodoCss } from "./metodo-css";
 
-export class Raio extends Metodo {
+export class Ray extends MetodoCss {
     posicao: string;
     valor: number;
     quantificador: string;
@@ -17,15 +17,15 @@ export class Raio extends Metodo {
     }
 
     paraTexto() {
-        if (this.quantificador === 'graus') {
-            this.quantificador = 'deg'
-        }
-        
         if (this.posicao) {
-            this.posicao = posicoesRaio[this.posicao];
-            return `ray(${this.posicao} ${this.valor}${this.quantificador})`
+            for (const key in posicoesRaio) {
+                if(posicoesRaio[key] === this.posicao) {
+                    this.posicao = key;
+                }
+            }
+            return `raio(${this.posicao} ${this.valor}${this.quantificador})`
         }
 
-        return `ray(${this.valor}${this.quantificador})`
+        return `raio(${this.valor}${this.quantificador})`
     }
 }

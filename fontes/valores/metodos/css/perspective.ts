@@ -1,7 +1,7 @@
 import { Simbolo } from "../../../lexador";
-import { Metodo } from "./metodo";
+import { MetodoCss } from "./metodo-css";
 
-export class Perspectivar extends Metodo {
+export class Perspective extends MetodoCss {
     valor: number | string;
     quantificador: string;
     traducao: string;
@@ -13,11 +13,11 @@ export class Perspectivar extends Metodo {
         this.traducao = 'perspective';
     }
 
-    paraTexto() {        
+    paraTexto() {
         if (this.quantificador) {
-            return `perspective(${this.valor}${this.quantificador})`
+            return `perspectivar(${this.valor}${this.quantificador})`
         }
 
-        return `perspective(${this.valor})`
+        return `perspectivar(${this.valor})`
     }
 }

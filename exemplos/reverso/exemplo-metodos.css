@@ -1,0 +1,47 @@
+div {
+    backdrop-filter: blur(10);
+    gap: calc(100px - 10px);
+    filter: contrast(50);
+    animation: cubic-bezier(0, 0, 1, 1);
+    height: fit-content(10%);
+    transform: scaleZ(20);
+}
+
+p {
+    backdrop-filter: grayscale(10%);
+    transform: scale3d(1, 1, 1);
+    border-image-source: linear-gradient(45deg, blue, red);
+    height: clamp(1.5rem, 2.5vw, 4rem);
+    color: rgba(150, 0, 150);
+}
+
+html {
+    background-color: hsla(50 80% 40%);
+    transform: skewY(15deg);
+    backdrop-filter: invert(50%);
+    animation: linear(0, 0.25, 1);
+    grid-template-columns: minmax(100px, max-content);
+}
+
+div {
+    transition-timing-function: steps(4, jump-both);
+    backdrop-filter: drop-shadow(5px 5px 15px);
+    offset-path: ray(200deg);
+    color: rgb(230, 200, 150);
+    transform: rotateZ(0);
+}
+
+a {
+    backdrop-filter: hue-rotate(90deg);
+    transform: translateX(200px);
+}
+
+p {
+    backdrop-filter: sepia(60%);
+    transform: translateY(50%);
+}
+
+div {
+    backdrop-filter: saturate(5);
+    transform: translateZ(150);
+}

@@ -363,6 +363,45 @@ import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
 import { Blur } from "../../valores/metodos/css/blur";
 import { Brightness } from "../../valores/metodos/css/brightness";
+import { Calc } from "../../valores/metodos/css/calc";
+import { Contrast } from "../../valores/metodos/css/constrast";
+import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
+import { FitContent } from "../../valores/metodos/css/fit-content";
+import { Grayscale } from "../../valores/metodos/css/grayscale";
+import { Scale3d } from "../../valores/metodos/css/scale3d";
+import { Scale } from "../../valores/metodos/css/scale";
+import { ScaleX } from "../../valores/metodos/css/scaleX";
+import { ScaleY } from "../../valores/metodos/css/scaleY";
+import { ScaleZ } from "../../valores/metodos/css/scaleZ";
+import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
+import { Hsl } from "../../valores/metodos/foles/hsl";
+import { Hsla } from "../../valores/metodos/foles/hsla";
+import { SkewX } from "../../valores/metodos/css/skewX";
+import { SkewY } from "../../valores/metodos/css/skewY";
+import { Skew } from "../../valores/metodos/css/skew";
+import { Invert } from "../../valores/metodos/css/invert";
+import { Clamp } from "../../valores/metodos/css/clamp";
+import { Linear } from "../../valores/metodos/foles/linear";
+import { MinMax } from "../../valores/metodos/css/minmax";
+import { Opacity } from "../../valores/metodos/css/opacity";
+import { Steps } from "../../valores/metodos/css/steps";
+import { Perspective } from "../../valores/metodos/css/perspective";
+import { DropShadow } from "../../valores/metodos/css/drop-shadow";
+import { Ray } from "../../valores/metodos/css/ray";
+import { Rgb } from "../../valores/metodos/foles/rgb";
+import { Rgba } from "../../valores/metodos/foles/rgba";
+import { Rotate } from "../../valores/metodos/css/rotate";
+import { RotateX } from "../../valores/metodos/css/rotateX";
+import { RotateY } from "../../valores/metodos/css/rotateY";
+import { RotateZ } from "../../valores/metodos/css/rotateZ";
+import { HueRotate } from "../../valores/metodos/css/hue-rotate";
+import { Saturate } from "../../valores/metodos/css/saturate";
+import { Sepia } from "../../valores/metodos/css/sepia";
+import { Translate3d } from "../../valores/metodos/css/translate3d";
+import { TranslateZ } from "../../valores/metodos/css/translateZ";
+import { TranslateX } from "../../valores/metodos/css/translateX";
+import { TranslateY } from "../../valores/metodos/css/translateY";
+import { Translate } from "../../valores/metodos/css/translate";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -585,7 +624,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "scroll-margin-top": MargemSuperiorRolagemMouse,
     "mask": Mascara,
     "background-blend-mode": MesclarFundo,
-    "grid-template-column": ModeloColunasEmGrade,
+    "grid-template-columns": ModeloColunasEmGrade,
     "grid-template": ModeloEmGrade,
     "grid-template-areas": ModeloGeralEmGrade,
     "grid-template-rows": ModeloLinhasEmGrade,
@@ -732,4 +771,43 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     // METODOS
     "blur": Blur,
     "brightness": Brightness,
+    "calc": Calc,
+    "clamp": Clamp,
+    "contrast": Contrast,
+    "cubic-bezier": CubicBezier,
+    "drop-shadow": DropShadow,
+    "fit-content": FitContent,
+    "grayscale": Grayscale,
+    "hsl": Hsl,
+    "hsla": Hsla,
+    "hue-rotate": HueRotate,
+    "invert": Invert,
+    "linear": Linear,
+    "linear-gradient": LinearGradient,
+    "minmax": MinMax,
+    // "opacity": Opacity,
+    // "perspective": Perspective,
+    "ray": Ray,
+    "rgb": Rgb,
+    "rgba": Rgba,
+    // "rotate": Rotate,
+    "rotateX":  RotateX,
+    "rotateY": RotateY,
+    "rotateZ": RotateZ,
+    "saturate": Saturate,
+    "scale3d": Scale3d,
+    // "scale": Scale,
+    "scaleX": ScaleX,
+    "scaleY": ScaleY,
+    "scaleZ": ScaleZ,
+    "sepia": Sepia,
+    "skew": Skew,
+    "skewX": SkewX,
+    "skewY": SkewY,
+    "steps": Steps,
+    // "translate": Translate,
+    "translate3d": Translate3d,
+    "translateX": TranslateX,
+    "translateY": TranslateY,
+    "translateZ": TranslateZ,
 }

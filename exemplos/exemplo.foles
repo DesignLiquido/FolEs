@@ -27,3 +27,7 @@
 %campos {
     margem-inferior: 50px;
 }
+
+lmht {
+    cor-fundo: hsl(50, 80%, 80%);
+}

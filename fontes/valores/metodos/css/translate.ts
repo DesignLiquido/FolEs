@@ -1,7 +1,7 @@
 import { Simbolo } from "../../../lexador";
-import { Metodo } from "./metodo";
+import { MetodoCss } from "./metodo-css";
 
-export class Translacao extends Metodo {
+export class Translate extends MetodoCss {
     valor1: number;
     quantificador1: string;
     valor2: number;
@@ -19,22 +19,13 @@ export class Translacao extends Metodo {
 
     paraTexto() {
         if (!this.quantificador1 && !this.valor2 && !this.quantificador2) {
-            return `translate(${this.valor1})`
+            return `translação(${this.valor1})`
         }
 
         if (!this.valor2 && !this.quantificador2) {
-            this.quantificador1 === 'graus' ? this.quantificador1 = 'deg' : null;
-            return `translate(${this.valor1}${this.quantificador1})`
+            return `translação(${this.valor1}${this.quantificador1})`
         }
 
-        if (this.quantificador1 === 'graus') {
-            this.quantificador1 = 'deg';
-        } 
-            
-        if (this.quantificador2 === 'graus') {
-            this.quantificador2 = 'deg';
-        } 
-
-        return `translate(${this.valor1}${this.quantificador1}, ${this.valor2}${this.quantificador2})`
+        return `translação(${this.valor1}${this.quantificador1}, ${this.valor2}${this.quantificador2})`
     }
 }

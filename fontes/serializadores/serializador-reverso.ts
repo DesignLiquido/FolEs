@@ -28,9 +28,9 @@ export class SerializadorReverso {
         } else {
             valor = modificador.valor;
         }
-
+        
         return " ".repeat(indentacao) +
-            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador};\n`;
+            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador ? quantificador : ''};\n`;
     }
 
     serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
@@ -55,7 +55,7 @@ export class SerializadorReverso {
             for (const modificador of declaracao.modificadores) {
                 resultado += this.serializarModificador(modificador, indentacao + 4);
             }
-
+            
             if (this.serializarComAninhamentos) {
                 resultado += this.serializar(
                     declaracao.declaracoesAninhadas,
