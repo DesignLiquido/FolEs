@@ -14,6 +14,10 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas
         );
 
+        if (valor.includes("'") || valor.includes('"')) {
+            this.valoresAceitos[valor] = valor;
+        }
+
         validarValorNumerico('configurações-variação-fonte', valor, this.valoresAceitos);
         this.valor = valor;
 

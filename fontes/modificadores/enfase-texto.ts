@@ -24,6 +24,10 @@ export class EnfaseTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
+        if (valor.includes("'") || valor.includes('"')) {
+            this.valoresAceitos[valor] = valor;
+        }
+
         validarValorCor('ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;

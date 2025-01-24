@@ -9,6 +9,10 @@ export class Citacoes extends Modificador {
 
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(["citacoes", "citações"], "quotes", pragmas);
+        
+        if (valor.includes("'") || valor.includes('"')) {
+            this.valoresAceitos[valor] = valor;
+        }
 
         validarValores("citações", valor, this.valoresAceitos);
 

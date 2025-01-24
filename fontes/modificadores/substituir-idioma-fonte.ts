@@ -9,6 +9,10 @@ export class SubstituirIdiomaFonte extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super("substituir-idioma-fonte", "font-language-override", pragmas);
 
+        if (valor.includes("'") || valor.includes('"')) {
+            this.valoresAceitos[valor] = valor;
+        }
+
         validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
         this.valor = valor;
 

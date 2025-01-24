@@ -20,19 +20,13 @@ export class EstiloEnfaseTexto extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
-            "text-emphasis-style", 
+            "text-emphasis-style",
             pragmas
         );
 
-        // OBS.: O seletor também aceita receber STRINGS, desde que essas contenham UM caractere.
-        
-        // Ex.1: estilo-ênfase-texto: "x";
-        // Ex.2: estilo-ênfase-texto: "\25B2"; // ESSE CASO É PERMITIDO.
-        // Ex.3: estilo-ênfase-texto: "foo"; // ESSE CASO NÃO É PERMITIDO! 
-        
-        // OBS.2: Dada a complexidade do Exemplo 2, uma simples condicional avaliando se a string
-        // possui 1 caractere não seria suficiente. A própria documentação não é muito clara sobre esse exemplo.
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style 
+        if (valor.includes("'") || valor.includes('"')) {
+            this.valoresAceitos[valor] = valor;
+        }
 
         validarValores('estilo-ênfase-texto', valor, this.valoresAceitos);
 
