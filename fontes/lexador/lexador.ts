@@ -120,10 +120,18 @@ export class Lexador implements LexadorInterface {
         literal: any = null,
         lexema: string = null
     ): void {
-        const texto: string = this.codigo[this.linha].substring(
+        let texto: string;
+        texto = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
+
+        if (tipo === tiposDeSimbolos.TEXTO) {
+            texto = this.codigo[this.linha].substring(
+                this.inicioSimbolo,
+                this.atual + 1
+            );
+        }
 
         this.simbolos.push(
             new Simbolo(
