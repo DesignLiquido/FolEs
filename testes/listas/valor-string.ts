@@ -3,10 +3,19 @@ export const ValorString: Array<string> = [
     'citacoes',
     'configurações-variação-fonte',
     'configuracoes-variacao-fonte',
-    'enfase-texto',
     'ênfase-texto',
+    'enfase-texto',
     'estilo-ênfase-texto',
     'estilo-enfase-texto',
+    'substituir-idioma-fonte',
+    'vazamento-texto',
+];
+
+export const ValorStringAcentuado: Array<string> = [
+    'citações',
+    'configurações-variação-fonte',
+    'ênfase-texto',
+    'estilo-ênfase-texto',
     'substituir-idioma-fonte',
     'vazamento-texto',
 ];

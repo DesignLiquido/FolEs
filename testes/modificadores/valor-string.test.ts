@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { ValorString } from "../listas/valor-string";
+import { ValorString, ValorStringAcentuado } from "../listas/valor-string";
 
 describe('Testando Seletores com VALORES STRING', () => {
     describe('Testes Unitários', () => {
@@ -21,7 +21,7 @@ describe('Testando Seletores com VALORES STRING', () => {
             tradutor = new Serializador();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Caso de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorString).length; index += 1) {
 
                 const valoresString = [
@@ -62,12 +62,28 @@ describe('Testando Seletores com VALORES STRING', () => {
                     // Avaliador Sintático
                     const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
                     expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toContain(ValorString[index]);
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toContain(valoresString[valIndex]);                    
-                    
+                    expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toContain(valoresString[valIndex]);
+
                     // Tradutor
                     const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
                     expect(resultadoTradutor).toContain(valoresString[valIndex]);
                 }
+            }
+        });
+
+        it('Caso de falha - Avaliador sintático deve retornar erro ', () => {
+            for (let index = 0; index < Object.keys(ValorStringAcentuado).length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                        `${ValorStringAcentuado[index]}: x;`,
+                    "}"
+                ]);
+
+                // Avaliador Sintático não deve aceitar o valor string sem aspas
+                expect(() => {
+                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
+                }).toThrowError(`Propriedade '${ValorStringAcentuado[index]}' com valor x inválido`);
             }
         });
     });
