@@ -10,6 +10,10 @@ export class VazamentoTexto extends Modificador {
     constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
         super("vazamento-texto", "text-overflow", pragmas);
 
+        if (valor.includes("'") || valor.includes('"')) {
+            this.valoresAceitos[valor] = valor;
+        }
+
         validarValores('vazamento-texto', valor, this.valoresAceitos);
 
         this.valor = valor;

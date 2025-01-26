@@ -17,3 +17,12 @@ lmht {
     atraso-transicao: 2s, 4ms;
     duracao-animacao: 10s, 35s, 230ms;
 }
+
+lmht {
+    citações: "x";
+    configuracoes-variacao-fonte: "<";
+    enfase-texto: 'foo';
+    estilo-enfase-texto: "\25B2";
+    substituir-idioma-fonte: "«" "»" "‹" "›";
+    vazamento-texto: 'xxxxx';
+}
