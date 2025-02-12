@@ -1,5 +1,6 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class EstiloEnfaseTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -24,7 +25,9 @@ export class EstiloEnfaseTexto extends Modificador {
             pragmas
         );
 
-        if (valor.includes("'") || valor.includes('"')) {
+        const validacaoString = validarValorString(valor);
+
+        if (validacaoString) {
             this.valoresAceitos[valor] = valor;
         }
 

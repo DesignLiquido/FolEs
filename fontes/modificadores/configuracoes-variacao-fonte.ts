@@ -1,6 +1,7 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
+import { validarValorString } from "./validacoes/string";
 
 export class ConfiguracoesVariacaoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,7 +15,9 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas
         );
 
-        if (valor.includes("'") || valor.includes('"')) {
+        const validacaoString = validarValorString(valor);
+
+        if (validacaoString) {
             this.valoresAceitos[valor] = valor;
         }
 
