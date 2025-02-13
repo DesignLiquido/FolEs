@@ -25,5 +25,6 @@ export default {
     QUALITATIVO: "QUALITATIVO",
     TEXTO: "TEXTO",
     TIL: "TIL",
+    VARIAVEL: "VARIAVEL",
     VIRGULA: "VIRGULA"
 }
