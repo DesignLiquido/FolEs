@@ -214,49 +214,6 @@ export class Lexador implements LexadorInterface {
         this.adicionarSimbolo(tiposDeSimbolos.TEXTO, valor);
     }
 
-    analisarVariaveis(): void {
-        this.linha = 0;
-        let indexBase = 0;
-        const indexLimite = this.simbolos.length;
-
-        const declaracoesVariaveis: Array<Simbolo[]> = [];
-        const atribuicoesVariaveis: Array<Simbolo[]> = [];
-
-        while (!this.eFinalDoCodigo() && indexBase < indexLimite) {
-            // console.log(this.simbolos[indexBase]);
-
-            if (this.simbolos[indexBase].tipo === tiposDeSimbolos.VARIAVEL) {
-                const variavelDeclarada = [];
-                while (this.simbolos[indexBase].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
-                    // this.simbolos[indexBase].literal = indexBase; // !!!!
-                    variavelDeclarada.push(this.simbolos[indexBase]);
-                    indexBase += 1;
-                }
-
-                if (variavelDeclarada.length === 2) {
-                    atribuicoesVariaveis.push(variavelDeclarada);
-                } else {
-                    // variavelDeclarada.forEach((variavel) => {
-                    //     this.simbolos.splice(variavel.literal, 1);
-                    // });
-                    declaracoesVariaveis.push(variavelDeclarada);
-                }
-            } else {
-                indexBase += 1;
-            }
-            this.avancar();
-        }
-        console.log('VARIAVEIS DECLARADAS:', declaracoesVariaveis);
-        console.log('VARIAVEIS ATRIBUÍDAS:', atribuicoesVariaveis);
-        console.log('SIMBOLOS', this.simbolos);
-        
-        // PRÓXIMOS OBJETIVOS:
-        // 1. Guardar valores de declaracoesVariaveis (tudo que vem depois de DOIS_PONTOS) declarados
-        // 2. Excluir declaracoesVariaveis de this.símbolos
-        // 3. Substituir os dois objetos de atribuicoesVariaveis em this.simbolos por um único objeto contendo o valor guardado
-
-    }
-
     identificarPalavraChave(): void {
         while (this.eAlfabetoOuDigito(this.caractereAtual())) {
             this.avancar();
@@ -439,10 +396,6 @@ export class Lexador implements LexadorInterface {
         while (!this.eFinalDoCodigo()) {
             this.inicioSimbolo = this.atual;
             this.analisarToken();
-        }
-        
-        if (this.contemVariaveis) {
-            this.analisarVariaveis();
         }
 
         return {
