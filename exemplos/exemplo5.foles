@@ -1,5 +1,5 @@
-$cor-base: #c6538c;
 $cor-secundaria: azul;
+$cor-base: #c6538c;
 
 .alerta {
   cor-borda: $cor-base;

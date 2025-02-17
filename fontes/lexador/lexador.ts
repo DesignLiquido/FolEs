@@ -214,15 +214,30 @@ export class Lexador implements LexadorInterface {
         this.adicionarSimbolo(tiposDeSimbolos.TEXTO, valor);
     }
 
+    identificarVariaveis(): boolean {
+        if (this.simbolos.length !== 0) {
+            const indexAnterior: number = this.simbolos.length - 1;
+            if (this.simbolos[indexAnterior].tipo === tiposDeSimbolos.CIFRAO) {
+                return true;
+            }
+    
+            return false;
+        }
+    }
+
     identificarPalavraChave(): void {
         while (this.eAlfabetoOuDigito(this.caractereAtual())) {
             this.avancar();
         }
+        
+        const variavel: boolean = this.identificarVariaveis();
+        if (variavel) return this.adicionarSimbolo(tiposDeSimbolos.VARIAVEL);
 
         const codigo: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
+        
         const tipo: string =
             codigo in palavrasReservadas
                 ? palavrasReservadas[codigo]
@@ -366,7 +381,7 @@ export class Lexador implements LexadorInterface {
                 this.analisarDiretiva();
                 break;
             case "$":
-                this.adicionarSimbolo(tiposDeSimbolos.VARIAVEL, null, '$');
+                this.adicionarSimbolo(tiposDeSimbolos.CIFRAO, null, '$');
                 this.contemVariaveis = true;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
