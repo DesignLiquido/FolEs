@@ -1147,7 +1147,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     protected seletorPorVariavel(): Seletor {
         // console.log(this.simbolos[this.atual]);
-        console.log(this.simbolos[this.atual]);
         
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
             // const valorModificador = this.avancarEDevolverAnterior();
@@ -1167,7 +1166,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 tiposDeSimbolos.DOIS_PONTOS,
                 "Esperado ':' após nome do modificador."
             );
-            console.log('até aqui chegamos');
+            // console.log('até aqui chegamos');
             
             switch(this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.METODO:

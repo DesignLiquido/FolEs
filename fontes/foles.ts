@@ -50,7 +50,8 @@ export class FolEs {
      */
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(simbolos);
-
+        // console.log(resultadoAvaliadorSintatico[0].seletores);
+        
         const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
         return traducao;
     }
@@ -64,6 +65,7 @@ export class FolEs {
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);
+        // console.log(resultadoLexador[1].simbolos);
         
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }
