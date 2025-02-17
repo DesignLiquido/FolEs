@@ -1145,6 +1145,55 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
     }
 
+    protected seletorPorVariavel(): Seletor {
+        // console.log(this.simbolos[this.atual]);
+        console.log(this.simbolos[this.atual]);
+        
+        while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+            // const valorModificador = this.avancarEDevolverAnterior();
+            // console.log(valorModificador);
+
+            this.consumir(
+                tiposDeSimbolos.VARIAVEL,
+                "Esperada declaração de variável."
+            )
+
+            const modificador = this.consumir(
+                tiposDeSimbolos.IDENTIFICADOR,
+                "Esperado nome do modificador."
+            );
+    
+            this.consumir(
+                tiposDeSimbolos.DOIS_PONTOS,
+                "Esperado ':' após nome do modificador."
+            );
+            console.log('até aqui chegamos');
+            
+            switch(this.simbolos[this.atual].tipo) {
+                case tiposDeSimbolos.METODO:
+                    // algo
+                case tiposDeSimbolos.QUALITATIVO:
+                    this.consumir(
+                        tiposDeSimbolos.QUALITATIVO,
+                        "Esperada declaração de qualitativo."
+                    );
+            }
+            
+        }
+        
+        // RETORNO GENÉRICO PARA EVITAR ERROS PONTUAIS
+        const pseudoclasse = this.resolverPseudoclasse();
+        return new SeletorClasse(
+            'lexema',
+            pseudoclasse,
+            {
+                linha: 0,
+                colunaInicial: 0,
+                colunaFinal: 0
+            }
+        );
+    }
+
     /**
      * Resolve os seletores.
      * @param espacoReservado 
@@ -1165,6 +1214,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     break;
                 case tiposDeSimbolos.CERQUILHA:
                     seletores.push(this.seletorPorId());
+                    break;
+                case tiposDeSimbolos.CIFRAO:
+                    seletores.push(this.seletorPorVariavel());
                     break;
             }
         } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
