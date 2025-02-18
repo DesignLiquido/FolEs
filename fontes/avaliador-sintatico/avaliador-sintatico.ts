@@ -1032,7 +1032,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 }
             }
         }
-        
+
         return atribuicaoAbreviada;
     }
 
@@ -1061,7 +1061,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 tiposDeSimbolos.PSEUDO_CLASSE,
                 "Esperado nome de pseudoclasse."
             );
-            
+
             return new SeletorPseudoclasse(
                 pseudoclasse.lexema,
                 {
@@ -1147,39 +1147,50 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     protected seletorPorVariavel(): Seletor {
         // console.log(this.simbolos[this.atual]);
-        
+
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
             // const valorModificador = this.avancarEDevolverAnterior();
             // console.log(valorModificador);
+
+            this.consumir(
+                tiposDeSimbolos.CIFRAO,
+                "Esperado cifrão antes de declaração de variável."
+            )
 
             this.consumir(
                 tiposDeSimbolos.VARIAVEL,
                 "Esperada declaração de variável."
             )
 
-            const modificador = this.consumir(
-                tiposDeSimbolos.IDENTIFICADOR,
-                "Esperado nome do modificador."
-            );
-    
-            this.consumir(
-                tiposDeSimbolos.DOIS_PONTOS,
-                "Esperado ':' após nome do modificador."
-            );
-            // console.log('até aqui chegamos');
-            
-            switch(this.simbolos[this.atual].tipo) {
-                case tiposDeSimbolos.METODO:
-                    // algo
-                case tiposDeSimbolos.QUALITATIVO:
-                    this.consumir(
-                        tiposDeSimbolos.QUALITATIVO,
-                        "Esperada declaração de qualitativo."
-                    );
+            if (this.simbolos[this.atual].tipo === tiposDeSimbolos.DOIS_PONTOS) {
+                this.consumir(
+                    tiposDeSimbolos.DOIS_PONTOS,
+                    "Esperado ':' após declaração de variável."
+                );
+                
+                switch (this.simbolos[this.atual].tipo) {
+                    case tiposDeSimbolos.IDENTIFICADOR:
+                        this.consumir(
+                            tiposDeSimbolos.IDENTIFICADOR,
+                            "Esperado nome do modificador após declaração de variável."
+                        );
+                        break;
+                    case tiposDeSimbolos.QUALITATIVO:
+                        this.consumir(
+                            tiposDeSimbolos.QUALITATIVO,
+                            "Esperado qualitativo após declaração de variável."
+                        );
+                        break;
+                    case tiposDeSimbolos.METODO:
+                        this.resolverMetodo(this.simbolos[this.atual - 1].lexema);
+                        break;
+                    default:
+                        console.log('nao deveria cair aqui')
+                }
             }
-            
+
         }
-        
+
         // RETORNO GENÉRICO PARA EVITAR ERROS PONTUAIS
         const pseudoclasse = this.resolverPseudoclasse();
         return new SeletorClasse(
