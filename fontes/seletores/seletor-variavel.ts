@@ -3,19 +3,18 @@ import { PragmasSeletor } from "./pragmas-seletor";
 import { Seletor } from "./seletor";
 
 export class SeletorVariavel extends Seletor {
-    nomeClasse: string;
+    nomeVariavel: string;
+    valorVariavel: string;
     pragmas?: PragmasSeletor;
 
-    constructor(nomeClasse: string, pseudoclasse?: Pseudoclasse, pragmas?: PragmasSeletor) {
-        super(pseudoclasse, pragmas);
-        this.nomeClasse = nomeClasse;
+    constructor(nomeVariavel: string, valorVariavel: string, pragmas?: PragmasSeletor) {
+        super(null, pragmas);
+        this.nomeVariavel = nomeVariavel;
+        this.valorVariavel = valorVariavel;
     }
 
     paraTexto() {
-        let resultado = `.${this.nomeClasse}`;
-        if (this.pseudoclasse !== undefined && this.pseudoclasse !== null) {
-            resultado += `:${this.pseudoclasse.pseudoclasseCss}`;
-        }
+        let resultado = `$${this.nomeVariavel}: ${this.valorVariavel}`;
         
         return resultado;
     }
