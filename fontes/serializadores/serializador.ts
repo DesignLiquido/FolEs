@@ -1,4 +1,4 @@
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
 import { SeletorEstrutura } from "../seletores";
@@ -95,7 +95,7 @@ export class Serializador {
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
+    serializar(declaracoes: BlocoDeclaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {

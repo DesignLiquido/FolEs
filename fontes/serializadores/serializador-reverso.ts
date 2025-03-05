@@ -1,4 +1,4 @@
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
@@ -33,7 +33,7 @@ export class SerializadorReverso {
             `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador ? quantificador : ''};\n`;
     }
 
-    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
+    serializar(declaracoes: BlocoDeclaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {

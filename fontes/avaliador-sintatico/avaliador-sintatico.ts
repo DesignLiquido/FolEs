@@ -1,5 +1,5 @@
 import { ErroAvaliadorSintatico } from ".";
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
 import { SeletorModificador } from "../modificadores/superclasse";
@@ -16,6 +16,7 @@ import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 import { ValorNumerico, ValorNumericoComQuantificador } from "../../testes/listas/valor-numerico";
 import { SeletorVariavel } from "../seletores/seletor-variavel";
+import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 
 
 /**
@@ -1352,14 +1353,14 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return classeModificadora as Modificador;
     }
 
-    resolverModificadoresEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: Declaracao[] } {
+    resolverModificadoresEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: BlocoDeclaracao[] } {
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
         );
 
         const modificadores: Modificador[] = [];
-        const declaracoesAninhadas: Declaracao[] = [];
+        const declaracoesAninhadas: BlocoDeclaracao[] = [];
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.IDENTIFICADOR:
@@ -1380,7 +1381,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         };
     }
 
-    declaracao(): Declaracao | null {
+    declaracao(): BlocoDeclaracao | null {
         if (this.estaNoFinal()) return null;
         switch (this.simbolos[this.atual].tipo) {
             case tiposDeSimbolos.IMPORTAR:
@@ -1390,13 +1391,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 this.simbolos.splice(this.atual - 1, 2, ...resultadoImportacao[1].simbolos);
                 this.atual -= 1;
                 return null;
+            case tiposDeSimbolos.CIFRAO:
+
             default:
                 const seletores = this.resolverSeletores();
                 // console.log('SELETORES', seletores);
                 
                 const modificadoresEDeclaracoesAninhadas = this.resolverModificadoresEDeclaracoesAninhadas();
 
-                return new Declaracao(
+                return new BlocoDeclaracao(
                     seletores,
                     modificadoresEDeclaracoesAninhadas.modificadores,
                     modificadoresEDeclaracoesAninhadas.declaracoesAninhadas
@@ -1404,15 +1407,16 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
     }
 
-    analisar(simbolos: Simbolo[]): Declaracao[] {
+    analisar(simbolos: Simbolo[]): BlocoDeclaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
 
-        const declaracoes: Declaracao[] = [];
+        const declaracoes: BlocoDeclaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
         }
+        // console.log(declaracoes);
         
         return declaracoes.filter(d => d);
     }

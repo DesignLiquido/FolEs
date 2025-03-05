@@ -1,6 +1,6 @@
 import * as vlq from 'vlq';
 
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import { Modificador } from "../modificadores";
 import { PragmasModificador, SeletorModificador } from "../modificadores/superclasse";
@@ -70,7 +70,7 @@ export class Tradutor {
         return modificadorTraduzido;
     }
 
-    traduzir(declaracoes: Declaracao[]): Declaracao[] {
+    traduzir(declaracoes: BlocoDeclaracao[]): BlocoDeclaracao[] {
         this.linha = 1;
         this.atual = 1;
 
@@ -94,7 +94,7 @@ export class Tradutor {
             }
 
             declaracoesTraduzidas.push(
-                new Declaracao(
+                new BlocoDeclaracao(
                     seletoresTraduzidos, 
                     modificadoresTraduzidos,
                     []

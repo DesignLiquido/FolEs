@@ -1,1 +1,1 @@
-export * from './declaracao';
+export * from './bloco-declaracao';
