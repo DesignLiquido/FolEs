@@ -1,6 +1,11 @@
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { Declaracao } from "./declaracao";
 
+export interface DeclaracaoVariavelInterface {
+    nome: string;
+    valor: Metodo | string;
+}
+
 export class DeclaracaoVariavel extends Declaracao {
     nome: string;
     valor: Metodo | string;
