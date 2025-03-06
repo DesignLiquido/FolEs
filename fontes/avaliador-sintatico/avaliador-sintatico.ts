@@ -1403,7 +1403,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         const declaracoes: BlocoDeclaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
-            console.log(declaracoes);
         }
         
         return declaracoes.filter(d => d);
