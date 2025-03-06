@@ -15,8 +15,7 @@ import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 import { ValorNumerico, ValorNumericoComQuantificador } from "../../testes/listas/valor-numerico";
-import { SeletorVariavel } from "../seletores/seletor-variavel";
-import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
+import { DeclaracaoVariavel, DeclaracaoVariavelInterface } from "../declaracoes/declaracao-variavel";
 
 
 /**
@@ -1147,23 +1146,16 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
     }
 
-    protected seletorPorVariavel(): Seletor {
+    protected declaracaoVariavel(): DeclaracaoVariavelInterface {
         let nomeVariavel: string;
         let simboloValorVariavel: Simbolo;
         let valorVariavel: string;
-
-        let linhaVariavel: number;
-        let colunaInicialVariavel: number;
-        let colunaFinalVariavel: number;
 
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
             const cifraoVariavel: Simbolo = this.consumir(
                 tiposDeSimbolos.CIFRAO,
                 "Esperado cifrão antes de declaração de variável."
             )
-
-            colunaInicialVariavel = cifraoVariavel.colunaInicial;
-            linhaVariavel = cifraoVariavel.linha;
 
             const declaracaoVariavel: Simbolo = this.consumir(
                 tiposDeSimbolos.VARIAVEL,
@@ -1177,7 +1169,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.DOIS_PONTOS,
                     "Esperado ':' após declaração de variável."
                 );
-
 
                 switch (this.simbolos[this.atual].tipo) {
                     case tiposDeSimbolos.IDENTIFICADOR:
@@ -1231,17 +1222,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             "Esperado ponto e vírgula após atribuição de valor à variável"
         );
 
-        colunaFinalVariavel = pontoVirgulaVariavel.colunaFinal - 1;
+        const variavel = {
+            nome: nomeVariavel,
+            valor: valorVariavel,
+        };
 
-        return new SeletorVariavel(
-            nomeVariavel,
-            valorVariavel,
-            {
-                linha: linhaVariavel,
-                colunaInicial: colunaInicialVariavel,
-                colunaFinal: colunaFinalVariavel,
-            }
-        );
+        return variavel;
     }
 
     /**
@@ -1264,9 +1250,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     break;
                 case tiposDeSimbolos.CERQUILHA:
                     seletores.push(this.seletorPorId());
-                    break;
-                case tiposDeSimbolos.CIFRAO:
-                    seletores.push(this.seletorPorVariavel());
                     break;
             }
         } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
@@ -1381,7 +1364,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         };
     }
 
-    declaracao(): BlocoDeclaracao | null {
+    declaracao(): BlocoDeclaracao | DeclaracaoVariavel | null {
         if (this.estaNoFinal()) return null;
         switch (this.simbolos[this.atual].tipo) {
             case tiposDeSimbolos.IMPORTAR:
@@ -1392,7 +1375,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 this.atual -= 1;
                 return null;
             case tiposDeSimbolos.CIFRAO:
+                const variavel = this.declaracaoVariavel();
 
+                return new DeclaracaoVariavel(
+                    variavel.nome,
+                    variavel.valor
+                );
             default:
                 const seletores = this.resolverSeletores();
                 // console.log('SELETORES', seletores);
@@ -1407,7 +1395,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
     }
 
-    analisar(simbolos: Simbolo[]): BlocoDeclaracao[] {
+    analisar(simbolos: Simbolo[]): BlocoDeclaracao[] | DeclaracaoVariavel[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
@@ -1415,8 +1403,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         const declaracoes: BlocoDeclaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
+            console.log(declaracoes);
         }
-        // console.log(declaracoes);
         
         return declaracoes.filter(d => d);
     }
