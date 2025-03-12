@@ -1,7 +1,11 @@
+$valor-padrao: herdar;
 $cor-secundaria: azul;
-$cor-base: #c6538c;
 
-.alerta {
-  cor-borda: $cor-base;
+lmht {
+  recuo: $valor-padrao;
+  recuo-direito: 12px;
+}
+
+lmht {
   cor-barra-rolagem: $cor-secundaria;
 }
