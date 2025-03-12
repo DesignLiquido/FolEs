@@ -27,6 +27,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     importador: ImportadorInterface;
 
     atual: number;
+    referenciaDeclaracoes: BlocoDeclaracao[] = [];
 
     constructor(importador: ImportadorInterface) {
         this.importador = importador;
@@ -1146,6 +1147,23 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
     }
 
+    protected atribuirValorVariavel(simbolos: Simbolo[]): Simbolo[] {
+        const declaracoesVariaveis = this.referenciaDeclaracoes.filter((declaracao) => {
+            return declaracao instanceof DeclaracaoVariavel;
+        });
+
+        declaracoesVariaveis.forEach((declaracao) => {
+            if (declaracao.nome === simbolos[1].lexema) {
+                const valorString = declaracao.valor.toString();
+                simbolos[1].lexema = valorString;
+            }
+        })
+
+        const valorVariavel = simbolos.slice(1);
+
+        return valorVariavel;
+    }
+
     protected declaracaoVariavel(): DeclaracaoVariavelInterface {
         let nomeVariavel: string;
         let simboloValorVariavel: Simbolo;
@@ -1159,65 +1177,63 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
             const declaracaoVariavel: Simbolo = this.consumir(
                 tiposDeSimbolos.VARIAVEL,
-                "Esperada declaração de variável."
+                "Esperada nomenclatura para declaração de variável."
             )
 
             nomeVariavel = declaracaoVariavel.lexema;
 
-            if (this.simbolos[this.atual].tipo === tiposDeSimbolos.DOIS_PONTOS) {
-                this.consumir(
-                    tiposDeSimbolos.DOIS_PONTOS,
-                    "Esperado ':' após declaração de variável."
-                );
+            this.consumir(
+                tiposDeSimbolos.DOIS_PONTOS,
+                "Esperado ':' após declaração de variável."
+            );
 
-                switch (this.simbolos[this.atual].tipo) {
-                    case tiposDeSimbolos.IDENTIFICADOR:
-                        simboloValorVariavel = this.consumir(
-                            tiposDeSimbolos.IDENTIFICADOR,
-                            "Esperado nome do modificador após declaração de variável."
-                        );
+            switch (this.simbolos[this.atual].tipo) {
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    simboloValorVariavel = this.consumir(
+                        tiposDeSimbolos.IDENTIFICADOR,
+                        "Esperado nome do modificador após declaração de variável."
+                    );
 
-                        valorVariavel = simboloValorVariavel.lexema;
-                        break;
-                    case tiposDeSimbolos.QUALITATIVO:
-                        simboloValorVariavel = this.consumir(
-                            tiposDeSimbolos.QUALITATIVO,
-                            "Esperado qualitativo após declaração de variável."
-                        );
+                    valorVariavel = simboloValorVariavel.lexema;
+                    break;
+                case tiposDeSimbolos.QUALITATIVO:
+                    simboloValorVariavel = this.consumir(
+                        tiposDeSimbolos.QUALITATIVO,
+                        "Esperado qualitativo após declaração de variável."
+                    );
 
-                        valorVariavel = simboloValorVariavel.lexema;
-                        break;
-                    case tiposDeSimbolos.NUMERO:
-                        simboloValorVariavel = this.consumir(
-                            tiposDeSimbolos.NUMERO,
-                            "Esperado valor numérico após declaração de variável"
-                        );
+                    valorVariavel = simboloValorVariavel.lexema;
+                    break;
+                case tiposDeSimbolos.NUMERO:
+                    simboloValorVariavel = this.consumir(
+                        tiposDeSimbolos.NUMERO,
+                        "Esperado valor numérico após declaração de variável"
+                    );
 
-                        valorVariavel = simboloValorVariavel.lexema;
+                    valorVariavel = simboloValorVariavel.lexema;
 
-                        const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
-                        if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
-                            const quantificadorVariavel = this.consumir(
-                                tiposDeSimbolos.QUANTIFICADOR,
-                                "Esperado quantificador após valor numérico atribuído à variável."
-                            )
+                    const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
+                    if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
+                        const quantificadorVariavel = this.consumir(
+                            tiposDeSimbolos.QUANTIFICADOR,
+                            "Esperado quantificador após valor numérico atribuído à variável."
+                        )
 
-                            valorVariavel += quantificadorVariavel.lexema;
-                        }
-                        break;
-                    case tiposDeSimbolos.METODO:
-                        this.resolverMetodo(this.simbolos[this.atual - 1].lexema);
-                        break;
-                    default:
-                        console.log('Não deveria cair aqui!')
-                }
+                        valorVariavel += quantificadorVariavel.lexema;
+                    }
+                    break;
+                case tiposDeSimbolos.METODO:
+                    this.resolverMetodo(this.simbolos[this.atual - 1].lexema);
+                    break;
+                default:
+                    console.log('Não deveria cair aqui!')
             }
         }
 
         // console.log('nome', nomeVariavel);
         // console.log('valor', valorVariavel);
-        
-        const pontoVirgulaVariavel: Simbolo = this.consumir(
+
+        this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             "Esperado ponto e vírgula após atribuição de valor à variável"
         );
@@ -1268,7 +1284,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             "Esperado ':' após nome do modificador."
         );
 
-        const valoresModificador: Array<any> = this.valoresModificador();
+        let valoresModificador: Array<any> = this.valoresModificador();
         let quantificador: any;
 
         for (const [index, valorModificador] of valoresModificador.entries()) {
@@ -1296,10 +1312,16 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             valoresModificador.push(proximoSimbolo);
         }
 
+        if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
+            const valorVariavel = this.atribuirValorVariavel(valoresModificador);
+            valoresModificador = valorVariavel;
+        }
+
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
+
 
         if (valoresModificador.length <= 2) {
             const classeModificadora = new SeletorModificador(
@@ -1344,6 +1366,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         const modificadores: Modificador[] = [];
         const declaracoesAninhadas: BlocoDeclaracao[] = [];
+
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.IDENTIFICADOR:
@@ -1383,8 +1406,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
             default:
                 const seletores = this.resolverSeletores();
-                // console.log('SELETORES', seletores);
-                
+
                 const modificadoresEDeclaracoesAninhadas = this.resolverModificadoresEDeclaracoesAninhadas();
 
                 return new BlocoDeclaracao(
@@ -1399,10 +1421,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
+        // console.log(simbolos);
 
         const declaracoes: BlocoDeclaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
+            this.referenciaDeclaracoes = declaracoes;
         }
         
         return declaracoes.filter(d => d);
