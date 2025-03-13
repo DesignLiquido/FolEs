@@ -1,6 +1,6 @@
-import { BlocoDeclaracao } from "../declaracoes";
+import { Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 
 export interface AvaliadorSintaticoInterface {
-    analisar(simbolos: Simbolo[]): BlocoDeclaracao[];
+    analisar(simbolos: Simbolo[]): Declaracao[];
 }

@@ -85,6 +85,76 @@ export class Serializador {
             }: ${valorTraduzido};\n`;
     }
 
+    serializarBlocoDeclaracao(declaracao: BlocoDeclaracao, indentacao: number, textoSeletorAnterior: string): string {
+        let resultado = "";
+        const prefixos = [];
+        let deveImprimir = true;
+
+        for (const seletor of declaracao.seletores) {
+            // Espaços reservados não são escritos diretamente no CSS.
+            if (seletor instanceof SeletorEspacoReservado) {
+                deveImprimir = false;
+                continue;
+            }
+
+            let prefixo: string;
+            if (seletor instanceof SeletorEstrutura) {
+                if (seletor.pseudoclasse) {
+                    const seletorLmht = seletor.paraTexto();
+                    const seletorSemPseudoclasse = seletorLmht.split(":")[0];
+
+                    const traducaoSeletor = estruturasHtml[seletorSemPseudoclasse];
+                    const traducaoPseudoclasse = seletor.pseudoclasse.pseudoclasseCss;
+
+                    prefixo = (textoSeletorAnterior + " " + `${traducaoSeletor}:${traducaoPseudoclasse}`).trimStart();
+                } else {
+                    const seletorLmht = seletor.paraTexto();
+                    const traducaoSeletor = estruturasHtml[seletorLmht];
+                    prefixo = (textoSeletorAnterior + " " + traducaoSeletor).trimStart();
+                }
+            } else {
+                prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
+            }
+
+            prefixos.push(prefixo);
+            resultado += " ".repeat(indentacao) + prefixo + ", ";
+        }
+
+        if (!deveImprimir) {
+            return resultado;
+        }
+
+        resultado = resultado.slice(0, -2);
+        resultado += " {\n";
+
+        for (const modificador of declaracao.modificadores) {
+            resultado += this.serializarModificador(
+                modificador,
+                indentacao + 4
+            );
+        }
+
+        if (this.serializarComAninhamentos) {
+            resultado += this.serializar(
+                declaracao.declaracoesAninhadas,
+                indentacao + 4
+            );
+            resultado += `${" ".repeat(indentacao)}}\n\n`;
+        } else {
+            resultado += `${" ".repeat(indentacao)}}\n\n`;
+
+            for (const prefixo of prefixos) {
+                resultado += this.serializar(
+                    declaracao.declaracoesAninhadas,
+                    indentacao,
+                    prefixo
+                );
+            }
+        }
+
+        return resultado;
+    }
+
     /**
      * O processo de tradução. É recursivo.
      * @param declaracoes As declaracoes.
@@ -100,70 +170,13 @@ export class Serializador {
         declaracoes = declaracoes.filter((declaracao) => !(declaracao instanceof DeclaracaoVariavel));
 
         for (const declaracao of declaracoes) {
-            const prefixos = [];
-            let deveImprimir = true;
-
-            for (const seletor of declaracao.seletores) {
-                // Espaços reservados não são escritos diretamente no CSS.
-                if (seletor instanceof SeletorEspacoReservado) {
-                    deveImprimir = false;
-                    continue;
-                }
-
-                let prefixo: string;
-                if (seletor instanceof SeletorEstrutura) {
-                    if (seletor.pseudoclasse) {
-                        const seletorLmht = seletor.paraTexto();
-                        const seletorSemPseudoclasse = seletorLmht.split(":")[0];
-
-                        const traducaoSeletor = estruturasHtml[seletorSemPseudoclasse];
-                        const traducaoPseudoclasse = seletor.pseudoclasse.pseudoclasseCss;
-
-                        prefixo = (textoSeletorAnterior + " " + `${traducaoSeletor}:${traducaoPseudoclasse}`).trimStart();
-                    } else {
-                        const seletorLmht = seletor.paraTexto();
-                        const traducaoSeletor = estruturasHtml[seletorLmht];
-                        prefixo = (textoSeletorAnterior + " " + traducaoSeletor).trimStart();
-                    }
-                } else {
-                    prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
-                }
-
-                prefixos.push(prefixo);
-                resultado += " ".repeat(indentacao) + prefixo + ", ";
-            }
-
-            if (!deveImprimir) {
-                continue;
-            }
-
-            resultado = resultado.slice(0, -2);
-            resultado += " {\n";
-
-
-            for (const modificador of declaracao.modificadores) {
-                resultado += this.serializarModificador(
-                    modificador,
-                    indentacao + 4
-                );
-            }
-
-            if (this.serializarComAninhamentos) {
-                resultado += this.serializar(
-                    declaracao.declaracoesAninhadas,
-                    indentacao + 4
-                );
-                resultado += `${" ".repeat(indentacao)}}\n\n`;
-            } else {
-                resultado += `${" ".repeat(indentacao)}}\n\n`;
-
-                for (const prefixo of prefixos) {
-                    resultado += this.serializar(
-                        declaracao.declaracoesAninhadas,
-                        indentacao,
-                        prefixo
-                    );
-                }
+            switch (declaracao.constructor.name) {
+                case 'BlocoDeclaracao':
+                    resultado += this.serializarBlocoDeclaracao(declaracao as BlocoDeclaracao, indentacao, textoSeletorAnterior);
+                    break;
+                case 'DeclaracaoVariavel':
+                    // TODO @Vitor: Ver se vai precisar usar isso.
+                    break;
             }
         }
 

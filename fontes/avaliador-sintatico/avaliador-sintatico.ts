@@ -1,5 +1,5 @@
 import { ErroAvaliadorSintatico } from ".";
-import { BlocoDeclaracao } from "../declaracoes";
+import { BlocoDeclaracao, Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
 import { SeletorModificador } from "../modificadores/superclasse";
@@ -15,7 +15,7 @@ import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { AvaliadorSintaticoInterface, ImportadorInterface, SimboloInterface } from "../interfaces";
 import { ValorNumerico, ValorNumericoComQuantificador } from "../../testes/listas/valor-numerico";
-import { DeclaracaoVariavel, DeclaracaoVariavelInterface } from "../declaracoes/declaracao-variavel";
+import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 
 
 /**
@@ -1164,7 +1164,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return valorVariavel;
     }
 
-    protected declaracaoVariavel(): DeclaracaoVariavelInterface {
+    protected declaracaoVariavel(): DeclaracaoVariavel {
         let nomeVariavel: string;
         let simboloValorVariavel: Simbolo;
         let valorVariavel: string;
@@ -1375,7 +1375,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     break;
                 default:
                     const declaracaoAninhada = this.declaracao();
-                    declaracoesAninhadas.push(declaracaoAninhada);
+                    declaracoesAninhadas.push(declaracaoAninhada as BlocoDeclaracao);
                     break;
             }
         }
@@ -1387,7 +1387,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         };
     }
 
-    declaracao(): BlocoDeclaracao | DeclaracaoVariavel | null {
+    declaracao(): Declaracao | null {
         if (this.estaNoFinal()) return null;
         switch (this.simbolos[this.atual].tipo) {
             case tiposDeSimbolos.IMPORTAR:
@@ -1417,16 +1417,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
     }
 
-    analisar(simbolos: Simbolo[]): BlocoDeclaracao[] | DeclaracaoVariavel[] {
+    analisar(simbolos: Simbolo[]): Declaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
         // console.log(simbolos);
 
-        const declaracoes: BlocoDeclaracao[] = [];
+        const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
-            this.referenciaDeclaracoes = declaracoes;
         }
         
         return declaracoes.filter(d => d);
