@@ -29,8 +29,6 @@ export class Lexador implements LexadorInterface {
         this.atual = 0;
         this.linha = 0;
         this.inicioSimbolo = 0;
-
-        this.contemVariaveis = false;
     }
 
     /**
@@ -217,11 +215,7 @@ export class Lexador implements LexadorInterface {
     identificarVariaveis(): boolean {
         if (this.simbolos.length !== 0) {
             const indexAnterior: number = this.simbolos.length - 1;
-            if (this.simbolos[indexAnterior].tipo === tiposDeSimbolos.CIFRAO) {
-                return true;
-            }
-    
-            return false;
+            return this.simbolos[indexAnterior].tipo === tiposDeSimbolos.CIFRAO;
         }
     }
 
@@ -382,7 +376,6 @@ export class Lexador implements LexadorInterface {
                 break;
             case "$":
                 this.adicionarSimbolo(tiposDeSimbolos.CIFRAO, null, '$');
-                this.contemVariaveis = true;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
                 else if (this.eAlfabeto(caractere))
