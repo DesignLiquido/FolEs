@@ -171,16 +171,16 @@ export class Serializador {
 
         // TODO @Vitor: Se você quiser filtrar por todas as declarações de variáveis antes de 
         // iterar sobre os blocos (voltando o `.filter()`) que estava aqui, eu não acho má ideia.
-
+        
         for (const declaracao of declaracoes) {
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':
                     resultado += this.serializarBlocoDeclaracao(declaracao as BlocoDeclaracao, indentacao, textoSeletorAnterior);
                     break;
-                case 'DeclaracaoVariavel':
-                    const declaracaoVariavel = declaracao as DeclaracaoVariavel;
-                    this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valor;
-                    break;
+                // case 'DeclaracaoVariavel':
+                //     const declaracaoVariavel = declaracao as DeclaracaoVariavel;
+                //     this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valor;
+                //     break;
             }
         }
 
