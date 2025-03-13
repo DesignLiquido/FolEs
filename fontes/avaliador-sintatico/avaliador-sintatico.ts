@@ -27,7 +27,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     importador: ImportadorInterface;
 
     atual: number;
-    referenciaDeclaracoes: BlocoDeclaracao[] = [];
+    referenciaDeclaracoes: Declaracao[] = [];
 
     constructor(importador: ImportadorInterface) {
         this.importador = importador;
@@ -1147,20 +1147,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
     }
 
-    protected atribuirValorVariavel(simbolos: Simbolo[]): Simbolo[] {
-        const declaracoesVariaveis = this.referenciaDeclaracoes.filter((declaracao) => {
-            return declaracao instanceof DeclaracaoVariavel;
-        });
-
-        declaracoesVariaveis.forEach((declaracao) => {
-            if (declaracao.nome === simbolos[1].lexema) {
+    protected atribuirValorVariavel(simbolos: Simbolo[]): Simbolo[] {       
+        this.referenciaDeclaracoes.forEach((declaracao) => {
+            if (declaracao instanceof DeclaracaoVariavel && declaracao.nome === simbolos[1].lexema) {
                 const valorString = declaracao.valor.toString();
                 simbolos[1].lexema = valorString;
             }
         })
 
-        const valorVariavel = simbolos.slice(1);
-
+        const valorVariavel = simbolos.slice(1);     
         return valorVariavel;
     }
 
@@ -1426,6 +1421,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
+            this.referenciaDeclaracoes = declaracoes;
         }
         
         return declaracoes.filter(d => d);
