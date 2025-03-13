@@ -18,11 +18,13 @@ import { Declaracao } from "../declaracoes/declaracao";
  */
 export class Serializador {
     serializarComAninhamentos: boolean;
+    variaveis: {[key: string]: any};
 
     constructor(serializarComAninhamentos: boolean = false) {
         this.serializarComAninhamentos = serializarComAninhamentos;
     }
 
+    // TODO @Vitor: Montar a lógica para reconhecer variáveis aqui.
     private serializarModificador(
         modificador: Modificador,
         indentacao: number = 0
@@ -167,7 +169,8 @@ export class Serializador {
             textoSeletorAnterior = seletorAnterior;
         }
 
-        declaracoes = declaracoes.filter((declaracao) => !(declaracao instanceof DeclaracaoVariavel));
+        // TODO @Vitor: Se você quiser filtrar por todas as declarações de variáveis antes de 
+        // iterar sobre os blocos (voltando o `.filter()`) que estava aqui, eu não acho má ideia.
 
         for (const declaracao of declaracoes) {
             switch (declaracao.constructor.name) {
@@ -175,7 +178,8 @@ export class Serializador {
                     resultado += this.serializarBlocoDeclaracao(declaracao as BlocoDeclaracao, indentacao, textoSeletorAnterior);
                     break;
                 case 'DeclaracaoVariavel':
-                    // TODO @Vitor: Ver se vai precisar usar isso.
+                    const declaracaoVariavel = declaracao as DeclaracaoVariavel;
+                    this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valor;
                     break;
             }
         }
