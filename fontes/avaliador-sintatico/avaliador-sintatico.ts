@@ -1147,18 +1147,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
     }
 
-    protected atribuirValorVariavel(simbolos: Simbolo[]): Simbolo[] {       
-        this.referenciaDeclaracoes.forEach((declaracao) => {
-            if (declaracao instanceof DeclaracaoVariavel && declaracao.nome === simbolos[1].lexema) {
-                const valorString = declaracao.valor.toString();
-                simbolos[1].lexema = valorString;
-            }
-        })
-
-        const valorVariavel = simbolos.slice(1);     
-        return valorVariavel;
-    }
-
     protected declaracaoVariavel(): DeclaracaoVariavel {
         let nomeVariavel: string;
         let simboloValorVariavel: Simbolo;
@@ -1306,16 +1294,29 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             const proximoSimbolo = this.avancarEDevolverAnterior();
             valoresModificador.push(proximoSimbolo);
         }
-
-        if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
-            const valorVariavel = this.atribuirValorVariavel(valoresModificador);
-            valoresModificador = valorVariavel;
-        }
-
+        
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`
         );
+        
+        if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
+            const classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valoresModificador[1].lexema,
+                quantificador && quantificador.hasOwnProperty('lexema') ?
+                    quantificador.lexema :
+                    quantificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal
+                },
+                true,
+            );
+
+            return classeModificadora as Modificador;
+        }
 
 
         if (valoresModificador.length <= 2) {
