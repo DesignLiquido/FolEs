@@ -2,7 +2,7 @@ $valor-padrao: herdar;
 $cor-secundaria: azul;
 
 lmht {
-  recuo: $valor-padrao;
+  altura: $valor-padrao;
   recuo-direito: 12px;
 }
 
