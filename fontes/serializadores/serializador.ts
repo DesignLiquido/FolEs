@@ -157,12 +157,33 @@ export class Serializador {
         return resultado;
     }
 
+    serializarVariaveis(declaracaoVariavel: DeclaracaoVariavel, declaracoes: Declaracao[], indexVariavel: number): void {
+        let variavelInexistente: boolean = true;
+        declaracoes.forEach((declaracao, indexBlocoDeclaracao) => {
+            if (declaracao instanceof BlocoDeclaracao) {
+                declaracao.modificadores.forEach((modificador) => {
+                    if (modificador.valor === declaracaoVariavel.nome) {
+                        modificador.valor = declaracaoVariavel.valor;
+
+                        if (indexVariavel > indexBlocoDeclaracao) {
+                            variavelInexistente = false;
+                        }
+                    }
+                })
+            }
+        });
+        
+        if (!variavelInexistente) {
+            throw new Error(`A variável '${declaracaoVariavel.nome}' deve ser declarada antes da atribuição de valor.`);
+        }
+    }
+
     /**
      * O processo de tradução. É recursivo.
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
+    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {  
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -170,17 +191,16 @@ export class Serializador {
         }
 
         // TODO @Vitor: Se você quiser filtrar por todas as declarações de variáveis antes de 
-        // iterar sobre os blocos (voltando o `.filter()`) que estava aqui, eu não acho má ideia.
+        // iterar sobre os blocos (voltando o `.filter()`) que estava aqui, eu não acho má ideia. 
         
-        for (const declaracao of declaracoes) {
+        for (const [index, declaracao] of declaracoes.entries()) {            
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':
                     resultado += this.serializarBlocoDeclaracao(declaracao as BlocoDeclaracao, indentacao, textoSeletorAnterior);
                     break;
-                // case 'DeclaracaoVariavel':
-                //     const declaracaoVariavel = declaracao as DeclaracaoVariavel;
-                //     this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valor;
-                //     break;
+                case 'DeclaracaoVariavel':
+                    this.serializarVariaveis(declaracao as DeclaracaoVariavel, declaracoes, index);
+                    break;
             }
         }
 
