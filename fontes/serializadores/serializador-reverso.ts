@@ -78,6 +78,8 @@ export class SerializadorReverso {
             }
         }
 
+        // TODO: Adicionar caso if (declaracao instanceof DeclaracaoVariavel)
+
         return resultado;
     }
 }
