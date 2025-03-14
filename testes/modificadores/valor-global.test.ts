@@ -7,6 +7,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Valor } from "../../fontes/valores/valor";
 import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores com VALORES GLOBAIS', () => {
     describe('Testes Unitários', () => {
@@ -43,13 +44,18 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
-
 
                 // Tradutor
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -125,11 +131,11 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
         it('Casos de falha - Valores globais inválidos', () => {
             for (let index = 0; index < ValorGlobalInvalido.length; index += 1) {
                 const valorInvalido = 'aut';
-                
+
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                        `${ValorGlobalInvalido[index]}: ${valorInvalido};`,
+                    `${ValorGlobalInvalido[index]}: ${valorInvalido};`,
                     "}"
                 ]);
 
