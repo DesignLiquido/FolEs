@@ -158,7 +158,8 @@ export class Serializador {
     }
 
     serializarVariaveis(declaracaoVariavel: DeclaracaoVariavel, declaracoes: Declaracao[], indexVariavel: number): void {
-        let variavelInexistente: boolean = true;
+        let variavelInexistente: boolean = false;
+
         declaracoes.forEach((declaracao, indexBlocoDeclaracao) => {
             if (declaracao instanceof BlocoDeclaracao) {
                 declaracao.modificadores.forEach((modificador) => {
@@ -166,14 +167,14 @@ export class Serializador {
                         modificador.valor = declaracaoVariavel.valor;
 
                         if (indexVariavel > indexBlocoDeclaracao) {
-                            variavelInexistente = false;
+                            variavelInexistente = true;
                         }
                     }
                 })
             }
         });
         
-        if (!variavelInexistente) {
+        if (variavelInexistente) {
             throw new Error(`A variável '${declaracaoVariavel.nome}' deve ser declarada antes da atribuição de valor.`);
         }
     }
@@ -189,9 +190,6 @@ export class Serializador {
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
         }
-
-        // TODO @Vitor: Se você quiser filtrar por todas as declarações de variáveis antes de 
-        // iterar sobre os blocos (voltando o `.filter()`) que estava aqui, eu não acho má ideia. 
         
         for (const [index, declaracao] of declaracoes.entries()) {            
             switch (declaracao.constructor.name) {
