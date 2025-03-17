@@ -6,6 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { TraducaoUrl, Url } from "../listas/url";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores que recebem URL como atributo', () => {
     describe('Testes Unitários', () => {
@@ -42,10 +43,16 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     TraducaoUrl[Url[index]]
                 );
-
 
                 // Tradutor
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
