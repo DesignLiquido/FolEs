@@ -6,6 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { PalavrasReservadas } from "../listas/palavras-reservadas";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () => {
     describe('Testes Unitários', () => {
@@ -57,10 +58,16 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
 
@@ -118,13 +125,18 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 // Avaliador Sintático deve conter os nomes FolEs e CSS corretamente
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
-
 
                 // Tradutor deve tranformar o código corretamente em CSS
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -152,7 +164,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
                     ])
                 );
-                
+
                 // Av. Sintático deve retornar um erro 
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
