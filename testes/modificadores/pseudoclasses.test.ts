@@ -5,6 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Pseudoclasses } from "../listas/pseudoclasses";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores com PSEUDOCLASSES', () => {
     describe('Testes Unitários', () => {
@@ -43,12 +44,19 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
                 // Serializador
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
                 // O Serializador deve traduzir devidamente os termos
                 expect(resultadoTradutor).toContain('div');
-                expect(resultadoTradutor).toContain(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse.pseudoclasseCss);
+                expect(resultadoTradutor).toContain(primeiroResultadoTipado.seletores[0].pseudoclasse.pseudoclasseCss);
                 expect(resultadoTradutor).toContain('12px;');
             }
         });
@@ -61,7 +69,7 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     `divisão:${pseudoclasseIncorreta} {`,
-                        'tamanho-fonte: 12px;',
+                    'tamanho-fonte: 12px;',
                     "}"
                 ]);
 
