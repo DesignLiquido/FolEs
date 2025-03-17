@@ -6,6 +6,7 @@ import { Serializador } from "../fontes/serializadores";
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
 import { SeletorClasse, SeletorId } from "../fontes/seletores";
 import { SeletorEspacoReservado } from "../fontes/seletores/seletor-espaco-reservado";
+import { BlocoDeclaracao } from "../fontes/declaracoes";
 
 
 describe('Testando seletores e estruturas', () => {
@@ -45,14 +46,21 @@ describe('Testando seletores e estruturas', () => {
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
         // O Avaliador Sintático deve executar as operações normalmente, sem retornar erros
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
         expect(resultadoAvaliadorSintatico).toBeTruthy();
         expect(resultadoAvaliadorSintatico).toHaveLength(1);
 
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
         // O Avaliador deve mapear uma instância da classe SeletorClasse
-        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorClasse);
+        expect(primeiroResultadoTipado.seletores[0]).toBeInstanceOf(SeletorClasse);
 
         // A classe mapeada deve ter o nome 'minha-classe'
-        expect(resultadoAvaliadorSintatico[0].seletores[0]['nomeClasse']).toBe('minha-classe');
+        expect(primeiroResultadoTipado.seletores[0]['nomeClasse']).toBe('minha-classe');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -95,14 +103,21 @@ describe('Testando seletores e estruturas', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
         // O Avaliador deve mapear uma instância da classe SeletorClasse e com o nome 'classe-personalizada'
-        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorClasse);
-        expect(resultadoAvaliadorSintatico[0].seletores[0]['nomeClasse']).toBe('classe-personalizada');
+        expect(primeiroResultadoTipado.seletores[0]).toBeInstanceOf(SeletorClasse);
+        expect(primeiroResultadoTipado.seletores[0]['nomeClasse']).toBe('classe-personalizada');
 
         // O Avaliador deve mapear devidamente a pseudoclasse
-        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse).toBeTruthy();
-        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse['nomeFoles']).toBe('foco');
+        expect(primeiroResultadoTipado.seletores[0].pseudoclasse).toBeTruthy();
+        expect(primeiroResultadoTipado.seletores[0].pseudoclasse['nomeFoles']).toBe('foco');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -133,14 +148,21 @@ describe('Testando seletores e estruturas', () => {
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
         // O Avaliador Sintático deve executar as operações normalmente, sem retornar erros
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
         expect(resultadoAvaliadorSintatico).toBeTruthy();
         expect(resultadoAvaliadorSintatico).toHaveLength(1);
 
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
         // O Avaliador deve mapear uma instância da classe SeletorClasse
-        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorId);
+        expect(primeiroResultadoTipado.seletores[0]).toBeInstanceOf(SeletorId);
 
         // O id mapeado deve ter o nome 'meu-id'
-        expect(resultadoAvaliadorSintatico[0].seletores[0]['id']).toBe('meu-id');
+        expect(primeiroResultadoTipado.seletores[0]['id']).toBe('meu-id');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -183,14 +205,21 @@ describe('Testando seletores e estruturas', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
         // O Avaliador deve mapear uma instância de SeletorId e com o nome 'id-personalizado'
-        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorId);
-        expect(resultadoAvaliadorSintatico[0].seletores[0]['id']).toBe('id-personalizado');
+        expect(primeiroResultadoTipado.seletores[0]).toBeInstanceOf(SeletorId);
+        expect(primeiroResultadoTipado.seletores[0]['id']).toBe('id-personalizado');
 
         // O Avaliador deve mapear devidamente a pseudoclasse
-        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse).toBeTruthy();
-        expect(resultadoAvaliadorSintatico[0].seletores[0].pseudoclasse['nomeFoles']).toBe('escopo');
+        expect(primeiroResultadoTipado.seletores[0].pseudoclasse).toBeTruthy();
+        expect(primeiroResultadoTipado.seletores[0].pseudoclasse['nomeFoles']).toBe('escopo');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -221,11 +250,18 @@ describe('Testando seletores e estruturas', () => {
         const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
         // O Avaliador Sintático deve executar as operações normalmente, sem retornar erros
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
         expect(resultadoAvaliadorSintatico).toBeTruthy();
         expect(resultadoAvaliadorSintatico).toHaveLength(1);
 
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
         // O Avaliador deve mapear uma instância da classe SeletorEspaçoReservado
-        expect(resultadoAvaliadorSintatico[0].seletores[0]).toBeInstanceOf(SeletorEspacoReservado);
+        expect(primeiroResultadoTipado.seletores[0]).toBeInstanceOf(SeletorEspacoReservado);
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
