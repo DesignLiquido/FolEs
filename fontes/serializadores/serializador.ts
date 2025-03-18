@@ -159,7 +159,11 @@ export class Serializador {
     }
 
     validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
-        const nomeFolEs = declaracao.modificadores[0].nomeFoles.toString();
+        const nomeFolEs = declaracao.modificadores[0].nomeFoles.length > 1 
+        && typeof declaracao.modificadores[0].nomeFoles === 'object'
+        ? declaracao.modificadores[0].nomeFoles[0].toString() 
+        : declaracao.modificadores[0].nomeFoles.toString();
+
         const valorModificador = declaracao.modificadores[0].valor.toString();
         const valorVariavel = false;
 

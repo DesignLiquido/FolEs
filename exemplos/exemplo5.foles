@@ -10,8 +10,8 @@ lmht {
   cor-barra-rolagem: $cor-secundaria;
 }
 
-$valor-teste: normal;
+$valor-teste: 10px;
 
 lmht {
-  agrupar-palavra: $valor-teste;
+  alinhar-vertical: $valor-teste;
 }

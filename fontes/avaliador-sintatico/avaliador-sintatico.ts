@@ -1153,8 +1153,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let valorVariavel: string;
 
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
-            // Excluir const
-            const cifraoVariavel: Simbolo = this.consumir(
+            this.consumir(
                 tiposDeSimbolos.CIFRAO,
                 "Esperado cifrão antes de declaração de variável."
             )
@@ -1213,9 +1212,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     console.log('Não deveria cair aqui!')
             }
         }
-
-        // console.log('nome', nomeVariavel);
-        // console.log('valor', valorVariavel);
 
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
@@ -1303,7 +1299,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         
         if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
             const valorVariavel = true;
-
+            
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[1].lexema,
@@ -1322,7 +1318,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
 
 
-        if (valoresModificador.length <= 2) {
+        if (valoresModificador.length <= 2) {            
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty('lexema') ? valoresModificador[0].lexema : valoresModificador[0],
@@ -1405,7 +1401,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
             default:
                 const seletores = this.resolverSeletores();
-
                 const modificadoresEDeclaracoesAninhadas = this.resolverModificadoresEDeclaracoesAninhadas();
 
                 return new BlocoDeclaracao(
