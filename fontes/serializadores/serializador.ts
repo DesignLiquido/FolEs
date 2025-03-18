@@ -8,6 +8,7 @@ import { Metodo } from "../valores/metodos/foles/metodo";
 import estruturasHtml from "../tradutores/estruturas-html";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
+import { SeletorModificador } from "../modificadores/superclasse";
 
 /**
  * A classe que efetivamente traduz FolEs para CSS.
@@ -157,6 +158,20 @@ export class Serializador {
         return resultado;
     }
 
+    validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
+        const nomeFolEs = declaracao.modificadores[0].nomeFoles.toString();
+        const valorModificador = declaracao.modificadores[0].valor.toString();
+        const valorVariavel = false;
+
+        new SeletorModificador(
+            nomeFolEs,
+            valorModificador,
+            declaracao.modificadores[0].quantificador ? declaracao.modificadores[0].quantificador : null,
+            declaracao.modificadores[0].pragmas,
+            valorVariavel,
+        )        
+    }
+
     serializarVariaveis(declaracaoVariavel: DeclaracaoVariavel, declaracoes: Declaracao[], indexVariavel: number): void {
         let variavelInexistente: boolean = false;
 
@@ -169,11 +184,13 @@ export class Serializador {
                         if (indexVariavel > indexBlocoDeclaracao) {
                             variavelInexistente = true;
                         }
+
+                        this.validarValoresVariaveis(declaracao);
                     }
                 })
             }
         });
-        
+
         if (variavelInexistente) {
             throw new Error(`A variável '${declaracaoVariavel.nome}' deve ser declarada antes da atribuição de valor.`);
         }
@@ -190,7 +207,7 @@ export class Serializador {
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
         }
-        
+
         for (const [index, declaracao] of declaracoes.entries()) {            
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':

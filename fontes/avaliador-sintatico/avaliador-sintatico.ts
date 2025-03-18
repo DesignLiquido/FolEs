@@ -1153,6 +1153,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let valorVariavel: string;
 
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+            // Excluir const
             const cifraoVariavel: Simbolo = this.consumir(
                 tiposDeSimbolos.CIFRAO,
                 "Esperado cifrão antes de declaração de variável."
@@ -1301,6 +1302,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
         
         if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
+            const valorVariavel = true;
+
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[1].lexema,
@@ -1312,7 +1315,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     colunaInicial: modificador.colunaInicial,
                     colunaFinal: modificador.colunaFinal
                 },
-                true,
+                valorVariavel,
             );
 
             return classeModificadora as Modificador;

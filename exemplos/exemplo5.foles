@@ -1,5 +1,5 @@
 $valor-padrao: herdar;
-$cor-secundaria: azul;
+$cor-secundaria: branco;
 
 lmht {
   altura: $valor-padrao;
@@ -8,4 +8,10 @@ lmht {
 
 lmht {
   cor-barra-rolagem: $cor-secundaria;
+}
+
+$valor-teste: normal;
+
+lmht {
+  agrupar-palavra: $valor-teste;
 }
