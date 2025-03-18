@@ -15,7 +15,7 @@ export class AlinharSe extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("alinhar-se", "align-self", pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
@@ -29,7 +29,7 @@ export class AlinharSe extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
 
-        validarValoresAdicionais('alinhar-se', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('alinhar-se', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

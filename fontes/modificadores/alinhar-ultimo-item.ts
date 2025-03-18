@@ -11,7 +11,7 @@ export class AlinharUltimoItem extends Modificador {
         "fim": "end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["alinhar-ultimo-item", "alinhar-último-item"],
             "text-align-last",
@@ -29,7 +29,7 @@ export class AlinharUltimoItem extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
 
-        validarValoresAdicionais('alinhar-último-item', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('alinhar-último-item', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

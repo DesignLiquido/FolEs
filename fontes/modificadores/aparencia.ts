@@ -33,13 +33,13 @@ export class Aparencia extends Modificador {
         "área-texto": "textarea",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["aparencia", "aparência"], "appearance", pragmas);
 
         // Se for um equivalente, o valor atribuído é 'auto';
         valor in this.valoresEquivalentes ? valor = 'auto' : null
 
-        validarValores('aparência', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('aparência', valor, this.valoresAceitos);
 
         this.valor = valor;
 

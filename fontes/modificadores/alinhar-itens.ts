@@ -15,7 +15,7 @@ export class AlinharItens extends Modificador {
         "inseguro": "unsafe",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("alinhar-itens", "align-items", pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
@@ -28,8 +28,8 @@ export class AlinharItens extends Modificador {
         posicoesAceitas.forEach((posicao, index) => {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
-
-        validarValoresAdicionais('alinhar-itens', valor, posicoesValidas, this.valoresAceitos);
+    
+        if (!valorVariavel) validarValoresAdicionais('alinhar-itens', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

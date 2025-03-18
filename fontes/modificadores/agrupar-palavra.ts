@@ -8,14 +8,11 @@ export class AgruparPalavra extends Modificador {
         "manter-tudo": "keep-all",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador: string = null, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("agrupar-palavra", "word-break", pragmas);
 
-        validarValores("agrupar-palavra", valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores("agrupar-palavra", valor, this.valoresAceitos);
         
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

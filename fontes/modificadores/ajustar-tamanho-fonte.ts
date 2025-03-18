@@ -12,17 +12,20 @@ export class AjustarTamanhoFonte extends Modificador {
         "altura-ic": "ic-height",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
         // OBS.: Os valores aceitos listados só são válidos quando há DOIS valores atribuídos.
         // Ex.: ajustar-tamanho-fonte: altura-cap 0.5;
 
-        validarValorNumerico('ajustar-tamanho-fonte', valor, this.valoresAceitos);
-
+        // TODO: Avaliar pq valores numéricos declarados via variável não estão sendo aceitos
+        if (!valorVariavel) {
+            validarValorNumerico('ajustar-tamanho-fonte', valor, this.valoresAceitos);
+        }
+        
         this.valor = valor;
-
+        
         // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('ajustar-tamanho-fonte', quantificador);
+        if (quantificador) proibirQuantificador('ajustar-tamanho-fonte', quantificador);
     }
 }

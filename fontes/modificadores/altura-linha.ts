@@ -8,18 +8,20 @@ export class AlturaLinha extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("altura-linha", "line-height", pragmas);
 
-        validarValorNumerico('altura-linha', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('altura-linha', valor, this.valoresAceitos);
+
+            // Lógica diferente dos demais pois o modificador pode receber valores numéricos s/ quantificador
+            if (quantificador !== undefined) {
+                validarQuantificador('altura-linha', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // Lógica diferente dos demais pois o modificador pode receber valores numéricos s/ quantificador
-        if (quantificador !== undefined) {
-            validarQuantificador('altura-linha', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -9,10 +9,10 @@ export class AlinharTexto extends Modificador {
         "combinar-elemento-pai": "match-parent",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("alinhar-texto", "text-align", pragmas);
 
-        validarValoresAdicionais('alinhar-texto', valor, posicoesBasicas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('alinhar-texto', valor, posicoesBasicas, this.valoresAceitos);
 
         this.valor = valor;
 

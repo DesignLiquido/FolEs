@@ -20,17 +20,19 @@ export class AreaMascara extends Modificador {
         "texto": "text",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
 
-        if (valor.includes(',')) {
-            const separarValores = valor.split(', ');
-            
-            separarValores.forEach((valorIndividual) => {
-                validarValores('área-máscara', valorIndividual, this.valoresAceitos);
-            });
-        } else {
-            validarValores('área-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (valor.includes(',')) {
+                const separarValores = valor.split(', ');
+                
+                separarValores.forEach((valorIndividual) => {
+                    validarValores('área-máscara', valorIndividual, this.valoresAceitos);
+                });
+            } else {
+                validarValores('área-máscara', valor, this.valoresAceitos);
+            }
         }
 
         this.valor = valor;
