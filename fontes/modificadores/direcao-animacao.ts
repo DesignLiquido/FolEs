@@ -9,14 +9,14 @@ export class DirecaoAnimacao extends Modificador {
         "alternar-reverter": "alternate-reverse"
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["direcao-animacao", "direção-animação"], 
             "animation-direction", 
             pragmas
         );
 
-        validarValores('direção-animação', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('direção-animação', valor, this.valoresAceitos);
 
         this.valor = valor;
 

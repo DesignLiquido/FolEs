@@ -12,14 +12,14 @@ export class DecoracaoEstiloTexto extends Modificador {
         "nenhum": "none",
     }
     
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["decoracao-estilo-texto", "decoração-estilo-texto"], 
             "text-decoration-style", 
             pragmas
         );
         
-        validarValores('decoração-estilo-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('decoração-estilo-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

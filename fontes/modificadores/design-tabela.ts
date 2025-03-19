@@ -7,10 +7,10 @@ export class DesignTabela extends Modificador {
         "fixo": "fixed",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("design-tabela", "table-layout", pragmas);
-        
-        validarValores('design-tabela', valor, this.valoresAceitos);
+
+        if (!valorVariavel) validarValores('design-tabela', valor, this.valoresAceitos);
 
         this.valor = valor;
 

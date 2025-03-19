@@ -9,21 +9,23 @@ export class DecoracaoEspessuraTexto extends Modificador {
         "de-frente": "from-font",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["decoracao-espessura-texto", "decoração-espessura-texto"],
-            "text-decoration-thickness", 
+            "text-decoration-thickness",
             pragmas
         );
-        
-        validarValorNumerico('decoração-espessura-texto', valor, this.valoresAceitos);
+
+        if (!valorVariavel) {
+            validarValorNumerico('decoração-espessura-texto', valor, this.valoresAceitos);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('decoração-espessura-texto', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('decoração-espessura-texto', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

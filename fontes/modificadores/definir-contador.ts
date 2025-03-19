@@ -6,10 +6,10 @@ export class DefinirContador extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("definir-contador", "counter-set", pragmas);
         
-        validarValores('definir-contador', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('definir-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
 

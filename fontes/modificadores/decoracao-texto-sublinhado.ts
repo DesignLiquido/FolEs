@@ -8,14 +8,14 @@ export class DecoracaoTextoSublinhado extends Modificador {
         "tudo": "all",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["decoracao-texto-sublinhado", "decoração-texto-sublinhado"],
             "text-decoration-skip-ink", 
             pragmas
         );
 
-        validarValores('decoração-texto-sublinhado', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('decoração-texto-sublinhado', valor, this.valoresAceitos);
 
         this.valor = valor;
 
