@@ -11,17 +11,19 @@ export class Colunas extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("colunas", "columns", pragmas);
 
-        validarValorNumerico('colunas', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('colunas', valor, this.valoresAceitos);
+
+            if (quantificador !== undefined) {
+                validarQuantificador('colunas', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (quantificador !== undefined) {
-            validarQuantificador('colunas', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

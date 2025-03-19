@@ -8,10 +8,10 @@ export class ComportamentoEmBlocoRolagemMouse extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("comportamento-em-bloco-rolagem-mouse", "overscroll-behavior-block", pragmas);
 
-        validarValores('comportamento-em-bloco-rolagem-mouse',valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('comportamento-em-bloco-rolagem-mouse',valor, this.valoresAceitos);
 
         this.valor = valor;
 

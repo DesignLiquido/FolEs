@@ -8,16 +8,18 @@ export class Citacoes extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["citacoes", "citações"], "quotes", pragmas);
-        
-        const validacaoString = validarValorString(valor);
 
-        if (validacaoString) {
-            this.valoresAceitos[valor] = valor;
+        if (!valorVariavel) {
+            const validacaoString = validarValorString(valor);
+
+            if (validacaoString) {
+                this.valoresAceitos[valor] = valor;
+            }
+
+            validarValores("citações", valor, this.valoresAceitos);
         }
-
-        validarValores("citações", valor, this.valoresAceitos);
 
         this.valor = valor;
 

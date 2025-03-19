@@ -9,20 +9,19 @@ export class Coordenadas extends Modificador {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("coordenadas", "translate", pragmas);
 
-        // Aceita de 1 a 3 valores;
-        // A lógica abaixo cobre o recebimento de UM único valor.
+        if (!valorVariavel) {
+            validarValorNumerico('coordenadas', valor, this.valoresAceitos);
 
-        validarValorNumerico('coordenadas', valor, this.valoresAceitos);
+            if (Number(parseInt(valor))) {
+                validarQuantificador('coordenadas', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('coordenadas', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

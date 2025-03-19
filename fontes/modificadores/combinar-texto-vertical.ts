@@ -9,10 +9,10 @@ export class CombinarTextoVertical extends Modificador {
         "dígitos": "digits",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("combinar-texto-vertical", "text-combine-upright", pragmas);
 
-        validarValores("combinar-texto-vertical", valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores("combinar-texto-vertical", valor, this.valoresAceitos);
 
         this.valor = valor;
 

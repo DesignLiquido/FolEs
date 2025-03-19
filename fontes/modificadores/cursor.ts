@@ -41,12 +41,12 @@ export class Cursor extends Modificador {
         "afastar": "zoom-out",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("cursor", "cursor", pragmas);
 
         const valoresExtra = ['url'];
 
-        validarValores('cursor', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel) validarValores('cursor', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

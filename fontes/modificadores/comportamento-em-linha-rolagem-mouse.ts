@@ -8,10 +8,10 @@ export class ComportamentoEmLinhaRolagemMouse extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("comportamento-em-linha-rolagem-mouse", "overscroll-behavior-inline", pragmas);
 
-        validarValores('comportamento-em-linha-rolagem-mouse',valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('comportamento-em-linha-rolagem-mouse',valor, this.valoresAceitos);
 
         this.valor = valor;
 
