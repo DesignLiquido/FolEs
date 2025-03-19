@@ -15,7 +15,7 @@ export class Borda extends Modificador {
         "espessa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("borda", "border", pragmas);
 
         // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
@@ -27,27 +27,29 @@ export class Borda extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
-        if (!(valor in this.valoresAceitos) &&
-            Number.isNaN(parseInt(valor)) &&
-            validaçõesCor &&
-            validaçõesHEX &&
-            !(valor in estilos) &&
-            !(valor in cores) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'borda' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        if (!valorVariavel) {
+            if (!(valor in this.valoresAceitos) &&
+                Number.isNaN(parseInt(valor)) &&
+                validaçõesCor &&
+                validaçõesHEX &&
+                !(valor in estilos) &&
+                !(valor in cores) &&
+                !(valor in valoresGlobais)) {
+                throw new Error(`Propriedade 'borda' com valor ${valor} inválido. Valores aceitos: 
+                número-quantificador, 
+                ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
+                ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
+                ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('borda', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
         }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('borda', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }
