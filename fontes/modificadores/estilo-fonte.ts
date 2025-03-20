@@ -12,23 +12,19 @@ export class EstiloFonte extends Modificador {
         "oblíqua": "oblique",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("estilo-fonte", "font-style", pragmas);
 
-        validarValores('estilo-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValores('estilo-fonte', valor, this.valoresAceitos);
+                        
+            if (valor === 'obliqua' || valor === 'oblíqua') {
+                validarQuantificador('estilo-fonte', quantificador, angulos);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // OBS.: O valor 'oblíqua' pode vir acompanhado de um número-quantificador
-        // que representa o ÂNGULO de inclinação da fonte.
-
-        // EX.: estilo-fonte: obliqua 10deg;
-        // OBS: Descomentar lógica abaixo quando permitido atribuir múltiplos valores a um seletor FolEs
-
-        // if (valor === 'obliqua' || valor === 'oblíqua') {
-        //     validarQuantificador('estilo-fonte', quantificador, angulos);
-
-        //     this.quantificador = quantificador;
-        // }
     }
 }

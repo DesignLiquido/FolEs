@@ -8,17 +8,19 @@ export class EspacamentoColuna extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["espacamento-coluna", "espaçamento-coluna"], "column-gap", pragmas);
 
-        validarValorNumerico('espaçamento-coluna', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('espaçamento-coluna', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('espaçamento-coluna', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('espaçamento-coluna', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

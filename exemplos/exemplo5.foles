@@ -10,8 +10,8 @@ lmht {
   cor-barra-rolagem: $cor-secundaria;
 }
 
-$valor-teste: 10px;
+$valor-teste: verde;
 
 lmht {
-  alinhar-vertical: $valor-teste;
+  borda-em-bloco: $valor-teste;
 }

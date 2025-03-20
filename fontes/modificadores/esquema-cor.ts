@@ -9,10 +9,10 @@ export class EsquemaCor extends Modificador {
         "apenas": "only",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("esquema-cor", "color-scheme", pragmas);
         
-        validarValores('esquema-cor', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('esquema-cor', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -18,7 +18,7 @@ export class EstiloEnfaseTexto extends Modificador {
         "sésamo": "sesame",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
             "text-emphasis-style",
@@ -31,7 +31,7 @@ export class EstiloEnfaseTexto extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        validarValores('estilo-ênfase-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('estilo-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

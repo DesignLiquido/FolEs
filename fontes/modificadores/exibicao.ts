@@ -41,10 +41,10 @@ export class Exibicao extends Modificador {
         "texto-container-rubí": "ruby-text-container",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["exibicao", "exibição"], "display", pragmas);
 
-        validarValores('exibição', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('exibição', valor, this.valoresAceitos);
 
         this.valor = valor;
 
