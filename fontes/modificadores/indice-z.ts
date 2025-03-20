@@ -6,10 +6,10 @@ export class IndiceZ extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["indice-z", "índice-z"], "z-index", pragmas);
-        
-        validarValorNumerico('índice-z', valor, this.valoresAceitos);
+
+        if (!valorVariavel) validarValorNumerico('índice-z', valor, this.valoresAceitos);
         
         this.valor = valor;
 

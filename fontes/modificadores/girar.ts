@@ -8,18 +8,20 @@ export class Girar extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("girar", "rotate", pragmas);
         
-        validarValorNumerico('girar', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('girar', valor, this.valoresAceitos);
+                        
+            // Quantificador deve ser do tipo ângulo (<angle>)
+            if (Number(parseInt(valor))) {
+                validarQuantificador('girar', quantificador, angulos);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // Quantificador deve ser do tipo ângulo (<angle>)
-        if (Number(parseInt(valor))) {
-            validarQuantificador('girar', quantificador, angulos);
-
-            this.quantificador = quantificador;
-        }
     }
 }

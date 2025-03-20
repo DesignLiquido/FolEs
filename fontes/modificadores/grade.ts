@@ -19,11 +19,12 @@ export class Grade extends Modificador {
         "alvenaria": "masonry",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("grade", "grid", pragmas);
 
         const valoresExtra = ['minmax'];
-        validarValores('grade', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) validarValores('grade', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

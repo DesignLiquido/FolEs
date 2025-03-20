@@ -6,18 +6,13 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioBordaEmLinha extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 3 valores.
-
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["inicio-borda-em-linha", "início-borda-em-linha"],
-            "border-inline-start", 
+            "border-inline-start",
             pragmas
         );
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações seguintes.
         const valorString = valor.toString();
 
         const validaçõesCor = !(valorString.includes('rgb')) && !(valorString.includes('rgba')) &&
@@ -25,25 +20,27 @@ export class InicioBordaEmLinha extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
-        if (Number.isNaN(parseInt(valor)) &&
-            validaçõesCor &&
-            validaçõesHEX &&
-            !(valor in estilos) &&
-            !(valor in cores) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'início-borda-em-linha' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
+        if (!valorVariavel) {
+            if (Number.isNaN(parseInt(valor)) &&
+                validaçõesCor &&
+                validaçõesHEX &&
+                !(valor in estilos) &&
+                !(valor in cores) &&
+                !(valor in valoresGlobais)) {
+                throw new Error(`Propriedade 'início-borda-em-linha' com valor ${valor} inválido. Valores aceitos: 
+                número-quantificador, 
+                ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('início-borda-em-linha', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
         }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('início-borda-em-linha', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

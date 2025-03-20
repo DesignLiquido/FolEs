@@ -8,21 +8,23 @@ export class InsercaoEmBlocoFim extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["insercao-em-bloco-fim", "inserção-em-bloco-fim"],
-            "inset-block-end", 
+            "inset-block-end",
             pragmas
         );
 
-        validarValorNumerico('inserção-em-bloco-fim', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('inserção-em-bloco-fim', valor, this.valoresAceitos);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('inserção-em-bloco-fim', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('inserção-em-bloco-fim', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -8,21 +8,23 @@ export class InicioInsercaoEmBloco extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["inicio-insercao-em-bloco", "início-inserção-em-bloco"],
             "inset-block-start", 
             pragmas
         );
         
-        validarValorNumerico('início-inserção-em-bloco', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('início-inserção-em-bloco', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('início-inserção-em-bloco', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('início-inserção-em-bloco', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -6,17 +6,13 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioBordaEmBloco extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 3 valores.
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["inicio-borda-em-bloco", "início-borda-em-bloco"],
-            "border-block-start", 
+            "border-block-start",
             pragmas
         );
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações seguintes.
         const valorString = valor.toString();
 
         const validaçõesCor = !(valorString.includes('rgb')) && !(valorString.includes('rgba')) &&
@@ -24,25 +20,27 @@ export class InicioBordaEmBloco extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
-        if (Number.isNaN(parseInt(valor)) &&
-            validaçõesCor &&
-            validaçõesHEX &&
-            !(valor in estilos) &&
-            !(valor in cores) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'início-borda-em-bloco' com valor ${valor} inválido. Valores aceitos: 
+        if (!valorVariavel) {
+            if (Number.isNaN(parseInt(valor)) &&
+                validaçõesCor &&
+                validaçõesHEX &&
+                !(valor in estilos) &&
+                !(valor in cores) &&
+                !(valor in valoresGlobais)) {
+                throw new Error(`Propriedade 'início-borda-em-bloco' com valor ${valor} inválido. Valores aceitos: 
             número-quantificador, 
             ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
             ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('início-borda-em-bloco', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
         }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('início-borda-em-bloco', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

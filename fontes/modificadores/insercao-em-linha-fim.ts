@@ -8,21 +8,23 @@ export class InsercaoEmLinhaFim extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["insercao-em-linha-fim", "inserção-em-linha-fim"],
             "inset-inline-end", 
             pragmas
         );
 
-        validarValorNumerico('inserção-em-linha-fim', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('inserção-em-linha-fim', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('inserção-em-linha-fim', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('inserção-em-linha-fim', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

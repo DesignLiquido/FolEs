@@ -8,15 +8,17 @@ export class ImagemFundo extends Modificador {
         "url": "url",
     }
 
-    constructor(valor: Metodo | string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: Metodo | string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("imagem-fundo", "background-image", pragmas);
 
-        // Valor deve ser um link URL ou 'nenhuma' (none)
-        if (valor instanceof Metodo) {
-            this.valor = valor;
-        } else {
-            validarValores('imagem-fundo', valor, this.valoresAceitos);
-            this.valor = valor;
+        if (!valorVariavel) {
+            // Valor deve ser um link URL ou 'nenhuma' (none)
+            if (valor instanceof Metodo) {
+                this.valor = valor;
+            } else {
+                validarValores('imagem-fundo', valor, this.valoresAceitos);
+                this.valor = valor;
+            }
         }
 
         // Não recebe quantificador
