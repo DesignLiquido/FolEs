@@ -15,10 +15,10 @@ export class FlexFluxo extends Modificador {
         "inverter-agrupamento": "wrap-reverse",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        validarValores('flex-fluxo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('flex-fluxo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -7,10 +7,10 @@ export class FimLinhaEmGrade extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fim-linha-em-grade", "grid-row-end", pragmas);
 
-        validarValorNumerico('fim-linha-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValorNumerico('fim-linha-em-grade', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -4,17 +4,19 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FormaMargem extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("forma-margem", "shape-margin", pragmas);
 
-        validarValorNumerico('forma-margem', valor);
-
-        this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('forma-margem', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
+        if (!valorVariavel) {
+            validarValorNumerico('forma-margem', valor);
+                
+            if (Number(parseInt(valor))) {
+                validarQuantificador('forma-margem', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
         }
+        
+        this.valor = valor;
     }
 }

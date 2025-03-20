@@ -8,20 +8,23 @@ export class FatiarImagemBorda extends Modificador {
         "preencher": "fill",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fatiar-imagem-borda", "border-image-slice", pragmas);
 
         const valoresExtra = ['url'];
-        validarValorNumerico('fatiar-imagem-borda', valor, this.valoresAceitos, valoresExtra);  
+
+        if (!valorVariavel) {
+            validarValorNumerico('fatiar-imagem-borda', valor, this.valoresAceitos, valoresExtra);
+
+            // Aceita somente o valor percentual (%) como quantificador.
+            // Também pode receber somente o valor numérico, sem quantificador.
+            if (quantificador !== undefined) {
+                validarQuantificador('fatiar-imagem-borda', quantificador, ListaDeValorPercentual);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // Aceita somente o valor percentual (%) como quantificador.
-        // Também pode receber somente o valor numérico, sem quantificador.
-        if (quantificador !== undefined) {
-            validarQuantificador('fatiar-imagem-borda', quantificador, ListaDeValorPercentual);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -19,7 +19,7 @@ export class FonteTexto extends Modificador {
         "fangsong": "fangsong",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fonte-texto", "font-family", pragmas);
 
         // OBS.: A lista de valores aceitos inclui todas as FONTES GENÉRICAS (<generic-name>).
@@ -32,7 +32,7 @@ export class FonteTexto extends Modificador {
         // OBS.3: O segundo parâmetro é obrigatório para o caso da primeira fonte não estar disponível.
 
         // A lógica abaixo cobre somente o recebimento dos valores genéricos.
-        validarValores('fonte-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('fonte-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

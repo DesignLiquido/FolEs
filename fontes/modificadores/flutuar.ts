@@ -11,10 +11,10 @@ export class Flutuar extends Modificador {
         "fim-em-linha": "inline-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("flutuar", "float", pragmas);
         
-        validarValores('flutuar', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('flutuar', valor, this.valoresAceitos);
 
         this.valor = valor;
 

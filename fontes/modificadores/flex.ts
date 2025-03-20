@@ -18,17 +18,19 @@ export class Flex extends Modificador {
         "conteúdo": "content",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("flex", "flex", pragmas);
 
-        validarValorNumerico('flex', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('flex', valor, this.valoresAceitos);
+
+            if (quantificador !== undefined) {
+                validarQuantificador('flex', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (quantificador !== undefined) {
-            validarQuantificador('flex', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

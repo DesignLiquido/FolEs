@@ -6,11 +6,12 @@ export class Filtro extends Modificador {
         "url": "url",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("filtro", "filter", pragmas);
 
         const valoresExtra = ['url', 'blur', 'brightness', 'contrast'];
-        validarValores('filtro', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) validarValores('filtro', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

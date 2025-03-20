@@ -6,8 +6,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fundo extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 8 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "fixo": "fixed",
         "local": "local",
@@ -35,11 +33,9 @@ export class Fundo extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fundo", "background", pragmas);
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações seguintes.
         const valorString = valor.toString();
 
         const validaçõesCor = !(valorString.includes('rgb')) && !(valorString.includes('rgba')) &&
@@ -47,25 +43,27 @@ export class Fundo extends Modificador {
 
         const validaçõesHEX = !(valorString.startsWith('#') && valorString.length <= 7);
 
-        if (Number.isNaN(parseInt(valor)) &&
-            !(valor in this.valoresAceitos) &&
-            validaçõesCor && validaçõesHEX &&
-            !(valorString.includes('url')) &&
-            !(valor in cores) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'fundo' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+        if (!valorVariavel) {
+            if (Number.isNaN(parseInt(valor)) &&
+                !(valor in this.valoresAceitos) &&
+                validaçõesCor && validaçõesHEX &&
+                !(valorString.includes('url')) &&
+                !(valor in cores) &&
+                !(valor in valoresGlobais)) {
+                throw new Error(`Propriedade 'fundo' com valor ${valor} inválido. Valores aceitos: 
+                    número-quantificador, 
+                    ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('fundo', quantificador, unidadesMedida, ValorPercentual);
+
+                this.quantificador = quantificador;
+            }
         }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('fundo', quantificador, unidadesMedida, ValorPercentual);
-
-            this.quantificador = quantificador;
-        }
     }
 }

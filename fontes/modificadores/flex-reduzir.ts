@@ -3,14 +3,16 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FlexReduzir extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("flex-reduzir", "flex-shrink", pragmas);
 
-        validarValorNumerico('flex-reduzir', valor);
+        if (!valorVariavel) {
+            validarValorNumerico('flex-reduzir', valor);
+                        
+            // Não recebe quantificador, apenas o valor numérico.
+            proibirQuantificador('flex-reduzir', quantificador);
+        }
 
         this.valor = valor;
-        
-        // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('flex-reduzir', quantificador);
     }
 }

@@ -12,10 +12,10 @@ export class Fluxo extends Modificador {
         "fim-em-linha": "inline-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fluxo", "clear", pragmas);
         
-        validarValores('fluxo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('fluxo', valor, this.valoresAceitos);
 
         this.valor = valor;
 
