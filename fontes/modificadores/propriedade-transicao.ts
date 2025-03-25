@@ -7,14 +7,14 @@ export class PropriedadeTransicao extends Modificador {
         "todas": "all",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["propriedade-transicao", "propriedade-transição"],
             "transition-property", 
             pragmas
         );
 
-        validarValores('propriedade-transição', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('propriedade-transição', valor, this.valoresAceitos);
 
         this.valor = valor;
 

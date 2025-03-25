@@ -3,8 +3,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarItens extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 2 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
@@ -23,10 +21,10 @@ export class PosicionarItens extends Modificador {
         "auto-fim": "self-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("posicionar-itens", "place-items", pragmas);
 
-        validarValoresAdicionais('posicionar-itens', valor, posicoes, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('posicionar-itens', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;
 

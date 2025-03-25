@@ -8,17 +8,19 @@ export class PosicaoInferior extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["posicao-inferior", "posição-inferior"], "bottom", pragmas);
 
-        validarValorNumerico('posição-inferior', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('posição-inferior', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('posição-inferior', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('posição-inferior', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

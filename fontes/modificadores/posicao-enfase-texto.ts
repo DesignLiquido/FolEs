@@ -9,14 +9,14 @@ export class PosicaoEnfaseTexto extends Modificador {
         "esquerda": "left",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["posicao-enfase-texto", "posição-ênfase-texto"],
             "text-emphasis-position", 
             pragmas
         );
 
-        validarValores('posição-ênfase-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('posição-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

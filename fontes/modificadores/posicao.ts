@@ -10,10 +10,10 @@ export class Posicao extends Modificador {
         "colada": "sticky",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["posicao", "posição"], "position", pragmas);
 
-        validarValores('posição', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('posição', valor, this.valoresAceitos);
 
         this.valor = valor;
 

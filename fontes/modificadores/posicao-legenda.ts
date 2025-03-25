@@ -13,10 +13,10 @@ export class PosicaoLegenda extends Modificador {
         "fim-em-linha": "inline-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["posicao-legenda", "posição-legenda"], "caption-side", pragmas);
 
-        validarValores('posição-legenda', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('posição-legenda', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -8,10 +8,10 @@ export class PreencherColuna extends Modificador {
         "equilibrar-tudo": "balance-all",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("preencher-coluna", "column-fill", pragmas);
 
-        validarValores('preencher-coluna', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('preencher-coluna', valor, this.valoresAceitos);
 
         this.valor = valor;
 
