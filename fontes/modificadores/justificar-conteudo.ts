@@ -16,7 +16,7 @@ export class JustificarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["justificar-conteudo", "justificar-conteúdo"],
             "justify-content", 
@@ -33,9 +33,9 @@ export class JustificarConteudo extends Modificador {
         const posicoesValidas = {};
         posicoesAceitas.forEach((posicao, index) => {
             posicoesValidas[posicao] = posicoesAceitas[index]
-        })
+        })  
 
-        validarValoresAdicionais('justificar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('justificar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

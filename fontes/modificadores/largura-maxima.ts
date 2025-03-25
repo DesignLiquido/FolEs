@@ -12,18 +12,21 @@ export class LarguraMaxima extends Modificador {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["largura-maxima", "largura-máxima"], "max-width", pragmas);
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('largura-máxima', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) {
+            validarValorNumerico('largura-máxima', valor, this.valoresAceitos, valoresExtra);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('largura-máxima', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('largura-máxima', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -3,14 +3,16 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class LinhasSuperiores extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("linhas-superiores", "widows", pragmas);
 
-        validarValorNumerico('linhas-superiores', valor);
+        if (!valorVariavel) {
+            validarValorNumerico('linhas-superiores', valor);
+
+            // Não recebe quantificador, apenas o valor numérico.
+            proibirQuantificador('linhas-superiores', quantificador);
+        }
 
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('linhas-superiores', quantificador);
     }
 }

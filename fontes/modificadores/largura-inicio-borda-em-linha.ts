@@ -11,21 +11,23 @@ export class LarguraInicioBordaEmLinha extends Modificador {
         "grossa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["largura-inicio-borda-em-linha", "largura-início-borda-em-linha"],
             "border-inline-start-width", 
             pragmas
         );
 
-        validarValorNumerico('largura-início-borda-em-linha', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('largura-início-borda-em-linha', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('largura-início-borda-em-linha', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('largura-início-borda-em-linha', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -12,7 +12,7 @@ export class JustificarSe extends Modificador {
         "auto-fim": "self-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("justificar-se", "justify-self", pragmas);
 
         // Além dos valores listados, aceita também todos os valores da Lista 
@@ -27,7 +27,7 @@ export class JustificarSe extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
 
-        validarValoresAdicionais('justificar-se', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('justificar-se', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
 

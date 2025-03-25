@@ -8,20 +8,20 @@ export class LarguraImagemBorda extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("largura-imagem-borda", "border-image-width", pragmas);
 
-        validarValorNumerico('largura-imagem-borda', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('largura-imagem-borda', valor, this.valoresAceitos);
+
+            // Aceita receber valores numéricos sem quantificador
+            if (quantificador !== undefined) {
+                validarQuantificador('largura-imagem-borda', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // A condicional aqui parte do quantificador, e não do valor,
-        // pois o modificador aceita receber valores numéricos sem quantificador
-        // Exemplo: largura-imagem-borda: 3;
-        if (quantificador !== undefined) {
-            validarQuantificador('largura-imagem-borda', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

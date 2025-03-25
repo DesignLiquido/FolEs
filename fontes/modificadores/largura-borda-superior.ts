@@ -11,18 +11,19 @@ export class LarguraBordaSuperior extends Modificador {
         "grossa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("largura-borda-superior", "border-top-width", pragmas);
 
-        // Pode receber valores próprios ou número-quantificador
-        validarValorNumerico('largura-borda-superior', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('largura-borda-superior', valor, this.valoresAceitos);
+            
+            if (Number(parseInt(valor))) {
+                validarQuantificador('largura-borda-superior', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('largura-borda-superior', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }
