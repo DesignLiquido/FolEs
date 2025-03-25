@@ -6,10 +6,10 @@ export class NomeAnimacao extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
 
-        validarValores('nome-animação', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('nome-animação', valor, this.valoresAceitos);
         this.valor = valor;
 
         // Não recebe quantificador

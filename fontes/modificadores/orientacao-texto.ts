@@ -12,14 +12,14 @@ export class OrientacaoTexto extends Modificador {
         "usar-orientação-glifo": "use-glyph-orientation",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["orientacao-texto", "orientação-texto"], 
             "text-orientation", 
             pragmas
         );
 
-        validarValores('orientação-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('orientação-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

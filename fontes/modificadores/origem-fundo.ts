@@ -9,10 +9,10 @@ export class OrigemFundo extends Modificador {
         "conteúdo-caixa": "content-box",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("origem-fundo", "background-origin", pragmas);
 
-        validarValores('origem-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('origem-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

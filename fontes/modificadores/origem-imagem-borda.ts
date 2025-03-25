@@ -6,11 +6,12 @@ export class OrigemImagemBorda extends Modificador {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("origem-imagem-borda", "border-image-source", pragmas);
 
         const valoresExtra = ['url', 'linear-gradient'];
-        validarValores('origem-imagem-borda', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) validarValores('origem-imagem-borda', valor, this.valoresAceitos, valoresExtra);
         this.valor = valor;
 
         // Não recebe quantificador

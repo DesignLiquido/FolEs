@@ -12,20 +12,21 @@ export class OrigemPerspectiva extends Modificador {
         "inferior": "bottom",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("origem-perspectiva", "perspective-origin", pragmas);
 
-        validarValorNumerico('origem-perspectiva', valor, this.valoresAceitos);
+        if (!valorVariavel) {            
+            validarValorNumerico('origem-perspectiva', valor, this.valoresAceitos);    
 
-        this.valor = valor;
-
-        // Aceita somente o valor percentual (%) como quantificador
-        // Também pode receber somente o valor numérico, sem quantificador
-        if (Number(parseInt(valor)) && quantificador !== undefined) {
-            validarQuantificador('origem-perspectiva', quantificador, ListaDeValorPercentual);
-
-            this.quantificador = quantificador;
+            // Aceita somente o valor percentual (%) como quantificador
+            // Também pode receber somente o valor numérico, sem quantificador
+            if (Number(parseInt(valor)) && quantificador !== undefined) {
+                validarQuantificador('origem-perspectiva', quantificador, ListaDeValorPercentual);
+                
+                this.quantificador = quantificador;
+            }
         }
 
+        this.valor = valor;
     }
 }
