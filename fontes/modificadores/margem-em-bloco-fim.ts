@@ -8,17 +8,19 @@ export class MargemEmBlocoFim extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem-em-bloco-fim", "margin-block-end", pragmas);
         
-        validarValorNumerico('margem-em-bloco-fim', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('margem-em-bloco-fim', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('margem-em-bloco-fim', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('margem-em-bloco-fim', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

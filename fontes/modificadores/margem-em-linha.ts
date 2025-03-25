@@ -10,17 +10,19 @@ export class MargemEmLinha extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem-em-linha", "margin-inline", pragmas);
 
-        validarValorNumerico('margem-em-linha', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('margem-em-linha', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('margem-em-linha', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('margem-em-linha', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

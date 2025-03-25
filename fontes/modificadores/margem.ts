@@ -11,17 +11,19 @@ export class Margem extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem", "margin", pragmas);
 
-        validarValorNumerico('margem', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('margem', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('margem', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('margem', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

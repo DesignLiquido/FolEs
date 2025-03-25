@@ -8,14 +8,14 @@ export class ModoBordaMascara extends Modificador {
         "alfa": "alpha",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["modo-borda-mascara", "modo-borda-máscara"],
             "mask-border-mode", 
             pragmas
         );
         
-        validarValores('modo-borda-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('modo-borda-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
 

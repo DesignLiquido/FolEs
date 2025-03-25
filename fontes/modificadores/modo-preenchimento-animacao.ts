@@ -10,14 +10,14 @@ export class ModoPreenchimentoAnimacao extends Modificador {
         "ambos": "both"
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["modo-preenchimento-animacao", "modo-preenchimento-animação"], 
             "animation-fill-mode", 
             pragmas
         );
 
-        validarValores('modo-preenchimento-animação', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('modo-preenchimento-animação', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -3,9 +3,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class Mascara extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 8 valores.
-
     valoresAceitos: { [valorFoles: string]: string } = {
         "alfa": "alpha",
         "luminancia": "luminance",
@@ -45,10 +42,10 @@ export class Mascara extends Modificador {
         "url": "url",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["mascara", "máscara"], "mask", pragmas);
 
-        validarValoresAdicionais('máscara', valor, posicoesBasicas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('máscara', valor, posicoesBasicas, this.valoresAceitos);
 
         this.valor = valor;
 
