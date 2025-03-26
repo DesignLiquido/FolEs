@@ -7,7 +7,7 @@ export class SubstituirIdiomaFonte extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("substituir-idioma-fonte", "font-language-override", pragmas);
 
         const validacaoString = validarValorString(valor);
@@ -16,7 +16,8 @@ export class SubstituirIdiomaFonte extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
+        
         this.valor = valor;
 
         // Não recebe quantificador

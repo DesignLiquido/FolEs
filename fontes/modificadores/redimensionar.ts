@@ -12,10 +12,10 @@ export class Redimensionar extends Modificador {
         "em-linha": "inline",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("redimensionar", "resize", pragmas);
 
-        validarValores('redimensionar', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('redimensionar', valor, this.valoresAceitos);
 
         this.valor = valor;
 

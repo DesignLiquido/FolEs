@@ -12,14 +12,14 @@ export class RenderizacaoTexto extends Modificador {
         "precisãoGeométrica": "geometricPrecision",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["renderizacao-texto", "renderização-texto"],
             "text-rendering", 
             pragmas
         );
 
-        validarValores('renderização-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('renderização-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

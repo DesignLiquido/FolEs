@@ -6,10 +6,11 @@ export class RecursosFonte extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("recursos-fonte", "font-feature-settings", pragmas);
 
-        validarValores('recursos-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('recursos-fonte', valor, this.valoresAceitos);
+
         this.valor = valor;
 
         // Não recebe quantificador

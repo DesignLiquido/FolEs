@@ -9,14 +9,14 @@ export class RenderizacaoImagem extends Modificador {
         "pixelado": "pixelated",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["renderizacao-imagem", "renderização-imagem"],
             "image-rendering", 
             pragmas
         );
 
-        validarValores('renderização-imagem', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('renderização-imagem', valor, this.valoresAceitos);
 
         this.valor = valor;
 

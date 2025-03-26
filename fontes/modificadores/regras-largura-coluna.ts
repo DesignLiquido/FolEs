@@ -11,17 +11,19 @@ export class RegrasLarguraColuna extends Modificador {
         "grossa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("regras-largura-coluna", "column-rule-width", pragmas);
 
-        validarValorNumerico('regras-largura-coluna', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('regras-largura-coluna', valor, this.valoresAceitos);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('regras-largura-coluna', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('regras-largura-coluna', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

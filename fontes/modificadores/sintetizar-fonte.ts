@@ -2,7 +2,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class SintetizarFonte extends Modificador {
-    
     // As traduções dos valores parecem estar erradas ou forçadas, mas estão de acordo com a documentação:
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis 
 
@@ -15,10 +14,10 @@ export class SintetizarFonte extends Modificador {
         "maiúsculas-pequenas": "small-caps",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("sintetizar-fonte", "font-synthesis", pragmas);
 
-        validarValores('sintetizar-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('sintetizar-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
 
