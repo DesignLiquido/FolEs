@@ -6,10 +6,10 @@ export class Recortar extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("recortar", "clip", pragmas);
 
-        validarValores('recortar', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('recortar', valor, this.valoresAceitos);
 
         this.valor = valor;
 

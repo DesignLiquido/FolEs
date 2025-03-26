@@ -4,20 +4,21 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RecuoDireito extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("recuo-direito", "padding-right", pragmas);
 
-        validarValorNumerico('recuo-direito', valor);
+        if (!valorVariavel) {
+            validarValorNumerico('recuo-direito', valor);
+
+            // O seletor aceita o número 0.
+            // Logo, o código só passa pela validação caso haja um segundo parâmetro ou caso o primeiro seja diferente de 0.
+            if (quantificador !== undefined && valor !== '0') {
+                validarQuantificador('recuo-direito', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // O seletor aceita o número 0.
-        // Logo, o código só passa pela validação caso haja um segundo parâmetro
-        // ou caso o primeiro seja diferente de 0.
-        if (quantificador !== undefined && valor !== '0') {
-            validarQuantificador('recuo-direito', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

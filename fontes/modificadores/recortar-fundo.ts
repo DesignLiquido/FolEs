@@ -10,10 +10,10 @@ export class RecortarFundo extends Modificador {
         "texto": "text",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("recortar-fundo", "background-clip", pragmas);
 
-        validarValores('recortar-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('recortar-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
 

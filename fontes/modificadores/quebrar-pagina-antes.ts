@@ -12,14 +12,14 @@ export class QuebrarPaginaAntes extends Modificador {
         "verso": "verso",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["quebrar-pagina-antes", "quebrar-página-antes"], 
             "page-break-before", 
             pragmas
         );
 
-        validarValores('quebrar-página-antes', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('quebrar-página-antes', valor, this.valoresAceitos);
 
         this.valor = valor;
 

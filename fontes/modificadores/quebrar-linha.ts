@@ -10,10 +10,10 @@ export class QuebrarLinha extends Modificador {
         "qualquer-lugar": "anywhere",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("quebrar-linha", "line-break", pragmas);
 
-        validarValores('quebrar-linha', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('quebrar-linha', valor, this.valoresAceitos);
 
         this.valor = valor;
 

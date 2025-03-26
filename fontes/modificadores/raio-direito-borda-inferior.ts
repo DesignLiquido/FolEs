@@ -4,17 +4,19 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RaioDireitoBordaInferior extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("raio-direito-borda-inferior", "border-bottom-right-radius", pragmas);
         
-        validarValorNumerico('raio-direito-borda-inferior', valor);
+        if (!valorVariavel) {
+            validarValorNumerico('raio-direito-borda-inferior', valor);
+
+            if (Number(parseInt(valor))){
+                validarQuantificador('raio-direito-borda-inferior', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))){
-            validarQuantificador('raio-direito-borda-inferior', quantificador, unidadesMedida);
-    
-            this.quantificador = quantificador;
-        }
     }
 }

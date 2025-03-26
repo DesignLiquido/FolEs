@@ -7,10 +7,10 @@ export class RecolherBorda extends Modificador {
         "separar": "separate",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("recolher-borda", "border-collapse", pragmas);
 
-        validarValores('recolher-borda', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('recolher-borda', valor, this.valoresAceitos);
 
         this.valor = valor;
 
