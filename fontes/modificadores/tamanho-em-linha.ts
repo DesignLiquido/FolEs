@@ -12,18 +12,21 @@ export class TamanhoEmLinha extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("tamanho-em-linha", "inline-size", pragmas);
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('tamanho-em-linha', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) {
+            validarValorNumerico('tamanho-em-linha', valor, this.valoresAceitos, valoresExtra);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('tamanho-em-linha', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('tamanho-em-linha', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

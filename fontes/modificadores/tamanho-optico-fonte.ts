@@ -7,14 +7,14 @@ export class TamanhoOpticoFonte extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["tamanho-optico-fonte", "tamanho-óptico-fonte"],
             "font-optical-sizing", 
             pragmas
         ); 
 
-        validarValores('tamanho-óptico-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('tamanho-óptico-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
 

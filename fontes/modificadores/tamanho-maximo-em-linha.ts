@@ -12,22 +12,25 @@ export class TamanhoMaximoEmLinha extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["tamanho-maximo-em-linha", "tamanho-máximo-em-linha"],
-            "max-inline-size", 
+            "max-inline-size",
             pragmas
         );
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('tamanho-máximo-em-linha', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) {
+            validarValorNumerico('tamanho-máximo-em-linha', valor, this.valoresAceitos, valoresExtra);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('tamanho-máximo-em-linha', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('tamanho-máximo-em-linha', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

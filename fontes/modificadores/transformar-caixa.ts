@@ -11,10 +11,10 @@ export class TransformarCaixa extends Modificador {
         "visualizar-caixa": "view-box",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("transformar-caixa", "transform-box", pragmas);
 
-        validarValores('transformar-caixa', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('transformar-caixa', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -10,17 +10,19 @@ export class TamanhoFundo extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("tamanho-fundo", "background-size", pragmas);
 
-        validarValorNumerico('tamanho-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('tamanho-fundo', valor, this.valoresAceitos);
+            
+            if (Number(parseInt(valor))){ 
+                validarQuantificador('tamanho-fundo', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))){ 
-            validarQuantificador('tamanho-fundo', quantificador, unidadesMedida);
-    
-            this.quantificador = quantificador;
-        }
     }
 }

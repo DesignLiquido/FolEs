@@ -6,16 +6,19 @@ export class TamanhoGrade extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("tamanho-grade", "grid-area", pragmas);
 
-        if (valor.includes('/')) {
-            const separarValores = valor.split(' / ');
-            separarValores.forEach((valorIndividual) => {
-                validarValorNumerico('tamanho-grade', valorIndividual, this.valoresAceitos);
-            });
-        } else {
-            validarValorNumerico('tamanho-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+
+            if (valor.includes('/')) {
+                const separarValores = valor.split(' / ');
+                separarValores.forEach((valorIndividual) => {
+                    validarValorNumerico('tamanho-grade', valorIndividual, this.valoresAceitos);
+                });
+            } else {
+                validarValorNumerico('tamanho-grade', valor, this.valoresAceitos);
+            }
         }
 
         this.valor = valor;

@@ -12,22 +12,25 @@ export class TamanhoMinimoEmBloco extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["tamanho-minimo-em-bloco", "tamanho-mínimo-em-bloco"],
-            "min-block-size", 
+            "min-block-size",
             pragmas
         );
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('tamanho-mínimo-em-bloco', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) {
+            validarValorNumerico('tamanho-mínimo-em-bloco', valor, this.valoresAceitos, valoresExtra);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('tamanho-mínimo-em-bloco', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('tamanho-mínimo-em-bloco', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

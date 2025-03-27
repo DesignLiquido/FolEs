@@ -11,10 +11,10 @@ export class TextoBidirecional extends Modificador {
         "texto-simples": "plaintext",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("texto-bidirecional", "unicode-bidi", pragmas);
 
-        validarValores('texto-bidirecional', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('texto-bidirecional', valor, this.valoresAceitos);
 
         this.valor = valor;
 

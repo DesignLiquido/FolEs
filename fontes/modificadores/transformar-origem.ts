@@ -5,18 +5,20 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TransformarOrigem extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("transformar-origem", "transform-origin", pragmas);
 
-        validarValorNumerico('transformar-origem', valor, posicoesBasicas);
+        if (!valorVariavel) {
+            validarValorNumerico('transformar-origem', valor, posicoesBasicas);
+
+            // Aceita valores de posição (palavras) e também valor-quantificador.
+            if (Number(parseInt(valor))) {
+                validarQuantificador('transformar-origem', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // Aceita valores de posição (palavras) e também valor-quantificador.
-        if (Number(parseInt(valor))) {
-            validarQuantificador('transformar-origem', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }
