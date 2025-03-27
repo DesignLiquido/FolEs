@@ -8,14 +8,14 @@ export class VariacaoFontePosicao extends Modificador {
         "sobrescrito": "super",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["variacao-fonte-posicao", "variação-fonte-posição"],
             "font-variant-position", 
             pragmas
         );
         
-        validarValores('variação-fonte-posição', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('variação-fonte-posição', valor, this.valoresAceitos);
 
         this.valor = valor;
 

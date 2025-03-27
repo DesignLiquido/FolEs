@@ -8,14 +8,14 @@ export class VazamentoEmAncora extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["vazamento-em-ancora", "vazamento-em-âncora"],
             "overflow-anchor", 
             pragmas
         );
 
-        validarValores('vazamento-em-âncora', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-em-âncora', valor, this.valoresAceitos);
 
         this.valor = valor;
 

@@ -20,16 +20,16 @@ export class VelocidadeAnimacao extends Modificador {
         "final": "end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["velocidade-animacao", "velocidade-animação"],
             "animation-timing-function", 
             pragmas
         );
-        
-        // Demais valores aceitos
+
         const valoresExtra = ['cubic-bezier', 'steps'];
-        validarValores('velocidade-animação', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) validarValores('velocidade-animação', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
 

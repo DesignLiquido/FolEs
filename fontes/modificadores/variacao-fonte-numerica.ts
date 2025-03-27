@@ -20,14 +20,14 @@ export class VariacaoFonteNumerica extends Modificador {
         "frações-empilhadas": "stacked-fractions",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["variacao-fonte-numerica", "variação-fonte-numérica"],
             "font-variant-numeric", 
             pragmas
         );
 
-        validarValores('variação-fonte-numérica', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('variação-fonte-numérica', valor, this.valoresAceitos);
 
         this.valor = valor;
 

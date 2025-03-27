@@ -22,14 +22,14 @@ export class VariacaoFonteLigacao extends Modificador {
         "não-contextual": "no-contextual",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["variacao-fonte-ligacao", "variação-fonte-ligação"],
             "font-variant-ligatures", 
             pragmas
         );
 
-        validarValores('variação-fonte-ligação', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('variação-fonte-ligação', valor, this.valoresAceitos);
 
         this.valor = valor;
 

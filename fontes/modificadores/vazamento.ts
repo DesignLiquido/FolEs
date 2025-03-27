@@ -2,8 +2,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class Vazamento extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 2 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "visivel": "visible",
         "visível": "visible",
@@ -13,10 +11,10 @@ export class Vazamento extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento", "overflow", pragmas);
 
-        validarValores('vazamento', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento', valor, this.valoresAceitos);
 
         this.valor = valor;
 

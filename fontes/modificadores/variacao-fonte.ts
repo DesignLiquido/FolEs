@@ -2,8 +2,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonte extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 7 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "normal": "normal",
         "formas-historicas": "historical-forms",
@@ -63,10 +61,10 @@ export class VariacaoFonte extends Modificador {
         "sobrescrito": "super",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["variacao-fonte", "variação-fonte"], "font-variant", pragmas);
 
-        validarValores('variação-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('variação-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
 

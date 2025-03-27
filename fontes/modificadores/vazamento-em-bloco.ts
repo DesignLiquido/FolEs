@@ -11,10 +11,10 @@ export class VazamentoEmBloco extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento-em-bloco", "overflow-block", pragmas);
 
-        validarValores('vazamento-em-bloco', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-em-bloco', valor, this.valoresAceitos);
 
         this.valor = valor;
 

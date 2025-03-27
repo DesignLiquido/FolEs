@@ -8,7 +8,7 @@ export class VazamentoTexto extends Modificador {
         "elipse": "ellipsis",
     }
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento-texto", "text-overflow", pragmas);
 
         const validacaoString = validarValorString(valor);
@@ -17,7 +17,7 @@ export class VazamentoTexto extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        validarValores('vazamento-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
 

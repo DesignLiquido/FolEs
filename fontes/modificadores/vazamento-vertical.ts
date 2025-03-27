@@ -11,10 +11,10 @@ export class VazamentoVertical extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento-vertical", "overflow-y", pragmas);
 
-        validarValores('vazamento-vertical', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-vertical', valor, this.valoresAceitos);
 
         this.valor = valor;
 
