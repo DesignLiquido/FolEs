@@ -15,8 +15,5 @@ export class OrigemFundo extends Modificador {
         if (!valorVariavel) validarValores('origem-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -67,8 +67,5 @@ export class VariacaoFonte extends Modificador {
         if (!valorVariavel) validarValores('variação-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador
     }
 }

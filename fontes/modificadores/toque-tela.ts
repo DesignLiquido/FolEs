@@ -23,8 +23,5 @@ export class ToqueTela extends Modificador {
         if (!valorVariavel) validarValores('toque-tela', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

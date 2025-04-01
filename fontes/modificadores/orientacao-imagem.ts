@@ -17,8 +17,5 @@ export class OrientacaoImagem extends Modificador {
         if (!valorVariavel) validarValores('orientação-imagem', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

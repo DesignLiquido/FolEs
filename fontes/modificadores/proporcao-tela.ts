@@ -21,8 +21,5 @@ export class ProporcaoTela extends Modificador {
         }
 
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        // this.quantificador = quantificador;
     }
 }

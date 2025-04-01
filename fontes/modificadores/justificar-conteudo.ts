@@ -29,7 +29,6 @@ export class JustificarConteudo extends Modificador {
             posicao !== 'superior' && posicao !== 'inferior'
         );
 
-        // Transforma array em objeto para processo de validação
         const posicoesValidas = {};
         posicoesAceitas.forEach((posicao, index) => {
             posicoesValidas[posicao] = posicoesAceitas[index]
@@ -38,8 +37,5 @@ export class JustificarConteudo extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('justificar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -4,8 +4,6 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Insercao extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 4 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
     }

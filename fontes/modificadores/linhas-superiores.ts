@@ -9,7 +9,6 @@ export class LinhasSuperiores extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('linhas-superiores', valor);
 
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('linhas-superiores', quantificador);
         }
 

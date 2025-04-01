@@ -13,8 +13,5 @@ export class RecolherBorda extends Modificador {
         if (!valorVariavel) validarValores('recolher-borda', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

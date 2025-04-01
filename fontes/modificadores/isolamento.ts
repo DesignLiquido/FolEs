@@ -13,8 +13,5 @@ export class Isolamento extends Modificador {
         if (!valorVariavel) validarValores('isolamento', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

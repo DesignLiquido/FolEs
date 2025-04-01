@@ -17,8 +17,5 @@ export class PropriedadeTransicao extends Modificador {
         if (!valorVariavel) validarValores('propriedade-transição', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

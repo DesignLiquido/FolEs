@@ -17,8 +17,5 @@ export class QuebraDecoracaoCaixa extends Modificador {
         if (!valorVariavel) validarValores('quebra-decoração-caixa', valor, this.valoresAceitos);
     
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -14,8 +14,5 @@ export class VisibilidadeFundo extends Modificador {
         if (!valorVariavel) validarValores('visibilidade-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

@@ -4,9 +4,6 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemEmBlocoRolagemMouse extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 2 valores.
-
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem-em-bloco-rolagem-mouse", "scroll-margin-block", pragmas);
 

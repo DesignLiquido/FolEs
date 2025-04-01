@@ -17,7 +17,6 @@ export class RepetirAnimacao extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('repetir-animação', valor, this.valoresAceitos);
 
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('repetir-animação', quantificador);
         }
 

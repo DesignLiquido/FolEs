@@ -12,7 +12,6 @@ export class ImagemFundo extends Modificador {
         super("imagem-fundo", "background-image", pragmas);
 
         if (!valorVariavel) {
-            // Valor deve ser um link URL ou 'nenhuma' (none)
             if (valor instanceof Metodo) {
                 this.valor = valor;
             } else {
@@ -20,8 +19,5 @@ export class ImagemFundo extends Modificador {
                 this.valor = valor;
             }
         }
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

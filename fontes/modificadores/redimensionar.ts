@@ -18,8 +18,5 @@ export class Redimensionar extends Modificador {
         if (!valorVariavel) validarValores('redimensionar', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

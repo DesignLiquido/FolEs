@@ -11,9 +11,6 @@ export class Recortar extends Modificador {
 
         if (!valorVariavel) validarValores('recortar', valor, this.valoresAceitos);
 
-        this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;   
+        this.valor = valor;  
     }
 }

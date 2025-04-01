@@ -10,8 +10,6 @@ export class Tabulacao extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('tabulação', valor)
 
-            // Condicional parte do 2º parâmetro pois o modificador aceita receber números inteiros também, sem quantificador.
-            // Dentre os quantificadores, aceita somente os de comprimento/length.
             if (quantificador !== undefined) {
                 validarQuantificador('tabulação', quantificador, comprimentos);
 

@@ -17,8 +17,5 @@ export class TamanhoOpticoFonte extends Modificador {
         if (!valorVariavel) validarValores('tamanho-óptico-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

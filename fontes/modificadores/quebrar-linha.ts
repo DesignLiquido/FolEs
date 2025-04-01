@@ -16,8 +16,5 @@ export class QuebrarLinha extends Modificador {
         if (!valorVariavel) validarValores('quebrar-linha', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

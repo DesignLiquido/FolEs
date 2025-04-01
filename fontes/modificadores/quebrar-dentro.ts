@@ -18,8 +18,5 @@ export class QuebrarDentro extends Modificador {
         if (!valorVariavel) validarValores('quebrar-dentro', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

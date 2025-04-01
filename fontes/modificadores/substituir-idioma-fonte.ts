@@ -19,8 +19,5 @@ export class SubstituirIdiomaFonte extends Modificador {
         if (!valorVariavel) validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
         
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

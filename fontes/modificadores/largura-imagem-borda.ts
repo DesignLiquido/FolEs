@@ -14,7 +14,6 @@ export class LarguraImagemBorda extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('largura-imagem-borda', valor, this.valoresAceitos);
 
-            // Aceita receber valores numéricos sem quantificador
             if (quantificador !== undefined) {
                 validarQuantificador('largura-imagem-borda', quantificador, unidadesMedida);
 

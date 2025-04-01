@@ -20,8 +20,5 @@ export class TipoEncaixeRolagemMouse extends Modificador {
         if (!valorVariavel) validarValores('tipo-encaixe-rolagem-mouse', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

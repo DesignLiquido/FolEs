@@ -22,8 +22,5 @@ export class QuebrarPaginaApos extends Modificador {
         if (!valorVariavel) validarValores('quebrar-página-após', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

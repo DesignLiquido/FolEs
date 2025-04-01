@@ -29,8 +29,5 @@ export class QuebrarAntes extends Modificador {
         if (!valorVariavel) validarValores('quebrar-antes', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

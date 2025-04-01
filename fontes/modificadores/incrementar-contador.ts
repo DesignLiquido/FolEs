@@ -19,8 +19,5 @@ export class IncrementarContador extends Modificador {
         if (!valorVariavel) validarValorNumerico('incrementar-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

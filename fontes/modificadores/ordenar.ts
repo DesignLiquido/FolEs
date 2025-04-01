@@ -9,7 +9,6 @@ export class Ordenar extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('ordenar', valor);
 
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('ordenar', quantificador);
         }
 

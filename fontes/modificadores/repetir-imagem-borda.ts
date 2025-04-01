@@ -16,8 +16,5 @@ export class RepetirImagemBorda extends Modificador {
         if (!valorVariavel) validarValores('repetir-imagem-borda', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

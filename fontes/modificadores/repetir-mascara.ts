@@ -19,8 +19,5 @@ export class RepetirMascara extends Modificador {
         if (!valorVariavel) validarValores('repetir-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

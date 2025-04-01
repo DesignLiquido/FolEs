@@ -19,8 +19,5 @@ export class PosicaoLegenda extends Modificador {
         if (!valorVariavel) validarValores('posição-legenda', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

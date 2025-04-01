@@ -17,8 +17,5 @@ export class VazamentoVertical extends Modificador {
         if (!valorVariavel) validarValores('vazamento-vertical', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

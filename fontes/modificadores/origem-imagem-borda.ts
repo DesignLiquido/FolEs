@@ -12,9 +12,7 @@ export class OrigemImagemBorda extends Modificador {
         const valoresExtra = ['url', 'linear-gradient'];
 
         if (!valorVariavel) validarValores('origem-imagem-borda', valor, this.valoresAceitos, valoresExtra);
-        this.valor = valor;
 
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
+        this.valor = valor;
     }
 }

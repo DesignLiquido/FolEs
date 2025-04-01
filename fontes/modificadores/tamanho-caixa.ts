@@ -13,9 +13,6 @@ export class TamanhoCaixa extends Modificador {
 
         if (!valorVariavel) validarValores('tamanho-caixa', valor, this.valoresAceitos);
 
-        this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;      
+        this.valor = valor;   
     }
 }

@@ -30,8 +30,5 @@ export class VariacaoFonteNumerica extends Modificador {
         if (!valorVariavel) validarValores('variação-fonte-numérica', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

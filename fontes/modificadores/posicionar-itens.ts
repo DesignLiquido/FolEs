@@ -27,8 +27,5 @@ export class PosicionarItens extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('posicionar-itens', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

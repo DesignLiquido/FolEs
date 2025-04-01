@@ -16,8 +16,5 @@ export class ModeloGeralEmGrade extends Modificador {
 
         if (!valorVariavel) validarValores('modelo-geral-em-grade', valor, this.valoresAceitos);
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

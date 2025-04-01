@@ -8,8 +8,5 @@ export class RegrasCorColuna extends Modificador {
         if (!valorVariavel) validarValorCor('regras-cor-coluna', valor)
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

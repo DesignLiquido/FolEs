@@ -4,7 +4,6 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class ModeloEmGrade extends Modificador {
-    // Seletor de atribuição abreviada, pode receber de 1 a 3 valores
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
         "auto": "auto",

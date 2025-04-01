@@ -18,8 +18,5 @@ export class OrigemBordaMascara extends Modificador {
         if (!valorVariavel) validarValores('origem-borda-máscara', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -15,8 +15,5 @@ export class ModoMascara extends Modificador {
         if (!valorVariavel) validarValores('modo-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

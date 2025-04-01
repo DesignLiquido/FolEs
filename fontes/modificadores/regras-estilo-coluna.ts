@@ -10,8 +10,5 @@ export class RegrasEstiloColuna extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('regras-estilo-coluna', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

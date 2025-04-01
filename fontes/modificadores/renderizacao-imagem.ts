@@ -19,8 +19,5 @@ export class RenderizacaoImagem extends Modificador {
         if (!valorVariavel) validarValores('renderização-imagem', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

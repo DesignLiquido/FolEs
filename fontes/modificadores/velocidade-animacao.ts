@@ -32,8 +32,5 @@ export class VelocidadeAnimacao extends Modificador {
         if (!valorVariavel) validarValores('velocidade-animação', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

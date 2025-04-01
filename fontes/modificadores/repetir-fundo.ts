@@ -19,8 +19,5 @@ export class RepetirFundo extends Modificador {
         if (!valorVariavel) validarValores('repetir-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

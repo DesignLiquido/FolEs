@@ -24,8 +24,5 @@ export class ReiniciarContador extends Modificador {
         if (!valorVariavel) validarValores('reiniciar-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

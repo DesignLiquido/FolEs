@@ -18,8 +18,5 @@ export class VazamentoEmAncora extends Modificador {
         if (!valorVariavel) validarValores('vazamento-em-âncora', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

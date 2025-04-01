@@ -17,7 +17,6 @@ export class InicioLinhaEmGrade extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('início-linha-em-grade', valor, this.valoresAceitos);
                         
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('início-linha-em-grade', quantificador);
         }
 

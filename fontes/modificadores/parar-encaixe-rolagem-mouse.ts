@@ -13,8 +13,5 @@ export class PararEncaixeRolagemMouse extends Modificador {
         if (!valorVariavel) validarValores('parar-encaixe-rolagem-mouse', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -14,8 +14,5 @@ export class PreencherColuna extends Modificador {
         if (!valorVariavel) validarValores('preencher-coluna', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -17,7 +17,6 @@ export class LimiteFormaImagem extends Modificador {
                 );
             }
 
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('limite-forma-imagem', quantificador);
         }
 

@@ -27,8 +27,5 @@ export class VariacaoFonteMaiuscula extends Modificador {
         if (!valorVariavel) validarValores('variação-fonte-maiúscula', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

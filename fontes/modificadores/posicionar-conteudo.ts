@@ -33,8 +33,5 @@ export class PosicionarConteudo extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('posicionar-conteúdo', valor, posicoes, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

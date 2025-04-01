@@ -9,8 +9,5 @@ export class PosicaoObjeto extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('posição-objeto', valor, posicoesBasicas)
 
         this.valor = valor;
-
-        // Quantificador fica inutilizado no momento
-        // this.quantificador = quantificador;
     }
 }

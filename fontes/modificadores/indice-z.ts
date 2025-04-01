@@ -12,8 +12,5 @@ export class IndiceZ extends Modificador {
         if (!valorVariavel) validarValorNumerico('índice-z', valor, this.valoresAceitos);
         
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        // this.quantificador = quantificador;
     }
 }

@@ -16,8 +16,5 @@ export class TrajetoDeslocamento extends Modificador {
         if (!valorVariavel) validarValores('trajeto-deslocamento', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

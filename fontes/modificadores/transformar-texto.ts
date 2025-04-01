@@ -19,8 +19,5 @@ export class TransformarTexto extends Modificador {
         if (!valorVariavel) validarValores('transformar-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

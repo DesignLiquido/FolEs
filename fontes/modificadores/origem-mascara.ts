@@ -21,8 +21,5 @@ export class OrigemMascara extends Modificador {
         if (!valorVariavel) validarValores('origem-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

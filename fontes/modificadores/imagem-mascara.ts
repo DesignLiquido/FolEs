@@ -11,15 +11,10 @@ export class ImagemMascara extends Modificador {
 
         // OBS.: Também pode receber a função image
         // Ex.: mask-image: image(url(mask.png), skyblue);
-
-        // A validação abaixo cobre os valores aceitos e extras
         const valoresExtra = ['url', 'linear-gradient'];
 
         if (!valorVariavel) validarValores('imagem-máscara', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

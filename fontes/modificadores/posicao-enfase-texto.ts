@@ -19,8 +19,5 @@ export class PosicaoEnfaseTexto extends Modificador {
         if (!valorVariavel) validarValores('posição-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

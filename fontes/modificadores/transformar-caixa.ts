@@ -17,8 +17,5 @@ export class TransformarCaixa extends Modificador {
         if (!valorVariavel) validarValores('transformar-caixa', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

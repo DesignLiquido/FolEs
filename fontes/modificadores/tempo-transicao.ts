@@ -32,8 +32,5 @@ export class TempoTransicao extends Modificador {
         if (!valorVariavel) validarValores('tempo-transição', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

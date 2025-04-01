@@ -12,8 +12,5 @@ export class RecursosFonte extends Modificador {
         if (!valorVariavel) validarValores('recursos-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

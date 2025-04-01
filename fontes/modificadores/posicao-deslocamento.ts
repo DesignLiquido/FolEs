@@ -25,8 +25,5 @@ export class PosicaoDeslocamento extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('posição-deslocamento', valor, posicoesBasicas, this.valoresAceitos);
         
         this.valor = valor;
-
-        // Quantificador fica inutilizado no momento
-        // this.quantificador = quantificador;
     }
 }
