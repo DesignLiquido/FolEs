@@ -18,8 +18,6 @@ export class Lexador implements LexadorInterface {
     atual: number;
     inicioSimbolo: number;
 
-    contemVariaveis: boolean;
-
     constructor() {
         this.codigo = [""];
 
