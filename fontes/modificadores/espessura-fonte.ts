@@ -15,8 +15,7 @@ export class EspessuraFonte extends Modificador {
 
         if (!valorVariavel) {
             validarValorNumerico('espessura-fonte', valor, this.valoresAceitos);
-            
-            // Não recebe quantificador, apenas o valor numérico.
+
             proibirQuantificador('espessura-fonte', quantificador);
         }
 

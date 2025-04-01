@@ -15,8 +15,5 @@ export class FlexDirecao extends Modificador {
         if (!valorVariavel) validarValores('flex-direção', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -21,8 +21,5 @@ export class DecoracaoLinhaTexto extends Modificador {
         if (!valorVariavel) validarValores('decoração-linha-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

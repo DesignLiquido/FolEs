@@ -8,8 +8,5 @@ export class CorFundo extends Modificador {
         if (!valorVariavel) validarValorCor('cor-fundo', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

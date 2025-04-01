@@ -13,8 +13,5 @@ export class EstiloInicioBordaEmBloco extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-início-borda-em-bloco', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

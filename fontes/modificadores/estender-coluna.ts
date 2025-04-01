@@ -13,8 +13,5 @@ export class EstenderColuna extends Modificador {
         if (!valorVariavel) validarValores('estender-coluna', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

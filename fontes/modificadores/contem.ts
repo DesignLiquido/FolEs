@@ -20,8 +20,5 @@ export class Contem extends Modificador {
         if (!valorVariavel) validarValores('contém', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -34,8 +34,5 @@ export class EstiloEnfaseTexto extends Modificador {
         if (!valorVariavel) validarValores('estilo-ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

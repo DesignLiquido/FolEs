@@ -22,8 +22,5 @@ export class Citacoes extends Modificador {
         }
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

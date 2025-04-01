@@ -17,8 +17,5 @@ export class AjusteCorForcado extends Modificador {
         if (!valorVariavel) validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

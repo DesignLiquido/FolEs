@@ -6,8 +6,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaDireita extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 3 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "fina": "thin",
         "media": "medium",
@@ -37,11 +35,12 @@ export class BordaDireita extends Modificador {
                 !(valor in cores) &&
                 !(valor in valoresGlobais)) {
                 throw new Error(`Propriedade 'borda-direita' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+                    número-quantificador, 
+                    ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(estilos).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`
+                );
             }
 
             if (Number(parseInt(valor))) {

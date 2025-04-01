@@ -14,7 +14,6 @@ export class FimColunaEmGrade extends Modificador {
 
         this.valor = valor;
 
-        // Não recebe quantificador, apenas o valor numérico.
         proibirQuantificador('fim-coluna-em-grade', quantificador);
     }
 }

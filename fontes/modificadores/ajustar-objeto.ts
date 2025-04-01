@@ -16,8 +16,5 @@ export class AjustarObjeto extends Modificador {
         if (!valorVariavel) validarValores("ajustar-objeto", valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

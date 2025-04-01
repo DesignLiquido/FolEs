@@ -12,8 +12,5 @@ export class CorEnfaseTexto extends Modificador {
         if (!valorVariavel) validarValorCor('cor-ênfase-texto', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

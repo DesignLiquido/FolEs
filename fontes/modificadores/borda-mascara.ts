@@ -4,8 +4,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaMascara extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 6 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhuma": "none",
         "preencher": "fill",

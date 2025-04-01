@@ -13,8 +13,5 @@ export class EstiloFimBordaEmBloco extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-fim-borda-em-bloco', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

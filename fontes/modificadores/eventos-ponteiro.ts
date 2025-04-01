@@ -17,8 +17,5 @@ export class EventosPonteiro extends Modificador {
         if (!valorVariavel) validarValores('eventos-ponteiro', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

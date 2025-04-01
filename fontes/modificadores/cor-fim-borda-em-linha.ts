@@ -8,8 +8,5 @@ export class CorFimBordaEmLinha extends Modificador {
         if (!valorVariavel) validarValorCor('cor-fim-borda-em-linha', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

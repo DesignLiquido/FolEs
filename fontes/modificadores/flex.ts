@@ -4,8 +4,6 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Flex extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 3 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "auto": "auto",
         "nenhum": "none",

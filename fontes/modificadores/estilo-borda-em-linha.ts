@@ -9,8 +9,5 @@ export class EstiloBordaEmLinha extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-borda-em-linha', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

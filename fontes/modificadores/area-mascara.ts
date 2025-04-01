@@ -36,8 +36,5 @@ export class AreaMascara extends Modificador {
         }
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -27,10 +27,5 @@ export class Animacao extends Modificador {
         if (!valorVariavel) validarValorNumerico('animação', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // if (quantificador !== undefined) {
-        //   validarQuantificador('animação', quantificador, valoresTemporais);
-        //   this.quantificador = quantificador;
-        // }
     }
 }

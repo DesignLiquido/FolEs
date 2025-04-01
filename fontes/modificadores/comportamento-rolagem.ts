@@ -13,8 +13,5 @@ export class ComportamentoRolagem extends Modificador {
         if (!valorVariavel) validarValores('comportamento-rolagem',valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

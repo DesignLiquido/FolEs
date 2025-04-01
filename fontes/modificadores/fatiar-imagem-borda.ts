@@ -16,8 +16,6 @@ export class FatiarImagemBorda extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('fatiar-imagem-borda', valor, this.valoresAceitos, valoresExtra);
 
-            // Aceita somente o valor percentual (%) como quantificador.
-            // Também pode receber somente o valor numérico, sem quantificador.
             if (quantificador !== undefined) {
                 validarQuantificador('fatiar-imagem-borda', quantificador, ListaDeValorPercentual);
 

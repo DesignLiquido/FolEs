@@ -18,8 +18,5 @@ export class EspacamentoFonte extends Modificador {
         if (!valorVariavel) validarValores('espaçamento-fonte', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;        ;
     }
 }

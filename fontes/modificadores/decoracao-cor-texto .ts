@@ -13,10 +13,6 @@ export class DecoracaoCorTexto extends Modificador {
         
         if (!valorVariavel) validarValorCor('decoração-cor-texto', valor)
 
-        this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
-        
+        this.valor = valor;        
     }
 }

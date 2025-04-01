@@ -9,7 +9,6 @@ export class FlexReduzir extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('flex-reduzir', valor);
                         
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('flex-reduzir', quantificador);
         }
 

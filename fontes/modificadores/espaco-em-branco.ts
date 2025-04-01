@@ -19,8 +19,5 @@ export class EspacoEmBranco extends Modificador {
         if (!valorVariavel) validarValores('espaço-em-branco', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

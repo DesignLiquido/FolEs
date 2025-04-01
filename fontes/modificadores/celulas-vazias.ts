@@ -13,8 +13,5 @@ export class CelulasVazias extends Modificador {
         if (!valorVariavel) validarValores("células-vazias", valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -49,8 +49,5 @@ export class Cursor extends Modificador {
         if (!valorVariavel) validarValores('cursor', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

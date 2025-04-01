@@ -4,8 +4,6 @@ import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 
 export class DecoracaoTexto extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 4 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhuma": "none",
         "sublinhado": "underline",
@@ -44,8 +42,5 @@ export class DecoracaoTexto extends Modificador {
         }
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;   
     }
 }

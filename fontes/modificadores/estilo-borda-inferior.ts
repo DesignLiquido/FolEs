@@ -9,8 +9,5 @@ export class EstiloBordaInferior extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-borda-inferior', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

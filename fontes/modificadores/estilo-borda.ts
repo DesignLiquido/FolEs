@@ -10,8 +10,5 @@ export class EstiloBorda extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-borda', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

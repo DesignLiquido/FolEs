@@ -14,8 +14,5 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
         if (!valorVariavel) validarValores('comportamento-em-horizontal-rolagem-mouse',valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

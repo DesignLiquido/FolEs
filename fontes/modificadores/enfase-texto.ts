@@ -5,8 +5,6 @@ import { validarValorCor } from "./validacoes/cor";
 import { validarValorString } from "./validacoes/string";
 
 export class EnfaseTexto extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 2 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
         "preenchido": "filled",
@@ -34,9 +32,5 @@ export class EnfaseTexto extends Modificador {
         validarValorCor('ênfase-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
-
     }
 }

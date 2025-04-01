@@ -14,8 +14,6 @@ export class FimLinhaEmGrade extends Modificador {
 
         this.valor = valor;
 
-        // Não recebe quantificador, apenas o valor numérico.
-        // Logo, deve retornar um erro se recebido um segundo parâmetro.
         proibirQuantificador('fim-linha-em-grade', quantificador);
     }
 }

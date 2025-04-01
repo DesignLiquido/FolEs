@@ -17,8 +17,5 @@ export class EstiloListaPosicao extends Modificador {
         if (!valorVariavel) validarValores('estilo-lista-posição', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

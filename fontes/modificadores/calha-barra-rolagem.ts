@@ -15,8 +15,5 @@ export class CalhaBarraRolagem extends Modificador {
         if (!valorVariavel) validarValores("calha-barra-rolagem", valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

@@ -2,7 +2,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class FonteTexto extends Modificador {
-    // OBS.: Optei inicialmente por não traduzir o nome das fontes genéricas. @vitor
     valoresAceitos: { [valorFoles: string]: string } = {
         "serif": "serif",
         "sans-serif": "sans-serif",
@@ -35,8 +34,5 @@ export class FonteTexto extends Modificador {
         if (!valorVariavel) validarValores('fonte-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

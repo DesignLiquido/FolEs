@@ -8,8 +8,5 @@ export class CorBordaSuperior extends Modificador {
         if (!valorVariavel) validarValorCor('cor-borda-superior', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

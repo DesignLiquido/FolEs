@@ -13,8 +13,5 @@ export class EstiloContorno extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-contorno', valor, estilos, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

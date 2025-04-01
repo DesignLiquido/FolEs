@@ -6,8 +6,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaInferior extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 3 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "fina": "thin",
         "media": "medium",
@@ -18,8 +16,6 @@ export class BordaInferior extends Modificador {
     constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("borda-inferior", "border-bottom", pragmas);
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações seguintes.
         const valorString = valor.toString();
 
         const validaçõesCor = !(valorString.includes('rgb')) && !(valorString.includes('rgba')) &&

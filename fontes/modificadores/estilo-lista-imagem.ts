@@ -14,8 +14,5 @@ export class EstiloListaImagem extends Modificador {
         if (!valorVariavel) validarValores('estilo-lista-imagem', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

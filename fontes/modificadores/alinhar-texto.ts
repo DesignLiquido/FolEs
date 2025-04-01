@@ -15,8 +15,5 @@ export class AlinharTexto extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('alinhar-texto', valor, posicoesBasicas, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -14,8 +14,5 @@ export class FiltroFundo extends Modificador {
         if (!valorVariavel) validarValores('filtro-fundo', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

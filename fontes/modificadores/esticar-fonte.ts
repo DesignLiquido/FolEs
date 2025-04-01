@@ -22,7 +22,6 @@ export class EsticarFonte extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('esticar-fonte', valor, this.valoresAceitos);
                         
-            // O único quantificador aceito pelo seletor é o Percentual (%)
             if (Number(parseInt(valor))) {
                 validarQuantificador('esticar-fonte', quantificador, ListaDeValorPercentual);
                 

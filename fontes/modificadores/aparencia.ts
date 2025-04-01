@@ -42,8 +42,5 @@ export class Aparencia extends Modificador {
         if (!valorVariavel) validarValores('aparência', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

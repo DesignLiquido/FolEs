@@ -13,8 +13,5 @@ export class EstiloInicioBordaEmLinha extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('estilo-início-borda-em-linha', valor, estilos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

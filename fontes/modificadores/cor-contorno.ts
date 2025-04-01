@@ -12,8 +12,5 @@ export class CorContorno extends Modificador {
         if (!valorVariavel) validarValorCor('cor-contorno', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

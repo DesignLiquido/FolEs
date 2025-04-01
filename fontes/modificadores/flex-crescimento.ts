@@ -9,7 +9,6 @@ export class FlexCrescimento extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('flex-crescimento', valor);
 
-            // Não recebe quantificador, apenas o valor numérico.
             proibirQuantificador('flex-crescimento', quantificador);
         }
 

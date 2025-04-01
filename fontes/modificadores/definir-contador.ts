@@ -12,8 +12,5 @@ export class DefinirContador extends Modificador {
         if (!valorVariavel) validarValores('definir-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

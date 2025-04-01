@@ -8,8 +8,5 @@ export class CorBordaEmBloco extends Modificador {
         if (!valorVariavel) validarValorCor('cor-borda-em-bloco', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

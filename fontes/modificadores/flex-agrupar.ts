@@ -15,8 +15,5 @@ export class FlexAgrupar extends Modificador {
         if (!valorVariavel) validarValores('flex-agrupar', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

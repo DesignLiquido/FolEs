@@ -24,8 +24,5 @@ export class Conteudo extends Modificador {
         if (!valorVariavel) validarValores('conteúdo', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

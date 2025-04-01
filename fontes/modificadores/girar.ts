@@ -14,7 +14,6 @@ export class Girar extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico('girar', valor, this.valoresAceitos);
                         
-            // Quantificador deve ser do tipo ângulo (<angle>)
             if (Number(parseInt(valor))) {
                 validarQuantificador('girar', quantificador, angulos);
                 

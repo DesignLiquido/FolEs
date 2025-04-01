@@ -19,8 +19,5 @@ export class FormaExterna extends Modificador {
         if (!valorVariavel) validarValores('forma-externa', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

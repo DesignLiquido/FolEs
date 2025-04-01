@@ -14,8 +14,5 @@ export class Hifens extends Modificador {
         if (!valorVariavel) validarValores('hífens', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

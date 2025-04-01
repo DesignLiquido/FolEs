@@ -22,8 +22,5 @@ export class DecoracaoEstiloTexto extends Modificador {
         if (!valorVariavel) validarValores('decoração-estilo-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

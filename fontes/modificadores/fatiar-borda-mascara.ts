@@ -17,9 +17,7 @@ export class FatiarBordaMascara extends Modificador {
 
         if (!valorVariavel) {
             validarValorNumerico('fatiar-borda-máscara', valor, this.valoresAceitos);
-            
-            // Aceita somente o valor percentual (%) como quantificador
-            // Também pode receber somente o valor numérico, sem quantificador
+
             if (quantificador !== undefined) {
                 validarQuantificador('fatiar-borda-máscara', quantificador, ListaDeValorPercentual);
                 

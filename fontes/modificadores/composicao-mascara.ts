@@ -19,8 +19,5 @@ export class ComposicaoMascara extends Modificador {
         if (!valorVariavel) validarValores('composição-máscara',valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

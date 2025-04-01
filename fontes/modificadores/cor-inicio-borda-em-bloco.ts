@@ -12,8 +12,5 @@ export class CorInicioBordaEmBloco extends Modificador {
         if (!valorVariavel) validarValorCor('cor-início-borda-em-bloco', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -8,8 +8,5 @@ export class CorBordaDireita extends Modificador {
         if (!valorVariavel) validarValorCor('cor-borda-direita', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

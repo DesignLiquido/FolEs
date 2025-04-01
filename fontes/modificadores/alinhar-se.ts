@@ -32,8 +32,5 @@ export class AlinharSe extends Modificador {
         if (!valorVariavel) validarValoresAdicionais('alinhar-se', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }
