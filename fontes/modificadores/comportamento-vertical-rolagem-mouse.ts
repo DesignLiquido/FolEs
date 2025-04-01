@@ -8,14 +8,11 @@ export class ComportamentoVerticalRolagemMouse extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("comportamento-vertical-rolagem-mouse", "overscroll-behavior-y", pragmas);
 
-        validarValores('comportamento-vertical-rolagem-mouse',valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('comportamento-vertical-rolagem-mouse',valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

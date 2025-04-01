@@ -9,17 +9,19 @@ export class IndentacaoTexto extends Modificador {
         "inverter": "hanging",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["indentacao-texto", "indentação-texto"], "text-indent", pragmas);
 
-        validarValorNumerico('indentação-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('indentação-texto', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('indentação-texto', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-    
-        if (Number(parseInt(valor))) {
-            validarQuantificador('indentação-texto', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

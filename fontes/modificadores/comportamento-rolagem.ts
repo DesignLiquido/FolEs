@@ -7,14 +7,11 @@ export class ComportamentoRolagem extends Modificador {
         "suave": "smooth",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("comportamento-rolagem", "scroll-behavior", pragmas);
 
-        validarValores('comportamento-rolagem',valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('comportamento-rolagem',valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

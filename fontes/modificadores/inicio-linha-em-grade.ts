@@ -7,18 +7,19 @@ export class InicioLinhaEmGrade extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["inicio-linha-em-grade", "início-linha-em-grade"],
             "grid-row-start", 
             pragmas
         );
 
-        validarValorNumerico('início-linha-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('início-linha-em-grade', valor, this.valoresAceitos);
+                        
+            proibirQuantificador('início-linha-em-grade', quantificador);
+        }
 
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('início-linha-em-grade', quantificador);
     }
 }

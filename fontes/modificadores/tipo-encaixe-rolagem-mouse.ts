@@ -14,14 +14,11 @@ export class TipoEncaixeRolagemMouse extends Modificador {
         "proximidade": "proximity",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("tipo-encaixe-rolagem-mouse", "scroll-snap-type", pragmas);
 
-        validarValores('tipo-encaixe-rolagem-mouse', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('tipo-encaixe-rolagem-mouse', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

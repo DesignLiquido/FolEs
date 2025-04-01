@@ -8,17 +8,19 @@ export class MargemEsquerda extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem-esquerda", "margin-left", pragmas);
 
-        validarValorNumerico('margem-esquerda', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('margem-esquerda', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('margem-esquerda', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('margem-esquerda', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -6,6 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Estilo, EstiloBorda } from "../listas/estilo";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores com ESTILO como atributo', () => {
     describe('Testes Unitários', () => {
@@ -51,12 +52,17 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
-
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
 
@@ -73,7 +79,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
         it('Casos de Falha - Valor não informado', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
-        
+
                 // Lexador - estilo não informado
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -121,11 +127,11 @@ describe('Testando Seletores com ESTILO como atributo', () => {
         it('Casos de falha - Valor inválido de estilo de borda deve retornar erro', () => {
             for (let index = 0; index < EstiloBorda.length; index += 1) {
                 const valorInvalido = 'pontilado';
-                
+
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                        `${EstiloBorda[index]}: ${valorInvalido};`,
+                    `${EstiloBorda[index]}: ${valorInvalido};`,
                     "}"
                 ]);
 

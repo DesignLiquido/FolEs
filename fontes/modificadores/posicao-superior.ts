@@ -8,17 +8,19 @@ export class PosicaoSuperior extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["posicao-superior", "posição-superior"], "top", pragmas);
 
-        validarValorNumerico('posição-superior', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('posição-superior', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('posição-superior', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-    
-        if (Number(parseInt(valor))) {
-            validarQuantificador('posição-superior', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

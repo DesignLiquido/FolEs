@@ -10,14 +10,15 @@ export class EspessuraFonte extends Modificador {
         "mais-escura": "bolder",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("espessura-fonte", "font-weight", pragmas);
 
-        validarValorNumerico('espessura-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('espessura-fonte', valor, this.valoresAceitos);
+
+            proibirQuantificador('espessura-fonte', quantificador);
+        }
 
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('espessura-fonte', quantificador);
     }
 }

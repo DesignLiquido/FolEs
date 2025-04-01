@@ -17,14 +17,11 @@ export class ToqueTela extends Modificador {
         "zoom-pinça": "pinch-zoom",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("toque-tela", "touch-action", pragmas);
 
-        validarValores('toque-tela', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('toque-tela', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

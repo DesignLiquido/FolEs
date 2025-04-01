@@ -24,14 +24,11 @@ export class MesclarFundo extends Modificador {
         "luminosidade": "luminosity",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("mesclar-fundo", "background-blend-mode", pragmas);
 
-        validarValores('mesclar-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('mesclar-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

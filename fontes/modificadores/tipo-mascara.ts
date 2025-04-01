@@ -8,14 +8,11 @@ export class TipoMascara extends Modificador {
         "luminância": "luminance",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["tipo-mascara", "tipo-máscara"], "mask-type", pragmas);
         
-        validarValores('tipo-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('tipo-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

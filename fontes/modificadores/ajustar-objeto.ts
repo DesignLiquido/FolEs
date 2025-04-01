@@ -10,14 +10,11 @@ export class AjustarObjeto extends Modificador {
         "diminuir-escala": "scale-down",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("ajustar-objeto", "object-fit", pragmas);
 
-        validarValores("ajustar-objeto", valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores("ajustar-objeto", valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

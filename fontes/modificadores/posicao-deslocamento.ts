@@ -7,7 +7,7 @@ export class PosicaoDeslocamento extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["posicao-deslocamento", "posição-deslocamento"], 
             "offset-position", 
@@ -21,11 +21,9 @@ export class PosicaoDeslocamento extends Modificador {
         // Ex.: posicao-deslocamento: 25% 75%;
 
         // Porém, essa validação inicial cobre somente as posições e os valores globais
-        validarValoresAdicionais('posição-deslocamento', valor, posicoesBasicas, this.valoresAceitos);
+
+        if (!valorVariavel) validarValoresAdicionais('posição-deslocamento', valor, posicoesBasicas, this.valoresAceitos);
         
         this.valor = valor;
-
-        // Quantificador fica inutilizado no momento
-        // this.quantificador = quantificador;
     }
 }

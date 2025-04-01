@@ -15,14 +15,11 @@ export class OrigemMascara extends Modificador {
         "borda": "border",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["origem-mascara", "origem-máscara"], "mask-origin", pragmas);
 
-        validarValores('origem-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('origem-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

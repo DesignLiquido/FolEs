@@ -13,14 +13,11 @@ export class TransformarTexto extends Modificador {
         "tamanho-completo-kana": "full-size-kana",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("transformar-texto", "text-transform", pragmas);
 
-        validarValores('transformar-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('transformar-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

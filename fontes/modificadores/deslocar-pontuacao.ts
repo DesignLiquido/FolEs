@@ -12,18 +12,15 @@ export class DeslocarPontuacao extends Modificador {
         "permitir-fim": "allow-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["deslocar-pontuacao", "deslocar-pontuação"], 
             "hanging-punctuation", 
             pragmas
         );
 
-        validarValores('deslocar-pontuação', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('deslocar-pontuação', valor, this.valoresAceitos);
 
-        this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;   
+        this.valor = valor;  
     }
 }

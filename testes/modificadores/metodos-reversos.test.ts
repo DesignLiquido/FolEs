@@ -5,6 +5,7 @@ import { AvaliadorSintaticoReverso } from "../../fontes/avaliador-sintatico/aval
 import { SerializadorReverso } from "../../fontes/serializadores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     describe('Testes Unitários', () => {
@@ -65,8 +66,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoBorrar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoBorrar[index]]
                     );
 
                     // Tradutor
@@ -124,8 +133,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoBrilho[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoBrilho[index]]
                     );
 
                     // Tradutor
@@ -170,7 +187,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoCalcular[index]
                 );
 
@@ -222,13 +244,20 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                         ])
                     );
 
-
                     // Avaliador Sintático
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoContraste[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoContraste[index]]
                     );
 
                     // Tradutor deve serializar de acordo e traduzir contrast para contraste
@@ -270,7 +299,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoCurvaCubica[index]
                 );
 
@@ -313,7 +347,13 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoEncaixarConteudo[index]
                 );
 
@@ -369,8 +409,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoEscalaCinza[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoEscalaCinza[index]]
                     );
 
                     // Tradutor
@@ -410,8 +458,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosEscalamento[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosEscalamento[index]]
                     );
 
                     // Tradutor
@@ -447,8 +503,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodosEscalamento[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodosEscalamento[index]]
                 );
 
                 // Tradutor
@@ -491,8 +555,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodosEscalamento[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodosEscalamento[index]]
                 );
 
                 // Tradutor
@@ -539,8 +611,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosEscalamento[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosEscalamento[index]]
                     );
 
                     // Tradutor
@@ -588,8 +668,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosEscalamento[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosEscalamento[index]]
                     );
 
                     // Tradutor
@@ -637,8 +725,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosEscalamento[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosEscalamento[index]]
                     );
 
                     // Tradutor
@@ -683,7 +779,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoGradienteLinear[index]
                 );
 
@@ -739,8 +840,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosInclinar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosInclinar[index]]
                     );
 
                     // Tradutor
@@ -785,8 +894,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodosInclinar[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodosInclinar[index]]
                 );
 
                 // Tradutor
@@ -842,8 +959,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosInclinar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosInclinar[index]]
                     );
 
                     // Tradutor
@@ -899,8 +1024,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosInclinar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosInclinar[index]]
                     );
 
                     // Tradutor
@@ -959,8 +1092,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoInverter[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoInverter[index]]
                     );
 
                     // Tradutor
@@ -1004,9 +1145,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoLimitar[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodoLimitar[index]]
                 );
 
                 // Tradutor
@@ -1048,8 +1196,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoLinear[index]
                 );
 
@@ -1092,9 +1244,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoMinMax[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodoMinMax[index]]
                 );
 
                 // Tradutor
@@ -1136,9 +1295,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoMinMax[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodoMinMax[index]]
                 );
 
                 // Tradutor
@@ -1193,8 +1359,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoOpacar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoOpacar[index]]
                     );
 
                     // Tradutor
@@ -1251,9 +1425,18 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoPerspectivar[index]
                     );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoPerspectivar[index]]
+                    );
+
 
                     // Tradutor
                     const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -1295,7 +1478,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoPassos[index]
                 );
 
@@ -1340,8 +1528,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoProjetarSombra[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoProjetarSombra[index]]
                     );
 
                     // Tradutor
@@ -1393,8 +1589,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoProjetarSombra[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoProjetarSombra[index]]
                     );
 
                     // Tradutor
@@ -1444,8 +1648,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoRaio[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoRaio[index]]
                     );
 
                     // Tradutor
@@ -1489,8 +1701,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodoRaio[index]
+                );
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    TraducaoValoresMetodos[MetodoRaio[index]]
                 );
 
                 // Tradutor
@@ -1539,8 +1759,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosRotacionar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosRotacionar[index]]
                     );
 
                     // Tradutor
@@ -1597,8 +1825,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosRotacionar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosRotacionar[index]]
                     );
 
                     // Tradutor
@@ -1655,8 +1891,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosRotacionar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosRotacionar[index]]
                     );
 
                     // Tradutor
@@ -1713,8 +1957,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosRotacionar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosRotacionar[index]]
                     );
 
                     // Tradutor
@@ -1771,8 +2023,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoRotacionarMatiz[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]
                     );
 
                     // Tradutor
@@ -1829,8 +2089,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoSaturar[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoSaturar[index]]
                     );
 
                     // Tradutor
@@ -1887,8 +2155,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodoSepia[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodoSepia[index]]
                     );
 
                     // Tradutor
@@ -1938,8 +2214,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosTranslacao[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosTranslacao[index]]
                     );
 
                     // Tradutor
@@ -1977,7 +2261,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodosTranslacao[index]
                 );
 
@@ -2034,8 +2323,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosTranslacao[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosTranslacao[index]]
                     );
 
                     // Tradutor
@@ -2092,8 +2389,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosTranslacao[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosTranslacao[index]]
                     );
 
                     // Tradutor
@@ -2150,8 +2455,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosTranslacao[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosTranslacao[index]]
                     );
 
                     // Tradutor
@@ -2174,7 +2487,6 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
                 // O Lexador não deve encontrar erros
                 expect(resultadoLexador.erros).toHaveLength(0);
-                // console.log(resultadoLexador.simbolos);
 
                 // O valor recebido deve ser mapeado como METODO
                 expect(resultadoLexador.simbolos).toEqual(
@@ -2196,7 +2508,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     MetodosTranslacao[index]
                 );
 
@@ -2286,8 +2603,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                         MetodosTranslacao[index]
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                        TraducaoValoresMetodos[MetodosTranslacao[index]]
                     );
 
                     // Tradutor

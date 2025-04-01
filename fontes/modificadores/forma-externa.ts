@@ -11,15 +11,13 @@ export class FormaExterna extends Modificador {
         "preenchimento-caixa": "padding-box",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("forma-externa", "shape-outside", pragmas);
 
         const valoresExtra = ['url'];
-        validarValores('forma-externa', valor, this.valoresAceitos, valoresExtra);
+        
+        if (!valorVariavel) validarValores('forma-externa', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

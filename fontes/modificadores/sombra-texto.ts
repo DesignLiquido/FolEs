@@ -4,17 +4,18 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class SombraTexto extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("sombra-texto", "text-shadow", pragmas);
 
-        // OBS.: Também aceita receber múltiplos valores, sendo um dos parâmetros do tipo COR
-        // Ex.: text-shadow: 1px 1px 2px black;
-        validarValorNumerico('sombra-texto', valor);
-        this.valor = valor;
-
-        if(quantificador !== undefined) {
-            validarQuantificador('sombra-texto', quantificador, unidadesMedida);
-            this.quantificador = quantificador;
+        if (!valorVariavel) {
+            validarValorNumerico('sombra-texto', valor);
+            
+            if(quantificador !== undefined) {
+                validarQuantificador('sombra-texto', quantificador, unidadesMedida);
+                this.quantificador = quantificador;
+            }
         }
+
+        this.valor = valor;
     }
 }

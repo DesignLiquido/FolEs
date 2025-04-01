@@ -2,16 +2,11 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorBorda extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 4 valores.
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("cor-borda", "border-color", pragmas);
 
-        validarValorCor('cor-borda', valor);
+        if (!valorVariavel) validarValorCor('cor-borda', valor);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -50,7 +50,7 @@ export class FolEs {
      */
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(simbolos);
-
+        
         const traducao = this.serializador.serializar(resultadoAvaliadorSintatico);
         return traducao;
     }
@@ -100,7 +100,7 @@ export class FolEs {
     }
 }
 
-//  const a = new FolEs(false);
-//  console.log(a.converterParaCss('../exemplos/exemplo2.foles'));
+//  const testeFoles = new FolEs(false);
+//  console.log(testeFoles.converterParaCss('../exemplos/exemplo5.foles'));
 //  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
 //  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));

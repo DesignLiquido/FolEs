@@ -3,9 +3,7 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
-export class Fonte extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 7 valores.
+export class Fonte extends Modificador {    
     valoresAceitos: { [valorFoles: string]: string } = {
         "serif": "serif",
         "sans-serif": "sans-serif",
@@ -49,17 +47,19 @@ export class Fonte extends Modificador {
         "ultra-expandida": "ultra-expanded",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fonte", "font", pragmas);
 
-        validarValorNumerico('fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('fonte', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('fonte', quantificador, unidadesMedida, valoresFonte);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('fonte', quantificador, unidadesMedida, valoresFonte);
-
-            this.quantificador = quantificador;
-        }
     }
 }

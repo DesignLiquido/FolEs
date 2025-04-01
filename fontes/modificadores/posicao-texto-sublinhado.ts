@@ -10,18 +10,15 @@ export class PosicaoTextoSublinhado extends Modificador {
         "de-frente": "from-front",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["posicao-texto-sublinhado", "posição-texto-sublinhado"],
             "text-underline-position", 
             pragmas
         );
 
-        validarValores('posição-texto-sublinhado', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('posição-texto-sublinhado', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

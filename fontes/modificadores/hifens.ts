@@ -8,14 +8,11 @@ export class Hifens extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["hifens", "hífens"], "hyphens", pragmas);
 
-        validarValores('hífens', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('hífens', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

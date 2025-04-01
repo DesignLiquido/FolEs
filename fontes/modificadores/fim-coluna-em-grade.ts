@@ -7,14 +7,13 @@ export class FimColunaEmGrade extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fim-coluna-em-grade", "grid-column-end", pragmas);
 
-        validarValorNumerico('fim-coluna-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValorNumerico('fim-coluna-em-grade', valor, this.valoresAceitos);
 
         this.valor = valor;
 
-        // Não recebe quantificador, apenas o valor numérico.
         proibirQuantificador('fim-coluna-em-grade', quantificador);
     }
 }

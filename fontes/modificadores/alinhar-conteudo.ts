@@ -20,7 +20,7 @@ export class AlinharConteudo extends Modificador {
         "auto-fim": "self-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["alinhar-conteudo", "alinhar-conteúdo"], "align-content", pragmas);
 
         // Não aceita os valores 'esquerda' e 'direita'
@@ -34,11 +34,8 @@ export class AlinharConteudo extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
 
-        validarValoresAdicionais('alinhar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('alinhar-conteúdo', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -8,14 +8,13 @@ export class TrajetoDeslocamento extends Modificador {
         "caixa-batida": "stroke-box",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("trajeto-deslocamento", "offset-path", pragmas);
 
         const valoresExtra = ['url', 'ray'];
-        validarValores('trajeto-deslocamento', valor, this.valoresAceitos, valoresExtra);
-        this.valor = valor;
 
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
+        if (!valorVariavel) validarValores('trajeto-deslocamento', valor, this.valoresAceitos, valoresExtra);
+
+        this.valor = valor;
     }
 }

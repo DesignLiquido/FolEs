@@ -8,25 +8,23 @@ export class FatiarBordaMascara extends Modificador {
         "preencher": "fill",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["fatiar-borda-mascara", "fatiar-borda-máscara"],
-            "mask-border-slice", 
+            "mask-border-slice",
             pragmas
         );
 
-        // OBS.: Pode receber de 1 a 4 valores
-        // A lógica abaixo cobre somente o recebimento de um único valor
-        validarValorNumerico('fatiar-borda-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('fatiar-borda-máscara', valor, this.valoresAceitos);
+
+            if (quantificador !== undefined) {
+                validarQuantificador('fatiar-borda-máscara', quantificador, ListaDeValorPercentual);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // Aceita somente o valor percentual (%) como quantificador
-        // Também pode receber somente o valor numérico, sem quantificador
-        if (quantificador !== undefined) {
-            validarQuantificador('fatiar-borda-máscara', quantificador, ListaDeValorPercentual);
-
-            this.quantificador = quantificador;
-        }
     }
 }

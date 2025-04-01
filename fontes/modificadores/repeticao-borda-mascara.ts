@@ -10,18 +10,15 @@ export class RepeticaoBordaMascara extends Modificador {
         "espaçar": "space",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["repeticao-borda-mascara", "repetição-borda-máscara"],
             "mask-border-repeat", 
             pragmas
         );
 
-        validarValores('repetição-borda-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('repetição-borda-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

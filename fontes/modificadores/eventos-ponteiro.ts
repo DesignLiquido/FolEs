@@ -8,16 +8,14 @@ export class EventosPonteiro extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("eventos-ponteiro", "pointer-events", pragmas);
 
         // Também pode receber valores do tipo SVG
         // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
-        validarValores('eventos-ponteiro', valor, this.valoresAceitos);
+
+        if (!valorVariavel) validarValores('eventos-ponteiro', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

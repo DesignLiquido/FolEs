@@ -9,14 +9,11 @@ export class FlexAgrupar extends Modificador {
         "inverter-agrupamento": "wrap-reverse",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("flex-agrupar", "flex-wrap", pragmas);
 
-        validarValores('flex-agrupar', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('flex-agrupar', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

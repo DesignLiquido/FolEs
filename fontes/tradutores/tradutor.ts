@@ -1,6 +1,6 @@
 import * as vlq from 'vlq';
 
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao, Declaracao } from "../declaracoes";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import { Modificador } from "../modificadores";
 import { PragmasModificador, SeletorModificador } from "../modificadores/superclasse";
@@ -25,7 +25,7 @@ export class Tradutor {
             colunaInicial: this.atual,
             colunaFinal: this.atual
         }
-        
+
         this.atual += traducaoSeletor.length;
         novosPragmasSeletor.colunaFinal = this.atual - 1;
         return novosPragmasSeletor;
@@ -58,19 +58,19 @@ export class Tradutor {
     private traduzirModificador(modificador: Modificador): Modificador {
         this.linha = modificador.pragmas.linha;
         const novosPragmasModificador = this.calcularPragmasModificador(modificador);
-        const modificadorTraduzido = 
+        const modificadorTraduzido =
             new SeletorModificador(
                 Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles,
                 modificador.valor instanceof Metodo ? modificador.valor.paraTexto() : modificador.valor,
                 modificador.quantificador,
                 modificador.pragmas
             ) as Modificador;
-        
-            modificadorTraduzido.pragmasTraducao = novosPragmasModificador;
+
+        modificadorTraduzido.pragmasTraducao = novosPragmasModificador;
         return modificadorTraduzido;
     }
 
-    traduzir(declaracoes: Declaracao[]): Declaracao[] {
+    traduzir(declaracoes: Declaracao[]): BlocoDeclaracao[] {
         this.linha = 1;
         this.atual = 1;
 
@@ -80,26 +80,30 @@ export class Tradutor {
             const seletoresTraduzidos: Seletor[] = [];
             const modificadoresTraduzidos: Modificador[] = [];
 
-            for (const seletor of declaracao.seletores) {
-                this.linha = seletor.pragmas.linha;
+            if (declaracao instanceof BlocoDeclaracao) {
+                for (const seletor of declaracao.seletores) {
+                    this.linha = seletor.pragmas.linha;
 
-                if (seletor instanceof SeletorEstrutura) {
-                    seletoresTraduzidos.push(this.traduzirSeletorEstrutura(seletor));
-                    continue;
-                }                
-            }
+                    if (seletor instanceof SeletorEstrutura) {
+                        seletoresTraduzidos.push(this.traduzirSeletorEstrutura(seletor));
+                        continue;
+                    }
+                }
 
-            for (const modificador of declaracao.modificadores) {
-                modificadoresTraduzidos.push(this.traduzirModificador(modificador));
-            }
+                for (const modificador of declaracao.modificadores) {
+                    modificadoresTraduzidos.push(this.traduzirModificador(modificador));
+                }
 
-            declaracoesTraduzidas.push(
-                new Declaracao(
-                    seletoresTraduzidos, 
-                    modificadoresTraduzidos,
-                    []
+                declaracoesTraduzidas.push(
+                    new BlocoDeclaracao(
+                        seletoresTraduzidos,
+                        modificadoresTraduzidos,
+                        []
+                    )
                 )
-            )
+            }
+
+            // TODO: Adicionar caso if (declaracao instanceof DeclaracaoVariavel)
         }
 
         return declaracoesTraduzidas;

@@ -6,7 +6,7 @@ export class IncrementarContador extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("incrementar-contador", "counter-increment", pragmas);
 
         // OBS.: A sintaxe desse modificador espera receber:
@@ -16,11 +16,8 @@ export class IncrementarContador extends Modificador {
         // Ex.: incrementar-contador: meu-contador -4;
         
         // A lógica abaixo cobre somente o recebimento de 'nenhum' e de números positivos.
-        validarValorNumerico('incrementar-contador', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValorNumerico('incrementar-contador', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

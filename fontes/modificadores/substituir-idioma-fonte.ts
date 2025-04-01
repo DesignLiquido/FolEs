@@ -1,22 +1,23 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class SubstituirIdiomaFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("substituir-idioma-fonte", "font-language-override", pragmas);
 
-        if (valor.includes("'") || valor.includes('"')) {
+        const validacaoString = validarValorString(valor);
+
+        if (validacaoString) {
             this.valoresAceitos[valor] = valor;
         }
 
-        validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
+        
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

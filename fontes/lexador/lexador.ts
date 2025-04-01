@@ -108,7 +108,7 @@ export class Lexador implements LexadorInterface {
 
     avancar(): void {
         this.atual += 1;
-
+        
         if (this.eFinalDaLinha() && !this.eUltimaLinha()) {
             this.linha++;
             this.atual = 0;
@@ -210,15 +210,26 @@ export class Lexador implements LexadorInterface {
         this.adicionarSimbolo(tiposDeSimbolos.TEXTO, valor);
     }
 
+    identificarVariaveis(): boolean {
+        if (this.simbolos.length !== 0) {
+            const indexAnterior: number = this.simbolos.length - 1;
+            return this.simbolos[indexAnterior].tipo === tiposDeSimbolos.CIFRAO;
+        }
+    }
+
     identificarPalavraChave(): void {
         while (this.eAlfabetoOuDigito(this.caractereAtual())) {
             this.avancar();
         }
+        
+        const variavel: boolean = this.identificarVariaveis();
+        if (variavel) return this.adicionarSimbolo(tiposDeSimbolos.VARIAVEL);
 
         const codigo: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
             this.atual
         );
+        
         const tipo: string =
             codigo in palavrasReservadas
                 ? palavrasReservadas[codigo]
@@ -361,6 +372,8 @@ export class Lexador implements LexadorInterface {
             case "@":
                 this.analisarDiretiva();
                 break;
+            case "$":
+                this.adicionarSimbolo(tiposDeSimbolos.CIFRAO, null, '$');
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
                 else if (this.eAlfabeto(caractere))

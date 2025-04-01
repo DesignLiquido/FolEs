@@ -6,6 +6,7 @@ import { Serializador } from "../../fontes/serializadores";
 import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../listas/atribuicao-abreviada";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais valores', () => {
     describe('Testes Unitários', () => {
@@ -55,11 +56,16 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                     const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                     // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                        seletor['propriedadeCss']
-                    );
-                    expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                    expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                    const primeiroResultado = resultadoAvaliadorSintatico[0];
+                    expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                    const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                    expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                    expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                         seletor['nomeFoles']
+                    );
+                    expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                        seletor['propriedadeCss']
                     );
 
                     // Tradutor
@@ -108,11 +114,16 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
                 );
 
                 // Tradutor
@@ -128,15 +139,15 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             for (let index = 0; index < AtribuicaoAbreviadaVQePR.length; index += 1) {
 
                 const seletor = new SeletorModificador(
-                    AtribuicaoAbreviadaVQePR[index]['modificador'], 
-                    AtribuicaoAbreviadaVQePR[index]['valor'], 
+                    AtribuicaoAbreviadaVQePR[index]['modificador'],
+                    AtribuicaoAbreviadaVQePR[index]['valor'],
                     'px'
                 );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `${AtribuicaoAbreviadaVQePR[index]['modificador']}: ${AtribuicaoAbreviadaVQePR[index]['valor']};`,
+                    `${AtribuicaoAbreviadaVQePR[index]['modificador']}: ${AtribuicaoAbreviadaVQePR[index]['valor']};`,
                     "}"
                 ]);
 
@@ -155,11 +166,16 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
                 );
 
                 // Tradutor
@@ -176,15 +192,15 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             for (let index = 0; index < AtribuicaoSeparadaPorBarra.length; index += 1) {
 
                 const seletor = new SeletorModificador(
-                    AtribuicaoSeparadaPorBarra[index]['modificador'], 
-                    AtribuicaoSeparadaPorBarra[index]['valor'], 
+                    AtribuicaoSeparadaPorBarra[index]['modificador'],
+                    AtribuicaoSeparadaPorBarra[index]['valor'],
                     'px'
                 );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `${AtribuicaoSeparadaPorBarra[index]['modificador']}: ${AtribuicaoSeparadaPorBarra[index]['valor']};`,
+                    `${AtribuicaoSeparadaPorBarra[index]['modificador']}: ${AtribuicaoSeparadaPorBarra[index]['valor']};`,
                     "}"
                 ]);
 
@@ -217,11 +233,16 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
                 );
 
                 // Tradutor
@@ -238,15 +259,15 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             for (let index = 0; index < AtribuicaoSeparadaPorVirgula.length; index += 1) {
 
                 const seletor = new SeletorModificador(
-                    AtribuicaoSeparadaPorVirgula[index]['modificador'], 
-                    AtribuicaoSeparadaPorVirgula[index]['valor'], 
+                    AtribuicaoSeparadaPorVirgula[index]['modificador'],
+                    AtribuicaoSeparadaPorVirgula[index]['valor'],
                     's'
                 );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `${AtribuicaoSeparadaPorVirgula[index]['modificador']}: ${AtribuicaoSeparadaPorVirgula[index]['valor']};`,
+                    `${AtribuicaoSeparadaPorVirgula[index]['modificador']}: ${AtribuicaoSeparadaPorVirgula[index]['valor']};`,
                     "}"
                 ]);
 
@@ -273,11 +294,16 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
-                );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
                 );
 
                 // Tradutor

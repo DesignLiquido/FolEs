@@ -17,18 +17,15 @@ export class VariacaoFonteAsiatica extends Modificador {
         "largura-completa": "full-width",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["variacao-fonte-asiatica", "variação-fonte-asiática"],
             "font-variant-east-asian", 
             pragmas
         );
 
-        validarValores('variação-fonte-asiática', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('variação-fonte-asiática', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

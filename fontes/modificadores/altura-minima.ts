@@ -12,18 +12,21 @@ export class AlturaMinima extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["altura-minima", "altura-mínima"], "min-height", pragmas);
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('altura-mínima', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) {
+            validarValorNumerico('altura-mínima', valor, this.valoresAceitos, valoresExtra);
+            
+            if (Number(parseInt(valor))) {
+                validarQuantificador('altura-mínima', quantificador, unidadesMedida);
+    
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('altura-mínima', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

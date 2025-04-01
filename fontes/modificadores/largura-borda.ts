@@ -11,15 +11,18 @@ export class LarguraBorda extends Modificador {
         "espessa": "thick",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("largura-borda", "border-width", pragmas);
 
-        validarValorNumerico('largura-borda', valor, this.valoresAceitos);
-        this.valor = valor;
-
-        if(quantificador !== undefined) {
-            validarQuantificador('largura-borda', quantificador, unidadesMedida);
-            this.quantificador = quantificador;
+        if (!valorVariavel) {
+            validarValorNumerico('largura-borda', valor, this.valoresAceitos);
+            
+            if(quantificador !== undefined) {
+                validarQuantificador('largura-borda', quantificador, unidadesMedida);
+                this.quantificador = quantificador;
+            }
         }
+
+        this.valor = valor;
     }
 }

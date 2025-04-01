@@ -9,18 +9,15 @@ export class ComposicaoMascara extends Modificador {
         "excluir": "exclude",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["composicao-mascara", "composição-máscara"],
             "mask-composite", 
             pragmas
         );
 
-        validarValores('composição-máscara',valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('composição-máscara',valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

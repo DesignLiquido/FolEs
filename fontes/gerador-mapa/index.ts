@@ -1,6 +1,6 @@
 import * as vlq from 'vlq';
 
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { MapaOrigensInterface } from '../interfaces/mapa-origens-interface';
 export class GeradorMapaCss {
 
@@ -17,7 +17,7 @@ export class GeradorMapaCss {
      * @param declaracoes As declarações já traduzidas.
      * @returns {MapaOrigensInterface} O mapa de origens pronto.
      */
-    gerarMapaFontes(declaracoes: Declaracao[], conteudoArquivoOriginal: string): MapaOrigensInterface {
+    gerarMapaFontes(declaracoes: BlocoDeclaracao[], conteudoArquivoOriginal: string): MapaOrigensInterface {
         
         const retorno: MapaOrigensInterface = {
             version: 3,

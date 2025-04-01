@@ -4,20 +4,19 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Tabulacao extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["tabulacao", "tabulação"], "tab-size", pragmas);
 
-        validarValorNumerico('tabulação', valor)
+        if (!valorVariavel) {
+            validarValorNumerico('tabulação', valor)
+
+            if (quantificador !== undefined) {
+                validarQuantificador('tabulação', quantificador, comprimentos);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // Condicional parte do 2º parâmetro pois o modificador aceita receber
-        // números inteiros também, sem quantificador.
-        // Dentre os quantificadores, aceita somente os de comprimento/length.
-        if (quantificador !== undefined) {
-            validarQuantificador('tabulação', quantificador, comprimentos);
-
-            this.quantificador = quantificador;
-        }
     }
 }

@@ -10,14 +10,11 @@ export class OrdemPintura extends Modificador {
         "marcadores": "markers",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("ordem-pintura", "paint-order", pragmas);
 
-        validarValores('ordem-pintura', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('ordem-pintura', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

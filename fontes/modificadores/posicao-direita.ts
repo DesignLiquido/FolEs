@@ -8,20 +8,22 @@ export class PosicaoDireita extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["posicao-direita", "posição-direita"], "right", pragmas);
 
-        validarValorNumerico('posição-direita', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('posição-direita', valor, this.valoresAceitos);
+
+            // O seletor aceita o número 0.
+            // Logo, o código só passa pela validação caso haja um segundo parâmetro 
+            // ou caso o primeiro seja diferente de 0.
+            if (quantificador !== undefined && valor !== '0') {
+                validarQuantificador('posição-direita', quantificador, unidadesMedida, ListaDeValorPercentual);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        // O seletor aceita o número 0.
-        // Logo, o código só passa pela validação caso haja um segundo parâmetro 
-        // ou caso o primeiro seja diferente de 0.
-        if (quantificador !== undefined && valor !== '0') {
-            validarQuantificador('posição-direita', quantificador, unidadesMedida, ListaDeValorPercentual);
-
-            this.quantificador = quantificador;
-        }
     }
 }

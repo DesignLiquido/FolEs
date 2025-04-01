@@ -1,4 +1,4 @@
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { ErroAvaliadorSintatico } from "./erro-avaliador-sintatico";
 
@@ -57,7 +57,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
     }
 
-    declaracaoPorSeletor(): Declaracao {
+    declaracaoPorSeletor(): BlocoDeclaracao {
         // TODO: Pensar lógica para seletor de classes.
         this.avancarEDevolverAnterior();
         return null;
@@ -933,14 +933,14 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return classeModificadora as Modificador;
     }
 
-    resolverModificadorEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: Declaracao[] } {
+    resolverModificadorEDeclaracoesAninhadas(): { modificadores: Modificador[], declaracoesAninhadas: BlocoDeclaracao[] } {
         this.consumir(
             tiposDeSimbolos.CHAVE_ESQUERDA,
             "Esperado '{' após declaração de seletor."
         );
 
         const modificadores: Modificador[] = [];
-        const declaracoesAninhadas: Declaracao[] = [];
+        const declaracoesAninhadas: BlocoDeclaracao[] = [];
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.IDENTIFICADOR:
@@ -961,24 +961,24 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         };
     }
 
-    declaracao(): Declaracao | null {
+    declaracao(): BlocoDeclaracao | null {
         if (this.estaNoFinal()) return null;
         const seletores = this.resolverSeletores();
         const modificadorEDeclaracoesAninhadas = this.resolverModificadorEDeclaracoesAninhadas();
 
-        return new Declaracao(
+        return new BlocoDeclaracao(
             seletores,
             modificadorEDeclaracoesAninhadas.modificadores,
             modificadorEDeclaracoesAninhadas.declaracoesAninhadas
         );
     }
 
-    analisar(simbolos: Simbolo[]): Declaracao[] {
+    analisar(simbolos: Simbolo[]): BlocoDeclaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
 
-        const declaracoes: Declaracao[] = [];
+        const declaracoes: BlocoDeclaracao[] = [];
         while (!this.estaNoFinal()) {
             declaracoes.push(this.declaracao());
         }

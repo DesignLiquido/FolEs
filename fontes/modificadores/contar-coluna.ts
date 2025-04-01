@@ -7,14 +7,16 @@ export class ContarColuna extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("contar-coluna", "column-count", pragmas);
 
-        validarValorNumerico('contar-coluna', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('contar-coluna', valor, this.valoresAceitos);
+
+            // Não recebe quantificador, apenas o valor numérico.
+            proibirQuantificador('contar-coluna', quantificador);
+        }
 
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('contar-coluna', quantificador);
     }
 }

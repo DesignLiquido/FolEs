@@ -7,18 +7,15 @@ export class QuebraDecoracaoCaixa extends Modificador {
         "clonar": "clone",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["quebra-decoracao-caixa", "quebra-decoração-caixa"], 
             "box-decoration-break", 
             pragmas
         );
         
-        validarValores('quebra-decoração-caixa', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('quebra-decoração-caixa', valor, this.valoresAceitos);
     
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

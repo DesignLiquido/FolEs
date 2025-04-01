@@ -6,13 +6,13 @@ export class CorBarraRolagem extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("cor-barra-rolagem", "scrollbar-color", pragmas);
 
-        validarValorCor('cor-barra-rolagem', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorCor('cor-barra-rolagem', valor, this.valoresAceitos);
+        }
+        
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

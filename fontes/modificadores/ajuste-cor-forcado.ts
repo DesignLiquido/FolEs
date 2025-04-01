@@ -7,18 +7,15 @@ export class AjusteCorForcado extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["ajuste-cor-forcado", "ajuste-cor-forçado"],
             "forced-color-adjust",
             pragmas
         );
 
-        validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -15,16 +15,14 @@ export class Conteudo extends Modificador {
         "não-fechar-citação": "no-close-quote",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
         // Também aceita como valor as funções image-set() e counter()
         const valoresExtra = ['url', 'linear-gradient'];
-        validarValores('conteúdo', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) validarValores('conteúdo', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

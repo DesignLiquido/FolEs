@@ -4,8 +4,6 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Transicao extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 4 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "velocidade-normal": "ease",
         "inicio-lento": "ease-in",
@@ -20,19 +18,21 @@ export class Transicao extends Modificador {
         "todas": "all",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["transicao", "transição"], "transition", pragmas);
 
         const valoresExtra = ['linear'];
 
-        validarValorNumerico('transição', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel) {
+            validarValorNumerico('transição', valor, this.valoresAceitos, valoresExtra);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('transição', quantificador, valoresTemporais);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('transição', quantificador, valoresTemporais);
-
-            this.quantificador = quantificador;
-        }
     }
 }

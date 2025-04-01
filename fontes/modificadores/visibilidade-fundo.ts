@@ -8,14 +8,11 @@ export class VisibilidadeFundo extends Modificador {
         "escondido": "hidden",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("visibilidade-fundo", "backface-visibility", pragmas);
 
-        validarValores('visibilidade-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('visibilidade-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

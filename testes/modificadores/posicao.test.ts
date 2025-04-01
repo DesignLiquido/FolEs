@@ -6,6 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Posição } from "../listas/posição";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores de POSIÇÃO', () => {
     describe('Testes Unitários', () => {
@@ -57,17 +58,23 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                     seletor['nomeFoles']
                 );
-                expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     seletor['propriedadeCss']
                 );
 
 
                 // // Tradutor
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-                
+
                 expect(resultadoTradutor).toContain('body');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('center;');
@@ -91,7 +98,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.QUALITATIVO }),
                     ])
                 );
-                
+
                 // O Avaliador Sintático deve retornar um erro
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);

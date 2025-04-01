@@ -7,18 +7,15 @@ export class OrientacaoImagem extends Modificador {
         "da-imagem": "from-image",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["orientacao-imagem", "orientação-imagem"],
             "image-orientation", 
             pragmas
         );
         
-        validarValores('orientação-imagem', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('orientação-imagem', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

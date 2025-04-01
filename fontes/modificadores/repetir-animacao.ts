@@ -7,18 +7,19 @@ export class RepetirAnimacao extends Modificador {
         "infinito": "infinite",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["repetir-animacao", "repetir-animação"],
-            "animation-iteration-count", 
+            "animation-iteration-count",
             pragmas
         );
-        
-        validarValorNumerico('repetir-animação', valor, this.valoresAceitos);
+
+        if (!valorVariavel) {
+            validarValorNumerico('repetir-animação', valor, this.valoresAceitos);
+
+            proibirQuantificador('repetir-animação', quantificador);
+        }
 
         this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        proibirQuantificador('repetir-animação', quantificador);
     }
 }

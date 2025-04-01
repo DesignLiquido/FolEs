@@ -13,14 +13,11 @@ export class EspacoEmBranco extends Modificador {
         "quebrar-espaços": "break-spaces",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["espaco-em-branco", "espaço-em-branco"], "white-space", pragmas);
 
-        validarValores('espaço-em-branco', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('espaço-em-branco', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

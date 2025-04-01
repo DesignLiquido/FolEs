@@ -9,22 +9,24 @@ export class RotacaoDeslocamento extends Modificador {
         "inverter": "revert",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["rotacao-deslocamento", "rotação-deslocamento"],
-            "offset-rotate", 
+            "offset-rotate",
             pragmas
         );
-        
-        validarValorNumerico('rotação-deslocamento', valor, this.valoresAceitos);
+
+        if (!valorVariavel) {
+            validarValorNumerico('rotação-deslocamento', valor, this.valoresAceitos);
+
+            // Quantificador deve ser do tipo ângulo (<angle>)
+            if (Number(parseInt(valor))) {
+                validarQuantificador('rotação-deslocamento', quantificador, angulos);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-        
-        // Quantificador deve ser do tipo ângulo (<angle>)
-        if (Number(parseInt(valor))){
-            validarQuantificador('rotação-deslocamento', quantificador, angulos);
-    
-            this.quantificador = quantificador;
-        }
     }
 }

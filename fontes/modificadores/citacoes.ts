@@ -1,5 +1,6 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class Citacoes extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,18 +8,19 @@ export class Citacoes extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["citacoes", "citações"], "quotes", pragmas);
-        
-        if (valor.includes("'") || valor.includes('"')) {
-            this.valoresAceitos[valor] = valor;
+
+        if (!valorVariavel) {
+            const validacaoString = validarValorString(valor);
+
+            if (validacaoString) {
+                this.valoresAceitos[valor] = valor;
+            }
+
+            validarValores("citações", valor, this.valoresAceitos);
         }
 
-        validarValores("citações", valor, this.valoresAceitos);
-
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

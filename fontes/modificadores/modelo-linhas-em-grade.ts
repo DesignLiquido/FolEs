@@ -15,17 +15,21 @@ export class ModeloLinhasEmGrade extends Modificador {
         "alvenaria": "masonry",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("modelo-linhas-em-grade", "grid-template-rows", pragmas);
 
         // OBS.: Também aceita receber o valor do tipo [linename]
         const valoresExtra = ['minmax', 'fit-content'];
-        validarValorNumerico('modelo-linhas-em-grade', valor, this.valoresAceitos, valoresExtra);
-        this.valor = valor;
 
-        if (quantificador !== undefined) {
-            validarQuantificador('modelo-linhas-em-grade', quantificador, unidadesMedida, valoresFlex);
-            this.quantificador = quantificador;
+        if (!valorVariavel) {
+            validarValorNumerico('modelo-linhas-em-grade', valor, this.valoresAceitos, valoresExtra);
+
+            if (quantificador !== undefined) {
+                validarQuantificador('modelo-linhas-em-grade', quantificador, unidadesMedida, valoresFlex);
+                this.quantificador = quantificador;
+            }
         }
+
+        this.valor = valor;
     }
 }

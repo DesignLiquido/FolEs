@@ -8,14 +8,11 @@ export class FixarFundo extends Modificador {
         "rolar": "scroll",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fixar-fundo", "background-attachment", pragmas);
 
-        validarValores('fixar-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('fixar-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

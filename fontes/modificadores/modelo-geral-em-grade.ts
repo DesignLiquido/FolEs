@@ -6,7 +6,7 @@ export class ModeloGeralEmGrade extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("modelo-geral-em-grade", "grid-template-areas", pragmas);
 
         // OBS.: Também aceita receber valores do tipo string e matriz
@@ -14,10 +14,7 @@ export class ModeloGeralEmGrade extends Modificador {
         //      "a b b"
         //      "a c d";
 
-        validarValores('modelo-geral-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('modelo-geral-em-grade', valor, this.valoresAceitos);
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

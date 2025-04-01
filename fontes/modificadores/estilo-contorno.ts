@@ -7,14 +7,11 @@ export class EstiloContorno extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("estilo-contorno", "outline-style", pragmas);
 
-        validarValoresAdicionais('estilo-contorno', valor, estilos, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('estilo-contorno', valor, estilos, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

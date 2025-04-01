@@ -8,21 +8,23 @@ export class EspacamentoPalavras extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["espacamento-palavras", "espaçamento-palavras"], 
             "word-spacing", 
             pragmas
         );
 
-        validarValorNumerico('espaçamento-palavras', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('espaçamento-palavras', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('espaçamento-palavras', quantificador, comprimentos);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('espaçamento-palavras', quantificador, comprimentos);
-
-            this.quantificador = quantificador;
-        }
     }
 }

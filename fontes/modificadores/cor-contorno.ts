@@ -6,14 +6,11 @@ export class CorContorno extends Modificador {
         "inverter": "invert",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("cor-contorno", "outline-color", pragmas);
 
-        validarValorCor('cor-contorno', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValorCor('cor-contorno', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

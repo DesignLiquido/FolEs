@@ -6,19 +6,17 @@ export class OrigemBordaMascara extends Modificador {
         "nenhuma": "none",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["origem-borda-mascara", "origem-borda-máscara"],
             "mask-border-source", 
             pragmas
         );
 
-        const valoresExtra = ['url'];    
-        validarValores('origem-borda-máscara', valor, this.valoresAceitos, valoresExtra);
+        const valoresExtra = ['url'];
+
+        if (!valorVariavel) validarValores('origem-borda-máscara', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

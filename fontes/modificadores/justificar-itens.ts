@@ -12,7 +12,7 @@ export class JustificarItens extends Modificador {
         "auto-fim": "self-end",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("justificar-itens", "justify-items", pragmas);
 
         // Além dos valores listados, aceita também todos os valores da Lista 
@@ -21,17 +21,13 @@ export class JustificarItens extends Modificador {
             posicao !== 'superior' && posicao !== 'inferior'
         );
 
-        // Transforma array em objeto para processo de validação
         const posicoesValidas = {};
         posicoesAceitas.forEach((posicao, index) => {
             posicoesValidas[posicao] = posicoesAceitas[index]
         })
 
-        validarValoresAdicionais('justificar-itens', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel) validarValoresAdicionais('justificar-itens', valor, posicoesValidas, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

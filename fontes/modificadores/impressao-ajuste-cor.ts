@@ -7,18 +7,15 @@ export class ImpressaoAjusteCor extends Modificador {
         "exata": "exact",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["impressao-ajuste-cor", "impressão-ajuste-cor"],
             "print-color-adjust", 
             pragmas
         );
 
-        validarValores('impressão-ajuste-cor', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('impressão-ajuste-cor', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -8,17 +8,19 @@ export class MargemInferior extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem-inferior", "margin-bottom", pragmas);
 
-        validarValorNumerico('margem-inferior', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('margem-inferior', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('margem-inferior', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('margem-inferior', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

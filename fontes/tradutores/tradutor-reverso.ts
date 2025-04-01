@@ -1,4 +1,4 @@
-import { Declaracao } from "../declaracoes";
+import { BlocoDeclaracao } from "../declaracoes";
 import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
@@ -51,7 +51,7 @@ export class TradutorReverso {
         ) as Seletor;
     }
 
-    traduzir(declaracoes: Declaracao[]): Declaracao[] {
+    traduzir(declaracoes: BlocoDeclaracao[]): BlocoDeclaracao[] {
         this.linha = 1;
         this.atual = 1;
 
@@ -83,7 +83,7 @@ export class TradutorReverso {
             }
 
             declaracoesTraduzidas.push(
-                new Declaracao(
+                new BlocoDeclaracao(
                     seletoresTraduzidos, 
                     modificadoresTraduzidos,
                     []

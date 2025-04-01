@@ -11,14 +11,11 @@ export class VazamentoHorizontal extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento-horizontal", "overflow-x", pragmas);
 
-        validarValores('vazamento-horizontal', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-horizontal', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

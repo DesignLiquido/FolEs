@@ -8,17 +8,19 @@ export class RecuoDireitoRolagemMouse extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("recuo-direito-rolagem-mouse", "scroll-padding-right", pragmas);
 
-        validarValorNumerico('recuo-direito-rolagem-mouse', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('recuo-direito-rolagem-mouse', valor, this.valoresAceitos);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('recuo-direito-rolagem-mouse', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('recuo-direito-rolagem-mouse', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

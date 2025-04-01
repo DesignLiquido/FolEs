@@ -13,14 +13,11 @@ export class RepetirFundo extends Modificador {
         "não-repetir": "no-repeat",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("repetir-fundo", "background-repeat", pragmas);
 
-        validarValores('repetir-fundo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('repetir-fundo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

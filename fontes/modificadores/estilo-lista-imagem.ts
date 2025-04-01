@@ -6,15 +6,13 @@ export class EstiloListaImagem extends Modificador {
         "nenhum": "none",
     }
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("estilo-lista-imagem", "list-style-image", pragmas);
 
         const valoresExtra = ['url'];
-        validarValores('estilo-lista-imagem', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) validarValores('estilo-lista-imagem', valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

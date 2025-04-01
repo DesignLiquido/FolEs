@@ -8,14 +8,11 @@ export class ModoEscrita extends Modificador {
         "vertical-esquerda-direita": "vertical-lr",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("modo-escrita", "writing-mode", pragmas);
 
-        validarValores('modo-escrita', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('modo-escrita', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -8,14 +8,11 @@ export class FluxoEmGrade extends Modificador {
         "denso": "dense",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("fluxo-em-grade", "grid-auto-flow", pragmas);
 
-        validarValores('fluxo-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('fluxo-em-grade', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

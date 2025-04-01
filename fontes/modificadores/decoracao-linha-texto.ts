@@ -11,18 +11,15 @@ export class DecoracaoLinhaTexto extends Modificador {
         "piscar": "blink",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["decoracao-linha-texto", "decoração-linha-texto"],
             "text-decoration-line", 
             pragmas
         );
 
-        validarValores('decoração-linha-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('decoração-linha-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

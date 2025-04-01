@@ -6,6 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { ValorNumerico, ValorNumericoApenas, ValorNumericoComQuantificador, ValorNumericoZeroUm } from "../listas/valor-numerico";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () => {
   describe('Testes Unitários', () => {
@@ -42,15 +43,20 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
           seletor['nomeFoles']
         );
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           seletor['propriedadeCss']
         );
 
-
-        // // Tradutor
+        // Tradutor
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -82,8 +88,8 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
 
         // Avaliador Sintático - Erro esperado como retorno
         const regex = /[~çáéíóúÁÉÍÓÚ]/;
-        
-        if (!regex.test(ValorNumericoApenas[index]) && regex.test(ValorNumericoApenas[index + 1])){
+
+        if (!regex.test(ValorNumericoApenas[index]) && regex.test(ValorNumericoApenas[index + 1])) {
           expect(() => {
             avaliador.analisar(novoLexador.simbolos);
           }).toThrow(`A propriedade '${ValorNumericoApenas[index + 1]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
@@ -105,7 +111,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         // Lexador
         const resultadoLexador = lexador.mapear([
           "corpo {",
-            `${ValorNumericoZeroUm[index]}: 2;`,
+          `${ValorNumericoZeroUm[index]}: 2;`,
           "}"
         ]);
 
@@ -151,16 +157,19 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
 
         // Avaliador Sintático                
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
           seletor['nomeFoles']
         );
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           seletor['propriedadeCss']
         );
 
-
-        // // Tradutor
+        // Tradutor
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -195,16 +204,19 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
 
         // Avaliador Sintático                
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
           seletor['nomeFoles']
         );
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           seletor['propriedadeCss']
         );
 
-
-        // // Tradutor
+        // Tradutor
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
         expect(resultadoTradutor).toContain(seletor['propriedadeCss']);

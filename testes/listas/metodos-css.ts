@@ -123,7 +123,7 @@ export const TraducaoValoresMetodos: Object = {
     'offset': 'deslocamento',
     'gap': 'espacamento',
     'filter': 'filtro',
-    'backdrop-filter': 'backdrop-filter',
+    'backdrop-filter': 'filtro-fundo',
     'grid': 'grade',
     'mask-image': 'imagem-mascara',
     'max-width': 'largura-maxima', 

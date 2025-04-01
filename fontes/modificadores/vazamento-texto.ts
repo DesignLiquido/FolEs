@@ -1,5 +1,6 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class VazamentoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -7,18 +8,17 @@ export class VazamentoTexto extends Modificador {
         "elipse": "ellipsis",
     }
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento-texto", "text-overflow", pragmas);
 
-        if (valor.includes("'") || valor.includes('"')) {
+        const validacaoString = validarValorString(valor);
+
+        if (validacaoString) {
             this.valoresAceitos[valor] = valor;
         }
 
-        validarValores('vazamento-texto', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-texto', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

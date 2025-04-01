@@ -7,14 +7,11 @@ export class StatusAnimacao extends Modificador {
         "pausada": "paused"
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["status-animacao", "status-animação"], "animation-play-state", pragmas);
 
-        validarValores('status-animação', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('status-animação', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

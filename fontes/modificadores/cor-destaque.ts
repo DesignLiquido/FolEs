@@ -6,14 +6,11 @@ export class CorDestaque extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("cor-destaque", "accent-color", pragmas);
 
-        validarValorCor('cor-destaque', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValorCor('cor-destaque', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

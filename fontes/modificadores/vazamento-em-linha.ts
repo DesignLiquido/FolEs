@@ -11,14 +11,11 @@ export class VazamentoEmLinha extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("vazamento-em-linha", "overflow-inline", pragmas);
 
-        validarValores('vazamento-em-linha', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('vazamento-em-linha', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Quantificador não é usado aqui.
-        // this.quantificador = quantificador;
     }
 }

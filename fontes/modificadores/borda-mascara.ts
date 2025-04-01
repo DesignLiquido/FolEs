@@ -4,8 +4,6 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaMascara extends Modificador {
-    // Seletor de Atribuição Abreviada (Shorthand).
-    // Pode receber de 1 a 6 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhuma": "none",
         "preencher": "fill",
@@ -20,30 +18,34 @@ export class BordaMascara extends Modificador {
         "alfa": "alpha",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
 
         let valorURL;
-        if(valor['traducao'] !== undefined) {
+
+        if (valor['traducao'] !== undefined) {
             valorURL = valor['traducao'];
         }
-        
-        if (!(valor in this.valoresAceitos) &&
-            Number.isNaN(parseInt(valor)) &&
-            !(valorURL.includes('url')) &&
-            !(valor in valoresGlobais)) {
-            throw new Error(`Propriedade 'borda-mascara' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, URL, 
-            ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+
+        if (!valorVariavel) {
+            if (!(valor in this.valoresAceitos) &&
+                Number.isNaN(parseInt(valor)) &&
+                !(valorURL.includes('url')) &&
+                !(valor in valoresGlobais)) {
+                throw new Error(`Propriedade 'borda-mascara' com valor ${valor} inválido. Valores aceitos: 
+                    número-quantificador, URL, 
+                    ${Object.keys(this.valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`);
+            }
+
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('borda-máscara', quantificador, unidadesMedida);
+
+                this.quantificador = quantificador;
+            }
         }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('borda-máscara', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

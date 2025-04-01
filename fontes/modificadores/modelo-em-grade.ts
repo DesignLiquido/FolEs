@@ -4,7 +4,6 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class ModeloEmGrade extends Modificador {
-    // Seletor de atribuição abreviada, pode receber de 1 a 3 valores
     valoresAceitos: { [valorFoles: string]: string } = {
         "nenhum": "none",
         "auto": "auto",
@@ -16,7 +15,7 @@ export class ModeloEmGrade extends Modificador {
         "alvenaria": "masonry",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("modelo-em-grade", "grid-template", pragmas);
 
         // OBS.: Também aceita receber o valor do tipo matriz
@@ -25,12 +24,15 @@ export class ModeloEmGrade extends Modificador {
         //      "b b b" auto;
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('modelo-em-grade', valor, this.valoresAceitos, valoresExtra);
-        this.valor = valor;
-
-        if (quantificador !== undefined) {
-            validarQuantificador('modelo-em-grade', quantificador, unidadesMedida, valoresFlex);
-            this.quantificador = quantificador;
+        if (!valorVariavel) {
+            validarValorNumerico('modelo-em-grade', valor, this.valoresAceitos, valoresExtra);
+            
+            if (quantificador !== undefined) {
+                validarQuantificador('modelo-em-grade', quantificador, unidadesMedida, valoresFlex);
+                this.quantificador = quantificador;
+            }
         }
+
+        this.valor = valor;
     }
 }

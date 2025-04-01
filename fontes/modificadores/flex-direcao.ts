@@ -9,14 +9,11 @@ export class FlexDirecao extends Modificador {
         "inverter-coluna": "column-reverse",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["flex-direcao", "flex-direção"], "flex-direction", pragmas);
 
-        validarValores('flex-direção', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('flex-direção', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

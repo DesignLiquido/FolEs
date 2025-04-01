@@ -1,4 +1,5 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
+import { BlocoDeclaracao } from "../fontes/declaracoes";
 import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador"
@@ -30,26 +31,34 @@ describe('Avaliador Sintático', () => {
                 `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
                 "}"
             ]);
-            
+
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
             expect(resultadoAvaliadorSintatico).toBeTruthy();
             expect(resultadoAvaliadorSintatico).toHaveLength(1);
 
-            expect(resultadoAvaliadorSintatico[0].seletores[0]['estrutura'].tagHtml).toBe('html');
-            expect(resultadoAvaliadorSintatico[0].seletores[0]['pseudoclasse']).toBe(undefined);
 
-            expect(resultadoAvaliadorSintatico[0].modificadores[0].nomeFoles).toStrictEqual(
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            
+            expect(primeiroResultadoTipado.seletores[0]['estrutura'].tagHtml).toBe('html');
+            expect(primeiroResultadoTipado.seletores[0]['pseudoclasse']).toBe(undefined);
+            
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                 seletor['nomeFoles']
             );
-            expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                 seletor['propriedadeCss']
             );
-            expect(resultadoAvaliadorSintatico[0].modificadores[0].valor).toStrictEqual(
+            expect(primeiroResultadoTipado.modificadores[0].valor).toStrictEqual(
                 '25'
             );
-            expect(resultadoAvaliadorSintatico[0].modificadores[0].quantificador).toStrictEqual(
+            expect(primeiroResultadoTipado.modificadores[0].quantificador).toStrictEqual(
                 'px'
             );
 

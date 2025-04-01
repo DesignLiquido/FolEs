@@ -17,18 +17,15 @@ export class VariacaoFonteMaiuscula extends Modificador {
         "título-maiúsculo": "titling-caps",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
             "font-variant-caps", 
             pragmas
         );
 
-        validarValores('variação-fonte-maiúscula', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('variação-fonte-maiúscula', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -8,7 +8,7 @@ export class EspacamentoLetras extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["espacamento-letras", "espaçamento-letras"],
             "letter-spacing",
@@ -18,14 +18,16 @@ export class EspacamentoLetras extends Modificador {
         // Também pode receber valores numéricos com ponto (.) na frente
         // Ex.: espaçamento-letras: .2rem;
 
-        validarValorNumerico('espaçamento-letras', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('espaçamento-letras', valor, this.valoresAceitos);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('espaçamento-letras', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('espaçamento-letras', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

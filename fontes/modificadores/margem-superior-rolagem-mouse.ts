@@ -4,17 +4,19 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemSuperiorRolagemMouse extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("margem-superior-rolagem-mouse", "scroll-margin-top", pragmas);
 
-        validarValorNumerico('margem-superior-rolagem-mouse', valor);
+        if (!valorVariavel) {
+            validarValorNumerico('margem-superior-rolagem-mouse', valor);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador('margem-superior-rolagem-mouse', quantificador, comprimentos);
+
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('margem-superior-rolagem-mouse', quantificador, comprimentos);
-
-            this.quantificador = quantificador;
-        }
     }
 }

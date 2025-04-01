@@ -8,14 +8,11 @@ export class TransformarEstilo extends Modificador {
         "espaço-3d": "preserve-3d",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("transformar-estilo", "transform-style", pragmas);
         
-        validarValores('transformar-estilo', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('transformar-estilo', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

@@ -9,14 +9,11 @@ export class ModoMascara extends Modificador {
         "fonte-correspondente": "match-source",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(["modo-mascara", "modo-máscara"], "mask-mode", pragmas);
 
-        validarValores('modo-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel) validarValores('modo-máscara', valor, this.valoresAceitos);
 
         this.valor = valor;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

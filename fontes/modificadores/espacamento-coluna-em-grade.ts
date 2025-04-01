@@ -8,21 +8,23 @@ export class EspacamentoColunaEmGrade extends Modificador {
         "normal": "normal",
     }
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super(
             ["espacamento-coluna-em-grade", "espaçamento-coluna-em-grade"],
             "grid-column-gap", 
             pragmas
         );
 
-        validarValorNumerico('espaçamento-coluna-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            validarValorNumerico('espaçamento-coluna-em-grade', valor, this.valoresAceitos);
+               
+            if (Number(parseInt(valor))) {
+                validarQuantificador('espaçamento-coluna-em-grade', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('espaçamento-coluna-em-grade', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

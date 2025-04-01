@@ -12,18 +12,21 @@ export class Largura extends Modificador {
         "auto": "auto",
     }
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador) {
+    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
         super("largura", "width", pragmas);
 
         const valoresExtra = ['fit-content'];
-        validarValorNumerico('largura', valor, this.valoresAceitos, valoresExtra);
+
+        if (!valorVariavel) {
+            validarValorNumerico('largura', valor, this.valoresAceitos, valoresExtra);
+                        
+            if (Number(parseInt(valor))) {
+                validarQuantificador('largura', quantificador, unidadesMedida);
+                
+                this.quantificador = quantificador;
+            }
+        }
 
         this.valor = valor;
-
-        if (Number(parseInt(valor))) {
-            validarQuantificador('largura', quantificador, unidadesMedida);
-
-            this.quantificador = quantificador;
-        }
     }
 }

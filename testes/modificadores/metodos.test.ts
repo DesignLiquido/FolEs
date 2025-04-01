@@ -5,6 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -65,7 +66,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          // TODO @Vitor: Alterei um caso para você. 
+          // Os demais podem seguir a mesma lógica.
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoBorrar[index]]
           );
 
@@ -124,7 +132,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoBrilho[index]]
           );
 
@@ -168,9 +181,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-
+        
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoCalcular[index]]
         );
 
@@ -228,7 +246,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoContraste[index]]
           );
 
@@ -272,7 +295,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoCurvaCubica[index]]
         );
 
@@ -316,7 +344,13 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]
         );
 
@@ -373,7 +407,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoEscalaCinza[index]]
           );
 
@@ -422,7 +461,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosEscalamento[index]]
           );
 
@@ -438,89 +482,99 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
     it('Atribuindo Método "escalamento()" com múltiplos valores', () => {
       for (let index = 0; index < MetodosEscalamento.length; index += 1) {
-          // Lexador
-          const resultadoLexador = lexador.mapear([
-            "lmht {",
-            `${MetodosEscalamento[index]}: escalamento(1.3, 0.4);`,
-            "}"
-          ]);
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodosEscalamento[index]}: escalamento(1.3, 0.4);`,
+          "}"
+        ]);
 
-          // O Lexador não deve encontrar erros
-          expect(resultadoLexador.erros).toHaveLength(0);
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
 
-          // O valor recebido deve ser mapeado como METODO
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-            ])
-          );
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
 
-          // O Lexador deve montar um objeto de comprimento 12
-          expect(resultadoLexador.simbolos).toHaveLength(12);
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-            ])
-          );
+        // O Lexador deve montar um objeto de comprimento 12
+        expect(resultadoLexador.simbolos).toHaveLength(12);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+          ])
+        );
 
-          // Avaliador Sintático
-          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-            TraducaoValoresMetodos[MetodosEscalamento[index]]
-          );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+          TraducaoValoresMetodos[MetodosEscalamento[index]]
+        );
 
-          // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir escalamento para scale
-          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-          expect(resultadoTradutor).toContain(`scale(1.3, 0.4);`);
+        // O Tradutor deve serializar de acordo e traduzir escalamento para scale
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+        expect(resultadoTradutor).toContain(`scale(1.3, 0.4);`);
       }
     });
 
     it('Atribuindo Método "escalamento-3d()"', () => {
       for (let index = 0; index < MetodosEscalamento.length; index += 1) {
-          // Lexador
-          const resultadoLexador = lexador.mapear([
-            "lmht {",
-            `${MetodosEscalamento[index]}: escalamento-3d(0.5, 1, 1.7);`,
-            "}"
-          ]);
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodosEscalamento[index]}: escalamento-3d(0.5, 1, 1.7);`,
+          "}"
+        ]);
 
-          // O Lexador não deve encontrar erros
-          expect(resultadoLexador.erros).toHaveLength(0);
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
 
-          // O valor recebido deve ser mapeado como METODO
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-            ])
-          );
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
 
-          // O Lexador deve montar um objeto de comprimento 14
-          expect(resultadoLexador.simbolos).toHaveLength(14);
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-            ])
-          );
+        // O Lexador deve montar um objeto de comprimento 14
+        expect(resultadoLexador.simbolos).toHaveLength(14);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+          ])
+        );
 
-          // Avaliador Sintático
-          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
-            TraducaoValoresMetodos[MetodosEscalamento[index]]
-          );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+          TraducaoValoresMetodos[MetodosEscalamento[index]]
+        );
 
-          // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir escalamento-3d para scale3d
-          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-          expect(resultadoTradutor).toContain(`scale3d(0.5, 1, 1.7);`);
+        // O Tradutor deve serializar de acordo e traduzir escalamento-3d para scale3d
+        expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+        expect(resultadoTradutor).toContain(`scale3d(0.5, 1, 1.7);`);
       }
     });
 
@@ -559,7 +613,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosEscalamento[index]]
           );
 
@@ -608,7 +667,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosEscalamento[index]]
           );
 
@@ -657,7 +721,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosEscalamento[index]]
           );
 
@@ -703,7 +772,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoGradienteLinear[index]]
         );
 
@@ -747,7 +821,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoGradienteLinear[index]]
         );
 
@@ -792,7 +871,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoGradienteLinear[index]]
           );
 
@@ -866,7 +950,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosInclinar[index]]
           );
 
@@ -916,7 +1005,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodosInclinar[index]]
         );
 
@@ -974,10 +1068,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosInclinar[index]]
           );
-
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
@@ -1037,7 +1135,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosInclinar[index]]
           );
 
@@ -1100,10 +1203,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoInverter[index]]
           );
-
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
@@ -1146,8 +1253,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoLimitar[index]]
         );
 
@@ -1190,8 +1301,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoLinear[index]]
         );
 
@@ -1235,8 +1350,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoMinMax[index]]
         );
 
@@ -1293,7 +1412,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoOpacar[index]]
           );
 
@@ -1339,7 +1463,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoPassos[index]]
         );
 
@@ -1403,7 +1532,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoPerspectivar[index]]
           );
 
@@ -1451,7 +1585,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoProjetarSombra[index]]
           );
 
@@ -1499,10 +1638,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoProjetarSombra[index]]
           );
-
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
@@ -1551,7 +1694,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoRaio[index]]
           );
 
@@ -1597,7 +1745,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodoRaio[index]]
         );
 
@@ -1656,7 +1809,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosRotacionar[index]]
           );
 
@@ -1720,7 +1878,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosRotacionar[index]]
           );
 
@@ -1783,7 +1946,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosRotacionar[index]]
           );
 
@@ -1846,7 +2014,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]
           );
 
@@ -1910,10 +2083,14 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosRotacionar[index]]
           );
-
           // Tradutor
           const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
@@ -1973,7 +2150,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoSaturar[index]]
           );
 
@@ -2032,7 +2214,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodoSepia[index]]
           );
 
@@ -2091,7 +2278,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2141,7 +2333,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodosTranslacao[index]]
         );
 
@@ -2186,7 +2383,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-        expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
           TraducaoValoresMetodos[MetodosTranslacao[index]]
         );
 
@@ -2204,13 +2406,13 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         const valoresAceitos = [
           '0',
-          '0, 62px, 135px', 
-          '2.7rem, 0, 1rem', 
+          '0, 62px, 135px',
+          '2.7rem, 0, 1rem',
           '5ch, 0.4in, 0',
-          '0, 0, 135px', 
-          '0, 2.7rem, 0', 
+          '0, 0, 135px',
+          '0, 2.7rem, 0',
           '5ch, 0, 0',
-          '42px, 62px, 135px', 
+          '42px, 62px, 135px',
           '0, 0, 0',
         ];
 
@@ -2277,7 +2479,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2340,7 +2547,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2399,7 +2611,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2458,7 +2675,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2517,7 +2739,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2576,7 +2803,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
@@ -2635,7 +2867,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
           // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico[0].modificadores[0].propriedadeCss).toStrictEqual(
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
             TraducaoValoresMetodos[MetodosTranslacao[index]]
           );
 
