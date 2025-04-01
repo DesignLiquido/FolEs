@@ -2487,7 +2487,6 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
                 // O Lexador não deve encontrar erros
                 expect(resultadoLexador.erros).toHaveLength(0);
-                // console.log(resultadoLexador.simbolos);
 
                 // O valor recebido deve ser mapeado como METODO
                 expect(resultadoLexador.simbolos).toEqual(

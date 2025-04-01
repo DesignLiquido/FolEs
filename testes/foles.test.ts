@@ -58,7 +58,7 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
 
         it('converterParaCss - caso de sucesso', () => {
             const resultado = foles.converterParaCss('testes/modelos/arquivo-modelo.foles');
-            // console.log(resultado);
+
             expect(resultado).toBeTruthy();
             expect(resultado).toContain('q');
             expect(resultado).toContain('contain');
@@ -75,7 +75,7 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
 
         it.skip('converterParaFolEs - caso de sucesso', () => {
             const resultado = foles.converterParaFolEs('testes/modelos/arquivo-modelo.css');
-            // console.log(resultado);
+
             expect(resultado).toBeTruthy();
             expect(resultado).toContain('lmht');
             expect(resultado).toContain('largura-maxima');

@@ -1415,7 +1415,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         this.simbolos = simbolos;
         this.erros = [];
         this.atual = 0;
-        // console.log(simbolos);
 
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
