@@ -1152,9 +1152,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let simboloValorVariavel: Simbolo;
         let valorVariavel: string;
 
-        while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
-            console.log('atual', this.simbolos[this.atual]);
-            
+        while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {            
             this.consumir(
                 tiposDeSimbolos.CIFRAO,
                 "Esperado cifrão antes de declaração de variável."
@@ -1196,10 +1194,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     );
 
                     valorVariavel = simboloValorVariavel.lexema;
-                    console.log('atual', this.simbolos[this.atual]);
                     
                     // const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
-                    // console.log('próximo', proximoSimbolo);
                     
                     // if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
                     //     const quantificadorVariavel = this.consumir(
