@@ -1153,6 +1153,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let valorVariavel: string;
 
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+            console.log('atual', this.simbolos[this.atual]);
+            
             this.consumir(
                 tiposDeSimbolos.CIFRAO,
                 "Esperado cifrão antes de declaração de variável."
@@ -1187,23 +1189,26 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                     valorVariavel = simboloValorVariavel.lexema;
                     break;
-                case tiposDeSimbolos.NUMERO:
+                case tiposDeSimbolos.NUMERO:                    
                     simboloValorVariavel = this.consumir(
                         tiposDeSimbolos.NUMERO,
                         "Esperado valor numérico após declaração de variável"
                     );
 
                     valorVariavel = simboloValorVariavel.lexema;
+                    console.log('atual', this.simbolos[this.atual]);
+                    
+                    // const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
+                    // console.log('próximo', proximoSimbolo);
+                    
+                    // if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
+                    //     const quantificadorVariavel = this.consumir(
+                    //         tiposDeSimbolos.QUANTIFICADOR,
+                    //         "Esperado quantificador após valor numérico atribuído à variável."
+                    //     )
 
-                    const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
-                    if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
-                        const quantificadorVariavel = this.consumir(
-                            tiposDeSimbolos.QUANTIFICADOR,
-                            "Esperado quantificador após valor numérico atribuído à variável."
-                        )
-
-                        valorVariavel += quantificadorVariavel.lexema;
-                    }
+                    //     valorVariavel += quantificadorVariavel.lexema;
+                    // }
                     break;
                 case tiposDeSimbolos.METODO:
                     this.resolverMetodo(this.simbolos[this.atual - 1].lexema);

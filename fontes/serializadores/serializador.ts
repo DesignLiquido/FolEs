@@ -30,8 +30,12 @@ export class Serializador {
         modificador: Modificador,
         indentacao: number = 0
     ): string {
+        console.log(modificador);
+        
         // Caso 1: Número-Quantificador ou somente Número.
-        if (Number(modificador.valor)) {
+        if (Number(modificador.valor) || modificador.valor === '0') {
+            console.log('ENTRA 1');
+            
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
                 }${modificador.quantificador || ""};\n`;
         }
@@ -41,6 +45,8 @@ export class Serializador {
             modificador["valoresAceitos"] !== undefined &&
             modificador["valoresAceitos"].hasOwnProperty(modificador.valor)
         ) {
+            console.log('ENTRA 2');
+
             const objetoValores = modificador["valoresAceitos"];
             const valorTraduzido = objetoValores[modificador.valor];
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss
@@ -49,12 +55,15 @@ export class Serializador {
 
         // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
         if (modificador.valor instanceof Metodo) {
+            console.log('ENTRA 3');
+
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""
                 };\n`;
         }
 
         // Caso 4: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(' ')) {
+            console.log('ENTRA 4');
             if (modificador.valor.includes(',')) {
                 const separarValores: Array<string> = modificador.valor.split(', ');
 
@@ -81,6 +90,7 @@ export class Serializador {
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
                 };\n`;
         }
+        console.log('ENTRA 5');
 
         // Caso 5: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
@@ -182,7 +192,7 @@ export class Serializador {
         declaracoes.forEach((declaracao, indexBlocoDeclaracao) => {
             if (declaracao instanceof BlocoDeclaracao) {
                 declaracao.modificadores.forEach((modificador) => {
-                    if (modificador.valor === declaracaoVariavel.nome) {
+                    if (modificador.valor === declaracaoVariavel.nome) {                    
                         modificador.valor = declaracaoVariavel.valor;
 
                         if (indexVariavel > indexBlocoDeclaracao) {
@@ -212,6 +222,8 @@ export class Serializador {
             textoSeletorAnterior = seletorAnterior;
         }
 
+        if (declaracoes[0] instanceof BlocoDeclaracao) console.log(declaracoes[0]);
+        
         for (const [index, declaracao] of declaracoes.entries()) {            
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':
