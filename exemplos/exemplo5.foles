@@ -1,7 +1,21 @@
+$valor-padrao: herdar;
+$cor-secundaria: branco;
 
+$valor-recuo: 12px;
 
+lmht {
+  altura: $valor-padrao;
+  recuo-direito: $valor-recuo;
+}
+
+lmht {
+  cor-barra-rolagem: $cor-secundaria;
+}
+
+$valor-teste: verde;
 $valor-indice: 0;
 
 lmht {
+  borda-em-bloco: $valor-teste;
   indice-z: $valor-indice; 
 }

@@ -1195,16 +1195,14 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                     valorVariavel = simboloValorVariavel.lexema;
                     
-                    // const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
-                    
-                    // if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
-                    //     const quantificadorVariavel = this.consumir(
-                    //         tiposDeSimbolos.QUANTIFICADOR,
-                    //         "Esperado quantificador após valor numérico atribuído à variável."
-                    //     )
+                    if (this.simbolos[this.atual].tipo === tiposDeSimbolos.QUANTIFICADOR) {
+                        const quantificadorVariavel = this.consumir(
+                            tiposDeSimbolos.QUANTIFICADOR,
+                            "Esperado quantificador após valor numérico atribuído à variável."
+                        )
 
-                    //     valorVariavel += quantificadorVariavel.lexema;
-                    // }
+                        valorVariavel += quantificadorVariavel.lexema;
+                    }
                     break;
                 case tiposDeSimbolos.METODO:
                     this.resolverMetodo(this.simbolos[this.atual - 1].lexema);

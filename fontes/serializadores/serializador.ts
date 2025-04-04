@@ -166,7 +166,7 @@ export class Serializador {
 
         const valorModificador = declaracao.modificadores[0].valor.toString();
         const valorVariavel = false;
-
+        
         new SeletorModificador(
             nomeFolEs,
             valorModificador,
@@ -182,8 +182,23 @@ export class Serializador {
         declaracoes.forEach((declaracao, indexBlocoDeclaracao) => {
             if (declaracao instanceof BlocoDeclaracao) {
                 declaracao.modificadores.forEach((modificador) => {
-                    if (modificador.valor === declaracaoVariavel.nome) {                    
-                        modificador.valor = declaracaoVariavel.valor;
+                    if (modificador.valor === declaracaoVariavel.nome) {          
+                        if (typeof declaracaoVariavel.valor === 'string') {
+                            const contemQuantificador = /[a-zA-Z]/.test(declaracaoVariavel.valor);
+                            if (contemQuantificador) {
+                                const match = declaracaoVariavel.valor.match(/^(-?\d+\.?\d*)(\D*)$/);
+                                if (match) {
+                                    modificador.valor = match[1];
+                                    modificador.quantificador = match[2];
+                                } else {
+                                    modificador.valor = declaracaoVariavel.valor;
+                                }
+                            } else {
+                                modificador.valor = declaracaoVariavel.valor;
+                            }
+                        } else {
+                            // Espaço para tratamento dos valores Metodo
+                        }
 
                         if (indexVariavel > indexBlocoDeclaracao) {
                             variavelInexistente = true;
@@ -212,6 +227,7 @@ export class Serializador {
             textoSeletorAnterior = seletorAnterior;
         }
         
+        // console.log(declaracoes[0]);
         for (const [index, declaracao] of declaracoes.entries()) {            
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':
