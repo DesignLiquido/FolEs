@@ -1151,6 +1151,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let nomeVariavel: string;
         let simboloValorVariavel: Simbolo;
         let valorVariavel: string;
+        let quantificadorVariavel: string;
 
         while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {            
             this.consumir(
@@ -1196,12 +1197,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorVariavel = simboloValorVariavel.lexema;
                     
                     if (this.simbolos[this.atual].tipo === tiposDeSimbolos.QUANTIFICADOR) {
-                        const quantificadorVariavel = this.consumir(
+                        const quantificador = this.consumir(
                             tiposDeSimbolos.QUANTIFICADOR,
                             "Esperado quantificador após valor numérico atribuído à variável."
                         )
-
-                        valorVariavel += quantificadorVariavel.lexema;
+                        
+                        quantificadorVariavel = quantificador.lexema;
                     }
                     break;
                 case tiposDeSimbolos.METODO:
@@ -1220,6 +1221,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         const variavel = {
             nome: nomeVariavel,
             valor: valorVariavel,
+            quantificador: quantificadorVariavel ? quantificadorVariavel : null,
         };
 
         return variavel;
@@ -1396,7 +1398,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 return new DeclaracaoVariavel(
                     variavel.nome,
-                    variavel.valor
+                    variavel.valor,
+                    variavel.quantificador,
                 );
             default:
                 const seletores = this.resolverSeletores();
