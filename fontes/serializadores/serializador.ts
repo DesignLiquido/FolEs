@@ -9,6 +9,7 @@ import estruturasHtml from "../tradutores/estruturas-html";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
 import { SeletorModificador } from "../modificadores/superclasse";
+import { Valor } from "../valores/valor";
 
 /**
  * A classe que efetivamente traduz FolEs para CSS.
@@ -30,8 +31,12 @@ export class Serializador {
         modificador: Modificador,
         indentacao: number = 0
     ): string {        
+        console.log('VALOR', modificador.valor);
+
         // Caso 1: Número-Quantificador ou somente Número.
-        if (Number(modificador.valor) || modificador.valor === '0') {            
+        if (Number(modificador.valor) || modificador.valor === '0') {    
+            console.log('ENTRA 1');
+                    
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
                 }${modificador.quantificador || ""};\n`;
         }
@@ -41,6 +46,8 @@ export class Serializador {
             modificador["valoresAceitos"] !== undefined &&
             modificador["valoresAceitos"].hasOwnProperty(modificador.valor)
         ) {
+            console.log('ENTRA 2');
+
             const objetoValores = modificador["valoresAceitos"];
             const valorTraduzido = objetoValores[modificador.valor];
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss
@@ -49,12 +56,15 @@ export class Serializador {
 
         // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
         if (modificador.valor instanceof Metodo) {
+            console.log('ENTRA 3');
+
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""
                 };\n`;
         }
 
         // Caso 4: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(' ')) {
+            console.log('ENTRA 4');
             if (modificador.valor.includes(',')) {
                 const separarValores: Array<string> = modificador.valor.split(', ');
 
@@ -77,10 +87,11 @@ export class Serializador {
                         };\n`;
                 }
             }
-
+            
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
-                };\n`;
+            };\n`;
         }
+        console.log('ENTRA 5');
 
         // Caso 5: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
@@ -187,15 +198,14 @@ export class Serializador {
                             modificador.valor = declaracaoVariavel.valor;
 
                             if (declaracaoVariavel.quantificador) modificador.quantificador = declaracaoVariavel.quantificador;
-                        } else {
-                            // Espaço para tratamento dos valores Metodo
+                            this.validarValoresVariaveis(declaracao);
+                        } else if (declaracaoVariavel.valor instanceof Metodo) {                            
+                            modificador.valor = declaracaoVariavel.valor;
                         }
 
                         if (indexVariavel > indexBlocoDeclaracao) {
                             variavelInexistente = true;
                         }
-
-                        this.validarValoresVariaveis(declaracao);
                     }
                 })
             }
@@ -217,17 +227,20 @@ export class Serializador {
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
         }
-
+        
+        
         for (const [index, declaracao] of declaracoes.entries()) {            
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':
                     resultado += this.serializarBlocoDeclaracao(declaracao as BlocoDeclaracao, indentacao, textoSeletorAnterior);
                     break;
-                case 'DeclaracaoVariavel':
-                    this.serializarVariaveis(declaracao as DeclaracaoVariavel, declaracoes, index);
-                    break;
-            }
-        }
+                    case 'DeclaracaoVariavel':
+                        this.serializarVariaveis(declaracao as DeclaracaoVariavel, declaracoes, index);
+                        break;
+                    }
+                }
+        
+        // if(declaracoes[3] instanceof BlocoDeclaracao) console.log(declaracoes[3].modificadores);
 
         return resultado;
     }

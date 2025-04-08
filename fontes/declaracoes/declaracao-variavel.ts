@@ -1,14 +1,14 @@
-import { Metodo } from "../valores/metodos/foles/metodo";
+import { Valor } from "../valores/valor";
 import { Declaracao } from "./declaracao";
 
 export class DeclaracaoVariavel extends Declaracao {
     nome: string;
-    valor: Metodo | string;
+    valor: Valor | string;
     quantificador?: string;
 
     constructor(
         nome: string, 
-        valor: Metodo | string,
+        valor: Valor | string,
         quantificador: string = null,
     ) {
         super();

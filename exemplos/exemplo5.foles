@@ -19,3 +19,14 @@ lmht {
   borda-em-bloco: $valor-teste;
   indice-z: $valor-indice; 
 }
+
+$cor-padrao: rgb(31, 120, 50);
+
+lmht {
+  sombra-caixa: $cor-padrao;
+}
+
+$cor-filtro: borrar(10px);
+lmht {
+  filtro-fundo: $cor-filtro;
+}
