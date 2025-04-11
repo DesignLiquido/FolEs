@@ -21,7 +21,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             tradutor = new Serializador();
         });
 
-        it('Casos de sucesso - Atribuição de variável com valor QUALITATIVO', () => {
+        it('Caso de sucesso - Atribuição de variável com valor QUALITATIVO', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$cor-secundaria: branco;",
@@ -81,7 +81,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             expect(resultadoSerializador).toContain('white;');
         });
 
-        it('Casos de sucesso - Atribuição de variável com valor NUMÉRICO', () => {
+        it('Caso de sucesso - Atribuição de variável com valor NUMÉRICO', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$valor-indice: 0;",
@@ -140,7 +140,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             expect(resultadoSerializador).toContain('0;');
         });
 
-        it('Casos de sucesso - Atribuição de variável com valor numérico COM QUANTIFICADOR', () => {
+        it('Caso de sucesso - Atribuição de variável com valor numérico COM QUANTIFICADOR', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$valor-recuo: 12px;",
@@ -200,7 +200,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             expect(resultadoSerializador).toContain('12px;');
         });
 
-        it('Casos de sucesso - Atribuição de variável com MÉTODOS DE COR', () => {
+        it('Caso de sucesso - Atribuição de variável com MÉTODOS DE COR', () => {
             const valoresMetodo = [
                 'rgb(31, 120, 50)',
                 'rgba(31, 120, 50)',
@@ -274,7 +274,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             }
         });
 
-        it('Casos de sucesso - Atribuição de variável com MÉTODOS GERAIS', () => {
+        it('Caso de sucesso - Atribuição de variável com MÉTODOS GERAIS', () => {
             const valoresMetodo = [
                 {
                     foles: 'borrar(4px)',
@@ -361,5 +361,42 @@ describe('Testando Suporte a VARIÁVEIS', () => {
                 expect(resultadoSerializador).toContain(valoresMetodo[index].css);
             }
         });
+
+        it('Caso de falha - Atribuição de variável com valor inválido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "$cor-secundaria: branc;",
+                "corpo {",
+                    "cor-barra-rolagem: $cor-secundaria;",
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // Serializador deve retornar erro de valor inválido antes de traduzir
+            expect(() => {
+                tradutor.serializar(resultadoAvaliadorSintatico);
+            }).toThrow(`Propriedade 'cor-barra-rolagem' com valor branc inválido`);
+        });
+
+        it('Caso de falha - Declaração de variável após atribuição (fora de ordem)', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "corpo {",
+                "cor-barra-rolagem: $cor-secundaria;",
+                "}",
+                "$cor-secundaria: branco;",
+            ]);
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // Serializador deve retornar erro de valor inválido antes de traduzir
+            expect(() => {
+                tradutor.serializar(resultadoAvaliadorSintatico);
+            }).toThrow(`A variável 'cor-secundaria' deve ser declarada antes da atribuição de valor.`);;
+        });
+ 
     });
 });
