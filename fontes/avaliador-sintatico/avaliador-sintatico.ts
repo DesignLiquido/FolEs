@@ -1150,9 +1150,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     protected declaracaoVariavel(): DeclaracaoVariavel {
         let nomeVariavel: string;
         let simboloValorVariavel: Simbolo;
-        let valorVariavel: string;
+        let valorVariavel: string | Valor;
+        let quantificadorVariavel: string;
 
-        while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {
+        while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA) {            
             this.consumir(
                 tiposDeSimbolos.CIFRAO,
                 "Esperado cifrão antes de declaração de variável."
@@ -1187,26 +1188,32 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                     valorVariavel = simboloValorVariavel.lexema;
                     break;
-                case tiposDeSimbolos.NUMERO:
+                case tiposDeSimbolos.NUMERO:                    
                     simboloValorVariavel = this.consumir(
                         tiposDeSimbolos.NUMERO,
                         "Esperado valor numérico após declaração de variável"
                     );
 
                     valorVariavel = simboloValorVariavel.lexema;
-
-                    const proximoSimbolo: Simbolo = this.avancarEDevolverAnterior();
-                    if (proximoSimbolo.tipo === tiposDeSimbolos.QUANTIFICADOR) {
-                        const quantificadorVariavel = this.consumir(
+                    
+                    if (this.simbolos[this.atual].tipo === tiposDeSimbolos.QUANTIFICADOR) {
+                        const quantificador = this.consumir(
                             tiposDeSimbolos.QUANTIFICADOR,
                             "Esperado quantificador após valor numérico atribuído à variável."
                         )
-
-                        valorVariavel += quantificadorVariavel.lexema;
+                        
+                        quantificadorVariavel = quantificador.lexema;
                     }
                     break;
                 case tiposDeSimbolos.METODO:
-                    this.resolverMetodo(this.simbolos[this.atual - 1].lexema);
+                    this.consumir(
+                        tiposDeSimbolos.METODO,
+                        "Esperada declaração de método no valor atribuído à variável."
+                    )
+
+                    const tratarMetodo = this.resolverMetodo(this.simbolos[this.atual - 1].lexema);
+                    valorVariavel = tratarMetodo;
+                    
                     break;
                 default:
                     console.log('Não deveria cair aqui!')
@@ -1221,6 +1228,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         const variavel = {
             nome: nomeVariavel,
             valor: valorVariavel,
+            quantificador: quantificadorVariavel ? quantificadorVariavel : null,
         };
 
         return variavel;
@@ -1397,7 +1405,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 return new DeclaracaoVariavel(
                     variavel.nome,
-                    variavel.valor
+                    variavel.valor,
+                    variavel.quantificador,
                 );
             default:
                 const seletores = this.resolverSeletores();
@@ -1414,7 +1423,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     analisar(simbolos: Simbolo[]): Declaracao[] {
         this.simbolos = simbolos;
         this.erros = [];
-        this.atual = 0;
+        this.atual = 0;        
 
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {

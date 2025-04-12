@@ -4,7 +4,6 @@ import { valoresGerais } from "../modificadores/atributos/gerais";
 import { SeletorEstrutura } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import { Metodo } from "../valores/metodos/foles/metodo";
-
 import estruturasHtml from "../tradutores/estruturas-html";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
@@ -19,7 +18,7 @@ import { SeletorModificador } from "../modificadores/superclasse";
  */
 export class Serializador {
     serializarComAninhamentos: boolean;
-    variaveis: {[key: string]: any};
+    variaveis: { [key: string]: any };
 
     constructor(serializarComAninhamentos: boolean = false) {
         this.serializarComAninhamentos = serializarComAninhamentos;
@@ -31,7 +30,7 @@ export class Serializador {
         indentacao: number = 0
     ): string {
         // Caso 1: Número-Quantificador ou somente Número.
-        if (Number(modificador.valor)) {
+        if (Number(modificador.valor) || modificador.valor === '0') {
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
                 }${modificador.quantificador || ""};\n`;
         }
@@ -159,9 +158,9 @@ export class Serializador {
     }
 
     validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
-        const nomeFolEs = declaracao.modificadores[0].nomeFoles.length > 1 
+        const nomeFolEs = declaracao.modificadores[0].nomeFoles.length > 1
         && typeof declaracao.modificadores[0].nomeFoles === 'object'
-        ? declaracao.modificadores[0].nomeFoles[0].toString() 
+        ? declaracao.modificadores[0].nomeFoles[0].toString()
         : declaracao.modificadores[0].nomeFoles.toString();
 
         const valorModificador = declaracao.modificadores[0].valor.toString();
@@ -170,26 +169,31 @@ export class Serializador {
         new SeletorModificador(
             nomeFolEs,
             valorModificador,
-            declaracao.modificadores[0].quantificador ? declaracao.modificadores[0].quantificador : null,
+            declaracao.modificadores[0].quantificador,
             declaracao.modificadores[0].pragmas,
             valorVariavel,
-        )        
+        )
     }
 
-    serializarVariaveis(declaracaoVariavel: DeclaracaoVariavel, declaracoes: Declaracao[], indexVariavel: number): void {
+    serializarDeclaracaoVariavel(declaracaoVariavel: DeclaracaoVariavel, declaracoes: Declaracao[], indexVariavel: number): void {
         let variavelInexistente: boolean = false;
 
         declaracoes.forEach((declaracao, indexBlocoDeclaracao) => {
             if (declaracao instanceof BlocoDeclaracao) {
                 declaracao.modificadores.forEach((modificador) => {
                     if (modificador.valor === declaracaoVariavel.nome) {
-                        modificador.valor = declaracaoVariavel.valor;
+                        if (typeof declaracaoVariavel.valor === 'string') {
+                            modificador.valor = declaracaoVariavel.valor;
+
+                            if (declaracaoVariavel.quantificador) modificador.quantificador = declaracaoVariavel.quantificador;
+                            this.validarValoresVariaveis(declaracao);
+                        } else if (declaracaoVariavel.valor instanceof Metodo) {
+                            modificador.valor = declaracaoVariavel.valor;
+                        }
 
                         if (indexVariavel > indexBlocoDeclaracao) {
                             variavelInexistente = true;
                         }
-
-                        this.validarValoresVariaveis(declaracao);
                     }
                 })
             }
@@ -205,20 +209,20 @@ export class Serializador {
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {  
+    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
         }
 
-        for (const [index, declaracao] of declaracoes.entries()) {            
+        for (const [index, declaracao] of declaracoes.entries()) {
             switch (declaracao.constructor.name) {
                 case 'BlocoDeclaracao':
                     resultado += this.serializarBlocoDeclaracao(declaracao as BlocoDeclaracao, indentacao, textoSeletorAnterior);
                     break;
                 case 'DeclaracaoVariavel':
-                    this.serializarVariaveis(declaracao as DeclaracaoVariavel, declaracoes, index);
+                    this.serializarDeclaracaoVariavel(declaracao as DeclaracaoVariavel, declaracoes, index);
                     break;
             }
         }

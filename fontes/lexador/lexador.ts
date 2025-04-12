@@ -374,6 +374,8 @@ export class Lexador implements LexadorInterface {
                 break;
             case "$":
                 this.adicionarSimbolo(tiposDeSimbolos.CIFRAO, null, '$');
+                this.avancar();
+                break;
             default:
                 if (this.eDigito(caractere)) this.analisarNumero();
                 else if (this.eAlfabeto(caractere))
