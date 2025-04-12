@@ -11,25 +11,36 @@ export class AlinharItens extends Modificador {
         "auto-inicio": "self-start",
         "auto-início": "self-start",
         "auto-fim": "self-end",
-        "seguro": "safe",
-        "inseguro": "unsafe",
-    }
+        seguro: "safe",
+        inseguro: "unsafe",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("alinhar-itens", "align-items", pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
         const posicoesAceitas = Object.keys(posicoes).filter(
-            (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
+            (posicao) => posicao !== "esquerda" && posicao !== "direita",
         );
 
         // Transforma array em objeto para processo de validação
         const posicoesValidas = {};
         posicoesAceitas.forEach((posicao, index) => {
-            posicoesValidas[posicao] = posicoesAceitas[index]
-        })
-    
-        if (!valorVariavel) validarValoresAdicionais('alinhar-itens', valor, posicoesValidas, this.valoresAceitos);
+            posicoesValidas[posicao] = posicoesAceitas[index];
+        });
+
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "alinhar-itens",
+                valor,
+                posicoesValidas,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

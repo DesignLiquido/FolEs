@@ -5,18 +5,35 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacamentoColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-    }
+        normal: "normal",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
-        super(["espacamento-coluna", "espaçamento-coluna"], "column-gap", pragmas);
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
+        super(
+            ["espacamento-coluna", "espaçamento-coluna"],
+            "column-gap",
+            pragmas,
+        );
 
         if (!valorVariavel) {
-            validarValorNumerico('espaçamento-coluna', valor, this.valoresAceitos);
-                        
+            validarValorNumerico(
+                "espaçamento-coluna",
+                valor,
+                this.valoresAceitos,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('espaçamento-coluna', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "espaçamento-coluna",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

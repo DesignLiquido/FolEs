@@ -5,21 +5,36 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Deslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "nenhum": "none",
-    }
+        auto: "auto",
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("deslocamento", "offset", pragmas);
 
         // Também aceita receber a função path()
-        const valoresExtra = ['url', 'ray'];
+        const valoresExtra = ["url", "ray"];
 
         if (!valorVariavel) {
-            validarValorNumerico('deslocamento', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "deslocamento",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             if (quantificador) {
-                validarQuantificador('deslocamento', quantificador, unidadesMedida, angulos);
+                validarQuantificador(
+                    "deslocamento",
+                    quantificador,
+                    unidadesMedida,
+                    angulos,
+                );
             }
 
             this.quantificador = quantificador;

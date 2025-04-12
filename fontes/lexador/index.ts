@@ -1,2 +1,2 @@
-export * from './lexador';
-export * from './simbolo';
+export * from "./lexador";
+export * from "./simbolo";

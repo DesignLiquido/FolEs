@@ -5,19 +5,19 @@ export class Perspective extends MetodoCss {
     valor: number | string;
     quantificador: string;
     traducao: string;
-    
+
     constructor(valor: Simbolo, quantificador: Simbolo) {
         super();
         this.valor = (valor as Simbolo).lexema;
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'perspective';
+        this.traducao = "perspective";
     }
 
     paraTexto() {
         if (this.quantificador) {
-            return `perspectivar(${this.valor}${this.quantificador})`
+            return `perspectivar(${this.valor}${this.quantificador})`;
         }
 
-        return `perspectivar(${this.valor})`
+        return `perspectivar(${this.valor})`;
     }
 }

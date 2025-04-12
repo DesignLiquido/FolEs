@@ -3,17 +3,23 @@ import { validarValores } from "./validacoes/comum";
 
 export class Posicao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "dentro": "static",
-        "relativa": "relative",
-        "absoluta": "absolute",
-        "fixa": "fixed",
-        "colada": "sticky",
-    }
+        dentro: "static",
+        relativa: "relative",
+        absoluta: "absolute",
+        fixa: "fixed",
+        colada: "sticky",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["posicao", "posição"], "position", pragmas);
 
-        if (!valorVariavel) validarValores('posição', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("posição", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

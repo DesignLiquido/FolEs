@@ -3,20 +3,26 @@ import { validarValores } from "./validacoes/comum";
 
 export class FlexFluxo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "linha": "row",
+        linha: "row",
         "inverter-linha": "row-reverse",
-        "coluna": "column",
+        coluna: "column",
         "inverter-coluna": "column-reverse",
         "nao-agrupar": "nowrap",
         "não-agrupar": "nowrap",
-        "agrupar": "wrap",
+        agrupar: "wrap",
         "inverter-agrupamento": "wrap-reverse",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        if (!valorVariavel) validarValores('flex-fluxo', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("flex-fluxo", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

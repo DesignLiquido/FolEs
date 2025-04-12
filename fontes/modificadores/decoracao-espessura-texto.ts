@@ -5,22 +5,35 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DecoracaoEspessuraTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
+        auto: "auto",
         "de-frente": "from-font",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["decoracao-espessura-texto", "decoração-espessura-texto"],
             "text-decoration-thickness",
-            pragmas
+            pragmas,
         );
 
         if (!valorVariavel) {
-            validarValorNumerico('decoração-espessura-texto', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "decoração-espessura-texto",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('decoração-espessura-texto', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "decoração-espessura-texto",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

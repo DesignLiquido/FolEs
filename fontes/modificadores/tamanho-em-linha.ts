@@ -9,19 +9,33 @@ export class TamanhoEmLinha extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("tamanho-em-linha", "inline-size", pragmas);
 
-        const valoresExtra = ['fit-content'];
+        const valoresExtra = ["fit-content"];
 
         if (!valorVariavel) {
-            validarValorNumerico('tamanho-em-linha', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "tamanho-em-linha",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('tamanho-em-linha', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "tamanho-em-linha",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

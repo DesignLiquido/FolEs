@@ -3,20 +3,33 @@ import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LinhaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("linha-em-grade", "grid-row", pragmas);
 
         if (!valorVariavel) {
-            if (valor.includes('/')) {
-                const separarValores = valor.split(' / ');
+            if (valor.includes("/")) {
+                const separarValores = valor.split(" / ");
                 separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico('linha-em-grade', valorIndividual, this.valoresAceitos);
+                    validarValorNumerico(
+                        "linha-em-grade",
+                        valorIndividual,
+                        this.valoresAceitos,
+                    );
                 });
             } else {
-                validarValorNumerico('linha-em-grade', valor, this.valoresAceitos);
+                validarValorNumerico(
+                    "linha-em-grade",
+                    valor,
+                    this.valoresAceitos,
+                );
             }
         }
 

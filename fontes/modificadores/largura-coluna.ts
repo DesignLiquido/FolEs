@@ -5,18 +5,27 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("largura-coluna", "column-width", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('largura-coluna', valor, this.valoresAceitos);
-                        
+            validarValorNumerico("largura-coluna", valor, this.valoresAceitos);
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('largura-coluna', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "largura-coluna",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

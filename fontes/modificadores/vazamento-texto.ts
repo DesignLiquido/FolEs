@@ -4,11 +4,16 @@ import { validarValorString } from "./validacoes/string";
 
 export class VazamentoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "recortar": "clip",
-        "elipse": "ellipsis",
-    }
+        recortar: "clip",
+        elipse: "ellipsis",
+    };
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("vazamento-texto", "text-overflow", pragmas);
 
         const validacaoString = validarValorString(valor);
@@ -17,7 +22,8 @@ export class VazamentoTexto extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        if (!valorVariavel) validarValores('vazamento-texto', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("vazamento-texto", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

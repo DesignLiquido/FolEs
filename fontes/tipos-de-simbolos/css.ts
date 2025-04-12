@@ -20,5 +20,5 @@ export default {
     QUALITATIVO: "QUALITATIVO",
     QUANTIFICADOR: "QUANTIFICADOR",
     TIL: "TIL",
-    VIRGULA: "VIRGULA"
-}
+    VIRGULA: "VIRGULA",
+};

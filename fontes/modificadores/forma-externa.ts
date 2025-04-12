@@ -3,20 +3,31 @@ import { validarValores } from "./validacoes/comum";
 
 export class FormaExterna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhuma": "none",
+        nenhuma: "none",
         "margem-caixa": "margin-box",
         "conteudo-caixa": "content-box",
         "conteúdo-caixa": "content-box",
         "borda-caixa": "border-box",
         "preenchimento-caixa": "padding-box",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("forma-externa", "shape-outside", pragmas);
 
-        const valoresExtra = ['url'];
-        
-        if (!valorVariavel) validarValores('forma-externa', valor, this.valoresAceitos, valoresExtra);
+        const valoresExtra = ["url"];
+
+        if (!valorVariavel)
+            validarValores(
+                "forma-externa",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
         this.valor = valor;
     }

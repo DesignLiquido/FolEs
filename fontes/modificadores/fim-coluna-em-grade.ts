@@ -4,16 +4,26 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FimColunaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("fim-coluna-em-grade", "grid-column-end", pragmas);
 
-        if (!valorVariavel) validarValorNumerico('fim-coluna-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValorNumerico(
+                "fim-coluna-em-grade",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
 
-        proibirQuantificador('fim-coluna-em-grade', quantificador);
+        proibirQuantificador("fim-coluna-em-grade", quantificador);
     }
 }

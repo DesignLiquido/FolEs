@@ -3,22 +3,27 @@ import { validarValores } from "./validacoes/comum";
 
 export class FonteTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "serif": "serif",
+        serif: "serif",
         "sans-serif": "sans-serif",
-        "monospace": "monospace",
-        "cursive": "cursive",
-        "fantasy": "fantasy",
+        monospace: "monospace",
+        cursive: "cursive",
+        fantasy: "fantasy",
         "system-ui": "system-ui",
         "ui-serif": "ui-serif",
         "ui-sans-serif": "ui-sans-serif",
         "ui-monospace": "ui-monospace",
         "ui-rounded": "ui-rounded",
-        "math": "math",
-        "emoji": "emoji",
-        "fangsong": "fangsong",
-    }
+        math: "math",
+        emoji: "emoji",
+        fangsong: "fangsong",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("fonte-texto", "font-family", pragmas);
 
         // OBS.: A lista de valores aceitos inclui todas as FONTES GENÉRICAS (<generic-name>).
@@ -26,12 +31,13 @@ export class FonteTexto extends Modificador {
         // sendo o PRIMEIRO o nome de qualquer fonte existente (<family-name>).
 
         // Ex.: fonte-texto: "Gill Sans Extrabold", sans-serif;
-        
+
         // OBS.2: Fontes com mais de uma palavra devem ser passadas como string (entre "");
         // OBS.3: O segundo parâmetro é obrigatório para o caso da primeira fonte não estar disponível.
 
         // A lógica abaixo cobre somente o recebimento dos valores genéricos.
-        if (!valorVariavel) validarValores('fonte-texto', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("fonte-texto", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

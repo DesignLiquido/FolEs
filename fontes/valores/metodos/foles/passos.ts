@@ -11,19 +11,19 @@ export class Passos extends Metodo {
         "salto-final": "jump-end",
         "salto-nenhum": "jump-none",
         "salto-conjunto": "jump-both",
-        "inicial": "start",
-        "final": "end",
-    }
+        inicial: "start",
+        final: "end",
+    };
 
     constructor(numero: Simbolo, salto: string) {
         super();
         this.numero = Number(numero.lexema);
-        this.salto = this.saltos[salto['lexema']];
-        this.traducao = 'steps';
+        this.salto = this.saltos[salto["lexema"]];
+        this.traducao = "steps";
     }
 
     paraTexto() {
-        return `steps(${this.numero}, ${this.salto})`
+        return `steps(${this.numero}, ${this.salto})`;
     }
 }
 

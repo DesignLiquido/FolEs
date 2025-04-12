@@ -4,10 +4,15 @@ import { validarValorString } from "./validacoes/string";
 
 export class SubstituirIdiomaFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-    }
+        normal: "normal",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("substituir-idioma-fonte", "font-language-override", pragmas);
 
         const validacaoString = validarValorString(valor);
@@ -16,8 +21,13 @@ export class SubstituirIdiomaFonte extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        if (!valorVariavel) validarValores('substituir-idioma-fonte', valor, this.valoresAceitos);
-        
+        if (!valorVariavel)
+            validarValores(
+                "substituir-idioma-fonte",
+                valor,
+                this.valoresAceitos,
+            );
+
         this.valor = valor;
     }
 }

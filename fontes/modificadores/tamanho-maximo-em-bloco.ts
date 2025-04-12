@@ -9,23 +9,37 @@ export class TamanhoMaximoEmBloco extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "nenhum": "none",
-    }
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["tamanho-maximo-em-bloco", "tamanho-máximo-em-bloco"],
             "max-block-size",
-            pragmas
+            pragmas,
         );
 
-        const valoresExtra = ['fit-content'];
+        const valoresExtra = ["fit-content"];
 
         if (!valorVariavel) {
-            validarValorNumerico('tamanho-máximo-em-bloco', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "tamanho-máximo-em-bloco",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('tamanho-máximo-em-bloco', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "tamanho-máximo-em-bloco",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

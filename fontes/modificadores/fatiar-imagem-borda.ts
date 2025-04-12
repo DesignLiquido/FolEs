@@ -5,19 +5,33 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FatiarImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "preencher": "fill",
-    }
+        preencher: "fill",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("fatiar-imagem-borda", "border-image-slice", pragmas);
 
-        const valoresExtra = ['url'];
+        const valoresExtra = ["url"];
 
         if (!valorVariavel) {
-            validarValorNumerico('fatiar-imagem-borda', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "fatiar-imagem-borda",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             if (quantificador !== undefined) {
-                validarQuantificador('fatiar-imagem-borda', quantificador, ListaDeValorPercentual);
+                validarQuantificador(
+                    "fatiar-imagem-borda",
+                    quantificador,
+                    ListaDeValorPercentual,
+                );
 
                 this.quantificador = quantificador;
             }

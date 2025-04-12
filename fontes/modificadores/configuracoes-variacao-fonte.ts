@@ -5,14 +5,19 @@ import { validarValorString } from "./validacoes/string";
 
 export class ConfiguracoesVariacaoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-    }
+        normal: "normal",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
             "font-variation-settings",
-            pragmas
+            pragmas,
         );
 
         if (!valorVariavel) {
@@ -22,10 +27,14 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
                 this.valoresAceitos[valor] = valor;
             }
 
-            validarValorNumerico('configurações-variação-fonte', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "configurações-variação-fonte",
+                valor,
+                this.valoresAceitos,
+            );
 
             // Não recebe quantificador
-            proibirQuantificador('configurações-variação-fonte', quantificador);
+            proibirQuantificador("configurações-variação-fonte", quantificador);
         }
 
         this.valor = valor;

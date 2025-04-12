@@ -5,17 +5,22 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class ModeloEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-        "auto": "auto",
+        nenhum: "none",
+        auto: "auto",
         "conteudo-maximo": "max-content",
         "conteudo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteudo-mínimo": "min-content",
         "sub-grade": "subgrid",
-        "alvenaria": "masonry",
-    }
+        alvenaria: "masonry",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("modelo-em-grade", "grid-template", pragmas);
 
         // OBS.: Também aceita receber o valor do tipo matriz
@@ -23,12 +28,22 @@ export class ModeloEmGrade extends Modificador {
         //      "a a a" 20%
         //      "b b b" auto;
 
-        const valoresExtra = ['fit-content'];
+        const valoresExtra = ["fit-content"];
         if (!valorVariavel) {
-            validarValorNumerico('modelo-em-grade', valor, this.valoresAceitos, valoresExtra);
-            
+            validarValorNumerico(
+                "modelo-em-grade",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+
             if (quantificador !== undefined) {
-                validarQuantificador('modelo-em-grade', quantificador, unidadesMedida, valoresFlex);
+                validarQuantificador(
+                    "modelo-em-grade",
+                    quantificador,
+                    unidadesMedida,
+                    valoresFlex,
+                );
                 this.quantificador = quantificador;
             }
         }

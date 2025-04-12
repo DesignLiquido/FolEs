@@ -4,17 +4,23 @@ import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AoMudar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
+        auto: "auto",
         "posicao-rolagem": "scroll-position",
         "posição-rolagem": "scroll-position",
         "mudar-conteudo": "contents",
         "mudar-conteúdo": "contents",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("ao-mudar", "will-change", pragmas);
 
-        if (!valorVariavel) validarValores("ao-mudar", valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("ao-mudar", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

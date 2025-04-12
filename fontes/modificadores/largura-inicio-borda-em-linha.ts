@@ -5,25 +5,38 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraInicioBordaEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "fina": "thin",
-        "media": "medium",
-        "média": "medium",
-        "grossa": "thick",
-    }
+        fina: "thin",
+        media: "medium",
+        média: "medium",
+        grossa: "thick",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["largura-inicio-borda-em-linha", "largura-início-borda-em-linha"],
-            "border-inline-start-width", 
-            pragmas
+            "border-inline-start-width",
+            pragmas,
         );
 
         if (!valorVariavel) {
-            validarValorNumerico('largura-início-borda-em-linha', valor, this.valoresAceitos);
-                        
+            validarValorNumerico(
+                "largura-início-borda-em-linha",
+                valor,
+                this.valoresAceitos,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('largura-início-borda-em-linha', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "largura-início-borda-em-linha",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

@@ -3,13 +3,19 @@ import { validarValores } from "./validacoes/comum";
 
 export class RecursosFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-    }
+        normal: "normal",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("recursos-fonte", "font-feature-settings", pragmas);
 
-        if (!valorVariavel) validarValores('recursos-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("recursos-fonte", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

@@ -9,17 +9,30 @@ export class TamanhoEmBloco extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("tamanho-em-bloco", "block-size", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('tamanho-em-bloco', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "tamanho-em-bloco",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('tamanho-em-bloco', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "tamanho-em-bloco",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

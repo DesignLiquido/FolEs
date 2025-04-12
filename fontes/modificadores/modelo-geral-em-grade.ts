@@ -3,10 +3,15 @@ import { validarValores } from "./validacoes/comum";
 
 export class ModeloGeralEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-    }
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("modelo-geral-em-grade", "grid-template-areas", pragmas);
 
         // OBS.: Também aceita receber valores do tipo string e matriz
@@ -14,7 +19,8 @@ export class ModeloGeralEmGrade extends Modificador {
         //      "a b b"
         //      "a c d";
 
-        if (!valorVariavel) validarValores('modelo-geral-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("modelo-geral-em-grade", valor, this.valoresAceitos);
         this.valor = valor;
     }
 }

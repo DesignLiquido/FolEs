@@ -7,25 +7,25 @@ export class Ray extends MetodoCss {
     valor: number;
     quantificador: string;
     traducao: string;
-    
+
     constructor(posicao: Simbolo, valor: Simbolo, quantificador: Simbolo) {
         super();
         this.posicao = posicao ? posicao.lexema : null;
         this.valor = Number(valor.lexema);
         this.quantificador = quantificador.lexema;
-        this.traducao = 'ray';
+        this.traducao = "ray";
     }
 
     paraTexto() {
         if (this.posicao) {
             for (const key in posicoesRaio) {
-                if(posicoesRaio[key] === this.posicao) {
+                if (posicoesRaio[key] === this.posicao) {
                     this.posicao = key;
                 }
             }
-            return `raio(${this.posicao} ${this.valor}${this.quantificador})`
+            return `raio(${this.posicao} ${this.valor}${this.quantificador})`;
         }
 
-        return `raio(${this.valor}${this.quantificador})`
+        return `raio(${this.valor}${this.quantificador})`;
     }
 }

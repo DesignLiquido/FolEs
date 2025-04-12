@@ -9,20 +9,35 @@ export class TamanhoLinhasEmGrade extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("tamanho-linhas-em-grade", "grid-auto-rows", pragmas);
 
-        const valoresExtra = ['minmax', 'fit-content'];
+        const valoresExtra = ["minmax", "fit-content"];
 
         if (!valorVariavel) {
-            validarValorNumerico('tamanho-linhas-em-grade', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "tamanho-linhas-em-grade",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             // Além dos quantificadores de Comprimento e Percentual, também pode receber a unidade 'fr', do tipo Flex.
             if (Number(parseInt(valor))) {
-                validarQuantificador('tamanho-linhas-em-grade', quantificador, unidadesMedida, valoresFlex);
+                validarQuantificador(
+                    "tamanho-linhas-em-grade",
+                    quantificador,
+                    unidadesMedida,
+                    valoresFlex,
+                );
 
                 this.quantificador = quantificador;
             }

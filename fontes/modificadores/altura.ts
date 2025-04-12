@@ -9,23 +9,33 @@ export class Altura extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("altura", "height", pragmas);
 
-        const valoresExtra = ['fit-content', 'clamp'];
+        const valoresExtra = ["fit-content", "clamp"];
 
         if (!valorVariavel) {
-            validarValorNumerico('altura', valor, this.valoresAceitos, valoresExtra);
-    
+            validarValorNumerico(
+                "altura",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('altura', quantificador, unidadesMedida);
+                validarQuantificador("altura", quantificador, unidadesMedida);
                 this.quantificador = quantificador;
             }
         }
-        
+
         this.valor = valor;
     }
 }

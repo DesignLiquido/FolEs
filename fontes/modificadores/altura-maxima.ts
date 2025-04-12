@@ -9,21 +9,34 @@ export class AlturaMaxima extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "nenhuma": "none",
-    }
+        nenhuma: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["altura-maxima", "altura-máxima"], "max-height", pragmas);
 
-        const valoresExtra = ['fit-content'];
+        const valoresExtra = ["fit-content"];
 
         if (!valorVariavel) {
-            validarValorNumerico('altura-máxima', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "altura-máxima",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             if (Number(parseInt(valor))) {
-    
-                validarQuantificador('altura-máxima', quantificador, unidadesMedida);
-    
+                validarQuantificador(
+                    "altura-máxima",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

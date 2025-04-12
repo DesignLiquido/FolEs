@@ -4,19 +4,24 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class EspessuraFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-        "negrito": "bold",
+        normal: "normal",
+        negrito: "bold",
         "mais-clara": "lighter",
         "mais-escura": "bolder",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("espessura-fonte", "font-weight", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('espessura-fonte', valor, this.valoresAceitos);
+            validarValorNumerico("espessura-fonte", valor, this.valoresAceitos);
 
-            proibirQuantificador('espessura-fonte', quantificador);
+            proibirQuantificador("espessura-fonte", quantificador);
         }
 
         this.valor = valor;

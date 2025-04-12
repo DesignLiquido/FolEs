@@ -3,20 +3,26 @@ import { validarValores } from "./validacoes/comum";
 
 export class EspacoEmBranco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
+        normal: "normal",
         "nao-quebrar": "nowrap",
         "não-quebrar": "nowrap",
-        "preservar": "pre",
+        preservar: "pre",
         "preservar-quebra": "pre-wrap",
         "preservar-linha": "pre-line",
         "quebrar-espacos": "break-spaces",
         "quebrar-espaços": "break-spaces",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["espaco-em-branco", "espaço-em-branco"], "white-space", pragmas);
 
-        if (!valorVariavel) validarValores('espaço-em-branco', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("espaço-em-branco", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

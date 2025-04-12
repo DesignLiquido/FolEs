@@ -3,15 +3,26 @@ import { validarValores } from "./validacoes/comum";
 
 export class ImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "url": "url",
-    }
+        url: "url",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("imagem-borda", "border-image", pragmas);
 
-        const valoresExtra = ['url'];
+        const valoresExtra = ["url"];
 
-        if (!valorVariavel) validarValores('imagem-máscara', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel)
+            validarValores(
+                "imagem-máscara",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
         this.valor = valor;
     }

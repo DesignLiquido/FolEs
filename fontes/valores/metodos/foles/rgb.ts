@@ -4,7 +4,7 @@ import { Metodo } from "./metodo";
 export class Rgb extends Metodo {
     vermelho: number;
     verde: number;
-    azul: number; 
+    azul: number;
 
     constructor(vermelho: Simbolo, verde: Simbolo, azul: Simbolo) {
         super();
@@ -14,6 +14,6 @@ export class Rgb extends Metodo {
     }
 
     paraTexto() {
-        return `rgb(${this.vermelho}, ${this.verde}, ${this.azul})`
+        return `rgb(${this.vermelho}, ${this.verde}, ${this.azul})`;
     }
 }

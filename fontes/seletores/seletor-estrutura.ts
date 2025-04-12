@@ -10,20 +10,24 @@ export class SeletorEstrutura extends Seletor {
         super(pseudoclasse, {
             linha: estrutura.pragmas.linha,
             colunaInicial: estrutura.pragmas.colunaInicial,
-            colunaFinal: estrutura.pragmas.colunaFinal
+            colunaFinal: estrutura.pragmas.colunaFinal,
         });
         this.estrutura = estrutura;
     }
 
     paraTexto() {
         const nomeTag = this.estrutura.constructor.name;
-        
+
         // Convertendo a primeira letra em minúscula
-        const nomeTagFormatado = nomeTag.charAt(0).toLowerCase() + nomeTag.slice(1);
+        const nomeTagFormatado =
+            nomeTag.charAt(0).toLowerCase() + nomeTag.slice(1);
 
         // Convertendo as letras maiúsculas restantes para minúsculas antecedidas por hífen.
         // Desta forma, as classes em camelCase (ex.: areaTexto) viram kebab-case (area-texto)
-        let resultado = nomeTagFormatado.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+        let resultado = nomeTagFormatado.replace(
+            /[A-Z]/g,
+            (letter) => `-${letter.toLowerCase()}`,
+        );
 
         if (this.pseudoclasse !== undefined && this.pseudoclasse !== null) {
             resultado += `:${this.pseudoclasse.pseudoclasseCss}`;

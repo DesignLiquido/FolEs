@@ -7,22 +7,28 @@ export class Grade extends Modificador {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "auto": "auto",
-        "linha": "row",
-        "coluna": "column",
-        "denso": "dense",
-        "nenhum": "none",
+        auto: "auto",
+        linha: "row",
+        coluna: "column",
+        denso: "dense",
+        nenhum: "none",
         "conteudo-mínimo": "min-content",
         "sub-grade": "subgrid",
-        "alvenaria": "masonry",
-    }
+        alvenaria: "masonry",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("grade", "grid", pragmas);
 
-        const valoresExtra = ['minmax'];
+        const valoresExtra = ["minmax"];
 
-        if (!valorVariavel) validarValores('grade', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel)
+            validarValores("grade", valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
     }

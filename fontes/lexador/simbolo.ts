@@ -7,12 +7,12 @@ export class Simbolo {
     colunaFinal: number;
 
     constructor(
-        tipo: string, 
-        lexema: string, 
-        literal: any, 
-        linha: number, 
-        colunaInicial: number, 
-        colunaFinal: number
+        tipo: string,
+        lexema: string,
+        literal: any,
+        linha: number,
+        colunaInicial: number,
+        colunaFinal: number,
     ) {
         this.tipo = tipo;
         this.lexema = lexema;

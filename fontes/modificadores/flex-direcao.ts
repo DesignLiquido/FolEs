@@ -3,16 +3,22 @@ import { validarValores } from "./validacoes/comum";
 
 export class FlexDirecao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "linha": "row",
+        linha: "row",
         "inverter-linha": "row-reverse",
-        "coluna": "column",
+        coluna: "column",
         "inverter-coluna": "column-reverse",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["flex-direcao", "flex-direção"], "flex-direction", pragmas);
 
-        if (!valorVariavel) validarValores('flex-direção', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("flex-direção", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

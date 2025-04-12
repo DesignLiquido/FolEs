@@ -3,14 +3,20 @@ import { validarValores } from "./validacoes/comum";
 
 export class CelulasVazias extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "exibir": "show",
-        "ocultar": "hide",
-    }
+        exibir: "show",
+        ocultar: "hide",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["celulas-vazias", "células-vazias"], "empty-cells", pragmas);
 
-        if (!valorVariavel) validarValores("células-vazias", valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("células-vazias", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

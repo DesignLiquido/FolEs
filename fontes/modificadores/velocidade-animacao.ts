@@ -4,7 +4,7 @@ import { validarValores } from "./validacoes/comum";
 export class VelocidadeAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "velocidade-normal": "ease",
-        "linear": "linear",
+        linear: "linear",
         "inicio-lento": "ease-in",
         "início-lento": "ease-in",
         "final-lento": "ease-out",
@@ -16,20 +16,31 @@ export class VelocidadeAnimacao extends Modificador {
         "salto-final": "jump-end",
         "salto-nenhum": "jump-none",
         "salto-conjunto": "jump-both",
-        "inicial": "start",
-        "final": "end",
-    }
+        inicial: "start",
+        final: "end",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["velocidade-animacao", "velocidade-animação"],
-            "animation-timing-function", 
-            pragmas
+            "animation-timing-function",
+            pragmas,
         );
 
-        const valoresExtra = ['cubic-bezier', 'steps'];
+        const valoresExtra = ["cubic-bezier", "steps"];
 
-        if (!valorVariavel) validarValores('velocidade-animação', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel)
+            validarValores(
+                "velocidade-animação",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
         this.valor = valor;
     }

@@ -9,12 +9,18 @@ export class TransformarCaixa extends Modificador {
         "completar-caixa": "fill-box",
         "delimitar-caixa": "stroke-box",
         "visualizar-caixa": "view-box",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("transformar-caixa", "transform-box", pragmas);
 
-        if (!valorVariavel) validarValores('transformar-caixa', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("transformar-caixa", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

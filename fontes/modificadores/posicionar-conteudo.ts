@@ -13,24 +13,35 @@ export class PosicionarConteudo extends Modificador {
         "espaço-ao-redor": "space-around",
         "espaco-uniforme": "space-evenly",
         "espaço-uniforme": "space-evenly",
-        "seguro": "safe",
-        "inseguro": "unsafe",
+        seguro: "safe",
+        inseguro: "unsafe",
         "auto-inicio": "self-start",
         "auto-início": "self-start",
         "auto-fim": "self-end",
         "primeira-linha-base": "first baseline",
         "ultima-linha-base": "last baseline",
         "última-linha-base": "last baseline",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["posicionar-conteudo", "posicionar-conteúdo"],
-            "place-content", 
-            pragmas
+            "place-content",
+            pragmas,
         );
 
-        if (!valorVariavel) validarValoresAdicionais('posicionar-conteúdo', valor, posicoes, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "posicionar-conteúdo",
+                valor,
+                posicoes,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

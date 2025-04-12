@@ -3,25 +3,25 @@ import { validarValores } from "./validacoes/comum";
 
 export class Cursor extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "padrao": "default",
-        "padrão": "default",
+        auto: "auto",
+        padrao: "default",
+        padrão: "default",
         "exibir-menu": "context-menu",
         "exibir-ajuda": "help",
-        "indicador": "pointer",
+        indicador: "pointer",
         "em-progresso": "progress",
-        "carregando": "wait",
-        "estilo": "cell",
-        "pintar": "crosshair",
-        "texto": "text",
+        carregando: "wait",
+        estilo: "cell",
+        pintar: "crosshair",
+        texto: "text",
         "texto-vertical": "vertical-text",
-        "atalho": "alias",
-        "copiar": "copy",
-        "mover": "move",
+        atalho: "alias",
+        copiar: "copy",
+        mover: "move",
         "proibido-soltar": "no-drop",
-        "proibido": "not-allowed",
-        "arrastar": "grab",
-        "arrastando": "grabbing",
+        proibido: "not-allowed",
+        arrastar: "grab",
+        arrastando: "grabbing",
         "rolar-tudo": "all-scroll",
         "ajustar-coluna": "col-resize",
         "ajustar-linha": "row-resize",
@@ -37,16 +37,22 @@ export class Cursor extends Modificador {
         "cima-baixo": "ns-resize",
         "diagonal-direita": "nesw-resize",
         "diagonal-esquerda": "nwse-resize",
-        "aproximar": "zoom-in",
-        "afastar": "zoom-out",
-    }
+        aproximar: "zoom-in",
+        afastar: "zoom-out",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("cursor", "cursor", pragmas);
 
-        const valoresExtra = ['url'];
+        const valoresExtra = ["url"];
 
-        if (!valorVariavel) validarValores('cursor', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel)
+            validarValores("cursor", valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
     }

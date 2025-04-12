@@ -5,18 +5,24 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Perspectiva extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhuma": "none",
-    }
+        nenhuma: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("perspectiva", "perspective", pragmas);
 
-        if (!valorVariavel) validarValorNumerico('perspectiva', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValorNumerico("perspectiva", valor, this.valoresAceitos);
 
         this.valor = valor;
 
         if (Number(parseInt(valor))) {
-            validarQuantificador('perspectiva', quantificador, comprimentos);
+            validarQuantificador("perspectiva", quantificador, comprimentos);
 
             this.quantificador = quantificador;
         }

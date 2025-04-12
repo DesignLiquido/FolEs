@@ -3,8 +3,8 @@ import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteNumerica extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-        "ordinal": "ordinal",
+        normal: "normal",
+        ordinal: "ordinal",
         "zero-cortado": "slashed-zero",
         "numeros-alinhados": "lining-nums",
         "números-alinhados": "lining-nums",
@@ -18,16 +18,26 @@ export class VariacaoFonteNumerica extends Modificador {
         "frações-diagonais": "diagonal-fractions",
         "fracoes-empilhadas": "stacked-fractions",
         "frações-empilhadas": "stacked-fractions",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["variacao-fonte-numerica", "variação-fonte-numérica"],
-            "font-variant-numeric", 
-            pragmas
+            "font-variant-numeric",
+            pragmas,
         );
 
-        if (!valorVariavel) validarValores('variação-fonte-numérica', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores(
+                "variação-fonte-numérica",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

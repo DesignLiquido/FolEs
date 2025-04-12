@@ -3,10 +3,10 @@ import { PragmasModificador } from "../../modificadores/superclasse";
 
 export class SeletorModificador {
     constructor(
-        nomeFolEs: string, 
-        valor: string, 
-        quantificador?: string, 
-        pragmas?: PragmasModificador, 
+        nomeFolEs: string,
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         const modificador = DicionarioModificadores[nomeFolEs];

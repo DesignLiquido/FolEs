@@ -4,14 +4,19 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
-            ["posicao-deslocamento", "posição-deslocamento"], 
-            "offset-position", 
-            pragmas
+            ["posicao-deslocamento", "posição-deslocamento"],
+            "offset-position",
+            pragmas,
         );
 
         // OBS.: Esse modificador está listado como Experimental
@@ -22,8 +27,14 @@ export class PosicaoDeslocamento extends Modificador {
 
         // Porém, essa validação inicial cobre somente as posições e os valores globais
 
-        if (!valorVariavel) validarValoresAdicionais('posição-deslocamento', valor, posicoesBasicas, this.valoresAceitos);
-        
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "posição-deslocamento",
+                valor,
+                posicoesBasicas,
+                this.valoresAceitos,
+            );
+
         this.valor = valor;
     }
 }

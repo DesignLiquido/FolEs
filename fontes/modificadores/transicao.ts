@@ -11,23 +11,37 @@ export class Transicao extends Modificador {
         "final-lento": "ease-out",
         "inicio-final-lento": "ease-in-out",
         "início-final-lento": "ease-in-out",
-        "linear": "linear",
+        linear: "linear",
         "passo-inicial": "step-start",
         "passo-final": "step-end",
-        "nenhuma": "none",
-        "todas": "all",
-    }
+        nenhuma: "none",
+        todas: "all",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["transicao", "transição"], "transition", pragmas);
 
-        const valoresExtra = ['linear'];
+        const valoresExtra = ["linear"];
 
         if (!valorVariavel) {
-            validarValorNumerico('transição', valor, this.valoresAceitos, valoresExtra);
+            validarValorNumerico(
+                "transição",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('transição', quantificador, valoresTemporais);
+                validarQuantificador(
+                    "transição",
+                    quantificador,
+                    valoresTemporais,
+                );
 
                 this.quantificador = quantificador;
             }

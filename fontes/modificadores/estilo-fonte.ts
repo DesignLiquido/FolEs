@@ -5,22 +5,27 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EstiloFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-        "italica": "italic",
-        "itálica": "italic",
-        "obliqua": "oblique",
-        "oblíqua": "oblique",
-    }
+        normal: "normal",
+        italica: "italic",
+        itálica: "italic",
+        obliqua: "oblique",
+        oblíqua: "oblique",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("estilo-fonte", "font-style", pragmas);
 
         if (!valorVariavel) {
-            validarValores('estilo-fonte', valor, this.valoresAceitos);
-                        
-            if (valor === 'obliqua' || valor === 'oblíqua') {
-                validarQuantificador('estilo-fonte', quantificador, angulos);
-                
+            validarValores("estilo-fonte", valor, this.valoresAceitos);
+
+            if (valor === "obliqua" || valor === "oblíqua") {
+                validarQuantificador("estilo-fonte", quantificador, angulos);
+
                 this.quantificador = quantificador;
             }
         }

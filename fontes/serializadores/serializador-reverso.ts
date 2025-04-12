@@ -14,12 +14,15 @@ export class SerializadorReverso {
         this.serializarComAninhamentos = serializarComAninhamentos;
     }
 
-    serializarModificador(modificador: Modificador, indentacao: number = 0): string {
+    serializarModificador(
+        modificador: Modificador,
+        indentacao: number = 0,
+    ): string {
         let quantificador = "";
         if (modificador.hasOwnProperty("quantificador")) {
             quantificador = modificador.quantificador;
         }
-        
+
         let valor = "";
         if (modificador.valor instanceof MetodoCss) {
             valor = (<MetodoCss>modificador.valor).paraTexto();
@@ -28,12 +31,18 @@ export class SerializadorReverso {
         } else {
             valor = modificador.valor;
         }
-        
-        return " ".repeat(indentacao) +
-            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador ? quantificador : ''};\n`;
+
+        return (
+            " ".repeat(indentacao) +
+            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador ? quantificador : ""};\n`
+        );
     }
 
-    serializar(declaracoes: Declaracao[], indentacao: number = 0, seletorAnterior: string = undefined) {
+    serializar(
+        declaracoes: Declaracao[],
+        indentacao: number = 0,
+        seletorAnterior: string = undefined,
+    ) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -45,33 +54,40 @@ export class SerializadorReverso {
 
             if (declaracao instanceof BlocoDeclaracao) {
                 for (const seletor of declaracao.seletores) {
-                    const prefixo = (textoSeletorAnterior + " " + seletor.paraTexto()).trimStart();
+                    const prefixo = (
+                        textoSeletorAnterior +
+                        " " +
+                        seletor.paraTexto()
+                    ).trimStart();
                     prefixos.push(prefixo);
-                    resultado += " ".repeat(indentacao) + prefixo + ', ';
+                    resultado += " ".repeat(indentacao) + prefixo + ", ";
                 }
-    
+
                 resultado = resultado.slice(0, -2);
-                resultado += ' {\n';
-    
+                resultado += " {\n";
+
                 for (const modificador of declaracao.modificadores) {
-                    resultado += this.serializarModificador(modificador, indentacao + 4);
+                    resultado += this.serializarModificador(
+                        modificador,
+                        indentacao + 4,
+                    );
                 }
-                
+
                 if (this.serializarComAninhamentos) {
                     resultado += this.serializar(
                         declaracao.declaracoesAninhadas,
-                        indentacao + 4
+                        indentacao + 4,
                     );
-    
+
                     resultado += `${" ".repeat(indentacao)}}\n\n`;
                 } else {
                     resultado += `${" ".repeat(indentacao)}}\n\n`;
-    
+
                     for (const prefixo of prefixos) {
                         resultado += this.serializar(
                             declaracao.declaracoesAninhadas,
                             indentacao,
-                            prefixo
+                            prefixo,
                         );
                     }
                 }

@@ -10,10 +10,10 @@ export class FitContent extends MetodoCss {
         super();
         this.valor = Number(valor);
         this.quantificador = quantificador;
-        this.traducao = 'fit-content';
+        this.traducao = "fit-content";
     }
 
     paraTexto() {
-        return `encaixar-conteudo(${this.valor}${this.quantificador})`
+        return `encaixar-conteudo(${this.valor}${this.quantificador})`;
     }
 }

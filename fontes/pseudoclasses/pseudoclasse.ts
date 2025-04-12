@@ -9,7 +9,11 @@ export class Pseudoclasse {
     pseudoclasseCss: string;
     pragmas?: PragmasPseudoclasse;
 
-    constructor(nomeFoles: string | string[], pseudoclasseCss: string, pragmas?: PragmasPseudoclasse) {
+    constructor(
+        nomeFoles: string | string[],
+        pseudoclasseCss: string,
+        pragmas?: PragmasPseudoclasse,
+    ) {
         this.nomeFoles = nomeFoles;
         this.pseudoclasseCss = pseudoclasseCss;
         this.pragmas = pragmas;

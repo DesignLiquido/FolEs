@@ -9,27 +9,38 @@ export class TempoTransicao extends Modificador {
         "final-lento": "ease-out",
         "inicio-final-lento": "ease-in-out",
         "início-final-lento": "ease-in-out",
-        "linear": "linear",
+        linear: "linear",
         "passo-inicial": "step-start",
         "passo-final": "step-end",
         "salto-inicial": "jump-start",
         "salto-final": "jump-end",
         "salto-nenhum": "jump-none",
         "salto-conjunto": "jump-both",
-        "inicial": "start",
-        "final": "end",
-    }
+        inicial: "start",
+        final: "end",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["tempo-transicao", "tempo-transição"],
-            "transition-timing-function", 
-            pragmas
+            "transition-timing-function",
+            pragmas,
         );
 
-        const valoresExtra = ['cubic-bezier', 'steps'];
+        const valoresExtra = ["cubic-bezier", "steps"];
 
-        if (!valorVariavel) validarValores('tempo-transição', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel)
+            validarValores(
+                "tempo-transição",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
         this.valor = valor;
     }

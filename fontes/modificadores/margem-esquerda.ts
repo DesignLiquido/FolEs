@@ -5,18 +5,27 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemEsquerda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("margem-esquerda", "margin-left", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('margem-esquerda', valor, this.valoresAceitos);
-                        
+            validarValorNumerico("margem-esquerda", valor, this.valoresAceitos);
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('margem-esquerda', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "margem-esquerda",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

@@ -5,18 +5,31 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoSuperior extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["posicao-superior", "posição-superior"], "top", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('posição-superior', valor, this.valoresAceitos);
-                        
+            validarValorNumerico(
+                "posição-superior",
+                valor,
+                this.valoresAceitos,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('posição-superior', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "posição-superior",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

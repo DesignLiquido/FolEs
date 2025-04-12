@@ -4,27 +4,37 @@ import { validarValores } from "./validacoes/comum";
 export class VariacaoFonteAsiatica extends Modificador {
     // Os valores que incluem letras e números pertencem à lista <east-asian-variant-values>
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-        "rubi": "ruby",
-        "jis78": "jis78",
-        "jis83": "jis83",
-        "jis90": "jis90",
-        "jis04": "jis04",
-        "jis78s": "jis78",
-        "simplificada": "simplified",
-        "tradicional": "traditional",
+        normal: "normal",
+        rubi: "ruby",
+        jis78: "jis78",
+        jis83: "jis83",
+        jis90: "jis90",
+        jis04: "jis04",
+        jis78s: "jis78",
+        simplificada: "simplified",
+        tradicional: "traditional",
         "largura-proporcional": "proportional-width",
         "largura-completa": "full-width",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["variacao-fonte-asiatica", "variação-fonte-asiática"],
-            "font-variant-east-asian", 
-            pragmas
+            "font-variant-east-asian",
+            pragmas,
         );
 
-        if (!valorVariavel) validarValores('variação-fonte-asiática', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores(
+                "variação-fonte-asiática",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

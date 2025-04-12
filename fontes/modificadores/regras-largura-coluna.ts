@@ -5,20 +5,33 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RegrasLarguraColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "fina": "thin",
-        "media": "medium",
-        "média": "medium",
-        "grossa": "thick",
-    }
+        fina: "thin",
+        media: "medium",
+        média: "medium",
+        grossa: "thick",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("regras-largura-coluna", "column-rule-width", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('regras-largura-coluna', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "regras-largura-coluna",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('regras-largura-coluna', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "regras-largura-coluna",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

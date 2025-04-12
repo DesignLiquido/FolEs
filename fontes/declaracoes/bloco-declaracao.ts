@@ -9,10 +9,10 @@ export class BlocoDeclaracao extends Declaracao {
     espacoReservado?: string;
 
     constructor(
-        seletores: Seletor[], 
-        modificadores: Modificador[], 
+        seletores: Seletor[],
+        modificadores: Modificador[],
         declaracoesAninhadas: Declaracao[],
-        espacoReservado: string = null
+        espacoReservado: string = null,
     ) {
         super();
         this.seletores = seletores;

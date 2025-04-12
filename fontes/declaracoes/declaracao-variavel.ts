@@ -7,7 +7,7 @@ export class DeclaracaoVariavel extends Declaracao {
     quantificador?: string;
 
     constructor(
-        nome: string, 
+        nome: string,
         valor: Valor | string,
         quantificador: string = null,
     ) {

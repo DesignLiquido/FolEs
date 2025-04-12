@@ -4,10 +4,15 @@ import { validarValores } from "./validacoes/comum";
 
 export class ReiniciarContador extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-    }
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("reiniciar-contador", "counter-reset", pragmas);
 
         // OBS.: A sintaxe desse modificador espera receber:
@@ -21,7 +26,8 @@ export class ReiniciarContador extends Modificador {
 
         // A lógica abaixo cobre somente o recebimento de 'nenhum' (único valor aceito) e dos Globais.
         // TODO: Adaptar lógica de acordo com a sintaxe do modificador.
-        if (!valorVariavel) validarValores('reiniciar-contador', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("reiniciar-contador", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

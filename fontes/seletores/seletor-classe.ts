@@ -6,7 +6,11 @@ export class SeletorClasse extends Seletor {
     nomeClasse: string;
     pragmas?: PragmasSeletor;
 
-    constructor(nomeClasse: string, pseudoclasse?: Pseudoclasse, pragmas?: PragmasSeletor) {
+    constructor(
+        nomeClasse: string,
+        pseudoclasse?: Pseudoclasse,
+        pragmas?: PragmasSeletor,
+    ) {
         super(pseudoclasse, pragmas);
         this.nomeClasse = nomeClasse;
     }
@@ -16,7 +20,7 @@ export class SeletorClasse extends Seletor {
         if (this.pseudoclasse !== undefined && this.pseudoclasse !== null) {
             resultado += `:${this.pseudoclasse.pseudoclasseCss}`;
         }
-        
+
         return resultado;
     }
 }

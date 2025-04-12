@@ -5,18 +5,27 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemSuperior extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("margem-superior", "margin-top", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('margem-superior', valor, this.valoresAceitos);
-                        
+            validarValorNumerico("margem-superior", valor, this.valoresAceitos);
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('margem-superior', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "margem-superior",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

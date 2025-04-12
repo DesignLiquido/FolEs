@@ -1,14 +1,16 @@
-import * as vlq from 'vlq';
+import * as vlq from "vlq";
 
 import { BlocoDeclaracao, Declaracao } from "../declaracoes";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import { Modificador } from "../modificadores";
-import { PragmasModificador, SeletorModificador } from "../modificadores/superclasse";
+import {
+    PragmasModificador,
+    SeletorModificador,
+} from "../modificadores/superclasse";
 import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
 import { Metodo } from "../valores/metodos/foles/metodo";
 
 import estruturasHtml from "./estruturas-html";
-
 
 export class Tradutor {
     linha: number;
@@ -23,8 +25,8 @@ export class Tradutor {
         const novosPragmasSeletor: PragmasSeletor = {
             linha: this.linha,
             colunaInicial: this.atual,
-            colunaFinal: this.atual
-        }
+            colunaFinal: this.atual,
+        };
 
         this.atual += traducaoSeletor.length;
         novosPragmasSeletor.colunaFinal = this.atual - 1;
@@ -35,8 +37,8 @@ export class Tradutor {
         const novosPragmasModificador: PragmasModificador = {
             linha: this.linha,
             colunaInicial: this.atual,
-            colunaFinal: this.atual
-        }
+            colunaFinal: this.atual,
+        };
 
         this.atual += modificador.propriedadeCss.length;
         novosPragmasModificador.colunaFinal = this.atual - 1;
@@ -46,10 +48,11 @@ export class Tradutor {
     private traduzirSeletorEstrutura(seletor: SeletorEstrutura): Seletor {
         const seletorLmht: string = seletor.paraTexto();
         const traducaoSeletor: string = estruturasHtml[seletorLmht];
-        const novosPragmasSeletor = this.calcularPragmasSeletor(traducaoSeletor);
+        const novosPragmasSeletor =
+            this.calcularPragmasSeletor(traducaoSeletor);
         const seletorTraduzido = new SeletorEstruturasHtml(
             traducaoSeletor,
-            seletor.pragmas
+            seletor.pragmas,
         ) as Seletor;
         seletorTraduzido.pragmasTraducao = novosPragmasSeletor;
         return seletorTraduzido;
@@ -57,14 +60,18 @@ export class Tradutor {
 
     private traduzirModificador(modificador: Modificador): Modificador {
         this.linha = modificador.pragmas.linha;
-        const novosPragmasModificador = this.calcularPragmasModificador(modificador);
-        const modificadorTraduzido =
-            new SeletorModificador(
-                Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles,
-                modificador.valor instanceof Metodo ? modificador.valor.paraTexto() : modificador.valor,
-                modificador.quantificador,
-                modificador.pragmas
-            ) as Modificador;
+        const novosPragmasModificador =
+            this.calcularPragmasModificador(modificador);
+        const modificadorTraduzido = new SeletorModificador(
+            Array.isArray(modificador.nomeFoles)
+                ? modificador.nomeFoles[0]
+                : modificador.nomeFoles,
+            modificador.valor instanceof Metodo
+                ? modificador.valor.paraTexto()
+                : modificador.valor,
+            modificador.quantificador,
+            modificador.pragmas,
+        ) as Modificador;
 
         modificadorTraduzido.pragmasTraducao = novosPragmasModificador;
         return modificadorTraduzido;
@@ -85,22 +92,26 @@ export class Tradutor {
                     this.linha = seletor.pragmas.linha;
 
                     if (seletor instanceof SeletorEstrutura) {
-                        seletoresTraduzidos.push(this.traduzirSeletorEstrutura(seletor));
+                        seletoresTraduzidos.push(
+                            this.traduzirSeletorEstrutura(seletor),
+                        );
                         continue;
                     }
                 }
 
                 for (const modificador of declaracao.modificadores) {
-                    modificadoresTraduzidos.push(this.traduzirModificador(modificador));
+                    modificadoresTraduzidos.push(
+                        this.traduzirModificador(modificador),
+                    );
                 }
 
                 declaracoesTraduzidas.push(
                     new BlocoDeclaracao(
                         seletoresTraduzidos,
                         modificadoresTraduzidos,
-                        []
-                    )
-                )
+                        [],
+                    ),
+                );
             }
 
             // TODO: Adicionar caso if (declaracao instanceof DeclaracaoVariavel)
@@ -108,5 +119,4 @@ export class Tradutor {
 
         return declaracoesTraduzidas;
     }
-
 }

@@ -6,22 +6,27 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Escala extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhuma": "none",
-    }
+        nenhuma: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("escala", "scale", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('escala', valor, this.valoresAceitos);
-            
+            validarValorNumerico("escala", valor, this.valoresAceitos);
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('escala', quantificador, unidadesMedida);
-                
+                validarQuantificador("escala", quantificador, unidadesMedida);
+
                 this.quantificador = quantificador;
             }
         }
-        
+
         this.valor = valor;
     }
 }

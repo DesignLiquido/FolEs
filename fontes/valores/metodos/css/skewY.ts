@@ -5,19 +5,19 @@ export class SkewY extends MetodoCss {
     valor: number;
     quantificador: string;
     traducao: string;
-    
+
     constructor(valor: Simbolo, quantificador: Simbolo) {
         super();
         this.valor = Number(valor.lexema);
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'skewY';
+        this.traducao = "skewY";
     }
 
     paraTexto() {
         if (this.quantificador) {
-            return `inclinar-vertical(${this.valor}${this.quantificador})`
+            return `inclinar-vertical(${this.valor}${this.quantificador})`;
         }
 
-        return `inclinar-vertical(${this.valor})`
+        return `inclinar-vertical(${this.valor})`;
     }
 }

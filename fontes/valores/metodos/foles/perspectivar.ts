@@ -5,19 +5,19 @@ export class Perspectivar extends Metodo {
     valor: number | string;
     quantificador: string;
     traducao: string;
-    
+
     constructor(valor: Simbolo, quantificador: Simbolo) {
         super();
         this.valor = (valor as Simbolo).lexema;
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'perspective';
+        this.traducao = "perspective";
     }
 
-    paraTexto() {        
+    paraTexto() {
         if (this.quantificador) {
-            return `perspective(${this.valor}${this.quantificador})`
+            return `perspective(${this.valor}${this.quantificador})`;
         }
 
-        return `perspective(${this.valor})`
+        return `perspective(${this.valor})`;
     }
 }

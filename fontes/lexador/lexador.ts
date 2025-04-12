@@ -108,7 +108,7 @@ export class Lexador implements LexadorInterface {
 
     avancar(): void {
         this.atual += 1;
-        
+
         if (this.eFinalDaLinha() && !this.eUltimaLinha()) {
             this.linha++;
             this.atual = 0;
@@ -118,18 +118,18 @@ export class Lexador implements LexadorInterface {
     adicionarSimbolo(
         tipo: any,
         literal: any = null,
-        lexema: string = null
+        lexema: string = null,
     ): void {
         let texto: string;
         texto = this.codigo[this.linha].substring(
             this.inicioSimbolo,
-            this.atual
+            this.atual,
         );
 
         if (tipo === tiposDeSimbolos.TEXTO) {
             texto = this.codigo[this.linha].substring(
                 this.inicioSimbolo,
-                this.atual + 1
+                this.atual + 1,
             );
         }
 
@@ -140,8 +140,8 @@ export class Lexador implements LexadorInterface {
                 literal,
                 this.linha + 1,
                 this.inicioSimbolo + 1,
-                this.atual
-            )
+                this.atual,
+            ),
         );
     }
 
@@ -150,7 +150,10 @@ export class Lexador implements LexadorInterface {
             this.avancar();
         }
 
-        if (this.caractereAtual() == "." && this.eDigito(this.proximoSimbolo())) {
+        if (
+            this.caractereAtual() == "." &&
+            this.eDigito(this.proximoSimbolo())
+        ) {
             this.avancar();
 
             while (this.eDigito(this.caractereAtual())) {
@@ -160,11 +163,11 @@ export class Lexador implements LexadorInterface {
 
         const numeroCompleto = this.codigo[this.linha].substring(
             this.inicioSimbolo,
-            this.atual
+            this.atual,
         );
         this.adicionarSimbolo(
             tiposDeSimbolos.NUMERO,
-            parseFloat(numeroCompleto)
+            parseFloat(numeroCompleto),
         );
     }
 
@@ -176,21 +179,24 @@ export class Lexador implements LexadorInterface {
 
         const nomeDiretiva: string = this.codigo[this.linha].substring(
             this.inicioSimbolo + 1,
-            this.atual
+            this.atual,
         );
 
         switch (nomeDiretiva) {
-            case 'importar':
+            case "importar":
                 this.avancar(); // Espaço esperado entre @importar e o texto do arquivo
                 this.adicionarSimbolo(tiposDeSimbolos.IMPORTAR, null, null);
                 break;
             default:
                 throw new Error(`Diretiva não reconhecida: ${nomeDiretiva}`);
-        }        
+        }
     }
 
     analisarTexto(delimitador = '"'): void {
-        while (this.caractereAtual() !== delimitador && !this.eFinalDoCodigo()) {
+        while (
+            this.caractereAtual() !== delimitador &&
+            !this.eFinalDoCodigo()
+        ) {
             this.avancar();
         }
 
@@ -205,7 +211,7 @@ export class Lexador implements LexadorInterface {
 
         const valor = this.codigo[this.linha].substring(
             this.inicioSimbolo + 1,
-            this.atual
+            this.atual,
         );
         this.adicionarSimbolo(tiposDeSimbolos.TEXTO, valor);
     }
@@ -221,15 +227,15 @@ export class Lexador implements LexadorInterface {
         while (this.eAlfabetoOuDigito(this.caractereAtual())) {
             this.avancar();
         }
-        
+
         const variavel: boolean = this.identificarVariaveis();
         if (variavel) return this.adicionarSimbolo(tiposDeSimbolos.VARIAVEL);
 
         const codigo: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
-            this.atual
+            this.atual,
         );
-        
+
         const tipo: string =
             codigo in palavrasReservadas
                 ? palavrasReservadas[codigo]
@@ -246,7 +252,10 @@ export class Lexador implements LexadorInterface {
     encontrarFimComentarioAsterisco(): void {
         while (!this.eFinalDoCodigo()) {
             this.avancar();
-            if (this.caractereAtual() === "*" && this.proximoSimbolo() === "/") {
+            if (
+                this.caractereAtual() === "*" &&
+                this.proximoSimbolo() === "/"
+            ) {
                 this.avancar();
                 this.avancar();
                 break;
@@ -291,32 +300,24 @@ export class Lexador implements LexadorInterface {
                     this.adicionarSimbolo(
                         tiposDeSimbolos.PERCENTUAL,
                         null,
-                        "%"
+                        "%",
                     );
                 } else {
                     this.adicionarSimbolo(
                         tiposDeSimbolos.QUANTIFICADOR,
                         null,
-                        "%"
+                        "%",
                     );
                 }
                 this.avancar();
                 break;
             case ".":
-                this.adicionarSimbolo(
-                    tiposDeSimbolos.PONTO,
-                    null,
-                    "."
-                );
+                this.adicionarSimbolo(tiposDeSimbolos.PONTO, null, ".");
                 this.avancar();
                 break;
             case "#":
                 if (this.atual === 0) {
-                    this.adicionarSimbolo(
-                        tiposDeSimbolos.CERQUILHA,
-                        null,
-                        "#"
-                    );
+                    this.adicionarSimbolo(tiposDeSimbolos.CERQUILHA, null, "#");
                 } else {
                     this.adicionarSimbolo(tiposDeSimbolos.METODO, null, "#");
                 }
@@ -351,7 +352,7 @@ export class Lexador implements LexadorInterface {
                             this.adicionarSimbolo(
                                 tiposDeSimbolos.BARRA,
                                 null,
-                                "/"
+                                "/",
                             );
                             break;
                     }
@@ -373,7 +374,7 @@ export class Lexador implements LexadorInterface {
                 this.analisarDiretiva();
                 break;
             case "$":
-                this.adicionarSimbolo(tiposDeSimbolos.CIFRAO, null, '$');
+                this.adicionarSimbolo(tiposDeSimbolos.CIFRAO, null, "$");
                 this.avancar();
                 break;
             default:

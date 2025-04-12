@@ -13,18 +13,29 @@ export class PosicionarItens extends Modificador {
         "espaço-ao-redor": "space-around",
         "espaco-uniforme": "space-evenly",
         "espaço-uniforme": "space-evenly",
-        "seguro": "safe",
-        "inseguro": "unsafe",
-        "legado": "legacy",
+        seguro: "safe",
+        inseguro: "unsafe",
+        legado: "legacy",
         "auto-inicio": "self-start",
         "auto-início": "self-start",
         "auto-fim": "self-end",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("posicionar-itens", "place-items", pragmas);
 
-        if (!valorVariavel) validarValoresAdicionais('posicionar-itens', valor, posicoes, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "posicionar-itens",
+                valor,
+                posicoes,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

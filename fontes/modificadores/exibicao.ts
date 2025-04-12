@@ -7,15 +7,15 @@ export class Exibicao extends Modificador {
         "em-linha": "inline",
         "fluxo-comum": "flow",
         "fluxo-raiz": "flow-root",
-        "tabela": "table",
-        "flex": "flex",
+        tabela: "table",
+        flex: "flex",
         "em-grade": "grid",
-        "rubi": "ruby",
-        "rubí": "ruby",
+        rubi: "ruby",
+        rubí: "ruby",
         "item-lista": "list-item",
         "conteudo-caixa": "contents",
         "conteúdo-caixa": "contents",
-        "nenhuma": "none",
+        nenhuma: "none",
         "bloco-em-linha": "inline-block",
         "tabela-em-linha": "inline-table",
         "flex-em-linha": "inline-flex",
@@ -39,12 +39,18 @@ export class Exibicao extends Modificador {
         "base-container-rubí": "ruby-base-container",
         "texto-container-rubi": "ruby-text-container",
         "texto-container-rubí": "ruby-text-container",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["exibicao", "exibição"], "display", pragmas);
 
-        if (!valorVariavel) validarValores('exibição', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("exibição", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

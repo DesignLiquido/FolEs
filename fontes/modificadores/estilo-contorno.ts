@@ -4,13 +4,24 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloContorno extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("estilo-contorno", "outline-style", pragmas);
 
-        if (!valorVariavel) validarValoresAdicionais('estilo-contorno', valor, estilos, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "estilo-contorno",
+                valor,
+                estilos,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

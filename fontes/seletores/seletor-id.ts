@@ -6,7 +6,11 @@ export class SeletorId extends Seletor {
     id: string;
     pragmas?: PragmasSeletor;
 
-    constructor(id: string, pseudoclasse?: Pseudoclasse, pragmas?: PragmasSeletor) {
+    constructor(
+        id: string,
+        pseudoclasse?: Pseudoclasse,
+        pragmas?: PragmasSeletor,
+    ) {
         super(pseudoclasse);
         this.id = id;
         this.pragmas = pragmas;

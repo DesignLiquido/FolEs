@@ -6,26 +6,39 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DeslocamentoEmAncora extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "superior": "top",
-        "inferior": "bottom",
-        "esquerda": "left",
-        "direita": "right",
-        "centro": "center",
-        "auto": "auto",
-    }
+        superior: "top",
+        inferior: "bottom",
+        esquerda: "left",
+        direita: "right",
+        centro: "center",
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["deslocamento-em-ancora", "deslocamento-em-âncora"],
             "offset-anchor",
-            pragmas
+            pragmas,
         );
 
         if (!valorVariavel) {
-            validarValorNumerico('deslocamento-em-âncora', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "deslocamento-em-âncora",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('deslocamento-em-âncora', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "deslocamento-em-âncora",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

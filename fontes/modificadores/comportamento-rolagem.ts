@@ -3,14 +3,20 @@ import { validarValores } from "./validacoes/comum";
 
 export class ComportamentoRolagem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "suave": "smooth",
-    }
+        auto: "auto",
+        suave: "smooth",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("comportamento-rolagem", "scroll-behavior", pragmas);
 
-        if (!valorVariavel) validarValores('comportamento-rolagem',valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("comportamento-rolagem", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

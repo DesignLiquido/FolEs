@@ -12,10 +12,10 @@ export class Escalamento3d extends Metodo {
         this.valor1 = Number(valor1.lexema);
         this.valor2 = Number(valor2.lexema);
         this.valor3 = Number(valor3.lexema);
-        this.traducao = 'scale3d';
+        this.traducao = "scale3d";
     }
 
     paraTexto() {
-        return `scale3d(${this.valor1}, ${this.valor2}, ${this.valor3})`
+        return `scale3d(${this.valor1}, ${this.valor2}, ${this.valor3})`;
     }
 }

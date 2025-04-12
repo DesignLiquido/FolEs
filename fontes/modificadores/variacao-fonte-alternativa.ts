@@ -3,19 +3,29 @@ import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteAlternativa extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
+        normal: "normal",
         "formas-historicas": "historical-forms",
         "formas-históricas": "historical-forms",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["variacao-fonte-alternativa", "variação-fonte-alternativa"],
-            "font-variant-alternates", 
-            pragmas
+            "font-variant-alternates",
+            pragmas,
         );
-        
-        if (!valorVariavel) validarValores('variação-fonte-alternativa', valor, this.valoresAceitos);
+
+        if (!valorVariavel)
+            validarValores(
+                "variação-fonte-alternativa",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

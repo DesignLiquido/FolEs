@@ -4,16 +4,26 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FimLinhaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("fim-linha-em-grade", "grid-row-end", pragmas);
 
-        if (!valorVariavel) validarValorNumerico('fim-linha-em-grade', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValorNumerico(
+                "fim-linha-em-grade",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
 
-        proibirQuantificador('fim-linha-em-grade', quantificador);
+        proibirQuantificador("fim-linha-em-grade", quantificador);
     }
 }

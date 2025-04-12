@@ -11,14 +11,20 @@ export class OrigemMascara extends Modificador {
         "completar-caixa": "fill-box",
         "delimitar-caixa": "stroke-box",
         "visualizar-caixa": "view-box",
-        "preenchimento": "padding",
-        "borda": "border",
-    }
+        preenchimento: "padding",
+        borda: "border",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["origem-mascara", "origem-máscara"], "mask-origin", pragmas);
 
-        if (!valorVariavel) validarValores('origem-máscara', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("origem-máscara", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

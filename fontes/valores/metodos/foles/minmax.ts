@@ -10,18 +10,22 @@ export class MinMax extends Metodo {
         "conteúdo-máximo": "max-content",
         "conteudo-minimo": "min-content",
         "conteúdo-mínimo": "min-content",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
     constructor(minimo: number | string, maximo: number | string) {
         super();
-        this.traducaoValores[minimo] === undefined ? this.minimo = minimo : this.minimo = this.traducaoValores[minimo];
-        this.traducaoValores[maximo] === undefined ? this.maximo = maximo : this.maximo = this.traducaoValores[maximo];
-        this.traducao = 'minmax';
+        this.traducaoValores[minimo] === undefined
+            ? (this.minimo = minimo)
+            : (this.minimo = this.traducaoValores[minimo]);
+        this.traducaoValores[maximo] === undefined
+            ? (this.maximo = maximo)
+            : (this.maximo = this.traducaoValores[maximo]);
+        this.traducao = "minmax";
     }
 
     paraTexto() {
-        return `minmax(${this.minimo}, ${this.maximo})`
+        return `minmax(${this.minimo}, ${this.maximo})`;
     }
 }
 

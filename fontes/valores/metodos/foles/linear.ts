@@ -12,10 +12,10 @@ export class Linear extends Metodo {
         this.inicio = Number(inicio.lexema);
         this.meio = Number(meio.lexema);
         this.fim = Number(fim.lexema);
-        this.traducao = 'linear';
+        this.traducao = "linear";
     }
 
     paraTexto() {
-        return `linear(${this.inicio}, ${this.meio}, ${this.fim})`
+        return `linear(${this.inicio}, ${this.meio}, ${this.fim})`;
     }
 }

@@ -3,30 +3,36 @@ import { validarValores } from "./validacoes/comum";
 
 export class QuebrarAntes extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "evitar": "avoid",
-        "sempre": "always",
-        "tudo": "all",
+        auto: "auto",
+        evitar: "avoid",
+        sempre: "always",
+        tudo: "all",
         "evitar-pagina": "avoid-page",
         "evitar-página": "avoid-page",
-        "pagina": "page",
-        "página": "page",
-        "esquerda": "left",
-        "direita": "right",
-        "frente": "recto",
-        "verso": "verso",
+        pagina: "page",
+        página: "page",
+        esquerda: "left",
+        direita: "right",
+        frente: "recto",
+        verso: "verso",
         "evitar-coluna": "avoid-column",
-        "coluna": "column",
+        coluna: "column",
         "evitar-regiao": "avoid-region",
         "evitar-região": "avoid-region",
-        "regiao": "region",
-        "região": "region",
-    }
+        regiao: "region",
+        região: "region",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("quebrar-antes", "break-before", pragmas);
 
-        if (!valorVariavel) validarValores('quebrar-antes', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("quebrar-antes", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

@@ -3,18 +3,24 @@ import { validarValores } from "./validacoes/comum";
 
 export class Flutuar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "esquerda": "left",
-        "direita": "right",
-        "nenhum": "none",
+        esquerda: "left",
+        direita: "right",
+        nenhum: "none",
         "inicio-em-linha": "inline-start",
         "início-em-linha": "inline-start",
         "fim-em-linha": "inline-end",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("flutuar", "float", pragmas);
-        
-        if (!valorVariavel) validarValores('flutuar', valor, this.valoresAceitos);
+
+        if (!valorVariavel)
+            validarValores("flutuar", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

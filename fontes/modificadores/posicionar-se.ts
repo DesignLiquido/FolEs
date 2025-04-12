@@ -13,18 +13,29 @@ export class PosicionarSe extends Modificador {
         "espaço-ao-redor": "space-around",
         "espaco-uniforme": "space-evenly",
         "espaço-uniforme": "space-evenly",
-        "seguro": "safe",
-        "inseguro": "unsafe",
+        seguro: "safe",
+        inseguro: "unsafe",
         "auto-inicio": "self-start",
         "auto-início": "self-start",
         "auto-fim": "self-end",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("posicionar-se", "place-self", pragmas);
 
-        if (!valorVariavel) validarValoresAdicionais('posicionar-se', valor, posicoes, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "posicionar-se",
+                valor,
+                posicoes,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

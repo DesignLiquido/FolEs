@@ -3,10 +3,15 @@ import { validarValorNumerico } from "./validacoes/numerica";
 
 export class IncrementarContador extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-    }
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("incrementar-contador", "counter-increment", pragmas);
 
         // OBS.: A sintaxe desse modificador espera receber:
@@ -14,9 +19,14 @@ export class IncrementarContador extends Modificador {
         // 2. um NÚMERO INTEIRO que represente a incrementação do contador.
 
         // Ex.: incrementar-contador: meu-contador -4;
-        
+
         // A lógica abaixo cobre somente o recebimento de 'nenhum' e de números positivos.
-        if (!valorVariavel) validarValorNumerico('incrementar-contador', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValorNumerico(
+                "incrementar-contador",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

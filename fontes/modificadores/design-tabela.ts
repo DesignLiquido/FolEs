@@ -3,14 +3,20 @@ import { validarValores } from "./validacoes/comum";
 
 export class DesignTabela extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "fixo": "fixed",
-    }
+        auto: "auto",
+        fixo: "fixed",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("design-tabela", "table-layout", pragmas);
 
-        if (!valorVariavel) validarValores('design-tabela', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("design-tabela", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

@@ -3,19 +3,25 @@ import { validarValores } from "./validacoes/comum";
 
 export class ModoBordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "luminancia": "luminance",
-        "luminância": "luminance",
-        "alfa": "alpha",
-    }
+        luminancia: "luminance",
+        luminância: "luminance",
+        alfa: "alpha",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["modo-borda-mascara", "modo-borda-máscara"],
-            "mask-border-mode", 
-            pragmas
+            "mask-border-mode",
+            pragmas,
         );
-        
-        if (!valorVariavel) validarValores('modo-borda-máscara', valor, this.valoresAceitos);
+
+        if (!valorVariavel)
+            validarValores("modo-borda-máscara", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

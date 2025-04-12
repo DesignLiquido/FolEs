@@ -9,7 +9,11 @@ export class Modificador {
     pragmas?: PragmasModificador;
     pragmasTraducao?: PragmasModificador;
 
-    constructor(nomeFoles: string | string[], propriedadeCss: string, pragmas?: PragmasModificador) {
+    constructor(
+        nomeFoles: string | string[],
+        propriedadeCss: string,
+        pragmas?: PragmasModificador,
+    ) {
         this.nomeFoles = nomeFoles;
         this.propriedadeCss = propriedadeCss;
         this.pragmas = pragmas;

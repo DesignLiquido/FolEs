@@ -3,16 +3,21 @@ import { validarValorCor } from "./validacoes/cor";
 
 export class CorBarraRolagem extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("cor-barra-rolagem", "scrollbar-color", pragmas);
 
         if (!valorVariavel) {
-            validarValorCor('cor-barra-rolagem', valor, this.valoresAceitos);
+            validarValorCor("cor-barra-rolagem", valor, this.valoresAceitos);
         }
-        
+
         this.valor = valor;
     }
 }

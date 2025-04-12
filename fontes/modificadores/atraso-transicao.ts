@@ -4,26 +4,35 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class AtrasoTransicao extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["atraso-transicao", "atraso-transição"],
             "transition-delay",
-            pragmas
+            pragmas,
         );
 
         if (!valorVariavel) {
-            if (valor.includes(',')) {
-                const separarValores = valor.split(', ');
+            if (valor.includes(",")) {
+                const separarValores = valor.split(", ");
 
                 separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico('atraso-transição', valorIndividual);
+                    validarValorNumerico("atraso-transição", valorIndividual);
                 });
             } else {
-                validarValorNumerico('atraso-transição', valor);
+                validarValorNumerico("atraso-transição", valor);
             }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('atraso-transição', quantificador, valoresTemporais);
+                validarQuantificador(
+                    "atraso-transição",
+                    quantificador,
+                    valoresTemporais,
+                );
 
                 this.quantificador = quantificador;
             }

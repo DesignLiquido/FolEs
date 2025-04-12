@@ -3,7 +3,7 @@ import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteMaiuscula extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
+        normal: "normal",
         "maiusculas-pequenas": "small-caps",
         "maiúsculas-pequenas": "small-caps",
         "todas-maiusculas-pequenas": "all-small-caps",
@@ -12,19 +12,29 @@ export class VariacaoFonteMaiuscula extends Modificador {
         "maiúsculas-menores": "petite-caps",
         "todas-maiusculas-menores": "all-petite-caps",
         "todas-maiúsculas-menores": "all-petite-caps",
-        "misturar": "unicase",
+        misturar: "unicase",
         "titulo-maiusculo": "titling-caps",
         "título-maiúsculo": "titling-caps",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
-            "font-variant-caps", 
-            pragmas
+            "font-variant-caps",
+            pragmas,
         );
 
-        if (!valorVariavel) validarValores('variação-fonte-maiúscula', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores(
+                "variação-fonte-maiúscula",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

@@ -3,15 +3,29 @@ import { validarValores } from "./validacoes/comum";
 
 export class ComportamentoHorizontalRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "conter": "contain",
-        "nenhum": "none",
-    }
+        auto: "auto",
+        conter: "contain",
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
-        super("comportamento-horizontal-rolagem-mouse", "overscroll-behavior-x", pragmas);
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
+        super(
+            "comportamento-horizontal-rolagem-mouse",
+            "overscroll-behavior-x",
+            pragmas,
+        );
 
-        if (!valorVariavel) validarValores('comportamento-em-horizontal-rolagem-mouse',valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores(
+                "comportamento-em-horizontal-rolagem-mouse",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

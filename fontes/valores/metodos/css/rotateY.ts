@@ -5,19 +5,19 @@ export class RotateY extends MetodoCss {
     valor: number;
     quantificador: string;
     traducao: string;
-    
+
     constructor(valor: Simbolo, quantificador: Simbolo) {
         super();
         this.valor = Number(valor.lexema);
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'rotateY';
+        this.traducao = "rotateY";
     }
 
     paraTexto() {
         if (this.quantificador) {
-            return `rotacionar-vertical(${this.valor}${this.quantificador})`
+            return `rotacionar-vertical(${this.valor}${this.quantificador})`;
         }
 
-        return `rotacionar-vertical(${this.valor})`
+        return `rotacionar-vertical(${this.valor})`;
     }
 }

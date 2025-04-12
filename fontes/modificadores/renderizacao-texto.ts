@@ -5,21 +5,27 @@ export class RenderizacaoTexto extends Modificador {
     // Valores são em camelCase mesmo.
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-        "otimizarVelocidade": "optimizeSpeed",
-        "otimizarLegibilidade": "optimizeLegibility",
-        "precisaoGeometrica": "geometricPrecision",
-        "precisãoGeométrica": "geometricPrecision",
-    }
+        auto: "auto",
+        otimizarVelocidade: "optimizeSpeed",
+        otimizarLegibilidade: "optimizeLegibility",
+        precisaoGeometrica: "geometricPrecision",
+        precisãoGeométrica: "geometricPrecision",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["renderizacao-texto", "renderização-texto"],
-            "text-rendering", 
-            pragmas
+            "text-rendering",
+            pragmas,
         );
 
-        if (!valorVariavel) validarValores('renderização-texto', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("renderização-texto", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

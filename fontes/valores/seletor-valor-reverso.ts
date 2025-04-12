@@ -5,16 +5,13 @@ export class SeletorValorReverso {
     constructor(nomeCss: string, valores: any[], metodo?: boolean) {
         let modificador;
 
-        if (metodo) {            
-            modificador =  DicionarioSuplementarMetodos[nomeCss];
+        if (metodo) {
+            modificador = DicionarioSuplementarMetodos[nomeCss];
         } else {
             modificador = DicionarioReversoModificadores[nomeCss];
         }
 
-        if (
-            modificador === undefined || 
-            modificador === null
-        ) {
+        if (modificador === undefined || modificador === null) {
             throw new Error(`O valor \'${nomeCss}\' não foi encontrado.`);
         }
         return new modificador(...valores);

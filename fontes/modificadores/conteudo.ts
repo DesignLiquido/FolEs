@@ -3,8 +3,8 @@ import { validarValores } from "./validacoes/comum";
 
 export class Conteudo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-        "nenhum": "none",
+        normal: "normal",
+        nenhum: "none",
         "abrir-citacao": "open-quote",
         "abrir-citação": "open-quote",
         "fechar-citacao": "close-quote",
@@ -13,15 +13,26 @@ export class Conteudo extends Modificador {
         "não-abrir-citação": "no-open-quote",
         "nao-fechar-citacao": "no-close-quote",
         "não-fechar-citação": "no-close-quote",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
         // Também aceita como valor as funções image-set() e counter()
-        const valoresExtra = ['url', 'linear-gradient'];
+        const valoresExtra = ["url", "linear-gradient"];
 
-        if (!valorVariavel) validarValores('conteúdo', valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel)
+            validarValores(
+                "conteúdo",
+                valor,
+                this.valoresAceitos,
+                valoresExtra,
+            );
 
         this.valor = valor;
     }

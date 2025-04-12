@@ -3,43 +3,49 @@ import { validarValores } from "./validacoes/comum";
 
 export class Aparencia extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-        "auto": "auto",
+        nenhum: "none",
+        auto: "auto",
         "botao-menu": "menulist-button",
         "botão-menu": "menulist-button",
         "campo-texto": "textfield",
-    }
+    };
 
     // Os valores a seguir são equivalentes a 'auto'
     // https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
     valoresEquivalentes: { [valorFoles: string]: string } = {
-        "botao": "button",
-        "botão": "button",
+        botao: "button",
+        botão: "button",
         "caixa-selecao": "checkbox",
         "caixa-seleção": "checkbox",
         "caixa-listagem": "listbox",
         "lista-menu": "menulist",
-        "metro": "meter",
+        metro: "meter",
         "barra-progresso": "progress-bar",
         "apertar-botao": "push-button",
         "apertar-botão": "push-button",
-        "radio": "radio",
-        "rádio": "radio",
+        radio: "radio",
+        rádio: "radio",
         "campo-busca": "searchfield",
         "deslizar-horizontal": "slider-horizontal",
         "botao-quadrado": "square-button",
         "botão-quadrado": "square-button",
         "area-texto": "textarea",
         "área-texto": "textarea",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["aparencia", "aparência"], "appearance", pragmas);
 
         // Se for um equivalente, o valor atribuído é 'auto';
-        valor in this.valoresEquivalentes ? valor = 'auto' : null
+        valor in this.valoresEquivalentes ? (valor = "auto") : null;
 
-        if (!valorVariavel) validarValores('aparência', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("aparência", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

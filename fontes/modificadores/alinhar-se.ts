@@ -7,29 +7,40 @@ export class AlinharSe extends Modificador {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
         "fim-linha-base": "last baseline",
-        "seguro": "safe",
-        "inseguro": "unsafe",
+        seguro: "safe",
+        inseguro: "unsafe",
         "auto-inicio": "self-start",
         "auto-início": "self-start",
         "auto-fim": "self-end",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("alinhar-se", "align-self", pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
         const posicoesAceitas = Object.keys(posicoes).filter(
-            (posicao) => posicao !== 'esquerda' && posicao !== 'direita'
+            (posicao) => posicao !== "esquerda" && posicao !== "direita",
         );
 
         // Transforma array em objeto para processo de validação
         const posicoesValidas = {};
         posicoesAceitas.forEach((posicao, index) => {
-            posicoesValidas[posicao] = posicoesAceitas[index]
-        })
+            posicoesValidas[posicao] = posicoesAceitas[index];
+        });
 
-        if (!valorVariavel) validarValoresAdicionais('alinhar-se', valor, posicoesValidas, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "alinhar-se",
+                valor,
+                posicoesValidas,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

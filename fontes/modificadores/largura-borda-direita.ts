@@ -5,20 +5,33 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraBordaDireita extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "fina": "thin",
-        "media": "medium",
-        "média": "medium",
-        "grossa": "thick",
-    }
+        fina: "thin",
+        media: "medium",
+        média: "medium",
+        grossa: "thick",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("largura-borda-direita", "border-right-width", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('largura-borda-direita', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "largura-borda-direita",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('largura-borda-direita', quantificador, unidadesMedida);
+                validarQuantificador(
+                    "largura-borda-direita",
+                    quantificador,
+                    unidadesMedida,
+                );
 
                 this.quantificador = quantificador;
             }

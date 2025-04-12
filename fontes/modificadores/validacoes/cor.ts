@@ -7,19 +7,24 @@ export function validarValorCor(
     nomePropriedade: string,
     valor: Metodo | string,
     valoresAceitos?: { [valorFoles: string]: string },
-    valoresExtra?: { [valorFoles: string]: string }) {
+    valoresExtra?: { [valorFoles: string]: string },
+) {
     if (valor instanceof Metodo) {
         if (valor instanceof HexadecimalCor) {
-            if (valor['codigo'].length !== 3 && valor['codigo'].length !== 6) {
+            if (valor["codigo"].length !== 3 && valor["codigo"].length !== 6) {
                 throw new Error(
-                    `Propriedade '${nomePropriedade}' com hexadecimal inválido: '${valor['codigo']}'. Hexadecimais
-                    devem ter 3 ou 6 caracteres após a cerquilha, sendo cada caracter de 0 até 9 ou de A até F.`
+                    `Propriedade '${nomePropriedade}' com hexadecimal inválido: '${valor["codigo"]}'. Hexadecimais
+                    devem ter 3 ou 6 caracteres após a cerquilha, sendo cada caracter de 0 até 9 ou de A até F.`,
                 );
             }
-        } else if (!['rgb', 'rgba', 'hsl', 'hsla'].includes(valor.constructor.name.toLowerCase())) {
+        } else if (
+            !["rgb", "rgba", "hsl", "hsla"].includes(
+                valor.constructor.name.toLowerCase(),
+            )
+        ) {
             throw new Error(
                 `Propriedade '${nomePropriedade}' com método '${valor.constructor.name}' inválido. Valores aceitos:
-                rgb(), rgba(), hsl(), hsla().`
+                rgb(), rgba(), hsl(), hsla().`,
             );
         }
     } else {
@@ -28,17 +33,21 @@ export function validarValorCor(
             if (!(valor in cores) && !(valor in valoresGlobais)) {
                 throw new Error(
                     `Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
-                    ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},    
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`
-                )
+                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},    
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`,
+                );
             }
         } else {
-            if (!(valor in cores) && !(valor in valoresAceitos) && !(valor in valoresGlobais)) {
+            if (
+                !(valor in cores) &&
+                !(valor in valoresAceitos) &&
+                !(valor in valoresGlobais)
+            ) {
                 throw new Error(
                     `Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
-                        ${Object.keys(cores).reduce((final, atual) => final += `, ${atual}`)},    
-                        ${Object.keys(valoresAceitos).reduce((final, atual) => final += `, ${atual}`)},
-                        ${Object.keys(valoresGlobais).reduce((final, atual) => final += `, ${atual}`)}.`
+                        ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},    
+                        ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
+                        ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`,
                 );
             }
         }

@@ -3,13 +3,18 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class Ordenar extends Modificador {
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("ordenar", "order", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('ordenar', valor);
+            validarValorNumerico("ordenar", valor);
 
-            proibirQuantificador('ordenar', quantificador);
+            proibirQuantificador("ordenar", quantificador);
         }
 
         this.valor = valor;

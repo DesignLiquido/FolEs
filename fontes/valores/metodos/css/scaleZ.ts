@@ -4,14 +4,14 @@ import { MetodoCss } from "./metodo-css";
 export class ScaleZ extends MetodoCss {
     valor1: number;
     traducao: string;
-    
+
     constructor(valor1: Simbolo, valor2: Simbolo) {
-        super();       
+        super();
         this.valor1 = Number(valor1.lexema);
-        this.traducao = 'scaleZ';
+        this.traducao = "scaleZ";
     }
 
     paraTexto() {
-        return `escalamento-eixo-z(${this.valor1})`
+        return `escalamento-eixo-z(${this.valor1})`;
     }
 }

@@ -5,22 +5,35 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioInsercaoEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["inicio-insercao-em-bloco", "início-inserção-em-bloco"],
-            "inset-block-start", 
-            pragmas
+            "inset-block-start",
+            pragmas,
         );
-        
+
         if (!valorVariavel) {
-            validarValorNumerico('início-inserção-em-bloco', valor, this.valoresAceitos);
-                        
+            validarValorNumerico(
+                "início-inserção-em-bloco",
+                valor,
+                this.valoresAceitos,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('início-inserção-em-bloco', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "início-inserção-em-bloco",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

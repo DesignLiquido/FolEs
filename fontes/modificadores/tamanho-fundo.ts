@@ -5,20 +5,29 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TamanhoFundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "alargar": "contain",
-        "diminuir": "cover",
-        "auto": "auto",
-    }
+        alargar: "contain",
+        diminuir: "cover",
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("tamanho-fundo", "background-size", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('tamanho-fundo', valor, this.valoresAceitos);
-            
-            if (Number(parseInt(valor))){ 
-                validarQuantificador('tamanho-fundo', quantificador, unidadesMedida);
-                
+            validarValorNumerico("tamanho-fundo", valor, this.valoresAceitos);
+
+            if (Number(parseInt(valor))) {
+                validarQuantificador(
+                    "tamanho-fundo",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

@@ -4,7 +4,7 @@ import { Metodo } from "./metodo";
 export class Hsl extends Metodo {
     matiz: number; // em inglês: 'hue'
     saturacao: number;
-    luminosidade: number; 
+    luminosidade: number;
 
     constructor(matiz: Simbolo, saturacao: Simbolo, luminosidade: Simbolo) {
         super();
@@ -14,6 +14,6 @@ export class Hsl extends Metodo {
     }
 
     paraTexto() {
-        return `hsl(${this.matiz}, ${this.saturacao}%, ${this.luminosidade}%)`
+        return `hsl(${this.matiz}, ${this.saturacao}%, ${this.luminosidade}%)`;
     }
 }

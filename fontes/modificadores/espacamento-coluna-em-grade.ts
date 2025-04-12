@@ -5,22 +5,35 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacamentoColunaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-    }
+        normal: "normal",
+    };
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["espacamento-coluna-em-grade", "espaçamento-coluna-em-grade"],
-            "grid-column-gap", 
-            pragmas
+            "grid-column-gap",
+            pragmas,
         );
 
         if (!valorVariavel) {
-            validarValorNumerico('espaçamento-coluna-em-grade', valor, this.valoresAceitos);
-               
+            validarValorNumerico(
+                "espaçamento-coluna-em-grade",
+                valor,
+                this.valoresAceitos,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('espaçamento-coluna-em-grade', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "espaçamento-coluna-em-grade",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

@@ -7,24 +7,33 @@ export class EsticarFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         "ultra-condensada": "ultra-condensed",
         "extra-condensada": "extra-condensed",
-        "condensada": "condensed",
+        condensada: "condensed",
         "semi-condensada": "semi-condensed",
-        "normal": "normal",
+        normal: "normal",
         "semi-expandida": "semi-expanded",
-        "expandida": "expanded",
+        expandida: "expanded",
         "extra-expandida": "extra-expanded",
         "ultra-expandida": "ultra-expanded",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("esticar-fonte", "font-stretch", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('esticar-fonte', valor, this.valoresAceitos);
-                        
+            validarValorNumerico("esticar-fonte", valor, this.valoresAceitos);
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('esticar-fonte', quantificador, ListaDeValorPercentual);
-                
+                validarQuantificador(
+                    "esticar-fonte",
+                    quantificador,
+                    ListaDeValorPercentual,
+                );
+
                 this.quantificador = quantificador;
             }
         }

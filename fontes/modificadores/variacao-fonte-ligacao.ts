@@ -3,8 +3,8 @@ import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteLigacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-        "nenhuma": "none",
+        normal: "normal",
+        nenhuma: "none",
         "ligacoes-comuns": "common-ligatures",
         "ligações-comuns": "common-ligatures",
         "sem-ligacoes-comuns": "no-common-ligatures",
@@ -17,19 +17,29 @@ export class VariacaoFonteLigacao extends Modificador {
         "ligações-históricas": "historical-ligatures",
         "sem-ligacoes-historicas": "no-historical-ligatures",
         "sem-ligações-históricas": "no-historical-ligatures",
-        "contextual": "contextual",
+        contextual: "contextual",
         "nao-contextual": "no-contextual",
         "não-contextual": "no-contextual",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["variacao-fonte-ligacao", "variação-fonte-ligação"],
-            "font-variant-ligatures", 
-            pragmas
+            "font-variant-ligatures",
+            pragmas,
         );
 
-        if (!valorVariavel) validarValores('variação-fonte-ligação', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores(
+                "variação-fonte-ligação",
+                valor,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

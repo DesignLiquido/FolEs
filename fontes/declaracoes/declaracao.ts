@@ -1,3 +1,1 @@
-export abstract class Declaracao {
-
-}
+export abstract class Declaracao {}

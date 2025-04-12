@@ -3,18 +3,24 @@ import { Modificador, PragmasModificador } from "./superclasse";
 
 export class AjusteCorForcado extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-        "auto": "auto",
-    }
+        nenhum: "none",
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["ajuste-cor-forcado", "ajuste-cor-forçado"],
             "forced-color-adjust",
-            pragmas
+            pragmas,
         );
 
-        if (!valorVariavel) validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

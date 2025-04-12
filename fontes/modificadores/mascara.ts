@@ -4,26 +4,26 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class Mascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "alfa": "alpha",
-        "luminancia": "luminance",
-        "luminância": "luminance",
+        alfa: "alpha",
+        luminancia: "luminance",
+        luminância: "luminance",
         "fonte-correspondente": "match-source",
-        "auto": "auto",
-        "nenhuma": "none",
-        "conter": "contain",
-        "cobrir": "cover",
+        auto: "auto",
+        nenhuma: "none",
+        conter: "contain",
+        cobrir: "cover",
         "repetir-horizontal": "repeat-x",
         "repetir-vertical": "repeat-y",
-        "repetir": "repeat",
-        "espacar": "space",
-        "espaçar": "space",
-        "arredondar": "round",
+        repetir: "repeat",
+        espacar: "space",
+        espaçar: "space",
+        arredondar: "round",
         "nao-repetir": "no-repeat",
         "não-repetir": "no-repeat",
-        "adicionar": "add",
-        "subtrair": "subtract",
-        "cruzar": "intersect",
-        "excluir": "exclude",
+        adicionar: "add",
+        subtrair: "subtract",
+        cruzar: "intersect",
+        excluir: "exclude",
         "conteudo-caixa": "content-box",
         "conteúdo-caixa": "content-box",
         "preenchimento-caixa": "padding-box",
@@ -34,18 +34,29 @@ export class Mascara extends Modificador {
         "visualizar-caixa": "view-box",
         "nao-recortar": "no-clip",
         "não-recortar": "no-clip",
-        "borda": "border",
-        "preenchimento": "padding",
-        "conteudo": "content",
-        "conteúdo": "content",
-        "texto": "text",
-        "url": "url",
-    }
+        borda: "border",
+        preenchimento: "padding",
+        conteudo: "content",
+        conteúdo: "content",
+        texto: "text",
+        url: "url",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["mascara", "máscara"], "mask", pragmas);
 
-        if (!valorVariavel) validarValoresAdicionais('máscara', valor, posicoesBasicas, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValoresAdicionais(
+                "máscara",
+                valor,
+                posicoesBasicas,
+                this.valoresAceitos,
+            );
 
         this.valor = valor;
     }

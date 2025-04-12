@@ -3,20 +3,26 @@ import { validarValores } from "./validacoes/comum";
 
 export class TransformarTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-        "capitalizar": "capitalize",
-        "maiusculo": "uppercase",
-        "maiúsculo": "uppercase",
-        "minusculo": "lowercase",
-        "minúsculo": "lowercase",
+        nenhum: "none",
+        capitalizar: "capitalize",
+        maiusculo: "uppercase",
+        maiúsculo: "uppercase",
+        minusculo: "lowercase",
+        minúsculo: "lowercase",
         "largura-cheia": "full-width",
         "tamanho-completo-kana": "full-size-kana",
-    }
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("transformar-texto", "text-transform", pragmas);
 
-        if (!valorVariavel) validarValores('transformar-texto', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("transformar-texto", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

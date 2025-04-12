@@ -10,20 +10,33 @@ export class AlinharVertical extends Modificador {
         "linha-superior": "super",
         "topo-texto": "text-top",
         "base-texto": "text-bottom",
-        "meio": "middle",
-        "superior": "top",
-        "inferior": "bottom",
-    }
+        meio: "middle",
+        superior: "top",
+        inferior: "bottom",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("alinhar-vertical", "vertical-align", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico('alinhar-vertical', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "alinhar-vertical",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (Number(parseInt(valor))) {
-                validarQuantificador('alinhar-vertical', quantificador, unidadesMedida);
-    
+                validarQuantificador(
+                    "alinhar-vertical",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

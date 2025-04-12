@@ -5,18 +5,23 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Girar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-    }
+        nenhum: "none",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("girar", "rotate", pragmas);
-        
+
         if (!valorVariavel) {
-            validarValorNumerico('girar', valor, this.valoresAceitos);
-                        
+            validarValorNumerico("girar", valor, this.valoresAceitos);
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('girar', quantificador, angulos);
-                
+                validarQuantificador("girar", quantificador, angulos);
+
                 this.quantificador = quantificador;
             }
         }

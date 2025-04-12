@@ -3,20 +3,20 @@ import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
+        normal: "normal",
         "formas-historicas": "historical-forms",
         "formas-históricas": "historical-forms",
-        "rubi": "ruby",
-        "jis78": "jis78",
-        "jis83": "jis83",
-        "jis90": "jis90",
-        "jis04": "jis04",
-        "jis78s": "jis78",
-        "simplificada": "simplified",
-        "tradicional": "traditional",
+        rubi: "ruby",
+        jis78: "jis78",
+        jis83: "jis83",
+        jis90: "jis90",
+        jis04: "jis04",
+        jis78s: "jis78",
+        simplificada: "simplified",
+        tradicional: "traditional",
         "largura-proporcional": "proportional-width",
         "largura-completa": "full-width",
-        "nenhuma": "none",
+        nenhuma: "none",
         "ligacoes-comuns": "common-ligatures",
         "ligações-comuns": "common-ligatures",
         "sem-ligacoes-comuns": "no-common-ligatures",
@@ -29,7 +29,7 @@ export class VariacaoFonte extends Modificador {
         "ligações-históricas": "historical-ligatures",
         "sem-ligacoes-historicas": "no-historical-ligatures",
         "sem-ligações-históricas": "no-historical-ligatures",
-        "contextual": "contextual",
+        contextual: "contextual",
         "nao-contextual": "no-contextual",
         "não-contextual": "no-contextual",
         "maiusculas-pequenas": "small-caps",
@@ -40,10 +40,10 @@ export class VariacaoFonte extends Modificador {
         "maiúsculas-menores": "petite-caps",
         "todas-maiusculas-menores": "all-petite-caps",
         "todas-maiúsculas-menores": "all-petite-caps",
-        "misturar": "unicase",
+        misturar: "unicase",
         "titulo-maiusculo": "titling-caps",
         "título-maiúsculo": "titling-caps",
-        "ordinal": "ordinal",
+        ordinal: "ordinal",
         "zero-cortado": "slashed-zero",
         "numeros-alinhados": "lining-nums",
         "números-alinhados": "lining-nums",
@@ -57,14 +57,20 @@ export class VariacaoFonte extends Modificador {
         "frações-diagonais": "diagonal-fractions",
         "fracoes-empilhadas": "stacked-fractions",
         "frações-empilhadas": "stacked-fractions",
-        "subscrito": "sub",
-        "sobrescrito": "super",
-    }
+        subscrito: "sub",
+        sobrescrito: "super",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(["variacao-fonte", "variação-fonte"], "font-variant", pragmas);
 
-        if (!valorVariavel) validarValores('variação-fonte', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("variação-fonte", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

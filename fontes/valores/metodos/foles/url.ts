@@ -7,10 +7,10 @@ export class Url extends Metodo {
     constructor(link: string) {
         super();
         this.link = link;
-        this.traducao = 'url';
+        this.traducao = "url";
     }
 
     paraTexto() {
-        return `url('${this.link}')`
+        return `url('${this.link}')`;
     }
 }

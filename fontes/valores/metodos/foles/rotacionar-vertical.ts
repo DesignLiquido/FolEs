@@ -5,20 +5,22 @@ export class RotacionarVertical extends Metodo {
     valor: number;
     quantificador: string;
     traducao: string;
-    
+
     constructor(valor: Simbolo, quantificador: Simbolo) {
         super();
         this.valor = Number(valor.lexema);
         this.quantificador = quantificador ? quantificador.lexema : null;
-        this.traducao = 'rotateY';
+        this.traducao = "rotateY";
     }
 
     paraTexto() {
         if (this.quantificador) {
-            this.quantificador === 'graus' ? this.quantificador = 'deg' : null;
-            return `rotateY(${this.valor}${this.quantificador})`
+            this.quantificador === "graus"
+                ? (this.quantificador = "deg")
+                : null;
+            return `rotateY(${this.valor}${this.quantificador})`;
         }
 
-        return `rotateY(${this.valor})`
+        return `rotateY(${this.valor})`;
     }
 }

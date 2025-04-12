@@ -4,7 +4,7 @@ import { Metodo } from "./metodo";
 export class Rgba extends Metodo {
     vermelho: number;
     verde: number;
-    azul: number; 
+    azul: number;
 
     constructor(vermelho: Simbolo, verde: Simbolo, azul: Simbolo) {
         super();
@@ -14,6 +14,6 @@ export class Rgba extends Metodo {
     }
 
     paraTexto() {
-        return `rgba(${this.vermelho}, ${this.verde}, ${this.azul})`
+        return `rgba(${this.vermelho}, ${this.verde}, ${this.azul})`;
     }
 }

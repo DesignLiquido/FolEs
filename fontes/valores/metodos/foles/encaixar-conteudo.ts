@@ -10,10 +10,10 @@ export class EncaixarConteudo extends Metodo {
         super();
         this.valor = Number(valor);
         this.quantificador = quantificador;
-        this.traducao = 'fit-content';
+        this.traducao = "fit-content";
     }
 
     paraTexto() {
-        return `fit-content(${this.valor}${this.quantificador})`
+        return `fit-content(${this.valor}${this.quantificador})`;
     }
 }

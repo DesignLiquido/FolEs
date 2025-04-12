@@ -4,25 +4,30 @@ import { validarValorString } from "./validacoes/string";
 
 export class EstiloEnfaseTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "nenhum": "none",
-        "preenchido": "filled",
-        "abrir": "open",
-        "ponto": "dot",
-        "circulo": "circle",
-        "círculo": "circle",
+        nenhum: "none",
+        preenchido: "filled",
+        abrir: "open",
+        ponto: "dot",
+        circulo: "circle",
+        círculo: "circle",
         "circulo-duplo": "double-circle",
         "círculo-duplo": "double-circle",
-        "triangulo": "triangle",
-        "triângulo": "triangle",
-        "sesamo": "sesame",
-        "sésamo": "sesame",
-    }
+        triangulo: "triangle",
+        triângulo: "triangle",
+        sesamo: "sesame",
+        sésamo: "sesame",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
             "text-emphasis-style",
-            pragmas
+            pragmas,
         );
 
         const validacaoString = validarValorString(valor);
@@ -31,7 +36,8 @@ export class EstiloEnfaseTexto extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        if (!valorVariavel) validarValores('estilo-ênfase-texto', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("estilo-ênfase-texto", valor, this.valoresAceitos);
 
         this.valor = valor;
     }

@@ -118,7 +118,7 @@ export class LexadorReverso implements LexadorInterface {
 
         const codigo: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
-            this.atual
+            this.atual,
         );
         const tipo: string =
             codigo in palavrasReservadas
@@ -128,10 +128,14 @@ export class LexadorReverso implements LexadorInterface {
         this.adicionarSimbolo(tipo);
     }
 
-    adicionarSimbolo(tipo: any, literal: any = null, lexema: string = null): void {
+    adicionarSimbolo(
+        tipo: any,
+        literal: any = null,
+        lexema: string = null,
+    ): void {
         const texto: string = this.codigo[this.linha].substring(
             this.inicioSimbolo,
-            this.atual
+            this.atual,
         );
 
         this.simbolos.push(
@@ -141,8 +145,8 @@ export class LexadorReverso implements LexadorInterface {
                 literal,
                 this.linha + 1,
                 this.inicioSimbolo + 1,
-                this.atual
-            )
+                this.atual,
+            ),
         );
     }
 
@@ -161,11 +165,11 @@ export class LexadorReverso implements LexadorInterface {
 
         const numeroCompleto = this.codigo[this.linha].substring(
             this.inicioSimbolo,
-            this.atual
+            this.atual,
         );
         this.adicionarSimbolo(
             tiposDeSimbolos.NUMERO,
-            parseFloat(numeroCompleto)
+            parseFloat(numeroCompleto),
         );
     }
 
@@ -189,39 +193,35 @@ export class LexadorReverso implements LexadorInterface {
                 this.adicionarSimbolo(tiposDeSimbolos.PARENTESE_DIREITO);
                 this.avancar();
                 break;
-            case ':':
+            case ":":
                 this.adicionarSimbolo(tiposDeSimbolos.DOIS_PONTOS);
                 this.avancar();
                 break;
-            case ';':
+            case ";":
                 this.adicionarSimbolo(tiposDeSimbolos.PONTO_E_VIRGULA);
                 this.avancar();
                 break;
-            case '%':
-                this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, '%');
+            case "%":
+                this.adicionarSimbolo(tiposDeSimbolos.QUANTIFICADOR, null, "%");
                 this.avancar();
                 break;
-            case ',':
-                this.adicionarSimbolo(tiposDeSimbolos.VIRGULA, null,',');
+            case ",":
+                this.adicionarSimbolo(tiposDeSimbolos.VIRGULA, null, ",");
                 this.avancar();
                 break;
             case ".":
-                this.adicionarSimbolo(
-                    tiposDeSimbolos.PONTO,
-                    null,
-                    "."
-                );
+                this.adicionarSimbolo(tiposDeSimbolos.PONTO, null, ".");
                 this.avancar();
                 break;
-            case '#':
+            case "#":
                 this.adicionarSimbolo(tiposDeSimbolos.CERQUILHA);
                 this.avancar();
                 break;
-            case ' ':
-            case '\0':
-            case '\r':
-            case '\t':
-            case ';':
+            case " ":
+            case "\0":
+            case "\r":
+            case "\t":
+            case ";":
                 this.avancar();
                 break;
             default:
@@ -256,7 +256,7 @@ export class LexadorReverso implements LexadorInterface {
 
         return {
             simbolos: this.simbolos,
-            erros: this.erros
-        }
+            erros: this.erros,
+        };
     }
 }

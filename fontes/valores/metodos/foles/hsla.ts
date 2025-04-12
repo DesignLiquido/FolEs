@@ -4,7 +4,7 @@ import { Metodo } from "./metodo";
 export class Hsla extends Metodo {
     matiz: number; // em inglês: 'hue'
     saturacao: number;
-    luminosidade: number; 
+    luminosidade: number;
 
     constructor(matiz: Simbolo, saturacao: Simbolo, luminosidade: Simbolo) {
         super();
@@ -14,7 +14,7 @@ export class Hsla extends Metodo {
     }
 
     paraTexto() {
-        return `hsla(${this.matiz}, ${this.saturacao}%, ${this.luminosidade}%)`
+        return `hsla(${this.matiz}, ${this.saturacao}%, ${this.luminosidade}%)`;
     }
 }
 

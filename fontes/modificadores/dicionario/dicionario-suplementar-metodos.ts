@@ -5,9 +5,9 @@ import { Rotate } from "../../valores/metodos/css/rotate";
 import { Translate } from "../../valores/metodos/css/translate";
 
 export const DicionarioSuplementarMetodos: { [nomeCss: string]: any } = {
-    "opacity": Opacity,
-    "perspective": Perspective,
-    "rotate": Rotate,
-    "scale": Scale,
-    "translate": Translate,
-}
+    opacity: Opacity,
+    perspective: Perspective,
+    rotate: Rotate,
+    scale: Scale,
+    translate: Translate,
+};

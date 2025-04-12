@@ -3,14 +3,20 @@ import { validarValores } from "./validacoes/comum";
 
 export class Recortar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super("recortar", "clip", pragmas);
 
-        if (!valorVariavel) validarValores('recortar', valor, this.valoresAceitos);
+        if (!valorVariavel)
+            validarValores("recortar", valor, this.valoresAceitos);
 
-        this.valor = valor;  
+        this.valor = valor;
     }
 }

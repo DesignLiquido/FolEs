@@ -5,25 +5,38 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacamentoLetras extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "normal": "normal",
-    }
+        normal: "normal",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["espacamento-letras", "espaçamento-letras"],
             "letter-spacing",
-            pragmas
+            pragmas,
         );
-        
+
         // Também pode receber valores numéricos com ponto (.) na frente
         // Ex.: espaçamento-letras: .2rem;
 
         if (!valorVariavel) {
-            validarValorNumerico('espaçamento-letras', valor, this.valoresAceitos);
-                        
+            validarValorNumerico(
+                "espaçamento-letras",
+                valor,
+                this.valoresAceitos,
+            );
+
             if (Number(parseInt(valor))) {
-                validarQuantificador('espaçamento-letras', quantificador, unidadesMedida);
-                
+                validarQuantificador(
+                    "espaçamento-letras",
+                    quantificador,
+                    unidadesMedida,
+                );
+
                 this.quantificador = quantificador;
             }
         }

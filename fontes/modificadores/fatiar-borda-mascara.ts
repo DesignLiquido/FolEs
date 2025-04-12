@@ -5,22 +5,35 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FatiarBordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        "preencher": "fill",
-    }
+        preencher: "fill",
+    };
 
-    constructor(valor: string, quantificador?: string, pragmas?: PragmasModificador, valorVariavel: boolean = false) {
+    constructor(
+        valor: string,
+        quantificador?: string,
+        pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
+    ) {
         super(
             ["fatiar-borda-mascara", "fatiar-borda-máscara"],
             "mask-border-slice",
-            pragmas
+            pragmas,
         );
 
         if (!valorVariavel) {
-            validarValorNumerico('fatiar-borda-máscara', valor, this.valoresAceitos);
+            validarValorNumerico(
+                "fatiar-borda-máscara",
+                valor,
+                this.valoresAceitos,
+            );
 
             if (quantificador !== undefined) {
-                validarQuantificador('fatiar-borda-máscara', quantificador, ListaDeValorPercentual);
-                
+                validarQuantificador(
+                    "fatiar-borda-máscara",
+                    quantificador,
+                    ListaDeValorPercentual,
+                );
+
                 this.quantificador = quantificador;
             }
         }

@@ -8,14 +8,14 @@ export class MinMax extends MetodoCss {
     traducaoValores = {
         "max-content": "conteudo-máximo",
         "min-content": "conteudo-mínimo",
-        "auto": "auto",
-    }
+        auto: "auto",
+    };
 
     constructor(minimo: number | string, maximo: number | string) {
         super();
         this.minimo = minimo;
         this.maximo = maximo;
-        this.traducao = 'minmax';
+        this.traducao = "minmax";
     }
 
     paraTexto() {
@@ -26,7 +26,7 @@ export class MinMax extends MetodoCss {
         if (this.traducaoValores[this.maximo]) {
             this.maximo = this.traducaoValores[this.maximo];
         }
-        
-        return `minmax(${this.minimo}, ${this.maximo})`
+
+        return `minmax(${this.minimo}, ${this.maximo})`;
     }
 }
