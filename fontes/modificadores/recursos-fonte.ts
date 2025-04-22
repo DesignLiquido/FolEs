@@ -1,5 +1,6 @@
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorNumerico } from "./validacoes/numerica";
 import { validarValorString } from "./validacoes/string";
 
 export class RecursosFonte extends Modificador {
@@ -31,7 +32,7 @@ export class RecursosFonte extends Modificador {
                         this.valoresAceitos[valorIndividual] = valorIndividual;
                     }
 
-                    validarValores("recursos-fonte", valorIndividual, this.valoresAceitos, valoresExtra);
+                    validarValorNumerico("recursos-fonte", valorIndividual, this.valoresAceitos, valoresExtra);
                 });
             } else {
                 const validacaoString = validarValorString(valor);
