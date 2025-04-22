@@ -31,3 +31,7 @@
 lmht {
     cor-fundo: hsl(50, 80%, 80%);
 }
+
+lmht {
+    eventos-ponteiro: pinturaVisível;
+}

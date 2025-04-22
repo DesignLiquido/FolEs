@@ -1,4 +1,3 @@
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -6,6 +5,18 @@ export class EventosPonteiro extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
+        pinturaVisivel: "visiblePainted",
+        pinturaVisível: "visiblePainted",
+        preenchimentoVisivel: "visibleFill",
+        preenchimentoVisível: "visibleFill",
+        tracoVisivel: "visibleStroke",
+        traçoVisível: "visibleStroke",
+        pintado: "painted",
+        preencher: "fill",
+        tracado: "stroke",
+        traçado: "stroke",
+        delimitarCaixa: "bounding-box",
+        tudo: "all",
     };
 
     constructor(
