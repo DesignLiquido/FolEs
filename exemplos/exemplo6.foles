@@ -1,4 +1,4 @@
 lmht {
-    recursos-fonte: "c2sc";
+    recursos-fonte: "c2sc", "hist";
 }
 

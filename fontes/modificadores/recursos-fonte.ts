@@ -15,17 +15,37 @@ export class RecursosFonte extends Modificador {
     ) {
         super("recursos-fonte", "font-feature-settings", pragmas);
 
-        const validacaoString = validarValorString(valor);
-
-        // Valor feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
         const valoresExtra = ["feature-tag-value"];
-        const validacaoTagValue = valor.length === 6;
 
-        if (validacaoString && validacaoTagValue) {
-            this.valoresAceitos[valor] = valor;
+        if (!valorVariavel) {
+            if (valor.includes(",")) {
+                const separarValores = valor.split(", ");
+
+                separarValores.forEach((valorIndividual) => {
+                    const validacaoString = validarValorString(valorIndividual);
+
+                    // Valor feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
+                    const validacaoTagValue = valorIndividual.length === 6;
+
+                    if (validacaoString && validacaoTagValue) {
+                        this.valoresAceitos[valorIndividual] = valorIndividual;
+                    }
+
+                    validarValores("recursos-fonte", valorIndividual, this.valoresAceitos, valoresExtra);
+                });
+            } else {
+                const validacaoString = validarValorString(valor);
+
+                // Valor feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
+                const validacaoTagValue = valor.length === 6;
+
+                if (validacaoString && validacaoTagValue) {
+                    this.valoresAceitos[valor] = valor;
+                }
+
+                validarValores("recursos-fonte", valor, this.valoresAceitos, valoresExtra);
+            }
         }
-
-        if (!valorVariavel) validarValores("recursos-fonte", valor, this.valoresAceitos, valoresExtra);
 
         this.valor = valor;
     }
