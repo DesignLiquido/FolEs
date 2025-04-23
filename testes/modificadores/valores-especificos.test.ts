@@ -1,0 +1,177 @@
+import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
+import { Importador } from "../../fontes/importador";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
+import { Lexador } from "../../fontes/lexador";
+import { SeletorModificador } from "../../fontes/modificadores/superclasse";
+import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
+import { Serializador } from "../../fontes/serializadores";
+import { ValorString, ValorStringAcentuado } from "../listas/valor-string";
+import { BlocoDeclaracao } from "../../fontes/declaracoes";
+
+describe('Testando Seletores com VALORES STRING', () => {
+    describe('Testes Unitários', () => {
+        let lexador: LexadorInterface;
+        let importador: ImportadorInterface;
+        let avaliadorSintatico: AvaliadorSintaticoInterface;
+        let tradutor: Serializador;
+
+        beforeEach(() => {
+            lexador = new Lexador();
+            importador = new Importador(lexador);
+            avaliadorSintatico = new AvaliadorSintatico(importador);
+            tradutor = new Serializador();
+        });
+
+        it('Casos de sucesso - Valores SVG', () => {
+            const valoresSVG = [
+                {
+                    folEs: "pinturaVisivel",
+                    css: "visiblePainted",
+                },
+                {
+                    folEs: "pinturaVisível",
+                    css: "visiblePainted",
+                },
+                {
+                    folEs: "preenchimentoVisivel",
+                    css: "visibleFill",
+                },
+                {
+                    folEs: "preenchimentoVisível",
+                    css: "visibleFill",
+                },
+                {
+                    folEs: "tracoVisivel",
+                    css: "visibleStroke",
+                },
+                {
+                    folEs: "traçoVisível",
+                    css: "visibleStroke",
+                },
+                {
+                    folEs: "pintado",
+                    css: "painted",
+                },
+                {
+                    folEs: "preencher",
+                    css: "fill",
+                },
+                {
+                    folEs: "tracado",
+                    css: "stroke",
+                },
+                {
+                    folEs: "traçado",
+                    css: "stroke",
+                },
+                {
+                    folEs: "delimitarCaixa",
+                    css: "bounding-box",
+                },
+                {
+                    folEs: "tudo",
+                    css: "all",
+                },
+            ];
+
+            for (let index = 0; index < valoresSVG.length; index += 1) {
+                const seletor = new SeletorModificador('eventos-ponteiro', valoresSVG[index].folEs, null);
+
+                // A classe do modificador deve aceitar o valor SVG
+                expect(seletor['valor']).toEqual(valoresSVG[index].folEs);
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "corpo {",
+                    `eventos-ponteiro: ${valoresSVG[index].folEs};`,
+                    "}"
+                ]);
+
+                // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(7);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como IDENTIFICADOR
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
+                // Serializador
+                const resultadoSerializador = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Serializador deve traduzir os valores SVG de acordo
+                expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
+                expect(resultadoSerializador).toContain(valoresSVG[index].css);
+            }
+        });
+
+        it('Caso de sucesso - Valores do tipo feature-tag-value', () => {
+            const valoresTagValue = [
+                '"c2sc", "hist"',
+                '"c2sc"',
+            ];
+
+            for (let index = 0; index < valoresTagValue.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `recursos-fonte: ${valoresTagValue[index]};`,
+                    "}"
+                ]);
+
+                if (index === 0) {
+                    expect(resultadoLexador.simbolos).toHaveLength(9);
+                } else {
+                    expect(resultadoLexador.simbolos).toHaveLength(7);
+                }
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].valor).toContain(valoresTagValue[index]);
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(valoresTagValue[index]);
+            }
+        });
+
+        it('Caso de falha - Valor feature-tag-value com mais de 4 caracteres', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `recursos-fonte: "cs2af";`,
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            }).toThrowError(`Propriedade 'recursos-fonte' com valor "cs2af" inválido`);
+        });
+    });
+});

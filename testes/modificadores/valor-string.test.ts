@@ -93,56 +93,5 @@ describe('Testando Seletores com VALORES STRING', () => {
                 }).toThrowError(`Propriedade '${ValorStringAcentuado[index]}' com valor x inválido`);
             }
         });
-
-        it('Caso de sucesso - Valores do tipo feature-tag-value', () => {
-            const valoresTagValue = [
-                '"c2sc", "hist"',
-                '"c2sc"',
-            ];
-
-            for (let index = 0; index < valoresTagValue.length; index += 1) {
-                // Lexador
-                const resultadoLexador = lexador.mapear([
-                    "lmht {",
-                    `recursos-fonte: ${valoresTagValue[index]};`,
-                    "}"
-                ]);
-
-                if (index === 0) {
-                    expect(resultadoLexador.simbolos).toHaveLength(9);
-                } else {
-                    expect(resultadoLexador.simbolos).toHaveLength(7);
-                }
-
-                // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
-
-                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
-                const primeiroResultado = resultadoAvaliadorSintatico[0];
-                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
-                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-                expect(primeiroResultadoTipado.modificadores[0].valor).toContain(valoresTagValue[index]);
-
-                // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(valoresTagValue[index]);
-            }
-        });
-
-        it('Caso de falha - Valor feature-tag-value com mais de 4 caracteres', () => {
-            // Lexador
-            const resultadoLexador = lexador.mapear([
-                "lmht {",
-                    `recursos-fonte: "cs2af";`,
-                "}"
-            ]);
-
-            // Avaliador Sintático
-            expect(() => {
-                avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrowError(`Propriedade 'recursos-fonte' com valor "cs2af" inválido`);
-        });
     });
 });
