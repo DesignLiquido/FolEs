@@ -2,3 +2,10 @@ lmht {
     recursos-fonte: "c2sc", "hist";
 }
 
+lmht {
+    eventos-ponteiro: delimitarCaixa;
+}
+
+lmht {
+    espacamento-letras: .2rem;
+}
