@@ -5,10 +5,9 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { ValorString, ValorStringAcentuado } from "../listas/valor-string";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
-describe('Testando Seletores com VALORES STRING', () => {
+describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
     describe('Testes Unitários', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
@@ -120,6 +119,41 @@ describe('Testando Seletores com VALORES STRING', () => {
                 // O Serializador deve traduzir os valores SVG de acordo
                 expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
                 expect(resultadoSerializador).toContain(valoresSVG[index].css);
+            }
+        });
+
+        it('Caso de sucesso - Valor numérico precedido de ponto', () => {
+            const valoresComPonto = [
+                '.2rem',
+                '.5em',
+                '.10px',
+            ];
+
+            for (let index = 0; index < valoresComPonto.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                        `espacamento-letras: ${valoresComPonto[index]};`,
+                    "}"
+                ]);
+
+                // O Lexador deve montar um objeto de comprimento 9 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(9);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(valoresComPonto[index]);
             }
         });
 
