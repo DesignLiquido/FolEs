@@ -28,7 +28,7 @@ export class Serializador {
     private serializarModificador(
         modificador: Modificador,
         indentacao: number = 0,
-    ): string {
+    ): string {        
         // Caso 1: Número-Quantificador ou somente Número.
         if (Number(modificador.valor) || modificador.valor === "0") {
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
@@ -94,8 +94,15 @@ export class Serializador {
                 modificador.valor
             };\n`;
         }
-
-        // Caso 5: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
+        
+        // Caso 5: Valor com aspas - como as fontes de texto.
+        if (modificador.valor.includes('"')) {
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
+                modificador.valor
+            };\n`;
+        }
+        
+        // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
         return `${" ".repeat(indentacao)}${
             modificador.propriedadeCss
@@ -110,7 +117,7 @@ export class Serializador {
         let resultado = "";
         const prefixos = [];
         let deveImprimir = true;
-
+        
         for (const seletor of declaracao.seletores) {
             // Espaços reservados não são escritos diretamente no CSS.
             if (seletor instanceof SeletorEspacoReservado) {
@@ -260,7 +267,7 @@ export class Serializador {
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
-        }
+        }        
 
         for (const [index, declaracao] of declaracoes.entries()) {
             switch (declaracao.constructor.name) {

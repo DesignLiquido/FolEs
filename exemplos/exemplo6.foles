@@ -9,3 +9,7 @@ lmht {
 lmht {
     espacamento-letras: .2rem;
 }
+
+lmht {
+    fonte-texto: "Arial";
+}

@@ -1,5 +1,6 @@
 import { Modificador, PragmasModificador } from "./superclasse";
-import { validarValores } from "./validacoes/comum";
+import { validarValorFonte } from "./validacoes/fonte";
+import { validarValorString } from "./validacoes/string";
 
 export class FonteTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -26,19 +27,22 @@ export class FonteTexto extends Modificador {
     ) {
         super("fonte-texto", "font-family", pragmas);
 
-        // OBS.: A lista de valores aceitos inclui todas as FONTES GENÉRICAS (<generic-name>).
-        // Porém, o modificador também pode receber DOIS PARÂMETROS,
-        // sendo o PRIMEIRO o nome de qualquer fonte existente (<family-name>).
+        const valorString = validarValorString(valor);
+        if (valorString) valor = valor.replace(/^["']|["']$/g, '');
+        
+        if (!valorVariavel) {
+            if (valor.includes(",")) {
+                const separarValores = valor.split(", ");
+                
+                separarValores.forEach((valorIndividual) => {
+                    validarValorFonte("fonte-texto", valorIndividual, this.valoresAceitos);
+                });
+            } else {
+                validarValorFonte("fonte-texto", valor, this.valoresAceitos);
+            }
+        }
 
-        // Ex.: fonte-texto: "Gill Sans Extrabold", sans-serif;
-
-        // OBS.2: Fontes com mais de uma palavra devem ser passadas como string (entre "");
-        // OBS.3: O segundo parâmetro é obrigatório para o caso da primeira fonte não estar disponível.
-
-        // A lógica abaixo cobre somente o recebimento dos valores genéricos.
-        if (!valorVariavel)
-            validarValores("fonte-texto", valor, this.valoresAceitos);
-
+        if (valorString) valor = `"${valor}"`;
         this.valor = valor;
     }
 }
