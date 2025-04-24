@@ -28,12 +28,11 @@ export class Serializador {
     private serializarModificador(
         modificador: Modificador,
         indentacao: number = 0,
-    ): string {        
+    ): string {
         // Caso 1: Número-Quantificador ou somente Número.
         if (Number(modificador.valor) || modificador.valor === "0") {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor
-            }${modificador.quantificador || ""};\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                }${modificador.quantificador || ""};\n`;
         }
 
         // Caso 2: Tradução do valor contida no objeto 'valoresAceitos'.
@@ -43,19 +42,22 @@ export class Serializador {
         ) {
             const objetoValores = modificador["valoresAceitos"];
             const valorTraduzido = objetoValores[modificador.valor];
-            return `${" ".repeat(indentacao)}${
-                modificador.propriedadeCss
-            }: ${valorTraduzido};\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss
+                }: ${valorTraduzido};\n`;
         }
 
         // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
         if (modificador.valor instanceof Metodo) {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor.paraTexto() || ""
-            };\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""
+                };\n`;
         }
 
-        // Caso 4: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
+        // Caso 4: Valor com aspas - como as fontes de texto.
+        if (modificador.valor.includes('"')) {
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+        }
+
+        // Caso 5: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(" ")) {
             if (modificador.valor.includes(",")) {
                 const separarValores: Array<string> =
@@ -80,33 +82,21 @@ export class Serializador {
                 );
 
                 if (valoresTraduzidos.length !== 0) {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                        valoresTraduzidos
-                    };\n`;
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos
+                        };\n`;
                 } else {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                        modificador.valor
-                    };\n`;
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                        };\n`;
                 }
             }
 
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor
-            };\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                };\n`;
         }
-        
-        // Caso 5: Valor com aspas - como as fontes de texto.
-        if (modificador.valor.includes('"')) {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor
-            };\n`;
-        }
-        
+
         // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
-        return `${" ".repeat(indentacao)}${
-            modificador.propriedadeCss
-        }: ${valorTraduzido};\n`;
+        return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valorTraduzido};\n`;
     }
 
     serializarBlocoDeclaracao(
@@ -117,7 +107,7 @@ export class Serializador {
         let resultado = "";
         const prefixos = [];
         let deveImprimir = true;
-        
+
         for (const seletor of declaracao.seletores) {
             // Espaços reservados não são escritos diretamente no CSS.
             if (seletor instanceof SeletorEspacoReservado) {
@@ -200,7 +190,7 @@ export class Serializador {
     validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
         const nomeFolEs =
             declaracao.modificadores[0].nomeFoles.length > 1 &&
-            typeof declaracao.modificadores[0].nomeFoles === "object"
+                typeof declaracao.modificadores[0].nomeFoles === "object"
                 ? declaracao.modificadores[0].nomeFoles[0].toString()
                 : declaracao.modificadores[0].nomeFoles.toString();
 
@@ -267,7 +257,7 @@ export class Serializador {
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
-        }        
+        }
 
         for (const [index, declaracao] of declaracoes.entries()) {
             switch (declaracao.constructor.name) {

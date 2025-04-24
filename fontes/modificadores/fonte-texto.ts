@@ -27,22 +27,23 @@ export class FonteTexto extends Modificador {
     ) {
         super("fonte-texto", "font-family", pragmas);
 
-        const valorString = validarValorString(valor);
-        if (valorString) valor = valor.replace(/^["']|["']$/g, '');
-        
         if (!valorVariavel) {
             if (valor.includes(",")) {
                 const separarValores = valor.split(", ");
-                
+
                 separarValores.forEach((valorIndividual) => {
+                    const valorString = validarValorString(valorIndividual);
+                    if (valorString) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
                     validarValorFonte("fonte-texto", valorIndividual, this.valoresAceitos);
                 });
             } else {
+                const valorString = validarValorString(valor);
+                if (valorString) valor = valor.replace(/^["']|["']$/g, '');
                 validarValorFonte("fonte-texto", valor, this.valoresAceitos);
+                if (valorString) valor = `"${valor}"`;
             }
         }
 
-        if (valorString) valor = `"${valor}"`;
         this.valor = valor;
     }
 }
