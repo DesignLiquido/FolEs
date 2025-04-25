@@ -257,7 +257,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 "emoji",
                 "fangsong",
             ];
-
+                
             for (let index = 0; index < valoresGrafia.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -283,6 +283,103 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain('font-family');
                 expect(resultadoTradutor).toContain(valoresGrafia[index]);
+            }
+        });
+
+        it('Caso de sucesso - Valor fonte de texto com 2º parâmetro de grafia em português', () => {            
+            const valoresGrafia = [
+                {
+                    css: "serif",
+                    foles: "serifa",
+                },
+                {
+                    css: "sans-serif",
+                    foles: "sem-serifa",
+                },
+                {
+                    css: "monospace",
+                    foles: "monoespaço",
+                },
+                {
+                    css: "monospace",
+                    foles: "monoespaco",
+                },
+                {
+                    css: "cursive",
+                    foles: "cursiva",
+                },
+                {
+                    css: "fantasy",
+                    foles: "fantasia",
+                },
+                {
+                    css: "system-ui",
+                    foles: "sistema-iu",
+                },
+                {
+                    css: "ui-serif",
+                    foles: "iu-serifa",
+                },
+                {
+                    css: "ui-sans-serif",
+                    foles: "iu-sem-serifa",
+                },
+                {
+                    css: "ui-monospace",
+                    foles: "iu-monoespaço",
+                },
+                {
+                    css: "ui-monospace",
+                    foles: "iu-monoespaco",
+                },
+                {
+                    css: "ui-rounded",
+                    foles: "iu-arredondada",
+                },
+                {
+                    css: "math",
+                    foles: "matematica",
+                },
+                {
+                    css: "math",
+                    foles: "matemática",
+                },
+                {
+                    css: "emoji",
+                    foles: "emoji",
+                },
+                {
+                    css: "fangsong",
+                    foles: "serifa-chinesa",
+                },
+            ];
+
+                
+            for (let index = 0; index < Object.keys(valoresGrafia).length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                        `fonte-texto: "Arial", ${valoresGrafia[index].foles};`,
+                    "}"
+                ]);
+
+                expect(resultadoLexador.simbolos).toHaveLength(9);
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].valor).toContain(valoresGrafia[index].foles);
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain('font-family');
+                expect(resultadoTradutor).toContain(valoresGrafia[index].css);
             }
         });
     });
