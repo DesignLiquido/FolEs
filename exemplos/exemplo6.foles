@@ -11,5 +11,5 @@ lmht {
 }
 
 lmht {
-    fonte-texto: "Times New Roman", serif;
+    fonte-texto: "Times New Roman", sans-serifa;
 }

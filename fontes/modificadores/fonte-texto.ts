@@ -17,6 +17,21 @@ export class FonteTexto extends Modificador {
         math: "math",
         emoji: "emoji",
         fangsong: "fangsong",
+        "serifa": "serif",
+        "sem-serifa": "sans-serif",
+        "monoespaço": "monospace",
+        "monoespaco": "monospace",
+        "cursiva": "cursive",
+        "fantasia": "fantasy",
+        "sistema-iu": "system-ui",
+        "iu-serifa": "ui-serif",
+        "iu-sem-serifa": "ui-sans-serif",
+        "iu-monoespaço": "ui-monospace",
+        "iu-monoespaco": "ui-monospace",
+        "iu-arredondada": "ui-rounded",
+        "matematica": "math",
+        "matemática": "math",
+        "serifa-chinesa": "fangsong",
     };
 
     constructor(

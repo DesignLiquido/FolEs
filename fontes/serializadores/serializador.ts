@@ -8,6 +8,7 @@ import estruturasHtml from "../tradutores/estruturas-html";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
 import { SeletorModificador } from "../modificadores/superclasse";
+import { fontes } from "../modificadores/atributos/fontes";
 
 /**
  * A classe que efetivamente traduz FolEs para CSS.
@@ -54,7 +55,31 @@ export class Serializador {
 
         // Caso 4: Valor com aspas - como as fontes de texto.
         if (modificador.valor.includes('"')) {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+            if (modificador.valor.includes(",")) {
+                const separarValores = modificador.valor.split(", ");
+                const valorSemAspas = separarValores[0].replace(/["']/g, '');
+
+                // Trecho específico para tratamento de fontes com grafia
+                if (Object.keys(fontes).includes(valorSemAspas)) {
+                    let unirValores = '';
+                    separarValores.forEach((valorIndividual) => {
+                        if (
+                            modificador["valoresAceitos"] !== undefined &&
+                            modificador["valoresAceitos"].hasOwnProperty(valorIndividual)
+                        ) {
+                            const objetoValores = modificador["valoresAceitos"];
+                            const valorTraduzido = objetoValores[valorIndividual];
+                            separarValores[1] = valorTraduzido;
+                            unirValores = separarValores.join(", ");
+                        }
+                    });
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${unirValores};\n`;
+                } else {
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+                }
+            } else {
+                return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+            }
         }
 
         // Caso 5: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra

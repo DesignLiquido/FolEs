@@ -117,7 +117,7 @@ export class FolEs {
     }
 }
 
-// const testeFoles = new FolEs(false);
-// console.log(testeFoles.converterParaCss('../exemplos/exemplo6.foles'));
+//  const testeFoles = new FolEs(false);
+//  console.log(testeFoles.converterParaCss('../exemplos/exemplo6.foles'));
 //  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
 //  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
