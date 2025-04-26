@@ -4,7 +4,6 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { Posição } from "../listas/posição";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 
 describe('Testando Suporte a VARIÁVEIS', () => {
@@ -397,6 +396,6 @@ describe('Testando Suporte a VARIÁVEIS', () => {
                 tradutor.serializar(resultadoAvaliadorSintatico);
             }).toThrow(`A variável 'cor-secundaria' deve ser declarada antes da atribuição de valor.`);;
         });
- 
+
     });
 });

@@ -1,5 +1,6 @@
 import { Modificador, PragmasModificador } from "./superclasse";
-import { validarValores } from "./validacoes/comum";
+import { validarValorFonte } from "./validacoes/fonte";
+import { validarValorString } from "./validacoes/string";
 
 export class FonteTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,6 +17,21 @@ export class FonteTexto extends Modificador {
         math: "math",
         emoji: "emoji",
         fangsong: "fangsong",
+        "serifa": "serif",
+        "sem-serifa": "sans-serif",
+        "monoespaço": "monospace",
+        "monoespaco": "monospace",
+        "cursiva": "cursive",
+        "fantasia": "fantasy",
+        "sistema-iu": "system-ui",
+        "iu-serifa": "ui-serif",
+        "iu-sem-serifa": "ui-sans-serif",
+        "iu-monoespaço": "ui-monospace",
+        "iu-monoespaco": "ui-monospace",
+        "iu-arredondada": "ui-rounded",
+        "matematica": "math",
+        "matemática": "math",
+        "serifa-chinesa": "fangsong",
     };
 
     constructor(
@@ -26,18 +42,22 @@ export class FonteTexto extends Modificador {
     ) {
         super("fonte-texto", "font-family", pragmas);
 
-        // OBS.: A lista de valores aceitos inclui todas as FONTES GENÉRICAS (<generic-name>).
-        // Porém, o modificador também pode receber DOIS PARÂMETROS,
-        // sendo o PRIMEIRO o nome de qualquer fonte existente (<family-name>).
+        if (!valorVariavel) {
+            if (valor.includes(",")) {
+                const separarValores = valor.split(", ");
 
-        // Ex.: fonte-texto: "Gill Sans Extrabold", sans-serif;
-
-        // OBS.2: Fontes com mais de uma palavra devem ser passadas como string (entre "");
-        // OBS.3: O segundo parâmetro é obrigatório para o caso da primeira fonte não estar disponível.
-
-        // A lógica abaixo cobre somente o recebimento dos valores genéricos.
-        if (!valorVariavel)
-            validarValores("fonte-texto", valor, this.valoresAceitos);
+                separarValores.forEach((valorIndividual) => {
+                    const valorString = validarValorString(valorIndividual);
+                    if (valorString) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
+                    validarValorFonte("fonte-texto", valorIndividual, this.valoresAceitos);
+                });
+            } else {
+                const valorString = validarValorString(valor);
+                if (valorString) valor = valor.replace(/^["']|["']$/g, '');
+                validarValorFonte("fonte-texto", valor, this.valoresAceitos);
+                if (valorString) valor = `"${valor}"`;
+            }
+        }
 
         this.valor = valor;
     }

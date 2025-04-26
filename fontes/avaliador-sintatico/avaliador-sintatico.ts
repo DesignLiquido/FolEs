@@ -1793,9 +1793,26 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             return classeModificadora as Modificador;
         }
 
-        const atribuicaoAbreviada =
-            this.tratarAtribuicaoAbreviada(valoresModificador);
+        if (valoresModificador[0].tipo === tiposDeSimbolos.PONTO) {
+            const valorComPonto = `${valoresModificador[0].lexema}${valoresModificador[1].lexema}`;
+            const classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valorComPonto,
+                quantificador && quantificador.hasOwnProperty("lexema")
+                    ? quantificador.lexema
+                    : quantificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal,
+                },
+            );
 
+            return classeModificadora as Modificador;
+        }
+
+        const atribuicaoAbreviada = this.tratarAtribuicaoAbreviada(valoresModificador);
+        
         const classeModificadora = new SeletorModificador(
             modificador.lexema,
             atribuicaoAbreviada,

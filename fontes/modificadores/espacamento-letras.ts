@@ -22,8 +22,14 @@ export class EspacamentoLetras extends Modificador {
 
         // Também pode receber valores numéricos com ponto (.) na frente
         // Ex.: espaçamento-letras: .2rem;
+        let valorComPonto = false;
 
         if (!valorVariavel) {
+            if (valor.includes('.')) {
+                valorComPonto = true;
+                valor = valor.replace('.', '');
+            }
+
             validarValorNumerico(
                 "espaçamento-letras",
                 valor,
@@ -41,6 +47,7 @@ export class EspacamentoLetras extends Modificador {
             }
         }
 
+        if (valorComPonto) valor = `.${valor}`;
         this.valor = valor;
     }
 }

@@ -217,7 +217,5 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(resultadoTradutor).toContain('normal');
             }
         });
-
-
     });
 });

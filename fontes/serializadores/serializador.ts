@@ -8,6 +8,7 @@ import estruturasHtml from "../tradutores/estruturas-html";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
 import { SeletorModificador } from "../modificadores/superclasse";
+import { fontes } from "../modificadores/atributos/fontes";
 
 /**
  * A classe que efetivamente traduz FolEs para CSS.
@@ -31,9 +32,8 @@ export class Serializador {
     ): string {
         // Caso 1: Número-Quantificador ou somente Número.
         if (Number(modificador.valor) || modificador.valor === "0") {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor
-            }${modificador.quantificador || ""};\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                }${modificador.quantificador || ""};\n`;
         }
 
         // Caso 2: Tradução do valor contida no objeto 'valoresAceitos'.
@@ -43,19 +43,46 @@ export class Serializador {
         ) {
             const objetoValores = modificador["valoresAceitos"];
             const valorTraduzido = objetoValores[modificador.valor];
-            return `${" ".repeat(indentacao)}${
-                modificador.propriedadeCss
-            }: ${valorTraduzido};\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss
+                }: ${valorTraduzido};\n`;
         }
 
         // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
         if (modificador.valor instanceof Metodo) {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor.paraTexto() || ""
-            };\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""
+                };\n`;
         }
 
-        // Caso 4: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
+        // Caso 4: Valor com aspas - como as fontes de texto.
+        if (modificador.valor.includes('"')) {
+            if (modificador.valor.includes(",")) {
+                const separarValores = modificador.valor.split(", ");
+                const valorSemAspas = separarValores[0].replace(/["']/g, '');
+
+                // Trecho específico para tratamento de fontes com grafia
+                if (Object.keys(fontes).includes(valorSemAspas)) {
+                    let unirValores = '';
+                    separarValores.forEach((valorIndividual) => {
+                        if (
+                            modificador["valoresAceitos"] !== undefined &&
+                            modificador["valoresAceitos"].hasOwnProperty(valorIndividual)
+                        ) {
+                            const objetoValores = modificador["valoresAceitos"];
+                            const valorTraduzido = objetoValores[valorIndividual];
+                            separarValores[1] = valorTraduzido;
+                            unirValores = separarValores.join(", ");
+                        }
+                    });
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${unirValores};\n`;
+                } else {
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+                }
+            } else {
+                return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+            }
+        }
+
+        // Caso 5: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(" ")) {
             if (modificador.valor.includes(",")) {
                 const separarValores: Array<string> =
@@ -80,26 +107,21 @@ export class Serializador {
                 );
 
                 if (valoresTraduzidos.length !== 0) {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                        valoresTraduzidos
-                    };\n`;
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos
+                        };\n`;
                 } else {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                        modificador.valor
-                    };\n`;
+                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                        };\n`;
                 }
             }
 
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${
-                modificador.valor
-            };\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                };\n`;
         }
 
-        // Caso 5: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
+        // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
         const valorTraduzido = valoresGerais[modificador.valor];
-        return `${" ".repeat(indentacao)}${
-            modificador.propriedadeCss
-        }: ${valorTraduzido};\n`;
+        return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valorTraduzido};\n`;
     }
 
     serializarBlocoDeclaracao(
@@ -193,7 +215,7 @@ export class Serializador {
     validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
         const nomeFolEs =
             declaracao.modificadores[0].nomeFoles.length > 1 &&
-            typeof declaracao.modificadores[0].nomeFoles === "object"
+                typeof declaracao.modificadores[0].nomeFoles === "object"
                 ? declaracao.modificadores[0].nomeFoles[0].toString()
                 : declaracao.modificadores[0].nomeFoles.toString();
 

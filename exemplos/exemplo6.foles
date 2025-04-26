@@ -1,0 +1,15 @@
+lmht {
+    recursos-fonte: "c2sc", "hist";
+}
+
+lmht {
+    eventos-ponteiro: delimitarCaixa;
+}
+
+lmht {
+    espacamento-letras: .2rem;
+}
+
+lmht {
+    fonte-texto: "Times New Roman", sans-serifa;
+}
