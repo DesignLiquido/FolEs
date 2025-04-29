@@ -1774,7 +1774,11 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             return classeModificadora as Modificador;
         }
 
-        if (valoresModificador.length <= 2) {
+        if (
+            valoresModificador.length < 2 ||
+            valoresModificador.length <= 2 && (quantificador && quantificador.hasOwnProperty("lexema"))
+        ) {
+            // console.log('CHEGA Q1');
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty("lexema")
@@ -1810,9 +1814,11 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
             return classeModificadora as Modificador;
         }
+        // console.log('CHEGA AA');
+        // console.log(valoresModificador);
 
         const atribuicaoAbreviada = this.tratarAtribuicaoAbreviada(valoresModificador);
-        
+
         const classeModificadora = new SeletorModificador(
             modificador.lexema,
             atribuicaoAbreviada,
