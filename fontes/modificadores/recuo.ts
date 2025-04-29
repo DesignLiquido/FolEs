@@ -16,20 +16,27 @@ export class Recuo extends Modificador {
         super("recuo", "padding", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("recuo", valor);
+            if (valor.includes(" ")) {
+                const separarValores = valor.split(" ");
+                separarValores.forEach((valorIndividual) => validarValorNumerico("recuo", valorIndividual))
+            } else {
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "recuo",
-                    quantificador,
-                    comprimentos,
-                    ListaDeValorPercentual,
-                );
-
-                this.quantificador = quantificador;
+                validarValorNumerico("recuo", valor);
+                
+                if (Number(parseInt(valor))) {
+                    validarQuantificador(
+                        "recuo",
+                        quantificador,
+                        comprimentos,
+                        ListaDeValorPercentual,
+                    );
+                    
+                    this.quantificador = quantificador;
+                }
             }
         }
-
+        // console.log(valor);
+        
         this.valor = valor;
     }
 }
