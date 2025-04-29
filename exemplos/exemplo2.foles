@@ -1,5 +1,28 @@
 lmht {
     opacidade: 80%;
-    recuo: herdar herdar;
+    recuo: 10px 10px;
     altura: 50%;
+}
+
+lmht {
+    coluna-em-grade: auto / auto;
+    linha-em-grade: 1 / 3;
+    proporção-tela: 16 / 9;
+    tamanho-grade: auto / auto / auto / auto;
+    raio-borda: 10px / 10px;
+}
+
+lmht {
+    area-mascara: visualizar-caixa, completar-caixa, borda-caixa;
+    atraso-transicao: 2s, 4ms;
+    duracao-animacao: 10s, 35s, 230ms;
+}
+
+lmht {
+    citações: "x";
+    configuracoes-variacao-fonte: "<";
+    enfase-texto: 'foo';
+    estilo-enfase-texto: "\25B2";
+    substituir-idioma-fonte: "«" "»" "‹" "›";
+    vazamento-texto: 'xxxxx';
 }

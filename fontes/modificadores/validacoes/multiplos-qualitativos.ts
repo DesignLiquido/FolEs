@@ -5,8 +5,7 @@ import { valoresGlobais } from "../atributos/globais";
 export function validarMultiplosQualitativos(
     nomePropriedade: string,
     valor: any,
-    valoresAceitos: { [valorFoles: string]: string },
-    valoresExtra?: any,
+    valoresAceitos?: { [valorFoles: string]: string },
 ) {
     const valorString = valor.toString();
 
@@ -20,9 +19,8 @@ export function validarMultiplosQualitativos(
         valorString.startsWith("#") && valorString.length <= 7
     );
 
-    if (valoresExtra === undefined) {
+    if (valoresAceitos === undefined) {
         if (
-            !(valor in valoresAceitos) &&
             validaçõesCor &&
             validaçõesHEX &&
             Number.isNaN(parseInt(valor)) &&
@@ -33,23 +31,14 @@ export function validarMultiplosQualitativos(
             throw new Error(
                 `Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos: 
                 número-quantificador, 
-                ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
             `);
         }
     } else {
-        let metodoValido = false;
-        for (let index = 0; index < valoresExtra.length; index++) {
-            if (metodoValido === false) {
-                metodoValido = valor["traducao"] === valoresExtra[index];
-            }
-        }
-
         if (
             !(valor in valoresAceitos) &&
-            !metodoValido &&
             validaçõesCor &&
             validaçõesHEX &&
             Number.isNaN(parseInt(valor)) &&
