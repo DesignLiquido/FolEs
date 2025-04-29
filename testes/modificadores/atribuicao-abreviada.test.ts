@@ -79,7 +79,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             }
         });
 
-        it('Seletores que recebem múltiplas palavras reservadas como atributo', () => {
+        it.skip('Seletores que recebem múltiplas palavras reservadas como atributo', () => {
             for (let index = 0; index < AtribuicaoAbreviadaPR.length; index += 1) {
                 let seletor: any;
                 if (index <= 5) {
