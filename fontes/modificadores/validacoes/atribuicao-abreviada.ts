@@ -12,15 +12,20 @@ export function validarAtribuicaoAbreviada(
     valoresAceitos: { [valorFoles: string]: string } = undefined,
     valoresExtra: any = undefined,
 ): void {
-    const separarValores: Array<string> = valor.split(" ");
+    let separarValores: Array<string>;
+
+    if (valor.includes(",")) {
+        separarValores = valor.split(", ");
+    } else if (valor.includes("/")) {
+        separarValores = valor.split(" / ");
+    } else if (valor.includes(" ")) {
+        separarValores = valor.split(" ");
+    }
 
     separarValores.forEach((valorIndividual: string) => {
         switch (tipoValidacao) {
             case "comum":
                 validarValores(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
-                break;
-            case "condicao-extra":
-                validarValoresAdicionais(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
                 break;
             case "condição-extra":
                 validarValoresAdicionais(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
@@ -31,14 +36,8 @@ export function validarAtribuicaoAbreviada(
             case "fonte":
                 validarValorFonte(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
                 break;
-            case "multiplos-qualitativos":
-                validarMultiplosQualitativos(nomePropriedade, valorIndividual, valoresAceitos ? valoresAceitos : undefined);
-                break;
             case "múltiplos-qualitativos":
                 validarMultiplosQualitativos(nomePropriedade, valorIndividual, valoresAceitos ? valoresAceitos : undefined);
-                break;
-            case "numerica":
-                validarValorNumerico(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
                 break;
             case "numérica":
                 validarValorNumerico(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);

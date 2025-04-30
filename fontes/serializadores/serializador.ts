@@ -89,7 +89,7 @@ export class Serializador {
             if (modificador.valor.includes(",")) {
                 separarValores = modificador.valor.split(", ");
             } else if (modificador.valor.includes("/")) {
-                separarValores = modificador.valor.split("/");
+                separarValores = modificador.valor.split(" / ");
             } else if (modificador.valor.includes(" ")) {
                 separarValores = modificador.valor.split(" ");
             }
