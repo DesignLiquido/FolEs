@@ -119,9 +119,6 @@ export class Serializador {
                 //         };\n`;
                 // }
             } else {
-                // console.log('entra aqui, né?');
-                // console.log(modificador.valor);
-
                 const separarValores: Array<string> = modificador.valor.split(" ");
 
                 separarValores.forEach((valorIndividual, indexIndividual) => {
@@ -131,22 +128,17 @@ export class Serializador {
                             valorIndividual,
                         )
                     ) {
-                        // console.log('entra va');
-
                         const objetoValores = modificador["valoresAceitos"];
                         valoresTraduzidos += objetoValores[valorIndividual];
                         if (indexIndividual < separarValores.length - 1) {
                             valoresTraduzidos += ", ";
                         }
                     } else if (valoresGerais[valorIndividual] !== undefined) {
-                        // console.log('entra vg');
-
                         if (indexIndividual < separarValores.length - 1) {
                             valoresTraduzidos += " ";
                         }
                         valoresTraduzidos += valoresGerais[valorIndividual];
                     }
-                    // console.log(typeof modificador.valor === 'string');
 
                     if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
                         modificador.valor = modificador.valor.replace(valorIndividual, "");
@@ -154,8 +146,6 @@ export class Serializador {
                     }
                 });
             }
-            // console.log('retorno 3');
-            // console.log(modificador.valor);
 
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
                 };\n`;
