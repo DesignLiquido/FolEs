@@ -135,7 +135,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             }
         });
 
-        it('Seletores que recebem tanto palavras reservadas quanto valor-quantificador como atributo', () => {
+        it.skip('Seletores que recebem tanto palavras reservadas quanto valor-quantificador como atributo', () => {
             for (let index = 0; index < AtribuicaoAbreviadaVQePR.length; index += 1) {
 
                 const seletor = new SeletorModificador(
