@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -13,7 +14,11 @@ export class FimBordaEmLinha extends Modificador {
         super("fim-borda-em-linha", "border-inline-end", pragmas);
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("fim-borda-em-linha", valor);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "fim-borda-em-linha", valor);
+            } else {
+                validarMultiplosQualitativos("fim-borda-em-linha", valor);
+            }
 
             if (Number(parseInt(valor))) {
                 validarQuantificador(

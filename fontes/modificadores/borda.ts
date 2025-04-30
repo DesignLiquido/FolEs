@@ -2,6 +2,7 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { validarQuantificador } from "./validacoes/quantificador";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 
 export class Borda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,7 +21,11 @@ export class Borda extends Modificador {
         super("borda", "border", pragmas);
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("borda", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda", valor, this.valoresAceitos);
+            } else {
+                validarMultiplosQualitativos("borda", valor, this.valoresAceitos);
+            }
 
             if (Number(parseInt(valor))) {
                 validarQuantificador("borda", quantificador, unidadesMedida);

@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -21,12 +22,11 @@ export class EstiloLista extends Modificador {
         const valoresExtra = ["url"];
 
         if (!valorVariavel) {
-            validarValorNumerico(
-                "estilo-lista",
-                valor,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+            if (typeof valor === 'string' && valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "estilo-lista", valor, this.valoresAceitos, valoresExtra);
+            } else {
+                validarValorNumerico("estilo-lista", valor, this.valoresAceitos, valoresExtra);
+            }
 
             if (quantificador !== undefined) {
                 validarQuantificador(

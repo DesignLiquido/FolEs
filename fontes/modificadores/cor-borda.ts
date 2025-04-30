@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorBorda extends Modificador {
@@ -10,7 +11,13 @@ export class CorBorda extends Modificador {
     ) {
         super("cor-borda", "border-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor-borda", valor);
+        if (!valorVariavel) {
+            if (typeof valor === 'string' && valor.includes(" ")) {
+                validarAtribuicaoAbreviada("cor", "cor-borda", valor);
+            } else {
+                validarValorCor("cor-borda", valor);
+            }
+        }
 
         this.valor = valor;
     }

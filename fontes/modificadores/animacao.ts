@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Animacao extends Modificador {
@@ -29,14 +30,18 @@ export class Animacao extends Modificador {
 
         const valoresExtra = ["linear", "cubic-bezier", "steps"];
 
-        if (!valorVariavel)
-            validarValorNumerico(
-                "animação",
-                valor,
-                this.valoresAceitos,
-                valoresExtra,
-            );
-
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "animação", valor, this.valoresAceitos, valoresExtra);
+            } else {
+                validarValorNumerico(
+                    "animação",
+                    valor,
+                    this.valoresAceitos,
+                    valoresExtra,
+                );
+            }
+        }
         this.valor = valor;
     }
 }

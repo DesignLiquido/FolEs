@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class Grade extends Modificador {
@@ -27,8 +28,13 @@ export class Grade extends Modificador {
 
         const valoresExtra = ["minmax"];
 
-        if (!valorVariavel)
-            validarValores("grade", valor, this.valoresAceitos, valoresExtra);
+        if (!valorVariavel) {
+            if (typeof valor === 'string' && valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "grade", valor, this.valoresAceitos, valoresExtra);
+            } else {
+                validarValores("grade", valor, this.valoresAceitos, valoresExtra);
+            }
+        }
 
         this.valor = valor;
     }

@@ -1,6 +1,7 @@
 import { ValorPercentual } from "../../testes/listas/valor-quantificador";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -41,7 +42,11 @@ export class Fundo extends Modificador {
         super("fundo", "background", pragmas);
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("fundo", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valor, this.valoresAceitos);
+            } else {
+                validarMultiplosQualitativos("fundo", valor, this.valoresAceitos);
+            }
 
             if (Number(parseInt(valor))) {
                 validarQuantificador(

@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
@@ -20,22 +21,21 @@ export class AjustarTamanhoFonte extends Modificador {
     ) {
         super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
-        // OBS.: Os valores aceitos listados só são válidos quando há DOIS valores atribuídos.
-        // Ex.: ajustar-tamanho-fonte: altura-cap 0.5;
-
-        // TODO: Avaliar pq valores numéricos declarados via variável não estão sendo aceitos
         if (!valorVariavel) {
-            validarValorNumerico(
-                "ajustar-tamanho-fonte",
-                valor,
-                this.valoresAceitos,
-            );
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "ajustar-tamanho-fonte", valor, this.valoresAceitos);
+            } else {
+                validarValorNumerico(
+                    "ajustar-tamanho-fonte",
+                    valor,
+                    this.valoresAceitos,
+                );
+            }
         }
 
         this.valor = valor;
 
         // Não recebe quantificador, apenas o valor numérico.
-        if (quantificador)
-            proibirQuantificador("ajustar-tamanho-fonte", quantificador);
+        if (quantificador) proibirQuantificador("ajustar-tamanho-fonte", quantificador);
     }
 }

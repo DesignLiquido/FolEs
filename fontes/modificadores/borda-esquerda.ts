@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -20,14 +21,14 @@ export class BordaEsquerda extends Modificador {
         super("borda-esquerda", "border-left", pragmas);
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("borda-esquerda", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-esquerda", valor, this.valoresAceitos);
+            } else {
+                validarMultiplosQualitativos("borda-esquerda", valor, this.valoresAceitos);
+            }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "borda-esquerda",
-                    quantificador,
-                    unidadesMedida,
-                );
+                validarQuantificador("borda-esquerda", quantificador, unidadesMedida);
 
                 this.quantificador = quantificador;
             }

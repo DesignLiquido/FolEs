@@ -1,5 +1,6 @@
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -55,8 +56,13 @@ export class Fonte extends Modificador {
     ) {
         super("fonte", "font", pragmas);
 
+        // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
         if (!valorVariavel) {
-            validarValorNumerico("fonte", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "fonte", valor, this.valoresAceitos);
+            } else {
+                validarValorNumerico("fonte", valor, this.valoresAceitos);
+            }
 
             if (Number(parseInt(valor))) {
                 validarQuantificador(

@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ColunaEmGrade extends Modificador {
@@ -16,14 +17,7 @@ export class ColunaEmGrade extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes("/")) {
-                const separarValores = valor.split(" / ");
-                separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico(
-                        "coluna-em-grade",
-                        valorIndividual,
-                        this.valoresAceitos,
-                    );
-                });
+                validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valor, this.valoresAceitos);
             } else {
                 validarValorNumerico(
                     "coluna-em-grade",

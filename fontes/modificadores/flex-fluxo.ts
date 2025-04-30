@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class FlexFluxo extends Modificador {
@@ -21,8 +22,13 @@ export class FlexFluxo extends Modificador {
     ) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        if (!valorVariavel)
-            validarValores("flex-fluxo", valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "flex-fluxo", valor, this.valoresAceitos);
+            } else {
+                validarValores("flex-fluxo", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

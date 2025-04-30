@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class DecoracaoTexto extends Modificador {
@@ -26,7 +27,11 @@ export class DecoracaoTexto extends Modificador {
         );
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("decoração-texto", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "decoração-texto", valor, this.valoresAceitos);
+            } else {
+                validarMultiplosQualitativos("decoração-texto", valor, this.valoresAceitos);
+            }
         }
 
         this.valor = valor;
