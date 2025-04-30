@@ -84,11 +84,11 @@ export class Serializador {
 
         // Caso 5: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
         if (modificador.valor.includes(" ")) {
+            let valoresTraduzidos: string = "";
             if (modificador.valor.includes(",")) {
                 const separarValores: Array<string> =
                     modificador.valor.split(", ");
 
-                let valoresTraduzidos: string = "";
                 separarValores.forEach(
                     (valorIndividual: string, indexIndividual: number) => {
                         if (
@@ -103,17 +103,59 @@ export class Serializador {
                                 valoresTraduzidos += ", ";
                             }
                         }
-                    },
+
+                        if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
+                            modificador.valor = modificador.valor.replace(valorIndividual, "");
+                            modificador.valor += valoresTraduzidos;
+                        }
+                    }
                 );
 
-                if (valoresTraduzidos.length !== 0) {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos
-                        };\n`;
-                } else {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
-                        };\n`;
-                }
+                // if (valoresTraduzidos.length !== 0) {
+                //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos
+                //         };\n`;
+                // } else {
+                //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
+                //         };\n`;
+                // }
+            } else {
+                // console.log('entra aqui, né?');
+                // console.log(modificador.valor);
+
+                const separarValores: Array<string> = modificador.valor.split(" ");
+
+                separarValores.forEach((valorIndividual, indexIndividual) => {
+                    if (
+                        modificador["valoresAceitos"] &&
+                        modificador["valoresAceitos"].hasOwnProperty(
+                            valorIndividual,
+                        )
+                    ) {
+                        // console.log('entra va');
+
+                        const objetoValores = modificador["valoresAceitos"];
+                        valoresTraduzidos += objetoValores[valorIndividual];
+                        if (indexIndividual < separarValores.length - 1) {
+                            valoresTraduzidos += ", ";
+                        }
+                    } else if (valoresGerais[valorIndividual] !== undefined) {
+                        // console.log('entra vg');
+
+                        if (indexIndividual < separarValores.length - 1) {
+                            valoresTraduzidos += " ";
+                        }
+                        valoresTraduzidos += valoresGerais[valorIndividual];
+                    }
+                    // console.log(typeof modificador.valor === 'string');
+
+                    if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
+                        modificador.valor = modificador.valor.replace(valorIndividual, "");
+                        modificador.valor += valoresTraduzidos;
+                    }
+                });
             }
+            // console.log('retorno 3');
+            // console.log(modificador.valor);
 
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
                 };\n`;
