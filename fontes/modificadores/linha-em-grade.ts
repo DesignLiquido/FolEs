@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LinhaEmGrade extends Modificador {
@@ -15,21 +16,10 @@ export class LinhaEmGrade extends Modificador {
         super("linha-em-grade", "grid-row", pragmas);
 
         if (!valorVariavel) {
-            if (valor.includes("/")) {
-                const separarValores = valor.split(" / ");
-                separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico(
-                        "linha-em-grade",
-                        valorIndividual,
-                        this.valoresAceitos,
-                    );
-                });
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "linha-em-grade", valor, this.valoresAceitos);
             } else {
-                validarValorNumerico(
-                    "linha-em-grade",
-                    valor,
-                    this.valoresAceitos,
-                );
+                validarValorNumerico("linha-em-grade", valor, this.valoresAceitos);
             }
         }
 

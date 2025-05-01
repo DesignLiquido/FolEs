@@ -19,9 +19,9 @@ export class ImagemBorda extends Modificador {
 
         if (!valorVariavel) {
             if (typeof valor === 'string' && valor.includes(" ")) {
-                validarAtribuicaoAbreviada("comum", "imagem-máscara", valor, this.valoresAceitos, valoresExtra);
+                validarAtribuicaoAbreviada("comum", "imagem-borda", valor, this.valoresAceitos, valoresExtra);
             } else {
-                validarValores("imagem-máscara", valor, this.valoresAceitos, valoresExtra);
+                validarValores("imagem-borda", valor, this.valoresAceitos, valoresExtra);
             }
         }
 

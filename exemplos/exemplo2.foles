@@ -14,3 +14,7 @@ lmht {
 lmht {
     animação: 3s alternar 1s deslizar;
 }
+
+lmht {
+    ajustar-tamanho-fonte: altura-cap 0.5;
+}

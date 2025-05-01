@@ -1,5 +1,6 @@
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -20,14 +21,14 @@ export class RegrasColuna extends Modificador {
         super("regras-coluna", "column-rule", pragmas);
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("regras-coluna", valor);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valor);
+            } else {
+                validarMultiplosQualitativos("regras-coluna", valor);
+            }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "regras-coluna",
-                    quantificador,
-                    comprimentos,
-                );
+                validarQuantificador("regras-coluna", quantificador, comprimentos);
 
                 this.quantificador = quantificador;
             }

@@ -10,11 +10,20 @@ export class ReiniciarTudo extends Modificador {
     ) {
         super("reiniciar-tudo", "all", pragmas);
 
-        // Aceita somente os valores globais
         if (!valorVariavel) {
-            if (!(valor in valoresGlobais)) {
-                throw new Error(`Propriedade 'reiniciar-tudo' com valor ${valor} inválido. Valores aceitos: 
+            if (valor.includes(" ")) {
+                const separarValores: Array<string> = valor.split(" ");
+                separarValores.forEach((valorIndividual) => {
+                    if (!(valorIndividual in valoresGlobais)) {
+                        throw new Error(`Propriedade 'reiniciar-tudo' com valor ${valorIndividual} inválido. Valores aceitos: 
+                        ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+                    }
+                })
+            } else {
+                if (!(valor in valoresGlobais)) {
+                    throw new Error(`Propriedade 'reiniciar-tudo' com valor ${valor} inválido. Valores aceitos: 
                     ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+                }
             }
         }
 

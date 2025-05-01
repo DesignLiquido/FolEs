@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -17,14 +18,14 @@ export class InicioBordaEmBloco extends Modificador {
         );
 
         if (!valorVariavel) {
-            validarMultiplosQualitativos("início-borda-em-bloco", valor);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "início-borda-em-bloco", valor);
+            } else {
+                validarMultiplosQualitativos("início-borda-em-bloco", valor);
+            }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "início-borda-em-bloco",
-                    quantificador,
-                    unidadesMedida,
-                );
+                validarQuantificador("início-borda-em-bloco", quantificador, unidadesMedida);
 
                 this.quantificador = quantificador;
             }
