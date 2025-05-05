@@ -4,6 +4,7 @@ import { validarValorCor } from "./cor";
 import { validarValorFonte } from "./fonte";
 import { validarMultiplosQualitativos } from "./multiplos-qualitativos";
 import { validarValorNumerico } from "./numerica";
+import { validarValorString } from "./string";
 
 export function validarAtribuicaoAbreviada(
     tipoValidacao: string,
@@ -11,6 +12,7 @@ export function validarAtribuicaoAbreviada(
     valor: any,
     valoresAceitos: { [valorFoles: string]: string } = undefined,
     valoresExtra: any = undefined,
+    validacaoString: boolean = false,
 ): void {
     let separarValores: Array<string>;
 
@@ -23,6 +25,11 @@ export function validarAtribuicaoAbreviada(
     }
 
     separarValores.forEach((valorIndividual: string) => {
+        if (validacaoString) {
+            const stringValida = validarValorString(valorIndividual);
+            if (stringValida) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
+        }
+
         switch (tipoValidacao) {
             case "comum":
                 validarValores(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
