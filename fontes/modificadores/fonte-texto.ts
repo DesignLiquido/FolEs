@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorFonte } from "./validacoes/fonte";
 import { validarValorString } from "./validacoes/string";
 
@@ -44,13 +45,7 @@ export class FonteTexto extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes(",")) {
-                const separarValores = valor.split(", ");
-
-                separarValores.forEach((valorIndividual) => {
-                    const valorString = validarValorString(valorIndividual);
-                    if (valorString) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
-                    validarValorFonte("fonte-texto", valorIndividual, this.valoresAceitos);
-                });
+                validarAtribuicaoAbreviada("fonte", "fonte-texto", valor, this.valoresAceitos, undefined, true);
             } else {
                 const valorString = validarValorString(valor);
                 if (valorString) valor = valor.replace(/^["']|["']$/g, '');

@@ -1,5 +1,6 @@
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -18,11 +19,7 @@ export class AtrasoTransicao extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes(",")) {
-                const separarValores = valor.split(", ");
-
-                separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico("atraso-transição", valorIndividual);
-                });
+                validarAtribuicaoAbreviada("numérica", "atraso-transição", valor);
             } else {
                 validarValorNumerico("atraso-transição", valor);
             }
