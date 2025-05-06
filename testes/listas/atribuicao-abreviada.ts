@@ -86,6 +86,49 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
     },
 ];
 
+export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
+    {
+        modificador: 'ajustar-tamanho-fonte',
+        valor: 'altura-ex 0.5',
+        traducao: 'ex-height 0.5',
+    },
+    {
+        modificador: 'comportamento-rolagem-mouse',
+        valor: 'auto conter',
+        traducao: 'auto contain',
+    },
+    {
+        modificador: 'cor-borda',
+        valor: 'vermelho amarelo verde azul',
+        traducao: 'red yellow green blue',
+    },
+    {
+        modificador: 'enfase-texto',
+        valor: 'preenchido sesamo',
+        traducao: 'filled sesame',
+    },
+    {
+        modificador: 'estilo-lista',
+        valor: 'fora nenhum',
+        traducao: 'outside none',
+    },
+    {
+        modificador: 'flex-fluxo',
+        valor: 'inverter-linha não-agrupar',
+        traducao: 'row-reverse nowrap',
+    },
+    {
+        modificador: 'fonte',
+        valor: 'italica muito-pequeno negrito',
+        traducao: 'italic x-small bold',
+    },
+    {
+        modificador: 'fundo',
+        valor: 'borda repetir vermelho',
+        traducao: 'border-box repeat red',
+    },
+];
+
 export const AtribuicaoAbreviadaPR: Array<string> = [
     'contorno',
     'borda-direita',
@@ -102,11 +145,14 @@ export const AtribuicaoAbreviadaPR: Array<string> = [
 export const AtribuicaoAbreviadaVQ: Array<string> = [
     'colunas',
     'deslocamento',
+    'espacamento',
+    'espaçamento',
     'flex',
     'insercao',
     'inserção',
     'inserção-em-bloco',
     'insercao-em-linha',
+    'largura-borda',
     'margem',
     'margem-em-bloco',
     'margem-em-bloco-rolagem-mouse',
@@ -143,6 +189,10 @@ export const AtribuicaoSeparadaPorBarra: Array<object> = [
         modificador: 'raio-borda',
         valor: '10px / 10px',
     },
+    {
+        modificador: 'modelo-em-grade',
+        valor: '100px 1fr / 50px 1fr',
+    }
 ];
 
 export const AtribuicaoSeparadaPorVirgula: Array<object> = [

@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { Serializador } from "../../fontes/serializadores";
-import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../listas/atribuicao-abreviada";
+import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaPREspecificas, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../listas/atribuicao-abreviada";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
@@ -135,6 +135,51 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             }
         });
 
+
+        it('Seletores que recebem palavras reservadas específicas como atributo', () => {
+            for (let index = 0; index < AtribuicaoAbreviadaPREspecificas.length; index += 1) {
+
+                const seletor = new SeletorModificador(
+                    AtribuicaoAbreviadaPREspecificas[index]['modificador'],
+                    AtribuicaoAbreviadaPREspecificas[index]['valor'],
+                );
+
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                        `${AtribuicaoAbreviadaPREspecificas[index]['modificador']}: ${AtribuicaoAbreviadaPREspecificas[index]['valor']};`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros ao fazer o mapeamento
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    seletor['nomeFoles']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    seletor['propriedadeCss']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo
+                expect(resultadoTradutor).toContain('html');
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaPREspecificas[index]['traducao']);
+            }
+        });
+    
         it('Seletores que recebem tanto palavras reservadas quanto valor-quantificador como atributo', () => {
             for (let index = 0; index < AtribuicaoAbreviadaVQePR.length; index += 1) {
 

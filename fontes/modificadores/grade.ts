@@ -26,6 +26,7 @@ export class Grade extends Modificador {
     ) {
         super("grade", "grid", pragmas);
 
+        // TODO: Também aceita valor-quantificador
         const valoresExtra = ["minmax"];
 
         if (!valorVariavel) {

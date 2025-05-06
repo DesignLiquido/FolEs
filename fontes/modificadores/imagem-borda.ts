@@ -14,6 +14,8 @@ export class ImagemBorda extends Modificador {
         valorVariavel: boolean = false,
     ) {
         super("imagem-borda", "border-image", pragmas);
+        
+        // TODO: Também aceita linear-gradient
 
         const valoresExtra = ["url"];
 
