@@ -22,9 +22,9 @@ export class RegrasColuna extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valor);
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valor, this.valoresAceitos);
             } else {
-                validarMultiplosQualitativos("regras-coluna", valor);
+                validarMultiplosQualitativos("regras-coluna", valor, this.valoresAceitos);
             }
 
             if (Number(parseInt(valor))) {

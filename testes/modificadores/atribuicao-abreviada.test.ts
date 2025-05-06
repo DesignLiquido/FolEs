@@ -9,7 +9,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais valores', () => {
-    describe.skip('Testes Unitários', () => {
+    describe('Testes Unitários', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
@@ -98,7 +98,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                         valorPR += ' ';
                     }
                 }
-
+                
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -184,7 +184,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['valor']);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['traducao']);
             }
         });
 

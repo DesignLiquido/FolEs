@@ -2,70 +2,87 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
     {
         modificador: 'animacao',
         valor: '3s alternar 1s deslizar',
+        traducao: '3s alternate 1s slide',
     },
     {
         modificador: 'animação',
         valor: '3s alternar 1s deslizar',
+        traducao: '3s alternate 1s slide',
     },
     {
         modificador: 'borda',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-direita',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-esquerda',
+        traducao: '2px dotted',
         valor: '2px pontilhado',
     },
     {
         modificador: 'borda-inferior',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-superior',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'colunas',
         valor: '6rem auto',
+        traducao: '6rem auto',
     },
     {
         modificador: 'contorno',
         valor: '1rem grossa',
+        traducao: '1rem thick',
     },
     {
         modificador: 'fim-borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'fim-borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'inicio-borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'início-borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'inicio-borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'início-borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
 ];
 

@@ -13,3 +13,7 @@ lmht {
 lmht {
     fonte-texto: "Times New Roman", sem-serifa;
 }
+
+lmht {
+    regras-coluna: fina;
+}
