@@ -35,8 +35,8 @@ export class Transicao extends Modificador {
             } else {
                 validarValorNumerico("transição", valor, this.valoresAceitos, valoresExtra);
             }
-
-            if (Number(parseInt(valor))) {
+            
+            if (quantificador && Number(parseInt(valor))) {
                 validarQuantificador("transição", quantificador, valoresTemporais);
 
                 this.quantificador = quantificador;

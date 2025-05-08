@@ -127,6 +127,41 @@ export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
         valor: 'borda repetir vermelho',
         traducao: 'border-box repeat red',
     },
+    {
+        modificador: 'grade',
+        valor: 'conteudo-maximo nenhum',
+        traducao: 'max-content none',
+    },
+    {
+        modificador: 'mascara',
+        valor: 'conter alfa',
+        traducao: 'contain alpha',
+    },
+    {
+        modificador: 'posicionar-se',
+        valor: 'centro inicio',
+        traducao: 'center start',
+    },
+    {
+        modificador: 'sintetizar-fonte',
+        valor: 'maiúsculas-pequenas itálico',
+        traducao: 'small-caps style',
+    },
+    {
+        modificador: 'transicao',
+        valor: '4s inicio-final-lento',
+        traducao: '4s ease-in-out',
+    },
+    {
+        modificador: 'variacao-fonte',
+        valor: 'ligacoes-comuns maiusculas-pequenas',
+        traducao: 'common-ligatures small-caps',
+    },
+    {
+        modificador: 'vazamento',
+        valor: 'auto visível',
+        traducao: 'auto visible',
+    }, 
 ];
 
 export const AtribuicaoAbreviadaPR: Array<string> = [
