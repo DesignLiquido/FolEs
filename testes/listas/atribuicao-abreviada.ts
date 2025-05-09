@@ -84,6 +84,11 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
         valor: '2px pontilhado',
         traducao: '2px dotted',
     },
+    {
+        modificador: 'estilo-fonte',
+        valor: 'oblíqua 10deg',
+        traducao: 'oblique 10deg',
+    },
 ];
 
 export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
@@ -131,6 +136,11 @@ export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
         modificador: 'grade',
         valor: 'conteudo-maximo nenhum',
         traducao: 'max-content none',
+    },
+    {
+        modificador: 'imagem-borda',
+        valor: 'preencher 27px',
+        traducao: 'fill 27px',
     },
     {
         modificador: 'mascara',
@@ -227,6 +237,10 @@ export const AtribuicaoSeparadaPorBarra: Array<object> = [
     {
         modificador: 'modelo-em-grade',
         valor: '100px 1fr / 50px 1fr',
+    },
+    {
+        modificador: 'imagem-borda',
+        valor: '27 / 35px',
     }
 ];
 

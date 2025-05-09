@@ -30,12 +30,12 @@ export class Transicao extends Modificador {
         const valoresExtra = ["linear"];
 
         if (!valorVariavel) {
-            if (typeof valor === 'string' && valor.includes("/")) {
+            if (typeof valor === 'string' && valor.includes(" ")) {
                 validarAtribuicaoAbreviada("numérica", "transição", valor, this.valoresAceitos, valoresExtra);
             } else {
                 validarValorNumerico("transição", valor, this.valoresAceitos, valoresExtra);
             }
-            
+
             if (quantificador && Number(parseInt(valor))) {
                 validarQuantificador("transição", quantificador, valoresTemporais);
 

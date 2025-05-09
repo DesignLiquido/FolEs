@@ -17,3 +17,7 @@ lmht {
 lmht {
     regras-coluna: fina;
 }
+
+lmht {
+    imagem-borda: preencher 27px;
+}

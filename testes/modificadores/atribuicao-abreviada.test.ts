@@ -186,7 +186,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 const seletor = new SeletorModificador(
                     AtribuicaoAbreviadaVQePR[index]['modificador'],
                     AtribuicaoAbreviadaVQePR[index]['valor'],
-                    'px'
+                    index === AtribuicaoAbreviadaVQePR.length - 1 ? 'deg' : 'px'
                 );
 
                 // Lexador

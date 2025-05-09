@@ -14,8 +14,7 @@ export class CorDestaque extends Modificador {
     ) {
         super("cor-destaque", "accent-color", pragmas);
 
-        if (!valorVariavel)
-            validarValorCor("cor-destaque", valor, this.valoresAceitos);
+        if (!valorVariavel) validarValorCor("cor-destaque", valor, this.valoresAceitos);
 
         this.valor = valor;
     }
