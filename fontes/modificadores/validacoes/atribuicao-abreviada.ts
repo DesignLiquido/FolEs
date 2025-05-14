@@ -49,8 +49,6 @@ export function validarAtribuicaoAbreviada(
             case "numérica":
                 validarValorNumerico(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
                 break;
-            default:
-                throw new Error(`A validação do tipo ${tipoValidacao} não foi encontrada`);
         }
     });
 }
