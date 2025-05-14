@@ -241,11 +241,10 @@ export class Serializador {
                 declaracao.modificadores.forEach((modificador) => {
                     if (modificador.valor === declaracaoVariavel.nome) {
                         if (typeof declaracaoVariavel.valor === "string") {
+                            
                             modificador.valor = declaracaoVariavel.valor;
 
-                            if (declaracaoVariavel.quantificador)
-                                modificador.quantificador =
-                                    declaracaoVariavel.quantificador;
+                            if (declaracaoVariavel.quantificador) modificador.quantificador = declaracaoVariavel.quantificador;
                             this.validarValoresVariaveis(declaracao);
                         } else if (declaracaoVariavel.valor instanceof Metodo) {
                             modificador.valor = declaracaoVariavel.valor;
