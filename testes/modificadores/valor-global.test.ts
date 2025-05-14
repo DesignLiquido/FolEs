@@ -7,7 +7,8 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Valor } from "../../fontes/valores/valor";
 import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
-import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
+import { valoresGlobais } from "../../fontes/modificadores/atributos/globais";
 
 describe('Testando Seletores com VALORES GLOBAIS', () => {
     describe('Testes Unitários', () => {
@@ -143,6 +144,54 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 expect(() => {
                     avaliadorSintatico.analisar(resultadoLexador.simbolos);
                 }).toThrowError(`Propriedade '${ValorGlobalInvalido[index]}' com valor ${valorInvalido} inválido.`);
+            }
+        });
+
+        it('Caso de Sucesso - Posição atribuída por meio de variável', () => {
+            const globaisFolEs = Object.keys(valoresGlobais);
+            const globaisCss = Object.values(valoresGlobais);
+
+            for (let index = 0; index < globaisFolEs.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    `$valor-padrao: ${globaisFolEs[index]};`,
+                    "lmht {",
+                        'conteúdo: $valor-padrao;',
+                    "}"
+                ]);
+
+                // O Lexador deve montar o objeto de acordo, sem retornar erros.
+                expect(resultadoLexador.simbolos).toHaveLength(13);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O mapeamento deve conter o tipo variável
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.VARIAVEL }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+
+                // O primeiro item do mapeamento deve ser a declaração da variável
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(DeclaracaoVariavel);
+
+                // O segundo item do mapeamento deve conter as devidas traduções
+                const segundoResultado = resultadoAvaliadorSintatico[1];
+                const segundoResultadoTipado = segundoResultado as BlocoDeclaracao;
+                expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(segundoResultadoTipado.modificadores[0].nomeFoles).toContain('conteúdo');
+                expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(globaisCss[index]);
+                expect(resultadoTradutor).toContain('content');
             }
         });
     });
