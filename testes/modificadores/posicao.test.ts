@@ -138,9 +138,9 @@ describe('Testando Seletores de POSIÇÃO', () => {
             for (let index = 0; index < estilosFolEs.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
-                    `$cor-padrao: ${estilosFolEs[index]};`,
+                    `$posicao-padrao: ${estilosFolEs[index]};`,
                     "lmht {",
-                        'posicionar-conteúdo: $cor-padrao;',
+                        'posicionar-conteúdo: $posicao-padrao;',
                     "}"
                 ]);
 

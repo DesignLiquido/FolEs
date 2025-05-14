@@ -6,7 +6,7 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { StatusAuto, StatusNenhum, StatusNormal } from "../listas/status";
-import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 
 describe('Testando Seletores com STATUS como atributo', () => {
     describe('Testes Unitários', () => {
@@ -215,6 +215,53 @@ describe('Testando Seletores com STATUS como atributo', () => {
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('normal');
+            }
+        });
+
+        it('Caso de Sucesso - Status atribuído por meio de variável', () => {
+            for (let index = 0; index < StatusAuto.length; index += 1) {
+                const seletor = new SeletorModificador(StatusAuto[index], 'auto', null);
+                
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    '$status-padrao: auto;',
+                    "lmht {",
+                    ` ${StatusAuto[index]}: $status-padrao;`,
+                    "}"
+                ]);
+
+                // O Lexador deve montar o objeto de acordo, sem retornar erros.
+                expect(resultadoLexador.simbolos).toHaveLength(13);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O mapeamento deve conter o tipo variável
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.VARIAVEL }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+
+                // O primeiro item do mapeamento deve ser a declaração da variável
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(DeclaracaoVariavel);
+
+                // O segundo item do mapeamento deve conter as devidas traduções
+                const segundoResultado = resultadoAvaliadorSintatico[1];
+                const segundoResultadoTipado = segundoResultado as BlocoDeclaracao;
+                expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(seletor['nomeFoles']);
+                expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain('auto');
             }
         });
     });
