@@ -257,12 +257,12 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 "emoji",
                 "fangsong",
             ];
-                
+
             for (let index = 0; index < valoresGrafia.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `fonte-texto: "Arial", ${valoresGrafia[index]};`,
+                    `fonte-texto: "Arial", ${valoresGrafia[index]};`,
                     "}"
                 ]);
 
@@ -286,7 +286,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             }
         });
 
-        it('Caso de sucesso - Valor fonte de texto com 2º parâmetro de grafia em português', () => {            
+        it('Caso de sucesso - Valor fonte de texto com 2º parâmetro de grafia em português', () => {
             const valoresGrafia = [
                 {
                     css: "serif",
@@ -354,12 +354,12 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 },
             ];
 
-                
+
             for (let index = 0; index < Object.keys(valoresGrafia).length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `fonte-texto: "Arial", ${valoresGrafia[index].foles};`,
+                    `fonte-texto: "Arial", ${valoresGrafia[index].foles};`,
                     "}"
                 ]);
 
@@ -381,6 +381,23 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(resultadoTradutor).toContain('font-family');
                 expect(resultadoTradutor).toContain(valoresGrafia[index].css);
             }
+        });
+
+        it('Caso de falha - Atribuição de valor fonte inválido', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `fonte-texto: reservada;`,
+                "}"
+            ]);
+
+            expect(resultadoLexador.simbolos).toHaveLength(7);
+
+            // Avaliador Sintático
+            expect(() => {
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            }).toThrow("Propriedade 'fonte-texto' com valor reservada inválido");
+
         });
     });
 });

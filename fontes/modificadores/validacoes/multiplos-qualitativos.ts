@@ -15,14 +15,10 @@ export function validarMultiplosQualitativos(
         !valorString.includes("hsl") &&
         !valorString.includes("hsla");
 
-    const validaçõesHEX = !(
-        valorString.startsWith("#") && valorString.length <= 7
-    );
 
     if (valoresAceitos === undefined) {
         if (
             validaçõesCor &&
-            validaçõesHEX &&
             Number.isNaN(parseInt(valor)) &&
             !(valor in estilos) &&
             !(valor in cores) &&
@@ -40,7 +36,6 @@ export function validarMultiplosQualitativos(
         if (
             !(valor in valoresAceitos) &&
             validaçõesCor &&
-            validaçõesHEX &&
             Number.isNaN(parseInt(valor)) &&
             !(valor in estilos) &&
             !(valor in cores) &&
