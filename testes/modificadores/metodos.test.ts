@@ -4,8 +4,9 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosFolEs, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { SeletorValor } from "../../fontes/valores/seletor-valor";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -181,7 +182,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-        
+
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
         expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
         const primeiroResultado = resultadoAvaliadorSintatico[0];
@@ -2886,7 +2887,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
-        it('Caso de Falha - Atribuindo método inexistente', () => {
+    it('Caso de Falha - Atribuindo método inexistente', () => {
       for (let index = 0; index < MetodosTranslacao.length; index += 1) {
 
         const valoresAceitos = ['42px', '3ch', '0'];
@@ -2947,6 +2948,16 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
           expect(resultadoTradutor).toContain(`translateY(${valoresAceitos[valIndex]});`);
         }
+      }
+    });
+
+    it('Caso de Falha - Erro ao instanciar classe SeletorValor', () => {
+      for (let index = 0; index < MetodosFolEs.length; index += 1) {
+        const metodoIncorreto = MetodosFolEs[index].replace(MetodosFolEs[index][0], '');
+
+        expect(() => {
+          new SeletorValor(metodoIncorreto, []);
+        }).toThrow(`O valor \'${metodoIncorreto}\' não foi encontrado.`);
       }
     });
   });

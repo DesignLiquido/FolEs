@@ -6,6 +6,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Pseudoclasses } from "../listas/pseudoclasses";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { SeletorPseudoclasse } from "../../fontes/pseudoclasses/seletor-pseudoclasse";
 
 describe('Testando Seletores com PSEUDOCLASSES', () => {
     describe('Testes Unitários', () => {
@@ -82,6 +83,17 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 expect(() => {
                     tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
+            }
+        });
+
+        it('Caso de falha - Erro ao instanciar classe SeletorPseudoclasse', () => {
+            for (let index = 0; index < Pseudoclasses.length; index += 1) {
+                // Causar erro de digitação
+                const pseudoclasseIncorreta = Pseudoclasses[index].replace(Pseudoclasses[index][0], '');
+
+                expect(() => {
+                    new SeletorPseudoclasse(pseudoclasseIncorreta)
+                }).toThrow(`A pseudoclasse \'${pseudoclasseIncorreta}\' não existe.`)
             }
         });
     });
