@@ -50,6 +50,14 @@ export const Pseudoclasses: Array<string> = [
     "vazio",
     "verificado",
     "visitado",
+    "direção-texto",
+    "direcao-texto",
+    "n-filho",
+    "n-tipo",
+    "n-último-filho",
+    "n-ultimo-filho",
+    "n-último-tipo",
+    "n-ultimo-tipo",
 ];
 
 export const PseudoclassesComParametro: Array<string> = [

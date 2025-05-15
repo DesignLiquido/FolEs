@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { ValorAngulo, ValorComprimento, ValorPercentual, ValorQuantificador, ValorTempo } from "../listas/valor-quantificador";
+import { ValorAngulo, ValorComprimento, ValorPercentual, ValorQuantificador, ValorQuantificadorInvalido, ValorTempo } from "../listas/valor-quantificador";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 
 describe('Testes: Valor-Quantificador', () => {
@@ -89,6 +89,31 @@ describe('Testes: Valor-Quantificador', () => {
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
                 }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
+            }
+        });
+
+        it('Casos de Falha - Atribuição de valor inválido', () => {
+            for (let index = 0; index < Object.keys(ValorQuantificadorInvalido).length; index += 1) {
+
+                // Lexador - valor numérico não informado
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${ValorQuantificadorInvalido[index]}: pontilhado;`,
+                    "}"
+                ]);
+
+                // Lexador não deve identificar número ou quantificador na estrutura
+                expect(resultadoLexador.simbolos).not.toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático deve retornar erro
+                expect(() => {
+                    avaliador.analisar(resultadoLexador.simbolos);
+                }).toThrow(`Propriedade '${ValorQuantificadorInvalido[index]}' com valor pontilhado inválido.`);
             }
         });
 

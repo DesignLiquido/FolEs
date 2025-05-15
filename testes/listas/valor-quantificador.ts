@@ -224,8 +224,7 @@ export const ValorAngulo: Array<string> = [
 ]
 
 export const ValorQuantificadorInvalido: Array<string> = [
-    'borda-mascara',
-    'borda-máscara',
+    'altura-máxima',
     'girar',
     'modelo-colunas-em-grade',
     'modelo-linhas-em-grade',
