@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -25,7 +26,11 @@ export class Flex extends Modificador {
         super("flex", "flex", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("flex", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "flex", valor, this.valoresAceitos);
+            } else {
+                validarValorNumerico("flex", valor, this.valoresAceitos);
+            }
 
             if (quantificador !== undefined) {
                 validarQuantificador("flex", quantificador, unidadesMedida);

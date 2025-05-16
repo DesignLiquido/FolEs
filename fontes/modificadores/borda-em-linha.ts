@@ -1,8 +1,7 @@
-import { cores } from "./atributos/cores";
-import { estilos } from "./atributos/estilo";
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaEmLinha extends Modificador {
@@ -14,41 +13,16 @@ export class BordaEmLinha extends Modificador {
     ) {
         super("borda-em-linha", "border-inline", pragmas);
 
-        const valorString = valor.toString();
-
-        const validaçõesCor =
-            !valorString.includes("rgb") &&
-            !valorString.includes("rgba") &&
-            !valorString.includes("hsl") &&
-            !valorString.includes("hsla");
-
-        const validaçõesHEX = !(
-            valorString.startsWith("#") && valorString.length <= 7
-        );
-
         if (!valorVariavel) {
-            if (
-                Number.isNaN(parseInt(valor)) &&
-                validaçõesCor &&
-                validaçõesHEX &&
-                !(valor in estilos) &&
-                !(valor in cores) &&
-                !(valor in valoresGlobais)
-            ) {
-                throw new Error(`Propriedade 'borda-em-linha' com valor ${valor} inválido. Valores aceitos: 
-            número-quantificador, 
-            ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-em-linha", valor);
+            } else {
+                validarMultiplosQualitativos("borda-em-linha", valor);      
             }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "borda-em-linha",
-                    quantificador,
-                    unidadesMedida,
-                );
-
+                validarQuantificador("borda-em-linha", quantificador, unidadesMedida);
+                
                 this.quantificador = quantificador;
             }
         }

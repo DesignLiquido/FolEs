@@ -1,5 +1,6 @@
 import { angulos, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -21,12 +22,22 @@ export class Deslocamento extends Modificador {
         const valoresExtra = ["url", "ray"];
 
         if (!valorVariavel) {
-            validarValorNumerico(
-                "deslocamento",
-                valor,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+            if (typeof valor === 'string' && valor.includes(" ")) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "deslocamento",
+                    valor,
+                    this.valoresAceitos,
+                    valoresExtra,
+                );
+            } else {
+                validarValorNumerico(
+                    "deslocamento",
+                    valor,
+                    this.valoresAceitos,
+                    valoresExtra,
+                );
+            }
 
             if (quantificador) {
                 validarQuantificador(

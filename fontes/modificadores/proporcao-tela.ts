@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ProporcaoTela extends Modificador {
@@ -16,20 +17,9 @@ export class ProporcaoTela extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes("/")) {
-                const separarValores = valor.split(" / ");
-                separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico(
-                        "proporção-tela",
-                        valorIndividual,
-                        this.valoresAceitos,
-                    );
-                });
+                validarAtribuicaoAbreviada("numérica", "proporção-tela", valor, this.valoresAceitos);
             } else {
-                validarValorNumerico(
-                    "proporção-tela",
-                    valor,
-                    this.valoresAceitos,
-                );
+                validarValorNumerico("proporção-tela", valor, this.valoresAceitos);
             }
         }
 

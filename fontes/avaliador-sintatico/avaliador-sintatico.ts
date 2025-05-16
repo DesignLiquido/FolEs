@@ -1756,7 +1756,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
             const valorVariavel = true;
-
+            
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[1].lexema,
@@ -1774,7 +1774,10 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             return classeModificadora as Modificador;
         }
 
-        if (valoresModificador.length <= 2) {
+        if (
+            valoresModificador.length < 2 ||
+            valoresModificador.length <= 2 && (quantificador && quantificador.hasOwnProperty("lexema"))
+        ) {            
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty("lexema")
@@ -1812,7 +1815,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         }
 
         const atribuicaoAbreviada = this.tratarAtribuicaoAbreviada(valoresModificador);
-        
+
         const classeModificadora = new SeletorModificador(
             modificador.lexema,
             atribuicaoAbreviada,

@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TamanhoGrade extends Modificador {
@@ -16,20 +17,9 @@ export class TamanhoGrade extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes("/")) {
-                const separarValores = valor.split(" / ");
-                separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico(
-                        "tamanho-grade",
-                        valorIndividual,
-                        this.valoresAceitos,
-                    );
-                });
+               validarAtribuicaoAbreviada("numérica", "tamanho-grade", valor, this.valoresAceitos);
             } else {
-                validarValorNumerico(
-                    "tamanho-grade",
-                    valor,
-                    this.valoresAceitos,
-                );
+                validarValorNumerico("tamanho-grade", valor, this.valoresAceitos);
             }
         }
 

@@ -1,5 +1,6 @@
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarItens extends Modificador {
@@ -29,13 +30,13 @@ export class PosicionarItens extends Modificador {
     ) {
         super("posicionar-itens", "place-items", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais(
-                "posicionar-itens",
-                valor,
-                posicoes,
-                this.valoresAceitos,
-            );
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("condição-extra", "posicionar-itens", valor, posicoes, this.valoresAceitos);
+            } else {
+                validarValoresAdicionais("posicionar-itens", valor, posicoes, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

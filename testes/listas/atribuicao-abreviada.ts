@@ -2,71 +2,176 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
     {
         modificador: 'animacao',
         valor: '3s alternar 1s deslizar',
+        traducao: '3s alternate 1s slide',
     },
     {
         modificador: 'animação',
         valor: '3s alternar 1s deslizar',
+        traducao: '3s alternate 1s slide',
     },
     {
         modificador: 'borda',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-direita',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-esquerda',
+        traducao: '2px dotted',
         valor: '2px pontilhado',
     },
     {
         modificador: 'borda-inferior',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'borda-superior',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'colunas',
         valor: '6rem auto',
+        traducao: '6rem auto',
     },
     {
         modificador: 'contorno',
         valor: '1rem grossa',
+        traducao: '1rem thick',
     },
     {
         modificador: 'fim-borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'fim-borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'inicio-borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'início-borda-em-bloco',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'inicio-borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
     {
         modificador: 'início-borda-em-linha',
         valor: '2px pontilhado',
+        traducao: '2px dotted',
     },
+    {
+        modificador: 'estilo-fonte',
+        valor: 'oblíqua 10deg',
+        traducao: 'oblique 10deg',
+    },
+];
+
+export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
+    {
+        modificador: 'ajustar-tamanho-fonte',
+        valor: 'altura-ex 0.5',
+        traducao: 'ex-height 0.5',
+    },
+    {
+        modificador: 'comportamento-rolagem-mouse',
+        valor: 'auto conter',
+        traducao: 'auto contain',
+    },
+    {
+        modificador: 'cor-borda',
+        valor: 'vermelho amarelo verde azul',
+        traducao: 'red yellow green blue',
+    },
+    {
+        modificador: 'enfase-texto',
+        valor: 'preenchido sesamo',
+        traducao: 'filled sesame',
+    },
+    {
+        modificador: 'estilo-lista',
+        valor: 'fora nenhum',
+        traducao: 'outside none',
+    },
+    {
+        modificador: 'flex-fluxo',
+        valor: 'inverter-linha não-agrupar',
+        traducao: 'row-reverse nowrap',
+    },
+    {
+        modificador: 'fonte',
+        valor: 'italica muito-pequeno negrito',
+        traducao: 'italic x-small bold',
+    },
+    {
+        modificador: 'fundo',
+        valor: 'borda repetir vermelho',
+        traducao: 'border-box repeat red',
+    },
+    {
+        modificador: 'grade',
+        valor: 'conteudo-maximo nenhum',
+        traducao: 'max-content none',
+    },
+    {
+        modificador: 'imagem-borda',
+        valor: 'preencher 27px',
+        traducao: 'fill 27px',
+    },
+    {
+        modificador: 'mascara',
+        valor: 'conter alfa',
+        traducao: 'contain alpha',
+    },
+    {
+        modificador: 'posicionar-se',
+        valor: 'centro inicio',
+        traducao: 'center start',
+    },
+    {
+        modificador: 'sintetizar-fonte',
+        valor: 'maiúsculas-pequenas itálico',
+        traducao: 'small-caps style',
+    },
+    {
+        modificador: 'transicao',
+        valor: '4s inicio-final-lento',
+        traducao: '4s ease-in-out',
+    },
+    {
+        modificador: 'variacao-fonte',
+        valor: 'ligacoes-comuns maiusculas-pequenas',
+        traducao: 'common-ligatures small-caps',
+    },
+    {
+        modificador: 'vazamento',
+        valor: 'auto visível',
+        traducao: 'auto visible',
+    }, 
 ];
 
 export const AtribuicaoAbreviadaPR: Array<string> = [
@@ -85,11 +190,14 @@ export const AtribuicaoAbreviadaPR: Array<string> = [
 export const AtribuicaoAbreviadaVQ: Array<string> = [
     'colunas',
     'deslocamento',
+    'espacamento',
+    'espaçamento',
     'flex',
     'insercao',
     'inserção',
     'inserção-em-bloco',
     'insercao-em-linha',
+    'largura-borda',
     'margem',
     'margem-em-bloco',
     'margem-em-bloco-rolagem-mouse',
@@ -126,6 +234,14 @@ export const AtribuicaoSeparadaPorBarra: Array<object> = [
         modificador: 'raio-borda',
         valor: '10px / 10px',
     },
+    {
+        modificador: 'modelo-em-grade',
+        valor: '100px 1fr / 50px 1fr',
+    },
+    {
+        modificador: 'imagem-borda',
+        valor: '27 / 35px',
+    }
 ];
 
 export const AtribuicaoSeparadaPorVirgula: Array<object> = [

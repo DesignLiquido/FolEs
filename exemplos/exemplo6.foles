@@ -11,5 +11,13 @@ lmht {
 }
 
 lmht {
-    fonte-texto: "Times New Roman", sans-serifa;
+    fonte-texto: "Times New Roman", sem-serifa;
+}
+
+lmht {
+    regras-coluna: fina;
+}
+
+lmht {
+    imagem-borda: preencher 27px;
 }

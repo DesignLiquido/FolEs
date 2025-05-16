@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class ComportamentoRolagemMouse extends Modificador {
@@ -16,12 +17,17 @@ export class ComportamentoRolagemMouse extends Modificador {
     ) {
         super("comportamento-rolagem-mouse", "overscroll-behavior", pragmas);
 
-        if (!valorVariavel)
-            validarValores(
-                "comportamento-rolagem-mouse",
-                valor,
-                this.valoresAceitos,
-            );
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "comportamento-rolagem-mouse", valor, this.valoresAceitos);
+            } else {
+                validarValores(
+                    "comportamento-rolagem-mouse",
+                    valor,
+                    this.valoresAceitos,
+                );
+            }
+        }
 
         this.valor = valor;
     }

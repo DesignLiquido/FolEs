@@ -1,5 +1,6 @@
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -18,11 +19,7 @@ export class DuracaoAnimacao extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes(",")) {
-                const separarValores = valor.split(", ");
-
-                separarValores.forEach((valorIndividual) => {
-                    validarValorNumerico("duração-animação", valorIndividual);
-                });
+                validarAtribuicaoAbreviada("numérica", "duração-animação", valor);
             } else {
                 validarValorNumerico("duração-animação", valor);
             }

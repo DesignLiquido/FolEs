@@ -4,8 +4,9 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosFolEs, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { SeletorValor } from "../../fontes/valores/seletor-valor";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -181,7 +182,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // Avaliador Sintático
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-        
+
         // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
         expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
         const primeiroResultado = resultadoAvaliadorSintatico[0];
@@ -2883,6 +2884,80 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
           expect(resultadoTradutor).toContain(`translateY(${valoresAceitos[valIndex]});`);
         }
+      }
+    });
+
+    it('Caso de Falha - Atribuindo método inexistente', () => {
+      for (let index = 0; index < MetodosTranslacao.length; index += 1) {
+
+        const valoresAceitos = ['42px', '3ch', '0'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodosTranslacao[index]}: translacao-vertical(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 11 caso haja quantificador e 10 caso não haja
+          if (valIndex === 0 || valIndex === 1) {
+            expect(resultadoLexador.simbolos).toHaveLength(11);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodosTranslacao[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+          expect(resultadoTradutor).toContain(`translateY(${valoresAceitos[valIndex]});`);
+        }
+      }
+    });
+
+    it('Caso de Falha - Erro ao instanciar classe SeletorValor', () => {
+      for (let index = 0; index < MetodosFolEs.length; index += 1) {
+        const metodoIncorreto = MetodosFolEs[index].replace(MetodosFolEs[index][0], '');
+
+        expect(() => {
+          new SeletorValor(metodoIncorreto, []);
+        }).toThrow(`O valor \'${metodoIncorreto}\' não foi encontrado.`);
       }
     });
   });

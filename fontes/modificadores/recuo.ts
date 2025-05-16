@@ -1,8 +1,6 @@
-import {
-    comprimentos,
-    ListaDeValorPercentual,
-} from "./atributos/quantificadores";
+import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -16,20 +14,19 @@ export class Recuo extends Modificador {
         super("recuo", "padding", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("recuo", valor);
-
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "recuo",
-                    quantificador,
-                    comprimentos,
-                    ListaDeValorPercentual,
-                );
-
-                this.quantificador = quantificador;
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "recuo", valor);
+            } else {
+                validarValorNumerico("recuo", valor);
+                
+                if (Number(parseInt(valor))) {
+                    validarQuantificador("recuo", quantificador, comprimentos, ListaDeValorPercentual);
+                    
+                    this.quantificador = quantificador;
+                }
             }
         }
-
+        
         this.valor = valor;
     }
 }

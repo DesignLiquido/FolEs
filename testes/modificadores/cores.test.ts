@@ -6,7 +6,8 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Cores, CoresNomeFolEs } from "../listas/cores";
-import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
+import { cores } from "../../fontes/modificadores/atributos/cores";
 
 describe('Testando Seletores que recebem COR como atributo', () => {
     describe('Testes Unitários', () => {
@@ -291,5 +292,48 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
+        it('Caso de Sucesso - Cores atribuídas por meio de variável', () => {
+            const coresFolEs = Object.keys(cores);
+            const coresCss = Object.values(cores);
+ 
+            for (let index = 0; index < coresFolEs.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    `$cor-padrao: ${coresFolEs[index]};`,
+                    "lmht {",
+                        'cor-fundo: $cor-padrao;',
+                    "}"
+                ]);
+
+                // O Lexador deve montar o objeto de acordo, sem retornar erros.
+                expect(resultadoLexador.simbolos).toHaveLength(13);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O mapeamento deve conter o tipo variável
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.VARIAVEL }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(DeclaracaoVariavel);
+
+                const segundoResultado = resultadoAvaliadorSintatico[1];
+                const segundoResultadoTipado = segundoResultado as BlocoDeclaracao;
+                expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('cor-fundo');
+                expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-color');
+                
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(coresCss[index]);
+            }
+        });
     });
 });

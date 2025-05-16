@@ -1,8 +1,6 @@
-import {
-    ListaDeValorPercentual,
-    unidadesMedida,
-} from "./atributos/quantificadores";
+import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -20,18 +18,14 @@ export class RecuoRolagemMouse extends Modificador {
         super("recuo-rolagem-mouse", "scroll-padding", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico(
-                "recuo-rolagem-mouse",
-                valor,
-                this.valoresAceitos,
-            );
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "recuo-rolagem-mouse", valor, this.valoresAceitos);
+            } else {
+                validarValorNumerico("recuo-rolagem-mouse", valor, this.valoresAceitos);
+            }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "recuo-rolagem-mouse",
-                    quantificador,
-                    unidadesMedida,
-                );
+                validarQuantificador("recuo-rolagem-mouse", quantificador, unidadesMedida);
 
                 this.quantificador = quantificador;
             }

@@ -82,41 +82,39 @@ export class Serializador {
             }
         }
 
-        // Caso 5: Atribuição Abreviada | Múltiplos valores separados por espaço, vírgula ou barra
+        // Caso 5: Atribuição Abreviada | Múltiplos valores separados por vírgula, barra ou espaço
         if (modificador.valor.includes(" ")) {
+            let separarValores: Array<string> = [];
+
             if (modificador.valor.includes(",")) {
-                const separarValores: Array<string> =
-                    modificador.valor.split(", ");
-
-                let valoresTraduzidos: string = "";
-                separarValores.forEach(
-                    (valorIndividual: string, indexIndividual: number) => {
-                        if (
-                            modificador["valoresAceitos"] &&
-                            modificador["valoresAceitos"].hasOwnProperty(
-                                valorIndividual,
-                            )
-                        ) {
-                            const objetoValores = modificador["valoresAceitos"];
-                            valoresTraduzidos += objetoValores[valorIndividual];
-                            if (indexIndividual < separarValores.length - 1) {
-                                valoresTraduzidos += ", ";
-                            }
-                        }
-                    },
-                );
-
-                if (valoresTraduzidos.length !== 0) {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos
-                        };\n`;
-                } else {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
-                        };\n`;
-                }
+                separarValores = modificador.valor.split(", ");
+            } else if (modificador.valor.includes("/")) {
+                separarValores = modificador.valor.split(" / ");
+            } else if (modificador.valor.includes(" ")) {
+                separarValores = modificador.valor.split(" ");
             }
 
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
-                };\n`;
+            separarValores.forEach((valorIndividual, indexIndividual) => {
+                let valoresTraduzidos: string = "";
+
+                if (
+                    modificador["valoresAceitos"] &&
+                    modificador["valoresAceitos"].hasOwnProperty(
+                        valorIndividual,
+                    )
+                ) {
+                    const objetoValores = modificador["valoresAceitos"];
+                    valoresTraduzidos += objetoValores[valorIndividual];
+                } else if (valoresGerais[valorIndividual] !== undefined) {
+                    valoresTraduzidos += valoresGerais[valorIndividual];
+                }
+
+                if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
+                    modificador.valor = modificador.valor.replace(valorIndividual, valoresTraduzidos);
+                }
+            });
+
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
         }
 
         // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
@@ -243,11 +241,10 @@ export class Serializador {
                 declaracao.modificadores.forEach((modificador) => {
                     if (modificador.valor === declaracaoVariavel.nome) {
                         if (typeof declaracaoVariavel.valor === "string") {
+                            
                             modificador.valor = declaracaoVariavel.valor;
 
-                            if (declaracaoVariavel.quantificador)
-                                modificador.quantificador =
-                                    declaracaoVariavel.quantificador;
+                            if (declaracaoVariavel.quantificador) modificador.quantificador = declaracaoVariavel.quantificador;
                             this.validarValoresVariaveis(declaracao);
                         } else if (declaracaoVariavel.valor instanceof Metodo) {
                             modificador.valor = declaracaoVariavel.valor;

@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonte extends Modificador {
@@ -69,8 +70,13 @@ export class VariacaoFonte extends Modificador {
     ) {
         super(["variacao-fonte", "variação-fonte"], "font-variant", pragmas);
 
-        if (!valorVariavel)
-            validarValores("variação-fonte", valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "variação-fonte", valor, this.valoresAceitos);
+            } else {
+                validarValores("variação-fonte", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

@@ -1,5 +1,6 @@
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class Mascara extends Modificador {
@@ -50,13 +51,13 @@ export class Mascara extends Modificador {
     ) {
         super(["mascara", "máscara"], "mask", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais(
-                "máscara",
-                valor,
-                posicoesBasicas,
-                this.valoresAceitos,
-            );
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("condição-extra", "máscara", valor, posicoesBasicas, this.valoresAceitos);
+            } else {
+                validarValoresAdicionais("máscara", valor, posicoesBasicas, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

@@ -4,8 +4,9 @@ import { LexadorReverso } from "../../fontes/lexador/lexador-reverso";
 import { AvaliadorSintaticoReverso } from "../../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
 import { SerializadorReverso } from "../../fontes/serializadores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     describe('Testes Unitários', () => {
@@ -2625,6 +2626,16 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                         expect(resultadoTradutor).toContain(`translacao-3d(0);`);
                     }
                 }
+            }
+        });
+
+        it('Caso de Falha - Erro ao instanciar classe SeletorValorReverso', () => {
+            for (let index = 0; index < MetodosCss.length; index += 1) {
+                const metodoIncorreto = MetodosCss[index].replace(MetodosCss[index][0], '');
+
+                expect(() => {
+                    new SeletorValorReverso(metodoIncorreto, []);
+                }).toThrow(`O valor \'${metodoIncorreto}\' não foi encontrado.`);
             }
         });
     });

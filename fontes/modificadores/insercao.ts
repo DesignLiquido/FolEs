@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -17,7 +18,11 @@ export class Insercao extends Modificador {
         super(["insercao", "inserção"], "inset", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("inserção", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "inserção", valor, this.valoresAceitos);
+            } else {
+                validarValorNumerico("inserção", valor, this.valoresAceitos);
+            }
 
             if (Number(parseInt(valor))) {
                 validarQuantificador("inserção", quantificador, unidadesMedida);

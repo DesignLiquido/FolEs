@@ -6,7 +6,8 @@ import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { Estilo, EstiloBorda } from "../listas/estilo";
-import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
+import { estilos } from "../../fontes/modificadores/atributos/estilo";
 
 describe('Testando Seletores com ESTILO como atributo', () => {
     describe('Testes Unitários', () => {
@@ -77,7 +78,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        it('Casos de Falha - Valor não informado', () => {
+        it('Casos de falha - Valor não informado', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
 
                 // Lexador - estilo não informado
@@ -100,7 +101,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        it('Casos de Falha - Seletor com erro de digitação', () => {
+        it('Casos de falha - Seletor com erro de digitação', () => {
             for (let index = 0; index < Object.keys(Estilo).length; index += 1) {
                 // Causar erro de digitação
                 const seletorIncorreto = Estilo[index].replace(Estilo[index][0], '')
@@ -139,6 +140,58 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
                 }).toThrowError(`Propriedade '${EstiloBorda[index]}' com valor ${valorInvalido} inválido.`);
+            }
+        });
+
+        it('Casos de sucesso - Valores de estilo atribuídos por meio de variável', () => {
+            const estilosFolEs = Object.keys(estilos);
+            const estilosCss = Object.values(estilos);
+
+            for (let index = 0; index < estilosFolEs.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    `$estilo-padrao: ${estilosFolEs[index]};`,
+                    "corpo {",
+                        'contorno: $estilo-padrao;',
+                    "}"
+                ]);
+
+                // O Lexador deve montar o objeto de acordo, sem retornar erros
+                expect(resultadoLexador.simbolos).toHaveLength(13);
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O mapeamento do Lexador  deve conter o símbolo Variável
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.VARIAVEL }),
+                    ])
+                );
+
+                // O mapeamento do Lexador não deve conter números e/ou quantificadores
+                expect(resultadoLexador.simbolos).not.toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(DeclaracaoVariavel);
+
+                const segundoResultado = resultadoAvaliadorSintatico[1];
+                const segundoResultadoTipado = segundoResultado as BlocoDeclaracao;
+                expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('contorno');
+                expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('outline');
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoTradutor).toContain(estilosCss[index]);
             }
         });
     });

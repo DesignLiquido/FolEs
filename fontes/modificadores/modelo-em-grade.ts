@@ -1,5 +1,6 @@
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -23,27 +24,21 @@ export class ModeloEmGrade extends Modificador {
     ) {
         super("modelo-em-grade", "grid-template", pragmas);
 
-        // OBS.: Também aceita receber o valor do tipo matriz
+        // TODO: Também aceita receber o valor do tipo matriz
         // Ex.: grid-template:
         //      "a a a" 20%
         //      "b b b" auto;
 
         const valoresExtra = ["fit-content"];
         if (!valorVariavel) {
-            validarValorNumerico(
-                "modelo-em-grade",
-                valor,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+            if (typeof valor === 'string' && valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "modelo-em-grade", valor, this.valoresAceitos, valoresExtra);
+            } else {
+                validarValorNumerico("modelo-em-grade", valor, this.valoresAceitos, valoresExtra);
+            }
 
             if (quantificador !== undefined) {
-                validarQuantificador(
-                    "modelo-em-grade",
-                    quantificador,
-                    unidadesMedida,
-                    valoresFlex,
-                );
+                validarQuantificador("modelo-em-grade", quantificador, unidadesMedida, valoresFlex);
                 this.quantificador = quantificador;
             }
         }

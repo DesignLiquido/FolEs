@@ -10,7 +10,6 @@ export class ReiniciarTudo extends Modificador {
     ) {
         super("reiniciar-tudo", "all", pragmas);
 
-        // Aceita somente os valores globais
         if (!valorVariavel) {
             if (!(valor in valoresGlobais)) {
                 throw new Error(`Propriedade 'reiniciar-tudo' com valor ${valor} inválido. Valores aceitos: 

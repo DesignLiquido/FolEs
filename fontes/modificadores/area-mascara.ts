@@ -1,5 +1,6 @@
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 
 export class AreaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -30,15 +31,7 @@ export class AreaMascara extends Modificador {
 
         if (!valorVariavel) {
             if (valor.includes(",")) {
-                const separarValores = valor.split(", ");
-
-                separarValores.forEach((valorIndividual) => {
-                    validarValores(
-                        "área-máscara",
-                        valorIndividual,
-                        this.valoresAceitos,
-                    );
-                });
+                validarAtribuicaoAbreviada("comum", "área-máscara", valor, this.valoresAceitos)
             } else {
                 validarValores("área-máscara", valor, this.valoresAceitos);
             }

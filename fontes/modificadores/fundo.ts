@@ -1,8 +1,8 @@
 import { ValorPercentual } from "../../testes/listas/valor-quantificador";
-import { cores } from "./atributos/cores";
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fundo extends Modificador {
@@ -41,33 +41,11 @@ export class Fundo extends Modificador {
     ) {
         super("fundo", "background", pragmas);
 
-        const valorString = valor.toString();
-
-        const validaçõesCor =
-            !valorString.includes("rgb") &&
-            !valorString.includes("rgba") &&
-            !valorString.includes("hsl") &&
-            !valorString.includes("hsla");
-
-        const validaçõesHEX = !(
-            valorString.startsWith("#") && valorString.length <= 7
-        );
-
         if (!valorVariavel) {
-            if (
-                Number.isNaN(parseInt(valor)) &&
-                !(valor in this.valoresAceitos) &&
-                validaçõesCor &&
-                validaçõesHEX &&
-                !valorString.includes("url") &&
-                !(valor in cores) &&
-                !(valor in valoresGlobais)
-            ) {
-                throw new Error(`Propriedade 'fundo' com valor ${valor} inválido. Valores aceitos: 
-                    número-quantificador, 
-                    ${Object.keys(this.valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valor, this.valoresAceitos);
+            } else {
+                validarMultiplosQualitativos("fundo", valor, this.valoresAceitos);
             }
 
             if (Number(parseInt(valor))) {

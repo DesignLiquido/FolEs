@@ -1,6 +1,5 @@
-import { cores } from "./atributos/cores";
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorCor } from "./validacoes/cor";
 import { validarValorString } from "./validacoes/string";
 
@@ -24,6 +23,7 @@ export class EnfaseTexto extends Modificador {
         valor: string,
         quantificador?: string,
         pragmas?: PragmasModificador,
+        valorVariavel: boolean = false,
     ) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
@@ -33,7 +33,13 @@ export class EnfaseTexto extends Modificador {
             this.valoresAceitos[valor] = valor;
         }
 
-        validarValorCor("ênfase-texto", valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (!validacaoString && valor.includes(" ")) {
+                validarAtribuicaoAbreviada("cor", "ênfase-texto", valor, this.valoresAceitos);
+            } else {
+                validarValorCor("ênfase-texto", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

@@ -1,28 +1,20 @@
 lmht {
-    opacidade: 80%;
-    recuo: 10px 10px auto 20px;
-    altura: 50%;
+    recuo: 10px 10px 100px 20px;
+    borda-direita: 2px pontilhado;
+}
+
+lmht {
+    recursos-fonte: "c2sc", "hist";
 }
 
 lmht {
     coluna-em-grade: auto / auto;
-    linha-em-grade: 1 / 3;
-    proporção-tela: 16 / 9;
-    tamanho-grade: auto / auto / auto / auto;
-    raio-borda: 10px / 10px;
 }
 
 lmht {
-    area-mascara: visualizar-caixa, completar-caixa, borda-caixa;
-    atraso-transicao: 2s, 4ms;
-    duracao-animacao: 10s, 35s, 230ms;
+    animação: 3s alternar 1s deslizar;
 }
 
 lmht {
-    citações: "x";
-    configuracoes-variacao-fonte: "<";
-    enfase-texto: 'foo';
-    estilo-enfase-texto: "\25B2";
-    substituir-idioma-fonte: "«" "»" "‹" "›";
-    vazamento-texto: 'xxxxx';
+    ajustar-tamanho-fonte: altura-cap 0.5;
 }

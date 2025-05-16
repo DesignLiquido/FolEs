@@ -1,8 +1,7 @@
-import { cores } from "./atributos/cores";
-import { estilos } from "./atributos/estilo";
-import { valoresGlobais } from "./atributos/globais";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RegrasColuna extends Modificador {
@@ -21,44 +20,15 @@ export class RegrasColuna extends Modificador {
     ) {
         super("regras-coluna", "column-rule", pragmas);
 
-        // O valor é recebido como objeto, o que impossibilita de utilizar a função includes().
-        // A constante abaixo é criada para ser possível fazer as validações seguintes.
-        const valorString = valor.toString();
-
-        const validaçõesCor =
-            !valorString.includes("rgb") &&
-            !valorString.includes("rgba") &&
-            !valorString.includes("hsl") &&
-            !valorString.includes("hsla");
-
-        const validaçõesHEX = !(
-            valorString.startsWith("#") && valorString.length <= 7
-        );
-
         if (!valorVariavel) {
-            if (
-                !(valor in this.valoresAceitos) &&
-                validaçõesCor &&
-                validaçõesHEX &&
-                Number.isNaN(parseInt(valor)) &&
-                !(valor in estilos) &&
-                !(valor in cores) &&
-                !(valor in valoresGlobais)
-            ) {
-                throw new Error(`Propriedade 'regras-coluna' com valor ${valor} inválido. Valores aceitos: 
-                número-quantificador, 
-                ${Object.keys(this.valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-                ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
-                ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
-                ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valor, this.valoresAceitos);
+            } else {
+                validarMultiplosQualitativos("regras-coluna", valor, this.valoresAceitos);
             }
 
             if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "regras-coluna",
-                    quantificador,
-                    comprimentos,
-                );
+                validarQuantificador("regras-coluna", quantificador, comprimentos);
 
                 this.quantificador = quantificador;
             }

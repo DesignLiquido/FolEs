@@ -1,5 +1,6 @@
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { validarQuantificador } from "./validacoes/quantificador";
 
@@ -20,14 +21,15 @@ export class LarguraBorda extends Modificador {
         super("largura-borda", "border-width", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("largura-borda", valor, this.valoresAceitos);
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "largura-borda", valor, this.valoresAceitos);
+            } else {
+                validarValorNumerico("largura-borda", valor, this.valoresAceitos);
+            }
 
             if (quantificador !== undefined) {
-                validarQuantificador(
-                    "largura-borda",
-                    quantificador,
-                    unidadesMedida,
-                );
+                validarQuantificador("largura-borda", quantificador, unidadesMedida);
+
                 this.quantificador = quantificador;
             }
         }

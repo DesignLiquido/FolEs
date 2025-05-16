@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class Vazamento extends Modificador {
@@ -19,8 +20,13 @@ export class Vazamento extends Modificador {
     ) {
         super("vazamento", "overflow", pragmas);
 
-        if (!valorVariavel)
-            validarValores("vazamento", valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "vazamento", valor, this.valoresAceitos);
+            } else {
+                validarValores("vazamento", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }
