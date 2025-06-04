@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
@@ -20,11 +21,11 @@ export class InicioColunaEmGrade extends Modificador {
         );
 
         if (!valorVariavel) {
-            validarValorNumerico(
-                "início-coluna-em-grade",
-                valor,
-                this.valoresAceitos,
-            );
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", 'início-coluna-em-grade', valor, this.valoresAceitos, undefined, false, true);
+            } else {
+                validarValorNumerico("início-coluna-em-grade", valor, this.valoresAceitos);
+            }
 
             proibirQuantificador("início-coluna-em-grade", quantificador);
         }
