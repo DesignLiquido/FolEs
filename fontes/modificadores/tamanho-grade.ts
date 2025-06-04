@@ -16,8 +16,8 @@ export class TamanhoGrade extends Modificador {
         super("tamanho-grade", "grid-area", pragmas);
 
         if (!valorVariavel) {
-            if (valor.includes("/")) {
-               validarAtribuicaoAbreviada("numérica", "tamanho-grade", valor, this.valoresAceitos);
+            if (valor.includes("/") || valor.includes(" ")) {
+               validarAtribuicaoAbreviada("numérica", "tamanho-grade", valor, this.valoresAceitos, undefined, false, true);
             } else {
                 validarValorNumerico("tamanho-grade", valor, this.valoresAceitos);
             }
