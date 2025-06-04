@@ -16,14 +16,10 @@ export class ColunaEmGrade extends Modificador {
         super("coluna-em-grade", "grid-column", pragmas);
 
         if (!valorVariavel) {
-            if (valor.includes("/")) {
-                validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valor, this.valoresAceitos);
+            if (valor.includes("/") || valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valor, this.valoresAceitos, undefined, false, true);
             } else {
-                validarValorNumerico(
-                    "coluna-em-grade",
-                    valor,
-                    this.valoresAceitos,
-                );
+                validarValorNumerico("coluna-em-grade", valor, this.valoresAceitos);
             }
         }
 

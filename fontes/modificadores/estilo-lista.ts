@@ -23,7 +23,7 @@ export class EstiloLista extends Modificador {
 
         if (!valorVariavel) {
             if (typeof valor === 'string' && valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "estilo-lista", valor, this.valoresAceitos, valoresExtra);
+                validarAtribuicaoAbreviada("numérica", "estilo-lista", valor, this.valoresAceitos, valoresExtra, false, true);
             } else {
                 validarValorNumerico("estilo-lista", valor, this.valoresAceitos, valoresExtra);
             }

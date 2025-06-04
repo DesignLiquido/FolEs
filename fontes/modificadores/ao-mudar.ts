@@ -1,6 +1,7 @@
 import { valoresGlobais } from "./atributos/globais";
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 
 export class AoMudar extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,8 +20,13 @@ export class AoMudar extends Modificador {
     ) {
         super("ao-mudar", "will-change", pragmas);
 
-        if (!valorVariavel)
-            validarValores("ao-mudar", valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "ao-mudar", valor, this.valoresAceitos, undefined, false, true);
+            } else {
+                validarValores("ao-mudar", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

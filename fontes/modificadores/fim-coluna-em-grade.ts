@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
@@ -15,12 +16,13 @@ export class FimColunaEmGrade extends Modificador {
     ) {
         super("fim-coluna-em-grade", "grid-column-end", pragmas);
 
-        if (!valorVariavel)
-            validarValorNumerico(
-                "fim-coluna-em-grade",
-                valor,
-                this.valoresAceitos,
-            );
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "fim-coluna-em-grade", valor, this.valoresAceitos, undefined, false, true);
+            } else {
+                validarValorNumerico("fim-coluna-em-grade", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
 
