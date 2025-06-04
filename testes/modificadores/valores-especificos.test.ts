@@ -7,6 +7,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { fontes } from "../../fontes/modificadores/atributos/fontes";
+import { ValoresPersonalizados } from "../listas/valores-personalizados";
 
 describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
     describe('Testes Unitários', () => {
@@ -398,6 +399,51 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 avaliadorSintatico.analisar(resultadoLexador.simbolos);
             }).toThrow("Propriedade 'fonte-texto' com valor reservada inválido");
 
+        });
+
+        it('Caso de sucesso - Seletores que recebem valores personalizados (custom-indent) válidos', () => {
+            for (let index = 0; index < ValoresPersonalizados.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${ValoresPersonalizados[index]['modificador']}: ${ValoresPersonalizados[index]['valor']};`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve conter o símbolo IDENTIFICADOR
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toContain(
+                    ValoresPersonalizados[index]['modificador']
+                );
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    ValoresPersonalizados[index]['css']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo
+                expect(resultadoTradutor).toContain('html');
+                expect(resultadoTradutor).toContain(ValoresPersonalizados[index]['css']);
+                expect(resultadoTradutor).toContain(ValoresPersonalizados[index]['valor']);
+            }
         });
     });
 });
