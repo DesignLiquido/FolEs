@@ -27,9 +27,6 @@ export function validarIdentificacaoPersonalizada(
     }
 }
 
-// const a = validarIdentificacaoPersonalizada('ao-mudar', 'opacidade');
-// console.log(a);
-
 /**
     Regras principais para um <custom-ident> válido:
     - Não pode ser um valor global (herdar, inicial, reverter)
