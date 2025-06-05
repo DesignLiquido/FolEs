@@ -65,3 +65,30 @@ export const ValoresPersonalizados: Array<object> = [
         css: 'grid-area',
     },
 ];
+
+export const ValoresPersonalizadosMultiplos: Array<object> = [
+    {
+        modificador: 'estilo-lista',
+        valor: 'dentro meu-estilo',
+        traducao: 'inside meu-estilo',
+        css: 'list-style',
+    },
+    {
+        modificador: 'propriedade-transição',
+        valor: 'todas, animacao4',
+        traducao: 'all, animacao4',
+        css: 'transition-property',
+    },
+    {
+        modificador: 'definir-contador',
+        valor: 'nenhum meu-contador',
+        traducao: 'none meu-contador',
+        css: 'counter-set',
+    },
+    {
+        modificador: 'ao-mudar',
+        valor: 'posição-rolagem test01',
+        traducao: 'scroll-position test01',
+        css: 'will-change',
+    },
+];
