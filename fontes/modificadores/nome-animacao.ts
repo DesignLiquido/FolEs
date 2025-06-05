@@ -21,7 +21,8 @@ export class NomeAnimacao extends Modificador {
             if (valor.includes(" ") || valor.includes(",")) {
                 validarAtribuicaoAbreviada("comum", "nome-animação", valor, this.valoresAceitos, undefined, false, true);
             } else {
-                if (valor !== 'nenhum' && !(Object.keys(valoresGlobais).includes(valor))) {
+                if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
+                    
                     validarIdentificacaoPersonalizada("nome-animação", valor);
                     this.valoresAceitos[valor] = valor;
                 }

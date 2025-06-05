@@ -445,5 +445,36 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(resultadoTradutor).toContain(ValoresPersonalizados[index]['valor']);
             }
         });
+
+        it('Caso de falha - Atribuição de valor personalizado inválido', () => {
+            const valoresInvalidos = [
+                '--valorPersonalizado',
+                '1111',
+                'herdar nenhum',
+                'inicial nenhum',
+                'reverter nenhum',
+                'reverter-camada nenhum',
+                'desarmar nenhum',
+            ]
+
+            for (let index = 0; index < valoresInvalidos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `nome-animação: ${valoresInvalidos[index]};`,
+                    "}"
+                ]);
+
+                if (valoresInvalidos[index].includes(" ")) {
+                    const separarValores = valoresInvalidos[index].split(" ");
+                    valoresInvalidos[index] = separarValores[0];
+                }
+
+                // Avaliador Sintático
+                expect(() => {
+                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
+                }).toThrow(`Propriedade 'nome-animação' com valor personalizado ${valoresInvalidos[index]} inválido.`);
+            }
+        });
     });
 });
