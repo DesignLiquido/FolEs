@@ -32,8 +32,13 @@ export function validarAtribuicaoAbreviada(
             if (stringValida) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
         }
 
-        if (validacaoPersonalizada) {            
-            if (typeof valorIndividual !== 'number' && !(Number(valorIndividual)) && valorIndividual !== '0') {
+        if (validacaoPersonalizada) {
+            if (
+                !(Object.keys(valoresAceitos).includes(valorIndividual))
+                && typeof valorIndividual !== 'number'
+                && !(Number(valorIndividual))
+                && valorIndividual !== '0'
+            ) {
                 validarIdentificacaoPersonalizada(nomePropriedade, valorIndividual);
                 valoresAceitos[valorIndividual] = valorIndividual;
             }

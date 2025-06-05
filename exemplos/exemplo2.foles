@@ -1,3 +1,4 @@
+/** Valores específicos */
 lmht {
     recuo: 10px 10px 100px 20px;
     borda-direita: 2px pontilhado;
@@ -26,8 +27,8 @@ lmht {
 lmht {
     definir-contador: meu-contador 5 contador2 0;
     ao-mudar: left, top;
-    coluna-em-grade: span 3;
-    estilo-lista: dentro;
+    coluna-em-grade: 3 span;
+    estilo-lista: dentro meu-estilo;
     fim-linha-em-grade: span 3;
     fim-coluna-em-grade: span 3;
     incrementar-contador: meu-contador -4;
