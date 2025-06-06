@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class IncrementarContador extends Modificador {
@@ -14,19 +15,13 @@ export class IncrementarContador extends Modificador {
     ) {
         super("incrementar-contador", "counter-increment", pragmas);
 
-        // OBS.: A sintaxe desse modificador espera receber:
-        // 1. o NOME do contador (<custom-ident>);
-        // 2. um NÚMERO INTEIRO que represente a incrementação do contador.
-
-        // Ex.: incrementar-contador: meu-contador -4;
-
-        // A lógica abaixo cobre somente o recebimento de 'nenhum' e de números positivos.
-        if (!valorVariavel)
-            validarValorNumerico(
-                "incrementar-contador",
-                valor,
-                this.valoresAceitos,
-            );
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("numérica", "incrementar-contador", valor, this.valoresAceitos, undefined, false, true);
+            } else {
+                validarValorNumerico("incrementar-contador", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }

@@ -16,8 +16,8 @@ export class LinhaEmGrade extends Modificador {
         super("linha-em-grade", "grid-row", pragmas);
 
         if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "linha-em-grade", valor, this.valoresAceitos);
+            if (valor.includes(" ") || valor.includes("/")) {
+                validarAtribuicaoAbreviada("numérica", "linha-em-grade", valor, this.valoresAceitos, undefined, false, true);
             } else {
                 validarValorNumerico("linha-em-grade", valor, this.valoresAceitos);
             }

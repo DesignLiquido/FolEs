@@ -2,6 +2,7 @@ import { validarValores } from "./comum";
 import { validarValoresAdicionais } from "./condicao-extra";
 import { validarValorCor } from "./cor";
 import { validarValorFonte } from "./fonte";
+import { validarIdentificacaoPersonalizada } from "./identificacao-personalizada";
 import { validarMultiplosQualitativos } from "./multiplos-qualitativos";
 import { validarValorNumerico } from "./numerica";
 import { validarValorString } from "./string";
@@ -13,6 +14,7 @@ export function validarAtribuicaoAbreviada(
     valoresAceitos: { [valorFoles: string]: string } = undefined,
     valoresExtra: any = undefined,
     validacaoString: boolean = false,
+    validacaoPersonalizada: boolean = false,
 ): void {
     let separarValores: Array<string>;
 
@@ -28,6 +30,18 @@ export function validarAtribuicaoAbreviada(
         if (validacaoString) {
             const stringValida = validarValorString(valorIndividual);
             if (stringValida) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
+        }
+
+        if (validacaoPersonalizada) {
+            if (
+                !(Object.keys(valoresAceitos).includes(valorIndividual))
+                && typeof valorIndividual !== 'number'
+                && !(Number(valorIndividual))
+                && valorIndividual !== '0'
+            ) {
+                validarIdentificacaoPersonalizada(nomePropriedade, valorIndividual);
+                valoresAceitos[valorIndividual] = valorIndividual;
+            }
         }
 
         switch (tipoValidacao) {

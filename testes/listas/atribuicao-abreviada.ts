@@ -113,11 +113,6 @@ export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
         traducao: 'filled sesame',
     },
     {
-        modificador: 'estilo-lista',
-        valor: 'fora nenhum',
-        traducao: 'outside none',
-    },
-    {
         modificador: 'flex-fluxo',
         valor: 'inverter-linha não-agrupar',
         traducao: 'row-reverse nowrap',

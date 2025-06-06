@@ -1,4 +1,5 @@
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class PropriedadeTransicao extends Modificador {
@@ -19,8 +20,13 @@ export class PropriedadeTransicao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("propriedade-transição", valor, this.valoresAceitos);
+        if (!valorVariavel) {
+            if (valor.includes(" ")) {
+                validarAtribuicaoAbreviada("comum", "propriedade-transição", valor, this.valoresAceitos, undefined, false, true);
+            } else {
+                validarValores("propriedade-transição", valor, this.valoresAceitos);
+            }
+        }
 
         this.valor = valor;
     }
