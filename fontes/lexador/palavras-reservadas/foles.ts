@@ -164,6 +164,7 @@ export default {
     borrar: tiposDeSimbolos.METODO,
     brilho: tiposDeSimbolos.METODO,
     calcular: tiposDeSimbolos.METODO,
+    contador: tiposDeSimbolos.METODO,
     contraste: tiposDeSimbolos.METODO,
     "curva-cubica": tiposDeSimbolos.METODO,
     "curva-cúbica": tiposDeSimbolos.METODO,
