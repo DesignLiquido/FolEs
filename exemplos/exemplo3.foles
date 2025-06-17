@@ -1,3 +1,4 @@
+/** MÉTODOS */
 lmht {
     linhas-superiores: 2;
     altura: 30px;
@@ -47,4 +48,8 @@ lmht {
 
 lmht {
     transformar: escalamento-3d(1.8, 1, 0.5);
+}
+
+lmht {
+    conteúdo: contador(contador1, romano-minusculo);
 }
