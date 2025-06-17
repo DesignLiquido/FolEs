@@ -144,6 +144,35 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorCalc2,
                 ]);
 
+            case "contador":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'contador'.",
+                );
+
+                const nomeContador = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após primeiro parâmetro do método 'contador'.",
+                );
+
+                let estiloContador = null;
+                if (this.simbolos[this.atual].tipo !== "PARENTESE_DIREITO") {
+                    // console.log('1', this.simbolos[this.atual]);
+
+                    estiloContador = this.avancarEDevolverAnterior();
+                }
+                // console.log('2', this.simbolos[this.atual]);
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'contador'.",
+                );
+                return new SeletorValor(lexema, [
+                    nomeContador,
+                    estiloContador,
+                ]);
             case "contraste":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -1756,7 +1785,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
             const valorVariavel = true;
-            
+
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[1].lexema,
@@ -1777,7 +1806,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         if (
             valoresModificador.length < 2 ||
             valoresModificador.length <= 2 && (quantificador && quantificador.hasOwnProperty("lexema"))
-        ) {            
+        ) {
             const classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador[0].hasOwnProperty("lexema")
