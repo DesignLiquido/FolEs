@@ -252,6 +252,38 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
+    it('Caso de Falha - Método "contador()" com valor de estilo inválido', () => {
+      const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
+      const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
+
+      const instanciaContador: Contador = new Contador(nomeSimbolo, estiloSimbolo);
+
+      const estilosAceitos: Array<string> = [];
+      Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
+
+      for (let index = 0; index < estilosAceitos.length; index += 1) {
+        const estiloErroDigitacao = estilosAceitos[index].replace(/./, "x");
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `conteúdo: contador(contador1, ${estiloErroDigitacao});`,
+          "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 12 sem retornar erros
+        expect(resultadoLexador.simbolos).toHaveLength(12);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Avaliador Sintático também deve retornar o seu objeto sem retornar erros
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+        
+        // O Serializador deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
+        expect(() => {
+          tradutor.serializar(resultadoAvaliadorSintatico)
+        }).toThrow(`Valor de estilo ${estiloErroDigitacao} inválido para a função contador().`);
+      }
+    });
+
     it('Atribuindo Método "contraste()"', () => {
       for (let index = 0; index < MetodoContraste.length; index += 1) {
 
