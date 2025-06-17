@@ -1,12 +1,13 @@
 import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
-import { Lexador } from "../../fontes/lexador";
+import { Lexador, Simbolo } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosFolEs, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValor } from "../../fontes/valores/seletor-valor";
+import { Contador } from "../../fontes/valores/metodos/foles/contador";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
   describe('Testes Unitários', () => {
@@ -198,6 +199,56 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCalcular[index]]);
         expect(resultadoTradutor).toContain('calc(100px - 80px);');
+      }
+    });
+
+    it('Atribuindo Método "contador()"', () => {
+      const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
+      const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
+
+      const instanciaContador: Contador = new Contador(nomeSimbolo, estiloSimbolo);
+
+      const estilosAceitos: Array<string> = [];
+      Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
+
+      const estilosTraduzidos: Array<string> = [];
+      Object.values(instanciaContador.estilosAceitos).forEach((valor) => estilosTraduzidos.push(valor));
+
+      for (let index = 0; index < estilosAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `conteúdo: contador(contador1, ${estilosAceitos[index]});`,
+          "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 12 sem retornar erros
+        expect(resultadoLexador.simbolos).toHaveLength(12);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com o devido nome CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
+
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        expect(resultadoTradutor).toContain('content');
+        expect(resultadoTradutor).toContain(`counter(contador1, ${estilosTraduzidos[index]});`);
       }
     });
 
