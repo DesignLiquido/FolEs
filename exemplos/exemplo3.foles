@@ -51,5 +51,5 @@ lmht {
 }
 
 lmht {
-    conteúdo: contador(contador1, romano-minusculo);
+    conteúdo: contador(contador1, romao-minusculo);
 }

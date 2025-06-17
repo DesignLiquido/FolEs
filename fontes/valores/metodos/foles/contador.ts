@@ -64,7 +64,8 @@ export class Contador extends Metodo {
             if (listagemEstilos.includes(this.estilo)) {
                 this.estilo = this.estilosAceitos[this.estilo];
             } else {
-                throw new Error(`Valor de estilo ${this.estilo} inválido para a função contador()`);
+                throw new Error(`Valor de estilo ${this.estilo} inválido para a função contador(). Valores aceitos:
+                ${Object.keys(this.estilosAceitos).reduce((final, atual) => (final += `, ${atual}`))},`);
             }
 
             return `counter(${this.nome}, ${this.estilo})`;
