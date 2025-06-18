@@ -91,6 +91,7 @@ export default {
     brightness: tiposDeSimbolos.METODO,
     calc: tiposDeSimbolos.METODO,
     contrast: tiposDeSimbolos.METODO,
+    counter: tiposDeSimbolos.METODO,
     "cubic-bezier": tiposDeSimbolos.METODO,
     "fit-content": tiposDeSimbolos.METODO,
     grayscale: tiposDeSimbolos.METODO,
