@@ -159,11 +159,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 let estiloContador = null;
                 if (this.simbolos[this.atual].tipo !== "PARENTESE_DIREITO") {
-                    // console.log('1', this.simbolos[this.atual]);
-
                     estiloContador = this.avancarEDevolverAnterior();
                 }
-                // console.log('2', this.simbolos[this.atual]);
 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
