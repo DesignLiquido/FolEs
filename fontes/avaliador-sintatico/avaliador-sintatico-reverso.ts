@@ -242,7 +242,33 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     valorContraste,
                     quantificadorContraste,
                 ]);
+            case "counter":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'counter'.",
+                );
 
+                const nomeCounter = this.avancarEDevolverAnterior();
+
+                let estiloCounter = null;
+                if (this.simbolos[this.atual].tipo === "VIRGULA") {
+                    this.consumir(
+                        tiposDeSimbolos.VIRGULA,
+                        "Esperada vírgula após primeiro parâmetro do método 'counter'.",
+                    );
+    
+                    estiloCounter = this.avancarEDevolverAnterior();
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'counter'.",
+                );
+
+                return new SeletorValorReverso(lexema, [
+                    nomeCounter,
+                    estiloCounter,
+                ]);
             case "cubic-bezier":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
