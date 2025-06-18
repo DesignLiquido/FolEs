@@ -151,14 +151,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
 
                 const nomeContador = this.avancarEDevolverAnterior();
-
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperada vírgula após primeiro parâmetro do método 'contador'.",
-                );
-
+               
                 let estiloContador = null;
-                if (this.simbolos[this.atual].tipo !== "PARENTESE_DIREITO") {
+                if (this.simbolos[this.atual].tipo === 'VIRGULA') {
+
+                    this.consumir(
+                        tiposDeSimbolos.VIRGULA,
+                        "Esperada vírgula após primeiro parâmetro do método 'contador'.",
+                    );
+    
                     estiloContador = this.avancarEDevolverAnterior();
                 }
 
@@ -166,6 +167,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'contador'.",
                 );
+
                 return new SeletorValor(lexema, [
                     nomeContador,
                     estiloContador,
