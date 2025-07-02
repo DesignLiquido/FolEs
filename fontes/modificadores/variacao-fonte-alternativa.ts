@@ -20,11 +20,14 @@ export class VariacaoFonteAlternativa extends Modificador {
             pragmas,
         );
 
+        const valoresExtra = ['stylistic'];
+
         if (!valorVariavel)
             validarValores(
                 "variação-fonte-alternativa",
                 valor,
                 this.valoresAceitos,
+                valoresExtra
             );
 
         this.valor = valor;

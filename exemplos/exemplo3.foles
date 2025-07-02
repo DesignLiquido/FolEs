@@ -53,3 +53,7 @@ lmht {
 lmht {
     conteúdo: contador(contador1, romano-minusculo);
 }
+
+lmht {
+    variacao-fonte-alternativa: estilistico(1);
+}

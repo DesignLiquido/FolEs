@@ -11,6 +11,7 @@ import { Escalamento3d } from "./metodos/foles/escalamento-3d";
 import { EscalamentoEixoZ } from "./metodos/foles/escalamento-eixo-z";
 import { EscalamentoHorizontal } from "./metodos/foles/escalamento-horizontal";
 import { EscalamentoVertical } from "./metodos/foles/escalamento-vertical";
+import { Estilistico } from "./metodos/foles/estilistico";
 import { GradienteLinear } from "./metodos/foles/gradiente-linear";
 import { HexadecimalCor } from "./metodos/foles/hexadecimal-cor";
 import { Hsl } from "./metodos/foles/hsl";
@@ -59,6 +60,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "escalamento-eixo-z": EscalamentoEixoZ,
     "escalamento-horizontal": EscalamentoHorizontal,
     "escalamento-vertical": EscalamentoVertical,
+    "estilistico": Estilistico,
+    "estilístico": Estilistico,
     "gradiente-linear": GradienteLinear,
     hsl: Hsl,
     hsla: Hsla,

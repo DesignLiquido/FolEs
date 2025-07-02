@@ -151,7 +151,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
 
                 const nomeContador = this.avancarEDevolverAnterior();
-               
+
                 let estiloContador = null;
                 if (this.simbolos[this.atual].tipo === 'VIRGULA') {
 
@@ -159,7 +159,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         tiposDeSimbolos.VIRGULA,
                         "Esperada vírgula após primeiro parâmetro do método 'contador'.",
                     );
-    
+
                     estiloContador = this.avancarEDevolverAnterior();
                 }
 
@@ -172,6 +172,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     nomeContador,
                     estiloContador,
                 ]);
+
             case "contraste":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -392,6 +393,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após segundo argumento do método escalamento-vertical.",
                 );
                 return new SeletorValor(lexema, [valorScaleY]);
+
+            case "estilistico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'estilístico'.",
+                );
+
+                const valorEstilistico = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método estilístico.",
+                );
+                return new SeletorValor(lexema, [valorEstilistico]);
+
+            case "estilístico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'estilístico'.",
+                );
+
+                const valorEstilistico1 = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método estilístico.",
+                );
+                return new SeletorValor(lexema, [valorEstilistico1]);
 
             case "gradiente-linear":
                 this.consumir(

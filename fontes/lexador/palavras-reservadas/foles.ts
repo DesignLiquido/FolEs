@@ -176,6 +176,8 @@ export default {
     "escalamento-eixo-z": tiposDeSimbolos.METODO,
     "escalamento-horizontal": tiposDeSimbolos.METODO,
     "escalamento-vertical": tiposDeSimbolos.METODO,
+    "estilistico": tiposDeSimbolos.METODO,
+    "estilístico": tiposDeSimbolos.METODO,
     "gradiente-linear": tiposDeSimbolos.METODO,
     hsl: tiposDeSimbolos.METODO,
     hsla: tiposDeSimbolos.METODO,
