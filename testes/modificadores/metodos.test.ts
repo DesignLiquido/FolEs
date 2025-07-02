@@ -202,6 +202,75 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
+    it('Atribuindo Método "conjunto-estilos()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '1, 2', '6, 12, 18'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `variacao-fonte-alternativa: conjunto-estilos(${valoresAceitos[index]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto contendo valores numéricos
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            ])
+          );
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+            'font-variant-alternates'
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
+          expect(resultadoTradutor).toContain('font-variant-alternates');
+          expect(resultadoTradutor).toContain(`styleset(${valoresAceitos[index]});`);
+      }
+    });
+
+    it('Atribuindo Método "conjunto-estilos()" - caso de falha', () => {
+      const valoresAceitos = ['0', '1, 21, 12', '3, 13, 30'];
+
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: conjunto-estilos(${valoresAceitos[index]});`,
+          "}"
+        ]);
+
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        expect(() => {
+          tradutor.serializar(resultadoAvaliadorSintatico);
+        }).toThrow('Os valores da função conjunto-estilos() deve estar entre 1 e 20');
+      }
+    });
+
     it('Atribuindo Método "contador()"', () => {
       const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
       const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
