@@ -872,7 +872,6 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
         expect(resultadoTradutor).toContain('font-variant-alternates');
         expect(resultadoTradutor).toContain(`stylistic(${valoresAceitos[index]});`);
-
       }
     });
 
