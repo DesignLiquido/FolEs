@@ -55,5 +55,5 @@ lmht {
 }
 
 lmht {
-    variacao-fonte-alternativa: estilistico(1);
+    variacao-fonte-alternativa: conjunto-estilos(1, 2, 6);
 }

@@ -20,7 +20,7 @@ export class VariacaoFonteAlternativa extends Modificador {
             pragmas,
         );
 
-        const valoresExtra = ['stylistic'];
+        const valoresExtra = ['stylistic', 'styleset'];
 
         if (!valorVariavel)
             validarValores(

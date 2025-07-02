@@ -1,6 +1,7 @@
 import { Borrar } from "./metodos/foles/borrar";
 import { Brilho } from "./metodos/foles/brilho";
 import { Calcular } from "./metodos/foles/calcular";
+import { ConjuntoEstilos } from "./metodos/foles/conjunto-estilos";
 import { Contador } from "./metodos/foles/contador";
 import { Contraste } from "./metodos/foles/contraste";
 import { CurvaCubica } from "./metodos/foles/curva-cubica";
@@ -48,6 +49,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     borrar: Borrar,
     brilho: Brilho,
     calcular: Calcular,
+    "conjunto-estilos": ConjuntoEstilos,
     contraste: Contraste,
     contador: Contador,
     "curva-cubica": CurvaCubica,
