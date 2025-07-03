@@ -893,6 +893,77 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
+
+    it('Atribuindo Método "espirrar()" - caso de sucesso', () => {
+      const valoresAceitos = ['1', '2', '12', '20'];
+
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: espirrar(${valoresAceitos[index]});`,
+          "}"
+        ]);
+
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+        expect(resultadoLexador.simbolos).toHaveLength(10);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+          ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+          'font-variant-alternates'
+        );
+
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+        // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
+        expect(resultadoTradutor).toContain('font-variant-alternates');
+        expect(resultadoTradutor).toContain(`swash(${valoresAceitos[index]});`);
+      }
+    });
+
+    it('Atribuindo Método "espirrar()" - caso de falha', () => {
+      const valoresAceitos = ['0', '100', '300'];
+
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: espirrar(${valoresAceitos[index]});`,
+          "}"
+        ]);
+
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        expect(() => {
+          tradutor.serializar(resultadoAvaliadorSintatico);
+        }).toThrow('O valor da função espirrar() deve estar entre 1 e 99');
+      }
+    });
+
     it('Atribuindo Método "estilistico()" - caso de sucesso', () => {
       const valoresAceitos = ['1', '2', '12', '20'];
 
