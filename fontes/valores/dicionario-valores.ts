@@ -26,6 +26,7 @@ import { Limitar } from "./metodos/foles/limitar";
 import { Linear } from "./metodos/foles/linear";
 import { MinMax } from "./metodos/foles/minmax";
 import { Opacar } from "./metodos/foles/opacar";
+import { Ornamentos } from "./metodos/foles/ornamentos";
 import { Passos } from "./metodos/foles/passos";
 import { Perspectivar } from "./metodos/foles/perspectivar";
 import { ProjetarSombra } from "./metodos/foles/projetar-sombra";
@@ -79,6 +80,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     linear: Linear,
     minmax: MinMax,
     opacar: Opacar,
+    ornamentos: Ornamentos,
     passos: Passos,
     perspectivar: Perspectivar,
     "projetar-sombra": ProjetarSombra,

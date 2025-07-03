@@ -813,6 +813,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorOpaco,
                 ]);
 
+            case "ornamentos":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'ornamentos'.",
+                );
+
+                const valorOrnamentos = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método ornamentos.",
+                );
+                return new SeletorValor(lexema, [valorOrnamentos]);
+
             case "passos":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

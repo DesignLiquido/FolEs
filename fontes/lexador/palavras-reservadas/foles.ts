@@ -191,6 +191,7 @@ export default {
     limitar: tiposDeSimbolos.METODO,
     linear: tiposDeSimbolos.METODO,
     minmax: tiposDeSimbolos.METODO,
+    ornamentos: tiposDeSimbolos.METODO,
     opacar: tiposDeSimbolos.METODO,
     passos: tiposDeSimbolos.METODO,
     perspectivar: tiposDeSimbolos.METODO,
