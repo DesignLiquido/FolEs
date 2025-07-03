@@ -1459,6 +1459,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorTranslacaoY,
                 ]);
 
+            case "variar-caractere":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'variar-caractere'.",
+                );
+
+                const valorVariarCaractere = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método variar-caractere.",
+                );
+                return new SeletorValor(lexema, [valorVariarCaractere]);
+
             case "url":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

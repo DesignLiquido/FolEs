@@ -48,12 +48,14 @@ lmht {
 
 lmht {
     transformar: escalamento-3d(1.8, 1, 0.5);
+    variacao-fonte-alternativa: estilístico(1);
 }
 
 lmht {
     conteúdo: contador(contador1, romano-minusculo);
+    variacao-fonte-alternativa: conjunto-estilos(1, 2, 6);
 }
 
 lmht {
-    variacao-fonte-alternativa: conjunto-estilos(1, 2, 6);
+    variacao-fonte-alternativa: variar-caractere(0);
 }

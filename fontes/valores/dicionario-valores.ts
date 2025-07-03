@@ -44,6 +44,7 @@ import { TranslacaoEixoZ } from "./metodos/foles/translacao-eixo-z";
 import { TranslacaoHorizontal } from "./metodos/foles/translacao-horizontal";
 import { TranslacaoVertical } from "./metodos/foles/translacao-vertical";
 import { Url } from "./metodos/foles/url";
+import { VariarCaractere } from "./metodos/foles/variar-caractere";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
     borrar: Borrar,
@@ -100,5 +101,6 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "translação-horizontal": TranslacaoHorizontal,
     "translacao-vertical": TranslacaoVertical,
     "translação-vertical": TranslacaoVertical,
+    "variar-caractere": VariarCaractere,
     url: Url,
 };

@@ -215,6 +215,7 @@ export default {
     "translação-horizontal": tiposDeSimbolos.METODO,
     "translacao-vertical": tiposDeSimbolos.METODO,
     "translação-vertical": tiposDeSimbolos.METODO,
+    "variar-caractere": tiposDeSimbolos.METODO,
     url: tiposDeSimbolos.METODO,
 
     // Pseudoclasses
