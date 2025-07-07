@@ -47,3 +47,7 @@ div {
 html {
     content: counter(contador1, upper-roman);
 }
+
+div {
+    font-variant-alternates: stylistic(1);
+}

@@ -242,6 +242,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     valorContraste,
                     quantificadorContraste,
                 ]);
+
             case "counter":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -256,7 +257,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         tiposDeSimbolos.VIRGULA,
                         "Esperada vírgula após primeiro parâmetro do método 'counter'.",
                     );
-    
+
                     estiloCounter = this.avancarEDevolverAnterior();
                 }
 
@@ -269,6 +270,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     nomeCounter,
                     estiloCounter,
                 ]);
+
             case "cubic-bezier":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -425,6 +427,21 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValorReverso(lexema, [valorScaleY]);
 
+            case "stylistic":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'stylistic'.",
+                );
+
+                const valorEstilistico = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método stylistic.",
+                );
+
+                return new SeletorValorReverso(lexema, [valorEstilistico]);
+    
             case "linear-gradient":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

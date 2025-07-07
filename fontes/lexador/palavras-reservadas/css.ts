@@ -125,6 +125,7 @@ export default {
     // 'rotate': tiposDeSimbolos.METODO,
     saturate: tiposDeSimbolos.METODO,
     sepia: tiposDeSimbolos.METODO,
+    stylistic: tiposDeSimbolos.METODO,
     translate3d: tiposDeSimbolos.METODO,
     translateZ: tiposDeSimbolos.METODO,
     translateY: tiposDeSimbolos.METODO,
