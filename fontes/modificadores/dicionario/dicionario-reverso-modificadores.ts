@@ -404,6 +404,7 @@ import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Translate } from "../../valores/metodos/css/translate";
 import { Counter } from "../../valores/metodos/css/counter";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
+import { Styleset } from "../../valores/metodos/css/styleset";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -804,6 +805,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     scaleY: ScaleY,
     scaleZ: ScaleZ,
     sepia: Sepia,
+    styleset: Styleset,
     stylistic: Stylistic,
     skew: Skew,
     skewX: SkewX,

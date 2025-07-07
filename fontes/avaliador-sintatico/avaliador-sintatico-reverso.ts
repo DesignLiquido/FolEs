@@ -220,6 +220,39 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorCalc2,
                 ]);
 
+            case "styleset":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'styleset'.",
+                );
+
+                const valor1ConjuntoEstilos = this.avancarEDevolverAnterior();
+
+                let valor2ConjuntoEstilos;
+                if (this.simbolos[this.atual].tipo === "VIRGULA") {
+                    this.consumir(
+                        tiposDeSimbolos.VIRGULA,
+                        "Esperado vírgula após primeiro argumento do método styleset.",
+                    );
+                    valor2ConjuntoEstilos = this.avancarEDevolverAnterior();
+                }
+
+                let valor3ConjuntoEstilos;
+                if (this.simbolos[this.atual].tipo === "VIRGULA") {
+                    this.consumir(
+                        tiposDeSimbolos.VIRGULA,
+                        "Esperado vírgula após segundo argumento do método styleset.",
+                    );
+                    valor3ConjuntoEstilos = this.avancarEDevolverAnterior();
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método styleset.",
+                );
+
+                return new SeletorValorReverso(lexema, [valor1ConjuntoEstilos, valor2ConjuntoEstilos, valor3ConjuntoEstilos]);
+
             case "contrast":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -441,7 +474,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
 
                 return new SeletorValorReverso(lexema, [valorEstilistico]);
-    
+
             case "linear-gradient":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
