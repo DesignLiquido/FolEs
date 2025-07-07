@@ -1,3 +1,4 @@
+import { Anotacao } from "./metodos/foles/anotacao";
 import { Borrar } from "./metodos/foles/borrar";
 import { Brilho } from "./metodos/foles/brilho";
 import { Calcular } from "./metodos/foles/calcular";
@@ -49,6 +50,8 @@ import { Url } from "./metodos/foles/url";
 import { VariarCaractere } from "./metodos/foles/variar-caractere";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
+    anotacao: Anotacao,
+    anotação: Anotacao,
     borrar: Borrar,
     brilho: Brilho,
     calcular: Calcular,

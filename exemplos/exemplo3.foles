@@ -61,3 +61,7 @@ lmht {
 lmht {
     variacao-fonte-alternativa: ornamentos(10);
 }
+
+lmht {
+    variacao-fonte-alternativa: anotação(1);
+}

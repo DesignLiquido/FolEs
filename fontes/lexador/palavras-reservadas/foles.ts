@@ -161,6 +161,8 @@ export default {
     ms: tiposDeSimbolos.QUANTIFICADOR,
 
     // Métodos
+    anotacao: tiposDeSimbolos.METODO,
+    anotação: tiposDeSimbolos.METODO,
     borrar: tiposDeSimbolos.METODO,
     brilho: tiposDeSimbolos.METODO,
     calcular: tiposDeSimbolos.METODO,

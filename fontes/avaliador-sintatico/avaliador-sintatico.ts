@@ -80,6 +80,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValor("hex", [codigoHEX.lexema]);
 
+            case "anotacao":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'anotação'.",
+                );
+
+                const valorAnotacao = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método anotação.",
+                );
+                return new SeletorValor(lexema, [valorAnotacao]);
+
+            case "anotação":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'anotação'.",
+                );
+
+                const valorAnotaçao = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método anotação.",
+                );
+                return new SeletorValor(lexema, [valorAnotaçao]);
+
             case "borrar":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
