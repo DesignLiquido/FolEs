@@ -20,7 +20,7 @@ export class ConjuntoEstilos extends Metodo {
             || (this.valor2 && this.valor2 < 1 || this.valor2 > 20)
             || (this.valor3 && this.valor3 < 1 || this.valor3 > 20)
         ) {
-            throw new Error('Os valores da função conjunto-estilos() deve estar entre 1 e 20');
+            throw new Error('Os valores da função conjunto-estilos() devem estar entre 1 e 20');
         }
 
         if (this.valor2 && this.valor3) {

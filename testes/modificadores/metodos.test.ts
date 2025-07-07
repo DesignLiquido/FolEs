@@ -408,7 +408,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         expect(() => {
           tradutor.serializar(resultadoAvaliadorSintatico);
-        }).toThrow('Os valores da função conjunto-estilos() deve estar entre 1 e 20');
+        }).toThrow('Os valores da função conjunto-estilos() devem estar entre 1 e 20');
       }
     });
 
