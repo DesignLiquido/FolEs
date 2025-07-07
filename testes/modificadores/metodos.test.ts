@@ -23,6 +23,147 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       tradutor = new Serializador();
     });
 
+    it('Atribuindo Método "anotação()" com valor numérico - caso de sucesso', () => {
+      const formasAceitas = ['anotação', 'anotacao'];
+      const valoresAceitos = ['1', '2', '12', '20'];
+
+      for (let valIndex = 0; valIndex < formasAceitas.length; valIndex += 1) {
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `variacao-fonte-alternativa: ${formasAceitas[valIndex]}(${valoresAceitos[index]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+          expect(resultadoLexador.simbolos).toHaveLength(10);
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+            ])
+          );
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+            'font-variant-alternates'
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir anotação para annotation
+          expect(resultadoTradutor).toContain('font-variant-alternates');
+          expect(resultadoTradutor).toContain(`annotation(${valoresAceitos[index]});`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "anotação()" com valor numérico - caso de falha', () => {
+      const valoresAceitos = ['0', '100', '300'];
+
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: anotação(${valoresAceitos[index]});`,
+          "}"
+        ]);
+
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        expect(() => {
+          tradutor.serializar(resultadoAvaliadorSintatico);
+        }).toThrow('O valor da função anotação() deve estar entre 1 e 99');
+      }
+    });
+
+    it('Atribuindo Método "anotação()" com valor string - caso de sucesso', () => {
+      const formasAceitas = ['anotação', 'anotacao'];
+      const valoresAceitos = ['floral', 'ruby', 'circle'];
+
+      for (let valIndex = 0; valIndex < formasAceitas.length; valIndex += 1) {
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `variacao-fonte-alternativa: ${formasAceitas[valIndex]}('${valoresAceitos[index]}');`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 10
+          expect(resultadoLexador.simbolos).toHaveLength(10);
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+            'font-variant-alternates'
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir anotação para annotation e conter o valor string
+          expect(resultadoTradutor).toContain('font-variant-alternates');
+          expect(resultadoTradutor).toContain(`annotation('${valoresAceitos[index]}');`);
+        }
+      }
+    });
+
+    it('Atribuindo Método "anotação()" com valor string - caso de falha', () => {
+      const valoresAceitos = ['--valorPersonalizado', 'herdar','inicial'];
+
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: anotação(${valoresAceitos[index]});`,
+          "}"
+        ]);
+
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        expect(() => {
+          tradutor.serializar(resultadoAvaliadorSintatico);
+        }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
+      }
+    });
+
     it('Atribuindo Método "borrar()"', () => {
       for (let index = 0; index < MetodoBorrar.length; index += 1) {
 
@@ -893,7 +1034,6 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
       }
     });
 
-
     it('Atribuindo Método "espirrar()" - caso de sucesso', () => {
       const valoresAceitos = ['1', '2', '12', '20'];
 
@@ -939,7 +1079,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Tradutor
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-        // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
+        // O Tradutor deve serializar de acordo e traduzir espirrar para swash
         expect(resultadoTradutor).toContain('font-variant-alternates');
         expect(resultadoTradutor).toContain(`swash(${valoresAceitos[index]});`);
       }
@@ -3225,7 +3365,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Tradutor
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-        // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
+        // O Tradutor deve serializar de acordo e traduzir variar-caractere para character-variant
         expect(resultadoTradutor).toContain('font-variant-alternates');
         expect(resultadoTradutor).toContain(`character-variant(${valoresAceitos[index]});`);
       }
