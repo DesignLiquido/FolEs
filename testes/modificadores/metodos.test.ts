@@ -1149,7 +1149,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         // Tradutor
         const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-        // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
+        // O Tradutor deve serializar de acordo e traduzir estilístico para stylistic
         expect(resultadoTradutor).toContain('font-variant-alternates');
         expect(resultadoTradutor).toContain(`stylistic(${valoresAceitos[index]});`);
       }
