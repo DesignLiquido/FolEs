@@ -49,5 +49,5 @@ html {
 }
 
 div {
-    font-variant-alternates: styleset(1);
+    font-variant-alternates: character-variant(91);
 }

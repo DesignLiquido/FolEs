@@ -220,6 +220,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorCalc2,
                 ]);
 
+            case "character-variant":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'character-variant'.",
+                );
+
+                const valorVariarCaractere = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método character-variant.",
+                );
+                return new SeletorValorReverso(lexema, [valorVariarCaractere]);
+
             case "clamp":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

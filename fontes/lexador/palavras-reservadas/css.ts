@@ -90,6 +90,7 @@ export default {
     blur: tiposDeSimbolos.METODO,
     brightness: tiposDeSimbolos.METODO,
     calc: tiposDeSimbolos.METODO,
+    "character-variant": tiposDeSimbolos.METODO,
     contrast: tiposDeSimbolos.METODO,
     counter: tiposDeSimbolos.METODO,
     "cubic-bezier": tiposDeSimbolos.METODO,
