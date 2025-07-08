@@ -206,6 +206,76 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
+        it('Atribuindo Método "character-variant()" - caso de sucesso', () => {
+            const valoresAceitos = ['1', '2', '12', '20'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: character-variant(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+                expect(resultadoLexador.simbolos).toHaveLength(10);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    ['variacao-fonte-alternativa', 'variação-fonte-alternativa']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo e traduzir character-variant para variar-caractere
+                expect(resultadoTradutor).toContain('variacao-fonte-alternativa');
+                expect(resultadoTradutor).toContain(`variar-caractere(${valoresAceitos[index]});`);
+            }
+        });
+
+        it('Atribuindo Método "character-variant()" - caso de falha', () => {
+            const valoresAceitos = ['0', '210', '100'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: character-variant(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(() => {
+                    tradutor.serializar(resultadoAvaliadorSintatico);
+                }).toThrow('O valor da função character-variant() deve estar entre 1 e 99');
+            }
+        });
+
         it('Atribuindo Método "clamp()"', () => {
             for (let index = 0; index < MetodoLimitar.length; index += 1) {
                 // Lexador
