@@ -1083,6 +1083,141 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
+        it('Atribuindo Método "ornaments()" com valor numérico - caso de sucesso', () => {
+            const valoresAceitos = ['1', '2', '12', '20'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+                expect(resultadoLexador.simbolos).toHaveLength(10);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    ['variacao-fonte-alternativa', 'variação-fonte-alternativa']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo e traduzir ornaments para ornamentos
+                expect(resultadoTradutor).toContain('variacao-fonte-alternativa');
+                expect(resultadoTradutor).toContain(`ornamentos(${valoresAceitos[index]});`);
+            }
+        });
+
+        it('Atribuindo Método "ornaments()" com valor numérico - caso de falha', () => {
+            const valoresAceitos = ['0', '100', '300'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(() => {
+                    tradutor.serializar(resultadoAvaliadorSintatico);
+                }).toThrow('O valor da função ornaments() deve estar entre 1 e 99');
+            }
+        });
+
+        it('Atribuindo Método "ornaments()" com valor string - caso de sucesso', () => {
+            const valoresAceitos = ['floral', 'ruby', 'circle'];
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // O Lexador deve montar um objeto de comprimento 10
+                expect(resultadoLexador.simbolos).toHaveLength(10);
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    ['variacao-fonte-alternativa', 'variação-fonte-alternativa']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo e traduzir ornaments para ornamentos e conter o valor string
+                expect(resultadoTradutor).toContain('variacao-fonte-alternativa');
+                expect(resultadoTradutor).toContain(`ornamentos("${valoresAceitos[index]}");`);
+
+            }
+        });
+
+        it('Atribuindo Método "ornaments()" com valor string - caso de falha', () => {
+            const valoresAceitos = ['--valorPersonalizado', 'herdar', 'inicial'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(() => {
+                    tradutor.serializar(resultadoAvaliadorSintatico);
+                }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
+            }
+        });
+
         it('Atribuindo Método "perspective()"', () => {
             for (let index = 0; index < MetodoPerspectivar.length; index += 1) {
 
