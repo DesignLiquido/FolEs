@@ -407,6 +407,7 @@ import { Stylistic } from "../../valores/metodos/css/stylistic";
 import { Styleset } from "../../valores/metodos/css/styleset";
 import { CharacterVariant } from "../../valores/metodos/css/character-variant";
 import { Swash } from "../../valores/metodos/css/swash";
+import { Ornaments } from "../../valores/metodos/css/ornaments";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -793,6 +794,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "linear-gradient": LinearGradient,
     minmax: MinMax,
     // "opacity": Opacity,
+    ornaments: Ornaments,
     // "perspective": Perspective,
     ray: Ray,
     rgb: Rgb,

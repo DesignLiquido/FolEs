@@ -49,5 +49,5 @@ html {
 }
 
 div {
-    font-variant-alternates: swash(91);
+    font-variant-alternates: ornaments("floral");
 }

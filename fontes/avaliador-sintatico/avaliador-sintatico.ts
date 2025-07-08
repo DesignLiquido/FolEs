@@ -853,6 +853,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumento do método ornamentos.",
                 );
+
                 return new SeletorValor(lexema, [valorOrnamentos]);
 
             case "passos":
