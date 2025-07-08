@@ -2472,6 +2472,76 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             }
         });
 
+        it('Atribuindo Método "swash()" - caso de sucesso', () => {
+            const valoresAceitos = ['1', '2', '12', '20'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: swash(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+                expect(resultadoLexador.simbolos).toHaveLength(10);
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                    ['variacao-fonte-alternativa', 'variação-fonte-alternativa']
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo e traduzir swash para espirrar
+                expect(resultadoTradutor).toContain('variacao-fonte-alternativa');
+                expect(resultadoTradutor).toContain(`espirrar(${valoresAceitos[index]});`);
+            }
+        });
+
+        it('Atribuindo Método "swash()" - caso de falha', () => {
+            const valoresAceitos = ['0', '100', '300'];
+
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `font-variant-alternates: swash(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                expect(() => {
+                    tradutor.serializar(resultadoAvaliadorSintatico);
+                }).toThrow('O valor da função swash() deve estar entre 1 e 99');
+            }
+        });
+
         it('Atribuindo Método "translate()"', () => {
             for (let index = 0; index < MetodosTranslacao.length; index += 1) {
 
