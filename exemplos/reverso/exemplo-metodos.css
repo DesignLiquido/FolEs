@@ -49,5 +49,5 @@ html {
 }
 
 div {
-    font-variant-alternates: character-variant(91);
+    font-variant-alternates: swash(91);
 }

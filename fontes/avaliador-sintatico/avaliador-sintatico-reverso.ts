@@ -1137,6 +1137,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, [valorEstilistico]);
 
+            case "swash":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'swash'.",
+                );
+
+                const valorEspirrar = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método swash.",
+                );
+                return new SeletorValorReverso(lexema, [valorEspirrar]);
+
             case "translate":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

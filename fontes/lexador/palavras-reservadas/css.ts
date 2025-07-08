@@ -128,6 +128,7 @@ export default {
     sepia: tiposDeSimbolos.METODO,
     styleset: tiposDeSimbolos.METODO,
     stylistic: tiposDeSimbolos.METODO,
+    swash: tiposDeSimbolos.METODO,
     translate3d: tiposDeSimbolos.METODO,
     translateZ: tiposDeSimbolos.METODO,
     translateY: tiposDeSimbolos.METODO,
