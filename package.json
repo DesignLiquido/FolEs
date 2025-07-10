@@ -28,6 +28,9 @@
             "url": "https://www.linkedin.com/in/vitorbrandao-silva/"
         }
     ],
+    "engines": {
+        "node": "^20 || ^22"
+    },
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/DesignLiquido/FolEs/issues"
