@@ -87,6 +87,7 @@ export default {
     var: tiposDeSimbolos.TAG,
 
     // MÉTODOS
+    annotation: tiposDeSimbolos.METODO,
     blur: tiposDeSimbolos.METODO,
     brightness: tiposDeSimbolos.METODO,
     calc: tiposDeSimbolos.METODO,

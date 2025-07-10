@@ -49,5 +49,5 @@ html {
 }
 
 div {
-    font-variant-alternates: ornaments("floral");
+    font-variant-alternates: annotation(10);
 }

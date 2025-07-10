@@ -155,6 +155,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
     // TODO: Implementar lógica para resolver método
     private resolverMetodo(lexema: string): Valor {
         switch (lexema) {
+            case "annotation":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'annotation'.",
+                );
+
+                const valorAnotacao = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método annotation.",
+                );
+                return new SeletorValorReverso(lexema, [valorAnotacao]);
+
             case "blur":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

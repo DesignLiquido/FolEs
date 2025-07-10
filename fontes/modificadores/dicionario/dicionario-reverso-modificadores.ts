@@ -408,6 +408,7 @@ import { Styleset } from "../../valores/metodos/css/styleset";
 import { CharacterVariant } from "../../valores/metodos/css/character-variant";
 import { Swash } from "../../valores/metodos/css/swash";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
+import { Annotation } from "../../valores/metodos/css/annotation";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -775,6 +776,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "backface-visibility": VisibilidadeFundo,
 
     // METODOS
+    annotation: Annotation,
     blur: Blur,
     brightness: Brightness,
     calc: Calc,
