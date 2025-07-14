@@ -51,7 +51,7 @@ const principal = () => {
     }
 
     if (opcoes.console) {
-        // console.log(resultadoTraducao);
+        console.log(resultadoTraducao);
         return;
     }
 

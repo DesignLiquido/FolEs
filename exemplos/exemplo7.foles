@@ -1,0 +1,5 @@
+lmht {
+    altura: 40px;
+    recuo: 5px 1em 0 2em;
+    cor: branco;
+}

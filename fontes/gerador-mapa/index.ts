@@ -80,9 +80,9 @@ export class GeradorMapaCss {
                 // Pragma do dois-pontos.
                 retorno.mappings += vlq.encode([2, 0, 0, 2]) + ",";
 
-                const larguraValor =
-                    modificador.valor.toString().length +
-                    modificador.quantificador.length;
+                const valor = (modificador.valor || "").toString();
+                const quantificador = (modificador.quantificador || "");
+                const larguraValor = valor.length + quantificador.length;
 
                 // Pragma do valor.
                 retorno.mappings +=
