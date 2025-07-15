@@ -1,3 +1,5 @@
+import { MetodoCss } from "../valores/metodos/css/metodo-css";
+import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -7,7 +9,7 @@ export class OrigemImagemBorda extends Modificador {
     };
 
     constructor(
-        valor: string,
+        valor: Metodo | MetodoCss | string,
         quantificador?: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
@@ -16,10 +18,19 @@ export class OrigemImagemBorda extends Modificador {
 
         const valoresExtra = ["url", "linear-gradient"];
 
+        let metodoResolvido = "";
+        if (valor instanceof Metodo) {
+            metodoResolvido = valor.traducao;
+        } else if (valor instanceof MetodoCss) {
+            metodoResolvido = valor.traducao;
+        } else {
+            metodoResolvido = valor;
+        }
+
         if (!valorVariavel)
             validarValores(
                 "origem-imagem-borda",
-                valor,
+                metodoResolvido,
                 this.valoresAceitos,
                 valoresExtra,
             );

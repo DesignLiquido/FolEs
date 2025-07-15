@@ -2,9 +2,9 @@ import { valoresGlobais } from "../atributos/globais";
 
 export function validarValores(
     nomePropriedade: string,
-    valor: any,
+    valor: string,
     valoresAceitos: { [valorFoles: string]: string },
-    valoresExtra?: any,
+    valoresExtra?: string[],
 ) {
     if (valoresExtra === undefined) {
         if (!(valor in valoresAceitos) && !(valor in valoresGlobais)) {
@@ -15,8 +15,9 @@ export function validarValores(
     } else {
         let metodoValido = false;
         for (let index = 0; index < valoresExtra.length; index++) {
-            if (metodoValido === false) {
-                metodoValido = valor["traducao"] === valoresExtra[index];
+            metodoValido = valor === valoresExtra[index];
+            if (metodoValido) {
+                break;
             }
         }
 

@@ -1,10 +1,11 @@
 import { DicionarioModificadores } from "../dicionario/dicionario-modificadores";
 import { PragmasModificador } from "../../modificadores/superclasse";
+import { Metodo } from "../../valores/metodos/foles/metodo";
 
 export class SeletorModificador {
     constructor(
         nomeFolEs: string,
-        valor: string,
+        valor: Metodo | string,
         quantificador?: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
