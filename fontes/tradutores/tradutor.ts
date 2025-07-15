@@ -66,9 +66,7 @@ export class Tradutor {
             Array.isArray(modificador.nomeFoles)
                 ? modificador.nomeFoles[0]
                 : modificador.nomeFoles,
-            modificador.valor instanceof Metodo
-                ? modificador.valor.paraTexto()
-                : modificador.valor,
+            modificador.valor,
             modificador.quantificador,
             modificador.pragmas,
         ) as Modificador;
