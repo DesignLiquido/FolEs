@@ -1,3 +1,5 @@
+import { MetodoCss } from "../valores/metodos/css/metodo-css";
+import { Metodo } from "../valores/metodos/foles/metodo";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -17,7 +19,7 @@ export class ImagemBorda extends Modificador {
     };
 
     constructor(
-        valor: string,
+        valor: Metodo | MetodoCss | string,
         quantificador?: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
@@ -35,7 +37,7 @@ export class ImagemBorda extends Modificador {
                 validarValorNumerico("imagem-borda", valor, this.valoresAceitos, valoresExtra);
             }
 
-            if (quantificador && Number(parseInt(valor))) {
+            if (quantificador && typeof valor === 'string' && Number(parseInt(valor))) {
                 validarQuantificador("imagem-borda", quantificador, unidadesMedida);
 
                 this.quantificador = quantificador;

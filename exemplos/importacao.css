@@ -1,0 +1,7 @@
+html {
+    transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    accent-color: rgb(100, 200, 300);
+}
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVzdGUuY3NzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGVzdGUuZm9sZXMiXSwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydGFyIFwiX3BhcmNpYWxcIlx1MDAwMCJdLCJtYXBwaW5ncyI6IkFBQUEsSUFBSTtJQUNBLDBCQUFlLEVBQUUsZUFBZTs4QkFDMUIsc0NBQVksRUFBRSxlQUFlOyJ9 */

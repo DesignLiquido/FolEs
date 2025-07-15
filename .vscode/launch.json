@@ -81,6 +81,21 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "FolEs > Exemplos > exemplo4.foles",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}${pathSeparator}execucao.ts",
+                // "--console",
+                "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}exemplo4.foles"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "FolEs > Exemplos > exemplo7.foles",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
             "cwd": "${workspaceRoot}",

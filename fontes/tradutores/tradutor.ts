@@ -11,6 +11,7 @@ import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
 import { Metodo } from "../valores/metodos/foles/metodo";
 
 import estruturasHtml from "./estruturas-html";
+import { Estrutura } from "../estruturas/estrutura";
 
 export class Tradutor {
     linha: number;
@@ -46,14 +47,20 @@ export class Tradutor {
     }
 
     private traduzirSeletorEstrutura(seletor: SeletorEstrutura): Seletor {
-        const seletorLmht: string = seletor.paraTexto();
+        const seletorLmht: string = String(seletor.estrutura.constructor.name).toLowerCase();
         const traducaoSeletor: string = estruturasHtml[seletorLmht];
+
         const novosPragmasSeletor =
             this.calcularPragmasSeletor(traducaoSeletor);
-        const seletorTraduzido = new SeletorEstruturasHtml(
+        const estruturaTraduzida = new SeletorEstruturasHtml(
             traducaoSeletor,
             seletor.pragmas,
-        ) as Seletor;
+        ) as Estrutura;
+        const seletorTraduzido = new SeletorEstrutura(
+            estruturaTraduzida,
+            seletor.pseudoclasse
+        );
+
         seletorTraduzido.pragmasTraducao = novosPragmasSeletor;
         return seletorTraduzido;
     }
