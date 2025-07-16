@@ -1,10 +1,11 @@
+import { MetodoCss } from "../../valores/metodos/css/metodo-css";
 import { Metodo } from "../../valores/metodos/foles/metodo";
 import { PragmasModificador } from "./pragmas-modificador";
 
 export class Modificador {
     nomeFoles: string | string[];
     propriedadeCss: string;
-    valor: Metodo | string;
+    valor: Metodo | MetodoCss | string;
     quantificador: string;
     pragmas?: PragmasModificador;
     pragmasTraducao?: PragmasModificador;

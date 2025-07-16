@@ -18,6 +18,8 @@ export class SombraCaixa extends Modificador {
     ) {
         super("sombra-caixa", "box-shadow", pragmas);
 
+        
+
         if (!valorVariavel) {
             validarMultiplosQualitativos("sombra-caixa", valor);
 

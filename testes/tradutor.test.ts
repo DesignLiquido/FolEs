@@ -5,7 +5,9 @@ import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador";
 import { Tradutor } from "../fontes/tradutores/tradutor";
-import {GeradorMapaCss} from "../fontes/gerador-mapa"
+import { GeradorMapaCss } from "../fontes/gerador-mapa"
+import { AlinharConteudo, CorDestaque, EstiloContorno } from '../fontes/modificadores';
+import { Hsl } from '../fontes/valores/metodos/foles/hsl';
 
 describe('Tradutor', () => {
     let lexador: LexadorInterface;
@@ -19,7 +21,7 @@ describe('Tradutor', () => {
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
         tradutor = new Tradutor();
-        geradorMapaCss = new GeradorMapaCss;
+        geradorMapaCss = new GeradorMapaCss();
     });
 
     describe('Tradução', () => {
@@ -30,10 +32,10 @@ describe('Tradutor', () => {
                     '    largura-borda-direita: 130mm;',
                     '}'
                 ]);
-    
+
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
                 const resultado = tradutor.traduzir(resultadoAvaliadorSintatico);
-    
+
                 expect(resultado).toBeTruthy();
             });
         });
@@ -60,7 +62,7 @@ describe('Tradutor', () => {
             }
 
             console.log(resultado); */
-    
+
             expect(resultado.version).toBe(3);
             expect(resultado.file).toBeTruthy();
             expect(resultado.sources.length).toBeGreaterThan(0);

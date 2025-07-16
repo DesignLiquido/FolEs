@@ -55,9 +55,14 @@ export class FolEs {
         const resultadoAvaliadorSintatico =
             this.avaliadorSintatico.analisar(simbolos);
 
-        const traducao = this.serializador.serializar(
-            resultadoAvaliadorSintatico,
+        const resultadoTraducao = this.tradutor.traduzir(
+            resultadoAvaliadorSintatico
         );
+
+        const traducao = this.serializador.serializar(
+            resultadoTraducao
+        );
+        
         return traducao;
     }
 
@@ -116,8 +121,3 @@ export class FolEs {
         return this.converterParaFolEsInterno(resultadoLexadorReverso.simbolos);
     }
 }
-
-//  const testeFoles = new FolEs(false);
-//  console.log(testeFoles.converterParaCss('../exemplos/exemplo2.foles'));
-//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
-//  console.log(a.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
