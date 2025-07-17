@@ -409,6 +409,7 @@ import { CharacterVariant } from "../../valores/metodos/css/character-variant";
 import { Swash } from "../../valores/metodos/css/swash";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
 import { Annotation } from "../../valores/metodos/css/annotation";
+import { Rotate3d } from "../../valores/metodos/css/rotate3d";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -802,6 +803,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     rgb: Rgb,
     rgba: Rgba,
     // "rotate": Rotate,
+    rotate3d: Rotate3d,
     rotateX: RotateX,
     rotateY: RotateY,
     rotateZ: RotateZ,

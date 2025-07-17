@@ -113,6 +113,7 @@ export default {
     ray: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
+    rotate3d: tiposDeSimbolos.METODO,
     rotateZ: tiposDeSimbolos.METODO,
     rotateY: tiposDeSimbolos.METODO,
     rotateX: tiposDeSimbolos.METODO,

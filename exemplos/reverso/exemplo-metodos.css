@@ -50,4 +50,5 @@ html {
 
 div {
     font-variant-alternates: annotation(10);
+    transform: rotate3d(0, 0, 0, 45deg);
 }

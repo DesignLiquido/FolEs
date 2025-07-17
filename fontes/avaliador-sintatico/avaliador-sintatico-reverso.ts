@@ -823,6 +823,52 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     true,
                 );
 
+            case "rotate3d":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'rotate3d'.",
+                );
+
+                const valor1Rotacionar3d = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após primeiro parâmetro do método 'rotate3d'.",
+                );
+
+                const valor2Rotacionar3d = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após segundo parâmetro do método 'rotate3d'.",
+                );
+
+                const valor3Rotacionar3d = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após terceiro parâmetro do método 'rotate3d'.",
+                );
+
+                const valor4Rotacionar3d = this.avancarEDevolverAnterior();
+
+                let quantificadorRotacionar3d;
+                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
+                    quantificadorRotacionar3d = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionar3d = null;
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'rotate3d'.",
+                );
+
+                return new SeletorValorReverso(lexema, [
+                    valor1Rotacionar3d,
+                    valor2Rotacionar3d,
+                    valor3Rotacionar3d,
+                    valor4Rotacionar3d,
+                    quantificadorRotacionar3d,
+                ]);
+
             case "rotateZ":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
