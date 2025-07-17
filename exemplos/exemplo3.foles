@@ -64,4 +64,5 @@ lmht {
 
 lmht {
     variacao-fonte-alternativa: anotação(1);
+    transformar: rotacionar-3d(0, 0, 0, 45deg);
 }

@@ -32,7 +32,7 @@ export class VariacaoFonteAlternativa extends Modificador {
         } else {
             metodoResolvido = valor;
         }
-
+        
         if (!valorVariavel)
             validarValores(
                 "variação-fonte-alternativa",

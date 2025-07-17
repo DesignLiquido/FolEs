@@ -202,6 +202,7 @@ export default {
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
     rotacionar: tiposDeSimbolos.METODO,
+    "rotacionar-3d": tiposDeSimbolos.METODO,
     "rotacionar-eixo-z": tiposDeSimbolos.METODO,
     "rotacionar-horizontal": tiposDeSimbolos.METODO,
     "rotacionar-matiz": tiposDeSimbolos.METODO,

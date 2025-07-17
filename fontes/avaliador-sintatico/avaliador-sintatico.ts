@@ -1030,6 +1030,52 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorRotacionar,
                 ]);
 
+            case "rotacionar-3d":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'rotacionar-3d'.",
+                );
+
+                const valor1Rotacionar3d = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após primeiro parâmetro do método 'rotacionar-3d'.",
+                );
+
+                const valor2Rotacionar3d = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após segundo parâmetro do método 'rotacionar-3d'.",
+                );
+
+                const valor3Rotacionar3d = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperada vírgula após terceiro parâmetro do método 'rotacionar-3d'.",
+                );
+
+                const valor4Rotacionar3d = this.avancarEDevolverAnterior();
+
+                let quantificadorRotacionar3d;
+                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
+                    quantificadorRotacionar3d = this.avancarEDevolverAnterior();
+                } else {
+                    quantificadorRotacionar3d = null;
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'rotacionar-3d'.",
+                );
+
+                return new SeletorValor(lexema, [
+                    valor1Rotacionar3d,
+                    valor2Rotacionar3d,
+                    valor3Rotacionar3d,
+                    valor4Rotacionar3d,
+                    quantificadorRotacionar3d,
+                ]);
+
             case "rotacionar-eixo-z":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

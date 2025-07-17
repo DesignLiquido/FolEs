@@ -35,6 +35,7 @@ import { Raio } from "./metodos/foles/raio";
 import { Rgb } from "./metodos/foles/rgb";
 import { Rgba } from "./metodos/foles/rgba";
 import { Rotacionar } from "./metodos/foles/rotacionar";
+import { Rotacionar3d } from "./metodos/foles/rotacionar-3d";
 import { RotacionarEixoZ } from "./metodos/foles/rotacionar-eixo-z";
 import { RotacionarHorizontal } from "./metodos/foles/rotacionar-horizontal";
 import { RotacionarMatiz } from "./metodos/foles/rotacionar-matiz";
@@ -91,6 +92,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     rgb: Rgb,
     rgba: Rgba,
     rotacionar: Rotacionar,
+    "rotacionar-3d": Rotacionar3d,
     "rotacionar-eixo-z": RotacionarEixoZ,
     "rotacionar-horizontal": RotacionarHorizontal,
     "rotacionar-matiz": RotacionarMatiz,
