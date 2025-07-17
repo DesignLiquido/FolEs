@@ -35,7 +35,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             `variacao-fonte-alternativa: ${formasAceitas[valIndex]}(${valoresAceitos[index]});`,
             "}"
           ]);
-
+          
           // O Lexador não deve encontrar erros
           expect(resultadoLexador.erros).toHaveLength(0);
 
