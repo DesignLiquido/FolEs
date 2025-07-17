@@ -1,3 +1,4 @@
+import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
@@ -9,7 +10,7 @@ export class ImagemFundo extends Modificador {
     };
 
     constructor(
-        valor: Metodo | string,
+        valor: Metodo | MetodoCss | string,
         quantificador?: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,

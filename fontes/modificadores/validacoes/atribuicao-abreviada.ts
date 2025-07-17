@@ -1,3 +1,5 @@
+import { MetodoCss } from "../../valores/metodos/css/metodo-css";
+import { Metodo } from "../../valores/metodos/foles/metodo";
 import { validarValores } from "./comum";
 import { validarValoresAdicionais } from "./condicao-extra";
 import { validarValorCor } from "./cor";
@@ -10,7 +12,7 @@ import { validarValorString } from "./string";
 export function validarAtribuicaoAbreviada(
     tipoValidacao: string,
     nomePropriedade: string,
-    valor: any,
+    valor: Metodo | MetodoCss | string,
     valoresAceitos: { [valorFoles: string]: string } = undefined,
     valoresExtra: any = undefined,
     validacaoString: boolean = false,
@@ -18,12 +20,21 @@ export function validarAtribuicaoAbreviada(
 ): void {
     let separarValores: Array<string>;
 
-    if (valor.includes(",")) {
-        separarValores = valor.split(", ");
-    } else if (valor.includes("/")) {
-        separarValores = valor.split(" / ");
-    } else if (valor.includes(" ")) {
-        separarValores = valor.split(" ");
+    let metodoResolvido = "";
+    if (valor instanceof Metodo) {
+        metodoResolvido = valor.traducao;
+    } else if (valor instanceof MetodoCss) {
+        metodoResolvido = valor.traducao;
+    } else {
+        metodoResolvido = valor;
+    }
+
+    if (metodoResolvido.includes(",")) {
+        separarValores = metodoResolvido.split(", ");
+    } else if (metodoResolvido.includes("/")) {
+        separarValores = metodoResolvido.split(" / ");
+    } else if (metodoResolvido.includes(" ")) {
+        separarValores = metodoResolvido.split(" ");
     }
 
     separarValores.forEach((valorIndividual: string) => {

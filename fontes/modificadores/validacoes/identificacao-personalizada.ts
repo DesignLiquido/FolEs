@@ -1,6 +1,9 @@
+import { MetodoCss } from "../../valores/metodos/css/metodo-css";
+import { Metodo } from "../../valores/metodos/foles/metodo";
+
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
-    valor: any,
+    valor: Metodo | MetodoCss | string,
 ): void {
     // Regex para um identificador CSS válido
     const validarIdentificador: RegExp = /^-?[_a-zA-Z][-_a-zA-Z0-9]*$/;

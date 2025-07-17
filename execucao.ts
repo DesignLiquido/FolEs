@@ -1,6 +1,7 @@
+import { Command } from 'commander';
+
 import { Exportador } from './fontes/exportador';
 import { FolEs } from './fontes/foles';
-import { Command } from 'commander';
 
 const principal = () => {
     const analisadorArgumentos = new Command();
@@ -15,14 +16,19 @@ const principal = () => {
             false
         )
         .option(
+            '-c, --console',
+            'Escreve a saída da tradução em console.',
+            null
+        )
+        .option(
             '-m, --mapas',
             'Gera CSS com mapas de fontes.',
             true
         )
         .option(
-            '-c, --console',
-            'Escreve a saída da tradução em console.',
-            null
+            '-v, --versao',
+            'Imprime o número da versão atual de FolEs',
+            false
         )
         .action((arquivos) => {
             if (arquivos.length > 0) {
@@ -32,6 +38,13 @@ const principal = () => {
 
     analisadorArgumentos.parse();
     const opcoes = analisadorArgumentos.opts();
+
+    if (opcoes.versao) {
+        const informacoesPacote = require('./package.json');
+        const versao = informacoesPacote.version;
+        console.log(versao);
+        return;
+    }
 
     if (!nomeArquivo) {
         console.error('Favor informar nome do arquivo a ser traduzido.');

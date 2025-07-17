@@ -55,9 +55,14 @@ export class FolEs {
         const resultadoAvaliadorSintatico =
             this.avaliadorSintatico.analisar(simbolos);
 
-        const traducao = this.serializador.serializar(
-            resultadoAvaliadorSintatico,
+        const resultadoTraducao = this.tradutor.traduzir(
+            resultadoAvaliadorSintatico
         );
+
+        const traducao = this.serializador.serializar(
+            resultadoTraducao
+        );
+        
         return traducao;
     }
 

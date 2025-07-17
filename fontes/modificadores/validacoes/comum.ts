@@ -1,13 +1,24 @@
+import { MetodoCss } from "../../valores/metodos/css/metodo-css";
+import { Metodo } from "../../valores/metodos/foles/metodo";
 import { valoresGlobais } from "../atributos/globais";
 
 export function validarValores(
     nomePropriedade: string,
-    valor: string,
+    valor: Metodo | MetodoCss | string,
     valoresAceitos: { [valorFoles: string]: string },
     valoresExtra?: string[],
 ) {
+    let metodoResolvido = "";
+    if (valor instanceof Metodo) {
+        metodoResolvido = valor.traducao;
+    } else if (valor instanceof MetodoCss) {
+        metodoResolvido = valor.traducao;
+    } else {
+        metodoResolvido = valor;
+    }
+    
     if (valoresExtra === undefined) {
-        if (!(valor in valoresAceitos) && !(valor in valoresGlobais)) {
+        if (!(metodoResolvido in valoresAceitos) && !(metodoResolvido in valoresGlobais)) {
             throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
@@ -22,9 +33,9 @@ export function validarValores(
         }
 
         if (
-            !(valor in valoresAceitos) &&
+            !(metodoResolvido in valoresAceitos) &&
             !metodoValido &&
-            !(valor in valoresGlobais)
+            !(metodoResolvido in valoresGlobais)
         ) {
             throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos: 
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},

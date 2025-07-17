@@ -53,10 +53,13 @@ export class Serializador {
                 };\n`;
         }
 
+        // `modificador.valor` nunca será `MetodoCss` aqui, que só existe em casos de serialização reversa.
+        const valorResolvido = modificador.valor as string;
+
         // Caso 4: Valor com aspas - como as fontes de texto.
-        if (modificador.valor.includes('"')) {
-            if (modificador.valor.includes(",")) {
-                const separarValores = modificador.valor.split(", ");
+        if (valorResolvido.includes('"')) {
+            if (valorResolvido.includes(",")) {
+                const separarValores = valorResolvido.split(", ");
                 const valorSemAspas = separarValores[0].replace(/["']/g, '');
 
                 // Trecho específico para tratamento de fontes com grafia
@@ -74,24 +77,24 @@ export class Serializador {
                         }
                     });
                     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${unirValores};\n`;
-                } else {
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
-                }
-            } else {
+                } 
+                    
                 return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
-            }
+            } 
+                
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
         }
 
         // Caso 5: Atribuição Abreviada | Múltiplos valores separados por vírgula, barra ou espaço
-        if (modificador.valor.includes(" ")) {
+        if (valorResolvido.includes(" ")) {
             let separarValores: Array<string> = [];
 
-            if (modificador.valor.includes(",")) {
-                separarValores = modificador.valor.split(", ");
-            } else if (modificador.valor.includes("/")) {
-                separarValores = modificador.valor.split(" / ");
-            } else if (modificador.valor.includes(" ")) {
-                separarValores = modificador.valor.split(" ");
+            if (valorResolvido.includes(",")) {
+                separarValores = valorResolvido.split(", ");
+            } else if (valorResolvido.includes("/")) {
+                separarValores = valorResolvido.split(" / ");
+            } else if (valorResolvido.includes(" ")) {
+                separarValores = valorResolvido.split(" ");
             }
 
             separarValores.forEach((valorIndividual, indexIndividual) => {
@@ -110,7 +113,7 @@ export class Serializador {
                 }
 
                 if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
-                    modificador.valor = modificador.valor.replace(valorIndividual, valoresTraduzidos);
+                    modificador.valor = valorResolvido.replace(valorIndividual, valoresTraduzidos);
                 }
             });
 
@@ -118,7 +121,7 @@ export class Serializador {
         }
 
         // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
-        const valorTraduzido = valoresGerais[modificador.valor];
+        const valorTraduzido = valoresGerais[valorResolvido];
         return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valorTraduzido};\n`;
     }
 

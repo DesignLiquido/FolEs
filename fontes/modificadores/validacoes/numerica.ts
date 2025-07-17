@@ -1,13 +1,24 @@
+import { MetodoCss } from "../../valores/metodos/css/metodo-css";
+import { Metodo } from "../../valores/metodos/foles/metodo";
 import { valoresGlobais } from "../atributos/globais";
 
 export function validarValorNumerico(
     nomePropriedade: string,
-    valor: any,
+    valor: Metodo | MetodoCss | string,
     valoresAceitos?: { [valorFoles: string]: string },
     valoresExtra?: any,
 ) {
+    let metodoResolvido = "";
+    if (valor instanceof Metodo) {
+        metodoResolvido = valor.traducao;
+    } else if (valor instanceof MetodoCss) {
+        metodoResolvido = valor.traducao;
+    } else {
+        metodoResolvido = valor;
+    }
+
     if (valoresAceitos === undefined && valoresExtra === undefined) {
-        if (Number.isNaN(parseInt(valor)) && !(valor in valoresGlobais)) {
+        if (Number.isNaN(parseInt(metodoResolvido)) && !(metodoResolvido in valoresGlobais)) {
             throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
             número-quantificador,
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
@@ -16,11 +27,11 @@ export function validarValorNumerico(
 
     if (valoresAceitos !== undefined && valoresExtra === undefined) {
         if (
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresAceitos) &&
-            !(valor in valoresGlobais)
+            Number.isNaN(parseInt(metodoResolvido)) &&
+            !(metodoResolvido in valoresAceitos) &&
+            !(metodoResolvido in valoresGlobais)
         ) {
-            throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
+            throw new Error(`Propriedade '${nomePropriedade}' com valor ${metodoResolvido} inválido. Valores aceitos:
             número-quantificador,
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
@@ -36,12 +47,12 @@ export function validarValorNumerico(
         }
 
         if (
-            Number.isNaN(parseInt(valor)) &&
-            !(valor in valoresAceitos) &&
+            Number.isNaN(parseInt(metodoResolvido)) &&
+            !(metodoResolvido in valoresAceitos) &&
             !metodoValido &&
-            !(valor in valoresGlobais)
+            !(metodoResolvido in valoresGlobais)
         ) {
-            throw new Error(`Propriedade '${nomePropriedade}' com valor ${valor} inválido. Valores aceitos:
+            throw new Error(`Propriedade '${nomePropriedade}' com valor ${metodoResolvido} inválido. Valores aceitos:
             número-quantificador,
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${valoresExtra.reduce((final, atual) => (final += `, ${atual}`))},
