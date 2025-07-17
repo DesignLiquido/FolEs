@@ -35,7 +35,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             `variacao-fonte-alternativa: ${formasAceitas[valIndex]}(${valoresAceitos[index]});`,
             "}"
           ]);
-          
+
           // O Lexador não deve encontrar erros
           expect(resultadoLexador.erros).toHaveLength(0);
 
@@ -1868,51 +1868,51 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "ornamentos()" com valor numérico - caso de sucesso', () => {
       const valoresAceitos = ['1', '2', '12', '20'];
 
-        for (let index = 0; index < valoresAceitos.length; index += 1) {
-          // Lexador
-          const resultadoLexador = lexador.mapear([
-            "lmht {",
-            `variacao-fonte-alternativa: ornamentos(${valoresAceitos[index]});`,
-            "}"
-          ]);
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: ornamentos(${valoresAceitos[index]});`,
+          "}"
+        ]);
 
-          // O Lexador não deve encontrar erros
-          expect(resultadoLexador.erros).toHaveLength(0);
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
 
-          // O valor recebido deve ser mapeado como METODO
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-            ])
-          );
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
 
-          // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
-          expect(resultadoLexador.simbolos).toHaveLength(10);
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
-            ])
-          );
+        // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+        expect(resultadoLexador.simbolos).toHaveLength(10);
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+          ])
+        );
 
-          // Avaliador Sintático
-          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
-          const primeiroResultado = resultadoAvaliadorSintatico[0];
-          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
-          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
-            'font-variant-alternates'
-          );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+          'font-variant-alternates'
+        );
 
-          // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments
-          expect(resultadoTradutor).toContain('font-variant-alternates');
-          expect(resultadoTradutor).toContain(`ornaments(${valoresAceitos[index]});`);
+        // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments
+        expect(resultadoTradutor).toContain('font-variant-alternates');
+        expect(resultadoTradutor).toContain(`ornaments(${valoresAceitos[index]});`);
       }
     });
 
@@ -1937,47 +1937,47 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
     it('Atribuindo Método "ornamentos()" com valor string - caso de sucesso', () => {
       const valoresAceitos = ['floral', 'ruby', 'circle'];
-        for (let index = 0; index < valoresAceitos.length; index += 1) {
-          // Lexador
-          const resultadoLexador = lexador.mapear([
-            "lmht {",
-            `variacao-fonte-alternativa: ornamentos('${valoresAceitos[index]}');`,
-            "}"
-          ]);
+      for (let index = 0; index < valoresAceitos.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `variacao-fonte-alternativa: ornamentos('${valoresAceitos[index]}');`,
+          "}"
+        ]);
 
-          // O Lexador não deve encontrar erros
-          expect(resultadoLexador.erros).toHaveLength(0);
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
 
-          // O valor recebido deve ser mapeado como METODO
-          expect(resultadoLexador.simbolos).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-            ])
-          );
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
 
-          // O Lexador deve montar um objeto de comprimento 10
-          expect(resultadoLexador.simbolos).toHaveLength(10);
+        // O Lexador deve montar um objeto de comprimento 10
+        expect(resultadoLexador.simbolos).toHaveLength(10);
 
-          // Avaliador Sintático
-          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
-          const primeiroResultado = resultadoAvaliadorSintatico[0];
-          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
-          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
-            'font-variant-alternates'
-          );
+        // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+          'font-variant-alternates'
+        );
 
-          // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        // Tradutor
+        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
 
-          // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments e conter o valor string
-          expect(resultadoTradutor).toContain('font-variant-alternates');
-          expect(resultadoTradutor).toContain(`ornaments('${valoresAceitos[index]}');`);
-  
+        // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments e conter o valor string
+        expect(resultadoTradutor).toContain('font-variant-alternates');
+        expect(resultadoTradutor).toContain(`ornaments('${valoresAceitos[index]}');`);
+
       }
     });
 
@@ -2399,6 +2399,103 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
           }
         }
+      }
+    });
+
+    it('Atribuindo Método "rotacionar-3d()" - caso de sucesso', () => {
+      for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+
+        const valoresAceitos = ['0, 0, 0, 0', '1, 2, 0, 45deg', '1, 1, 1, 90graus'];
+
+        for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+          // Lexador
+          const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `${MetodosRotacionar[index]}: rotacionar-3d(${valoresAceitos[valIndex]});`,
+            "}"
+          ]);
+
+          // O Lexador não deve encontrar erros
+          expect(resultadoLexador.erros).toHaveLength(0);
+
+          // O valor recebido deve ser mapeado como METODO
+          expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+          );
+
+          // O Lexador deve montar um objeto de comprimento 17 caso haja quantificador e 16 caso não haja
+          if (valIndex > 0) {
+            expect(resultadoLexador.simbolos).toHaveLength(17);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+              ])
+            );
+          } else {
+            expect(resultadoLexador.simbolos).toHaveLength(16);
+            expect(resultadoLexador.simbolos).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+              ])
+            );
+          }
+
+          // Avaliador Sintático
+          const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+          // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+          expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+          const primeiroResultado = resultadoAvaliadorSintatico[0];
+          expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+          const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+          expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+          expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+            TraducaoValoresMetodos[MetodosRotacionar[index]]
+          );
+
+          // Tradutor
+          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+          // O Tradutor deve serializar de acordo e traduzir rotacionar-3d para rotate3d
+          expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+          if (valIndex < 2) {
+            expect(resultadoTradutor).toContain(`rotate3d(${valoresAceitos[valIndex]});`);
+          } else {
+            expect(resultadoTradutor).toContain(`rotate3d(1, 1, 1, 90deg);`);
+          }
+        }
+      }
+    });
+
+    it('Atribuindo Método "rotacionar-3d()" - caso de falha', () => {
+      for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+          "lmht {",
+          `${MetodosRotacionar[index]}: rotacionar-3d(1, 1, 1, 20px);`,
+          "}"
+        ]);
+
+        // O Lexador não deve encontrar erros
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O valor recebido deve ser mapeado como METODO
+        expect(resultadoLexador.simbolos).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+          ])
+        );
+
+        // Avaliador Sintático 
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // Serializador não deve aceitar 'px' como quantificador válido
+        expect(() => {
+          tradutor.serializar(resultadoAvaliadorSintatico);
+        }).toThrow("Propriedade 'transformar' com quantificador inválido");
       }
     });
 

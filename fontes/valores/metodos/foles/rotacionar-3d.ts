@@ -27,7 +27,7 @@ export class Rotacionar3d extends Metodo {
                 ? (this.quantificador = "deg")
                 : null;
 
-            validarQuantificador('tranformar', this.quantificador, angulos);
+            validarQuantificador('transformar', this.quantificador, angulos);
 
             return `rotate3d(${this.valor1}, ${this.valor2}, ${this.valor3}, ${this.valor4}${this.quantificador})`;
         }
