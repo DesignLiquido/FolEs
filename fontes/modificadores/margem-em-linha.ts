@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -10,27 +11,28 @@ export class MargemEmLinha extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("margem-em-linha", "margin-inline", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "margem-em-linha", valor, this.valoresAceitos);
-            } else {
-                validarValorNumerico("margem-em-linha", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "margem-em-linha", valores, this.valoresAceitos);
+        //     } else {
+        //         validarValorNumerico("margem-em-linha", valores, this.valoresAceitos);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador("margem-em-linha", quantificador, unidadesMedida);
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador("margem-em-linha", quantificador, unidadesMedida);
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

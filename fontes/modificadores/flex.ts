@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -18,27 +19,28 @@ export class Flex extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("flex", "flex", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "flex", valor, this.valoresAceitos);
-            } else {
-                validarValorNumerico("flex", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "flex", valores, this.valoresAceitos);
+        //     } else {
+        //         validarValorNumerico("flex", valores, this.valoresAceitos);
+        //     }
 
-            if (quantificador !== undefined) {
-                validarQuantificador("flex", quantificador, unidadesMedida);
+        //     if (quantificador !== undefined) {
+        //         validarQuantificador("flex", quantificador, unidadesMedida);
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

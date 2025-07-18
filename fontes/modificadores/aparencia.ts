@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -34,19 +35,20 @@ export class Aparencia extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["aparencia", "aparência"], "appearance", pragmas);
 
         // Se for um equivalente, o valor atribuído é 'auto';
-        valor in this.valoresEquivalentes ? (valor = "auto") : null;
+        // TODO: Repensar
+        // valor in this.valoresEquivalentes ? (valor = "auto") : null;
 
         if (!valorVariavel)
-            validarValores("aparência", valor, this.valoresAceitos);
+            validarValores("aparência", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

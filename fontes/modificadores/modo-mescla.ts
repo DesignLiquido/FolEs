@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -26,16 +27,16 @@ export class ModoMescla extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("modo-mescla", "mix-blend-mode", pragmas);
 
         if (!valorVariavel)
-            validarValores("modo-mescla", valor, this.valoresAceitos);
+            validarValores("modo-mescla", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

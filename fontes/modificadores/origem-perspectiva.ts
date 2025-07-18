@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -13,8 +14,8 @@ export class OrigemPerspectiva extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -23,23 +24,23 @@ export class OrigemPerspectiva extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "origem-perspectiva",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
             // Aceita somente o valor percentual (%) como quantificador
             // Também pode receber somente o valor numérico, sem quantificador
-            if (Number(parseInt(valor)) && quantificador !== undefined) {
-                validarQuantificador(
-                    "origem-perspectiva",
-                    quantificador,
-                    ListaDeValorPercentual,
-                );
+            // if (Number(parseInt(valor)) && quantificador !== undefined) {
+            //     validarQuantificador(
+            //         "origem-perspectiva",
+            //         quantificador,
+            //         ListaDeValorPercentual,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

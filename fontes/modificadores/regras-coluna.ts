@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -13,27 +14,28 @@ export class RegrasColuna extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("regras-coluna", "column-rule", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valor, this.valoresAceitos);
-            } else {
-                validarMultiplosQualitativos("regras-coluna", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valores, this.valoresAceitos);
+        //     } else {
+        //         validarMultiplosQualitativos("regras-coluna", valores, this.valoresAceitos);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador("regras-coluna", quantificador, comprimentos);
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador("regras-coluna", quantificador, comprimentos);
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -13,16 +14,16 @@ export class QuebrarDentro extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("quebrar-dentro", "break-inside", pragmas);
 
         if (!valorVariavel)
-            validarValores("quebrar-dentro", valor, this.valoresAceitos);
+            validarValores("quebrar-dentro", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

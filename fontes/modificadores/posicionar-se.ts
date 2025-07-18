@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -23,21 +24,22 @@ export class PosicionarSe extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("posicionar-se", "place-self", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("condição-extra", "posicionar-se", valor, posicoes, this.valoresAceitos);
-            } else {
-                validarValoresAdicionais("posicionar-se", valor, posicoes, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("condição-extra", "posicionar-se", valores, posicoes, this.valoresAceitos);
+        //     } else {
+        //         validarValoresAdicionais("posicionar-se", valores, posicoes, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

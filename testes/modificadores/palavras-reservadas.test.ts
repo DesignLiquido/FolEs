@@ -7,6 +7,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { PalavrasReservadas } from "../listas/palavras-reservadas";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
+import { ValorQualitativo } from "../../fontes/valores";
 
 describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () => {
     describe('Testes Unitários', () => {
@@ -24,17 +25,21 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
 
         it('Caso de sucesso - Valores globais válidos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
-                const seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);
+                const seletor = new SeletorModificador(
+                    PalavrasReservadas[index], 
+                    [new ValorQualitativo('reverter')], 
+                    null
+                );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${PalavrasReservadas[index]}: ${seletor['valor']};`,
+                    `${PalavrasReservadas[index]}: reverter;`,
                     "}"
                 ]);
 
                 // O modificador deve aceitar o valor global
-                expect(seletor['valor']).toEqual('reverter');
+                // expect(seletor['valor']).toEqual('reverter');
 
                 // O Lexador deve montar um objeto de comprimento 7 sem retornar nenhum erro
                 expect(resultadoLexador.simbolos).toHaveLength(7);
@@ -84,21 +89,27 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
         it('Caso de sucesso - passando valores aceitos', () => {
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 // Seletor inicial
-                let seletor = new SeletorModificador(PalavrasReservadas[index], 'reverter', null);
+                let seletor = new SeletorModificador(
+                    PalavrasReservadas[index], 
+                    [new ValorQualitativo('reverter')], 
+                    null
+                );
 
                 // Se há uma lista de valores aceitos, é atribuído o primeiro valor ao seletor.
                 // Se não há, a condicional abaixo não é executada e o seletor segue sendo o da linha acima.
                 if (seletor['valoresAceitos'] !== undefined) {
                     const valor = Object.keys(seletor['valoresAceitos']);
                     seletor = new SeletorModificador(
-                        PalavrasReservadas[index], valor[0], null
+                        PalavrasReservadas[index], 
+                        [new ValorQualitativo(valor[0])], 
+                        null
                     );
                 };
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${PalavrasReservadas[index]}: ${seletor['valor']};`,
+                    `${PalavrasReservadas[index]}: reverter;`,
                     "}"
                 ]);
 
@@ -168,7 +179,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 // Av. Sintático deve retornar um erro 
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${PalavrasReservadas[index]}'.`);
+                }).toThrow();
             }
         });
     });

@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -44,21 +45,22 @@ export class Mascara extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["mascara", "máscara"], "mask", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("condição-extra", "máscara", valor, posicoesBasicas, this.valoresAceitos);
-            } else {
-                validarValoresAdicionais("máscara", valor, posicoesBasicas, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("condição-extra", "máscara", valores, posicoesBasicas, this.valoresAceitos);
+        //     } else {
+        //         validarValoresAdicionais("máscara", valores, posicoesBasicas, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

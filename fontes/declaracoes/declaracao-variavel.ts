@@ -3,17 +3,14 @@ import { Declaracao } from "./declaracao";
 
 export class DeclaracaoVariavel extends Declaracao {
     nome: string;
-    valor: Valor | string;
-    quantificador?: string;
+    valores: Valor[]
 
     constructor(
         nome: string,
-        valor: Valor | string,
-        quantificador: string = null,
+        valores: Valor[]
     ) {
         super();
         this.nome = nome;
-        this.valor = valor;
-        this.quantificador = quantificador;
+        this.valores = valores;
     }
 }

@@ -1,5 +1,6 @@
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { Valor } from "../valores";
 
 export class AjusteCorForcado extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -8,7 +9,7 @@ export class AjusteCorForcado extends Modificador {
     };
 
     constructor(
-        valor: string,
+        valores: Valor[],
         quantificador: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
@@ -20,8 +21,8 @@ export class AjusteCorForcado extends Modificador {
         );
 
         if (!valorVariavel)
-            validarValores("ajuste-cor-forçado", valor, this.valoresAceitos);
+            validarValores("ajuste-cor-forçado", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

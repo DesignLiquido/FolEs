@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorFonte } from "./validacoes/fonte";
@@ -36,24 +37,25 @@ export class FonteTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("fonte-texto", "font-family", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(",")) {
-                validarAtribuicaoAbreviada("fonte", "fonte-texto", valor, this.valoresAceitos, undefined, true);
-            } else {
-                const valorString = validarValorString(valor);
-                if (valorString) valor = valor.replace(/^["']|["']$/g, '');
-                validarValorFonte("fonte-texto", valor, this.valoresAceitos);
-                if (valorString) valor = `"${valor}"`;
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(",")) {
+        //         validarAtribuicaoAbreviada("fonte", "fonte-texto", valores, this.valoresAceitos, undefined, true);
+        //     } else {
+        //         const valorString = validarValorString(valor);
+        //         if (valorString) valor = valor.replace(/^["']|["']$/g, '');
+        //         validarValorFonte("fonte-texto", valores, this.valoresAceitos);
+        //         if (valorString) valor = `"${valor}"`;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

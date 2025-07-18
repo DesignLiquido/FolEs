@@ -1,5 +1,6 @@
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { Valor } from "../valores";
 
 export class AjustarObjeto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,16 +12,16 @@ export class AjustarObjeto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("ajustar-objeto", "object-fit", pragmas);
 
         if (!valorVariavel)
-            validarValores("ajustar-objeto", valor, this.valoresAceitos);
+            validarValores("ajustar-objeto", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

@@ -10,7 +10,7 @@ export const posicoes: { [valorFolEs: string]: string } = {
     inferior: "bottom",
     inicio: "start",
     início: "start",
-    "linha-base": "baseline",
+    "linha-de-base": "baseline",
     normal: "normal",
     superior: "top",
 };

@@ -1,22 +1,23 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class LinhasInferiores extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("linhas-inferiores", "orphans", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("linhas-inferiores", valor);
+            validarValorNumerico("linhas-inferiores", valores);
 
-            proibirQuantificador("linhas-inferiores", quantificador);
+            // TODO: Repensar.
+            // proibirQuantificador("linhas-inferiores", quantificador);
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

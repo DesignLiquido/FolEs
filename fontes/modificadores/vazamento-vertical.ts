@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -12,16 +13,16 @@ export class VazamentoVertical extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("vazamento-vertical", "overflow-y", pragmas);
 
         if (!valorVariavel)
-            validarValores("vazamento-vertical", valor, this.valoresAceitos);
+            validarValores("vazamento-vertical", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

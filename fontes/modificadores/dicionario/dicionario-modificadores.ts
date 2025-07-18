@@ -66,7 +66,7 @@ import { CorFundo } from "../cor-fundo";
 import { CorInicioBordaEmBloco } from "../cor-inicio-borda-em-bloco";
 import { CorInicioBordaEmLinha } from "../cor-inicio-borda-em-linha";
 import { Cursor } from "../cursor";
-import { DecoracaoCorTexto } from "../decoracao-cor-texto ";
+import { DecoracaoCorTexto } from "../decoracao-cor-texto";
 import { DecoracaoEspessuraTexto } from "../decoracao-espessura-texto";
 import { DecoracaoEstiloTexto } from "../decoracao-estilo-texto";
 import { DecoracaoLinhaTexto } from "../decoracao-linha-texto";

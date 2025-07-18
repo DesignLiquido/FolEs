@@ -1,1 +1,3 @@
-export abstract class Valor {}
+export abstract class Valor {
+    abstract paraTexto(): string;
+}

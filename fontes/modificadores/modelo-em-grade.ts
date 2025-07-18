@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -17,8 +18,8 @@ export class ModeloEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -30,19 +31,20 @@ export class ModeloEmGrade extends Modificador {
         //      "b b b" auto;
 
         const valoresExtra = ["fit-content"];
-        if (!valorVariavel) {
-            if (typeof valor === 'string' && valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "modelo-em-grade", valor, this.valoresAceitos, valoresExtra);
-            } else {
-                validarValorNumerico("modelo-em-grade", valor, this.valoresAceitos, valoresExtra);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (typeof valor === 'string' && valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "modelo-em-grade", valores, this.valoresAceitos, valoresExtra);
+        //     } else {
+        //         validarValorNumerico("modelo-em-grade", valores, this.valoresAceitos, valoresExtra);
+        //     }
 
-            if (quantificador !== undefined) {
-                validarQuantificador("modelo-em-grade", quantificador, unidadesMedida, valoresFlex);
-                this.quantificador = quantificador;
-            }
-        }
+        //     if (quantificador !== undefined) {
+        //         validarQuantificador("modelo-em-grade", quantificador, unidadesMedida, valoresFlex);
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

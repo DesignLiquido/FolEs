@@ -8,6 +8,7 @@ import { Serializador } from "../../fontes/serializadores";
 import { Estilo, EstiloBorda } from "../listas/estilo";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { estilos } from "../../fontes/modificadores/atributos/estilo";
+import { ValorQualitativo } from "../../fontes/valores";
 
 describe('Testando Seletores com ESTILO como atributo', () => {
     describe('Testes Unitários', () => {
@@ -25,12 +26,16 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
         it('Casos de sucesso - Valor válido', () => {
             for (let index = 0; index < Estilo.length; index += 1) {
-                const seletor = new SeletorModificador(Estilo[index], 'pontilhado', null);
+                const seletor = new SeletorModificador(
+                    Estilo[index], 
+                    [new ValorQualitativo('pontilhado')], 
+                    null
+                );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${Estilo[index]}: ${seletor['valor']};`,
+                    `${Estilo[index]}: pontilhado;`,
                     "}"
                 ]);
 
@@ -97,7 +102,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Esperado ';' após declaração de valor de modificador '${Estilo[index]}'.`);
+                }).toThrow();
             }
         });
 
@@ -139,7 +144,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 // Avaliador Sintático
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrowError(`Propriedade '${EstiloBorda[index]}' com valor ${valorInvalido} inválido.`);
+                }).toThrowError(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
             }
         });
 

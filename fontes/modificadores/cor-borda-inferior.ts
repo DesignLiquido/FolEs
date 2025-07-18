@@ -1,17 +1,18 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorBordaInferior extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("cor-borda-inferior", "border-bottom-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor-borda-inferior", valor);
+        if (!valorVariavel) validarValorCor("cor-borda-inferior", valores);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

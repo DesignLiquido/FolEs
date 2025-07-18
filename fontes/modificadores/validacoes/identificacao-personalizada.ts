@@ -1,33 +1,35 @@
+import { Valor } from "../../valores";
 import { MetodoCss } from "../../valores/metodos/css/metodo-css";
 import { Metodo } from "../../valores/metodos/foles/metodo";
 
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
-    valor: Metodo | MetodoCss | string,
+    valores: Valor[],
 ): void {
-    // Regex para um identificador CSS válido
-    const validarIdentificador: RegExp = /^-?[_a-zA-Z][-_a-zA-Z0-9]*$/;
+    // TODO: Repensar
+    // // Regex para um identificador CSS válido
+    // const validarIdentificador: RegExp = /^-?[_a-zA-Z][-_a-zA-Z0-9]*$/;
     
-    // Listagem de valores globais (não permitidos)
-    const valoresGlobais: Array<string> = [
-        'herdar',
-        'inicial',
-        'reverter',
-        'reverter-camada',
-        'desarmar',
-    ];
+    // // Listagem de valores globais (não permitidos)
+    // const valoresGlobais: Array<string> = [
+    //     'herdar',
+    //     'inicial',
+    //     'reverter',
+    //     'reverter-camada',
+    //     'desarmar',
+    // ];
 
-    // Validações de um valor <custom-indent> válido
-    const validacoesIdentificador = typeof valor === "string"
-        && validarIdentificador.test(valor)
-        && !(valoresGlobais.includes(valor))
-        && !(valor.startsWith("--"));
+    // // Validações de um valor <custom-indent> válido
+    // const validacoesIdentificador = typeof valor === "string"
+    //     && validarIdentificador.test(valor)
+    //     && !(valoresGlobais.includes(valor))
+    //     && !(valor.startsWith("--"));
     
-    // Retorna erro caso não passe nas validações acima
-    if (!(validacoesIdentificador)) {
-        throw new Error(`Propriedade '${nomePropriedade}' com valor personalizado ${valor} inválido. 
-        O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
-    }
+    // // Retorna erro caso não passe nas validações acima
+    // if (!(validacoesIdentificador)) {
+    //     throw new Error(`Modificador ou variável '${nomePropriedade}' com valor personalizado ${valor} inválido. 
+    //     O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
+    // }
 }
 
 /**

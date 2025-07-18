@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -12,16 +13,16 @@ export class TextoBidirecional extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("texto-bidirecional", "unicode-bidi", pragmas);
 
         if (!valorVariavel)
-            validarValores("texto-bidirecional", valor, this.valoresAceitos);
+            validarValores("texto-bidirecional", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

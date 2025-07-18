@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -24,16 +25,16 @@ export class QuebrarApos extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["quebrar-apos", "quebrar-após"], "break-after", pragmas);
 
         if (!valorVariavel)
-            validarValores("quebrar-após", valor, this.valoresAceitos);
+            validarValores("quebrar-após", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

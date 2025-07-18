@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
@@ -12,8 +13,8 @@ export class AlinharUltimoItem extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -37,12 +38,12 @@ export class AlinharUltimoItem extends Modificador {
         if (!valorVariavel)
             validarValoresAdicionais(
                 "alinhar-último-item",
-                valor,
+                valores,
                 posicoesValidas,
                 this.valoresAceitos,
             );
 
-        this.valor = valor;
+        this.valores = valores;
 
         // Não recebe quantificador
         // this.quantificador = quantificador;

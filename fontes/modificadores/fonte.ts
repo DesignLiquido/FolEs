@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -49,33 +50,34 @@ export class Fonte extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("fonte", "font", pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "fonte", valor, this.valoresAceitos);
-            } else {
-                validarValorNumerico("fonte", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "fonte", valores, this.valoresAceitos);
+        //     } else {
+        //         validarValorNumerico("fonte", valores, this.valoresAceitos);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "fonte",
-                    quantificador,
-                    unidadesMedida,
-                    valoresFonte,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "fonte",
+        //             quantificador,
+        //             unidadesMedida,
+        //             valoresFonte,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

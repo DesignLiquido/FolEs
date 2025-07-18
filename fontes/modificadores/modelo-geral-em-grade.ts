@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -7,8 +8,8 @@ export class ModeloGeralEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -20,7 +21,7 @@ export class ModeloGeralEmGrade extends Modificador {
         //      "a c d";
 
         if (!valorVariavel)
-            validarValores("modelo-geral-em-grade", valor, this.valoresAceitos);
-        this.valor = valor;
+            validarValores("modelo-geral-em-grade", valores, this.valoresAceitos);
+        this.valores = valores;
     }
 }

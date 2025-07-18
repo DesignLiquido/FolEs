@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -8,16 +9,16 @@ export class CelulasVazias extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["celulas-vazias", "células-vazias"], "empty-cells", pragmas);
 
         if (!valorVariavel)
-            validarValores("células-vazias", valor, this.valoresAceitos);
+            validarValores("células-vazias", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

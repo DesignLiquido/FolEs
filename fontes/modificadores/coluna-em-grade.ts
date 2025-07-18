@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -8,21 +9,21 @@ export class ColunaEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
-        pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        valores: Valor[],
+        
+        pragmas?: PragmasModificador
     ) {
         super("coluna-em-grade", "grid-column", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes("/") || valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valor, this.valoresAceitos, undefined, false, true);
-            } else {
-                validarValorNumerico("coluna-em-grade", valor, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes("/") || valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valores, this.valoresAceitos, undefined, false, true);
+        //     } else {
+        //         validarValorNumerico("coluna-em-grade", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

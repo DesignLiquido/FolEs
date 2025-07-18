@@ -3,7 +3,7 @@ import { BlocoDeclaracao, Declaracao } from "../declaracoes";
 import { Simbolo } from "../lexador";
 import { Modificador } from "../modificadores";
 import { SeletorModificador } from "../modificadores/superclasse";
-import { Valor } from "../valores/valor";
+import { ValorAbreviacao, Valor, ValorNumerico, ValorQualitativo, ValorTexto, ValorVirgula } from "../valores";
 import { SeletorValor } from "../valores/seletor-valor";
 
 import tiposDeSimbolos from "../tipos-de-simbolos/foles";
@@ -24,10 +24,13 @@ import {
     SimboloInterface,
 } from "../interfaces";
 import {
-    ValorNumerico,
-    ValorNumericoComQuantificador,
-} from "../../testes/listas/valor-numerico";
+    ModificadoresDeValorNumerico,
+    ModificadoresDeValorNumericoComQuantificador,
+} from "../../testes/listas/valores-numericos";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
+import { ReferenciaVariavel } from "../valores/referencia-variavel";
+import { Metodo } from "../valores/metodos/foles/metodo";
+import { valoresGerais } from "../modificadores/atributos/gerais";
 
 /**
  * Implementação do avaliador sintático.
@@ -71,14 +74,14 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         throw this.erro(this.simbolos[this.atual], mensagemDeErro);
     }
 
-    resolverMetodo(lexema: string): Valor {
+    resolverMetodo(lexema: string): Metodo {
         switch (lexema) {
             case "#":
                 const codigoHEX = this.consumir(
                     tiposDeSimbolos.IDENTIFICADOR,
                     "Esperado código HEX válido após #'.",
                 );
-                return new SeletorValor("hex", [codigoHEX.lexema]);
+                return new SeletorValor("hex", [codigoHEX.lexema]) as Metodo;
 
             case "borrar":
                 this.consumir(
@@ -96,10 +99,11 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'borrar'.",
                 );
+
                 return new SeletorValor(lexema, [
                     valorBorrar,
                     quantificadorBorrar,
-                ]);
+                ])  as Metodo;
 
             case "brilho":
                 this.consumir(
@@ -120,7 +124,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorBrilho,
                     quantificadorBrilho,
-                ]);
+                ]) as Metodo;
 
             case "calcular":
                 this.consumir(
@@ -142,7 +146,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     operadorCalc,
                     valorCalc2,
                     quantificadorCalc2,
-                ]);
+                ]) as Metodo;
 
             case "contraste":
                 this.consumir(
@@ -163,7 +167,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorContraste,
                     quantificadorContraste,
-                ]);
+                ]) as Metodo;
 
             case "curva-cúbica":
                 this.consumir(
@@ -195,7 +199,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     parametro2,
                     parametro3,
                     parametro4,
-                ]);
+                ]) as Metodo;
 
             case "curva-cubica":
                 this.consumir(
@@ -227,7 +231,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     parametro2cc,
                     parametro3cc,
                     parametro4cc,
-                ]);
+                ]) as Metodo;
 
             case "encaixar-conteudo":
                 this.consumir(
@@ -243,7 +247,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorFit["lexema"],
                     quantificadorFit["lexema"],
-                ]);
+                ]) as Metodo;
 
             case "encaixar-conteúdo":
                 this.consumir(
@@ -259,7 +263,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorFit1["lexema"],
                     quantificadorFit1["lexema"],
-                ]);
+                ]) as Metodo;
 
             case "escala-cinza":
                 this.consumir(
@@ -280,7 +284,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorEscala,
                     quantificadorEscala,
-                ]);
+                ]) as Metodo;
 
             case "escalamento":
                 this.consumir(
@@ -301,7 +305,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método escalamento.",
                 );
-                return new SeletorValor(lexema, [valorScale1, valorScale2]);
+                return new SeletorValor(lexema, [valorScale1, valorScale2]) as Metodo;
 
             case "escalamento-3d":
                 this.consumir(
@@ -327,7 +331,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorScale3d1,
                     valorScale3d2,
                     valorScale3d3,
-                ]);
+                ]) as Metodo;
 
             case "escalamento-eixo-z":
                 this.consumir(
@@ -339,7 +343,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método escalamento-eixo-z.",
                 );
-                return new SeletorValor(lexema, [valorScaleZ]);
+                return new SeletorValor(lexema, [valorScaleZ]) as Metodo;
 
             case "escalamento-horizontal":
                 this.consumir(
@@ -351,7 +355,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método escalamento-horizontal.",
                 );
-                return new SeletorValor(lexema, [valorScaleX]);
+                return new SeletorValor(lexema, [valorScaleX]) as Metodo;
 
             case "escalamento-vertical":
                 this.consumir(
@@ -363,7 +367,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método escalamento-vertical.",
                 );
-                return new SeletorValor(lexema, [valorScaleY]);
+                return new SeletorValor(lexema, [valorScaleY]) as Metodo;
 
             case "gradiente-linear":
                 this.consumir(
@@ -432,7 +436,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorAngulo,
                     cor1,
                     cor2,
-                ]);
+                ]) as Metodo;
 
             case "hsl":
                 this.consumir(
@@ -462,7 +466,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'hsl'.",
                 );
-                return new SeletorValor(lexema, [HdeHSL, SdeHSL, LdeHSL]);
+                return new SeletorValor(lexema, [HdeHSL, SdeHSL, LdeHSL]) as Metodo;
 
             case "hsla":
                 this.consumir(
@@ -492,7 +496,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'hsla'.",
                 );
-                return new SeletorValor(lexema, [HdeHSLA, SdeHSLA, LdeHSLA]);
+                return new SeletorValor(lexema, [HdeHSLA, SdeHSLA, LdeHSLA]) as Metodo;
 
             case "inclinar":
                 this.consumir(
@@ -532,7 +536,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorInclinar1,
                     valorInclinar2,
                     quantificadorInclinar2,
-                ]);
+                ]) as Metodo;
 
             case "inclinar-horizontal":
                 this.consumir(
@@ -553,7 +557,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorInclinarX,
                     quantificadorInclinarX,
-                ]);
+                ]) as Metodo;
 
             case "inclinar-vertical":
                 this.consumir(
@@ -574,7 +578,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorInclinarY,
                     quantificadorInclinarY,
-                ]);
+                ]) as Metodo;
 
             case "inverter":
                 this.consumir(
@@ -595,7 +599,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorInverter,
                     quantificadorInverter,
-                ]);
+                ]) as Metodo;
 
             case "limitar":
                 this.consumir(
@@ -627,7 +631,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorMed,
                     valorMax,
                     quantificadorMax,
-                ]);
+                ]) as Metodo;
 
             case "linear":
                 this.consumir(
@@ -649,7 +653,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após terceiro argumento do método linear.",
                 );
-                return new SeletorValor(lexema, [valor1, valor2, valor3]);
+                return new SeletorValor(lexema, [valor1, valor2, valor3]) as Metodo;
 
             case "minmax":
                 this.consumir(
@@ -681,12 +685,14 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     return new SeletorValor(lexema, [
                         parametro01,
                         valor02["lexema"],
-                    ]);
-                } else if (parametro02 !== null) {
+                    ]) as Metodo;
+                } 
+                
+                if (parametro02 !== null) {
                     return new SeletorValor(lexema, [
                         valor01["lexema"],
                         parametro02,
-                    ]);
+                    ]) as Metodo;
                 }
 
             case "opacar":
@@ -708,7 +714,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorOpaco,
                     quantificadorOpaco,
-                ]);
+                ]) as Metodo;
 
             case "passos":
                 this.consumir(
@@ -725,7 +731,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método passos.",
                 );
-                return new SeletorValor(lexema, [valorNumerico, termoSalto]);
+                return new SeletorValor(lexema, [valorNumerico, termoSalto]) as Metodo;
 
             case "perspectivar":
                 this.consumir(
@@ -746,7 +752,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorPerspectivar,
                     quantificadorPerspectivar,
-                ]);
+                ]) as Metodo;
 
             case "projetar-sombra":
                 this.consumir(
@@ -790,7 +796,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorSombra3,
                     quantificadorSombra3,
                     corSombra,
-                ]);
+                ]) as Metodo;
 
             case "raio":
                 this.consumir(
@@ -813,7 +819,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     posicaoRaio,
                     numeroRaio,
                     quantificadorRaio,
-                ]);
+                ]) as Metodo;
 
             case "rgb":
                 this.consumir(
@@ -835,7 +841,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'rgb'.",
                 );
-                return new SeletorValor(lexema, [vermelho, verde, azul]);
+                return new SeletorValor(lexema, [vermelho, verde, azul]) as Metodo;
 
             case "rgba":
                 this.consumir(
@@ -861,7 +867,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     vermelhoRgba,
                     verdeRgba,
                     azulRgba,
-                ]);
+                ]) as Metodo;
 
             case "rotacionar":
                 this.consumir(
@@ -882,7 +888,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorRotacionar,
                     quantificadorRotacionar,
-                ]);
+                ]) as Metodo;
 
             case "rotacionar-eixo-z":
                 this.consumir(
@@ -903,7 +909,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorRotacionarZ,
                     quantificadorRotacionarZ,
-                ]);
+                ]) as Metodo;
 
             case "rotacionar-horizontal":
                 this.consumir(
@@ -924,7 +930,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorRotacionarX,
                     quantificadorRotacionarX,
-                ]);
+                ]) as Metodo;
 
             case "rotacionar-matiz":
                 this.consumir(
@@ -945,7 +951,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorRotacao,
                     quantificadorRotacao,
-                ]);
+                ]) as Metodo;
 
             case "rotacionar-vertical":
                 this.consumir(
@@ -966,7 +972,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorRotacionarY,
                     quantificadorRotacionarY,
-                ]);
+                ]) as Metodo;
 
             case "saturar":
                 this.consumir(
@@ -987,7 +993,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorSaturar,
                     quantificadorSaturar,
-                ]);
+                ]) as Metodo;
 
             case "sepia":
                 this.consumir(
@@ -1008,7 +1014,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorSepia,
                     quantificadorSepia,
-                ]);
+                ]) as Metodo;
 
             case "sépia":
                 this.consumir(
@@ -1029,7 +1035,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorSépia,
                     quantificadorSépia,
-                ]);
+                ]) as Metodo;
 
             case "translação":
                 this.consumir(
@@ -1069,7 +1075,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorTranslacao1,
                     valorTranslacao2,
                     quantificadorTranslacao2,
-                ]);
+                ]) as Metodo;
 
             case "translacao":
                 this.consumir(
@@ -1109,7 +1115,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorTranlacao01,
                     valorTranslacao02,
                     quantificadorTranlacao02,
-                ]);
+                ]) as Metodo;
 
             case "translação-3d":
                 this.consumir(
@@ -1175,7 +1181,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorTranlacao3d2,
                     valorTranslacao3d3,
                     quantificadorTranlacao3d3,
-                ]);
+                ]) as Metodo;
 
             case "translacao-3d":
                 this.consumir(
@@ -1242,7 +1248,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorTranlacao3d02,
                     valorTranslacao3d03,
                     quantificadorTranlacao3d03,
-                ]);
+                ]) as Metodo;
 
             case "translação-eixo-z":
                 this.consumir(
@@ -1263,7 +1269,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorTranslaçaoZ,
                     quantificadorTranslaçaoZ,
-                ]);
+                ]) as Metodo;
 
             case "translacao-eixo-z":
                 this.consumir(
@@ -1284,7 +1290,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorTranslacaoZ,
                     quantificadorTranslacaoZ,
-                ]);
+                ]) as Metodo;
 
             case "translação-horizontal":
                 this.consumir(
@@ -1305,7 +1311,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorTranslaçaoX,
                     quantificadorTranslaçaoX,
-                ]);
+                ]) as Metodo;
 
             case "translacao-horizontal":
                 this.consumir(
@@ -1326,7 +1332,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorTranslacaoX,
                     quantificadorTranslacaoX,
-                ]);
+                ]) as Metodo;
 
             case "translação-vertical":
                 this.consumir(
@@ -1347,7 +1353,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorTranslaçaoY,
                     quantificadorTranslaçaoY,
-                ]);
+                ]) as Metodo;
 
             case "translacao-vertical":
                 this.consumir(
@@ -1368,7 +1374,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorTranslacaoY,
                     quantificadorTranslacaoY,
-                ]);
+                ]) as Metodo;
 
             case "url":
                 this.consumir(
@@ -1380,7 +1386,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumento do método url.",
                 );
-                return new SeletorValor(lexema, [url]);
+                return new SeletorValor(lexema, [url]) as Metodo;
         }
 
         throw new Error(`Método ${lexema} não reconhecido em FolEs.`);
@@ -1441,25 +1447,85 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return textoUrl;
     }
 
-    private valoresModificador(): Array<any> {
-        const modificadores = [];
-        while (
-            this.simbolos[this.atual].hasOwnProperty("tipo") &&
-            this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA
-        ) {
+    protected valorNumerico(
+        nomeModificador: string, 
+        valorModificador: SimboloInterface,
+        ponto: boolean
+    ): ValorNumerico {
+        let literalNumero = Number(valorModificador.lexema);
+        if (ponto) {
+            literalNumero = literalNumero / Math.pow(10, valorModificador.lexema.length);
+        }
+
+        let quantificadorNumero: string;
+        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.QUANTIFICADOR)) {
+            const simboloQuantificadorNumero = this.avancarEDevolverAnterior();
+            quantificadorNumero = simboloQuantificadorNumero.lexema;
+        }
+
+        const valorNumerico = new ValorNumerico(nomeModificador, literalNumero, quantificadorNumero);
+        return valorNumerico;
+    }
+
+    protected valoresModificador(nomeModificador: string): Array<Valor> {
+        const valoresResolvidos = [];
+        do {
             const valorModificador = this.avancarEDevolverAnterior();
 
             switch (valorModificador.tipo) {
+                case tiposDeSimbolos.BARRA:
+                    valoresResolvidos.push(new ValorAbreviacao());
+                    break;
+                case tiposDeSimbolos.CIFRAO:
+                    const nomeVariavel = this.avancarEDevolverAnterior();
+                    const referenciaVariavel = new ReferenciaVariavel(nomeVariavel.lexema);
+                    valoresResolvidos.push(referenciaVariavel);
+                    break;
                 case tiposDeSimbolos.METODO:
                     const metodo = this.resolverMetodo(valorModificador.lexema);
-                    modificadores.push(metodo);
+                    valoresResolvidos.push(metodo);
+                    break;
+                case tiposDeSimbolos.NUMERO:
+                    const valorNumerico = this.valorNumerico(nomeModificador, valorModificador, false);
+                    valoresResolvidos.push(valorNumerico);
+                    break;
+                case tiposDeSimbolos.PONTO:
+                    const simboloNumero = this.consumir(tiposDeSimbolos.NUMERO, "Esperado número após ponto para valor de modificador.");
+                    const valorNumericoComecadoPorPonto = this.valorNumerico(nomeModificador, simboloNumero, true);
+                    valoresResolvidos.push(valorNumericoComecadoPorPonto);
+                    break;
+                case tiposDeSimbolos.QUALITATIVO:
+                    const valorQualitativo = new ValorQualitativo(valorModificador.lexema);
+                    valoresResolvidos.push(valorQualitativo);
+                    break;
+                case tiposDeSimbolos.TEXTO:
+                    const valorTexto = new ValorTexto(valorModificador.lexema);
+                    valoresResolvidos.push(valorTexto);
+                    break;
+                case tiposDeSimbolos.VIRGULA:
+                    const valorVirgula = new ValorVirgula();
+                    valoresResolvidos.push(valorVirgula);
+                    break;
                 default:
-                    const modificador = valorModificador;
-                    modificadores.push(modificador);
-            }
-        }
+                    // TODO @Vitor: Avaliar se isso é uma boa ideia.
+                    if (valorModificador.lexema in valoresGerais) {
+                        valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                        break;
+                    }
 
-        return modificadores;
+                    throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
+            } 
+        } while (
+            this.atual < this.simbolos.length &&
+            this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA
+        );
+
+        this.consumir(
+            tiposDeSimbolos.PONTO_E_VIRGULA,
+            "Esperado ponto-e-vírgula após declaração de valores de modificador.",
+        );
+
+        return valoresResolvidos;
     }
 
     private tratarAtribuicaoAbreviada(valoresModificador: Array<any>): string {
@@ -1488,8 +1554,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     }
 
     private tratarValorNumerico(modificador: Simbolo): Boolean {
-        if (!ValorNumerico.includes(modificador.lexema)) {
-            if (ValorNumericoComQuantificador.includes(modificador.lexema)) {
+        if (!ModificadoresDeValorNumerico.includes(modificador.lexema)) {
+            if (ModificadoresDeValorNumericoComQuantificador.includes(modificador.lexema)) {
                 if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
                     return true;
                 } else {
@@ -1585,96 +1651,26 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     protected declaracaoVariavel(): DeclaracaoVariavel {
         let nomeVariavel: string;
-        let simboloValorVariavel: Simbolo;
-        let valorVariavel: string | Valor;
-        let quantificadorVariavel: string;
-
-        while (
-            this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA
-        ) {
-            this.consumir(
-                tiposDeSimbolos.CIFRAO,
-                "Esperado cifrão antes de declaração de variável.",
-            );
-
-            const declaracaoVariavel: Simbolo = this.consumir(
-                tiposDeSimbolos.VARIAVEL,
-                "Esperada nomenclatura para declaração de variável.",
-            );
-
-            nomeVariavel = declaracaoVariavel.lexema;
-
-            this.consumir(
-                tiposDeSimbolos.DOIS_PONTOS,
-                "Esperado ':' após declaração de variável.",
-            );
-
-            switch (this.simbolos[this.atual].tipo) {
-                case tiposDeSimbolos.IDENTIFICADOR:
-                    simboloValorVariavel = this.consumir(
-                        tiposDeSimbolos.IDENTIFICADOR,
-                        "Esperado nome do modificador após declaração de variável.",
-                    );
-
-                    valorVariavel = simboloValorVariavel.lexema;
-                    break;
-                case tiposDeSimbolos.QUALITATIVO:
-                    simboloValorVariavel = this.consumir(
-                        tiposDeSimbolos.QUALITATIVO,
-                        "Esperado qualitativo após declaração de variável.",
-                    );
-
-                    valorVariavel = simboloValorVariavel.lexema;
-                    break;
-                case tiposDeSimbolos.NUMERO:
-                    simboloValorVariavel = this.consumir(
-                        tiposDeSimbolos.NUMERO,
-                        "Esperado valor numérico após declaração de variável",
-                    );
-
-                    valorVariavel = simboloValorVariavel.lexema;
-
-                    if (
-                        this.simbolos[this.atual].tipo ===
-                        tiposDeSimbolos.QUANTIFICADOR
-                    ) {
-                        const quantificador = this.consumir(
-                            tiposDeSimbolos.QUANTIFICADOR,
-                            "Esperado quantificador após valor numérico atribuído à variável.",
-                        );
-
-                        quantificadorVariavel = quantificador.lexema;
-                    }
-                    break;
-                case tiposDeSimbolos.METODO:
-                    this.consumir(
-                        tiposDeSimbolos.METODO,
-                        "Esperada declaração de método no valor atribuído à variável.",
-                    );
-
-                    const tratarMetodo = this.resolverMetodo(
-                        this.simbolos[this.atual - 1].lexema,
-                    );
-                    valorVariavel = tratarMetodo;
-
-                    break;
-                default:
-                    console.log("Não deveria cair aqui!");
-            }
-        }
 
         this.consumir(
-            tiposDeSimbolos.PONTO_E_VIRGULA,
-            "Esperado ponto e vírgula após atribuição de valor à variável",
+            tiposDeSimbolos.CIFRAO,
+            "Esperado cifrão antes de declaração de variável.",
         );
 
-        const variavel = {
-            nome: nomeVariavel,
-            valor: valorVariavel,
-            quantificador: quantificadorVariavel ? quantificadorVariavel : null,
-        };
+        const declaracaoVariavel: Simbolo = this.consumir(
+            tiposDeSimbolos.VARIAVEL,
+            "Esperada nomenclatura para declaração de variável.",
+        );
 
-        return variavel;
+        nomeVariavel = declaracaoVariavel.lexema;
+
+        this.consumir(
+            tiposDeSimbolos.DOIS_PONTOS,
+            "Esperado ':' após declaração de variável.",
+        );
+
+        const valoresVariavel: Valor[] = this.valoresModificador(nomeVariavel);
+        return new DeclaracaoVariavel(nomeVariavel, valoresVariavel);
     }
 
     /**
@@ -1715,118 +1711,16 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             "Esperado ':' após nome do modificador.",
         );
 
-        let valoresModificador: Array<any> = this.valoresModificador();
-        let quantificador: any;
-
-        for (const [index, valorModificador] of valoresModificador.entries()) {
-            if (
-                valorModificador.hasOwnProperty("tipo") &&
-                valorModificador.tipo === tiposDeSimbolos.NUMERO
-            ) {
-                const tratarValorNumerico =
-                    this.tratarValorNumerico(valorModificador);
-
-                if (tratarValorNumerico) {
-                    quantificador = valoresModificador[index + 1];
-                }
-            }
-
-            if (
-                valorModificador.hasOwnProperty("tipo") &&
-                valorModificador.tipo === tiposDeSimbolos.METODO
-            ) {
-                valoresModificador.splice(index, 1);
-            }
-        }
-
-        // TODO: Pensar num teste melhor pra isso.
-        /*if (!(valorModificador instanceof Metodo)) {
-            quantificador = this.avancarEDevolverAnterior();
-        }*/
-
-        if (valoresModificador.length === 0) {
-            const proximoSimbolo = this.avancarEDevolverAnterior();
-            valoresModificador.push(proximoSimbolo);
-        }
-
-        this.consumir(
-            tiposDeSimbolos.PONTO_E_VIRGULA,
-            `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`,
-        );
-
-        if (valoresModificador[0].tipo === tiposDeSimbolos.CIFRAO) {
-            const valorVariavel = true;
+        let valoresModificador: Array<any> = this.valoresModificador(modificador.lexema);
             
-            const classeModificadora = new SeletorModificador(
-                modificador.lexema,
-                valoresModificador[1].lexema,
-                quantificador && quantificador.hasOwnProperty("lexema")
-                    ? quantificador.lexema
-                    : quantificador,
-                {
-                    linha: modificador.linha,
-                    colunaInicial: modificador.colunaInicial,
-                    colunaFinal: modificador.colunaFinal,
-                },
-                valorVariavel,
-            );
-
-            return classeModificadora as Modificador;
-        }
-
-        if (
-            valoresModificador.length < 2 ||
-            valoresModificador.length <= 2 && (quantificador && quantificador.hasOwnProperty("lexema"))
-        ) {            
-            const classeModificadora = new SeletorModificador(
-                modificador.lexema,
-                valoresModificador[0].hasOwnProperty("lexema")
-                    ? valoresModificador[0].lexema
-                    : valoresModificador[0],
-                quantificador && quantificador.hasOwnProperty("lexema")
-                    ? quantificador.lexema
-                    : quantificador,
-                {
-                    linha: modificador.linha,
-                    colunaInicial: modificador.colunaInicial,
-                    colunaFinal: modificador.colunaFinal,
-                },
-            );
-
-            return classeModificadora as Modificador;
-        }
-
-        if (valoresModificador[0].tipo === tiposDeSimbolos.PONTO) {
-            const valorComPonto = `${valoresModificador[0].lexema}${valoresModificador[1].lexema}`;
-            const classeModificadora = new SeletorModificador(
-                modificador.lexema,
-                valorComPonto,
-                quantificador && quantificador.hasOwnProperty("lexema")
-                    ? quantificador.lexema
-                    : quantificador,
-                {
-                    linha: modificador.linha,
-                    colunaInicial: modificador.colunaInicial,
-                    colunaFinal: modificador.colunaFinal,
-                },
-            );
-
-            return classeModificadora as Modificador;
-        }
-
-        const atribuicaoAbreviada = this.tratarAtribuicaoAbreviada(valoresModificador);
-
         const classeModificadora = new SeletorModificador(
             modificador.lexema,
-            atribuicaoAbreviada,
-            quantificador && quantificador.hasOwnProperty("lexema")
-                ? quantificador.lexema
-                : quantificador,
+            valoresModificador,
             {
                 linha: modificador.linha,
                 colunaInicial: modificador.colunaInicial,
                 colunaFinal: modificador.colunaFinal,
-            },
+            }
         );
 
         return classeModificadora as Modificador;
@@ -1884,13 +1778,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 this.atual -= 1;
                 return null;
             case tiposDeSimbolos.CIFRAO:
-                const variavel = this.declaracaoVariavel();
-
-                return new DeclaracaoVariavel(
-                    variavel.nome,
-                    variavel.valor,
-                    variavel.quantificador,
-                );
+                return this.declaracaoVariavel();
             default:
                 const seletores = this.resolverSeletores();
                 const modificadoresEDeclaracoesAninhadas =

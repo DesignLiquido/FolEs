@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -20,8 +21,8 @@ export class EventosPonteiro extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -31,8 +32,8 @@ export class EventosPonteiro extends Modificador {
         // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
 
         if (!valorVariavel)
-            validarValores("eventos-ponteiro", valor, this.valoresAceitos);
+            validarValores("eventos-ponteiro", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

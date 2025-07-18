@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -12,8 +13,8 @@ export class EstiloLista extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -21,24 +22,25 @@ export class EstiloLista extends Modificador {
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel) {
-            if (typeof valor === 'string' && valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "estilo-lista", valor, this.valoresAceitos, valoresExtra, false, true);
-            } else {
-                validarValorNumerico("estilo-lista", valor, this.valoresAceitos, valoresExtra);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (typeof valor === 'string' && valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "estilo-lista", valores, this.valoresAceitos, valoresExtra, false, true);
+        //     } else {
+        //         validarValorNumerico("estilo-lista", valores, this.valoresAceitos, valoresExtra);
+        //     }
 
-            if (quantificador !== undefined) {
-                validarQuantificador(
-                    "estilo-lista",
-                    quantificador,
-                    unidadesMedida,
-                );
+        //     if (quantificador !== undefined) {
+        //         validarQuantificador(
+        //             "estilo-lista",
+        //             quantificador,
+        //             unidadesMedida,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

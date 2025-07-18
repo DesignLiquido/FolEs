@@ -68,7 +68,7 @@ export * from "./cor-inicio-borda-em-bloco";
 export * from "./cor-inicio-borda-em-linha";
 export * from "./cor";
 export * from "./cursor";
-export * from "./decoracao-cor-texto ";
+export * from "./decoracao-cor-texto";
 export * from "./decoracao-espessura-texto";
 export * from "./decoracao-estilo-texto";
 export * from "./decoracao-linha-texto";

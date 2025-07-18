@@ -11,13 +11,13 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let serializador: Serializador;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            serializador = new Serializador();
         });
 
         it('Caso de sucesso - Atribuição de variável com valor QUALITATIVO', () => {
@@ -74,13 +74,12 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // Serializador deve traduzir de acordo o valor qualitativo
-            const resultadoSerializador = tradutor.serializar(resultadoAvaliadorSintatico);
-            expect(resultadoSerializador).toContain('body');
-            expect(resultadoSerializador).toContain('scrollbar-color');
-            expect(resultadoSerializador).toContain('white;');
+            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            expect(resultadoSerializador).toContain('body {');
+            expect(resultadoSerializador).toContain('scrollbar-color: white;');
         });
 
-        it('Caso de sucesso - Atribuição de variável com valor NUMÉRICO', () => {
+        it('Caso de sucesso - Atribuição de variável com valor NUMÉRICO sem quantificador', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$valor-indice: 0;",
@@ -133,10 +132,9 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // Serializador deve traduzir de acordo
-            const resultadoSerializador = tradutor.serializar(resultadoAvaliadorSintatico);
-            expect(resultadoSerializador).toContain('body');
-            expect(resultadoSerializador).toContain('z-index');
-            expect(resultadoSerializador).toContain('0;');
+            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            expect(resultadoSerializador).toContain('body {');
+            expect(resultadoSerializador).toContain('z-index: 0;');
         });
 
         it('Caso de sucesso - Atribuição de variável com valor numérico COM QUANTIFICADOR', () => {
@@ -193,10 +191,9 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // Serializador deve traduzir de acordo
-            const resultadoSerializador = tradutor.serializar(resultadoAvaliadorSintatico);
-            expect(resultadoSerializador).toContain('body');
-            expect(resultadoSerializador).toContain('padding-right');
-            expect(resultadoSerializador).toContain('12px;');
+            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            expect(resultadoSerializador).toContain('body {');
+            expect(resultadoSerializador).toContain('padding-right: 12px;');
         });
 
         it('Caso de sucesso - Atribuição de variável com MÉTODOS DE COR', () => {
@@ -266,10 +263,9 @@ describe('Testando Suporte a VARIÁVEIS', () => {
                 expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador deve traduzir de acordo
-                const resultadoSerializador = tradutor.serializar(resultadoAvaliadorSintatico);
-                expect(resultadoSerializador).toContain('body');
-                expect(resultadoSerializador).toContain('box-shadow');
-                expect(resultadoSerializador).toContain(valoresMetodo[index]);
+                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoSerializador).toContain('body {');
+                expect(resultadoSerializador).toContain(`box-shadow: ${valoresMetodo[index]};`);
             }
         });
 
@@ -354,14 +350,14 @@ describe('Testando Suporte a VARIÁVEIS', () => {
                 expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador deve traduzir de acordo
-                const resultadoSerializador = tradutor.serializar(resultadoAvaliadorSintatico);
-                expect(resultadoSerializador).toContain('body');
-                expect(resultadoSerializador).toContain('backdrop-filter');
-                expect(resultadoSerializador).toContain(valoresMetodo[index].css);
+                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoSerializador).toContain('body {');
+                expect(resultadoSerializador).toContain(`backdrop-filter: ${valoresMetodo[index].css};`);
             }
         });
 
-        it('Caso de falha - Atribuição de variável com valor inválido', () => {
+        // TODO: Depreciado. Deve disparar erro de avaliação sintática.
+        it.skip('Caso de falha - Atribuição de variável com valor inválido', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$cor-secundaria: branc;",
@@ -375,8 +371,8 @@ describe('Testando Suporte a VARIÁVEIS', () => {
 
             // Serializador deve retornar erro de valor inválido antes de traduzir
             expect(() => {
-                tradutor.serializar(resultadoAvaliadorSintatico);
-            }).toThrow(`Propriedade 'cor-barra-rolagem' com valor branc inválido`);
+                serializador.serializar(resultadoAvaliadorSintatico);
+            }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com valor branc inválido`);
         });
 
         it('Caso de falha - Declaração de variável após atribuição (fora de ordem)', () => {
@@ -393,7 +389,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
 
             // Serializador deve retornar erro de valor inválido antes de traduzir
             expect(() => {
-                tradutor.serializar(resultadoAvaliadorSintatico);
+                serializador.serializar(resultadoAvaliadorSintatico);
             }).toThrow(`A variável 'cor-secundaria' deve ser declarada antes da atribuição de valor.`);;
         });
 

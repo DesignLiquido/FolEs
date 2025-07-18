@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
@@ -10,8 +11,8 @@ export class AlinharTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -20,11 +21,11 @@ export class AlinharTexto extends Modificador {
         if (!valorVariavel)
             validarValoresAdicionais(
                 "alinhar-texto",
-                valor,
+                valores,
                 posicoesBasicas,
                 this.valoresAceitos,
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -14,28 +15,32 @@ export class AjustarTamanhoFonte extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "ajustar-tamanho-fonte", valor, this.valoresAceitos);
-            } else {
-                validarValorNumerico(
-                    "ajustar-tamanho-fonte",
-                    valor,
-                    this.valoresAceitos,
-                );
-            }
+        // TODO: Repensar.
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "ajustar-tamanho-fonte", valores, this.valoresAceitos);
+        //     } else {
+        //         validarValorNumerico(
+        //             "ajustar-tamanho-fonte",
+        //             valor,
+        //             this.valoresAceitos,
+        //         );
+        //     }
+        // }
+
+        this.valores = valores;
+
+        // Por enquanto trabalhando apenas com o primeiro valor.
+        if (this.valores.length > 0 && this.valores[0].hasOwnProperty('quantificador')) {
+            const quantificador = (this.valores[0] as any).quantificador;
+            // Não recebe quantificador, apenas o valor numérico.
+            if (quantificador) proibirQuantificador("ajustar-tamanho-fonte", quantificador);
         }
-
-        this.valor = valor;
-
-        // Não recebe quantificador, apenas o valor numérico.
-        if (quantificador) proibirQuantificador("ajustar-tamanho-fonte", quantificador);
     }
 }

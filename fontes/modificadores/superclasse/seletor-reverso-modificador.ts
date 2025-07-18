@@ -5,8 +5,7 @@ import { PragmasModificador } from "./pragmas-modificador";
 export class SeletorReversoModificador {
     constructor(
         nomeCss: string,
-        valor: string | Valor,
-        quantificador?: string,
+        valores: Valor[],
         pragmas?: PragmasModificador,
     ) {
         if (
@@ -16,8 +15,7 @@ export class SeletorReversoModificador {
             throw new Error(`O seletor \'${nomeCss}\' não foi encontrado.`);
         }
         return new DicionarioReversoModificadores[nomeCss](
-            valor,
-            quantificador,
+            valores,
             pragmas,
         );
     }

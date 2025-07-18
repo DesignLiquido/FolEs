@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -9,16 +10,16 @@ export class FluxoEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("fluxo-em-grade", "grid-auto-flow", pragmas);
 
         if (!valorVariavel)
-            validarValores("fluxo-em-grade", valor, this.valoresAceitos);
+            validarValores("fluxo-em-grade", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

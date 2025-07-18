@@ -1,5 +1,6 @@
 import { BlocoDeclaracao, Declaracao } from "../declaracoes";
 import { Modificador } from "../modificadores";
+import { Valor } from "../valores";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
 
@@ -14,27 +15,32 @@ export class SerializadorReverso {
         this.serializarComAninhamentos = serializarComAninhamentos;
     }
 
+    protected serializarValor(valor: Valor): string {
+        if (valor instanceof MetodoCss) {
+            return valor.paraTexto();
+        } 
+        
+        if (valor instanceof Metodo) {
+            return valor.paraTexto();
+        } 
+        
+        return String(valor);
+    }
+
     serializarModificador(
         modificador: Modificador,
         indentacao: number = 0,
     ): string {
-        let quantificador = "";
-        if (modificador.hasOwnProperty("quantificador")) {
-            quantificador = modificador.quantificador;
+        let valoresResolvidos = "";
+        for (const valor of modificador.valores) {
+            valoresResolvidos += this.serializarValor(valor) + " ";
         }
-
-        let valor = "";
-        if (modificador.valor instanceof MetodoCss) {
-            valor = (<MetodoCss>modificador.valor).paraTexto();
-        } else if (modificador.valor instanceof Metodo) {
-            valor = (<Metodo>modificador.valor).paraTexto();
-        } else {
-            valor = modificador.valor;
-        }
+        
+        valoresResolvidos = valoresResolvidos.slice(0, -1);
 
         return (
             " ".repeat(indentacao) +
-            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valor}${quantificador ? quantificador : ""};\n`
+            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valoresResolvidos};\n`
         );
     }
 

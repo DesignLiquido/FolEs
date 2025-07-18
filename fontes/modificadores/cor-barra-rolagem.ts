@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
@@ -7,17 +8,17 @@ export class CorBarraRolagem extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("cor-barra-rolagem", "scrollbar-color", pragmas);
 
         if (!valorVariavel) {
-            validarValorCor("cor-barra-rolagem", valor, this.valoresAceitos);
+            validarValorCor("cor-barra-rolagem", valores, this.valoresAceitos);
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

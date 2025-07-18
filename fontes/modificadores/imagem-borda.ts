@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { unidadesMedida } from "./atributos/quantificadores";
@@ -19,8 +20,8 @@ export class ImagemBorda extends Modificador {
     };
 
     constructor(
-        valor: Metodo | MetodoCss | string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -30,20 +31,21 @@ export class ImagemBorda extends Modificador {
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel) {
-            if (typeof valor === 'string' && (valor.includes(" ") || valor.includes("/"))) {
-                validarAtribuicaoAbreviada("numérica", "imagem-borda", valor, this.valoresAceitos, valoresExtra);
-            } else {
-                validarValorNumerico("imagem-borda", valor, this.valoresAceitos, valoresExtra);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (typeof valor === 'string' && (valor.includes(" ") || valor.includes("/"))) {
+        //         validarAtribuicaoAbreviada("numérica", "imagem-borda", valores, this.valoresAceitos, valoresExtra);
+        //     } else {
+        //         validarValorNumerico("imagem-borda", valores, this.valoresAceitos, valoresExtra);
+        //     }
 
-            if (quantificador && typeof valor === 'string' && Number(parseInt(valor))) {
-                validarQuantificador("imagem-borda", quantificador, unidadesMedida);
+        //     if (quantificador && typeof valor === 'string' && Number(parseInt(valor))) {
+        //         validarQuantificador("imagem-borda", quantificador, unidadesMedida);
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

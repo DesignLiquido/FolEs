@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -12,8 +13,8 @@ export class DecoracaoLinhaTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -24,8 +25,8 @@ export class DecoracaoLinhaTexto extends Modificador {
         );
 
         if (!valorVariavel)
-            validarValores("decoração-linha-texto", valor, this.valoresAceitos);
+            validarValores("decoração-linha-texto", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

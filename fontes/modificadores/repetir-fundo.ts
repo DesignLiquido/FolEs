@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -14,16 +15,16 @@ export class RepetirFundo extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("repetir-fundo", "background-repeat", pragmas);
 
         if (!valorVariavel)
-            validarValores("repetir-fundo", valor, this.valoresAceitos);
+            validarValores("repetir-fundo", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

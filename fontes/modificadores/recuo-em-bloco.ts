@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import {
     ListaDeValorPercentual,
     unidadesMedida,
@@ -9,27 +10,28 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RecuoEmBloco extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("recuo-em-bloco", "padding-block", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "recuo-em-bloco", valor);
-            } else {
-                validarValorNumerico("recuo-em-bloco", valor);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "recuo-em-bloco", valor);
+        //     } else {
+        //         validarValorNumerico("recuo-em-bloco", valor);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador("recuo-em-bloco", quantificador, unidadesMedida);
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador("recuo-em-bloco", quantificador, unidadesMedida);
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

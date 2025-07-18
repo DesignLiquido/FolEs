@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -11,8 +12,8 @@ export class PosicaoTextoSublinhado extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -25,10 +26,10 @@ export class PosicaoTextoSublinhado extends Modificador {
         if (!valorVariavel)
             validarValores(
                 "posição-texto-sublinhado",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

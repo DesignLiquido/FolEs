@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -6,31 +7,31 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FimBordaEmBloco extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("fim-borda-em-bloco", "border-block-end", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("múltiplos-qualitativos", "fim-borda-em-bloco", valor);
-            } else {
-                validarMultiplosQualitativos("fim-borda-em-bloco", valor);
-            }
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fim-borda-em-bloco", valor);
+        //     } else {
+        //         validarMultiplosQualitativos("fim-borda-em-bloco", valor);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "fim-borda-em-bloco",
-                    quantificador,
-                    unidadesMedida,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "fim-borda-em-bloco",
+        //             quantificador,
+        //             unidadesMedida,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

@@ -1,4 +1,4 @@
-export const ValorNumerico: Array<string> = [
+export const ModificadoresDeValorNumerico: Array<string> = [
     'linhas-superiores',
     'repetir-animacao',
     'repetir-animação',
@@ -24,7 +24,7 @@ export const ValorNumerico: Array<string> = [
     'coluna-em-grade',    
 ];
 
-export const ValorNumericoApenas: Array<string> = [
+export const ModificadoresDeValorNumericoApenas: Array<string> = [
     'linhas-superiores',
     'repetir-animacao',
     'repetir-animação',
@@ -45,13 +45,13 @@ export const ValorNumericoApenas: Array<string> = [
     'configurações-variação-fonte',
 ];
 
-export const ValorNumericoZeroUm: Array<string> = [
+export const ModificadoresDeValorNumericoZeroUm: Array<string> = [
     'limite-forma-imagem',
 ];
 
 // A lista abaixo inclui modificadores que aceitam tanto somente valores numéricos 
 // quanto valores numéricos c/ quantificador.
-export const ValorNumericoComQuantificador = [
+export const ModificadoresDeValorNumericoComQuantificador = [
     'tabulacao',
     'tabulação',
     'opacidade',

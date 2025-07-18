@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -42,8 +43,8 @@ export class Cursor extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -52,8 +53,8 @@ export class Cursor extends Modificador {
         const valoresExtra = ["url"];
 
         if (!valorVariavel)
-            validarValores("cursor", valor, this.valoresAceitos, valoresExtra);
+            validarValores("cursor", valores, this.valoresAceitos, valoresExtra);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

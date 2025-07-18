@@ -1,9 +1,10 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorEnfaseTexto extends Modificador {
     constructor(
-        valor: string,
+        valores: Valor[],
         quantificador: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
@@ -14,8 +15,8 @@ export class CorEnfaseTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) validarValorCor("cor-ênfase-texto", valor);
+        if (!valorVariavel) validarValorCor("cor-ênfase-texto", valores);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

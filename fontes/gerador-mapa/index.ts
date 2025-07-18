@@ -80,13 +80,15 @@ export class GeradorMapaCss {
                 // Pragma do dois-pontos.
                 retorno.mappings += vlq.encode([2, 0, 0, 2]) + ",";
 
-                const valor = (modificador.valor || "").toString();
-                const quantificador = (modificador.quantificador || "");
-                const larguraValor = valor.length + quantificador.length;
+                let larguraValores = 0;
+                for (const valor of modificador.valores) {
+                    const valorResolvido = valor.paraTexto();
+                    larguraValores += valorResolvido.length;
+                }
 
                 // Pragma do valor.
                 retorno.mappings +=
-                    vlq.encode([larguraValor, 0, 0, larguraValor]) + ";";
+                    vlq.encode([larguraValores, 0, 0, larguraValores]) + ";";
             }
         }
 

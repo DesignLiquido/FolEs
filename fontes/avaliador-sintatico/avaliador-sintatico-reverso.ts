@@ -21,6 +21,8 @@ import { HexadecimalCor } from "../valores/metodos/foles/hexadecimal-cor";
 import { Estrutura } from "../estruturas/estrutura";
 import { Valor } from "../valores/valor";
 import { SeletorValorReverso } from "../valores/seletor-valor-reverso";
+import { Metodo } from "../valores/metodos/foles/metodo";
+import { MetodoCss } from "../valores/metodos/css/metodo-css";
 
 /**
  * O avaliador sintático reverso avalia símbolos de arquivos CSS,
@@ -147,7 +149,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return seletores;
     }
 
-    private resolverCor() {
+    private resolverCor(): Metodo {
         const codigoCor = this.avancarEDevolverAnterior();
         return new HexadecimalCor(codigoCor.lexema);
     }
@@ -174,7 +176,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorBorrar,
                     quantificadorBorrar,
-                ]);
+                ]) as MetodoCss;
 
             case "brightness":
                 this.consumir(
@@ -195,7 +197,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorBrilho,
                     quantificadorBrilho,
-                ]);
+                ]) as MetodoCss;
 
             case "calc":
                 this.consumir(
@@ -218,7 +220,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     operadorCalc,
                     valorCalc2,
                     quantificadorCalc2,
-                ]);
+                ]) as MetodoCss;
 
             case "contrast":
                 this.consumir(
@@ -241,7 +243,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorContraste,
                     quantificadorContraste,
-                ]);
+                ]) as MetodoCss;
 
             case "cubic-bezier":
                 this.consumir(
@@ -273,7 +275,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     parametro2,
                     parametro3,
                     parametro4,
-                ]);
+                ]) as MetodoCss;
 
             case "fit-content":
                 this.consumir(
@@ -289,7 +291,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorFit["lexema"],
                     quantificadorFit["lexema"],
-                ]);
+                ]) as MetodoCss;
 
             case "grayscale":
                 this.consumir(
@@ -310,7 +312,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorEscala,
                     quantificadorEscala,
-                ]);
+                ]) as MetodoCss;
 
             case "scale":
                 this.consumir(
@@ -335,7 +337,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorScale1, valorScale2],
                     true,
-                );
+                ) as MetodoCss;
 
             case "scale3d":
                 this.consumir(
@@ -361,7 +363,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     valorScale3d1,
                     valorScale3d2,
                     valorScale3d3,
-                ]);
+                ]) as MetodoCss;
 
             case "scaleZ":
                 this.consumir(
@@ -373,7 +375,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método scaleZ.",
                 );
-                return new SeletorValorReverso(lexema, [valorScaleZ]);
+                return new SeletorValorReverso(lexema, [valorScaleZ]) as MetodoCss;
 
             case "scaleX":
                 this.consumir(
@@ -385,7 +387,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método scaleX.",
                 );
-                return new SeletorValorReverso(lexema, [valorScaleX]);
+                return new SeletorValorReverso(lexema, [valorScaleX]) as MetodoCss;
 
             case "scaleY":
                 this.consumir(
@@ -397,7 +399,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método scaleY.",
                 );
-                return new SeletorValorReverso(lexema, [valorScaleY]);
+                return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
 
             case "linear-gradient":
                 this.consumir(
@@ -466,7 +468,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorAngulo,
                     cor1,
                     cor2,
-                ]);
+                ]) as MetodoCss;
 
             case "hsl":
                 this.consumir(
@@ -492,7 +494,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     HdeHSL,
                     SdeHSL,
                     LdeHSL,
-                ]);
+                ]) as MetodoCss;
 
             case "hsla":
                 this.consumir(
@@ -518,7 +520,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     HdeHSLA,
                     SdeHSLA,
                     LdeHSLA,
-                ]);
+                ]) as MetodoCss;
 
             case "skew":
                 this.consumir(
@@ -558,7 +560,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorInclinar1,
                     valorInclinar2,
                     quantificadorInclinar2,
-                ]);
+                ]) as MetodoCss;
 
             case "skewX":
                 this.consumir(
@@ -579,7 +581,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorInclinarX,
                     quantificadorInclinarX,
-                ]);
+                ]) as MetodoCss;
 
             case "skewY":
                 this.consumir(
@@ -600,7 +602,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorInclinarY,
                     quantificadorInclinarY,
-                ]);
+                ]) as MetodoCss;
 
             case "invert":
                 this.consumir(
@@ -621,7 +623,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorInverter,
                     quantificadorInverter,
-                ]);
+                ]) as MetodoCss;
 
             case "clamp":
                 this.consumir(
@@ -653,7 +655,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorMed,
                     valorMax,
                     quantificadorMax,
-                ]);
+                ]) as MetodoCss;
 
             case "linear":
                 this.consumir(
@@ -679,7 +681,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     valor1,
                     valor2,
                     valor3,
-                ]);
+                ]) as MetodoCss;
 
             case "minmax":
                 this.consumir(
@@ -711,12 +713,14 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     return new SeletorValorReverso(lexema, [
                         parametro01,
                         valor02["lexema"],
-                    ]);
-                } else if (parametro02 !== null) {
+                    ]) as MetodoCss;
+                }
+                
+                if (parametro02 !== null) {
                     return new SeletorValorReverso(lexema, [
                         valor01["lexema"],
                         parametro02,
-                    ]);
+                    ]) as MetodoCss;
                 }
 
             case "opacity":
@@ -739,7 +743,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorOpaco, quantificadorOpaco],
                     true,
-                );
+                ) as MetodoCss;
 
             case "steps":
                 this.consumir(
@@ -759,7 +763,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorNumerico,
                     termoSalto,
-                ]);
+                ]) as MetodoCss;
 
             case "perspective":
                 this.consumir(
@@ -781,7 +785,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorPerspectivar, quantificadorPerspectivar],
                     true,
-                );
+                ) as MetodoCss;
 
             case "drop-shadow":
                 this.consumir(
@@ -825,7 +829,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     valorSombra3,
                     quantificadorSombra3,
                     corSombra,
-                ]);
+                ]) as MetodoCss;
 
             case "ray":
                 this.consumir(
@@ -848,7 +852,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     posicaoRaio,
                     numeroRaio,
                     quantificadorRaio,
-                ]);
+                ]) as MetodoCss;
 
             case "rgb":
                 this.consumir(
@@ -870,7 +874,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'rgb'.",
                 );
-                return new SeletorValorReverso(lexema, [vermelho, verde, azul]);
+                return new SeletorValorReverso(lexema, [vermelho, verde, azul]) as MetodoCss;
 
             case "rgba":
                 this.consumir(
@@ -896,7 +900,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     vermelhoRgba,
                     verdeRgba,
                     azulRgba,
-                ]);
+                ]) as MetodoCss;
 
             case "rotate":
                 this.consumir(
@@ -919,7 +923,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorRotacionar, quantificadorRotacionar],
                     true,
-                );
+                ) as MetodoCss;
 
             case "rotateZ":
                 this.consumir(
@@ -941,7 +945,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorRotacionarZ,
                     quantificadorRotacionarZ,
-                ]);
+                ]) as MetodoCss;
 
             case "rotateX":
                 this.consumir(
@@ -962,7 +966,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorRotacionarX,
                     quantificadorRotacionarX,
-                ]);
+                ]) as MetodoCss;
 
             case "hue-rotate":
                 this.consumir(
@@ -983,7 +987,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorRotacao,
                     quantificadorRotacao,
-                ]);
+                ]) as MetodoCss;
 
             case "rotateY":
                 this.consumir(
@@ -1004,7 +1008,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorRotacionarY,
                     quantificadorRotacionarY,
-                ]);
+                ]) as MetodoCss;
 
             case "saturate":
                 this.consumir(
@@ -1025,7 +1029,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorSaturar,
                     quantificadorSaturar,
-                ]);
+                ]) as MetodoCss;
 
             case "sepia":
                 this.consumir(
@@ -1046,7 +1050,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorSepia,
                     quantificadorSepia,
-                ]);
+                ]) as MetodoCss;
 
             case "translate":
                 this.consumir(
@@ -1090,7 +1094,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         quantificadorTranlacao2,
                     ],
                     true,
-                );
+                ) as MetodoCss;
 
             case "translate3d":
                 this.consumir(
@@ -1156,7 +1160,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     quantificadorTranlacao3d2,
                     valorTranslacao3d3,
                     quantificadorTranlacao3d3,
-                ]);
+                ]) as MetodoCss;
 
             case "translateX":
                 this.consumir(
@@ -1177,7 +1181,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorTranslaçaoX,
                     quantificadorTranslaçaoX,
-                ]);
+                ]) as MetodoCss;
 
             case "translateY":
                 this.consumir(
@@ -1198,7 +1202,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorTranslaçaoY,
                     quantificadorTranslaçaoY,
-                ]);
+                ]) as MetodoCss;
 
             case "translateZ":
                 this.consumir(
@@ -1219,23 +1223,40 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 return new SeletorValorReverso(lexema, [
                     valorTranslaçaoZ,
                     quantificadorTranslaçaoZ,
-                ]);
+                ]) as MetodoCss;
         }
     }
 
-    private valorModificador() {
-        const valorModificador = this.avancarEDevolverAnterior();
+    protected valoresModificador(): Array<Valor> {
+        const valoresResolvidos = [];
+        while (
+            this.atual < this.simbolos.length &&
+            this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA
+        ) {
+            const valorModificador = this.avancarEDevolverAnterior();
 
-        switch (valorModificador.tipo) {
-            case tiposDeSimbolos.CERQUILHA:
-                return this.resolverCor();
-            case tiposDeSimbolos.METODO:
-                return this.resolverMetodo(valorModificador.lexema);
-            case tiposDeSimbolos.IDENTIFICADOR:
-                return this.resolverMetodo(valorModificador.lexema);
-            default:
-                return valorModificador;
+            switch (valorModificador.tipo) {
+                case tiposDeSimbolos.CERQUILHA:
+                    valoresResolvidos.push(this.resolverCor());
+                    break;
+                case tiposDeSimbolos.METODO:
+                    valoresResolvidos.push(this.resolverMetodo(valorModificador.lexema));
+                    break;
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    valoresResolvidos.push(this.resolverMetodo(valorModificador.lexema));
+                    break;
+                default:
+                    valoresResolvidos.push(valorModificador);
+                    break;
+            }
         }
+        
+        this.consumir(
+            tiposDeSimbolos.PONTO_E_VIRGULA,
+            "Esperado ponto-e-vírgula após declaração de valores de modificador.",
+        );
+
+        return valoresResolvidos;
     }
 
     private resolverModificador(): Modificador {
@@ -1246,32 +1267,14 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
         this.consumir(
             tiposDeSimbolos.DOIS_PONTOS,
-            `Esperado ':' após declaração de modificador '${modificador.lexema}'.`,
+            `Esperado ':' após declaração de Modificador ou variável '${modificador.lexema}'.`,
         );
 
-        const valorModificador = this.valorModificador();
-
-        let quantificador;
-        if (
-            valorModificador instanceof Simbolo &&
-            valorModificador.tipo === tiposDeSimbolos.NUMERO
-        ) {
-            quantificador = this.avancarEDevolverAnterior();
-        }
-
-        this.consumir(
-            tiposDeSimbolos.PONTO_E_VIRGULA,
-            `Esperado ';' após declaração de valor de modificador '${modificador.lexema}'.`,
-        );
+        const valoresModificador = this.valoresModificador();
 
         const classeModificadora = new SeletorReversoModificador(
             modificador.lexema,
-            valorModificador instanceof Simbolo
-                ? valorModificador.lexema
-                : valorModificador,
-            quantificador && quantificador.hasOwnProperty("lexema")
-                ? quantificador.lexema
-                : quantificador,
+            valoresModificador,
             {
                 linha: modificador.linha,
                 colunaInicial: modificador.colunaInicial,

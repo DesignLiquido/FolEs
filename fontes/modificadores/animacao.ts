@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -21,27 +22,27 @@ export class Animacao extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
-        pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        valores: Valor[],
+        
+        pragmas?: PragmasModificador
     ) {
         super(["animacao", "animação"], "animation", pragmas);
 
         const valoresExtra = ["linear", "cubic-bezier", "steps"];
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", "animação", valor, this.valoresAceitos, valoresExtra);
-            } else {
-                validarValorNumerico(
-                    "animação",
-                    valor,
-                    this.valoresAceitos,
-                    valoresExtra,
-                );
-            }
-        }
-        this.valor = valor;
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", "animação", valores, this.valoresAceitos, valoresExtra);
+        //     } else {
+        //         validarValorNumerico(
+        //             "animação",
+        //             valor,
+        //             this.valoresAceitos,
+        //             valoresExtra,
+        //         );
+        //     }
+        // }
+        this.valores = valores;
     }
 }

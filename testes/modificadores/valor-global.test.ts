@@ -9,6 +9,7 @@ import { Valor } from "../../fontes/valores/valor";
 import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { valoresGlobais } from "../../fontes/modificadores/atributos/globais";
+import { ValorQualitativo } from "../../fontes/valores";
 
 describe('Testando Seletores com VALORES GLOBAIS', () => {
     describe('Testes Unitários', () => {
@@ -26,12 +27,16 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
-                const seletor = new SeletorModificador(ValorGlobal[index], 'herdar', null);
+                const seletor = new SeletorModificador(
+                    ValorGlobal[index], 
+                    [new ValorQualitativo('herdar')],
+                    null
+                );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "corpo {",
-                    `${ValorGlobal[index]}: ${seletor['valor']};`,
+                    `${ValorGlobal[index]}: herdar;`,
                     "}"
                 ]);
 
@@ -143,7 +148,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 // Avaliador Sintático
                 expect(() => {
                     avaliadorSintatico.analisar(resultadoLexador.simbolos);
-                }).toThrowError(`Propriedade '${ValorGlobalInvalido[index]}' com valor ${valorInvalido} inválido.`);
+                }).toThrow(`Modificador ou variável '${ValorGlobalInvalido[index]}' com valor '${valorInvalido}' inválido.`);
             }
         });
 

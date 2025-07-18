@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -8,8 +9,8 @@ export class QuebrarPaginaDentro extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -20,8 +21,8 @@ export class QuebrarPaginaDentro extends Modificador {
         );
 
         if (!valorVariavel)
-            validarValores("quebrar-página-dentro", valor, this.valoresAceitos);
+            validarValores("quebrar-página-dentro", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

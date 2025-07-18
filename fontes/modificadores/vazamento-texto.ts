@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 import { validarValorString } from "./validacoes/string";
@@ -9,22 +10,23 @@ export class VazamentoTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
+        valores: Valor[],
         quantificador: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("vazamento-texto", "text-overflow", pragmas);
 
-        const validacaoString = validarValorString(valor);
+        // TODO: Repensar
+        // const validacaoString = validarValorString(valor);
 
-        if (validacaoString) {
-            this.valoresAceitos[valor] = valor;
-        }
+        // if (validacaoString) {
+        //     this.valoresAceitos[valor] = valor;
+        // }
 
         if (!valorVariavel)
-            validarValores("vazamento-texto", valor, this.valoresAceitos);
+            validarValores("vazamento-texto", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

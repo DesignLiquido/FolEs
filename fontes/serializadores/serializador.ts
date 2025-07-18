@@ -9,6 +9,8 @@ import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
 import { SeletorModificador } from "../modificadores/superclasse";
 import { fontes } from "../modificadores/atributos/fontes";
+import { Valor, ValorAbreviacao, ValorNumerico, ValorQualitativo, ValorTexto } from "../valores";
+import { ReferenciaVariavel } from "../valores/referencia-variavel";
 
 /**
  * A classe que efetivamente traduz FolEs para CSS.
@@ -19,110 +21,171 @@ import { fontes } from "../modificadores/atributos/fontes";
  */
 export class Serializador {
     serializarComAninhamentos: boolean;
-    variaveis: { [key: string]: any };
+    variaveis: { [key: string]: Valor[] };
 
     constructor(serializarComAninhamentos: boolean = false) {
         this.serializarComAninhamentos = serializarComAninhamentos;
+        this.variaveis = {};
+    }
+
+    protected serializarValor(valor: Valor): string {
+        switch (valor.constructor.name) {
+            case 'ReferenciaVariavel':
+                const valorReferenciaVariavel = valor as ReferenciaVariavel;
+                const valoresVariavelCorrespondente = this.variaveis[valorReferenciaVariavel.nomeVariavel];
+                if (valoresVariavelCorrespondente === undefined) {
+                    throw new Error(`A variável '${valorReferenciaVariavel.nomeVariavel}' deve ser declarada antes da atribuição de valor.`);
+                }
+
+                let valoresVariavelResolvidos = "";
+                for (const valorVariavel of valoresVariavelCorrespondente) {
+                    const valorSerializado = this.serializarValor(valorVariavel);
+                    if (valorSerializado === ",") {
+                        valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
+                    }
+                    valoresVariavelResolvidos += valorSerializado + " ";
+                }
+
+                valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
+                return valoresVariavelResolvidos;
+            case 'ValorAbreviacao':
+                return "/";
+            case 'ValorNumerico':
+                const valorNumerico = valor as ValorNumerico;
+                let literalNumerico = String(valorNumerico.literalNumerico);
+                if (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0) {
+                    literalNumerico = literalNumerico.replace(/^0\./, '.');
+                }
+
+                return `${literalNumerico}${valorNumerico.quantificador || ''}`;
+            case 'ValorQualitativo':
+                const valorQualitativo = valor as ValorQualitativo;
+                const traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
+                return `${traducaoQualitativo}`;
+            case 'ValorTexto':
+                const valorTexto = valor as ValorTexto;
+                return valorTexto.literalTexto;
+            case 'ValorVirgula':
+                return ",";
+            default:
+                // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
+                if (valor instanceof Metodo) {
+                    return valor.paraTexto();
+                }
+
+                console.log(valor);
+        }
     }
 
     // TODO @Vitor: Montar a lógica para reconhecer variáveis aqui.
-    private serializarModificador(
+    protected serializarModificador(
         modificador: Modificador,
         indentacao: number = 0,
     ): string {
-        // Caso 1: Número-Quantificador ou somente Número.
-        if (Number(modificador.valor) || modificador.valor === "0") {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor
-                }${modificador.quantificador || ""};\n`;
-        }
-
-        // Caso 2: Tradução do valor contida no objeto 'valoresAceitos'.
-        if (
-            modificador["valoresAceitos"] !== undefined &&
-            modificador["valoresAceitos"].hasOwnProperty(modificador.valor)
-        ) {
-            const objetoValores = modificador["valoresAceitos"];
-            const valorTraduzido = objetoValores[modificador.valor];
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss
-                }: ${valorTraduzido};\n`;
-        }
-
-        // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
-        if (modificador.valor instanceof Metodo) {
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor.paraTexto() || ""
-                };\n`;
-        }
-
-        // `modificador.valor` nunca será `MetodoCss` aqui, que só existe em casos de serialização reversa.
-        const valorResolvido = modificador.valor as string;
-
-        // Caso 4: Valor com aspas - como as fontes de texto.
-        if (valorResolvido.includes('"')) {
-            if (valorResolvido.includes(",")) {
-                const separarValores = valorResolvido.split(", ");
-                const valorSemAspas = separarValores[0].replace(/["']/g, '');
-
-                // Trecho específico para tratamento de fontes com grafia
-                if (Object.keys(fontes).includes(valorSemAspas)) {
-                    let unirValores = '';
-                    separarValores.forEach((valorIndividual) => {
-                        if (
-                            modificador["valoresAceitos"] !== undefined &&
-                            modificador["valoresAceitos"].hasOwnProperty(valorIndividual)
-                        ) {
-                            const objetoValores = modificador["valoresAceitos"];
-                            const valorTraduzido = objetoValores[valorIndividual];
-                            separarValores[1] = valorTraduzido;
-                            unirValores = separarValores.join(", ");
-                        }
-                    });
-                    return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${unirValores};\n`;
-                } 
-                    
-                return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
-            } 
-                
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
-        }
-
-        // Caso 5: Atribuição Abreviada | Múltiplos valores separados por vírgula, barra ou espaço
-        if (valorResolvido.includes(" ")) {
-            let separarValores: Array<string> = [];
-
-            if (valorResolvido.includes(",")) {
-                separarValores = valorResolvido.split(", ");
-            } else if (valorResolvido.includes("/")) {
-                separarValores = valorResolvido.split(" / ");
-            } else if (valorResolvido.includes(" ")) {
-                separarValores = valorResolvido.split(" ");
+        let valoresTraduzidos = "";
+        for (const valor of modificador.valores) {
+            const valorSerializado = this.serializarValor(valor);
+            if (valorSerializado === ",") {
+                valoresTraduzidos = valoresTraduzidos.slice(0, -1);
             }
-
-            separarValores.forEach((valorIndividual, indexIndividual) => {
-                let valoresTraduzidos: string = "";
-
-                if (
-                    modificador["valoresAceitos"] &&
-                    modificador["valoresAceitos"].hasOwnProperty(
-                        valorIndividual,
-                    )
-                ) {
-                    const objetoValores = modificador["valoresAceitos"];
-                    valoresTraduzidos += objetoValores[valorIndividual];
-                } else if (valoresGerais[valorIndividual] !== undefined) {
-                    valoresTraduzidos += valoresGerais[valorIndividual];
-                }
-
-                if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
-                    modificador.valor = valorResolvido.replace(valorIndividual, valoresTraduzidos);
-                }
-            });
-
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+            valoresTraduzidos += valorSerializado + " ";
         }
+        
+        valoresTraduzidos = valoresTraduzidos.slice(0, -1);
+        return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos};\n`;
+        // // Caso 1: Número-Quantificador ou somente Número.
+        // if (Number(modificador.valores[0]) || modificador.valores[0] === "0") {
+        //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valores[0]
+        //         }${modificador.quantificador || ""};\n`;
+        // }
 
-        // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
-        const valorTraduzido = valoresGerais[valorResolvido];
-        return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valorTraduzido};\n`;
+        // // Caso 2: Tradução do valor contida no objeto 'valoresAceitos'.
+        // if (
+        //     modificador["valoresAceitos"] !== undefined &&
+        //     modificador["valoresAceitos"].hasOwnProperty(modificador.valores[0])
+        // ) {
+        //     const objetoValores = modificador["valoresAceitos"];
+        //     const valorTraduzido = objetoValores[modificador.valores[0]];
+        //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss
+        //         }: ${valorTraduzido};\n`;
+        // }
+
+        // // Caso 3: Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
+        // if (modificador.valores[0] instanceof Metodo) {
+        //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valores[0].paraTexto() || ""
+        //         };\n`;
+        // }
+
+        // // `modificador.valores[0]` nunca será `MetodoCss` aqui, que só existe em casos de serialização reversa.
+        // const valorResolvido = modificador.valores[0] as string;
+
+        // // Caso 4: Valor com aspas - como as fontes de texto.
+        // if (valorResolvido.includes('"')) {
+        //     if (valorResolvido.includes(",")) {
+        //         const separarValores = valorResolvido.split(", ");
+        //         const valorSemAspas = separarValores[0].replace(/["']/g, '');
+
+        //         // Trecho específico para tratamento de fontes com grafia
+        //         if (Object.keys(fontes).includes(valorSemAspas)) {
+        //             let unirValores = '';
+        //             separarValores.forEach((valorIndividual) => {
+        //                 if (
+        //                     modificador["valoresAceitos"] !== undefined &&
+        //                     modificador["valoresAceitos"].hasOwnProperty(valorIndividual)
+        //                 ) {
+        //                     const objetoValores = modificador["valoresAceitos"];
+        //                     const valorTraduzido = objetoValores[valorIndividual];
+        //                     separarValores[1] = valorTraduzido;
+        //                     unirValores = separarValores.join(", ");
+        //                 }
+        //             });
+        //             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${unirValores};\n`;
+        //         } 
+                    
+        //         return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valores[0]};\n`;
+        //     } 
+                
+        //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valores[0]};\n`;
+        // }
+
+        // // Caso 5: Atribuição Abreviada | Múltiplos valores separados por vírgula, barra ou espaço
+        // if (valorResolvido.includes(" ")) {
+        //     let separarValores: Array<string> = [];
+
+        //     if (valorResolvido.includes(",")) {
+        //         separarValores = valorResolvido.split(", ");
+        //     } else if (valorResolvido.includes("/")) {
+        //         separarValores = valorResolvido.split(" / ");
+        //     } else if (valorResolvido.includes(" ")) {
+        //         separarValores = valorResolvido.split(" ");
+        //     }
+
+        //     separarValores.forEach((valorIndividual, indexIndividual) => {
+        //         let valoresTraduzidos: string = "";
+
+        //         if (
+        //             modificador["valoresAceitos"] &&
+        //             modificador["valoresAceitos"].hasOwnProperty(
+        //                 valorIndividual,
+        //             )
+        //         ) {
+        //             const objetoValores = modificador["valoresAceitos"];
+        //             valoresTraduzidos += objetoValores[valorIndividual];
+        //         } else if (valoresGerais[valorIndividual] !== undefined) {
+        //             valoresTraduzidos += valoresGerais[valorIndividual];
+        //         }
+
+        //         if (valoresTraduzidos.length !== 0 && typeof modificador.valores[0] === 'string') {
+        //             modificador.valores[0] = valorResolvido.replace(valorIndividual, valoresTraduzidos);
+        //         }
+        //     });
+
+        //     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valores[0]};\n`;
+        // }
+
+        // // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.
+        // const valorTraduzido = valoresGerais[valorResolvido];
+        // return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valorTraduzido};\n`;
     }
 
     serializarBlocoDeclaracao(
@@ -220,52 +283,28 @@ export class Serializador {
                 ? declaracao.modificadores[0].nomeFoles[0].toString()
                 : declaracao.modificadores[0].nomeFoles.toString();
 
-        const valorModificador = declaracao.modificadores[0].valor.toString();
-        const valorVariavel = false;
+        const valoresModificador = declaracao.modificadores[0].valores;
 
         new SeletorModificador(
             nomeFolEs,
-            valorModificador,
-            declaracao.modificadores[0].quantificador,
-            declaracao.modificadores[0].pragmas,
-            valorVariavel,
+            valoresModificador,
+            declaracao.modificadores[0].pragmas
         );
     }
 
+    /**
+     * Esta função pode ter dois comportamentos, dependendo da configuração
+     * do serializador:
+     * 
+     * - Acumula o valor da variável para ser usada por outras declarações;
+     * - Escreve um `var()` no resultado.
+     * @param declaracaoVariavel 
+     */
     serializarDeclaracaoVariavel(
-        declaracaoVariavel: DeclaracaoVariavel,
-        declaracoes: Declaracao[],
-        indexVariavel: number,
+        declaracaoVariavel: DeclaracaoVariavel
     ): void {
-        let variavelInexistente: boolean = false;
-
-        declaracoes.forEach((declaracao, indexBlocoDeclaracao) => {
-            if (declaracao instanceof BlocoDeclaracao) {
-                declaracao.modificadores.forEach((modificador) => {
-                    if (modificador.valor === declaracaoVariavel.nome) {
-                        if (typeof declaracaoVariavel.valor === "string") {
-
-                            modificador.valor = declaracaoVariavel.valor;
-
-                            if (declaracaoVariavel.quantificador) modificador.quantificador = declaracaoVariavel.quantificador;
-                            this.validarValoresVariaveis(declaracao);
-                        } else if (declaracaoVariavel.valor instanceof Metodo) {
-                            modificador.valor = declaracaoVariavel.valor;
-                        }
-
-                        if (indexVariavel > indexBlocoDeclaracao) {
-                            variavelInexistente = true;
-                        }
-                    }
-                });
-            }
-        });
-
-        if (variavelInexistente) {
-            throw new Error(
-                `A variável '${declaracaoVariavel.nome}' deve ser declarada antes da atribuição de valor.`,
-            );
-        }
+        // TODO: Implementar escrita de `var()` no resultado. 
+        this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valores;
     }
 
     /**
@@ -278,13 +317,14 @@ export class Serializador {
         indentacao: number = 0,
         seletorAnterior: string = undefined,
     ) {
+        this.variaveis = {};
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
             textoSeletorAnterior = seletorAnterior;
         }
 
-        for (const [index, declaracao] of declaracoes.entries()) {
+        for (const declaracao of declaracoes) {
             switch (declaracao.constructor.name) {
                 case "BlocoDeclaracao":
                     resultado += this.serializarBlocoDeclaracao(
@@ -295,9 +335,7 @@ export class Serializador {
                     break;
                 case "DeclaracaoVariavel":
                     this.serializarDeclaracaoVariavel(
-                        declaracao as DeclaracaoVariavel,
-                        declaracoes,
-                        index,
+                        declaracao as DeclaracaoVariavel
                     );
                     break;
             }

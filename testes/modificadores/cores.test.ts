@@ -8,6 +8,7 @@ import { Serializador } from "../../fontes/serializadores";
 import { Cores, CoresNomeFolEs } from "../listas/cores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { cores } from "../../fontes/modificadores/atributos/cores";
+import { ValorQualitativo } from "../../fontes/valores";
 
 describe('Testando Seletores que recebem COR como atributo', () => {
     describe('Testes Unitários', () => {
@@ -25,12 +26,15 @@ describe('Testando Seletores que recebem COR como atributo', () => {
 
         it('Caso de Sucesso - Cor válida', () => {
             for (let index = 0; index < Cores.length; index += 1) {
-                const seletor = new SeletorModificador(Cores[index], 'castanho');
+                const seletor = new SeletorModificador(
+                    Cores[index], 
+                    [new ValorQualitativo('castanho')]
+                );
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: ${seletor['valor']};`,
+                    `${Cores[index]}: castanho;`,
                     "}"
                 ]);
 

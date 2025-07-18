@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { posicoes } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -25,8 +26,8 @@ export class PosicionarConteudo extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -36,14 +37,15 @@ export class PosicionarConteudo extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("condição-extra", "posicionar-conteúdo", valor, posicoes, this.valoresAceitos);
-            } else {
-                validarValoresAdicionais("posicionar-conteúdo", valor, posicoes, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("condição-extra", "posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
+        //     } else {
+        //         validarValoresAdicionais("posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }
