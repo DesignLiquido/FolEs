@@ -6,4 +6,5 @@ lmht {
 
 lmht {
     estilo-lista: dentro meu-estilo;
+    caminho-recorte: visualizar-caixa;
 }
