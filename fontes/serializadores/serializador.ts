@@ -77,29 +77,32 @@ export class Serializador {
                         }
                     });
                     return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${unirValores};\n`;
-                } 
-                    
+                }
+
                 return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
-            } 
-                
+            }
+
             return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
         }
 
         // Caso 5: Atribuição Abreviada | Múltiplos valores separados por vírgula, barra ou espaço
         if (valorResolvido.includes(" ")) {
             let separarValores: Array<string> = [];
+            let caractereSeparacao: string = '';
 
             if (valorResolvido.includes(",")) {
                 separarValores = valorResolvido.split(", ");
+                caractereSeparacao = ", ";
             } else if (valorResolvido.includes("/")) {
                 separarValores = valorResolvido.split(" / ");
+                caractereSeparacao = " / ";
             } else if (valorResolvido.includes(" ")) {
                 separarValores = valorResolvido.split(" ");
+                caractereSeparacao = " ";
             }
 
+            let valoresTraduzidos: string = "";
             separarValores.forEach((valorIndividual, indexIndividual) => {
-                let valoresTraduzidos: string = "";
-
                 if (
                     modificador["valoresAceitos"] &&
                     modificador["valoresAceitos"].hasOwnProperty(
@@ -107,17 +110,27 @@ export class Serializador {
                     )
                 ) {
                     const objetoValores = modificador["valoresAceitos"];
-                    valoresTraduzidos += objetoValores[valorIndividual];
+                    if (indexIndividual === 0) {
+                        valoresTraduzidos += objetoValores[valorIndividual];
+                    } else {
+                        valoresTraduzidos += `${caractereSeparacao}${objetoValores[valorIndividual]}`;
+                    }
                 } else if (valoresGerais[valorIndividual] !== undefined) {
-                    valoresTraduzidos += valoresGerais[valorIndividual];
-                }
-
-                if (valoresTraduzidos.length !== 0 && typeof modificador.valor === 'string') {
-                    modificador.valor = valorResolvido.replace(valorIndividual, valoresTraduzidos);
+                    if (indexIndividual === 0) {
+                        valoresTraduzidos += valoresGerais[valorIndividual];
+                    } else {
+                        valoresTraduzidos += `${caractereSeparacao}${valoresGerais[valorIndividual]}`;
+                    }
+                } else {
+                    if (indexIndividual === 0) {
+                        valoresTraduzidos += valorIndividual;
+                    } else {
+                        valoresTraduzidos += `${caractereSeparacao}${valorIndividual}`;
+                    }
                 }
             });
 
-            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${modificador.valor};\n`;
+            return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos};\n`;
         }
 
         // Caso 6: É um valor genérico, cuja tradução está na lista 'valoresGerais'.

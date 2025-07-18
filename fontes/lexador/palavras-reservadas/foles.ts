@@ -161,9 +161,13 @@ export default {
     ms: tiposDeSimbolos.QUANTIFICADOR,
 
     // Métodos
+    anotacao: tiposDeSimbolos.METODO,
+    anotação: tiposDeSimbolos.METODO,
     borrar: tiposDeSimbolos.METODO,
     brilho: tiposDeSimbolos.METODO,
     calcular: tiposDeSimbolos.METODO,
+    "conjunto-estilos": tiposDeSimbolos.METODO,
+    contador: tiposDeSimbolos.METODO,
     contraste: tiposDeSimbolos.METODO,
     "curva-cubica": tiposDeSimbolos.METODO,
     "curva-cúbica": tiposDeSimbolos.METODO,
@@ -175,6 +179,9 @@ export default {
     "escalamento-eixo-z": tiposDeSimbolos.METODO,
     "escalamento-horizontal": tiposDeSimbolos.METODO,
     "escalamento-vertical": tiposDeSimbolos.METODO,
+    "espirrar": tiposDeSimbolos.METODO,
+    "estilistico": tiposDeSimbolos.METODO,
+    "estilístico": tiposDeSimbolos.METODO,
     "gradiente-linear": tiposDeSimbolos.METODO,
     hsl: tiposDeSimbolos.METODO,
     hsla: tiposDeSimbolos.METODO,
@@ -186,6 +193,7 @@ export default {
     limitar: tiposDeSimbolos.METODO,
     linear: tiposDeSimbolos.METODO,
     minmax: tiposDeSimbolos.METODO,
+    ornamentos: tiposDeSimbolos.METODO,
     opacar: tiposDeSimbolos.METODO,
     passos: tiposDeSimbolos.METODO,
     perspectivar: tiposDeSimbolos.METODO,
@@ -194,6 +202,7 @@ export default {
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
     rotacionar: tiposDeSimbolos.METODO,
+    "rotacionar-3d": tiposDeSimbolos.METODO,
     "rotacionar-eixo-z": tiposDeSimbolos.METODO,
     "rotacionar-horizontal": tiposDeSimbolos.METODO,
     "rotacionar-matiz": tiposDeSimbolos.METODO,
@@ -211,6 +220,7 @@ export default {
     "translação-horizontal": tiposDeSimbolos.METODO,
     "translacao-vertical": tiposDeSimbolos.METODO,
     "translação-vertical": tiposDeSimbolos.METODO,
+    "variar-caractere": tiposDeSimbolos.METODO,
     url: tiposDeSimbolos.METODO,
 
     // Pseudoclasses

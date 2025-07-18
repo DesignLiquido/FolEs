@@ -7,6 +7,8 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
+import { Counter } from "../../fontes/valores/metodos/css/counter";
+import { Simbolo } from "../../fontes/lexador";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     let lexador: LexadorInterface;
@@ -1777,6 +1779,99 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // O Tradutor deve serializar de acordo e traduzir rotate para rotacionar
                 expect(resultadoTradutor).toContain(`rotacionar(${valoresAceitos[valIndex]});`);
             }
+        }
+    });
+
+    it('Atribuindo Método "rotate3d()" - caso de sucesso', () => {
+        for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+
+            const valoresAceitos = ['0, 0, 0, 0', '1, 2, 0, 45deg', '1, 1, 1, 90turn'];
+
+            for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "html {",
+                    `${MetodosRotacionar[index]}: rotate3d(${valoresAceitos[valIndex]});`,
+                    "}"
+                ]);
+
+                // O Lexador não deve encontrar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O valor recebido deve ser mapeado como METODO
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // O Lexador deve montar um objeto de comprimento 17 caso haja quantificador e 16 caso não haja
+                if (valIndex > 0) {
+                    expect(resultadoLexador.simbolos).toHaveLength(17);
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                            expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
+                        ])
+                    );
+                } else {
+                    expect(resultadoLexador.simbolos).toHaveLength(16);
+                    expect(resultadoLexador.simbolos).toEqual(
+                        expect.arrayContaining([
+                            expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                        ])
+                    );
+                }
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                    'transform'
+                );
+
+                // Tradutor
+                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+
+                // O Tradutor deve serializar de acordo e traduzir rotate3d para rotacionar-3d  
+                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+                expect(resultadoTradutor).toContain(`rotacionar-3d(${valoresAceitos[valIndex]});`);
+            }
+        }
+    });
+
+    it('Atribuindo Método "rotacionar-3d()" - caso de falha', () => {
+        for (let index = 0; index < MetodosRotacionar.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "html {",
+                `${MetodosRotacionar[index]}: rotate3d(1, 1, 1, 20px);`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático 
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // Serializador não deve aceitar 'px' como quantificador válido
+            expect(() => {
+                tradutor.serializar(resultadoAvaliadorSintatico);
+            }).toThrow("Propriedade 'transformar' com quantificador inválido");
         }
     });
 

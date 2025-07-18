@@ -3,18 +3,17 @@ import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
-export class Conteudo extends Modificador {
+export class CaminhoRecorte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
-        normal: "normal",
         nenhum: "none",
-        "abrir-citacao": "open-quote",
-        "abrir-citação": "open-quote",
-        "fechar-citacao": "close-quote",
-        "fechar-citação": "close-quote",
-        "nao-abrir-citacao": "no-open-quote",
-        "não-abrir-citação": "no-open-quote",
-        "nao-fechar-citacao": "no-close-quote",
-        "não-fechar-citação": "no-close-quote",
+        "margem-caixa": "margin-box",
+        "caixa-batida": "stroke-box",
+        "borda-caixa": "border-box",
+        "preenchimento-caixa": "padding-box",
+        "conteudo-caixa": "content-box",
+        "conteúdo-caixa": "content-box",
+        "completar-caixa": "fill-box",
+        "visualizar-caixa": "view-box",
     };
 
     constructor(
@@ -23,10 +22,9 @@ export class Conteudo extends Modificador {
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
-        super(["conteudo", "conteúdo"], "content", pragmas);
+        super("caminho-recorte", "clip-path", pragmas);
 
-        // Também aceita como valor a função image-set()
-        const valoresExtra = ["url", "linear-gradient", "counter"];
+        const valoresExtra = ['inset', 'circle', 'ellipse', 'polygon', 'path', 'rect', 'shape', 'xywh'];
 
         let metodoResolvido = "";
         if (valor instanceof Metodo) {
@@ -39,7 +37,7 @@ export class Conteudo extends Modificador {
 
         if (!valorVariavel)
             validarValores(
-                "conteúdo",
+                "caminho-recorte",
                 metodoResolvido,
                 this.valoresAceitos,
                 valoresExtra,

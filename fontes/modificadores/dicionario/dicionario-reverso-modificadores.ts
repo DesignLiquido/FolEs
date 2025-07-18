@@ -402,6 +402,14 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Translate } from "../../valores/metodos/css/translate";
+import { Counter } from "../../valores/metodos/css/counter";
+import { Stylistic } from "../../valores/metodos/css/stylistic";
+import { Styleset } from "../../valores/metodos/css/styleset";
+import { CharacterVariant } from "../../valores/metodos/css/character-variant";
+import { Swash } from "../../valores/metodos/css/swash";
+import { Ornaments } from "../../valores/metodos/css/ornaments";
+import { Annotation } from "../../valores/metodos/css/annotation";
+import { Rotate3d } from "../../valores/metodos/css/rotate3d";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -769,11 +777,14 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "backface-visibility": VisibilidadeFundo,
 
     // METODOS
+    annotation: Annotation,
     blur: Blur,
     brightness: Brightness,
     calc: Calc,
+    "character-variant": CharacterVariant,
     clamp: Clamp,
     contrast: Contrast,
+    counter: Counter,
     "cubic-bezier": CubicBezier,
     "drop-shadow": DropShadow,
     "fit-content": FitContent,
@@ -786,11 +797,13 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "linear-gradient": LinearGradient,
     minmax: MinMax,
     // "opacity": Opacity,
+    ornaments: Ornaments,
     // "perspective": Perspective,
     ray: Ray,
     rgb: Rgb,
     rgba: Rgba,
     // "rotate": Rotate,
+    rotate3d: Rotate3d,
     rotateX: RotateX,
     rotateY: RotateY,
     rotateZ: RotateZ,
@@ -801,10 +814,13 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     scaleY: ScaleY,
     scaleZ: ScaleZ,
     sepia: Sepia,
+    styleset: Styleset,
+    stylistic: Stylistic,
     skew: Skew,
     skewX: SkewX,
     skewY: SkewY,
     steps: Steps,
+    swash: Swash,
     // "translate": Translate,
     translate3d: Translate3d,
     translateX: TranslateX,

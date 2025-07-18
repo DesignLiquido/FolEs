@@ -3,3 +3,8 @@ lmht {
     recuo: 5px 1em 0 2em;
     cor: branco;
 }
+
+lmht {
+    estilo-lista: dentro meu-estilo;
+    caminho-recorte: visualizar-caixa;
+}

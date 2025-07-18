@@ -361,6 +361,7 @@ import { VelocidadeAnimacao } from "../velocidade-animacao";
 import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
+import { CaminhoRecorte } from "../caminho-recorte";
 
 export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "agrupar-palavra": AgruparPalavra,
@@ -405,6 +406,7 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "borda-máscara": BordaMascara,
     "borda-superior": BordaSuperior,
     "calha-barra-rolagem": CalhaBarraRolagem,
+    "caminho-recorte": CaminhoRecorte,
     "celulas-vazias": CelulasVazias,
     "células-vazias": CelulasVazias,
     citacoes: Citacoes,
@@ -414,8 +416,7 @@ export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "combinar-texto-vertical": CombinarTextoVertical,
     "comportamento-em-bloco-rolagem-mouse": ComportamentoEmBlocoRolagemMouse,
     "comportamento-em-linha-rolagem-mouse": ComportamentoEmLinhaRolagemMouse,
-    "comportamento-horizontal-rolagem-mouse":
-        ComportamentoHorizontalRolagemMouse,
+    "comportamento-horizontal-rolagem-mouse": ComportamentoHorizontalRolagemMouse,
     "comportamento-rolagem-mouse": ComportamentoRolagemMouse,
     "comportamento-rolagem": ComportamentoRolagem,
     "comportamento-vertical-rolagem-mouse": ComportamentoVerticalRolagemMouse,
