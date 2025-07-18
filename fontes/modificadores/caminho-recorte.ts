@@ -1,5 +1,4 @@
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -17,8 +16,7 @@ export class CaminhoRecorte extends Modificador {
     };
 
     constructor(
-        valor: Metodo | MetodoCss | string,
-        quantificador?: string,
+        valores: Valor[],
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -26,23 +24,14 @@ export class CaminhoRecorte extends Modificador {
 
         const valoresExtra = ['inset', 'circle', 'ellipse', 'polygon', 'path', 'rect', 'shape', 'xywh'];
 
-        let metodoResolvido = "";
-        if (valor instanceof Metodo) {
-            metodoResolvido = valor.traducao;
-        } else if (valor instanceof MetodoCss) {
-            metodoResolvido = valor.traducao;
-        } else {
-            metodoResolvido = valor;
-        }
-
         if (!valorVariavel)
             validarValores(
                 "caminho-recorte",
-                metodoResolvido,
+                valores,
                 this.valoresAceitos,
                 valoresExtra,
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

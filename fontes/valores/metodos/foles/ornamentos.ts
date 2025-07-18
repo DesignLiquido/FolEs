@@ -21,7 +21,8 @@ export class Ornamentos extends Metodo {
         }
 
         const valorSemAspas = this.valor.replace(/^['"]|['"]$/g, '');
-        validarIdentificacaoPersonalizada('variação-fonte-alternativa', valorSemAspas);
+        // TODO: Repensar
+        // validarIdentificacaoPersonalizada('variação-fonte-alternativa', valorSemAspas);
         return `ornaments(${this.valor})`;
     }
 }

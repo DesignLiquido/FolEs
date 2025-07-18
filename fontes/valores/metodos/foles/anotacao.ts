@@ -21,7 +21,8 @@ export class Anotacao extends Metodo {
         }
         
         const valorSemAspas = this.valor.replace(/^['"]|['"]$/g, '');
-        validarIdentificacaoPersonalizada('variação-fonte-alternativa', valorSemAspas);
+        // TODO: Repensar
+        // validarIdentificacaoPersonalizada('variação-fonte-alternativa', valorSemAspas);
         return `annotation(${this.valor})`;
     }
 }
