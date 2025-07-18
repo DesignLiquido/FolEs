@@ -1,5 +1,4 @@
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -11,8 +10,7 @@ export class VariacaoFonteAlternativa extends Modificador {
     };
 
     constructor(
-        valor: Metodo | MetodoCss | string,
-        quantificador?: string,
+        valores: Valor[],
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -23,24 +21,15 @@ export class VariacaoFonteAlternativa extends Modificador {
         );
 
         const valoresExtra = ['annotation', 'character-variant', 'ornaments', 'styleset', 'stylistic', 'swash'];
-
-        let metodoResolvido = "";
-        if (valor instanceof Metodo) {
-            metodoResolvido = valor.traducao;
-        } else if (valor instanceof MetodoCss) {
-            metodoResolvido = valor.traducao;
-        } else {
-            metodoResolvido = valor;
-        }
         
         if (!valorVariavel)
             validarValores(
                 "variação-fonte-alternativa",
-                metodoResolvido,
+                valores,
                 this.valoresAceitos,
                 valoresExtra
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

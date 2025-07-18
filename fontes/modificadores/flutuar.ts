@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -12,16 +13,16 @@ export class Flutuar extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("flutuar", "float", pragmas);
 
         if (!valorVariavel)
-            validarValores("flutuar", valor, this.valoresAceitos);
+            validarValores("flutuar", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

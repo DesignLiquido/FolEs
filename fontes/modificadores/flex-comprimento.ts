@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -17,8 +18,8 @@ export class FlexComprimento extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -27,21 +28,22 @@ export class FlexComprimento extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "flex-comprimento",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "flex-comprimento",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "flex-comprimento",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

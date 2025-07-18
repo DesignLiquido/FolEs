@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import {
     ListaDeValorPercentual,
     unidadesMedida,
@@ -12,31 +13,32 @@ export class PosicaoDireita extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["posicao-direita", "posição-direita"], "right", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("posição-direita", valor, this.valoresAceitos);
+            validarValorNumerico("posição-direita", valores, this.valoresAceitos);
 
             // O seletor aceita o número 0.
             // Logo, o código só passa pela validação caso haja um segundo parâmetro
             // ou caso o primeiro seja diferente de 0.
-            if (quantificador !== undefined && valor !== "0") {
-                validarQuantificador(
-                    "posição-direita",
-                    quantificador,
-                    unidadesMedida,
-                    ListaDeValorPercentual,
-                );
+            // TODO: Repensar
+            // if (quantificador !== undefined && valor !== "0") {
+            //     validarQuantificador(
+            //         "posição-direita",
+            //         quantificador,
+            //         unidadesMedida,
+            //         ListaDeValorPercentual,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

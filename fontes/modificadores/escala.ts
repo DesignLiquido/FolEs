@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
@@ -10,23 +11,24 @@ export class Escala extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("escala", "scale", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("escala", valor, this.valoresAceitos);
+            validarValorNumerico("escala", valores, this.valoresAceitos);
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador("escala", quantificador, unidadesMedida);
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador("escala", quantificador, unidadesMedida);
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

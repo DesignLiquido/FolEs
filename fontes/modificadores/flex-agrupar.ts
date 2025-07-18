@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -10,16 +11,16 @@ export class FlexAgrupar extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("flex-agrupar", "flex-wrap", pragmas);
 
         if (!valorVariavel)
-            validarValores("flex-agrupar", valor, this.valoresAceitos);
+            validarValores("flex-agrupar", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

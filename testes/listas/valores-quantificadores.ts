@@ -1,4 +1,4 @@
-export const ValorQuantificador: Array<string> = [
+export const ValoresQuantificadores: Array<string> = [
     'alinhar-vertical',
     'largura',
     'posicao-horizontal-fundo',

@@ -1,3 +1,4 @@
+import { Valor } from "../../valores";
 import { MetodoCss } from "../../valores/metodos/css/metodo-css";
 import { Metodo } from "../../valores/metodos/foles/metodo";
 import { validarValores } from "./comum";
@@ -12,68 +13,69 @@ import { validarValorString } from "./string";
 export function validarAtribuicaoAbreviada(
     tipoValidacao: string,
     nomePropriedade: string,
-    valor: Metodo | MetodoCss | string,
+    valores: Valor[],
     valoresAceitos: { [valorFoles: string]: string } = undefined,
     valoresExtra: any = undefined,
     validacaoString: boolean = false,
     validacaoPersonalizada: boolean = false,
 ): void {
-    let separarValores: Array<string>;
+    // TODO: Repensar
+    // let separarValores: Array<string>;
 
-    let metodoResolvido = "";
-    if (valor instanceof Metodo) {
-        metodoResolvido = valor.traducao;
-    } else if (valor instanceof MetodoCss) {
-        metodoResolvido = valor.traducao;
-    } else {
-        metodoResolvido = valor;
-    }
+    // let metodoResolvido = "";
+    // if (valor instanceof Metodo) {
+    //     metodoResolvido = valor.traducao;
+    // } else if (valor instanceof MetodoCss) {
+    //     metodoResolvido = valor.traducao;
+    // } else {
+    //     metodoResolvido = valor;
+    // }
 
-    if (metodoResolvido.includes(",")) {
-        separarValores = metodoResolvido.split(", ");
-    } else if (metodoResolvido.includes("/")) {
-        separarValores = metodoResolvido.split(" / ");
-    } else if (metodoResolvido.includes(" ")) {
-        separarValores = metodoResolvido.split(" ");
-    }
+    // if (metodoResolvido.includes(",")) {
+    //     separarValores = metodoResolvido.split(", ");
+    // } else if (metodoResolvido.includes("/")) {
+    //     separarValores = metodoResolvido.split(" / ");
+    // } else if (metodoResolvido.includes(" ")) {
+    //     separarValores = metodoResolvido.split(" ");
+    // }
 
-    separarValores.forEach((valorIndividual: string) => {
-        if (validacaoString) {
-            const stringValida = validarValorString(valorIndividual);
-            if (stringValida) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
-        }
+    // separarValores.forEach((valorIndividual: string) => {
+    //     if (validacaoString) {
+    //         const stringValida = validarValorString(valorIndividual);
+    //         if (stringValida) valorIndividual = valorIndividual.replace(/^["']|["']$/g, '');
+    //     }
 
-        if (validacaoPersonalizada) {
-            if (
-                !(Object.keys(valoresAceitos).includes(valorIndividual))
-                && typeof valorIndividual !== 'number'
-                && !(Number(valorIndividual))
-                && valorIndividual !== '0'
-            ) {
-                validarIdentificacaoPersonalizada(nomePropriedade, valorIndividual);
-                valoresAceitos[valorIndividual] = valorIndividual;
-            }
-        }
+    //     if (validacaoPersonalizada) {
+    //         if (
+    //             !(Object.keys(valoresAceitos).includes(valorIndividual))
+    //             && typeof valorIndividual !== 'number'
+    //             && !(Number(valorIndividual))
+    //             && valorIndividual !== '0'
+    //         ) {
+    //             validarIdentificacaoPersonalizada(nomePropriedade, valorIndividual);
+    //             valoresAceitos[valorIndividual] = valorIndividual;
+    //         }
+    //     }
 
-        switch (tipoValidacao) {
-            case "comum":
-                validarValores(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
-                break;
-            case "condição-extra":
-                validarValoresAdicionais(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
-                break;
-            case "cor":
-                validarValorCor(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
-                break;
-            case "fonte":
-                validarValorFonte(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
-                break;
-            case "múltiplos-qualitativos":
-                validarMultiplosQualitativos(nomePropriedade, valorIndividual, valoresAceitos ? valoresAceitos : undefined);
-                break;
-            case "numérica":
-                validarValorNumerico(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
-                break;
-        }
-    });
+    //     switch (tipoValidacao) {
+    //         case "comum":
+    //             validarValores(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
+    //             break;
+    //         case "condição-extra":
+    //             validarValoresAdicionais(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
+    //             break;
+    //         case "cor":
+    //             validarValorCor(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
+    //             break;
+    //         case "fonte":
+    //             validarValorFonte(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
+    //             break;
+    //         case "múltiplos-qualitativos":
+    //             validarMultiplosQualitativos(nomePropriedade, valorIndividual, valoresAceitos ? valoresAceitos : undefined);
+    //             break;
+    //         case "numérica":
+    //             validarValorNumerico(nomePropriedade, valorIndividual, valoresAceitos, valoresExtra);
+    //             break;
+    //     }
+    // });
 }

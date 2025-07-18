@@ -1,17 +1,18 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class RegrasCorColuna extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("regras-cor-coluna", "column-rule-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("regras-cor-coluna", valor);
+        if (!valorVariavel) validarValorCor("regras-cor-coluna", valores);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

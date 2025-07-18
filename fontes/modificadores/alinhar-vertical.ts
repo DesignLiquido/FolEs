@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -16,8 +17,8 @@ export class AlinharVertical extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -26,21 +27,22 @@ export class AlinharVertical extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "alinhar-vertical",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "alinhar-vertical",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "alinhar-vertical",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

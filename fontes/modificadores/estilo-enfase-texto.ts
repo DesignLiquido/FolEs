@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 import { validarValorString } from "./validacoes/string";
@@ -19,8 +20,8 @@ export class EstiloEnfaseTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -30,15 +31,16 @@ export class EstiloEnfaseTexto extends Modificador {
             pragmas,
         );
 
-        const validacaoString = validarValorString(valor);
+        // TODO: Repensar
+        // const validacaoString = validarValorString(valores);
 
-        if (validacaoString) {
-            this.valoresAceitos[valor] = valor;
-        }
+        // if (validacaoString) {
+        //     this.valoresAceitos[valor] = valor;
+        // }
 
         if (!valorVariavel)
-            validarValores("estilo-ênfase-texto", valor, this.valoresAceitos);
+            validarValores("estilo-ênfase-texto", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

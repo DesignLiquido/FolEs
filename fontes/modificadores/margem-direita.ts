@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -9,27 +10,28 @@ export class MargemDireita extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("margem-direita", "margin-right", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("margem-direita", valor, this.valoresAceitos);
+            validarValorNumerico("margem-direita", valores, this.valoresAceitos);
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "margem-direita",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "margem-direita",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

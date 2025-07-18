@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -5,8 +6,8 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoFundo extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -17,27 +18,28 @@ export class PosicaoFundo extends Modificador {
         );
 
         if (!valorVariavel) {
-            validarValorNumerico("posição-fundo", valor, posicoesBasicas);
+            validarValorNumerico("posição-fundo", valores, posicoesBasicas);
 
-            if (Number(parseInt(valor))) {
-                const quantificadoresAceitos = {
-                    px: "px",
-                    "%": "%",
-                    rem: "rem",
-                    vmin: "vmin",
-                    vmax: "vmax",
-                };
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     const quantificadoresAceitos = {
+            //         px: "px",
+            //         "%": "%",
+            //         rem: "rem",
+            //         vmin: "vmin",
+            //         vmax: "vmax",
+            //     };
 
-                validarQuantificador(
-                    "posição-fundo",
-                    quantificador,
-                    quantificadoresAceitos,
-                );
+            //     validarQuantificador(
+            //         "posição-fundo",
+            //         quantificador,
+            //         quantificadoresAceitos,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

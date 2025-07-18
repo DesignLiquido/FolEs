@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -9,8 +10,8 @@ export class EspacamentoPalavras extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -20,24 +21,25 @@ export class EspacamentoPalavras extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "espaçamento-palavras",
-                valor,
-                this.valoresAceitos,
-            );
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     validarValorNumerico(
+        //         "espaçamento-palavras",
+        //         valor,
+        //         this.valoresAceitos,
+        //     );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "espaçamento-palavras",
-                    quantificador,
-                    comprimentos,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "espaçamento-palavras",
+        //             quantificador,
+        //             comprimentos,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

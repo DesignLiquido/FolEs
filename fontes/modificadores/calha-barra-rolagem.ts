@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -10,16 +11,16 @@ export class CalhaBarraRolagem extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("calha-barra-rolagem", "scrollbar-gutter", pragmas);
 
         if (!valorVariavel)
-            validarValores("calha-barra-rolagem", valor, this.valoresAceitos);
+            validarValores("calha-barra-rolagem", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

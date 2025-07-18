@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -10,8 +11,8 @@ export class IndentacaoTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -20,21 +21,22 @@ export class IndentacaoTexto extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "indentação-texto",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "indentação-texto",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "indentação-texto",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

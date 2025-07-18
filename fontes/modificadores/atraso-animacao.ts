@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -5,10 +6,9 @@ import { validarQuantificador } from "./validacoes/quantificador";
 
 export class AtrasoAnimacao extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
-        pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        valores: Valor[],
+        
+        pragmas?: PragmasModificador
     ) {
         super(
             ["atraso-animacao", "atraso-animação"],
@@ -16,20 +16,20 @@ export class AtrasoAnimacao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("atraso-animação", valor);
+        // if (!valorVariavel) {
+        //     validarValorNumerico("atraso-animação", valor);
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "atraso-animação",
-                    quantificador,
-                    valoresTemporais,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "atraso-animação",
+        //             quantificador,
+        //             valoresTemporais,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

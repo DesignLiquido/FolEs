@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -8,16 +9,16 @@ export class ComportamentoRolagem extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("comportamento-rolagem", "scroll-behavior", pragmas);
 
         if (!valorVariavel)
-            validarValores("comportamento-rolagem", valor, this.valoresAceitos);
+            validarValores("comportamento-rolagem", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

@@ -1,6 +1,7 @@
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { Valor } from "../valores";
 
 export class AreaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,21 +23,22 @@ export class AreaMascara extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(",")) {
-                validarAtribuicaoAbreviada("comum", "área-máscara", valor, this.valoresAceitos)
-            } else {
-                validarValores("área-máscara", valor, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(",")) {
+        //         validarAtribuicaoAbreviada("comum", "área-máscara", valores, this.valoresAceitos)
+        //     } else {
+        //         validarValores("área-máscara", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

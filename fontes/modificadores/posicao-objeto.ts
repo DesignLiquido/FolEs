@@ -1,19 +1,20 @@
+import { Valor } from "../valores";
 import { posicoesBasicas } from "./atributos/posicoes";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicaoObjeto extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["posicao-objeto", "posição-objeto"], "object-position", pragmas);
 
         if (!valorVariavel)
-            validarValoresAdicionais("posição-objeto", valor, posicoesBasicas);
+            validarValoresAdicionais("posição-objeto", valores, posicoesBasicas);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

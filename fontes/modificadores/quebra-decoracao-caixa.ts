@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -8,8 +9,8 @@ export class QuebraDecoracaoCaixa extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -19,13 +20,14 @@ export class QuebraDecoracaoCaixa extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores(
-                "quebra-decoração-caixa",
-                valor,
-                this.valoresAceitos,
-            );
+        // TODO: Repensar
+        // if (!valorVariavel)
+        //     validarValores(
+        //         "quebra-decoração-caixa",
+        //         valor,
+        //         this.valoresAceitos,
+        //     );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

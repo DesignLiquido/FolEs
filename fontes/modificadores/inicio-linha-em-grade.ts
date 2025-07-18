@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -9,8 +10,8 @@ export class InicioLinhaEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -20,16 +21,17 @@ export class InicioLinhaEmGrade extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("numérica", 'início-linha-em-grade', valor, this.valoresAceitos, undefined, false, true);
-            } else {
-                validarValorNumerico("início-linha-em-grade", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("numérica", 'início-linha-em-grade', valores, this.valoresAceitos, undefined, false, true);
+        //     } else {
+        //         validarValorNumerico("início-linha-em-grade", valores, this.valoresAceitos);
+        //     }
 
-            proibirQuantificador("início-linha-em-grade", quantificador);
-        }
+        //     proibirQuantificador("início-linha-em-grade", quantificador);
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

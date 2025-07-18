@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -9,16 +10,16 @@ export class TransformarEstilo extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("transformar-estilo", "transform-style", pragmas);
 
         if (!valorVariavel)
-            validarValores("transformar-estilo", valor, this.valoresAceitos);
+            validarValores("transformar-estilo", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

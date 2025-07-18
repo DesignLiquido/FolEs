@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -9,10 +10,9 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
-        pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        valores: Valor[],
+        
+        pragmas?: PragmasModificador
     ) {
         super(
             "comportamento-horizontal-rolagem-mouse",
@@ -20,13 +20,14 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores(
-                "comportamento-em-horizontal-rolagem-mouse",
-                valor,
-                this.valoresAceitos,
-            );
+        // TODO: Repensar
+        // if (!valorVariavel)
+        //     validarValores(
+        //         "comportamento-em-horizontal-rolagem-mouse",
+        //         valor,
+        //         this.valoresAceitos,
+        //     );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

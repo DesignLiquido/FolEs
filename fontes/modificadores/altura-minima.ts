@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -13,8 +14,8 @@ export class AlturaMinima extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -25,22 +26,23 @@ export class AlturaMinima extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "altura-mínima",
-                valor,
+                valores,
                 this.valoresAceitos,
                 valoresExtra,
             );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "altura-mínima",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "altura-mínima",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

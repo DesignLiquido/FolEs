@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -10,26 +11,27 @@ export class NomeAnimacao extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ") || valor.includes(",")) {
-                validarAtribuicaoAbreviada("comum", "nome-animação", valor, this.valoresAceitos, undefined, false, true);
-            } else {
-                if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ") || valor.includes(",")) {
+        //         validarAtribuicaoAbreviada("comum", "nome-animação", valores, this.valoresAceitos, undefined, false, true);
+        //     } else {
+        //         if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
                     
-                    validarIdentificacaoPersonalizada("nome-animação", valor);
-                    this.valoresAceitos[valor] = valor;
-                }
-                validarValores("nome-animação", valor, this.valoresAceitos);
-            }
-        }
+        //             validarIdentificacaoPersonalizada("nome-animação", valor);
+        //             this.valoresAceitos[valor] = valor;
+        //         }
+        //         validarValores("nome-animação", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

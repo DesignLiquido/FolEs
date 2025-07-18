@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -8,21 +9,22 @@ export class TamanhoGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("tamanho-grade", "grid-area", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes("/") || valor.includes(" ")) {
-               validarAtribuicaoAbreviada("numérica", "tamanho-grade", valor, this.valoresAceitos, undefined, false, true);
-            } else {
-                validarValorNumerico("tamanho-grade", valor, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes("/") || valor.includes(" ")) {
+        //        validarAtribuicaoAbreviada("numérica", "tamanho-grade", valores, this.valoresAceitos, undefined, false, true);
+        //     } else {
+        //         validarValorNumerico("tamanho-grade", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

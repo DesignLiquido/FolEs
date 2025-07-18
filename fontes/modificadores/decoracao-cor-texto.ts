@@ -1,12 +1,11 @@
-import { cores } from "./atributos/cores";
-import { valoresGlobais } from "./atributos/globais";
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class DecoracaoCorTexto extends Modificador {
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -16,8 +15,8 @@ export class DecoracaoCorTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) validarValorCor("decoração-cor-texto", valor);
+        if (!valorVariavel) validarValorCor("decoração-cor-texto", valores);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

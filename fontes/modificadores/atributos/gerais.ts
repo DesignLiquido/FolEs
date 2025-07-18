@@ -19,18 +19,24 @@ export const valoresGerais: { [valorFolEs: string]: string } = {
     inicial: "initial",
     inicio: "start",
     início: "start",
-    "linha-base": "baseline",
+    "linha-de-base": "baseline",
     nenhum: "none",
     normal: "normal",
     pontilhado: "dotted",
     reverter: "revert",
     "reverter-camada": "revert-layer",
     saltado: "outset",
+    seguro: "safe",
     solido: "solid",
     sólido: "solid",
     sulcado: "ridge",
     superior: "top",
     tracejado: "dashed",
+
+    // area-mascara, área-máscara
+    "borda-caixa": "border-box",
+    "completar-caixa": "fill-box",
+    "visualizar-caixa": "view-box",
 
     // Cores
     "aguamarinha": "aquamarine",

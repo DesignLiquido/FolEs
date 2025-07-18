@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -11,27 +12,28 @@ export class TamanhoFundo extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("tamanho-fundo", "background-size", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("tamanho-fundo", valor, this.valoresAceitos);
+            validarValorNumerico("tamanho-fundo", valores, this.valoresAceitos);
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "tamanho-fundo",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "tamanho-fundo",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

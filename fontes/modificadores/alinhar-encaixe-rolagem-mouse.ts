@@ -1,5 +1,6 @@
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { Valor } from "../valores";
 
 export class AlinharEncaixeRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,8 +12,8 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -21,10 +22,10 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
         if (!valorVariavel)
             validarValores(
                 "alinhar-encaixe-rolagem-mouse",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

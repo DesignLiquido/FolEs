@@ -1,16 +1,11 @@
 import { BlocoDeclaracao } from "../declaracoes";
-import { Estrutura } from "../estruturas/estrutura";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
-import { SeletorEstruturasLmht } from "../estruturas/seletor-estruturas-lmht";
 import { Modificador } from "../modificadores";
 import {
     PragmasModificador,
     SeletorModificador,
 } from "../modificadores/superclasse";
 import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
-import { Metodo } from "../valores/metodos/foles/metodo";
-
-import estruturasLmht from "./estruturas-lmht";
 
 export class TradutorReverso {
     linha: number;
@@ -82,10 +77,7 @@ export class TradutorReverso {
                         Array.isArray(modificador.nomeFoles)
                             ? modificador.nomeFoles[0]
                             : modificador.nomeFoles,
-                        modificador.valor instanceof Metodo
-                            ? modificador.valor.paraTexto()
-                            : modificador.valor,
-                        modificador.quantificador,
+                        modificador.valores,
                         this.calcularPragmasModificador(modificador),
                     ) as Modificador,
                 );

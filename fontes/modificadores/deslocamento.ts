@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { angulos, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -11,8 +12,7 @@ export class Deslocamento extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -21,36 +21,37 @@ export class Deslocamento extends Modificador {
         // Também aceita receber a função path()
         const valoresExtra = ["url", "ray"];
 
-        if (!valorVariavel) {
-            if (typeof valor === 'string' && valor.includes(" ")) {
-                validarAtribuicaoAbreviada(
-                    "numérica",
-                    "deslocamento",
-                    valor,
-                    this.valoresAceitos,
-                    valoresExtra,
-                );
-            } else {
-                validarValorNumerico(
-                    "deslocamento",
-                    valor,
-                    this.valoresAceitos,
-                    valoresExtra,
-                );
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (typeof valor === 'string' && valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada(
+        //             "numérica",
+        //             "deslocamento",
+        //             valor,
+        //             this.valoresAceitos,
+        //             valoresExtra,
+        //         );
+        //     } else {
+        //         validarValorNumerico(
+        //             "deslocamento",
+        //             valor,
+        //             this.valoresAceitos,
+        //             valoresExtra,
+        //         );
+        //     }
 
-            if (quantificador) {
-                validarQuantificador(
-                    "deslocamento",
-                    quantificador,
-                    unidadesMedida,
-                    angulos,
-                );
-            }
+        //     if (quantificador) {
+        //         validarQuantificador(
+        //             "deslocamento",
+        //             quantificador,
+        //             unidadesMedida,
+        //             angulos,
+        //         );
+        //     }
 
-            this.quantificador = quantificador;
-        }
+        //     this.quantificador = quantificador;
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

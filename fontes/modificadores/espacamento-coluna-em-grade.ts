@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -9,7 +10,7 @@ export class EspacamentoColunaEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
+        valores: Valor[],
         quantificador: string,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
@@ -23,21 +24,22 @@ export class EspacamentoColunaEmGrade extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "espaçamento-coluna-em-grade",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "espaçamento-coluna-em-grade",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "espaçamento-coluna-em-grade",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

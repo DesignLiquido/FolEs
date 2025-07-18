@@ -1,5 +1,6 @@
 import { validarValores } from "./validacoes/comum";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { Valor } from "../valores";
 
 export class AgruparPalavra extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -9,7 +10,7 @@ export class AgruparPalavra extends Modificador {
     };
 
     constructor(
-        valor: string,
+        valores: Valor[],
         quantificador: string = null,
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
@@ -17,8 +18,8 @@ export class AgruparPalavra extends Modificador {
         super("agrupar-palavra", "word-break", pragmas);
 
         if (!valorVariavel)
-            validarValores("agrupar-palavra", valor, this.valoresAceitos);
+            validarValores("agrupar-palavra", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

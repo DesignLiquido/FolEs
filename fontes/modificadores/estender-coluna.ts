@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -8,16 +9,16 @@ export class EstenderColuna extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("estender-coluna", "column-span", pragmas);
 
         if (!valorVariavel)
-            validarValores("estender-coluna", valor, this.valoresAceitos);
+            validarValores("estender-coluna", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

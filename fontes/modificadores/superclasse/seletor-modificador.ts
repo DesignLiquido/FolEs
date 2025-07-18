@@ -1,21 +1,18 @@
 import { DicionarioModificadores } from "../dicionario/dicionario-modificadores";
 import { PragmasModificador } from "../../modificadores/superclasse";
-import { Metodo } from "../../valores/metodos/foles/metodo";
-import { MetodoCss } from "../../valores/metodos/css/metodo-css";
+import { Valor } from "../../valores";
 
 export class SeletorModificador {
     constructor(
         nomeFolEs: string,
-        valor: Metodo | MetodoCss | string,
-        quantificador?: string,
-        pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        valores: Valor[],
+        pragmas?: PragmasModificador
     ) {
         const modificador = DicionarioModificadores[nomeFolEs];
         if (modificador === undefined || modificador === null) {
             throw new Error(`O seletor \'${nomeFolEs}\' não existe.`);
         }
 
-        return new modificador(valor, quantificador, pragmas, valorVariavel);
+        return new modificador(valores, pragmas);
     }
 }

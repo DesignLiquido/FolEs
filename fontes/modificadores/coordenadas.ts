@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
@@ -10,27 +11,27 @@ export class Coordenadas extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
-        pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        valores: Valor[],
+        
+        pragmas?: PragmasModificador
     ) {
         super("coordenadas", "translate", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("coordenadas", valor, this.valoresAceitos);
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     validarValorNumerico("coordenadas", valores, this.valoresAceitos);
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "coordenadas",
-                    quantificador,
-                    unidadesMedida,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "coordenadas",
+        //             quantificador,
+        //             unidadesMedida,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

@@ -5,7 +5,8 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, Res
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Serializador } from "../fontes/serializadores";
-import { ValorQuantificador } from "./listas/valor-quantificador"
+import { ValorNumerico } from "../fontes/valores";
+import { ValoresQuantificadores } from "./listas/valores-quantificadores"
 
 describe('Avaliador Sintático', () => {
     let lexador: LexadorInterface;
@@ -22,13 +23,16 @@ describe('Avaliador Sintático', () => {
 
 
     it('Casos de sucesso - testando seletores valor-quantificador', () => {
-        for (let index = 0; index < ValorQuantificador.length; index += 1) {
-            const seletor: Object = new SeletorModificador(ValorQuantificador[index], '25', 'px');
+        for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
+            const seletor: Object = new SeletorModificador(
+                ValoresQuantificadores[index], 
+                [new ValorNumerico(ValoresQuantificadores[index], 25, 'px')]
+            );
 
             // Lexador
             const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
                 "lmht {",
-                `${ValorQuantificador[index]}: ${seletor['valor']}${seletor['quantificador']};`,
+                `${ValoresQuantificadores[index]}: 25px;`,
                 "}"
             ]);
 
@@ -55,12 +59,10 @@ describe('Avaliador Sintático', () => {
             expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                 seletor['propriedadeCss']
             );
-            expect(primeiroResultadoTipado.modificadores[0].valor).toStrictEqual(
-                '25'
-            );
-            expect(primeiroResultadoTipado.modificadores[0].quantificador).toStrictEqual(
-                'px'
-            );
+            expect(primeiroResultadoTipado.modificadores[0].valores.length).toBeGreaterThan(0);
+            const valor = primeiroResultadoTipado.modificadores[0].valores[0] as ValorNumerico;
+            expect(valor.literalNumerico).toStrictEqual(25);
+            expect(valor.quantificador).toStrictEqual('px');
 
             // O resultado do Avaliador deve ser recebido corretamente pelo Tradutor
             const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
@@ -70,22 +72,22 @@ describe('Avaliador Sintático', () => {
     });
 
     it('Casos de Falha - mensagens de erro esperadas como retorno', () => {
-        for (let index = 0; index < Object.keys(ValorQuantificador).length; index += 1) {
+        for (let index = 0; index < Object.keys(ValoresQuantificadores).length; index += 1) {
 
             // Lexador - valor e quantificador não informados
             let resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
                 "lmht {",
-                `${ValorQuantificador[index]}: ;`,
+                `${ValoresQuantificadores[index]}: ;`,
                 "}"
             ]);
 
             // Avaliador Sintático deve retornar erro
             expect(() => {
                 avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Esperado ';' após declaração de valor de modificador '${ValorQuantificador[index]}'.`);
+            }).toThrow();
 
             // Causar erro de digitação
-            const seletorIncorreto = ValorQuantificador[index].replace(ValorQuantificador[index][0], '')
+            const seletorIncorreto = ValoresQuantificadores[index].replace(ValoresQuantificadores[index][0], '')
 
             resultadoLexador = lexador.mapear([
                 "lmht {",

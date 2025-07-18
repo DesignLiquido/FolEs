@@ -73,8 +73,7 @@ export class Tradutor {
             Array.isArray(modificador.nomeFoles)
                 ? modificador.nomeFoles[0]
                 : modificador.nomeFoles,
-            modificador.valor,
-            modificador.quantificador,
+            modificador.valores,
             modificador.pragmas,
         ) as Modificador;
 

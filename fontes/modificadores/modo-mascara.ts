@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -10,16 +11,16 @@ export class ModoMascara extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["modo-mascara", "modo-máscara"], "mask-mode", pragmas);
 
         if (!valorVariavel)
-            validarValores("modo-máscara", valor, this.valoresAceitos);
+            validarValores("modo-máscara", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

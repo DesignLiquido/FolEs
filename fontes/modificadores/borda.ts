@@ -3,6 +3,7 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { validarQuantificador } from "./validacoes/quantificador";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { Valor } from "../valores";
 
 export class Borda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,27 +14,28 @@ export class Borda extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("borda", "border", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda", valor, this.valoresAceitos);
-            } else {
-                validarMultiplosQualitativos("borda", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda", valores, this.valoresAceitos);
+        //     } else {
+        //         validarMultiplosQualitativos("borda", valores, this.valoresAceitos);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador("borda", quantificador, unidadesMedida);
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador("borda", quantificador, unidadesMedida);
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

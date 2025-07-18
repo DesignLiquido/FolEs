@@ -1,4 +1,5 @@
-import { ValorPercentual } from "../../testes/listas/valor-quantificador";
+import { ValorPercentual } from "../../testes/listas/valores-quantificadores";
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -34,32 +35,33 @@ export class Fundo extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("fundo", "background", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valor, this.valoresAceitos);
-            } else {
-                validarMultiplosQualitativos("fundo", valor, this.valoresAceitos);
-            }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valores, this.valoresAceitos);
+        //     } else {
+        //         validarMultiplosQualitativos("fundo", valores, this.valoresAceitos);
+        //     }
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "fundo",
-                    quantificador,
-                    unidadesMedida,
-                    ValorPercentual,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "fundo",
+        //             quantificador,
+        //             unidadesMedida,
+        //             ValorPercentual,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

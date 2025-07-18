@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { estilos } from "./atributos/estilo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
@@ -8,8 +9,8 @@ export class EstiloContorno extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -18,11 +19,11 @@ export class EstiloContorno extends Modificador {
         if (!valorVariavel)
             validarValoresAdicionais(
                 "estilo-contorno",
-                valor,
+                valores,
                 estilos,
                 this.valoresAceitos,
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

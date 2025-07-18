@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -11,8 +12,8 @@ export class ModoPreenchimentoAnimacao extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -25,10 +26,10 @@ export class ModoPreenchimentoAnimacao extends Modificador {
         if (!valorVariavel)
             validarValores(
                 "modo-preenchimento-animação",
-                valor,
+                valores,
                 this.valoresAceitos,
             );
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

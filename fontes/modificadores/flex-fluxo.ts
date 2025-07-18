@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
@@ -15,21 +16,22 @@ export class FlexFluxo extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("comum", "flex-fluxo", valor, this.valoresAceitos);
-            } else {
-                validarValores("flex-fluxo", valor, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("comum", "flex-fluxo", valores, this.valoresAceitos);
+        //     } else {
+        //         validarValores("flex-fluxo", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

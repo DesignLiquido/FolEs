@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
@@ -9,8 +10,8 @@ export class VazamentoEmAncora extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -21,8 +22,8 @@ export class VazamentoEmAncora extends Modificador {
         );
 
         if (!valorVariavel)
-            validarValores("vazamento-em-âncora", valor, this.valoresAceitos);
+            validarValores("vazamento-em-âncora", valores, this.valoresAceitos);
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

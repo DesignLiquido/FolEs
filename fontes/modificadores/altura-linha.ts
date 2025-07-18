@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -9,28 +10,29 @@ export class AlturaLinha extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("altura-linha", "line-height", pragmas);
 
         if (!valorVariavel) {
-            validarValorNumerico("altura-linha", valor, this.valoresAceitos);
+            validarValorNumerico("altura-linha", valores, this.valoresAceitos);
 
             // Lógica diferente dos demais pois o modificador pode receber valores numéricos s/ quantificador
-            if (quantificador !== undefined) {
-                validarQuantificador(
-                    "altura-linha",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (quantificador !== undefined) {
+            //     validarQuantificador(
+            //         "altura-linha",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

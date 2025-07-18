@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -9,8 +10,8 @@ export class EspacamentoLetras extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -22,32 +23,33 @@ export class EspacamentoLetras extends Modificador {
 
         // Também pode receber valores numéricos com ponto (.) na frente
         // Ex.: espaçamento-letras: .2rem;
-        let valorComPonto = false;
+        // TODO: Repensar
+        // let valorComPonto = false;
 
-        if (!valorVariavel) {
-            if (valor.includes('.')) {
-                valorComPonto = true;
-                valor = valor.replace('.', '');
-            }
+        // if (!valorVariavel) {
+        //     if (valor.includes('.')) {
+        //         valorComPonto = true;
+        //         valor = valor.replace('.', '');
+        //     }
 
-            validarValorNumerico(
-                "espaçamento-letras",
-                valor,
-                this.valoresAceitos,
-            );
+        //     validarValorNumerico(
+        //         "espaçamento-letras",
+        //         valor,
+        //         this.valoresAceitos,
+        //     );
 
-            if (Number(parseInt(valor))) {
-                validarQuantificador(
-                    "espaçamento-letras",
-                    quantificador,
-                    unidadesMedida,
-                );
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "espaçamento-letras",
+        //             quantificador,
+        //             unidadesMedida,
+        //         );
 
-                this.quantificador = quantificador;
-            }
-        }
+        //         this.quantificador = quantificador;
+        //     }
+        // }
 
-        if (valorComPonto) valor = `.${valor}`;
-        this.valor = valor;
+        // if (valorComPonto) valor = `.${valor}`;
+        this.valores = valores;
     }
 }

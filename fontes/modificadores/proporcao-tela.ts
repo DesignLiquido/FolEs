@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -8,21 +9,22 @@ export class ProporcaoTela extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super(["proporcao-tela", "proporção-tela"], "aspect-ratio", pragmas);
 
-        if (!valorVariavel) {
-            if (valor.includes("/")) {
-                validarAtribuicaoAbreviada("numérica", "proporção-tela", valor, this.valoresAceitos);
-            } else {
-                validarValorNumerico("proporção-tela", valor, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes("/")) {
+        //         validarAtribuicaoAbreviada("numérica", "proporção-tela", valores, this.valoresAceitos);
+        //     } else {
+        //         validarValorNumerico("proporção-tela", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

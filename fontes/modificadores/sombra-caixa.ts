@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { unidadesMedida } from "./atributos/quantificadores";
@@ -11,29 +12,28 @@ export class SombraCaixa extends Modificador {
     };
 
     constructor(
-        valor: Metodo | MetodoCss | string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
         super("sombra-caixa", "box-shadow", pragmas);
 
-        
-
         if (!valorVariavel) {
-            validarMultiplosQualitativos("sombra-caixa", valor);
+            validarMultiplosQualitativos("sombra-caixa", valores);
 
-            if (typeof valor === 'string' && Number(parseInt(valor))) {
-                validarQuantificador(
-                    "sombra-caixa",
-                    quantificador,
-                    unidadesMedida,
-                );
+            // TODO: Repensar
+            // if (typeof valor === 'string' && Number(parseInt(valor))) {
+            //     validarQuantificador(
+            //         "sombra-caixa",
+            //         quantificador,
+            //         unidadesMedida,
+            //     );
 
-                this.quantificador = quantificador;
-            }
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

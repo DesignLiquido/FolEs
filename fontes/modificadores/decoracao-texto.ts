@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
@@ -15,8 +16,8 @@ export class DecoracaoTexto extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -26,14 +27,15 @@ export class DecoracaoTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            if (valor.includes(" ")) {
-                validarAtribuicaoAbreviada("múltiplos-qualitativos", "decoração-texto", valor, this.valoresAceitos);
-            } else {
-                validarMultiplosQualitativos("decoração-texto", valor, this.valoresAceitos);
-            }
-        }
+        // TODO: Repensar
+        // if (!valorVariavel) {
+        //     if (valor.includes(" ")) {
+        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "decoração-texto", valores, this.valoresAceitos);
+        //     } else {
+        //         validarMultiplosQualitativos("decoração-texto", valores, this.valoresAceitos);
+        //     }
+        // }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }

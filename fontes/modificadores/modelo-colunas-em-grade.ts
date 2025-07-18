@@ -1,3 +1,4 @@
+import { Valor } from "../valores";
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
@@ -16,8 +17,8 @@ export class ModeloColunasEmGrade extends Modificador {
     };
 
     constructor(
-        valor: string,
-        quantificador?: string,
+        valores: Valor[],
+        
         pragmas?: PragmasModificador,
         valorVariavel: boolean = false,
     ) {
@@ -28,22 +29,23 @@ export class ModeloColunasEmGrade extends Modificador {
         if (!valorVariavel) {
             validarValorNumerico(
                 "modelo-colunas-em-grade",
-                valor,
+                valores,
                 this.valoresAceitos,
                 valoresExtra,
             );
 
-            if (quantificador !== undefined) {
-                validarQuantificador(
-                    "modelo-colunas-em-grade",
-                    quantificador,
-                    unidadesMedida,
-                    valoresFlex,
-                );
-                this.quantificador = quantificador;
-            }
+            // TODO: Repensar
+            // if (quantificador !== undefined) {
+            //     validarQuantificador(
+            //         "modelo-colunas-em-grade",
+            //         quantificador,
+            //         unidadesMedida,
+            //         valoresFlex,
+            //     );
+            //     this.quantificador = quantificador;
+            // }
         }
 
-        this.valor = valor;
+        this.valores = valores;
     }
 }
