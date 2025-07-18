@@ -67,7 +67,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+          const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
           // O Tradutor deve serializar de acordo e traduzir anotação para annotation
           expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -90,7 +90,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow('O valor da função anotação() deve estar entre 1 e 99');
       }
     });
@@ -135,7 +135,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+          const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
           // O Tradutor deve serializar de acordo e traduzir anotação para annotation e conter o valor string
           expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -158,7 +158,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
       }
     });
@@ -384,7 +384,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
         // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
         expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -406,7 +406,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow('Os valores da função conjunto-estilos() devem estar entre 1 e 20');
       }
     });
@@ -455,7 +455,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toContain('content');
         expect(resultadoTradutor).toContain(`counter(contador1, ${estilosTraduzidos[index]});`);
       }
@@ -488,7 +488,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // O Serializador deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico)
+          serializador.serializar(resultadoAvaliadorSintatico)
         }).toThrow(`Valor de estilo ${estiloErroDigitacao} inválido para a função contador().`);
       }
     });
@@ -1076,7 +1076,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
         // O Tradutor deve serializar de acordo e traduzir espirrar para swash
         expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1098,7 +1098,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow('O valor da função espirrar() deve estar entre 1 e 99');
       }
     });
@@ -1146,7 +1146,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
         // O Tradutor deve serializar de acordo e traduzir estilístico para stylistic
         expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1168,7 +1168,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow('O valor da função estilistico() deve estar entre 1 e 20');
       }
     });
@@ -1907,7 +1907,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
         // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments
         expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1929,7 +1929,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow('O valor da função ornamentos() deve estar entre 1 e 99');
       }
     });
@@ -1971,7 +1971,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
         // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments e conter o valor string
         expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1994,7 +1994,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
       }
     });
@@ -2456,7 +2456,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
           );
 
           // Tradutor
-          const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+          const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
           // O Tradutor deve serializar de acordo e traduzir rotacionar-3d para rotate3d
           expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -2493,7 +2493,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // Serializador não deve aceitar 'px' como quantificador válido
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow("Propriedade 'transformar' com quantificador inválido");
       }
     });
@@ -3594,7 +3594,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         );
 
         // Tradutor
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
 
         // O Tradutor deve serializar de acordo e traduzir variar-caractere para character-variant
         expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -3616,7 +3616,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
         expect(() => {
-          tradutor.serializar(resultadoAvaliadorSintatico);
+          serializador.serializar(resultadoAvaliadorSintatico);
         }).toThrow('O valor da função variar-caractere() deve estar entre 1 e 99');
       }
     });
