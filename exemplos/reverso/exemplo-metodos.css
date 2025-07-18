@@ -2,7 +2,6 @@ div {
     backdrop-filter: blur(10);
     gap: calc(100px - 10px);
     filter: contrast(50);
-    animation: cubic-bezier(0, 0, 1, 1);
     height: fit-content(10%);
     transform: scaleZ(20);
 }
@@ -19,7 +18,6 @@ html {
     background-color: hsla(50 80% 40%);
     transform: skewY(15deg);
     backdrop-filter: invert(50%);
-    animation: linear(0, 0.25, 1);
     grid-template-columns: minmax(100px, max-content);
 }
 
@@ -44,4 +42,13 @@ p {
 div {
     backdrop-filter: saturate(5);
     transform: translateZ(150);
+}
+
+html {
+    content: counter(contador1, upper-roman);
+}
+
+div {
+    font-variant-alternates: annotation(10);
+    transform: rotate3d(0, 0, 0, 45deg);
 }

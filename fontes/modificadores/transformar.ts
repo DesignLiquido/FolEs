@@ -23,6 +23,7 @@ export class Transformar extends Modificador {
             "rotateX",
             "rotateY",
             "rotateZ",
+            "rotate3d",
             "scale",
             "scale3d",
             "scaleX",

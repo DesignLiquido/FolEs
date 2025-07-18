@@ -121,3 +121,8 @@ export class FolEs {
         return this.converterParaFolEsInterno(resultadoLexadorReverso.simbolos);
     }
 }
+
+//  const testeFoles = new FolEs(false);
+//  console.log(testeFoles.converterParaCss('../exemplos/exemplo3.foles'));
+//  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
+//  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
