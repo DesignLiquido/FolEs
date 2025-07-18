@@ -175,9 +175,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-
-                // TODO: Descomentar e realizar debug
-                // expect(resultadoTradutor).toContain(AtribuicaoAbreviadaPREspecificas[index]['traducao']);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaPREspecificas[index]['traducao']);
             }
         });
     
@@ -230,9 +228,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-
-                // TODO: Descomentar e realizar debug
-                // expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['traducao']);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['traducao']);
             }
         });
 
@@ -360,9 +356,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                
-                // TODO: Descomentar e realizar debug
-                // expect(resultadoTradutor).toContain(AtribuicaoSeparadaPorVirgula[index]['traducao']);
+                expect(resultadoTradutor).toContain(AtribuicaoSeparadaPorVirgula[index]['traducao']);
             }
         });
     });

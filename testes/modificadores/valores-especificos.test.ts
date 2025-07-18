@@ -487,9 +487,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(ValoresPersonalizadosMultiplos[index]['css']);
-
-                // TODO: Descomentar e realizar debug
-                // expect(resultadoTradutor).toContain(ValoresPersonalizadosMultiplos[index]['traducao']);
+                expect(resultadoTradutor).toContain(ValoresPersonalizadosMultiplos[index]['traducao']);
             }
         });
 
