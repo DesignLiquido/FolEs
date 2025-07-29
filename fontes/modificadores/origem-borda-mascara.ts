@@ -11,9 +11,7 @@ export class OrigemBordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["origem-borda-mascara", "origem-borda-máscara"],
@@ -23,13 +21,12 @@ export class OrigemBordaMascara extends Modificador {
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel)
-            validarValores(
-                "origem-borda-máscara",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "origem-borda-máscara",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

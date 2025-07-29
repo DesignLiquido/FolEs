@@ -8,9 +8,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class PosicaoVerticalFundo extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["posicao-vertical-fundo", "posição-vertical-fundo"],
@@ -18,24 +16,22 @@ export class PosicaoVerticalFundo extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "posição-vertical-fundo",
-                valores,
-                posicoesBasicas,
-            );
+        validarValorNumerico(
+            "posição-vertical-fundo",
+            valores,
+            posicoesBasicas,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "posição-vertical-fundo",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "posição-vertical-fundo",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

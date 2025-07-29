@@ -15,9 +15,7 @@ export class QuebrarPaginaApos extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["quebrar-pagina-apos", "quebrar-página-após"],
@@ -25,8 +23,7 @@ export class QuebrarPaginaApos extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("quebrar-página-após", valores, this.valoresAceitos);
+        validarValores("quebrar-página-após", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

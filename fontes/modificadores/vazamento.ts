@@ -15,20 +15,16 @@ export class Vazamento extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("vazamento", "overflow", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "vazamento", valores, this.valoresAceitos);
         //     } else {
         //         validarValores("vazamento", valores, this.valoresAceitos);
         //     }
-        // }
 
         this.valores = valores;
     }

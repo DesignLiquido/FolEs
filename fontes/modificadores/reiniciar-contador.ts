@@ -10,9 +10,7 @@ export class ReiniciarContador extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("reiniciar-contador", "counter-reset", pragmas);
 
@@ -27,8 +25,7 @@ export class ReiniciarContador extends Modificador {
 
         // A lógica abaixo cobre somente o recebimento de 'nenhum' (único valor aceito) e dos Globais.
         // TODO: Adaptar lógica de acordo com a sintaxe do modificador.
-        if (!valorVariavel)
-            validarValores("reiniciar-contador", valores, this.valoresAceitos);
+        validarValores("reiniciar-contador", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

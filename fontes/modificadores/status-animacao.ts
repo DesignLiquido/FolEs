@@ -10,9 +10,7 @@ export class StatusAnimacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["status-animacao", "status-animação"],
@@ -20,8 +18,7 @@ export class StatusAnimacao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("status-animação", valores, this.valoresAceitos);
+        validarValores("status-animação", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

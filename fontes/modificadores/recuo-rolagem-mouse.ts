@@ -12,14 +12,11 @@ export class RecuoRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recuo-rolagem-mouse", "scroll-padding", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "recuo-rolagem-mouse", valores, this.valoresAceitos);
         //     } else {
@@ -31,7 +28,6 @@ export class RecuoRolagemMouse extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

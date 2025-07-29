@@ -11,30 +11,26 @@ export class PosicaoEsquerda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["posicao-esquerda", "posição-esquerda"], "left", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "posição-esquerda",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "posição-esquerda",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "posição-esquerda",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "posição-esquerda",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

@@ -8,14 +8,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class Opacidade extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("opacidade", "opacity", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
         //     // Caso haja um quantificador %, pode ser qualquer número.
         //     validarValorNumerico("opacidade", valor);
@@ -30,7 +27,7 @@ export class Opacidade extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
+
         this.valores = valores;
     }
 }

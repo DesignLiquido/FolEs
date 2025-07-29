@@ -15,9 +15,7 @@ export class TamanhoMinimoEmLinha extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["tamanho-minimo-em-linha", "tamanho-mínimo-em-linha"],
@@ -28,13 +26,12 @@ export class TamanhoMinimoEmLinha extends Modificador {
         const valoresExtra = ["fit-content"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico(
-        //         "tamanho-mínimo-em-linha",
-        //         valor,
-        //         this.valoresAceitos,
-        //         valoresExtra,
-        //     );
+        validarValorNumerico(
+            "tamanho-mínimo-em-linha",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         //     if (Number(parseInt(valor))) {
         //         validarQuantificador(
@@ -45,7 +42,6 @@ export class TamanhoMinimoEmLinha extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

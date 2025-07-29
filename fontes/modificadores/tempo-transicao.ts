@@ -25,9 +25,7 @@ export class TempoTransicao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["tempo-transicao", "tempo-transição"],
@@ -37,13 +35,12 @@ export class TempoTransicao extends Modificador {
 
         const valoresExtra = ["cubic-bezier", "steps"];
 
-        if (!valorVariavel)
-            validarValores(
-                "tempo-transição",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "tempo-transição",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

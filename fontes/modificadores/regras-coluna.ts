@@ -15,14 +15,11 @@ export class RegrasColuna extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("regras-coluna", "column-rule", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valores, this.valoresAceitos);
         //     } else {
@@ -34,7 +31,6 @@ export class RegrasColuna extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

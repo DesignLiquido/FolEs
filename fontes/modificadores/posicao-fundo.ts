@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class PosicaoFundo extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["posicao-fundo", "posição-fundo"],
@@ -17,28 +15,26 @@ export class PosicaoFundo extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("posição-fundo", valores, posicoesBasicas);
+        validarValorNumerico("posição-fundo", valores, posicoesBasicas);
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     const quantificadoresAceitos = {
-            //         px: "px",
-            //         "%": "%",
-            //         rem: "rem",
-            //         vmin: "vmin",
-            //         vmax: "vmax",
-            //     };
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     const quantificadoresAceitos = {
+        //         px: "px",
+        //         "%": "%",
+        //         rem: "rem",
+        //         vmin: "vmin",
+        //         vmax: "vmax",
+        //     };
 
-            //     validarQuantificador(
-            //         "posição-fundo",
-            //         quantificador,
-            //         quantificadoresAceitos,
-            //     );
+        //     validarQuantificador(
+        //         "posição-fundo",
+        //         quantificador,
+        //         quantificadoresAceitos,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

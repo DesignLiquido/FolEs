@@ -11,7 +11,6 @@ export class RepetirAnimacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["repetir-animacao", "repetir-animação"],
@@ -19,16 +18,14 @@ export class RepetirAnimacao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "repetir-animação",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "repetir-animação",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // proibirQuantificador("repetir-animação", quantificador);
-        }
+        // TODO: Repensar
+        // proibirQuantificador("repetir-animação", quantificador);
 
         this.valores = valores;
     }

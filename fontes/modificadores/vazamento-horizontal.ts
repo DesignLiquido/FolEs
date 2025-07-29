@@ -14,14 +14,11 @@ export class VazamentoHorizontal extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("vazamento-horizontal", "overflow-x", pragmas);
 
-        if (!valorVariavel)
-            validarValores("vazamento-horizontal", valores, this.valoresAceitos);
+        validarValores("vazamento-horizontal", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -11,30 +11,26 @@ export class RecuoSuperiorRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recuo-superior-rolagem-mouse", "scroll-padding-top", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "recuo-superior-rolagem-mouse",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "recuo-superior-rolagem-mouse",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "recuo-superior-rolagem-mouse",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "recuo-superior-rolagem-mouse",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

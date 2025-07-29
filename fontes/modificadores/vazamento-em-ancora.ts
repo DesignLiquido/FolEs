@@ -11,9 +11,7 @@ export class VazamentoEmAncora extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["vazamento-em-ancora", "vazamento-em-âncora"],
@@ -21,8 +19,7 @@ export class VazamentoEmAncora extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("vazamento-em-âncora", valores, this.valoresAceitos);
+        validarValores("vazamento-em-âncora", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -21,25 +21,21 @@ export class TamanhoFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("tamanho-fonte", "font-size", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("tamanho-fonte", valores, this.valoresAceitos);
+        validarValorNumerico("tamanho-fonte", valores, this.valoresAceitos);
 
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "tamanho-fonte",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "tamanho-fonte",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

@@ -8,14 +8,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class RecuoEmLinha extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recuo-em-linha", "padding-inline", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "recuo-em-linha", valor);
         //     } else {
@@ -27,7 +24,6 @@ export class RecuoEmLinha extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

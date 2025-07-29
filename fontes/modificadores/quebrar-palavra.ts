@@ -12,14 +12,11 @@ export class QuebrarPalavra extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("quebrar-palavra", "word-break", pragmas);
 
-        if (!valorVariavel)
-            validarValores("quebrar-palavra", valores, this.valoresAceitos);
+        validarValores("quebrar-palavra", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -12,30 +12,26 @@ export class RecortarMargemVazada extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recortar-margem-vazada", "overflow-clip-margin", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "recortar-margem-vazada",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "recortar-margem-vazada",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "recortar-margem-vazada",
-            //         quantificador,
-            //         comprimentos,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "recortar-margem-vazada",
+        //         quantificador,
+        //         comprimentos,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

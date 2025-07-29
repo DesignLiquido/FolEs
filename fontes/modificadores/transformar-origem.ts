@@ -8,27 +8,23 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class TransformarOrigem extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("transformar-origem", "transform-origin", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("transformar-origem", valores, posicoesBasicas);
+        validarValorNumerico("transformar-origem", valores, posicoesBasicas);
 
-            // Aceita valores de posição (palavras) e também valor-quantificador.
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "transformar-origem",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // Aceita valores de posição (palavras) e também valor-quantificador.
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "transformar-origem",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

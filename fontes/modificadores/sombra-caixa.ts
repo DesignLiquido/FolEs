@@ -13,26 +13,22 @@ export class SombraCaixa extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("sombra-caixa", "box-shadow", pragmas);
 
-        if (!valorVariavel) {
-            validarMultiplosQualitativos("sombra-caixa", valores);
+        validarMultiplosQualitativos("sombra-caixa", valores);
 
-            // TODO: Repensar
-            // if (typeof valor === 'string' && Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "sombra-caixa",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (typeof valor === 'string' && Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "sombra-caixa",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

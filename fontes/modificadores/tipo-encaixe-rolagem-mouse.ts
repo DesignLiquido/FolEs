@@ -17,18 +17,15 @@ export class TipoEncaixeRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("tipo-encaixe-rolagem-mouse", "scroll-snap-type", pragmas);
 
-        if (!valorVariavel)
-            validarValores(
-                "tipo-encaixe-rolagem-mouse",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValores(
+            "tipo-encaixe-rolagem-mouse",
+            valores,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

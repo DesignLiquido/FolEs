@@ -11,14 +11,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class RecuoEmBloco extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recuo-em-bloco", "padding-block", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "recuo-em-bloco", valor);
         //     } else {
@@ -30,7 +27,6 @@ export class RecuoEmBloco extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

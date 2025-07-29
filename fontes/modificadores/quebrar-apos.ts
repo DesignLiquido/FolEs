@@ -26,14 +26,11 @@ export class QuebrarApos extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["quebrar-apos", "quebrar-após"], "break-after", pragmas);
 
-        if (!valorVariavel)
-            validarValores("quebrar-após", valores, this.valoresAceitos);
+        validarValores("quebrar-após", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

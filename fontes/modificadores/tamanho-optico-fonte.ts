@@ -10,9 +10,7 @@ export class TamanhoOpticoFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["tamanho-optico-fonte", "tamanho-óptico-fonte"],
@@ -20,8 +18,7 @@ export class TamanhoOpticoFonte extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("tamanho-óptico-fonte", valores, this.valoresAceitos);
+        validarValores("tamanho-óptico-fonte", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

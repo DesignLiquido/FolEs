@@ -15,14 +15,11 @@ export class QuebrarDentro extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("quebrar-dentro", "break-inside", pragmas);
 
-        if (!valorVariavel)
-            validarValores("quebrar-dentro", valores, this.valoresAceitos);
+        validarValores("quebrar-dentro", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

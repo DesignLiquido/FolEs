@@ -8,14 +8,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class RaioBorda extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("raio-borda", "border-radius", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes("/")) {
         //         validarAtribuicaoAbreviada("numérica", "raio-borda", valor);
         //     } else {
@@ -27,7 +24,6 @@ export class RaioBorda extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

@@ -8,23 +8,20 @@ export class SombraTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("sombra-texto", "text-shadow", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("sombra-texto", valores);
+        validarValorNumerico("sombra-texto", valores);
 
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "sombra-texto",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-            //     this.quantificador = quantificador;
-            // }
-        }
+        // TODO: Repensar
+        // if (quantificador !== undefined) {
+        //     validarQuantificador(
+        //         "sombra-texto",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

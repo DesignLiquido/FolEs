@@ -12,9 +12,7 @@ export class PosicaoEnfaseTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["posicao-enfase-texto", "posição-ênfase-texto"],
@@ -22,8 +20,7 @@ export class PosicaoEnfaseTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("posição-ênfase-texto", valores, this.valoresAceitos);
+        validarValores("posição-ênfase-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

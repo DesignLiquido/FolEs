@@ -16,14 +16,11 @@ export class RepetirMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["repetir-mascara", "repetir-máscara"], "mask-repeat", pragmas);
 
-        if (!valorVariavel)
-            validarValores("repetir-máscara", valores, this.valoresAceitos);
+        validarValores("repetir-máscara", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

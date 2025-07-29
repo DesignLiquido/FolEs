@@ -15,35 +15,32 @@ export class TamanhoColunasEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("tamanho-colunas-em-grade", "grid-auto-columns", pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "tamanho-colunas-em-grade",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValorNumerico(
+            "tamanho-colunas-em-grade",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
-            // Além dos quantificadores de Comprimento e Percentual, também pode receber a unidade 'fr', do tipo Flex.
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "tamanho-colunas-em-grade",
-            //         quantificador,
-            //         unidadesMedida,
-            //         valoresFlex,
-            //     );
+        // Além dos quantificadores de Comprimento e Percentual, também pode receber a unidade 'fr', do tipo Flex.
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "tamanho-colunas-em-grade",
+        //         quantificador,
+        //         unidadesMedida,
+        //         valoresFlex,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
+
 
         this.valores = valores;
     }

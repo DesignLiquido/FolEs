@@ -13,14 +13,11 @@ export class Posicao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["posicao", "posição"], "position", pragmas);
 
-        if (!valorVariavel)
-            validarValores("posição", valores, this.valoresAceitos);
+        validarValores("posição", valores, this.valoresAceitos);
 
         this.valores = valores;
     }
