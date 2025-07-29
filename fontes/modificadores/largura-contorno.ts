@@ -14,30 +14,26 @@ export class LarguraContorno extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("largura-contorno", "outline-width", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-contorno",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "largura-contorno",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "largura-contorno",
-            //         quantificador,
-            //         comprimentos,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "largura-contorno",
+        //         quantificador,
+        //         comprimentos,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

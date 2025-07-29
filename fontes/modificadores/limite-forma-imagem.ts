@@ -6,13 +6,10 @@ import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 export class LimiteFormaImagem extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("limite-forma-imagem", "shape-image-threshold", pragmas);
 
-        // if (!valorVariavel) {
         //     // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
         //     if (
         //         (Number(parseInt(valor)) < 0 || Number(parseInt(valor)) > 1) &&
@@ -25,7 +22,6 @@ export class LimiteFormaImagem extends Modificador {
         //     }
 
         //     proibirQuantificador("limite-forma-imagem", quantificador);
-        // }
 
         this.valores = valores;
     }

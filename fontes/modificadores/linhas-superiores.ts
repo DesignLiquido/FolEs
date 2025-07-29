@@ -7,16 +7,13 @@ export class LinhasSuperiores extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("linhas-superiores", "widows", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("linhas-superiores", valores);
+        validarValorNumerico("linhas-superiores", valores);
 
-            // TODO: Repensar.
-            // proibirQuantificador("linhas-superiores", quantificador);
-        }
+        // TODO: Repensar.
+        // proibirQuantificador("linhas-superiores", quantificador);
 
         this.valores = valores;
     }

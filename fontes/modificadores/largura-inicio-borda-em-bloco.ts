@@ -14,9 +14,7 @@ export class LarguraInicioBordaEmBloco extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["largura-inicio-borda-em-bloco", "largura-início-borda-em-bloco"],
@@ -24,24 +22,22 @@ export class LarguraInicioBordaEmBloco extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-início-borda-em-bloco",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "largura-início-borda-em-bloco",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "largura-início-borda-em-bloco",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "largura-início-borda-em-bloco",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

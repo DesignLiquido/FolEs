@@ -12,25 +12,21 @@ export class NomeAnimacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ") || valor.includes(",")) {
         //         validarAtribuicaoAbreviada("comum", "nome-animação", valores, this.valoresAceitos, undefined, false, true);
         //     } else {
         //         if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
-                    
+
         //             validarIdentificacaoPersonalizada("nome-animação", valor);
         //             this.valoresAceitos[valor] = valor;
         //         }
         //         validarValores("nome-animação", valores, this.valoresAceitos);
         //     }
-        // }
 
         this.valores = valores;
     }

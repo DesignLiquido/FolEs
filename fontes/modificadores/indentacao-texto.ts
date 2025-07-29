@@ -12,30 +12,26 @@ export class IndentacaoTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["indentacao-texto", "indentação-texto"], "text-indent", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "indentação-texto",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "indentação-texto",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "indentação-texto",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "indentação-texto",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

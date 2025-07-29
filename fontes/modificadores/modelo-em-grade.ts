@@ -19,9 +19,7 @@ export class ModeloEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("modelo-em-grade", "grid-template", pragmas);
 
@@ -32,7 +30,6 @@ export class ModeloEmGrade extends Modificador {
 
         const valoresExtra = ["fit-content"];
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (typeof valor === 'string' && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "modelo-em-grade", valores, this.valoresAceitos, valoresExtra);
         //     } else {
@@ -43,7 +40,6 @@ export class ModeloEmGrade extends Modificador {
         //         validarQuantificador("modelo-em-grade", quantificador, unidadesMedida, valoresFlex);
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

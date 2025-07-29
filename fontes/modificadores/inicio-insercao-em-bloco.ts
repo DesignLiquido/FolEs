@@ -11,9 +11,7 @@ export class InicioInsercaoEmBloco extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-insercao-em-bloco", "início-inserção-em-bloco"],
@@ -21,23 +19,21 @@ export class InicioInsercaoEmBloco extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "início-inserção-em-bloco",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "início-inserção-em-bloco",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "início-inserção-em-bloco",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "início-inserção-em-bloco",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

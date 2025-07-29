@@ -12,14 +12,11 @@ export class Margem extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("margem", "margin", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "margem", valores, this.valoresAceitos);
         //     } else {
@@ -31,7 +28,6 @@ export class Margem extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

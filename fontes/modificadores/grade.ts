@@ -23,9 +23,7 @@ export class Grade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("grade", "grid", pragmas);
 
@@ -33,13 +31,11 @@ export class Grade extends Modificador {
         const valoresExtra = ["minmax"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (typeof valor === 'string' && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "grade", valores, this.valoresAceitos, valoresExtra);
         //     } else {
         //         validarValores("grade", metodoResolvido, this.valoresAceitos, valoresExtra);
         //     }
-        // }
 
         this.valores = valores;
     }

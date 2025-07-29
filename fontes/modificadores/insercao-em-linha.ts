@@ -11,9 +11,7 @@ export class InsercaoEmLinha extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["insercao-em-linha", "inserção-em-linha"],
@@ -21,23 +19,21 @@ export class InsercaoEmLinha extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "inserção-em-linha",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "inserção-em-linha",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "inserção-em-linha",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "inserção-em-linha",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

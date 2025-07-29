@@ -14,29 +14,25 @@ export class LarguraBordaInferior extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("largura-borda-inferior", "border-bottom-width", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-borda-inferior",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "largura-borda-inferior",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "largura-borda-inferior",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "largura-borda-inferior",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

@@ -19,30 +19,26 @@ export class FlexComprimento extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("flex-comprimento", "flex-basis", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "flex-comprimento",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "flex-comprimento",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "flex-comprimento",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "flex-comprimento",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

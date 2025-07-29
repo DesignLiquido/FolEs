@@ -51,15 +51,12 @@ export class Fonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("fonte", "font", pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "fonte", valores, this.valoresAceitos);
         //     } else {
@@ -76,7 +73,6 @@ export class Fonte extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

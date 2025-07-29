@@ -12,14 +12,11 @@ export class Insercao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["insercao", "inserção"], "inset", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "inserção", valores, this.valoresAceitos);
         //     } else {
@@ -31,7 +28,6 @@ export class Insercao extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

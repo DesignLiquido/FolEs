@@ -36,14 +36,11 @@ export class Fundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("fundo", "background", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valores, this.valoresAceitos);
         //     } else {
@@ -60,7 +57,6 @@ export class Fundo extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

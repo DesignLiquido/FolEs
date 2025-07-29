@@ -15,14 +15,11 @@ export class LarguraBorda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("largura-borda", "border-width", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "largura-borda", valores, this.valoresAceitos);
         //     } else {
@@ -34,7 +31,6 @@ export class LarguraBorda extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

@@ -15,33 +15,29 @@ export class LarguraMinima extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["largura-minima", "largura-minima"], "min-width", pragmas);
 
         const valoresExtra = ["fit-content"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-minima",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValorNumerico(
+            "largura-minima",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "largura-mínima",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "largura-mínima",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

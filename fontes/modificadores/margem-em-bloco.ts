@@ -12,14 +12,11 @@ export class MargemEmBloco extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("margem-em-bloco", "margin-block", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "margem-em-bloco", valores, this.valoresAceitos);
         //     } else {
@@ -31,7 +28,6 @@ export class MargemEmBloco extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

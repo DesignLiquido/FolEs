@@ -11,30 +11,26 @@ export class LarguraImagemBorda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("largura-imagem-borda", "border-image-width", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-imagem-borda",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "largura-imagem-borda",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "largura-imagem-borda",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (quantificador !== undefined) {
+        //     validarQuantificador(
+        //         "largura-imagem-borda",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

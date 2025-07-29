@@ -10,9 +10,7 @@ export class ImpressaoAjusteCor extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["impressao-ajuste-cor", "impressão-ajuste-cor"],
@@ -20,8 +18,7 @@ export class ImpressaoAjusteCor extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("impressão-ajuste-cor", valores, this.valoresAceitos);
+        validarValores("impressão-ajuste-cor", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

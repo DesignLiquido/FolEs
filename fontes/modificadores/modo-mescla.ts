@@ -28,14 +28,11 @@ export class ModoMescla extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("modo-mescla", "mix-blend-mode", pragmas);
 
-        if (!valorVariavel)
-            validarValores("modo-mescla", valores, this.valoresAceitos);
+        validarValores("modo-mescla", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

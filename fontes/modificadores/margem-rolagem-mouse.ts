@@ -8,14 +8,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class MargemRolagemMouse extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("margem-rolagem-mouse", "scroll-margin", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "margem-rolagem-mouse", valor);
         //     } else {
@@ -27,7 +24,6 @@ export class MargemRolagemMouse extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

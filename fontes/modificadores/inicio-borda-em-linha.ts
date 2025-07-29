@@ -8,9 +8,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class InicioBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-borda-em-linha", "início-borda-em-linha"],
@@ -19,7 +17,6 @@ export class InicioBordaEmLinha extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "início-borda-em-linha", valor);
         //     } else {
@@ -31,7 +28,6 @@ export class InicioBordaEmLinha extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

@@ -11,31 +11,27 @@ export class FatiarImagemBorda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("fatiar-imagem-borda", "border-image-slice", pragmas);
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "fatiar-imagem-borda",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValorNumerico(
+            "fatiar-imagem-borda",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "fatiar-imagem-borda",
-            //         quantificador,
-            //         ListaDeValorPercentual,
-            //     );
-            // }
-        }
+        // TODO: Repensar
+        // if (quantificador !== undefined) {
+        //     validarQuantificador(
+        //         "fatiar-imagem-borda",
+        //         quantificador,
+        //         ListaDeValorPercentual,
+        //     );
+        // }
 
         this.valores = valores;
     }

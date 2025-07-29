@@ -12,14 +12,11 @@ export class MargemEmLinha extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("margem-em-linha", "margin-inline", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "margem-em-linha", valores, this.valoresAceitos);
         //     } else {
@@ -31,7 +28,6 @@ export class MargemEmLinha extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

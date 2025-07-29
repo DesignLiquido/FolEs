@@ -38,14 +38,11 @@ export class FonteTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("fonte-texto", "font-family", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(",")) {
         //         validarAtribuicaoAbreviada("fonte", "fonte-texto", valores, this.valoresAceitos, undefined, true);
         //     } else {
@@ -54,7 +51,6 @@ export class FonteTexto extends Modificador {
         //         validarValorFonte("fonte-texto", valores, this.valoresAceitos);
         //         if (valorString) valor = `"${valor}"`;
         //     }
-        // }
 
         this.valores = valores;
     }

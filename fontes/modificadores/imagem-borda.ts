@@ -21,18 +21,14 @@ export class ImagemBorda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("imagem-borda", "border-image", pragmas);
 
         // TODO: Também aceita o método linear-gradient
-
         const valoresExtra = ["url"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (typeof valor === 'string' && (valor.includes(" ") || valor.includes("/"))) {
         //         validarAtribuicaoAbreviada("numérica", "imagem-borda", valores, this.valoresAceitos, valoresExtra);
         //     } else {
@@ -44,7 +40,6 @@ export class ImagemBorda extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

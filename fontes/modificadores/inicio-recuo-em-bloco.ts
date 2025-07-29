@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class InicioRecuoEmBloco extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-recuo-em-bloco", "início-recuo-em-bloco"],
@@ -17,20 +15,18 @@ export class InicioRecuoEmBloco extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("início-recuo-em-bloco", valores);
+        validarValorNumerico("início-recuo-em-bloco", valores);
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "início-recuo-em-bloco",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "início-recuo-em-bloco",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

@@ -10,20 +10,16 @@ export class IncrementarContador extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("incrementar-contador", "counter-increment", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "incrementar-contador", valores, this.valoresAceitos, undefined, false, true);
         //     } else {
         //         validarValorNumerico("incrementar-contador", valores, this.valoresAceitos);
         //     }
-        // }
 
         this.valores = valores;
     }

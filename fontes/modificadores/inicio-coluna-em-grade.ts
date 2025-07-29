@@ -11,9 +11,7 @@ export class InicioColunaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-coluna-em-grade", "início-coluna-em-grade"],
@@ -22,7 +20,6 @@ export class InicioColunaEmGrade extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", 'início-coluna-em-grade', valores, this.valoresAceitos, undefined, false, true);
         //     } else {
@@ -30,7 +27,6 @@ export class InicioColunaEmGrade extends Modificador {
         //     }
 
         //     proibirQuantificador("início-coluna-em-grade", quantificador);
-        // }
 
         this.valores = valores;
     }

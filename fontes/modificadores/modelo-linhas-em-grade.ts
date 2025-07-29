@@ -19,32 +19,29 @@ export class ModeloLinhasEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("modelo-linhas-em-grade", "grid-template-rows", pragmas);
 
         // OBS.: Também aceita receber o valor do tipo [linename]
         const valoresExtra = ["minmax", "fit-content"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "modelo-linhas-em-grade",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValorNumerico(
+            "modelo-linhas-em-grade",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "modelo-linhas-em-grade",
-            //         quantificador,
-            //         unidadesMedida,
-            //         valoresFlex,
-            //     );
-            //     this.quantificador = quantificador;
-            // }
-        }
+        // TODO: Repensar
+        // if (quantificador !== undefined) {
+        //     validarQuantificador(
+        //         "modelo-linhas-em-grade",
+        //         quantificador,
+        //         unidadesMedida,
+        //         valoresFlex,
+        //     );
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

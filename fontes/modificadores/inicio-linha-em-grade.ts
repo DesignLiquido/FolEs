@@ -11,9 +11,7 @@ export class InicioLinhaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-linha-em-grade", "início-linha-em-grade"],
@@ -22,7 +20,6 @@ export class InicioLinhaEmGrade extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", 'início-linha-em-grade', valores, this.valoresAceitos, undefined, false, true);
         //     } else {
@@ -30,7 +27,6 @@ export class InicioLinhaEmGrade extends Modificador {
         //     }
 
         //     proibirQuantificador("início-linha-em-grade", quantificador);
-        // }
 
         this.valores = valores;
     }

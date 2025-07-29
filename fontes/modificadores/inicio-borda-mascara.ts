@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class InicioBordaMascara extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-borda-mascara", "início-borda-máscara"],
@@ -17,20 +15,18 @@ export class InicioBordaMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("início-borda-máscara", valores);
+        validarValorNumerico("início-borda-máscara", valores);
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "início-borda-máscara",
-            //         quantificador,
-            //         comprimentos,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "início-borda-máscara",
+        //         quantificador,
+        //         comprimentos,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

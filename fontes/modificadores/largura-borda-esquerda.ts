@@ -14,29 +14,25 @@ export class LarguraBordaEsquerda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("largura-borda-esquerda", "border-left-width", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-borda-esquerda",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "largura-borda-esquerda",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "largura-borda-esquerda",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "largura-borda-esquerda",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

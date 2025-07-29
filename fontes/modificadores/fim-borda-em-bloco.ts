@@ -8,13 +8,10 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class FimBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("fim-borda-em-bloco", "border-block-end", pragmas);
 
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fim-borda-em-bloco", valor);
         //     } else {
@@ -30,7 +27,6 @@ export class FimBordaEmBloco extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

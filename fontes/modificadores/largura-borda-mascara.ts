@@ -11,9 +11,7 @@ export class LarguraBordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["largura-borda-mascara", "largura-borda-máscara"],
@@ -21,25 +19,23 @@ export class LarguraBordaMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "largura-borda-máscara",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "largura-borda-máscara",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // Também pode receber somente o valor numérico, sem quantificador
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "largura-borda-máscara",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // Também pode receber somente o valor numérico, sem quantificador
+        // TODO: Repensar
+        // if (quantificador !== undefined) {
+        //     validarQuantificador(
+        //         "largura-borda-máscara",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

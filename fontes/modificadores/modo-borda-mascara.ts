@@ -11,9 +11,7 @@ export class ModoBordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["modo-borda-mascara", "modo-borda-máscara"],
@@ -21,8 +19,7 @@ export class ModoBordaMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("modo-borda-máscara", valores, this.valoresAceitos);
+        validarValores("modo-borda-máscara", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

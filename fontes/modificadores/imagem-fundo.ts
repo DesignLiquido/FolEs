@@ -12,19 +12,15 @@ export class ImagemFundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("imagem-fundo", "background-image", pragmas);
 
-        // if (!valorVariavel) {
         //     if (valor instanceof Metodo) {
         //         this.valores = valores;
         //     } else {
         //         validarValores("imagem-fundo", valores, this.valoresAceitos);
         //         this.valores = valores;
         //     }
-        // }
     }
 }
