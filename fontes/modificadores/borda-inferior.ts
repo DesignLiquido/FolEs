@@ -20,7 +20,6 @@ export class BordaInferior extends Modificador {
         super("borda-inferior", "border-bottom", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-direita", valores, this.valoresAceitos);
         //     } else {
@@ -32,7 +31,6 @@ export class BordaInferior extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

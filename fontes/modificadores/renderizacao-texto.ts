@@ -16,7 +16,6 @@ export class RenderizacaoTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["renderizacao-texto", "renderização-texto"],

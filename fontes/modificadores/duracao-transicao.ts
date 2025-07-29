@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class DuracaoTransicao extends Modificador {
     constructor(
         valores: Valor[],
-
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["duracao-transicao", "duração-transição"],

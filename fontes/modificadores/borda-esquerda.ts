@@ -20,7 +20,6 @@ export class BordaEsquerda extends Modificador {
         super("borda-esquerda", "border-left", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-esquerda", valores, this.valoresAceitos);
         //     } else {
@@ -32,7 +31,6 @@ export class BordaEsquerda extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

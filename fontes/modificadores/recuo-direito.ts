@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class RecuoDireito extends Modificador {
     constructor(
         valores: Valor[],
-
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recuo-direito", "padding-right", pragmas);
 
