@@ -9,13 +9,11 @@ export class CorDestaque extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("cor-destaque", "accent-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor-destaque", valores, this.valoresAceitos);
+        validarValorCor("cor-destaque", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

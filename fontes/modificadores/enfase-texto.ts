@@ -22,9 +22,7 @@ export class EnfaseTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
@@ -34,13 +32,11 @@ export class EnfaseTexto extends Modificador {
         //     this.valoresAceitos[valor] = valor;
         // }
 
-        // if (!valorVariavel) {
         //     if (!validacaoString && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("cor", "ênfase-texto", valores, this.valoresAceitos);
         //     } else {
         //         validarValorCor("ênfase-texto", valores, this.valoresAceitos);
         //     }
-        // }
 
         this.valores = valores;
     }

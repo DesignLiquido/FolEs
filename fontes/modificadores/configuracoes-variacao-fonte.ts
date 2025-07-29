@@ -11,8 +11,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
     ) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
@@ -20,22 +19,20 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas,
         );
 
-        // if (!valorVariavel) {
         //     const validacaoString = validarValorString(valor);
 
         //     if (validacaoString) {
         //         this.valoresAceitos[valor] = valor;
         //     }
 
-        //     validarValorNumerico(
-        //         "configurações-variação-fonte",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
+        validarValorNumerico(
+            "configurações-variação-fonte",
+            valores,
+            this.valoresAceitos,
+        );
 
         //     // Não recebe quantificador
         //     proibirQuantificador("configurações-variação-fonte", quantificador);
-        // }
 
         this.valores = valores;
     }

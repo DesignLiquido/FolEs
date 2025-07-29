@@ -7,22 +7,18 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class EspacoBorda extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["espaco-borda", "espaço-borda"], "border-spacing", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico("espaço-borda", valor);
+        validarValorNumerico("espaço-borda", valores);
 
         //     if (Number(parseInt(valor))) {
         //         validarQuantificador("espaço", quantificador, comprimentos);
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

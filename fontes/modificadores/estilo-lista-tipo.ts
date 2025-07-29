@@ -5,7 +5,6 @@ export class EstiloListaTipo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("estilo-lista-tipo", "list-style-type", pragmas);
 

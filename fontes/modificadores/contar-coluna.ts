@@ -10,19 +10,15 @@ export class ContarColuna extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("contar-coluna", "column-count", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("contar-coluna", valores, this.valoresAceitos);
+        validarValorNumerico("contar-coluna", valores, this.valoresAceitos);
 
-            // Não recebe quantificador, apenas o valor numérico.
-            // TODO: Repensar.
-            // proibirQuantificador("contar-coluna", quantificador);
-        }
+        // Não recebe quantificador, apenas o valor numérico.
+        // TODO: Repensar.
+        // proibirQuantificador("contar-coluna", quantificador);
 
         this.valores = valores;
     }

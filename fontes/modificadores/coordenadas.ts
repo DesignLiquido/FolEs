@@ -12,13 +12,11 @@ export class Coordenadas extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
     ) {
         super("coordenadas", "translate", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     validarValorNumerico("coordenadas", valores, this.valoresAceitos);
 
         //     if (Number(parseInt(valor))) {
@@ -30,7 +28,6 @@ export class Coordenadas extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

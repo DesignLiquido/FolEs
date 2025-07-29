@@ -14,7 +14,6 @@ export class Deslocamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("deslocamento", "offset", pragmas);
 
@@ -22,7 +21,6 @@ export class Deslocamento extends Modificador {
         const valoresExtra = ["url", "ray"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (typeof valor === 'string' && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada(
         //             "numérica",
@@ -38,7 +36,6 @@ export class Deslocamento extends Modificador {
         //             this.valoresAceitos,
         //             valoresExtra,
         //         );
-        //     }
 
         //     if (quantificador) {
         //         validarQuantificador(

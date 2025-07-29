@@ -15,9 +15,7 @@ export class DecoracaoEstiloTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["decoracao-estilo-texto", "decoração-estilo-texto"],
@@ -25,12 +23,11 @@ export class DecoracaoEstiloTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores(
-                "decoração-estilo-texto",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValores(
+            "decoração-estilo-texto",
+            valores,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

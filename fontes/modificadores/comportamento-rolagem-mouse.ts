@@ -12,14 +12,11 @@ export class ComportamentoRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("comportamento-rolagem-mouse", "overscroll-behavior", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "comportamento-rolagem-mouse", valores, this.valoresAceitos);
         //     } else {
@@ -29,7 +26,6 @@ export class ComportamentoRolagemMouse extends Modificador {
         //             this.valoresAceitos,
         //         );
         //     }
-        // }
 
         this.valores = valores;
     }

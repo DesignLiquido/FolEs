@@ -13,18 +13,14 @@ export class EspessuraFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("espessura-fonte", "font-weight", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("espessura-fonte", valores, this.valoresAceitos);
+        validarValorNumerico("espessura-fonte", valores, this.valoresAceitos);
 
-            // TODO: Repensar
-            // proibirQuantificador("espessura-fonte", quantificador);
-        }
+        // TODO: Repensar
+        // proibirQuantificador("espessura-fonte", quantificador);
 
         this.valores = valores;
     }

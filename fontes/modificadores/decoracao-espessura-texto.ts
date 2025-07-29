@@ -12,9 +12,7 @@ export class DecoracaoEspessuraTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["decoracao-espessura-texto", "decoração-espessura-texto"],
@@ -23,12 +21,11 @@ export class DecoracaoEspessuraTexto extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico(
-        //         "decoração-espessura-texto",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
+        validarValorNumerico(
+            "decoração-espessura-texto",
+            valores,
+            this.valoresAceitos,
+        );
 
         //     if (Number(parseInt(valor))) {
         //         validarQuantificador(
@@ -39,7 +36,6 @@ export class DecoracaoEspessuraTexto extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

@@ -8,16 +8,13 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class Espacamento extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["espacamento", "espaçamento"], "gap", pragmas);
 
         const valoresExtra = ["calc"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (typeof valor === 'string' && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "espaçamento", valores, undefined, valoresExtra);
         //     } else {
@@ -33,7 +30,6 @@ export class Espacamento extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

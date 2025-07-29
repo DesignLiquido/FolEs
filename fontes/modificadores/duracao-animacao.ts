@@ -8,9 +8,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class DuracaoAnimacao extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["duracao-animacao", "duração-animação"],
@@ -19,7 +17,6 @@ export class DuracaoAnimacao extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(",")) {
         //         validarAtribuicaoAbreviada("numérica", "duração-animação", valor);
         //     } else {
@@ -35,7 +32,6 @@ export class DuracaoAnimacao extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

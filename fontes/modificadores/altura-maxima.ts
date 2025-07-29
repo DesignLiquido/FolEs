@@ -15,33 +15,29 @@ export class AlturaMaxima extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["altura-maxima", "altura-máxima"], "max-height", pragmas);
 
         const valoresExtra = ["fit-content"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "altura-máxima",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValorNumerico(
+            "altura-máxima",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "altura-máxima",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        //     // TODO: Repensar
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador(
+        //             "altura-máxima",
+        //             quantificador,
+        //             unidadesMedida,
+        //         );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //         this.quantificador = quantificador;
+        //     }
 
         this.valores = valores;
     }

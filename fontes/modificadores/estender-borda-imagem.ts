@@ -7,14 +7,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class EstenderBordaImagem extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("estender-borda-imagem", "border-image-outset", pragmas);
 
-        // if (!valorVariavel) {
-        //     validarValorNumerico("estender-borda-imagem", valor);
+        validarValorNumerico("estender-borda-imagem", valores);
 
         //     if (Number(parseInt(valor))) {
         //         validarQuantificador(
@@ -25,7 +22,6 @@ export class EstenderBordaImagem extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

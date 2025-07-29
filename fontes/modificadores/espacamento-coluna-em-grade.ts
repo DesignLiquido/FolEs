@@ -11,9 +11,7 @@ export class EspacamentoColunaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        quantificador: string,
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["espacamento-coluna-em-grade", "espaçamento-coluna-em-grade"],
@@ -21,24 +19,22 @@ export class EspacamentoColunaEmGrade extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "espaçamento-coluna-em-grade",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValorNumerico(
+            "espaçamento-coluna-em-grade",
+            valores,
+            this.valoresAceitos,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "espaçamento-coluna-em-grade",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // TODO: Repensar
+        // if (Number(parseInt(valor))) {
+        //     validarQuantificador(
+        //         "espaçamento-coluna-em-grade",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

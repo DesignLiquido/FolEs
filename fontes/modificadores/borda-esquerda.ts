@@ -15,7 +15,6 @@ export class BordaEsquerda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador
     ) {
         super("borda-esquerda", "border-left", pragmas);

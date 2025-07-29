@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class EspacamentoEmGrade extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["espacamento-em-grade", "espaçamento-em-grade"],
@@ -17,19 +15,17 @@ export class EspacamentoEmGrade extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("espaçamento-em-grade", valores);
+        validarValorNumerico("espaçamento-em-grade", valores);
 
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "espaçamento-em-grade",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-            //     this.quantificador = quantificador;
-            // }
-        }
+        // TODO: Repensar
+        // if (quantificador !== undefined) {
+        //     validarQuantificador(
+        //         "espaçamento-em-grade",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

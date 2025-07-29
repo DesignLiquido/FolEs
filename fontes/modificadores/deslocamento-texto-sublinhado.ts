@@ -12,9 +12,7 @@ export class DeslocamentoTextoSublinhado extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             "deslocamento-texto-sublinhado",
@@ -23,12 +21,11 @@ export class DeslocamentoTextoSublinhado extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico(
-        //         "deslocamento-texto-sublinhado",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
+        validarValorNumerico(
+            "deslocamento-texto-sublinhado",
+            valores,
+            this.valoresAceitos,
+        );
 
         //     if (Number(parseInt(valor))) {
         //         validarQuantificador(
@@ -39,7 +36,6 @@ export class DeslocamentoTextoSublinhado extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

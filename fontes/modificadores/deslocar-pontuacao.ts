@@ -15,9 +15,7 @@ export class DeslocarPontuacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["deslocar-pontuacao", "deslocar-pontuação"],
@@ -25,8 +23,7 @@ export class DeslocarPontuacao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("deslocar-pontuação", valores, this.valoresAceitos);
+        validarValores("deslocar-pontuação", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

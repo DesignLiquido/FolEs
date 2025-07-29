@@ -7,9 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class DistanciaDeslocamento extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["distancia-deslocamento", "distância-deslocamento"],
@@ -17,22 +15,20 @@ export class DistanciaDeslocamento extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("distância-deslocamento", valores);
+        validarValorNumerico("distância-deslocamento", valores);
 
-            // O seletor aceita o número 0.
-            // Logo, o código só passa pela validação caso haja um segundo parâmetro ou caso o primeiro seja diferente de 0.
-            // TODO: Repensar
-            // if (quantificador !== undefined || valor !== "0") {
-            //     validarQuantificador(
-            //         "distância-deslocamento",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
+        // O seletor aceita o número 0.
+        // Logo, o código só passa pela validação caso haja um segundo parâmetro ou caso o primeiro seja diferente de 0.
+        // TODO: Repensar
+        // if (quantificador !== undefined || valor !== "0") {
+        //     validarQuantificador(
+        //         "distância-deslocamento",
+        //         quantificador,
+        //         unidadesMedida,
+        //     );
 
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     this.quantificador = quantificador;
+        // }
 
         this.valores = valores;
     }

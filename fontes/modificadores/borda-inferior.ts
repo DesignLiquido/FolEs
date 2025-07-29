@@ -15,9 +15,7 @@ export class BordaInferior extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("borda-inferior", "border-bottom", pragmas);
 

@@ -14,16 +14,13 @@ export class EstiloLista extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("estilo-lista", "list-style", pragmas);
 
         const valoresExtra = ["url"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (typeof valor === 'string' && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "estilo-lista", valores, this.valoresAceitos, valoresExtra, false, true);
         //     } else {
@@ -39,7 +36,6 @@ export class EstiloLista extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

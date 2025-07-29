@@ -17,12 +17,10 @@ export class AjustarTamanhoFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
         // TODO: Repensar.
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "ajustar-tamanho-fonte", valores, this.valoresAceitos);
         //     } else {
@@ -32,7 +30,6 @@ export class AjustarTamanhoFonte extends Modificador {
         //             this.valoresAceitos,
         //         );
         //     }
-        // }
 
         this.valores = valores;
 

@@ -5,13 +5,11 @@ import { validarValorCor } from "./validacoes/cor";
 export class Cor extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("cor", "color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor", valores);
+        validarValorCor("cor", valores);
 
         this.valores = valores;
     }

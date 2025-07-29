@@ -9,14 +9,11 @@ export class CorContorno extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("cor-contorno", "outline-color", pragmas);
 
-        if (!valorVariavel)
-            validarValorCor("cor-contorno", valores, this.valoresAceitos);
+        validarValorCor("cor-contorno", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

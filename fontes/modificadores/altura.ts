@@ -15,28 +15,24 @@ export class Altura extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("altura", "height", pragmas);
 
         const valoresExtra = ["fit-content", "clamp"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "altura",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValorNumerico(
+            "altura",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador("altura", quantificador, unidadesMedida);
-            //     this.quantificador = quantificador;
-            // }
-        }
+        //     // TODO: Repensar
+        //     if (Number(parseInt(valor))) {
+        //         validarQuantificador("altura", quantificador, unidadesMedida);
+        //         this.quantificador = quantificador;
+        //     }
 
         this.valores = valores;
     }

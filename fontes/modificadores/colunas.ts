@@ -12,13 +12,11 @@ export class Colunas extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
     ) {
         super("colunas", "columns", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "colunas", valores, this.valoresAceitos);
         //     } else {
@@ -30,7 +28,6 @@ export class Colunas extends Modificador {
         //             this.quantificador = quantificador;
         //         }
         //     }
-        // }
 
         this.valores = valores;
     }

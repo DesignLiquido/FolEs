@@ -23,7 +23,6 @@ export class Animacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador
     ) {
         super(["animacao", "animação"], "animation", pragmas);
@@ -31,7 +30,6 @@ export class Animacao extends Modificador {
         const valoresExtra = ["linear", "cubic-bezier", "steps"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "animação", valores, this.valoresAceitos, valoresExtra);
         //     } else {
@@ -42,7 +40,7 @@ export class Animacao extends Modificador {
         //             valoresExtra,
         //         );
         //     }
-        // }
+
         this.valores = valores;
     }
 }

@@ -7,8 +7,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class AtrasoAnimacao extends Modificador {
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
     ) {
         super(
             ["atraso-animacao", "atraso-animação"],
@@ -16,8 +15,7 @@ export class AtrasoAnimacao extends Modificador {
             pragmas,
         );
 
-        // if (!valorVariavel) {
-        //     validarValorNumerico("atraso-animação", valor);
+        validarValorNumerico("atraso-animação", valores);
 
         //     if (Number(parseInt(valor))) {
         //         validarQuantificador(
@@ -28,7 +26,6 @@ export class AtrasoAnimacao extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

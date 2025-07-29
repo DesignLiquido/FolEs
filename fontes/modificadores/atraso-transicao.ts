@@ -8,9 +8,7 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class AtrasoTransicao extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["atraso-transicao", "atraso-transição"],
@@ -19,7 +17,6 @@ export class AtrasoTransicao extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(",")) {
         //         validarAtribuicaoAbreviada("numérica", "atraso-transição", valor);
         //     } else {
@@ -35,7 +32,6 @@ export class AtrasoTransicao extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }
