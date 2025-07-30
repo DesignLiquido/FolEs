@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EstenderBordaImagem extends Modificador {
     constructor(
@@ -11,17 +10,13 @@ export class EstenderBordaImagem extends Modificador {
     ) {
         super("estender-borda-imagem", "border-image-outset", pragmas);
 
-        validarValorNumerico("estender-borda-imagem", valores);
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "estender-borda-imagem",
-        //             quantificador,
-        //             comprimentos,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
+        validarValorNumerico(
+            "estender-borda-imagem", 
+            valores,
+            null,
+            null,
+            comprimentos
+        );
 
         this.valores = valores;
     }

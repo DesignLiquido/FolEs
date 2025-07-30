@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemInferiorRolagemMouse extends Modificador {
     constructor(
@@ -11,18 +10,13 @@ export class MargemInferiorRolagemMouse extends Modificador {
     ) {
         super("margem-inferior-rolagem-mouse", "scroll-margin-bottom", pragmas);
 
-        validarValorNumerico("margem-inferior-rolagem-mouse", valores);
-
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "margem-inferior-rolagem-mouse",
-        //         quantificador,
-        //         comprimentos,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
+        validarValorNumerico(
+            "margem-inferior-rolagem-mouse", 
+            valores,
+            null,
+            null,
+            comprimentos
+        );
 
         this.valores = valores;
     }

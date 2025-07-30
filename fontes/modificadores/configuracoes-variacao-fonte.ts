@@ -1,4 +1,4 @@
-import { Valor } from "../valores";
+import { Valor, ValorNumerico } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 import { proibirQuantificador } from "./validacoes/proibir-quantificador";
@@ -19,11 +19,12 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas,
         );
 
-        //     const validacaoString = validarValorString(valor);
+        // const valorTipado = valores[0] as ValorNumerico;
+        // const validacaoString = validarValorString(valorTipado.literalNumerico);
 
-        //     if (validacaoString) {
-        //         this.valoresAceitos[valor] = valor;
-        //     }
+        // if (validacaoString) {
+        //     this.valoresAceitos[valor] = valor;
+        // }
 
         validarValorNumerico(
             "configurações-variação-fonte",
@@ -31,6 +32,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             this.valoresAceitos,
         );
 
+        // TODO: Repensar
         //     // Não recebe quantificador
         //     proibirQuantificador("configurações-variação-fonte", quantificador);
 

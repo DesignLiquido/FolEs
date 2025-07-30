@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioMargemEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -23,17 +22,9 @@ export class InicioMargemEmLinha extends Modificador {
             "início-margem-em-linha",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
-
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "início-margem-em-linha",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

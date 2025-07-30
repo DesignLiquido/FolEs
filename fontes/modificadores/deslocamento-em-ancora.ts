@@ -1,9 +1,7 @@
 import { Valor } from "../valores";
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DeslocamentoEmAncora extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -29,18 +27,9 @@ export class DeslocamentoEmAncora extends Modificador {
             "deslocamento-em-âncora",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
-
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "deslocamento-em-âncora",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

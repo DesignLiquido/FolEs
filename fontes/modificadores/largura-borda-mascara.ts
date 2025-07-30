@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraBordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -23,19 +22,9 @@ export class LarguraBordaMascara extends Modificador {
             "largura-borda-máscara",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
-
-        // Também pode receber somente o valor numérico, sem quantificador
-        // TODO: Repensar
-        // if (quantificador !== undefined) {
-        //     validarQuantificador(
-        //         "largura-borda-máscara",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

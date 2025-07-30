@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraContorno extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,18 +21,9 @@ export class LarguraContorno extends Modificador {
             "largura-contorno",
             valores,
             this.valoresAceitos,
+            null,
+            comprimentos
         );
-
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "largura-contorno",
-        //         quantificador,
-        //         comprimentos,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FatiarImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,16 +21,8 @@ export class FatiarImagemBorda extends Modificador {
             valores,
             this.valoresAceitos,
             valoresExtra,
+            ListaDeValorPercentual
         );
-
-        // TODO: Repensar
-        // if (quantificador !== undefined) {
-        //     validarQuantificador(
-        //         "fatiar-imagem-borda",
-        //         quantificador,
-        //         ListaDeValorPercentual,
-        //     );
-        // }
 
         this.valores = valores;
     }

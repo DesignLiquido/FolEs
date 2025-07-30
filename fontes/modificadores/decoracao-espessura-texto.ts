@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DecoracaoEspessuraTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -20,22 +19,13 @@ export class DecoracaoEspessuraTexto extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
         validarValorNumerico(
             "decoração-espessura-texto",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida,
         );
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "decoração-espessura-texto",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
 
         this.valores = valores;
     }

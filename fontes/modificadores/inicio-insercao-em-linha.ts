@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioInsercaoEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -23,18 +22,9 @@ export class InicioInsercaoEmLinha extends Modificador {
             "início-inserção-em-linha",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
-
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "início-inserção-em-linha",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

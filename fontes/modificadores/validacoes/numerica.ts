@@ -12,7 +12,7 @@ export function validarValorNumerico(
     quantificadoresAceitos?: { [valorFoles: string]: string },
     quantificadoresAceitos2?: { [valorFoles: string]: string },
 ) {
-    if (quantificadoresAceitos && valores[0] instanceof ValorNumerico) {
+    if (quantificadoresAceitos && valores[0] instanceof ValorNumerico && valores[0].quantificador) {
         if (quantificadoresAceitos2) quantificadoresAceitos = { ...quantificadoresAceitos, ...quantificadoresAceitos2 };
 
         validarQuantificador(nomePropriedade, valores[0].quantificador, quantificadoresAceitos);
@@ -29,7 +29,7 @@ export function validarValorNumerico(
         valorTipoMetodo = true;
     }
     
-    if (valoresAceitos === undefined && valoresExtra === undefined) {
+    if (valoresAceitos === null && valoresExtra === null) {
         if (
             typeof valorModificador !== 'number' && 
             !(valorModificador in valoresGlobais)
@@ -40,7 +40,7 @@ export function validarValorNumerico(
         }
     }
 
-    if (valoresAceitos !== undefined && valoresExtra === undefined) {
+    if (valoresAceitos !== null && valoresExtra === null) {
         if (
             typeof valorModificador !== 'number' &&
             !(valorModificador in valoresAceitos) &&
@@ -53,7 +53,7 @@ export function validarValorNumerico(
         }
     }
 
-    if (valoresAceitos !== undefined && valoresExtra !== undefined) {
+    if (valoresAceitos !== null && valoresExtra !== null) {
         let metodoValido = false;
         if (valorTipoMetodo) {            
             for (let index = 0; index < valoresExtra.length; index++) {

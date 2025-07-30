@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraFimBordaEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,18 +21,9 @@ export class LarguraFimBordaEmLinha extends Modificador {
             "largura-fim-borda-em-linha",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
-
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "largura-fim-borda-em-linha",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

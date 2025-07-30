@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,18 +18,9 @@ export class LarguraImagemBorda extends Modificador {
             "largura-imagem-borda",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
-
-        // TODO: Repensar
-        // if (quantificador !== undefined) {
-        //     validarQuantificador(
-        //         "largura-imagem-borda",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class ModeloColunasEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -29,18 +28,9 @@ export class ModeloColunasEmGrade extends Modificador {
             valores,
             this.valoresAceitos,
             valoresExtra,
+            unidadesMedida,
+            valoresFlex
         );
-
-        // TODO: Repensar
-        // if (quantificador !== undefined) {
-        //     validarQuantificador(
-        //         "modelo-colunas-em-grade",
-        //         quantificador,
-        //         unidadesMedida,
-        //         valoresFlex,
-        //     );
-        //     this.quantificador = quantificador;
-        // }
 
         this.valores = valores;
     }

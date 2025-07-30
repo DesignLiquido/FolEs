@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EspacamentoLinhas extends Modificador {
     constructor(
@@ -11,18 +10,13 @@ export class EspacamentoLinhas extends Modificador {
     ) {
         super(["espacamento-linhas", "espaçamento-linhas"], "row-gap", pragmas);
 
-        validarValorNumerico("espaçamento-linhas", valores);
-
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "espaçamento-linhas",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
+        validarValorNumerico(
+            "espaçamento-linhas", 
+            valores,
+            null,
+            null,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }

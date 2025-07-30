@@ -11,14 +11,13 @@ export class Tabulacao extends Modificador {
     ) {
         super(["tabulacao", "tabulação"], "tab-size", pragmas);
 
-        validarValorNumerico("tabulação", valores);
-
-        // TODO: Repensar
-        // if (quantificador !== undefined) {
-        //     validarQuantificador("tabulação", quantificador, comprimentos);
-
-        //     this.quantificador = quantificador;
-        // }
+        validarValorNumerico(
+            "tabulação", 
+            valores,
+            null,
+            null,
+            comprimentos
+        );
 
         this.valores = valores;
     }

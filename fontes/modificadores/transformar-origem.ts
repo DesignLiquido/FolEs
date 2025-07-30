@@ -3,7 +3,6 @@ import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TransformarOrigem extends Modificador {
     constructor(
@@ -12,19 +11,13 @@ export class TransformarOrigem extends Modificador {
     ) {
         super("transformar-origem", "transform-origin", pragmas);
 
-        validarValorNumerico("transformar-origem", valores, posicoesBasicas);
-
-        // Aceita valores de posição (palavras) e também valor-quantificador.
-        // TODO: Repensar
-        // if (Number(parseInt(valor))) {
-        //     validarQuantificador(
-        //         "transformar-origem",
-        //         quantificador,
-        //         unidadesMedida,
-        //     );
-
-        //     this.quantificador = quantificador;
-        // }
+        validarValorNumerico(
+            "transformar-origem", 
+            valores, 
+            posicoesBasicas,
+            null,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }
