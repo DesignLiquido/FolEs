@@ -28,7 +28,10 @@ export class Serializador {
         this.variaveis = {};
     }
 
-    protected serializarValor(valor: Valor): string {
+    protected serializarValor(
+        valor: Valor, 
+        valoresAceitos?: { [valorFoles: string]: string }
+    ): string {        
         switch (valor.constructor.name) {
             case 'ReferenciaVariavel':
                 const valorReferenciaVariavel = valor as ReferenciaVariavel;
@@ -58,9 +61,12 @@ export class Serializador {
                 }
 
                 return `${literalNumerico}${valorNumerico.quantificador || ''}`;
-            case 'ValorQualitativo':
+            case 'ValorQualitativo':                
                 const valorQualitativo = valor as ValorQualitativo;
-                const traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
+                let traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
+                
+                if(!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
+                
                 return `${traducaoQualitativo}`;
             case 'ValorTexto':
                 const valorTexto = valor as ValorTexto;
@@ -83,8 +89,12 @@ export class Serializador {
         indentacao: number = 0,
     ): string {
         let valoresTraduzidos = "";
+        
         for (const valor of modificador.valores) {
-            const valorSerializado = this.serializarValor(valor);
+            let valoresAceitos: { [valorFoles: string]: string } = null;
+            if (modificador.valoresAceitos) valoresAceitos = modificador.valoresAceitos;
+
+            const valorSerializado = this.serializarValor(valor, valoresAceitos);
             if (valorSerializado === ",") {
                 valoresTraduzidos = valoresTraduzidos.slice(0, -1);
             }
@@ -233,7 +243,7 @@ export class Serializador {
 
         for (const declaracao of declaracoes) {
             switch (declaracao.constructor.name) {
-                case "BlocoDeclaracao":
+                case "BlocoDeclaracao":                    
                     resultado += this.serializarBlocoDeclaracao(
                         declaracao as BlocoDeclaracao,
                         indentacao,
