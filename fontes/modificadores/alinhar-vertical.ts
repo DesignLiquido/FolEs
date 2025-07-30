@@ -26,6 +26,8 @@ export class AlinharVertical extends Modificador {
             "alinhar-vertical",
             valores,
             this.valoresAceitos,
+            null,
+            unidadesMedida
         );
 
         //     // TODO: Repensar

@@ -309,6 +309,7 @@ export default {
     entalhado: tiposDeSimbolos.QUALITATIVO,
     escondido: tiposDeSimbolos.QUALITATIVO,
     nenhum: tiposDeSimbolos.QUALITATIVO,
+    nenhuma: tiposDeSimbolos.QUALITATIVO,
     ondulado: tiposDeSimbolos.QUALITATIVO,
     pontilhado: tiposDeSimbolos.QUALITATIVO,
     saltado: tiposDeSimbolos.QUALITATIVO,
