@@ -1,3 +1,4 @@
 lmht {
-    altura-máxima: conteudo-maximo;
+    posicao-direita: 20%;
+    configuracoes-variacao-fonte: 10;
 }
