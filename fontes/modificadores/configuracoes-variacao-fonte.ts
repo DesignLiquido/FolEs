@@ -1,7 +1,6 @@
 import { Valor, ValorNumerico } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 import { validarValorString } from "./validacoes/string";
 
 export class ConfiguracoesVariacaoFonte extends Modificador {
@@ -30,11 +29,11 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             "configurações-variação-fonte",
             valores,
             this.valoresAceitos,
+            null,
+            null,
+            null,
+            true,
         );
-
-        // TODO: Repensar
-        //     // Não recebe quantificador
-        //     proibirQuantificador("configurações-variação-fonte", quantificador);
 
         this.valores = valores;
     }

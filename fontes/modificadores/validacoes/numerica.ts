@@ -2,6 +2,7 @@ import { Valor, ValorNumerico, ValorQualitativo } from "../../valores";
 import { MetodoCss } from "../../valores/metodos/css/metodo-css";
 import { Metodo } from "../../valores/metodos/foles/metodo";
 import { valoresGlobais } from "../atributos/globais";
+import { proibirQuantificador } from "./proibir-quantificador";
 import { validarQuantificador } from "./quantificador";
 
 export function validarValorNumerico(
@@ -11,11 +12,18 @@ export function validarValorNumerico(
     valoresExtra?: any,
     quantificadoresAceitos?: { [valorFoles: string]: string },
     quantificadoresAceitos2?: { [valorFoles: string]: string },
+    proibeQuantificador: boolean = false,
 ) {
-    if (quantificadoresAceitos && valores[0] instanceof ValorNumerico && valores[0].quantificador) {
+    const valorNumericoTipado = valores[0] as ValorNumerico;
+
+    if (proibeQuantificador && valorNumericoTipado.quantificador) {
+        proibirQuantificador(nomePropriedade, valorNumericoTipado.quantificador);
+    }
+
+    if (quantificadoresAceitos && valorNumericoTipado.quantificador) {
         if (quantificadoresAceitos2) quantificadoresAceitos = { ...quantificadoresAceitos, ...quantificadoresAceitos2 };
 
-        validarQuantificador(nomePropriedade, valores[0].quantificador, quantificadoresAceitos);
+        validarQuantificador(nomePropriedade, valorNumericoTipado.quantificador, quantificadoresAceitos);
     }
 
     let valorModificador: string | number;

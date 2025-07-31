@@ -1,7 +1,6 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class RepetirAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,10 +21,11 @@ export class RepetirAnimacao extends Modificador {
             "repetir-animação",
             valores,
             this.valoresAceitos,
+            null,
+            null,
+            null,
+            true
         );
-
-        // TODO: Repensar
-        // proibirQuantificador("repetir-animação", quantificador);
 
         this.valores = valores;
     }

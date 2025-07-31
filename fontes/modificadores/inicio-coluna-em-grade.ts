@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class InicioColunaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,11 +21,17 @@ export class InicioColunaEmGrade extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", 'início-coluna-em-grade', valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("início-coluna-em-grade", valores, this.valoresAceitos);
-        //     }
+        //     } 
 
-        //     proibirQuantificador("início-coluna-em-grade", quantificador);
+        validarValorNumerico(
+            "início-coluna-em-grade", 
+            valores, 
+            this.valoresAceitos,
+            null,
+            null,
+            null,
+            true
+        );
 
         this.valores = valores;
     }
