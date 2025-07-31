@@ -1,4 +1,13 @@
 lmht {
     posicao-direita: 20%;
     configuracoes-variacao-fonte: 10;
+    cor-barra-rolagem: rgb(10, 20, 30);
+}
+
+lmht {
+    cor-barra-rolagem: #ffffff;
+}
+
+lmht {
+    cor-barra-rolagem: verde;
 }

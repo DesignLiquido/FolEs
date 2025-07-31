@@ -26,6 +26,7 @@ export class EnfaseTexto extends Modificador {
     ) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
+        // TODO: Repensar
         // const validacaoString = validarValorString(valor);
 
         // if (validacaoString) {
@@ -34,9 +35,9 @@ export class EnfaseTexto extends Modificador {
 
         //     if (!validacaoString && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("cor", "ênfase-texto", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorCor("ênfase-texto", valores, this.valoresAceitos);
-        //     }
+        //     } 
+
+        validarValorCor("ênfase-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }
