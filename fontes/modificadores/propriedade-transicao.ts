@@ -22,9 +22,9 @@ export class PropriedadeTransicao extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "propriedade-transição", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValores("propriedade-transição", valores, this.valoresAceitos);
-        //     }
+        //     } 
+
+        validarValores("propriedade-transição", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

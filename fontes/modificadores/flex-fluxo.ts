@@ -24,9 +24,9 @@ export class FlexFluxo extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "flex-fluxo", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("flex-fluxo", valores, this.valoresAceitos);
         //     }
+
+        validarValores("flex-fluxo", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

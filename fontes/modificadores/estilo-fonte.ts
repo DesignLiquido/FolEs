@@ -24,14 +24,15 @@ export class EstiloFonte extends Modificador {
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("numérica", "estilo-fonte", valores, this.valoresAceitos);
         //     } else {
-        //         validarValores("estilo-fonte", valores, this.valoresAceitos);
         //     }
-            
+
         //     if (valor.includes("obliqua") || valor.includes("oblíqua")) {
         //         validarQuantificador("estilo-fonte", quantificador, angulos);
 
         //         this.quantificador = quantificador;
         //     }
+
+        validarValores("estilo-fonte", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

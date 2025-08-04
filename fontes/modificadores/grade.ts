@@ -34,8 +34,9 @@ export class Grade extends Modificador {
         //     if (typeof valor === 'string' && valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "grade", valores, this.valoresAceitos, valoresExtra);
         //     } else {
-        //         validarValores("grade", metodoResolvido, this.valoresAceitos, valoresExtra);
         //     }
+        
+        validarValores("grade", valores, this.valoresAceitos, valoresExtra);
 
         this.valores = valores;
     }

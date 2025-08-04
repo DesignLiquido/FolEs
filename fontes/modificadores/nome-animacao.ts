@@ -25,8 +25,9 @@ export class NomeAnimacao extends Modificador {
         //             validarIdentificacaoPersonalizada("nome-animação", valor);
         //             this.valoresAceitos[valor] = valor;
         //         }
-        //         validarValores("nome-animação", valores, this.valoresAceitos);
         //     }
+
+        validarValores("nome-animação", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -22,9 +22,9 @@ export class SintetizarFonte extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "sintetizar-fonte", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("sintetizar-fonte", valores, this.valoresAceitos);
-        //     }
+        //     } 
+
+        validarValores("sintetizar-fonte", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -16,11 +16,13 @@ export class ImagemFundo extends Modificador {
     ) {
         super("imagem-fundo", "background-image", pragmas);
 
+        // TODO: Repensar
         //     if (valor instanceof Metodo) {
         //         this.valores = valores;
-        //     } else {
-        //         validarValores("imagem-fundo", valores, this.valoresAceitos);
-        //         this.valores = valores;
-        //     }
+        //     } 
+        
+        validarValores("imagem-fundo", valores, this.valoresAceitos);
+
+        this.valores = valores;
     }
 }

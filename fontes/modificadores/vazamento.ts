@@ -22,9 +22,9 @@ export class Vazamento extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "vazamento", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("vazamento", valores, this.valoresAceitos);
         //     }
+
+        validarValores("vazamento", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

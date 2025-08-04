@@ -43,8 +43,9 @@ export class RecursosFonte extends Modificador {
         //             this.valoresAceitos[valor] = valor;
         //         }
 
-        //         validarValores("recursos-fonte", valores, this.valoresAceitos, valoresExtra);
         //     }
+
+        validarValores("recursos-fonte", valores, this.valoresAceitos, valoresExtra);
 
         this.valores = valores;
     }

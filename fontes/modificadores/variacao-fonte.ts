@@ -72,9 +72,9 @@ export class VariacaoFonte extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("comum", "variação-fonte", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("variação-fonte", valores, this.valoresAceitos);
         //     }
+
+        validarValores("variação-fonte", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -31,9 +31,9 @@ export class AreaMascara extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(",")) {
         //         validarAtribuicaoAbreviada("comum", "área-máscara", valores, this.valoresAceitos)
-        //     } else {
-        //         validarValores("área-máscara", valores, this.valoresAceitos);
         //     }
+
+        validarValores("área-máscara", valores, this.valoresAceitos);
 
         this.valores = valores;
     }
