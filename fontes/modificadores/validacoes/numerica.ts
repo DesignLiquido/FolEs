@@ -12,11 +12,11 @@ export function validarValorNumerico(
     valoresExtra?: any,
     quantificadoresAceitos?: { [valorFoles: string]: string },
     quantificadoresAceitos2?: { [valorFoles: string]: string },
-    proibeQuantificador: boolean = false,
+    naoAceitaQuantificador: boolean = false,
 ) {
     const valorNumericoTipado = valores[0] as ValorNumerico;
 
-    if (proibeQuantificador && valorNumericoTipado.quantificador) {
+    if (naoAceitaQuantificador && valorNumericoTipado.quantificador) {
         proibirQuantificador(nomePropriedade, valorNumericoTipado.quantificador);
     }
 
