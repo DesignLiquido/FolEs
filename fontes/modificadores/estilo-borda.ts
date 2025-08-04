@@ -15,9 +15,9 @@ export class EstiloBorda extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("condição-extra", "estilo-borda", valores, estilos);
-        //     } else {
-        //         validarValoresAdicionais("estilo-borda", valores, estilos);
         //     }
+
+        validarValoresAdicionais("estilo-borda", valores, estilos);
 
         this.valores = valores;
     }

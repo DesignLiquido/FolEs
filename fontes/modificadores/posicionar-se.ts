@@ -32,9 +32,9 @@ export class PosicionarSe extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("condição-extra", "posicionar-se", valores, posicoes, this.valoresAceitos);
-        //     } else {
-        //         validarValoresAdicionais("posicionar-se", valores, posicoes, this.valoresAceitos);
         //     }
+
+        validarValoresAdicionais("posicionar-se", valores, posicoes, this.valoresAceitos);
 
         this.valores = valores;
     }

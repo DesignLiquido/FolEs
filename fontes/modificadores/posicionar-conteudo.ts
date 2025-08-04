@@ -38,9 +38,9 @@ export class PosicionarConteudo extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("condição-extra", "posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
-        //     } else {
-        //         validarValoresAdicionais("posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
         //     }
+
+        validarValoresAdicionais("posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
 
         this.valores = valores;
     }

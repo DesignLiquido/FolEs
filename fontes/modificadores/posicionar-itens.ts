@@ -32,9 +32,9 @@ export class PosicionarItens extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("condição-extra", "posicionar-itens", valores, posicoes, this.valoresAceitos);
-        //     } else {
-        //         validarValoresAdicionais("posicionar-itens", valores, posicoes, this.valoresAceitos);
         //     }
+
+        validarValoresAdicionais("posicionar-itens", valores, posicoes, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -53,9 +53,9 @@ export class Mascara extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("condição-extra", "máscara", valores, posicoesBasicas, this.valoresAceitos);
-        //     } else {
-        //         validarValoresAdicionais("máscara", valores, posicoesBasicas, this.valoresAceitos);
         //     }
+
+        validarValoresAdicionais("máscara", valores, posicoesBasicas, this.valoresAceitos);
 
         this.valores = valores;
     }
