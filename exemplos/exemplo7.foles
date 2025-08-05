@@ -11,3 +11,7 @@ lmht {
 lmht {
     cor-barra-rolagem: verde;
 }
+
+lmht {
+    borda-direita: 20fr;
+}

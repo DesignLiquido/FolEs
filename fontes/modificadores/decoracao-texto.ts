@@ -28,9 +28,9 @@ export class DecoracaoTexto extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "decoração-texto", valores, this.valoresAceitos);
-        //     } else {
-        //         validarMultiplosQualitativos("decoração-texto", valores, this.valoresAceitos);
-        //     }
+        //     } 
+
+        validarMultiplosQualitativos("decoração-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

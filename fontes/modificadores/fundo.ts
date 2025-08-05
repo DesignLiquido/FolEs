@@ -1,10 +1,8 @@
-import { ValorPercentual } from "../../testes/listas/valores-quantificadores";
 import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -43,20 +41,9 @@ export class Fundo extends Modificador {
         // TODO: Repensar
         //     if (valor.includes(" ")) {
         //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valores, this.valoresAceitos);
-        //     } else {
-        //         validarMultiplosQualitativos("fundo", valores, this.valoresAceitos);
-        //     }
+        //     } 
 
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "fundo",
-        //             quantificador,
-        //             unidadesMedida,
-        //             ValorPercentual,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
+        validarMultiplosQualitativos("fundo", valores, this.valoresAceitos, unidadesMedida);
 
         this.valores = valores;
     }
