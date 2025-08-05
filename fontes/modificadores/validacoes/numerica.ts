@@ -36,7 +36,7 @@ export function validarValorNumerico(
         valorModificador = valores[0].traducao;
         valorTipoMetodo = true;
     }
-    
+
     if (valoresAceitos === null && valoresExtra === null) {
         if (
             typeof valorModificador !== 'number' && 
