@@ -48,9 +48,10 @@ export class FonteTexto extends Modificador {
         //     } else {
         //         const valorString = validarValorString(valor);
         //         if (valorString) valor = valor.replace(/^["']|["']$/g, '');
-        //         validarValorFonte("fonte-texto", valores, this.valoresAceitos);
         //         if (valorString) valor = `"${valor}"`;
         //     }
+
+        validarValorFonte("fonte-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

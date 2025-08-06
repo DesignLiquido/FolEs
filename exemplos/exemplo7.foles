@@ -13,5 +13,9 @@ lmht {
 }
 
 lmht {
-    borda-direita: 20fr;
+    borda-direita: 20%;
+}
+
+lmht {
+    fonte-texto: "Arial";
 }

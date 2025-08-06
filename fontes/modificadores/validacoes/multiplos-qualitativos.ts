@@ -35,10 +35,10 @@ export function validarMultiplosQualitativos(
 
         validarQuantificador(nomePropriedade, valorTipado.quantificador, quantificadoresAceitos);
     }
-    
+
     let validaçõesCor: boolean = true;
     if (valorTipoMetodo) {
-        validaçõesCor =   
+        validaçõesCor =
         !valorTipado.includes("rgb") &&
         !valorTipado.includes("rgba") &&
         !valorTipado.includes("hsl") &&
@@ -72,7 +72,7 @@ export function validarMultiplosQualitativos(
         ) {
             throw new Error(
                 `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores aceitos: 
-                número-quantificador, 
+                número-quantificador,
                 ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
