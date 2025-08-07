@@ -19,3 +19,8 @@ lmht {
 lmht {
     fonte-texto: "Arial";
 }
+
+lmht {
+    agrupar-palavra: normal;
+    ao-mudar: auto;
+}

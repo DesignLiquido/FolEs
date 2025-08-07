@@ -1,9 +1,8 @@
-import { Valor, ValorNumerico, ValorQualitativo } from "../../valores";
-import { MetodoCss } from "../../valores/metodos/css/metodo-css";
-import { Metodo } from "../../valores/metodos/foles/metodo";
+import { Valor, ValorNumerico } from "../../valores";
 import { cores } from "../atributos/cores";
 import { estilos } from "../atributos/estilo";
 import { valoresGlobais } from "../atributos/globais";
+import { capturarValor } from "./capturar-valor";
 import { validarQuantificador } from "./quantificador";
 
 export function validarMultiplosQualitativos(
@@ -13,48 +12,36 @@ export function validarMultiplosQualitativos(
     quantificadoresAceitos?: { [valorFoles: string]: string },
     quantificadoresAceitos2?: { [valorFoles: string]: string },
 ) {
-    let valorModificador: string | number;
-    let valorTipado: any;
-    let valorTipoNumerico: boolean = false;
-    let valorTipoMetodo: boolean = false;
-    if (valores[0] instanceof ValorNumerico) {
-        valorModificador = valores[0].literalNumerico;
-        valorTipado = valores[0] as ValorNumerico;
-        valorTipoNumerico = true;
-    } else if (valores[0] instanceof ValorQualitativo) {
-        valorModificador = valores[0].qualitativo;
-        valorTipado = valores[0] as ValorQualitativo;
-    } else if (valores[0] instanceof Metodo || valores[0] instanceof MetodoCss) {
-        valorModificador = valores[0].constructor.name.toLowerCase();
-        valorTipado = valorModificador;
-        valorTipoMetodo = true;
-    }
+    const valorModificador: { valor: string | number, metodo: boolean, numerico: boolean } = capturarValor(valores);
 
-    if (valorTipoNumerico && quantificadoresAceitos && valorTipado.quantificador) {
+    const valorTipado = valores[0] as ValorNumerico;
+    if (valorModificador.numerico && quantificadoresAceitos && valorTipado.quantificador) {
         if (quantificadoresAceitos2) quantificadoresAceitos = { ...quantificadoresAceitos, ...quantificadoresAceitos2 };
 
         validarQuantificador(nomePropriedade, valorTipado.quantificador, quantificadoresAceitos);
     }
 
     let validaçõesCor: boolean = true;
-    if (valorTipoMetodo) {
-        validaçõesCor =
-        !valorTipado.includes("rgb") &&
-        !valorTipado.includes("rgba") &&
-        !valorTipado.includes("hsl") &&
-        !valorTipado.includes("hsla");
+    if (valorModificador.metodo) {
+        if (typeof valorModificador.valor === 'string') {
+            validaçõesCor =
+                !valorModificador.valor.includes("rgb") &&
+                !valorModificador.valor.includes("rgba") &&
+                !valorModificador.valor.includes("hsl") &&
+                !valorModificador.valor.includes("hsla");
+        }
     }
 
     if (valoresAceitos === null) {
         if (
             validaçõesCor &&
-            typeof valorModificador !== 'number' &&
-            !(valorModificador in estilos) &&
-            !(valorModificador in cores) &&
-            !(valorModificador in valoresGlobais)
+            typeof valorModificador.valor !== 'number' &&
+            !(valorModificador.valor in estilos) &&
+            !(valorModificador.valor in cores) &&
+            !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(
-                `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores aceitos: 
+                `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
                 número-quantificador, 
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
@@ -63,15 +50,15 @@ export function validarMultiplosQualitativos(
         }
     } else {
         if (
-            !(valorModificador in valoresAceitos) &&
+            !(valorModificador.valor in valoresAceitos) &&
             validaçõesCor &&
-            typeof valorModificador !== 'number' &&
-            !(valorModificador in estilos) &&
-            !(valorModificador in cores) &&
-            !(valorModificador in valoresGlobais)
+            typeof valorModificador.valor !== 'number' &&
+            !(valorModificador.valor in estilos) &&
+            !(valorModificador.valor in cores) &&
+            !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(
-                `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores aceitos: 
+                `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
                 número-quantificador,
                 ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},

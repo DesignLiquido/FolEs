@@ -1,7 +1,6 @@
-import { Valor, ValorQualitativo } from "../../valores";
-import { MetodoCss } from "../../valores/metodos/css/metodo-css";
-import { Metodo } from "../../valores/metodos/foles/metodo";
+import { Valor } from "../../valores";
 import { valoresGlobais } from "../atributos/globais";
+import { capturarValor } from "./capturar-valor";
 
 export function validarValores(
     nomePropriedade: string,
@@ -9,30 +8,19 @@ export function validarValores(
     valoresAceitos: { [valorFoles: string]: string },
     valoresExtra?: string[],
 ) {
-    let valorModificador: string | number;
-    let valorTipoMetodo: boolean = false;
-    let valorTipado: any;
-
-    if (valores[0] instanceof ValorQualitativo) {
-        valorTipado = valores[0] as ValorQualitativo;
-        valorModificador = valorTipado.qualitativo;
-    } else if (valores[0] instanceof Metodo || valores[0] instanceof MetodoCss) {
-        valorTipado = valores[0] as Metodo;
-        valorModificador = valorTipado.traducao;
-        valorTipoMetodo = true;
-    }
-
+    const valorModificador: { valor: string | number, metodo: boolean, numerico: boolean } = capturarValor(valores);
+    
     if (valoresExtra === null) {
-        if (!(valorModificador in valoresAceitos) && !(valorModificador in valoresGlobais)) {
-            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores aceitos: 
+        if (!(valorModificador.valor in valoresAceitos) && !(valorModificador.valor in valoresGlobais)) {
+            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     } else {
         let metodoValido = false;
-        if (valorTipoMetodo) {
+        if (valorModificador.metodo) {
             for (let index = 0; index < valoresExtra.length; index++) {
-                metodoValido = valorModificador === valoresExtra[index];
+                metodoValido = valorModificador.valor === valoresExtra[index];
                 if (metodoValido) {
                     break;
                 }
@@ -40,11 +28,11 @@ export function validarValores(
         }
 
         if (
-            !(valorModificador in valoresAceitos) &&
+            !(valorModificador.valor in valoresAceitos) &&
             !metodoValido &&
-            !(valorModificador in valoresGlobais)
+            !(valorModificador.valor in valoresGlobais)
         ) {
-            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores aceitos: 
+            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${valoresExtra.reduce((final, atual) => (final += `, ${atual}`))},
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
