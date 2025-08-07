@@ -4,7 +4,7 @@ import { capturarValor } from "./capturar-valor";
 
 export function validarValores(
     nomePropriedade: string,
-    valores: Valor[],
+    valores: Valor | Valor[],
     valoresAceitos: { [valorFoles: string]: string },
     valoresExtra?: string[],
 ) {

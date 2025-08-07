@@ -3,7 +3,7 @@ import { valoresGlobais } from "../atributos/globais";
 
 export function validarValoresAdicionais(
     nomePropriedade: string,
-    valores: Valor[],
+    valores: Valor | Valor[],
     valoresAdicionais: { [valorFoles: string]: string },
     valoresAceitos?: { [valorFoles: string]: string },
 ) {

@@ -7,7 +7,7 @@ import { validarQuantificador } from "./quantificador";
 
 export function validarMultiplosQualitativos(
     nomePropriedade: string,
-    valores: Valor[],
+    valores: Valor | Valor[],
     valoresAceitos?: { [valorFoles: string]: string },
     quantificadoresAceitos?: { [valorFoles: string]: string },
     quantificadoresAceitos2?: { [valorFoles: string]: string },

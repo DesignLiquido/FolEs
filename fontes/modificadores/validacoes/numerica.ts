@@ -6,7 +6,7 @@ import { validarQuantificador } from "./quantificador";
 
 export function validarValorNumerico(
     nomePropriedade: string,
-    valores: Valor[],
+    valores: Valor | Valor[],
     valoresAceitos?: { [valorFoles: string]: string },
     valoresExtra?: any,
     quantificadoresAceitos?: { [valorFoles: string]: string },

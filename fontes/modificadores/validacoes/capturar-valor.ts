@@ -2,7 +2,7 @@ import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../../valore
 import { MetodoCss } from "../../valores/metodos/css/metodo-css";
 import { Metodo } from "../../valores/metodos/foles/metodo";
 
-export function capturarValor(valores: Valor[]): {
+export function capturarValor(valores: Valor | Valor[]): {
     valor: string | number, metodo: boolean, numerico: boolean
 } {
     let valorMapeado: { valor: string | number, metodo: boolean, numerico: boolean } = {
