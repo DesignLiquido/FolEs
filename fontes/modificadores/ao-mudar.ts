@@ -19,12 +19,17 @@ export class AoMudar extends Modificador {
     ) {
         super("ao-mudar", "will-change", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "ao-mudar", valores, this.valoresAceitos, undefined, false, true);
-        //     }
-
-        validarValores("ao-mudar", valores, this.valoresAceitos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "comum", 
+                "ao-mudar", 
+                valores, 
+                this.valoresAceitos,
+            );
+            // OBS.: Recebia validacaoPersonalizada como true
+        } else {
+            validarValores("ao-mudar", valores, this.valoresAceitos);
+        }
 
         this.valores = valores;
     }

@@ -1,5 +1,6 @@
 lmht {
     area-mascara: completar-caixa, preenchimento;
+    coluna-em-grade: auto / auto;
 }
 
 lmht {

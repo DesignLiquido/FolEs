@@ -10,12 +10,18 @@ export class CorBorda extends Modificador {
     ) {
         super("cor-borda", "border-color", pragmas);
 
-        // TODO: Repensar
-        //     if (typeof valor === 'string' && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("cor", "cor-borda", valor);
-        //     }
-
-        validarValorCor("cor-borda", valores);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "cor",
+                "cor-borda",
+                valores
+            );
+        } else {
+            validarValorCor(
+                "cor-borda",
+                valores
+            );
+        }
 
         this.valores = valores;
     }

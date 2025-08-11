@@ -13,13 +13,22 @@ export class DefinirContador extends Modificador {
         pragmas?: PragmasModificador,
     ) {
         super("definir-contador", "counter-set", pragmas);
-        
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "definir-contador", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("definir-contador", valores, this.valoresAceitos);
-        //     }
+
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                "definir-contador",
+                valores,
+                this.valoresAceitos
+            );
+            // OBS.: Recebia validacaoPersonalizada como true
+        } else {
+            validarValorNumerico(
+                "definir-contador",
+                valores,
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

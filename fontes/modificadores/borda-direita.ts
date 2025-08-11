@@ -18,12 +18,23 @@ export class BordaDireita extends Modificador {
     ) {
         super("borda-direita", "border-right", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-direita", valores, this.valoresAceitos);
-        //     }
-
-        validarMultiplosQualitativos("borda-direita", valores, this.valoresAceitos, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "borda-direita", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "borda-direita", 
+                valores, 
+                this.valoresAceitos, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

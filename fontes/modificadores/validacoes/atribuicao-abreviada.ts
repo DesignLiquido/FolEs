@@ -15,8 +15,8 @@ export function validarAtribuicaoAbreviada(
     valoresAceitos: { [valorFoles: string]: string } = null,
     valoresExtra: any = null,
     quantificadoresAceitos: { [valorFoles: string]: string } = null,
-    validacaoString: boolean = false,
-    validacaoPersonalizada: boolean = false,
+    // validacaoString: boolean = false,
+    // validacaoPersonalizada: boolean = false,
 ): void {
     valores.forEach((valor) => {
         const arrayValores: Valor[] = [];
@@ -41,6 +41,8 @@ export function validarAtribuicaoAbreviada(
                     break;
                 case "numérica":
                     validarValorNumerico(nomePropriedade, arrayValores, valoresAceitos, valoresExtra, quantificadoresAceitos);
+                    break;
+                default:
                     break;
             }
         }

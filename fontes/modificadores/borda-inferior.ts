@@ -18,12 +18,23 @@ export class BordaInferior extends Modificador {
     ) {
         super("borda-inferior", "border-bottom", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-direita", valores, this.valoresAceitos);
-        //     }
-
-        validarMultiplosQualitativos("borda-inferior", valores, this.valoresAceitos, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos",
+                "borda-direita",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "borda-inferior",
+                valores,
+                this.valoresAceitos,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

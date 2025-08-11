@@ -13,13 +13,21 @@ export class ColunaEmGrade extends Modificador {
         pragmas?: PragmasModificador
     ) {
         super("coluna-em-grade", "grid-column", pragmas);
-
-        // TODO: Repensar
-        //     if (valor.includes("/") || valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("coluna-em-grade", valores, this.valoresAceitos);
-        //     }
+            if (valores.length > 1) {
+                // validarAtribuicaoAbreviada(
+                //     "numérica", 
+                //     "coluna-em-grade", 
+                //     valores, 
+                //     this.valoresAceitos
+                // );
+                // OBS.: Aceitava validacaoPersonalizada como true
+            } else {
+                validarValorNumerico(
+                    "coluna-em-grade", 
+                    valores, 
+                    this.valoresAceitos
+                );
+            }
 
         this.valores = valores;
     }

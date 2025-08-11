@@ -11,12 +11,23 @@ export class BordaEmLinha extends Modificador {
     ) {
         super("borda-em-linha", "border-inline", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-em-linha", valor);
-        //     }
-
-        validarMultiplosQualitativos("borda-em-linha", valores, null, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "borda-em-linha", 
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "borda-em-linha", 
+                valores, 
+                null, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

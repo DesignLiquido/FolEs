@@ -18,12 +18,23 @@ export class Borda extends Modificador {
     ) {
         super("borda", "border", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda", valores, this.valoresAceitos);
-        //     }
-
-        validarMultiplosQualitativos("borda", valores, this.valoresAceitos, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos",
+                "borda",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "borda",
+                valores,
+                this.valoresAceitos,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

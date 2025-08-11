@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Colunas extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,18 +15,24 @@ export class Colunas extends Modificador {
     ) {
         super("colunas", "columns", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "colunas", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("colunas", valores, this.valoresAceitos);
-
-        //         if (quantificador !== undefined) {
-        //             validarQuantificador("colunas", quantificador, unidadesMedida);
-
-        //             this.quantificador = quantificador;
-        //         }
-        //     }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "colunas", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarValorNumerico(
+                "colunas", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

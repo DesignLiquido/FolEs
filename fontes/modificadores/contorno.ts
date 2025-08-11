@@ -18,12 +18,23 @@ export class Contorno extends Modificador {
     ) {
         super("contorno", "outline", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "contorno", valores, this.valoresAceitos);
-        //     } 
-
-        validarMultiplosQualitativos("contorno", valores, this.valoresAceitos, comprimentos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos",
+                "contorno",
+                valores,
+                this.valoresAceitos,
+                null,
+                comprimentos
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "contorno",
+                valores,
+                this.valoresAceitos,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
     }

@@ -19,21 +19,24 @@ export class AjustarTamanhoFonte extends Modificador {
     ) {
         super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
-        // TODO: Repensar.
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "ajustar-tamanho-fonte", valores, this.valoresAceitos);
-        //     } else {
-        //     }
-
-        validarValorNumerico(
-            "ajustar-tamanho-fonte",
-            valores,
-            this.valoresAceitos,
-            null,
-            null,
-            null,
-            true,
-        );
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                "ajustar-tamanho-fonte",
+                valores,
+                this.valoresAceitos
+            );
+        } else {
+            validarValorNumerico(
+                "ajustar-tamanho-fonte",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                null,
+                true,
+            );
+        }
 
         this.valores = valores;
     }

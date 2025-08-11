@@ -18,12 +18,23 @@ export class BordaSuperior extends Modificador {
     ) {
         super("borda-superior", "border-top", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-superior", valores, this.valoresAceitos);
-        //     } 
-
-        validarMultiplosQualitativos("borda-superior", valores, this.valoresAceitos, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "borda-superior", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "borda-superior", 
+                valores, 
+                this.valoresAceitos, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }
