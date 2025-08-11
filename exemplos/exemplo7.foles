@@ -1,4 +1,8 @@
 lmht {
+    area-mascara: completar-caixa, preenchimento;
+}
+
+lmht {
     posicao-direita: 20%;
     configuracoes-variacao-fonte: 10;
     cor-barra-rolagem: rgb(10, 20, 30);
