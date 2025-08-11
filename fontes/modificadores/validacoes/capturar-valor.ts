@@ -2,7 +2,7 @@ import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../../valore
 import { MetodoCss } from "../../valores/metodos/css/metodo-css";
 import { Metodo } from "../../valores/metodos/foles/metodo";
 
-export function capturarValor(valores: Valor | Valor[]): {
+export function capturarValor(valores: Valor[]): {
     valor: string | number, metodo: boolean, numerico: boolean
 } {
     let valorMapeado: { valor: string | number, metodo: boolean, numerico: boolean } = {
@@ -10,7 +10,7 @@ export function capturarValor(valores: Valor | Valor[]): {
         metodo: false,
         numerico: false,
     }
-
+    
     if (valores[0] instanceof ValorQualitativo) {
         valorMapeado.valor = valores[0].qualitativo;
     } else if (valores[0] instanceof ValorNumerico) {

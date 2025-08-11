@@ -4,7 +4,7 @@ import { Metodo } from "../../valores/metodos/foles/metodo";
 
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
-    valores: Valor | Valor[],
+    valores: Valor[],
 ): void {
     console.log(valores);
     

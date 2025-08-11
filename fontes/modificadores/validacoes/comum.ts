@@ -4,7 +4,7 @@ import { capturarValor } from "./capturar-valor";
 
 export function validarValores(
     nomePropriedade: string,
-    valores: Valor | Valor[],
+    valores: Valor[],
     valoresAceitos: { [valorFoles: string]: string },
     valoresExtra?: string[],
 ) {
@@ -21,9 +21,7 @@ export function validarValores(
         if (valorModificador.metodo) {
             for (let index = 0; index < valoresExtra.length; index++) {
                 metodoValido = valorModificador.valor === valoresExtra[index];
-                if (metodoValido) {
-                    break;
-                }
+                if (metodoValido) break;
             }
         }
 

@@ -5,7 +5,7 @@ import { capturarValor } from "./capturar-valor";
 
 export function validarValorFonte(
     nomePropriedade: string,
-    valores: Valor | Valor[],
+    valores: Valor[],
     valoresAceitos: { [valorFoles: string]: string },
 ) {
     const valorModificador: { valor: string | number, metodo: boolean, numerico: boolean } = capturarValor(valores);
