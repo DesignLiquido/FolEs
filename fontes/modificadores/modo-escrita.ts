@@ -11,14 +11,11 @@ export class ModoEscrita extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("modo-escrita", "writing-mode", pragmas);
 
-        if (!valorVariavel)
-            validarValores("modo-escrita", valores, this.valoresAceitos);
+        validarValores("modo-escrita", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

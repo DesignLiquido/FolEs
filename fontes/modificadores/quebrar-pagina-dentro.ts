@@ -10,9 +10,7 @@ export class QuebrarPaginaDentro extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["quebrar-pagina-dentro", "quebrar-página-dentro"],
@@ -20,8 +18,7 @@ export class QuebrarPaginaDentro extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("quebrar-página-dentro", valores, this.valoresAceitos);
+        validarValores("quebrar-página-dentro", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

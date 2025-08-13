@@ -1,4 +1,3 @@
-import { proibirQuantificador } from "../modificadores/validacoes/proibir-quantificador";
 import { Valor } from "./valor";
 
 export class ValorNumerico extends Valor {
@@ -8,7 +7,6 @@ export class ValorNumerico extends Valor {
     constructor(nomeModificador: string, literalNumerico: number, quantificador?: string) {
         super();
         this.literalNumerico = literalNumerico;
-        // if (quantificador) proibirQuantificador(nomeModificador, quantificador);
         this.quantificador = quantificador;
     }
 

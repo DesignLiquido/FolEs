@@ -1,7 +1,6 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class ContarColuna extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -10,19 +9,19 @@ export class ContarColuna extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("contar-coluna", "column-count", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("contar-coluna", valores, this.valoresAceitos);
-
-            // Não recebe quantificador, apenas o valor numérico.
-            // TODO: Repensar.
-            // proibirQuantificador("contar-coluna", quantificador);
-        }
+        validarValorNumerico(
+            "contar-coluna", 
+            valores, 
+            this.valoresAceitos,
+            null,
+            null,
+            null,
+            true
+        );
 
         this.valores = valores;
     }

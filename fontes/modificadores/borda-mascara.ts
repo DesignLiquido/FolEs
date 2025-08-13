@@ -21,7 +21,6 @@ export class BordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador
     ) {
         super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
@@ -33,7 +32,6 @@ export class BordaMascara extends Modificador {
         //     valorURL = valor["traducao"];
         // }
 
-        // if (!valorVariavel) {
         //     if (
         //         !(valor in this.valoresAceitos) &&
         //         Number.isNaN(parseInt(valor)) &&
@@ -55,7 +53,6 @@ export class BordaMascara extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

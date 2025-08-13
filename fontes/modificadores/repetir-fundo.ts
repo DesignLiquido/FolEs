@@ -16,14 +16,11 @@ export class RepetirFundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("repetir-fundo", "background-repeat", pragmas);
 
-        if (!valorVariavel)
-            validarValores("repetir-fundo", valores, this.valoresAceitos);
+        validarValores("repetir-fundo", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

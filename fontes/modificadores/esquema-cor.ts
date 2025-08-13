@@ -12,14 +12,11 @@ export class EsquemaCor extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("esquema-cor", "color-scheme", pragmas);
 
-        if (!valorVariavel)
-            validarValores("esquema-cor", valores, this.valoresAceitos);
+        validarValores("esquema-cor", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -12,14 +12,11 @@ export class FlexAgrupar extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("flex-agrupar", "flex-wrap", pragmas);
 
-        if (!valorVariavel)
-            validarValores("flex-agrupar", valores, this.valoresAceitos);
+        validarValores("flex-agrupar", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

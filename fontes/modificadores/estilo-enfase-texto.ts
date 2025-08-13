@@ -21,9 +21,7 @@ export class EstiloEnfaseTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
@@ -38,8 +36,7 @@ export class EstiloEnfaseTexto extends Modificador {
         //     this.valoresAceitos[valor] = valor;
         // }
 
-        if (!valorVariavel)
-            validarValores("estilo-ênfase-texto", valores, this.valoresAceitos);
+        validarValores("estilo-ênfase-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

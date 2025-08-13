@@ -5,9 +5,7 @@ import { validarValorCor } from "./validacoes/cor";
 export class DecoracaoCorTexto extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["decoracao-cor-texto", "decoração-cor-texto"],
@@ -15,7 +13,7 @@ export class DecoracaoCorTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) validarValorCor("decoração-cor-texto", valores);
+        validarValorCor("decoração-cor-texto", valores);
 
         this.valores = valores;
     }

@@ -11,9 +11,7 @@ export class EspacamentoLetras extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["espacamento-letras", "espaçamento-letras"],
@@ -26,7 +24,6 @@ export class EspacamentoLetras extends Modificador {
         // TODO: Repensar
         // let valorComPonto = false;
 
-        // if (!valorVariavel) {
         //     if (valor.includes('.')) {
         //         valorComPonto = true;
         //         valor = valor.replace('.', '');
@@ -47,7 +44,6 @@ export class EspacamentoLetras extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         // if (valorComPonto) valor = `.${valor}`;
         this.valores = valores;

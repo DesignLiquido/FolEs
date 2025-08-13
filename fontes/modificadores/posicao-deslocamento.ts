@@ -10,9 +10,7 @@ export class PosicaoDeslocamento extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["posicao-deslocamento", "posição-deslocamento"],
@@ -28,13 +26,12 @@ export class PosicaoDeslocamento extends Modificador {
 
         // Porém, essa validação inicial cobre somente as posições e os valores globais
 
-        if (!valorVariavel)
-            validarValoresAdicionais(
-                "posição-deslocamento",
-                valores,
-                posicoesBasicas,
-                this.valoresAceitos,
-            );
+        validarValoresAdicionais(
+            "posição-deslocamento",
+            valores,
+            posicoesBasicas,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

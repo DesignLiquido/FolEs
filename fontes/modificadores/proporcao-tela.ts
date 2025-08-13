@@ -10,20 +10,24 @@ export class ProporcaoTela extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["proporcao-tela", "proporção-tela"], "aspect-ratio", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes("/")) {
-        //         validarAtribuicaoAbreviada("numérica", "proporção-tela", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("proporção-tela", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                "proporção-tela",
+                valores,
+                this.valoresAceitos
+            );
+        } else {
+            validarValorNumerico(
+                "proporção-tela",
+                valores,
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

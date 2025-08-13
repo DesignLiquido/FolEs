@@ -5,7 +5,6 @@ import {
 } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoDireita extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,30 +13,18 @@ export class PosicaoDireita extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["posicao-direita", "posição-direita"], "right", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("posição-direita", valores, this.valoresAceitos);
-
-            // O seletor aceita o número 0.
-            // Logo, o código só passa pela validação caso haja um segundo parâmetro
-            // ou caso o primeiro seja diferente de 0.
-            // TODO: Repensar
-            // if (quantificador !== undefined && valor !== "0") {
-            //     validarQuantificador(
-            //         "posição-direita",
-            //         quantificador,
-            //         unidadesMedida,
-            //         ListaDeValorPercentual,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
-        }
+        validarValorNumerico(
+            "posição-direita",
+            valores,
+            this.valoresAceitos,
+            null,
+            unidadesMedida,
+            ListaDeValorPercentual,
+        );
 
         this.valores = valores;
     }

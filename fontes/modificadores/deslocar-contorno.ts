@@ -7,14 +7,11 @@ import { validarQuantificador } from "./validacoes/quantificador";
 export class DeslocarContorno extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("deslocar-contorno", "outline-offset", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     validarValorNumerico("deslocar-contorno", valor);
 
         //     if (Number(parseInt(valor))) {
@@ -26,7 +23,6 @@ export class DeslocarContorno extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

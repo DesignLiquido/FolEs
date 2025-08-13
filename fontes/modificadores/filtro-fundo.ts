@@ -11,9 +11,7 @@ export class FiltroFundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("filtro-fundo", "backdrop-filter", pragmas);
 
@@ -31,13 +29,12 @@ export class FiltroFundo extends Modificador {
             "url",
         ];
 
-        if (!valorVariavel)
-            validarValores(
-                "filtro-fundo",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "filtro-fundo",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

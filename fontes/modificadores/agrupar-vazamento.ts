@@ -11,14 +11,11 @@ export class AgruparVazamento extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("agrupar-vazamento", "overflow-wrap", pragmas);
 
-        if (!valorVariavel)
-            validarValores("agrupar-vazamento", valores, this.valoresAceitos);
+        validarValores("agrupar-vazamento", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

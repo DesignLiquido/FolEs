@@ -1,7 +1,6 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class RepetirAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,7 +10,6 @@ export class RepetirAnimacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["repetir-animacao", "repetir-animação"],
@@ -19,16 +17,15 @@ export class RepetirAnimacao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "repetir-animação",
-                valores,
-                this.valoresAceitos,
-            );
-
-            // TODO: Repensar
-            // proibirQuantificador("repetir-animação", quantificador);
-        }
+        validarValorNumerico(
+            "repetir-animação",
+            valores,
+            this.valoresAceitos,
+            null,
+            null,
+            null,
+            true
+        );
 
         this.valores = valores;
     }

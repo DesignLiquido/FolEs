@@ -1,7 +1,6 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class EspessuraFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -13,18 +12,19 @@ export class EspessuraFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("espessura-fonte", "font-weight", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("espessura-fonte", valores, this.valoresAceitos);
-
-            // TODO: Repensar
-            // proibirQuantificador("espessura-fonte", quantificador);
-        }
+        validarValorNumerico(
+            "espessura-fonte", 
+            valores, 
+            this.valoresAceitos,
+            null,
+            null,
+            null,
+            true,
+        );
 
         this.valores = valores;
     }

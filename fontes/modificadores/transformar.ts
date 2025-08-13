@@ -11,9 +11,7 @@ export class Transformar extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("transformar", "transform", pragmas);
 
@@ -39,13 +37,12 @@ export class Transformar extends Modificador {
             "translateZ",
         ];
 
-        if (!valorVariavel)
-            validarValores(
-                "transformar",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "transformar",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

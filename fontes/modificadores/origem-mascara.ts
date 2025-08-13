@@ -18,14 +18,11 @@ export class OrigemMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["origem-mascara", "origem-máscara"], "mask-origin", pragmas);
 
-        if (!valorVariavel)
-            validarValores("origem-máscara", valores, this.valoresAceitos);
+        validarValores("origem-máscara", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

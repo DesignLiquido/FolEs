@@ -3,14 +3,11 @@ import { posicoesBasicas } from "./atributos/posicoes";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class PosicaoVerticalFundo extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["posicao-vertical-fundo", "posição-vertical-fundo"],
@@ -18,24 +15,13 @@ export class PosicaoVerticalFundo extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "posição-vertical-fundo",
-                valores,
-                posicoesBasicas,
-            );
-
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "posição-vertical-fundo",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
-        }
+        validarValorNumerico(
+            "posição-vertical-fundo",
+            valores,
+            posicoesBasicas,
+            null,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }

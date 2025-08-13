@@ -11,21 +11,18 @@ export class EstiloListaImagem extends Modificador {
 
     constructor(
         valores: Valor[],
-        quantificador: string,
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("estilo-lista-imagem", "list-style-image", pragmas);
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel)
-            validarValores(
-                "estilo-lista-imagem",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "estilo-lista-imagem",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

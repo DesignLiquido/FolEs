@@ -13,9 +13,7 @@ export class ModoPreenchimentoAnimacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["modo-preenchimento-animacao", "modo-preenchimento-animação"],
@@ -23,12 +21,11 @@ export class ModoPreenchimentoAnimacao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores(
-                "modo-preenchimento-animação",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValores(
+            "modo-preenchimento-animação",
+            valores,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

@@ -16,14 +16,11 @@ export class TransformarTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("transformar-texto", "text-transform", pragmas);
 
-        if (!valorVariavel)
-            validarValores("transformar-texto", valores, this.valoresAceitos);
+        validarValores("transformar-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

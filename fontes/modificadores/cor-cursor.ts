@@ -9,14 +9,11 @@ export class CorCursor extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("cor-cursor", "caret-color", pragmas);
 
-        if (!valorVariavel)
-            validarValorCor("cor-cursor", valores, this.valoresAceitos);
+        validarValorCor("cor-cursor", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

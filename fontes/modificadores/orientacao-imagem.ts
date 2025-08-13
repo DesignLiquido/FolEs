@@ -10,9 +10,7 @@ export class OrientacaoImagem extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["orientacao-imagem", "orientação-imagem"],
@@ -20,8 +18,7 @@ export class OrientacaoImagem extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("orientação-imagem", valores, this.valoresAceitos);
+        validarValores("orientação-imagem", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

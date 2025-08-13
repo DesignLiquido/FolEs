@@ -16,21 +16,18 @@ export class FormaExterna extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("forma-externa", "shape-outside", pragmas);
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel)
-            validarValores(
-                "forma-externa",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "forma-externa",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

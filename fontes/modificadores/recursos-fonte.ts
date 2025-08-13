@@ -11,16 +11,13 @@ export class RecursosFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recursos-fonte", "font-feature-settings", pragmas);
 
         const valoresExtra = ["feature-tag-value"];
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     if (valor.includes(",")) {
         //         const separarValores = valor.split(", ");
 
@@ -46,9 +43,9 @@ export class RecursosFonte extends Modificador {
         //             this.valoresAceitos[valor] = valor;
         //         }
 
-        //         validarValores("recursos-fonte", valores, this.valoresAceitos, valoresExtra);
         //     }
-        // }
+
+        validarValores("recursos-fonte", valores, this.valoresAceitos, valoresExtra);
 
         this.valores = valores;
     }

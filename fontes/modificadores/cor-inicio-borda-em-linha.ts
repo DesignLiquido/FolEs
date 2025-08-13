@@ -5,9 +5,7 @@ import { validarValorCor } from "./validacoes/cor";
 export class CorInicioBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["cor-inicio-borda-em-linha", "cor-início-borda-em-linha"],
@@ -15,7 +13,7 @@ export class CorInicioBordaEmLinha extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) validarValorCor("cor-início-borda-em-linha", valores);
+        validarValorCor("cor-início-borda-em-linha", valores);
 
         this.valores = valores;
     }

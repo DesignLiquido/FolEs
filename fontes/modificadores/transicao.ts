@@ -3,7 +3,6 @@ import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Transicao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,28 +21,30 @@ export class Transicao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["transicao", "transição"], "transition", pragmas);
 
         const valoresExtra = ["linear"];
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (typeof valor === 'string' && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "transição", valores, this.valoresAceitos, valoresExtra);
-        //     } else {
-        //         validarValorNumerico("transição", valores, this.valoresAceitos, valoresExtra);
-        //     }
-
-        //     if (quantificador && Number(parseInt(valor))) {
-        //         validarQuantificador("transição", quantificador, valoresTemporais);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "transição", 
+                valores, 
+                this.valoresAceitos, 
+                valoresExtra,
+                valoresTemporais
+            );
+        } else {
+            validarValorNumerico(
+                "transição", 
+                valores, 
+                this.valoresAceitos, 
+                valoresExtra,
+                valoresTemporais
+            );
+        }
 
         this.valores = valores;
     }

@@ -11,9 +11,7 @@ export class EspacamentoPalavras extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["espacamento-palavras", "espaçamento-palavras"],
@@ -22,7 +20,6 @@ export class EspacamentoPalavras extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     validarValorNumerico(
         //         "espaçamento-palavras",
         //         valor,
@@ -38,7 +35,6 @@ export class EspacamentoPalavras extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

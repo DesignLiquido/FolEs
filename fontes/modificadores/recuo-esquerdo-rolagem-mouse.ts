@@ -11,14 +11,11 @@ export class RecuoEsquerdoRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("recuo-esquerdo-rolagem-mouse", "scroll-padding-left", pragmas);
 
         // TODO: Repensar
-        // if (!valorVariavel) {
         //     validarValorNumerico(
         //         "recuo-esquerdo-rolagem-mouse",
         //         valor,
@@ -34,7 +31,6 @@ export class RecuoEsquerdoRolagemMouse extends Modificador {
 
         //         this.quantificador = quantificador;
         //     }
-        // }
 
         this.valores = valores;
     }

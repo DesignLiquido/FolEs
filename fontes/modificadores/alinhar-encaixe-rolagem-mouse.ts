@@ -13,18 +13,15 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("alinhar-encaixe-rolagem-mouse", "scroll-snap-align", pragmas);
 
-        if (!valorVariavel)
-            validarValores(
-                "alinhar-encaixe-rolagem-mouse",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValores(
+            "alinhar-encaixe-rolagem-mouse",
+            valores,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

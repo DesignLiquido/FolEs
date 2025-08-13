@@ -11,9 +11,7 @@ export class VariacaoFontePosicao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["variacao-fonte-posicao", "variação-fonte-posição"],
@@ -21,12 +19,11 @@ export class VariacaoFontePosicao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores(
-                "variação-fonte-posição",
-                valores,
-                this.valoresAceitos,
-            );
+        validarValores(
+            "variação-fonte-posição",
+            valores,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

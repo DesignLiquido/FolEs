@@ -15,9 +15,7 @@ export class RenderizacaoTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["renderizacao-texto", "renderização-texto"],
@@ -25,8 +23,7 @@ export class RenderizacaoTexto extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("renderização-texto", valores, this.valoresAceitos);
+        validarValores("renderização-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

@@ -1,9 +1,7 @@
 import { Valor } from "../valores";
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DeslocamentoEmAncora extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -17,9 +15,7 @@ export class DeslocamentoEmAncora extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["deslocamento-em-ancora", "deslocamento-em-âncora"],
@@ -27,24 +23,13 @@ export class DeslocamentoEmAncora extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "deslocamento-em-âncora",
-                valores,
-                this.valoresAceitos,
-            );
-
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "deslocamento-em-âncora",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
-        }
+        validarValorNumerico(
+            "deslocamento-em-âncora",
+            valores,
+            this.valoresAceitos,
+            null,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }

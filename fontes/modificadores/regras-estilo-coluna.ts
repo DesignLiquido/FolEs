@@ -7,14 +7,11 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 export class RegrasEstiloColuna extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("regras-estilo-coluna", "column-rule-style", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais("regras-estilo-coluna", valores, estilos);
+        validarValoresAdicionais("regras-estilo-coluna", valores, estilos);
 
         this.valores = valores;
     }

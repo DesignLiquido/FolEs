@@ -16,26 +16,26 @@ export class EstiloFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("estilo-fonte", "font-style", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "estilo-fonte", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("estilo-fonte", valores, this.valoresAceitos);
-        //     }
-            
-        //     if (valor.includes("obliqua") || valor.includes("oblíqua")) {
-        //         validarQuantificador("estilo-fonte", quantificador, angulos);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "estilo-fonte", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                angulos
+            );
+        } else {
+            validarValores(
+                "estilo-fonte", 
+                valores, 
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

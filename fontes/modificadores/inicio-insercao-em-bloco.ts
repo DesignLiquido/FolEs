@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioInsercaoEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,9 +10,7 @@ export class InicioInsercaoEmBloco extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-insercao-em-bloco", "início-inserção-em-bloco"],
@@ -21,23 +18,13 @@ export class InicioInsercaoEmBloco extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "início-inserção-em-bloco",
-                valores,
-                this.valoresAceitos,
-            );
-
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "início-inserção-em-bloco",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
-        }
+        validarValorNumerico(
+            "início-inserção-em-bloco",
+            valores,
+            this.valoresAceitos,
+            null,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }

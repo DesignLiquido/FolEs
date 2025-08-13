@@ -10,14 +10,11 @@ export class CelulasVazias extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["celulas-vazias", "células-vazias"], "empty-cells", pragmas);
 
-        if (!valorVariavel)
-            validarValores("células-vazias", valores, this.valoresAceitos);
+        validarValores("células-vazias", valores, this.valoresAceitos);
 
         this.valores = valores;
     }

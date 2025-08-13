@@ -1,10 +1,31 @@
 lmht {
-    altura: 40px;
-    recuo: 5px 1em 0 2em;
-    cor: branco;
+    area-mascara: completar-caixa, preenchimento;
+    coluna-em-grade: auto / auto;
 }
 
 lmht {
-    estilo-lista: dentro meu-estilo;
-    caminho-recorte: visualizar-caixa;
+    posicao-direita: 20%;
+    configuracoes-variacao-fonte: 10;
+    cor-barra-rolagem: rgb(10, 20, 30);
+}
+
+lmht {
+    cor-barra-rolagem: #ffffff;
+}
+
+lmht {
+    cor-barra-rolagem: verde;
+}
+
+lmht {
+    borda-direita: 20%;
+}
+
+lmht {
+    fonte-texto: "Arial";
+}
+
+lmht {
+    agrupar-palavra: normal;
+    ao-mudar: auto;
 }

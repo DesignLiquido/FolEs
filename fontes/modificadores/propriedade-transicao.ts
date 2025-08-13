@@ -11,9 +11,7 @@ export class PropriedadeTransicao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["propriedade-transicao", "propriedade-transição"],
@@ -21,14 +19,21 @@ export class PropriedadeTransicao extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "propriedade-transição", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValores("propriedade-transição", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "comum",
+                "propriedade-transição",
+                valores,
+                this.valoresAceitos,
+            );
+            // OBS.: Recebe validacaoPersonalizada como true
+        } else {
+            validarValores(
+                "propriedade-transição",
+                valores,
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

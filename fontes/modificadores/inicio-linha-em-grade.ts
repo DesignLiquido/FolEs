@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class InicioLinhaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,9 +10,7 @@ export class InicioLinhaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["inicio-linha-em-grade", "início-linha-em-grade"],
@@ -21,16 +18,27 @@ export class InicioLinhaEmGrade extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", 'início-linha-em-grade', valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("início-linha-em-grade", valores, this.valoresAceitos);
-        //     }
-
-        //     proibirQuantificador("início-linha-em-grade", quantificador);
-        // }
+        // TODO: Adaptar validação AA para proibir quantificador
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                'início-linha-em-grade',
+                valores,
+                this.valoresAceitos,
+                null,
+            );
+            // OBS.: Recebe validacaoPersonalizada como true
+        } else {
+            validarValorNumerico(
+                "início-linha-em-grade",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
     }

@@ -8,20 +8,16 @@ export class Tabulacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["tabulacao", "tabulação"], "tab-size", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("tabulação", valores);
-
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador("tabulação", quantificador, comprimentos);
-
-            //     this.quantificador = quantificador;
-            // }
-        }
+        validarValorNumerico(
+            "tabulação", 
+            valores,
+            null,
+            null,
+            comprimentos
+        );
 
         this.valores = valores;
     }

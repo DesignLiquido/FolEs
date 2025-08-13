@@ -11,8 +11,7 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
     ) {
         super(
             "comportamento-horizontal-rolagem-mouse",
@@ -21,12 +20,11 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
         );
 
         // TODO: Repensar
-        // if (!valorVariavel)
-        //     validarValores(
-        //         "comportamento-em-horizontal-rolagem-mouse",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
+        validarValores(
+            "comportamento-em-horizontal-rolagem-mouse",
+            valores,
+            this.valoresAceitos,
+        );
 
         this.valores = valores;
     }

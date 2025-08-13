@@ -25,9 +25,7 @@ export class VelocidadeAnimacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["velocidade-animacao", "velocidade-animação"],
@@ -37,13 +35,12 @@ export class VelocidadeAnimacao extends Modificador {
 
         const valoresExtra = ["cubic-bezier", "steps"];
 
-        if (!valorVariavel)
-            validarValores(
-                "velocidade-animação",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "velocidade-animação",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

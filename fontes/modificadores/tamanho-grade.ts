@@ -10,20 +10,24 @@ export class TamanhoGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("tamanho-grade", "grid-area", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes("/") || valor.includes(" ")) {
-        //        validarAtribuicaoAbreviada("numérica", "tamanho-grade", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("tamanho-grade", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "tamanho-grade", 
+                valores, 
+                this.valoresAceitos, 
+                );
+        } else {
+            validarValorNumerico(
+                "tamanho-grade", 
+                valores, 
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TamanhoMinimoEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,9 +14,7 @@ export class TamanhoMinimoEmBloco extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["tamanho-minimo-em-bloco", "tamanho-mínimo-em-bloco"],
@@ -27,25 +24,13 @@ export class TamanhoMinimoEmBloco extends Modificador {
 
         const valoresExtra = ["fit-content"];
 
-        if (!valorVariavel) {
-            validarValorNumerico(
-                "tamanho-mínimo-em-bloco",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
-
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "tamanho-mínimo-em-bloco",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
-        }
+        validarValorNumerico(
+            "tamanho-mínimo-em-bloco",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }

@@ -25,20 +25,26 @@ export class PosicionarSe extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super("posicionar-se", "place-self", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("condição-extra", "posicionar-se", valores, posicoes, this.valoresAceitos);
-        //     } else {
-        //         validarValoresAdicionais("posicionar-se", valores, posicoes, this.valoresAceitos);
-        //     }
-        // }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "condição-extra", 
+                "posicionar-se", 
+                valores, 
+                posicoes, 
+                this.valoresAceitos
+            );
+        } else {
+            validarValoresAdicionais(
+                "posicionar-se", 
+                valores, 
+                posicoes, 
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

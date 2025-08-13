@@ -131,7 +131,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorBorrar,
                     quantificadorBorrar,
-                ])  as Metodo;
+                ]) as Metodo;
 
             case "brilho":
                 this.consumir(
@@ -817,8 +817,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         parametro01,
                         valor02["lexema"],
                     ]) as Metodo;
-                } 
-                
+                }
+
                 if (parametro02 !== null) {
                     return new SeletorValor(lexema, [
                         valor01["lexema"],
@@ -1654,7 +1654,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     }
 
     protected valorNumerico(
-        nomeModificador: string, 
+        nomeModificador: string,
         valorModificador: SimboloInterface,
         ponto: boolean
     ): ValorNumerico {
@@ -1720,7 +1720,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     }
 
                     throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
-            } 
+            }
         } while (
             this.atual < this.simbolos.length &&
             this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA

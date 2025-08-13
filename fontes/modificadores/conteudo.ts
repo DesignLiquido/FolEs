@@ -20,22 +20,19 @@ export class Conteudo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
         // Também aceita como valor a função image-set()
         const valoresExtra = ["url", "linear-gradient", "counter"];
 
-        if (!valorVariavel)
-            validarValores(
-                "conteúdo",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        validarValores(
+            "conteúdo",
+            valores,
+            this.valoresAceitos,
+            valoresExtra,
+        );
 
         this.valores = valores;
     }

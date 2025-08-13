@@ -6,9 +6,7 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 export class EstiloInicioBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
     ) {
         super(
             ["estilo-inicio-borda-em-bloco", "estilo-início-borda-em-bloco"],
@@ -16,12 +14,11 @@ export class EstiloInicioBordaEmBloco extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValoresAdicionais(
-                "estilo-início-borda-em-bloco",
-                valores,
-                estilos,
-            );
+        validarValoresAdicionais(
+            "estilo-início-borda-em-bloco",
+            valores,
+            estilos,
+        );
 
         this.valores = valores;
     }
