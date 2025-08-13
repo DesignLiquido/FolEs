@@ -16,7 +16,6 @@ export class Grade extends Modificador {
         coluna: "column",
         denso: "dense",
         nenhum: "none",
-        "conteudo-mínimo": "min-content",
         "sub-grade": "subgrid",
         alvenaria: "masonry",
     };
