@@ -641,7 +641,17 @@ export default {
     // Qualitativos - Palavras reservadas aceitas pelos Modificadores
     // "cor-destaque": tiposDeSimbolos.QUALITATIVO,
     // "cor-fundo": tiposDeSimbolos.QUALITATIVO,
-    // "repetir": tiposDeSimbolos.QUALITATIVO,
+    // "flex": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
+    // "inverter": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
+    // "sobre": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de pseudoclasse
+    // "saturar": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
+    // "linear": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
+    // "curva-cubica": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
+    // "curva-cúbica": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método 
+    // "passos": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
+    // "contraste": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
+    // "borda": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
+    "repetir": tiposDeSimbolos.QUALITATIVO,
     "completar": tiposDeSimbolos.QUALITATIVO,
     "espacar": tiposDeSimbolos.QUALITATIVO,
     "espaçar": tiposDeSimbolos.QUALITATIVO, 
@@ -695,7 +705,6 @@ export default {
     "em-linha": tiposDeSimbolos.QUALITATIVO,
     "fluxo-comum": tiposDeSimbolos.QUALITATIVO,
     "fluxo-raiz": tiposDeSimbolos.QUALITATIVO,
-    // "flex": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
     "em-grade": tiposDeSimbolos.QUALITATIVO,
     "rubi": tiposDeSimbolos.QUALITATIVO,
     "rubí": tiposDeSimbolos.QUALITATIVO,
@@ -743,7 +752,6 @@ export default {
     "math": tiposDeSimbolos.QUALITATIVO, 
     "emoji": tiposDeSimbolos.QUALITATIVO, 
     "fangsong": tiposDeSimbolos.QUALITATIVO, 
-    // "inverter": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
     "maiusculas-pequenas": tiposDeSimbolos.QUALITATIVO, 
     "maiúsculas-pequenas": tiposDeSimbolos.QUALITATIVO, 
     "italica": tiposDeSimbolos.QUALITATIVO, 
@@ -783,7 +791,6 @@ export default {
     "não-repetir": tiposDeSimbolos.QUALITATIVO,
     "multiplicar": tiposDeSimbolos.QUALITATIVO,
     "tela": tiposDeSimbolos.QUALITATIVO,
-    // "sobre": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de pseudoclasse
     "escurecer": tiposDeSimbolos.QUALITATIVO,
     "clarear": tiposDeSimbolos.QUALITATIVO,
     "subexpor-cores": tiposDeSimbolos.QUALITATIVO,
@@ -795,7 +802,6 @@ export default {
     "exclusao": tiposDeSimbolos.QUALITATIVO,
     "exclusão": tiposDeSimbolos.QUALITATIVO,
     "matiz": tiposDeSimbolos.QUALITATIVO,
-    // "saturar": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
     "colorir": tiposDeSimbolos.QUALITATIVO,
     "luminosidade": tiposDeSimbolos.QUALITATIVO,
     "cobrir": tiposDeSimbolos.QUALITATIVO,
@@ -835,7 +841,6 @@ export default {
     "final-lento": tiposDeSimbolos.QUALITATIVO,
     "inicio-final-lento": tiposDeSimbolos.QUALITATIVO,
     "início-final-lento": tiposDeSimbolos.QUALITATIVO,
-    // "linear": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
     "passo-inicial": tiposDeSimbolos.QUALITATIVO,
     "passo-final": tiposDeSimbolos.QUALITATIVO,
     "embutir": tiposDeSimbolos.QUALITATIVO,
@@ -853,16 +858,11 @@ export default {
     "manter-tudo": tiposDeSimbolos.QUALITATIVO,
     "vertical-direita-esquerda": tiposDeSimbolos.QUALITATIVO,
     "vertical-esquerda-direita": tiposDeSimbolos.QUALITATIVO,
-    // "curva-cubica": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
-    // "curva-cúbica": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método 
-    // "passos": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
-    // "contraste": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
     "local": tiposDeSimbolos.QUALITATIVO,
     "rolar": tiposDeSimbolos.QUALITATIVO,
     "subexposicao": tiposDeSimbolos.QUALITATIVO,
     "subexposição": tiposDeSimbolos.QUALITATIVO,
     "mesclar-cor": tiposDeSimbolos.QUALITATIVO,
-    // "borda": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
     "separar": tiposDeSimbolos.QUALITATIVO,
     "formas-historicas": tiposDeSimbolos.QUALITATIVO,
     "formas-históricas": tiposDeSimbolos.QUALITATIVO,
