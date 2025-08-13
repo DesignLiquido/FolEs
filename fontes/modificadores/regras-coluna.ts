@@ -18,12 +18,21 @@ export class RegrasColuna extends Modificador {
     ) {
         super("regras-coluna", "column-rule", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "regras-coluna", valores, this.valoresAceitos);
-        //     } 
-
-        validarMultiplosQualitativos("regras-coluna", valores, this.valoresAceitos, comprimentos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "regras-coluna", 
+                valores, 
+                this.valoresAceitos
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "regras-coluna", 
+                valores, 
+                this.valoresAceitos, 
+                comprimentos
+            );
+        }
 
         this.valores = valores;
     }

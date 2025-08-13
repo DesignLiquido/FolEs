@@ -14,12 +14,26 @@ export class IncrementarContador extends Modificador {
     ) {
         super("incrementar-contador", "counter-increment", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "incrementar-contador", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("incrementar-contador", valores, this.valoresAceitos);
-        //     }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "incrementar-contador", 
+                valores, 
+                this.valoresAceitos, 
+                null,
+            );
+            // OBS.: Recebe validacaoPersonalizada como true
+        } else {
+            validarValorNumerico(
+                "incrementar-contador", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
     }

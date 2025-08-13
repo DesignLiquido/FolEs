@@ -16,18 +16,24 @@ export class MargemEmBloco extends Modificador {
     ) {
         super("margem-em-bloco", "margin-block", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "margem-em-bloco", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("margem-em-bloco", valores, this.valoresAceitos);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("margem-em-bloco", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "margem-em-bloco", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarValorNumerico(
+                "margem-em-bloco", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

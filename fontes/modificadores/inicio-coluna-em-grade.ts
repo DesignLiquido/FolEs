@@ -18,14 +18,21 @@ export class InicioColunaEmGrade extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", 'início-coluna-em-grade', valores, this.valoresAceitos, undefined, false, true);
-        //     } 
+        // TODO: Adaptar validação AA para proibir quantificador
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                'início-coluna-em-grade',
+                valores,
+                this.valoresAceitos,
+                null,
+            );
+            // OBS.: Recebe validacaoPersonalizada como true
+        }
 
         validarValorNumerico(
-            "início-coluna-em-grade", 
-            valores, 
+            "início-coluna-em-grade",
+            valores,
             this.valoresAceitos,
             null,
             null,

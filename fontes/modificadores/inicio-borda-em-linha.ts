@@ -15,12 +15,20 @@ export class InicioBordaEmLinha extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "início-borda-em-linha", valor);
-        //     }
-
-        validarMultiplosQualitativos("início-borda-em-linha", valores, null, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "início-borda-em-linha", 
+                valores
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "início-borda-em-linha", 
+                valores, 
+                null, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

@@ -69,12 +69,20 @@ export class VariacaoFonte extends Modificador {
     ) {
         super(["variacao-fonte", "variação-fonte"], "font-variant", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "variação-fonte", valores, this.valoresAceitos);
-        //     }
-
-        validarValores("variação-fonte", valores, this.valoresAceitos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "comum", 
+                "variação-fonte", 
+                valores, 
+                this.valoresAceitos
+            );
+        } else {
+            validarValores(
+                "variação-fonte", 
+                valores, 
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

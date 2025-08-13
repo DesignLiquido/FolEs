@@ -18,20 +18,27 @@ export class InicioLinhaEmGrade extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", 'início-linha-em-grade', valores, this.valoresAceitos, undefined, false, true);
-        //  
-
-        validarValorNumerico(
-            "início-linha-em-grade", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            null,
-            null,
-            true
-        );
+        // TODO: Adaptar validação AA para proibir quantificador
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                'início-linha-em-grade',
+                valores,
+                this.valoresAceitos,
+                null,
+            );
+            // OBS.: Recebe validacaoPersonalizada como true
+        } else {
+            validarValorNumerico(
+                "início-linha-em-grade",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
     }

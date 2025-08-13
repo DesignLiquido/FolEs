@@ -3,7 +3,6 @@ import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -56,23 +55,25 @@ export class Fonte extends Modificador {
         super("fonte", "font", pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "fonte", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("fonte", valores, this.valoresAceitos);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "fonte",
-        //             quantificador,
-        //             unidadesMedida,
-        //             valoresFonte,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (valores.length > 1) {
+            const quantificadoresAceitos: { [nome: string]: string} = {...unidadesMedida, ...valoresFonte};
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "fonte", 
+                valores, 
+                this.valoresAceitos,
+                quantificadoresAceitos
+            );
+        } else {
+            validarValorNumerico(
+                "fonte", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida, 
+                valoresFonte
+            );
+        }
 
         this.valores = valores;
     }

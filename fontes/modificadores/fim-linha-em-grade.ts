@@ -14,21 +14,26 @@ export class FimLinhaEmGrade extends Modificador {
     ) {
         super("fim-linha-em-grade", "grid-row-end", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "fim-linha-em-grade", valores, this.valoresAceitos, undefined, false, true);
-        //     } 
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "fim-linha-em-grade", 
+                valores, 
+                this.valoresAceitos,
+            );
+            // OBS.: Recebe validacaoPersonalizada como true
+        } else {   
+            validarValorNumerico(
+                "fim-linha-em-grade",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
-        validarValorNumerico(
-            "fim-linha-em-grade", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            null,
-            null,
-            true
-        );
-        
         this.valores = valores;
     }
 }

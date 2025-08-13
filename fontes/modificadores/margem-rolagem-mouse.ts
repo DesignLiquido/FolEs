@@ -12,18 +12,24 @@ export class MargemRolagemMouse extends Modificador {
     ) {
         super("margem-rolagem-mouse", "scroll-margin", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "margem-rolagem-mouse", valor);
-        //     } else {
-        //         validarValorNumerico("margem-rolagem-mouse", valor);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("margem-rolagem-mouse", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica",
+                "margem-rolagem-mouse",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarValorNumerico(
+                "margem-rolagem-mouse",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

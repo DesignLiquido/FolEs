@@ -35,12 +35,22 @@ export class PosicionarConteudo extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("condição-extra", "posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
-        //     }
-
-        validarValoresAdicionais("posicionar-conteúdo", valores, posicoes, this.valoresAceitos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "condição-extra", 
+                "posicionar-conteúdo", 
+                valores, 
+                posicoes, 
+                this.valoresAceitos
+            );
+        } else {
+            validarValoresAdicionais(
+                "posicionar-conteúdo", 
+                valores, 
+                posicoes, 
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

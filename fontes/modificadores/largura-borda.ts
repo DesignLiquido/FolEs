@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,18 +18,24 @@ export class LarguraBorda extends Modificador {
     ) {
         super("largura-borda", "border-width", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "largura-borda", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("largura-borda", valores, this.valoresAceitos);
-        //     }
-
-        //     if (quantificador !== undefined) {
-        //         validarQuantificador("largura-borda", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "largura-borda", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarValorNumerico(
+                "largura-borda", 
+                valores, 
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

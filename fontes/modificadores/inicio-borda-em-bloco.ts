@@ -15,12 +15,23 @@ export class InicioBordaEmBloco extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "início-borda-em-bloco", valor);
-        //     }
-
-        validarMultiplosQualitativos("início-borda-em-bloco", valores, null, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "início-borda-em-bloco", 
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "início-borda-em-bloco", 
+                valores, 
+                null, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

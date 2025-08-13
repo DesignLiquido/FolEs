@@ -38,12 +38,21 @@ export class Fundo extends Modificador {
     ) {
         super("fundo", "background", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valores, this.valoresAceitos);
-        //     } 
-
-        validarMultiplosQualitativos("fundo", valores, this.valoresAceitos, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "fundo", 
+                valores, 
+                this.valoresAceitos
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "fundo", 
+                valores, 
+                this.valoresAceitos, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

@@ -11,11 +11,20 @@ export class FimBordaEmBloco extends Modificador {
     ) {
         super("fim-borda-em-bloco", "border-block-end", pragmas);
 
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fim-borda-em-bloco", valor);
-        //     } 
-
-        validarMultiplosQualitativos("fim-borda-em-bloco", valores, null, unidadesMedida);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "múltiplos-qualitativos", 
+                "fim-borda-em-bloco", 
+                valores
+            );
+        } else {
+            validarMultiplosQualitativos(
+                "fim-borda-em-bloco", 
+                valores, 
+                null, 
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

@@ -27,16 +27,25 @@ export class Grade extends Modificador {
     ) {
         super("grade", "grid", pragmas);
 
-        // TODO: Também aceita valor-quantificador
         const valoresExtra = ["minmax"];
 
-        // TODO: Repensar
-        //     if (typeof valor === 'string' && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "grade", valores, this.valoresAceitos, valoresExtra);
-        //     } else {
-        //     }
-        
-        validarValores("grade", valores, this.valoresAceitos, valoresExtra);
+        // TODO: Adaptar para receber também número-quantificador
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "comum", 
+                "grade", 
+                valores, 
+                this.valoresAceitos, 
+                valoresExtra
+            );
+        } else {
+            validarValores(
+                "grade", 
+                valores, 
+                this.valoresAceitos, 
+                valoresExtra
+            );
+        }
 
         this.valores = valores;
     }

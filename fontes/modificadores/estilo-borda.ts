@@ -12,12 +12,20 @@ export class EstiloBorda extends Modificador {
     ) {
         super("estilo-borda", "border-style", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("condição-extra", "estilo-borda", valores, estilos);
-        //     }
-
-        validarValoresAdicionais("estilo-borda", valores, estilos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "condição-extra", 
+                "estilo-borda", 
+                valores, 
+                estilos
+            );
+        } else {
+            validarValoresAdicionais(
+                "estilo-borda", 
+                valores, 
+                estilos
+            );
+        }
 
         this.valores = valores;
     }

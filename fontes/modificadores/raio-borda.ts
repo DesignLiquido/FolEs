@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RaioBorda extends Modificador {
     constructor(
@@ -12,18 +11,24 @@ export class RaioBorda extends Modificador {
     ) {
         super("raio-borda", "border-radius", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes("/")) {
-        //         validarAtribuicaoAbreviada("numérica", "raio-borda", valor);
-        //     } else {
-        //         validarValorNumerico("raio-borda", valor);
-        //     }
-
-        //     if (quantificador !== undefined) {
-        //         validarQuantificador("raio-borda", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "numérica", 
+                "raio-borda", 
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        } else {
+            validarValorNumerico(
+                "raio-borda", 
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
     }

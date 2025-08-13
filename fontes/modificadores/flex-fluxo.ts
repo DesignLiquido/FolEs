@@ -21,12 +21,20 @@ export class FlexFluxo extends Modificador {
     ) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        // TODO: Repensar
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "flex-fluxo", valores, this.valoresAceitos);
-        //     }
-
-        validarValores("flex-fluxo", valores, this.valoresAceitos);
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "comum",
+                "flex-fluxo",
+                valores,
+                this.valoresAceitos
+            );
+        } else {
+            validarValores(
+                "flex-fluxo",
+                valores,
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }
