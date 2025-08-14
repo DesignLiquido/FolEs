@@ -1,6 +1,7 @@
 import { Valor } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
+import { validarValores } from "./validacoes/comum";
 
 export class ReiniciarTudo extends Modificador {
     constructor(
@@ -9,11 +10,7 @@ export class ReiniciarTudo extends Modificador {
     ) {
         super("reiniciar-tudo", "all", pragmas);
 
-        // TODO: Repensar
-        //     if (!(valor in valoresGlobais)) {
-        //         throw new Error(`Modificador ou variável 'reiniciar-tudo' com valor ${valor} inválido. Valores aceitos: 
-        //             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
-        //     }
+        validarValores("reiniciar-tudo", valores, {});
 
         this.valores = valores;
     }

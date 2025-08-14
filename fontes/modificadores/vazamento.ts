@@ -8,7 +8,7 @@ export class Vazamento extends Modificador {
         visivel: "visible",
         visível: "visible",
         escondido: "hidden",
-        recortar: "clip",
+        recorte: "clip",
         "barra-rolagem": "scroll",
         auto: "auto",
     };

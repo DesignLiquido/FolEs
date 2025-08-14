@@ -1,8 +1,5 @@
 import { Valor } from "../valores";
-import {
-    ListaDeValorPercentual,
-    unidadesMedida,
-} from "./atributos/quantificadores";
+import { ListaDeValorPercentual, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 

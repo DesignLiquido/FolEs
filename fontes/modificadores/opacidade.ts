@@ -1,4 +1,4 @@
-import { Valor } from "../valores";
+import { Valor, ValorNumerico } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
@@ -11,22 +11,30 @@ export class Opacidade extends Modificador {
         pragmas?: PragmasModificador,
     ) {
         super("opacidade", "opacity", pragmas);
+        
+        // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
+        // Caso haja um quantificador %, pode ser qualquer número.        
+        const valorTipado = valores[0] as ValorNumerico;
 
-        // TODO: Repensar
-        //     // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
-        //     // Caso haja um quantificador %, pode ser qualquer número.
-        //     validarValorNumerico("opacidade", valor);
-
-        //     // Se há valor numérico maior do que 1, aceita o quantificador percentual.
-        //     if (quantificador !== undefined && Number(parseInt(valor)) > 1) {
-        //         validarQuantificador(
-        //             "opacidade",
-        //             quantificador,
-        //             ListaDeValorPercentual,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (valorTipado.literalNumerico > 1 && valorTipado.quantificador) {
+            validarValorNumerico(
+                "opacidade", 
+                valores,
+                null,
+                null,
+                ListaDeValorPercentual
+            );
+        } else {
+            validarValorNumerico(
+                "opacidade", 
+                valores,
+                null,
+                null,
+                null,
+                null,
+                true
+            )
+        }
 
         this.valores = valores;
     }
