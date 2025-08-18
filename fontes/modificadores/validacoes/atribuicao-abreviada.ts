@@ -15,6 +15,7 @@ export function validarAtribuicaoAbreviada(
     valoresAceitos: { [valorFoles: string]: string } = null,
     valoresExtra: any = null,
     quantificadoresAceitos: { [valorFoles: string]: string } = null,
+    proibirQuantificador: boolean = false,
     // validacaoString: boolean = false,
     // validacaoPersonalizada: boolean = false,
 ): void {

@@ -17,9 +17,18 @@ export class ComportamentoRolagemMouse extends Modificador {
         super("comportamento-rolagem-mouse", "overscroll-behavior", pragmas);
 
         if (valores.length > 1) {
-            validarAtribuicaoAbreviada("comum", "comportamento-rolagem-mouse", valores, this.valoresAceitos);
+            validarAtribuicaoAbreviada(
+                "comum", 
+                "comportamento-rolagem-mouse", 
+                valores, 
+                this.valoresAceitos
+            );
         } else {
-            validarValores("comportamento-rolagem-mouse", valores, this.valoresAceitos);
+            validarValores(
+                "comportamento-rolagem-mouse", 
+                valores, 
+                this.valoresAceitos
+            );
         }
 
         this.valores = valores;

@@ -26,7 +26,7 @@ export class AoMudar extends Modificador {
                 valores, 
                 this.valoresAceitos,
             );
-            // OBS.: Recebia validacaoPersonalizada como true
+            // TODO: Recebia validacaoPersonalizada como true
         } else {
             validarValores("ao-mudar", valores, this.valoresAceitos);
         }

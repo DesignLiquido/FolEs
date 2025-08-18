@@ -14,13 +14,13 @@ export class ColunaEmGrade extends Modificador {
     ) {
         super("coluna-em-grade", "grid-column", pragmas);
             if (valores.length > 1) {
-                // validarAtribuicaoAbreviada(
-                //     "numérica", 
-                //     "coluna-em-grade", 
-                //     valores, 
-                //     this.valoresAceitos
-                // );
-                // OBS.: Aceitava validacaoPersonalizada como true
+                validarAtribuicaoAbreviada(
+                    "numérica", 
+                    "coluna-em-grade", 
+                    valores, 
+                    this.valoresAceitos
+                );
+                // TODO: Aceitava validacaoPersonalizada como true
             } else {
                 validarValorNumerico(
                     "coluna-em-grade", 

@@ -27,13 +27,21 @@ export class AreaMascara extends Modificador {
         pragmas?: PragmasModificador,
     ) {
         super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
-        
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada("comum", "área-máscara", valores, this.valoresAceitos);
-        } else {
-            validarValores("área-máscara", valores, this.valoresAceitos);
-        }
 
+        if (valores.length > 1) {
+            validarAtribuicaoAbreviada(
+                "comum",
+                "área-máscara",
+                valores,
+                this.valoresAceitos
+            );
+        } else {
+            validarValores(
+                "área-máscara",
+                valores,
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
     }

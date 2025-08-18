@@ -48,7 +48,7 @@ export class FonteTexto extends Modificador {
                 valores,
                 this.valoresAceitos,
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebe validacaoPersonalizada como true
         } else {
             validarValorFonte(
                 "fonte-texto",

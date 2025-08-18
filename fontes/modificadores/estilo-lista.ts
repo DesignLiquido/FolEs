@@ -28,7 +28,7 @@ export class EstiloLista extends Modificador {
                 valoresExtra, 
                 unidadesMedida,
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebia validacaoPersonalizada como true
         } else {
             validarValorNumerico(
                 "estilo-lista", 

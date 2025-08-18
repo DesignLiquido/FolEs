@@ -22,10 +22,11 @@ export class AtrasoTransicao extends Modificador {
                 valores,
                 null,
                 null,
-                valoresTemporais);
+                valoresTemporais
+            );
         } else {
             validarValorNumerico(
-                "atraso-transição", 
+                "atraso-transição",
                 valores,
                 null,
                 null,

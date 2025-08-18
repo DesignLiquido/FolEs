@@ -21,9 +21,11 @@ export class FimColunaEmGrade extends Modificador {
                 "fim-coluna-em-grade", 
                 valores, 
                 this.valoresAceitos,
-                null
+                null,
+                null,
+                true
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebe validacaoPersonalizada como true
         } else {
             validarValorNumerico(
                 "fim-coluna-em-grade",

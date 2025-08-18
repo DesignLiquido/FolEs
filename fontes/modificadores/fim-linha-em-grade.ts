@@ -20,8 +20,11 @@ export class FimLinhaEmGrade extends Modificador {
                 "fim-linha-em-grade", 
                 valores, 
                 this.valoresAceitos,
+                null,
+                null,
+                true
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebe validacaoPersonalizada como true
         } else {   
             validarValorNumerico(
                 "fim-linha-em-grade",

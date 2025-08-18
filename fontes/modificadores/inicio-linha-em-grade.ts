@@ -26,8 +26,10 @@ export class InicioLinhaEmGrade extends Modificador {
                 valores,
                 this.valoresAceitos,
                 null,
+                null,
+                true
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebia validacaoPersonalizada como true
         } else {
             validarValorNumerico(
                 "início-linha-em-grade",

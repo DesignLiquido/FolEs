@@ -26,7 +26,7 @@ export class PropriedadeTransicao extends Modificador {
                 valores,
                 this.valoresAceitos,
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebe validacaoPersonalizada como true
         } else {
             validarValores(
                 "propriedade-transição",

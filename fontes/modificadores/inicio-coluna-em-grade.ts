@@ -26,19 +26,21 @@ export class InicioColunaEmGrade extends Modificador {
                 valores,
                 this.valoresAceitos,
                 null,
+                null,
+                true
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebe validacaoPersonalizada como true
+        } else {
+            validarValorNumerico(
+                "início-coluna-em-grade",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                null,
+                true
+            );
         }
-
-        validarValorNumerico(
-            "início-coluna-em-grade",
-            valores,
-            this.valoresAceitos,
-            null,
-            null,
-            null,
-            true
-        );
 
         this.valores = valores;
     }

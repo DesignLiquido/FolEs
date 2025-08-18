@@ -24,7 +24,10 @@ export class AjustarTamanhoFonte extends Modificador {
                 "numérica",
                 "ajustar-tamanho-fonte",
                 valores,
-                this.valoresAceitos
+                this.valoresAceitos,
+                null,
+                null,
+                true
             );
         } else {
             validarValorNumerico(

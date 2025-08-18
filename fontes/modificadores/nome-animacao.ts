@@ -21,7 +21,7 @@ export class NomeAnimacao extends Modificador {
                 valores,
                 this.valoresAceitos,
             );
-            // OBS.: Recebe validacaoPersonalizada como true
+            // TODO: Recebia validacaoPersonalizada como true
         } else {
             validarValores(
                 "nome-animação",
@@ -29,14 +29,6 @@ export class NomeAnimacao extends Modificador {
                 this.valoresAceitos
             );
         }
-
-        //      else {
-        //         if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
-
-        //             validarIdentificacaoPersonalizada("nome-animação", valor);
-        //             this.valoresAceitos[valor] = valor;
-        //         }
-        //     }
 
         this.valores = valores;
     }
