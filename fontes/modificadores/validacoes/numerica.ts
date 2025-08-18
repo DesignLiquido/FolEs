@@ -33,7 +33,7 @@ export function validarValorNumerico(
             !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-            número-quantificador,
+            número-quantificador (ex.: 12px),
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     }
@@ -45,7 +45,7 @@ export function validarValorNumerico(
             !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-            número-quantificador,
+            número-quantificador (ex.: 12px),
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
@@ -68,7 +68,7 @@ export function validarValorNumerico(
             !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-            número-quantificador,
+            número-quantificador (ex.: 12px),
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${valoresExtra.reduce((final, atual) => (final += `, ${atual}`))},
             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);

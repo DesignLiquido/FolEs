@@ -42,7 +42,7 @@ export function validarMultiplosQualitativos(
         ) {
             throw new Error(
                 `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
-                número-quantificador, 
+                número-quantificador (ex.: 12px), 
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
@@ -59,7 +59,7 @@ export function validarMultiplosQualitativos(
         ) {
             throw new Error(
                 `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
-                número-quantificador,
+                número-quantificador (ex.: 12px),
                 ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
