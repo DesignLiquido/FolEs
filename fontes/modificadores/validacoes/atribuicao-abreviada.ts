@@ -15,7 +15,7 @@ export function validarAtribuicaoAbreviada(
     valoresAceitos: { [valorFoles: string]: string } = null,
     valoresExtra: any = null,
     quantificadoresAceitos: { [valorFoles: string]: string } = null,
-    proibirQuantificador: boolean = false,
+    naoAceitaQuantificador: boolean = false,
     // validacaoString: boolean = false,
     // validacaoPersonalizada: boolean = false,
 ): void {
@@ -41,7 +41,7 @@ export function validarAtribuicaoAbreviada(
                     validarMultiplosQualitativos(nomePropriedade, arrayValores, valoresAceitos, quantificadoresAceitos);
                     break;
                 case "numérica":
-                    validarValorNumerico(nomePropriedade, arrayValores, valoresAceitos, valoresExtra, quantificadoresAceitos);
+                    validarValorNumerico(nomePropriedade, arrayValores, valoresAceitos, valoresExtra, quantificadoresAceitos, naoAceitaQuantificador);
                     break;
                 default:
                     break;
