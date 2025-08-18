@@ -10,7 +10,6 @@ export function validarValorNumerico(
     valoresAceitos?: { [valorFoles: string]: string },
     valoresExtra?: any,
     quantificadoresAceitos?: { [valorFoles: string]: string },
-    quantificadoresAceitos2?: { [valorFoles: string]: string },
     naoAceitaQuantificador: boolean = false,
 ) {
     const valorModificador: { valor: string | number, metodo: boolean, numerico: boolean } = capturarValor(valores);
@@ -21,8 +20,6 @@ export function validarValorNumerico(
     }
 
     if (quantificadoresAceitos && valorModificador.numerico && valorNumericoTipado.quantificador) {
-        if (quantificadoresAceitos2) quantificadoresAceitos = { ...quantificadoresAceitos, ...quantificadoresAceitos2 };
-
         validarQuantificador(nomePropriedade, valorNumericoTipado.quantificador, quantificadoresAceitos);
     }
 
