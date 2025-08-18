@@ -29,24 +29,24 @@ export class ModeloEmGrade extends Modificador {
 
         const valoresExtra = ["fit-content"];
 
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
         if (valores.length > 1) {
-            const quantificadoresAceitos: { [nome: string] : string } = {...unidadesMedida, ...valoresFlex};
             validarAtribuicaoAbreviada(
-                "numérica", 
-                "modelo-em-grade", 
-                valores, 
-                this.valoresAceitos, 
+                "numérica",
+                "modelo-em-grade",
+                valores,
+                this.valoresAceitos,
                 valoresExtra,
                 quantificadoresAceitos
             );
         } else {
             validarValorNumerico(
-                "modelo-em-grade", 
-                valores, 
-                this.valoresAceitos, 
+                "modelo-em-grade",
+                valores,
+                this.valoresAceitos,
                 valoresExtra,
-                unidadesMedida,
-                valoresFlex
+                quantificadoresAceitos
             );
         }
 

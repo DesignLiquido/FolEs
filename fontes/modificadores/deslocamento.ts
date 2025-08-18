@@ -19,8 +19,8 @@ export class Deslocamento extends Modificador {
         // Também aceita receber a função path()
         const valoresExtra = ["url", "ray"];
 
+        const quantificadoresAceitos: { [valor: string]: string } = {...unidadesMedida, ...angulos};
         if (valores.length > 1) {
-            const quantificadoresAceitos: { [valor: string]: string } = {...unidadesMedida, ...angulos};
             validarAtribuicaoAbreviada(
                 "numérica",
                 "deslocamento",
@@ -35,8 +35,7 @@ export class Deslocamento extends Modificador {
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
-                unidadesMedida,
-                angulos
+                quantificadoresAceitos
             );
         }
 

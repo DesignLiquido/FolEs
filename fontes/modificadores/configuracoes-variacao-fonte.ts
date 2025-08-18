@@ -31,7 +31,6 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             this.valoresAceitos,
             null,
             null,
-            null,
             true,
         );
 

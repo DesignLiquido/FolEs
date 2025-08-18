@@ -19,7 +19,6 @@ export class ContarColuna extends Modificador {
             this.valoresAceitos,
             null,
             null,
-            null,
             true
         );
 

@@ -15,7 +15,6 @@ export class Ordenar extends Modificador {
             null,
             null,
             null,
-            null,
             true
         );
 

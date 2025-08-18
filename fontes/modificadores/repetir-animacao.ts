@@ -23,7 +23,6 @@ export class RepetirAnimacao extends Modificador {
             this.valoresAceitos,
             null,
             null,
-            null,
             true
         );
 

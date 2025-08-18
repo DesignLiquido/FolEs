@@ -22,7 +22,6 @@ export class EspessuraFonte extends Modificador {
             this.valoresAceitos,
             null,
             null,
-            null,
             true,
         );
 

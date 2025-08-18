@@ -15,7 +15,6 @@ export class LinhasInferiores extends Modificador {
             null,
             null,
             null,
-            null,
             true
         );
 

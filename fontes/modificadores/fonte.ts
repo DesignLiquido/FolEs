@@ -55,8 +55,8 @@ export class Fonte extends Modificador {
         super("fonte", "font", pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
+        const quantificadoresAceitos: { [nome: string]: string} = {...unidadesMedida, ...valoresFonte};
         if (valores.length > 1) {
-            const quantificadoresAceitos: { [nome: string]: string} = {...unidadesMedida, ...valoresFonte};
             validarAtribuicaoAbreviada(
                 "numérica", 
                 "fonte", 
@@ -70,8 +70,7 @@ export class Fonte extends Modificador {
                 valores, 
                 this.valoresAceitos,
                 null,
-                unidadesMedida, 
-                valoresFonte
+                quantificadoresAceitos
             );
         }
 

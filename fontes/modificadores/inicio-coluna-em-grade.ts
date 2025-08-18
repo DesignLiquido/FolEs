@@ -18,7 +18,6 @@ export class InicioColunaEmGrade extends Modificador {
             pragmas,
         );
 
-        // TODO: Adaptar validação AA para proibir quantificador
         if (valores.length > 1) {
             validarAtribuicaoAbreviada(
                 "numérica",
@@ -35,7 +34,6 @@ export class InicioColunaEmGrade extends Modificador {
                 "início-coluna-em-grade",
                 valores,
                 this.valoresAceitos,
-                null,
                 null,
                 null,
                 true

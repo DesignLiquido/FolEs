@@ -11,8 +11,9 @@ export class Recuo extends Modificador {
     ) {
         super("recuo", "padding", pragmas);
 
+        const quantificadoresAceitos: { [nome: string]: string } = {...comprimentos, ...ListaDeValorPercentual}; 
+
         if (valores.length > 1) {
-            const quantificadoresAceitos: { [nome: string]: string } = {...comprimentos, ...ListaDeValorPercentual}; 
             validarAtribuicaoAbreviada(
                 "numérica", 
                 "recuo", 
@@ -27,8 +28,7 @@ export class Recuo extends Modificador {
                 valores,
                 null,
                 null,
-                comprimentos,
-                ListaDeValorPercentual
+                quantificadoresAceitos
             );
         }
 

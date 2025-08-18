@@ -14,13 +14,14 @@ export class PosicaoDireita extends Modificador {
     ) {
         super(["posicao-direita", "posição-direita"], "right", pragmas);
 
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...ListaDeValorPercentual };
+
         validarValorNumerico(
             "posição-direita",
             valores,
             this.valoresAceitos,
             null,
-            unidadesMedida,
-            ListaDeValorPercentual,
+            quantificadoresAceitos
         );
 
         this.valores = valores;

@@ -32,7 +32,6 @@ export class FimLinhaEmGrade extends Modificador {
                 this.valoresAceitos,
                 null,
                 null,
-                null,
                 true
             );
         }

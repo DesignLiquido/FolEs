@@ -15,7 +15,6 @@ export class FlexCrescimento extends Modificador {
             null,
             null,
             null,
-            null,
             true
         );
 

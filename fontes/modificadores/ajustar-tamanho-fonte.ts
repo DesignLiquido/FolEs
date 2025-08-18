@@ -36,7 +36,6 @@ export class AjustarTamanhoFonte extends Modificador {
                 this.valoresAceitos,
                 null,
                 null,
-                null,
                 true,
             );
         }

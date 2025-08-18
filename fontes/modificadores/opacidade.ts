@@ -30,7 +30,6 @@ export class Opacidade extends Modificador {
                 null,
                 null,
                 null,
-                null,
                 true
             )
         } else {

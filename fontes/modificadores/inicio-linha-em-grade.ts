@@ -18,7 +18,6 @@ export class InicioLinhaEmGrade extends Modificador {
             pragmas,
         );
 
-        // TODO: Adaptar validação AA para proibir quantificador
         if (valores.length > 1) {
             validarAtribuicaoAbreviada(
                 "numérica",
@@ -35,7 +34,6 @@ export class InicioLinhaEmGrade extends Modificador {
                 "início-linha-em-grade",
                 valores,
                 this.valoresAceitos,
-                null,
                 null,
                 null,
                 true

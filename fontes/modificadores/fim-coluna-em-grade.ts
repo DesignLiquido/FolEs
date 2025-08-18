@@ -14,7 +14,6 @@ export class FimColunaEmGrade extends Modificador {
     ) {
         super("fim-coluna-em-grade", "grid-column-end", pragmas);
 
-        // TODO: Adaptar validação AA para proibir quantificador
         if (valores.length > 1) {
             validarAtribuicaoAbreviada(
                 "numérica", 
@@ -31,7 +30,6 @@ export class FimColunaEmGrade extends Modificador {
                 "fim-coluna-em-grade",
                 valores,
                 this.valoresAceitos,
-                null,
                 null,
                 null,
                 true

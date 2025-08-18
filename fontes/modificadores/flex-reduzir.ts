@@ -15,7 +15,6 @@ export class FlexReduzir extends Modificador {
             null,
             null,
             null,
-            null,
             true
         );
 

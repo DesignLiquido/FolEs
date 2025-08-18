@@ -20,13 +20,14 @@ export class TamanhoLinhasEmGrade extends Modificador {
 
         const valoresExtra = ["minmax", "fit-content"];
 
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
         validarValorNumerico(
             "tamanho-linhas-em-grade",
             valores,
             this.valoresAceitos,
             valoresExtra,
-            unidadesMedida,
-            valoresFlex,
+            quantificadoresAceitos
         );
 
         this.valores = valores;

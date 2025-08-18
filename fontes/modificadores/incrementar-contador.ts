@@ -32,7 +32,6 @@ export class IncrementarContador extends Modificador {
                 this.valoresAceitos,
                 null,
                 null,
-                null,
                 true
             );
         }

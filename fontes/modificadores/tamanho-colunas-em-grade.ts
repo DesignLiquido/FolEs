@@ -20,13 +20,14 @@ export class TamanhoColunasEmGrade extends Modificador {
 
         const valoresExtra = ["minmax", "fit-content"];
 
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
         validarValorNumerico(
             "tamanho-colunas-em-grade",
             valores,
             this.valoresAceitos,
             valoresExtra,
-            unidadesMedida,
-            valoresFlex,
+            quantificadoresAceitos
         );
 
         this.valores = valores;
