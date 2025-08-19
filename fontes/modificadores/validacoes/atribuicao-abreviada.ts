@@ -29,7 +29,7 @@ export function validarAtribuicaoAbreviada(
                     validarValores(nomePropriedade, arrayValores, valoresAceitos, valoresExtra);
                     break;
                 case "condição-extra":
-                    validarValoresAdicionais(nomePropriedade, arrayValores, valoresAceitos, valoresExtra);
+                    validarValoresAdicionais(nomePropriedade, arrayValores, valoresExtra, valoresAceitos);
                     break;
                 case "cor":
                     validarValorCor(nomePropriedade, arrayValores, valoresAceitos);

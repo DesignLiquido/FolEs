@@ -5,9 +5,7 @@ import { Metodo } from "../../valores/metodos/foles/metodo";
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
     valores: Valor[],
-): void {
-    console.log(valores);
-    
+): void {    
     let valorModificador: string;
 
     if (valores[0] instanceof ValorTexto) {
