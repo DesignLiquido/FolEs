@@ -1,7 +1,6 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
-import { validarValorString } from "./validacoes/string";
 
 export class EstiloEnfaseTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -29,13 +28,7 @@ export class EstiloEnfaseTexto extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // const validacaoString = validarValorString(valores);
-
-        // if (validacaoString) {
-        //     this.valoresAceitos[valor] = valor;
-        // }
-
+        // TODO: Aceita valores string
         validarValores("estilo-ênfase-texto", valores, this.valoresAceitos);
 
         this.valores = valores;

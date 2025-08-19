@@ -1,4 +1,4 @@
-import { Valor } from "../valores";
+import { Valor, ValorQualitativo } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -40,9 +40,10 @@ export class Aparencia extends Modificador {
     ) {
         super(["aparencia", "aparência"], "appearance", pragmas);
 
-        // Se for um equivalente, o valor atribuído é 'auto';
-        // TODO: Repensar
-        // valor in this.valoresEquivalentes ? (valor = "auto") : null;
+        // Se for um valor equivalente, o valor atribuído é 'auto';
+        if (valores[0] instanceof ValorQualitativo && valores[0].qualitativo in this.valoresEquivalentes) {
+            valores[0].qualitativo = "auto";
+        }
 
         validarValores("aparência", valores, this.valoresAceitos);
 

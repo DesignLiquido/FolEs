@@ -16,7 +16,7 @@ export class Deslocamento extends Modificador {
     ) {
         super("deslocamento", "offset", pragmas);
 
-        // Também aceita receber a função path()
+        // TODO: Também aceita receber a função path()
         const valoresExtra = ["url", "ray"];
 
         const quantificadoresAceitos: { [valor: string]: string } = {...unidadesMedida, ...angulos};

@@ -24,7 +24,6 @@ export class TamanhoMinimoEmLinha extends Modificador {
 
         const valoresExtra = ["fit-content"];
 
-        // TODO: Repensar
         validarValorNumerico(
             "tamanho-mínimo-em-linha",
             valores,

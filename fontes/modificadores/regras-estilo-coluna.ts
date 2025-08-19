@@ -1,6 +1,5 @@
 import { Valor } from "../valores";
 import { estilos } from "./atributos/estilo";
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 

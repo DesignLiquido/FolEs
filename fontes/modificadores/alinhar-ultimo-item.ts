@@ -41,8 +41,5 @@ export class AlinharUltimoItem extends Modificador {
         );
 
         this.valores = valores;
-
-        // Não recebe quantificador
-        // this.quantificador = quantificador;
     }
 }

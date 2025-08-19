@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemEmBloco extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {

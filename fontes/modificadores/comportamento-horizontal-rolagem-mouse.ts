@@ -19,7 +19,6 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
         validarValores(
             "comportamento-em-horizontal-rolagem-mouse",
             valores,

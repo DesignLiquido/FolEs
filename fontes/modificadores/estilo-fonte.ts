@@ -3,7 +3,6 @@ import { angulos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EstiloFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {

@@ -26,7 +26,6 @@ export class OrigemPerspectiva extends Modificador {
             ListaDeValorPercentual
         );
 
-        // TODO: Também pode receber somente o valor numérico, sem quantificador
         this.valores = valores;
     }
 }

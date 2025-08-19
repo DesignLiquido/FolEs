@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Tabulacao extends Modificador {
     constructor(

@@ -18,7 +18,6 @@ export class QuebraDecoracaoCaixa extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
         validarValores(
             "quebra-decoração-caixa",
             valores,

@@ -13,9 +13,14 @@ export class IndiceZ extends Modificador {
     ) {
         super(["indice-z", "índice-z"], "z-index", pragmas);
 
-        validarValorNumerico("índice-z", valores, this.valoresAceitos);
-    
-        // TODO: Proibir quantificador?
+        validarValorNumerico(
+            "índice-z", 
+            valores, 
+            this.valoresAceitos,
+            null,
+            null,
+            true
+        );
 
         this.valores = valores;
     }

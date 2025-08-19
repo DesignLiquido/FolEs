@@ -19,11 +19,10 @@ export class ComportamentoEmLinhaRolagemMouse extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
         validarValores(
             "comportamento-em-linha-rolagem-mouse",
             valores,
-            this.valoresAceitos,
+            this.valoresAceitos
         );
 
         this.valores = valores;

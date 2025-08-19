@@ -1,5 +1,4 @@
 import { Valor } from "../valores";
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 

@@ -16,18 +16,13 @@ export class Coordenadas extends Modificador {
     ) {
         super("coordenadas", "translate", pragmas);
 
-        // TODO: Repensar
-        //     validarValorNumerico("coordenadas", valores, this.valoresAceitos);
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "coordenadas",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
+        validarValorNumerico(
+            "coordenadas",
+            valores,
+            this.valoresAceitos,
+            null,
+            unidadesMedida
+        );
 
         this.valores = valores;
     }

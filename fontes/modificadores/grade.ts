@@ -1,9 +1,9 @@
-import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
+import { Valor, ValorNumerico, ValorQualitativo } from "../valores";
+import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Grade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -28,7 +28,8 @@ export class Grade extends Modificador {
 
         const valoresExtra = ["minmax"];
 
-        // TODO: Adaptar para receber também número-quantificador
+        const quantificadoresAceitos: { [nome: string]: string } = {...unidadesMedida, ...valoresFlex};
+
         if (valores.length > 1) {
             validarAtribuicaoAbreviada(
                 "comum", 
@@ -37,6 +38,14 @@ export class Grade extends Modificador {
                 this.valoresAceitos, 
                 valoresExtra
             );
+        } else if (valores[0] instanceof ValorNumerico) {
+            validarValorNumerico(
+                 "grade", 
+                valores, 
+                this.valoresAceitos, 
+                valoresExtra,
+                quantificadoresAceitos
+            );
         } else {
             validarValores(
                 "grade", 
@@ -44,6 +53,7 @@ export class Grade extends Modificador {
                 this.valoresAceitos, 
                 valoresExtra
             );
+            
         }
 
         this.valores = valores;
