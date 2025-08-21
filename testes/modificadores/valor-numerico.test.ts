@@ -7,7 +7,6 @@ import { Serializador } from "../../fontes/serializadores";
 import { ModificadoresDeValorNumerico, ModificadoresDeValorNumericoApenas, ModificadoresDeValorNumericoComQuantificador, ModificadoresDeValorNumericoZeroUm } from "../listas/valores-numericos";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
-
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 
 describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () => {
@@ -69,8 +68,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         }
     });
 
-    // TODO: Descobrir por que não dá erro.
-    it.skip('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
         for (let index = 0; index < Object.keys(ModificadoresDeValorNumericoApenas).length; index += 1) {
 
             // Lexador - valor numérico não informado
@@ -99,7 +97,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
             if (!regex.test(ModificadoresDeValorNumericoApenas[index]) && regex.test(ModificadoresDeValorNumericoApenas[index + 1])) {
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`A Modificador ou variável '${ModificadoresDeValorNumericoApenas[index + 1]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
+                }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoApenas[index + 1]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
             } else {
                 expect(() => {
                     avaliador.analisar(novoLexador.simbolos);
@@ -113,8 +111,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         }
     });
 
-    // TODO: Descobrir por que não dá erro.
-    it.skip('Casos de falha - Modificadores que só aceitam zero ou um como valor numérico', () => {
+    it('Casos de falha - Modificadores que só aceitam zero ou um como valor numérico', () => {
         for (let index = 0; index < ModificadoresDeValorNumericoZeroUm.length; index += 1) {
             // Lexador
             const resultadoLexador = lexador.mapear([
@@ -125,11 +122,11 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
 
             expect(() => {
                 avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoZeroUm[index]}' com valor 2 inválido. O valor deve estar entre 0 e 1 ou ser um dos valores:`);
+            }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoZeroUm[index]}' com valor 2 inválido.`);
         }
     });
 
-    // TODO: Descobrir por que dá erro.
+    // TODO: Consertar após ajustar processo de atribuição de valor via variável
     it.skip('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
         for (let index = 0; index < ModificadoresDeValorNumerico.length; index += 1) {
             const seletor = new SeletorModificador(
