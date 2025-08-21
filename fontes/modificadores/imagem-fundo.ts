@@ -14,7 +14,12 @@ export class ImagemFundo extends Modificador {
     ) {
         super("imagem-fundo", "background-image", pragmas);
         
-        validarValores("imagem-fundo", valores, this.valoresAceitos);
+        validarValores(
+            "imagem-fundo", 
+            valores, 
+            this.valoresAceitos,
+            null
+        );
 
         this.valores = valores;
     }

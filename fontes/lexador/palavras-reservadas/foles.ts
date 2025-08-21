@@ -959,7 +959,7 @@ export default {
     "delimitarCaixa": tiposDeSimbolos.QUALITATIVO,
     "ajustar-conteudo": tiposDeSimbolos.QUALITATIVO,
     "ajustar-conteúdo": tiposDeSimbolos.QUALITATIVO,
-    "serifa": "serif",
+    "serifa": tiposDeSimbolos.QUALITATIVO,
     "monoespaço": tiposDeSimbolos.QUALITATIVO,
     "monoespaco": tiposDeSimbolos.QUALITATIVO,
     "cursiva": tiposDeSimbolos.QUALITATIVO,
