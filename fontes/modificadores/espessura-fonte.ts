@@ -5,7 +5,7 @@ import { validarValorNumerico } from "./validacoes/numerica";
 export class EspessuraFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
-        negrito: "bold",
+        "em-negrito": "bold",
         "mais-clara": "lighter",
         "mais-escura": "bolder",
     };
@@ -17,8 +17,8 @@ export class EspessuraFonte extends Modificador {
         super("espessura-fonte", "font-weight", pragmas);
 
         validarValorNumerico(
-            "espessura-fonte", 
-            valores, 
+            "espessura-fonte",
+            valores,
             this.valoresAceitos,
             null,
             null,

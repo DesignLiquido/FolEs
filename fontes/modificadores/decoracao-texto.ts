@@ -6,7 +6,7 @@ import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativo
 export class DecoracaoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
-        sublinhado: "underline",
+        sublinhar: "underline",
         "linha-superior": "overline",
         "atraves-linha": "line-through",
         "através-linha": "line-through",

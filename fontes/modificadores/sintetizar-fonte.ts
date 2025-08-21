@@ -6,9 +6,9 @@ import { validarValores } from "./validacoes/comum";
 export class SintetizarFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
-        negrito: "weight",
-        italico: "style",
-        itálico: "style",
+        "em-negrito": "weight",
+        italica: "style",
+        itálica: "style",
         "maiusculas-pequenas": "small-caps",
         "maiúsculas-pequenas": "small-caps",
     };

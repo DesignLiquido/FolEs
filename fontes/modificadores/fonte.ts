@@ -35,7 +35,7 @@ export class Fonte extends Modificador {
         itálica: "italic",
         obliqua: "oblique",
         oblíqua: "oblique",
-        negrito: "bold",
+        "em-negrito": "bold",
         "mais-clara": "lighter",
         "mais-escura": "bolder",
         "ultra-condensada": "ultra-condensed",

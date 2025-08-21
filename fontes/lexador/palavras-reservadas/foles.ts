@@ -742,6 +742,7 @@ export default {
     "fangsong": tiposDeSimbolos.QUALITATIVO,
     "maiusculas-pequenas": tiposDeSimbolos.QUALITATIVO,
     "maiúsculas-pequenas": tiposDeSimbolos.QUALITATIVO,
+    "em-negrito": tiposDeSimbolos.QUALITATIVO,
     "italica": tiposDeSimbolos.QUALITATIVO,
     "itálica": tiposDeSimbolos.QUALITATIVO,
     "obliqua": tiposDeSimbolos.QUALITATIVO,
@@ -994,6 +995,7 @@ export default {
     "proximidade": tiposDeSimbolos.QUALITATIVO,
     "achatar": tiposDeSimbolos.QUALITATIVO,
     "recorte": tiposDeSimbolos.QUALITATIVO,
+    "sublinhar": tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos com nomenclatura conflitando com demais estruturas // TODO: Avaliar e ajustar
     // "cor-destaque": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador

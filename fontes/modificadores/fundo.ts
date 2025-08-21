@@ -9,7 +9,7 @@ export class Fundo extends Modificador {
         fixo: "fixed",
         local: "local",
         rolar: "scroll",
-        borda: "border-box",
+        "borda-caixa": "border-box",
         preenchimento: "padding-box",
         conteudo: "content-box",
         conteúdo: "content-box",

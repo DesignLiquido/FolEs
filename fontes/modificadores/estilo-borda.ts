@@ -2,6 +2,7 @@ import { Valor } from "../valores";
 import { estilos } from "./atributos/estilo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { validarValores } from "./validacoes/comum";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloBorda extends Modificador {
@@ -14,16 +15,16 @@ export class EstiloBorda extends Modificador {
 
         if (valores.length > 1) {
             validarAtribuicaoAbreviada(
-                "condição-extra", 
+                "comum", 
                 "estilo-borda", 
                 valores, 
-                estilos
+                this.valoresAceitos
             );
         } else {
-            validarValoresAdicionais(
+            validarValores(
                 "estilo-borda", 
                 valores, 
-                estilos
+                this.valoresAceitos
             );
         }
 
