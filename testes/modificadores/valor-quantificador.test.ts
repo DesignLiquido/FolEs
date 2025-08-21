@@ -97,8 +97,7 @@ describe('Testes: Valor-Quantificador', () => {
             }
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Casos de Falha - Atribuição de valor inválido', () => {
+        it('Casos de Falha - Atribuição de valor inválido', () => {
             for (let index = 0; index < Object.keys(ValorQuantificadorInvalido).length; index += 1) {
 
                 // Lexador - valor numérico não informado
@@ -123,7 +122,7 @@ describe('Testes: Valor-Quantificador', () => {
             }
         });
 
-        // TODO: Descobrir por que  dá erro.
+        // TODO: Descomentar ao consertar o processo de atribuição via variável
         it.skip('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
             for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
                 const seletor = new SeletorModificador(
