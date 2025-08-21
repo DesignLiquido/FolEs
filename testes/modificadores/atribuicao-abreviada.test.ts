@@ -23,8 +23,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             serializador = new Serializador();
         });
 
-        // TODO: Corrigir teste.
-        it.skip('Seletores que recebem múltiplos atributos do tipo valor-quantificador', () => {
+        it('Seletores que recebem múltiplos atributos do tipo valor-quantificador', () => {
             for (let index = 0; index < AtribuicaoAbreviadaVQ.length; index += 1) {
                 const nomeModificador = AtribuicaoAbreviadaVQ[index];
                 const valoresAceitos = [
@@ -36,7 +35,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
 
                 for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
                     const seletor = new SeletorModificador(
-                        AtribuicaoAbreviadaVQ[index], 
+                        AtribuicaoAbreviadaVQ[index],
                         valoresAceitos[valIndex]
                     );
 
@@ -89,25 +88,24 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             }
         });
 
-        // TODO: Corrigir teste.
-        it.skip('Seletores que recebem múltiplas palavras reservadas como atributo', () => {
+        it('Seletores que recebem múltiplas palavras reservadas como atributo', () => {
             for (let index = 0; index < AtribuicaoAbreviadaPR.length; index += 1) {
                 let seletor: any;
                 if (index <= 5) {
                     seletor = new SeletorModificador(
-                        AtribuicaoAbreviadaPR[index], 
+                        AtribuicaoAbreviadaPR[index],
                         [new ValorNumerico(AtribuicaoAbreviadaPR[index], 10, 'px')]
                     );
                 } else if (index > 5 && index <= 7) {
                     seletor = new SeletorModificador(
-                        AtribuicaoAbreviadaPR[index], 
-                        [new ValorQualitativo('tracejado')], 
+                        AtribuicaoAbreviadaPR[index],
+                        [new ValorQualitativo('tracejado')],
                         null
                     );
                 } else {
                     seletor = new SeletorModificador(
-                        AtribuicaoAbreviadaPR[index], 
-                        [new ValorQualitativo('centro')], 
+                        AtribuicaoAbreviadaPR[index],
+                        [new ValorQualitativo('centro')],
                         null
                     );
                 }
@@ -120,7 +118,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                         valorPR += ' ';
                     }
                 }
-                
+
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -157,19 +155,12 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             }
         });
 
-        // TODO: Corrigir teste.
-        it.skip('Seletores que recebem palavras reservadas específicas como atributo', () => {
+        it('Seletores que recebem palavras reservadas específicas como atributo', () => {
             for (let index = 0; index < AtribuicaoAbreviadaPREspecificas.length; index += 1) {
-
-                const seletor = new SeletorModificador(
-                    AtribuicaoAbreviadaPREspecificas[index]['modificador'],
-                    AtribuicaoAbreviadaPREspecificas[index]['valor'],
-                );
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                        `${AtribuicaoAbreviadaPREspecificas[index]['modificador']}: ${AtribuicaoAbreviadaPREspecificas[index]['valor']};`,
+                    `${AtribuicaoAbreviadaPREspecificas[index]['modificador']}: ${AtribuicaoAbreviadaPREspecificas[index]['valor']};`,
                     "}"
                 ]);
 
@@ -185,11 +176,11 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
                 const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toContain(
+                    AtribuicaoAbreviadaPREspecificas[index]['modificador']
                 );
                 expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    AtribuicaoAbreviadaPREspecificas[index]['css']
                 );
 
                 // Tradutor
@@ -197,20 +188,13 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaPREspecificas[index]['css']);
                 expect(resultadoTradutor).toContain(AtribuicaoAbreviadaPREspecificas[index]['traducao']);
             }
         });
-    
-        // TODO: Corrigir teste.
-        it.skip('Seletores que recebem tanto palavras reservadas quanto valor-quantificador como atributo', () => {
+
+        it('Seletores que recebem tanto palavras reservadas quanto valor-quantificador como atributo', () => {
             for (let index = 0; index < AtribuicaoAbreviadaVQePR.length; index += 1) {
-
-                const seletor = new SeletorModificador(
-                    AtribuicaoAbreviadaVQePR[index]['modificador'],
-                    AtribuicaoAbreviadaVQePR[index]['valor']
-                );
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -238,11 +222,11 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
                 const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toContain(
+                    AtribuicaoAbreviadaVQePR[index]['modificador']
                 );
                 expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                    AtribuicaoAbreviadaVQePR[index]['css']
                 );
 
                 // Tradutor
@@ -250,20 +234,13 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['css']);
                 expect(resultadoTradutor).toContain(AtribuicaoAbreviadaVQePR[index]['traducao']);
             }
         });
 
-        // TODO: Corrigir teste.
-        it.skip('Seletores que recebem atribuição de valores separados por BARRA', () => {
+        it('Seletores que recebem atribuição de valores separados por BARRA', () => {
             for (let index = 0; index < AtribuicaoSeparadaPorBarra.length; index += 1) {
-
-                const seletor = new SeletorModificador(
-                    AtribuicaoSeparadaPorBarra[index]['modificador'],
-                    AtribuicaoSeparadaPorBarra[index]['valor'],
-                );
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -305,11 +282,11 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
                 const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toContain(
+                    AtribuicaoSeparadaPorBarra[index]['modificador']
                 );
-                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toContain(
+                    AtribuicaoSeparadaPorBarra[index]['css']
                 );
 
                 // Tradutor
@@ -317,20 +294,13 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoSerializador).toContain('html');
-                expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
+                expect(resultadoSerializador).toContain(AtribuicaoSeparadaPorBarra[index]['css']);
                 expect(resultadoSerializador).toContain(AtribuicaoSeparadaPorBarra[index]['valor']);
             }
         });
 
-        // TODO: Consertar
-        it.skip('Seletores que recebem atribuição de valores separados por VÍRGULA', () => {
+        it('Seletores que recebem atribuição de valores separados por VÍRGULA', () => {
             for (let index = 0; index < AtribuicaoSeparadaPorVirgula.length; index += 1) {
-
-                const seletor = new SeletorModificador(
-                    AtribuicaoSeparadaPorVirgula[index]['modificador'],
-                    AtribuicaoSeparadaPorVirgula[index]['valor']
-                );
-
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
@@ -366,11 +336,11 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
                 const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
-                    seletor['nomeFoles']
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toContain(
+                    AtribuicaoSeparadaPorVirgula[index]['modificador']
                 );
-                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
-                    seletor['propriedadeCss']
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toContain(
+                    AtribuicaoSeparadaPorVirgula[index]['css']
                 );
 
                 // Tradutor
@@ -378,7 +348,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoTradutor).toContain(AtribuicaoSeparadaPorVirgula[index]['css']);
                 expect(resultadoTradutor).toContain(AtribuicaoSeparadaPorVirgula[index]['traducao']);
             }
         });
