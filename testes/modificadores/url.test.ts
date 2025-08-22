@@ -2,7 +2,6 @@ import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Importador } from "../../fontes/importador";
 import { ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
-import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { TraducaoUrl, Url } from "../listas/url";
@@ -22,10 +21,9 @@ describe('Testando Seletores que recebem URL como atributo', () => {
             tradutor = new Serializador();
         });
 
-        // TODO: TypeError: modificador.valores is not iterable
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             const URLexemplo = 'url("https://www.showmetech.com.br/wp-content/uploads//2018/12/email_ss_1920-1920x1024.png")';
-
+            
             for (let index = 0; index < Url.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
