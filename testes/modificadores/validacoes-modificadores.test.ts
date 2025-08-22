@@ -283,8 +283,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             expect(resultadoTradutor).toContain('blue;');
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Caso de sucesso - Validações não retornam erros ao atribuir código hexadecimal', () => {
+        it('Caso de sucesso - Validações não retornam erros ao atribuir código hexadecimal', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 'divisão {',
@@ -315,8 +314,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             expect(resultadoTradutor).toContain('#ffffff;');
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Caso de falha - Validação retorna erro de código hexadecimal inválido', () => {
+        it('Caso de falha - Validação retorna erro de código hexadecimal inválido', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 'divisão {',
@@ -330,8 +328,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com hexadecimal inválido`);
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Caso de falha - Validação retorna erro de método inválido', () => {
+        it('Caso de falha - Validação retorna erro de método inválido', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 'divisão {',
