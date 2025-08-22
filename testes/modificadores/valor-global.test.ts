@@ -28,7 +28,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(
-                    ValorGlobal[index], 
+                    ValorGlobal[index],
                     [new ValorQualitativo('herdar')],
                     null
                 );
@@ -152,7 +152,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             }
         });
 
-        // TODO: Consertar
+        // TODO: Consertar após ajustar processo de atribuição de valor via variável
         it.skip('Caso de Sucesso - Posição atribuída por meio de variável', () => {
             const globaisFolEs = Object.keys(valoresGlobais);
             const globaisCss = Object.values(valoresGlobais);
@@ -162,7 +162,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 const resultadoLexador = lexador.mapear([
                     `$valor-padrao: ${globaisFolEs[index]};`,
                     "lmht {",
-                        'conteúdo: $valor-padrao;',
+                    'conteúdo: $valor-padrao;',
                     "}"
                 ]);
 
