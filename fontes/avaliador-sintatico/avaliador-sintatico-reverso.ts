@@ -187,10 +187,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'blur'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorBorrar,
-                    quantificadorBorrar,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema, [valorBorrar, quantificadorBorrar]) as MetodoCss;
 
             case "brightness":
                 this.consumir(
@@ -208,10 +205,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'brightness'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorBrilho,
-                    quantificadorBrilho,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema, [valorBrilho, quantificadorBrilho]) as MetodoCss;
 
             case "calc":
                 this.consumir(
@@ -228,13 +222,16 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'calc'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorCalc1,
-                    quantificadorCalc1,
-                    operadorCalc,
-                    valorCalc2,
-                    quantificadorCalc2,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorCalc1,
+                        quantificadorCalc1,
+                        operadorCalc,
+                        valorCalc2,
+                        quantificadorCalc2,
+                    ]
+                ) as MetodoCss;
 
             case "character-variant":
                 this.consumir(
@@ -273,14 +270,17 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método clamp.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorMin,
-                    quantificadorMin,
-                    valorMed,
-                    quantificadorMed,
-                    valorMax,
-                    quantificadorMax,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorMin,
+                        quantificadorMin,
+                        valorMed,
+                        quantificadorMed,
+                        valorMax,
+                        quantificadorMax,
+                    ]
+                ) as MetodoCss;
             }
 
             case "contrast":
@@ -301,10 +301,13 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'contrast'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorContraste,
-                    quantificadorContraste,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorContraste,
+                        quantificadorContraste,
+                    ]
+                ) as MetodoCss;
 
             case "counter":
                 this.consumir(
@@ -329,45 +332,51 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após método 'counter'.",
                 );
 
-                return new SeletorValorReverso(lexema, [
-                    nomeCounter,
-                    estiloCounter,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        nomeCounter,
+                        estiloCounter,
+                    ]
+                ) as MetodoCss;
 
             case "cubic-bezier":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'cubic-bezier'.",
                 );
-                const parametro1 = this.avancarEDevolverAnterior();
+                const parametro1cubic = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.VIRGULA,
                     "Esperado vírgula após primeiro argumento do método cubic-bezier.",
                 );
-                const parametro2 = this.avancarEDevolverAnterior();
+                const parametro2cubic = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.VIRGULA,
                     "Esperado vírgula após segundo argumento do método cubic-bezier.",
                 );
-                const parametro3 = this.avancarEDevolverAnterior();
+                const parametro3cubic = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.VIRGULA,
                     "Esperado vírgula após terceiro argumento do método cubic-bezier.",
                 );
-                const parametro4 = this.avancarEDevolverAnterior();
+                const parametro4cubic = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após quarto argumento do método curva-cúbica.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    parametro1,
-                    parametro2,
-                    parametro3,
-                    parametro4,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        parametro1cubic,
+                        parametro2cubic,
+                        parametro3cubic,
+                        parametro4cubic,
+                    ]
+                ) as MetodoCss;
 
             case "drop-shadow": {
-this.consumir(
+                this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'drop-shadow'.",
                 );
@@ -400,15 +409,17 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'drop-shadow'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorSombra1,
-                    quantificadorSombra1,
-                    valorSombra2,
-                    quantificadorSombra2,
-                    valorSombra3,
-                    quantificadorSombra3,
-                    corSombra,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema,
+                    [
+                        valorSombra1,
+                        quantificadorSombra1,
+                        valorSombra2,
+                        quantificadorSombra2,
+                        valorSombra3,
+                        quantificadorSombra3,
+                        corSombra,
+                    ]
+                ) as MetodoCss;
             }
 
             case "fit-content":
@@ -422,10 +433,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método fit-content.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorFit["lexema"],
-                    quantificadorFit["lexema"],
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorFit["lexema"],
+                        quantificadorFit["lexema"],
+                    ]
+                ) as MetodoCss;
 
             case "grayscale":
                 this.consumir(
@@ -443,10 +457,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'grayscale'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorEscala,
-                    quantificadorEscala,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorEscala,
+                        quantificadorEscala,
+                    ]
+                ) as MetodoCss;
 
             case "hsl": {
                 this.consumir(
@@ -468,13 +485,16 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'hsl'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    HdeHSL,
-                    SdeHSL,
-                    LdeHSL,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        HdeHSL,
+                        SdeHSL,
+                        LdeHSL,
+                    ]
+                ) as MetodoCss;
             }
-                
+
             case "hsla": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -495,11 +515,14 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'hsla'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    HdeHSLA,
-                    SdeHSLA,
-                    LdeHSLA,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        HdeHSLA,
+                        SdeHSLA,
+                        LdeHSLA,
+                    ]
+                ) as MetodoCss;
             }
 
             case "hue-rotate": {
@@ -520,8 +543,7 @@ this.consumir(
                 );
                 return new SeletorValorReverso(
                     lexema,
-                    [valorRotacao, quantificadorRotacao],
-                    true,
+                    [valorRotacao, quantificadorRotacao]
                 ) as MetodoCss;
             }
 
@@ -545,11 +567,14 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método scale3d.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorScale3d1,
-                    valorScale3d2,
-                    valorScale3d3,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorScale3d1,
+                        valorScale3d2,
+                        valorScale3d3,
+                    ]
+                ) as MetodoCss;
             }
 
             case "invert": {
@@ -568,7 +593,7 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'invert'.",
                 );
-                return new SeletorValorReverso(lexema, [valorInverter]) as MetodoCss;
+                return new SeletorValorReverso(lexema, [valorInverter, quantificadorInverter]) as MetodoCss;
             }
 
             case "scaleX": {
@@ -659,64 +684,15 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'linear-gradient'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorAngulo,
-                    quantificadorAngulo,
-                    cor1,
-                    cor2,
-                ]) as MetodoCss;
-
-            case "hsl":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'hsl'.",
-                );
-                const HdeHSL = this.avancarEDevolverAnterior();
-                const SdeHSL = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.QUANTIFICADOR,
-                    "Esperado símbolo percentual após argumento de saturação (S) no método 'hsl'.",
-                );
-                const LdeHSL = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.QUANTIFICADOR,
-                    "Esperado símbolo percentual após argumento de luminosidade (L) no método 'hsl'.",
-                );
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'hsl'.",
-                );
-                return new SeletorValorReverso(lexema, [
-                    HdeHSL,
-                    SdeHSL,
-                    LdeHSL,
-                ]) as MetodoCss;
-
-            case "hsla":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'hsla'.",
-                );
-                const HdeHSLA = this.avancarEDevolverAnterior();
-                const SdeHSLA = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.QUANTIFICADOR,
-                    "Esperado símbolo percentual após argumento de saturação (S) no método 'hsla'.",
-                );
-                const LdeHSLA = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.QUANTIFICADOR,
-                    "Esperado símbolo percentual após argumento de luminosidade (L) no método 'hsla'.",
-                );
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após argumentos de método 'hsla'.",
-                );
-                return new SeletorValorReverso(lexema, [
-                    HdeHSLA,
-                    SdeHSLA,
-                    LdeHSLA,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorAngulo,
+                        quantificadorAngulo,
+                        cor1,
+                        cor2,
+                    ]
+                ) as MetodoCss;
 
             case "skew": {
                 this.consumir(
@@ -751,14 +727,16 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'skew'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInclinar1,
-                    quantificadorInclinar1,
-                    valorInclinar2,
-                    quantificadorInclinar2,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInclinar1,
+                        quantificadorInclinar1,
+                        valorInclinar2,
+                        quantificadorInclinar2,
+                    ]
+                ) as MetodoCss;
             }
-                
 
             case "skewX": {
                 this.consumir(
@@ -776,10 +754,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'skewX'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInclinarX,
-                    quantificadorInclinarX,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInclinarX,
+                        quantificadorInclinarX,
+                    ]
+                ) as MetodoCss;
             }
 
             case "skewY": {
@@ -798,10 +779,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'skewY'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInclinarY,
-                    quantificadorInclinarY,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInclinarY,
+                        quantificadorInclinarY,
+                    ]
+                ) as MetodoCss;
             }
 
             case "invert":
@@ -820,10 +804,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'invert'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInverter,
-                    quantificadorInverter,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInverter,
+                        quantificadorInverter,
+                    ]
+                ) as MetodoCss;
 
             case "clamp":
                 this.consumir(
@@ -848,14 +835,17 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método clamp.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorMin,
-                    quantificadorMin,
-                    valorMed,
-                    quantificadorMed,
-                    valorMax,
-                    quantificadorMax,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorMin,
+                        quantificadorMin,
+                        valorMed,
+                        quantificadorMed,
+                        valorMax,
+                        quantificadorMax,
+                    ]
+                ) as MetodoCss;
 
             case "linear":
                 this.consumir(
@@ -877,11 +867,14 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após terceiro argumento do método linear.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valor1,
-                    valor2,
-                    valor3,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valor1,
+                        valor2,
+                        valor3,
+                    ]
+                ) as MetodoCss;
 
             case "minmax":
                 this.consumir(
@@ -910,18 +903,13 @@ this.consumir(
                 );
 
                 if (parametro01 !== null) {
-                    return new SeletorValorReverso(lexema, [
-                        parametro01,
-                        valor02["lexema"],
-                    ]) as MetodoCss;
+                    return new SeletorValorReverso(lexema, [parametro01, valor02["lexema"]]) as MetodoCss;
                 }
-                
+
                 if (parametro02 !== null) {
-                    return new SeletorValorReverso(lexema, [
-                        valor01["lexema"],
-                        parametro02,
-                    ]) as MetodoCss;
+                    return new SeletorValorReverso(lexema, [valor01["lexema"], parametro02]) as MetodoCss;
                 }
+
             case "opacity":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -941,7 +929,7 @@ this.consumir(
                 return new SeletorValorReverso(
                     lexema,
                     [valorOpaco, quantificadorOpaco],
-                    true,
+                    true
                 ) as MetodoCss;
 
             case "ornaments":
@@ -978,7 +966,7 @@ this.consumir(
                 return new SeletorValorReverso(
                     lexema,
                     [valorPerspectivar, quantificadorPerspectivar],
-                    true,
+                    true
                 ) as MetodoCss;
 
             case "drop-shadow":
@@ -1015,15 +1003,17 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'drop-shadow'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorSombra1,
-                    quantificadorSombra1,
-                    valorSombra2,
-                    quantificadorSombra2,
-                    valorSombra3,
-                    quantificadorSombra3,
-                    corSombra,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema,
+                    [
+                        valorSombra1,
+                        quantificadorSombra1,
+                        valorSombra2,
+                        quantificadorSombra2,
+                        valorSombra3,
+                        quantificadorSombra3,
+                        corSombra,
+                    ]
+                ) as MetodoCss;
 
             case "ray":
                 this.consumir(
@@ -1042,11 +1032,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'ray'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    posicaoRaio,
-                    numeroRaio,
-                    quantificadorRaio,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema,
+                    [
+                        posicaoRaio,
+                        numeroRaio,
+                        quantificadorRaio,
+                    ]
+                ) as MetodoCss;
 
             case "rgb":
                 this.consumir(
@@ -1090,11 +1082,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumentos de método 'rgba'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    vermelhoRgba,
-                    verdeRgba,
-                    azulRgba,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema,
+                    [
+                        vermelhoRgba,
+                        verdeRgba,
+                        azulRgba,
+                    ]
+                ) as MetodoCss;
 
             case "rotate":
                 this.consumir(
@@ -1116,7 +1110,7 @@ this.consumir(
                 return new SeletorValorReverso(
                     lexema,
                     [valorRotacionar, quantificadorRotacionar],
-                    true,
+                    true
                 ) as MetodoCss;
 
             case "rotate3d":
@@ -1157,13 +1151,15 @@ this.consumir(
                     "Esperado parêntese direito após método 'rotate3d'.",
                 );
 
-                return new SeletorValorReverso(lexema, [
-                    valor1Rotacionar3d,
-                    valor2Rotacionar3d,
-                    valor3Rotacionar3d,
-                    valor4Rotacionar3d,
-                    quantificadorRotacionar3d,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(lexema,
+                    [
+                        valor1Rotacionar3d,
+                        valor2Rotacionar3d,
+                        valor3Rotacionar3d,
+                        valor4Rotacionar3d,
+                        quantificadorRotacionar3d,
+                    ]
+                ) as MetodoCss;
 
             case "rotateZ":
                 this.consumir(
@@ -1182,10 +1178,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'rotateZ'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorRotacionarZ,
-                    quantificadorRotacionarZ,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorRotacionarZ,
+                        quantificadorRotacionarZ,
+                    ]
+                ) as MetodoCss;
 
             case "rotateX":
                 this.consumir(
@@ -1203,10 +1202,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'rotateX'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorRotacionarX,
-                    quantificadorRotacionarX,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorRotacionarX,
+                        quantificadorRotacionarX,
+                    ]
+                ) as MetodoCss;
 
             case "hue-rotate":
                 this.consumir(
@@ -1224,10 +1226,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'hue-rotate'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorRotacao,
-                    quantificadorRotacao,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorRotacao,
+                        quantificadorRotacao,
+                    ]
+                ) as MetodoCss;
 
             case "rotateY":
                 this.consumir(
@@ -1245,10 +1250,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'rotateY'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorRotacionarY,
-                    quantificadorRotacionarY,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorRotacionarY,
+                        quantificadorRotacionarY,
+                    ]
+                ) as MetodoCss;
 
             case "saturate":
                 this.consumir(
@@ -1266,10 +1274,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'saturate'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorSaturar,
-                    quantificadorSaturar,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorSaturar,
+                        quantificadorSaturar,
+                    ]
+                ) as MetodoCss;
 
             case "scale":
                 this.consumir(
@@ -1293,7 +1304,7 @@ this.consumir(
                 return new SeletorValorReverso(
                     lexema,
                     [valorScale1, valorScale2],
-                    true,
+                    true
                 ) as MetodoCss;
 
             case "scale3d":
@@ -1316,11 +1327,14 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método scale3d.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorScale3d1,
-                    valorScale3d2,
-                    valorScale3d3,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorScale3d1,
+                        valorScale3d2,
+                        valorScale3d3,
+                    ]
+                ) as MetodoCss;
 
             case "scaleZ":
                 this.consumir(
@@ -1374,10 +1388,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'sepia'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorSepia,
-                    quantificadorSepia,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorSepia,
+                        quantificadorSepia,
+                    ]
+                ) as MetodoCss;
 
             case "skew":
                 this.consumir(
@@ -1412,12 +1429,15 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'skew'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInclinar1,
-                    quantificadorInclinar1,
-                    valorInclinar2,
-                    quantificadorInclinar2,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInclinar1,
+                        quantificadorInclinar1,
+                        valorInclinar2,
+                        quantificadorInclinar2,
+                    ]
+                ) as MetodoCss;
 
             case "skewX":
                 this.consumir(
@@ -1435,10 +1455,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'skewX'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInclinarX,
-                    quantificadorInclinarX,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInclinarX,
+                        quantificadorInclinarX,
+                    ]
+                ) as MetodoCss;
 
             case "skewY":
                 this.consumir(
@@ -1456,10 +1479,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'skewY'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorInclinarY,
-                    quantificadorInclinarY,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorInclinarY,
+                        quantificadorInclinarY,
+                    ]
+                ) as MetodoCss;
 
             case "steps":
                 this.consumir(
@@ -1476,10 +1502,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após segundo argumento do método steps.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorNumerico,
-                    termoSalto,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorNumerico,
+                        termoSalto,
+                    ]
+                ) as MetodoCss;
 
             case "styleset":
                 this.consumir(
@@ -1512,7 +1541,14 @@ this.consumir(
                     "Esperado parêntese direito após argumento do método styleset.",
                 );
 
-                return new SeletorValorReverso(lexema, [valor1ConjuntoEstilos, valor2ConjuntoEstilos, valor3ConjuntoEstilos]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valor1ConjuntoEstilos,
+                        valor2ConjuntoEstilos,
+                        valor3ConjuntoEstilos
+                    ]
+                ) as MetodoCss;
 
             case "stylistic":
                 this.consumir(
@@ -1584,7 +1620,7 @@ this.consumir(
                         valorTranslacao2,
                         quantificadorTranlacao2,
                     ],
-                    true,
+                    true
                 ) as MetodoCss;
 
             case "translate3d":
@@ -1644,14 +1680,17 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'translate3d'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorTranslacao3d1,
-                    quantificadorTranlacao3d1,
-                    valorTranslacao3d2,
-                    quantificadorTranlacao3d2,
-                    valorTranslacao3d3,
-                    quantificadorTranlacao3d3,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorTranslacao3d1,
+                        quantificadorTranlacao3d1,
+                        valorTranslacao3d2,
+                        quantificadorTranlacao3d2,
+                        valorTranslacao3d3,
+                        quantificadorTranlacao3d3,
+                    ]
+                ) as MetodoCss;
 
             case "translateX":
                 this.consumir(
@@ -1669,10 +1708,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'translateX'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorTranslaçaoX,
-                    quantificadorTranslaçaoX,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorTranslaçaoX,
+                        quantificadorTranslaçaoX,
+                    ]
+                ) as MetodoCss;
 
             case "translateY":
                 this.consumir(
@@ -1690,10 +1732,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'translateY'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorTranslaçaoY,
-                    quantificadorTranslaçaoY,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorTranslaçaoY,
+                        quantificadorTranslaçaoY,
+                    ]
+                ) as MetodoCss;
 
             case "translateZ":
                 this.consumir(
@@ -1711,10 +1756,13 @@ this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'translateZ'.",
                 );
-                return new SeletorValorReverso(lexema, [
-                    valorTranslaçaoZ,
-                    quantificadorTranslaçaoZ,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorTranslaçaoZ,
+                        quantificadorTranslaçaoZ,
+                    ]
+                ) as MetodoCss;
         }
     }
 
@@ -1741,7 +1789,7 @@ this.consumir(
                     break;
             }
         }
-        
+
         this.consumir(
             tiposDeSimbolos.PONTO_E_VIRGULA,
             "Esperado ponto-e-vírgula após declaração de valores de modificador.",
