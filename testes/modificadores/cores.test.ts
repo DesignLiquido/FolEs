@@ -27,7 +27,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
         it('Caso de Sucesso - Cor válida', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    Cores[index], 
+                    Cores[index],
                     [new ValorQualitativo('castanho')]
                 );
 
@@ -296,17 +296,17 @@ describe('Testando Seletores que recebem COR como atributo', () => {
             }
         });
 
-        // TODO: Consertar
+        // TODO: Consertar após ajustar processo de atribuição de valor via variável
         it.skip('Caso de Sucesso - Cores atribuídas por meio de variável', () => {
             const coresFolEs = Object.keys(cores);
             const coresCss = Object.values(cores);
- 
+
             for (let index = 0; index < coresFolEs.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     `$cor-padrao: ${coresFolEs[index]};`,
                     "lmht {",
-                        'cor-fundo: $cor-padrao;',
+                    'cor-fundo: $cor-padrao;',
                     "}"
                 ]);
 
@@ -334,7 +334,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('cor-fundo');
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-color');
-                
+
                 // Tradutor
                 const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(coresCss[index]);
