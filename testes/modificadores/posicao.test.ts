@@ -26,8 +26,8 @@ describe('Testando Seletores de POSIÇÃO', () => {
     it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
         for (let index = 0; index < Posição.length; index += 1) {
             const seletor = new SeletorModificador(
-                Posição[index], 
-                [new ValorQualitativo('centro')], 
+                Posição[index],
+                [new ValorQualitativo('centro')],
                 null
             );
 
@@ -135,7 +135,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
         }
     });
 
-    // TODO: Consertar
+    // TODO: Consertar após ajustar processo de atribuição de valor via variável
     it.skip('Caso de Sucesso - Posição atribuída por meio de variável', () => {
         const estilosFolEs = Object.keys(posicoes);
         const estilosCss = Object.values(posicoes);
@@ -145,7 +145,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             const resultadoLexador = lexador.mapear([
                 `$posicao-padrao: ${estilosFolEs[index]};`,
                 "lmht {",
-                    'posicionar-conteúdo: $posicao-padrao;',
+                'posicionar-conteúdo: $posicao-padrao;',
                 "}"
             ]);
 
