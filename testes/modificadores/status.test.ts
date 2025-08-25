@@ -125,8 +125,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
             }
         });
 
-        // TODO: TypeError: modificador.valores is not iterable
-        it.skip('Casos de sucesso - Valor válido (nenhum)', () => {
+        it('Casos de sucesso - Valor válido (nenhum)', () => {
             for (let index = 0; index < StatusNenhum.length; index += 1) {
                 const seletor = new SeletorModificador(
                     StatusNenhum[index],
@@ -225,15 +224,13 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // Serializador
-                // console.log(StatusNormal[index]);
                 const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
-
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('normal');
             }
         });
 
-        // TODO: Descobrir por que  dá erro.
+        // TODO: Consertar após ajustar atribuição de valores via variável
         it.skip('Caso de Sucesso - Status atribuído por meio de variável', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(
@@ -241,7 +238,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     [new ValorQualitativo('auto')],
                     null
                 );
-
+                
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     '$status-padrao: auto;',
@@ -260,7 +257,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.VARIAVEL }),
                     ])
                 );
-
+                
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
