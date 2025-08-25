@@ -7,8 +7,6 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
-import { Counter } from "../../fontes/valores/metodos/css/counter";
-import { Simbolo } from "../../fontes/lexador";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     let lexador: LexadorInterface;
@@ -1049,8 +1047,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    // TODO: Corrigir teste.
-    it.skip('Atribuindo Método "invert()"', () => {
+    it('Atribuindo Método "invert()"', () => {
         for (let index = 0; index < MetodoInverter.length; index += 1) {
 
             const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
@@ -2074,8 +2071,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    // TODO: Corrigir teste.
-    it.skip('Atribuindo Método "hue-rotate()"', () => {
+    it('Atribuindo Método "hue-rotate()"', () => {
         for (let index = 0; index < MetodoRotacionarMatiz.length; index += 1) {
 
             const valoresAceitos = ['100px', '100%', '0.1', '0', '1', '1.75'];
