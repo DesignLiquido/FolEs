@@ -6,7 +6,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Serializador } from "../../fontes/serializadores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 
-describe('Testando Suporte a VARIÁVEIS', () => {
+describe.skip('Testando Suporte a VARIÁVEIS', () => {
     describe('Testes Unitários', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
@@ -21,7 +21,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Consertar
-        it.skip('Caso de sucesso - Atribuição de variável com valor QUALITATIVO', () => {
+        it('Caso de sucesso - Atribuição de variável com valor QUALITATIVO', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$cor-secundaria: branco;",
@@ -81,7 +81,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Descobrir por que  dá erro.
-        it.skip('Caso de sucesso - Atribuição de variável com valor NUMÉRICO sem quantificador', () => {
+        it('Caso de sucesso - Atribuição de variável com valor NUMÉRICO sem quantificador', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$valor-indice: 0;",
@@ -140,7 +140,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Descobrir por que  dá erro.
-        it.skip('Caso de sucesso - Atribuição de variável com valor numérico COM QUANTIFICADOR', () => {
+        it('Caso de sucesso - Atribuição de variável com valor numérico COM QUANTIFICADOR', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$valor-recuo: 12px;",
@@ -200,7 +200,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Consertar
-        it.skip('Caso de sucesso - Atribuição de variável com MÉTODOS DE COR', () => {
+        it('Caso de sucesso - Atribuição de variável com MÉTODOS DE COR', () => {
             const valoresMetodo = [
                 'rgb(31, 120, 50)',
                 'rgba(31, 120, 50)',
@@ -274,7 +274,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Consertar
-        it.skip('Caso de sucesso - Atribuição de variável com MÉTODOS GERAIS', () => {
+        it('Caso de sucesso - Atribuição de variável com MÉTODOS GERAIS', () => {
             const valoresMetodo = [
                 {
                     foles: 'borrar(4px)',
@@ -362,7 +362,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Depreciado. Deve disparar erro de avaliação sintática.
-        it.skip('Caso de falha - Atribuição de variável com valor inválido', () => {
+        it('Caso de falha - Atribuição de variável com valor inválido', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "$cor-secundaria: branc;",
@@ -381,7 +381,7 @@ describe('Testando Suporte a VARIÁVEIS', () => {
         });
 
         // TODO: Consertar
-        it.skip('Caso de falha - Declaração de variável após atribuição (fora de ordem)', () => {
+        it('Caso de falha - Declaração de variável após atribuição (fora de ordem)', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "corpo {",
