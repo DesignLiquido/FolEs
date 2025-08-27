@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Pseudoclasses } from "../listas/pseudoclasses";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorPseudoclasse } from "../../fontes/pseudoclasses/seletor-pseudoclasse";
@@ -13,13 +13,13 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -53,7 +53,7 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 // O Serializador deve traduzir devidamente os termos
                 expect(resultadoTradutor).toContain('div');
@@ -81,7 +81,7 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
 
                 // Serializador - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    tradutor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

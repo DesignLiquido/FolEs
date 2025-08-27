@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { StatusAuto, StatusNenhum, StatusNormal } from "../listas/status";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorQualitativo } from "../../fontes/valores";
@@ -14,13 +14,13 @@ describe('Testando Seletores com STATUS como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let serializador: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            serializador = new Resolvedor();
         });
 
         it('Casos de sucesso - Valor válido (auto)', () => {
@@ -78,7 +78,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
@@ -120,7 +120,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    serializador.serializar(avaliador.analisar(novoLexador.simbolos));
+                    serializador.resolver(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -171,7 +171,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // Serializador
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
                 expect(resultadoSerializador).toContain('none');
@@ -224,7 +224,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // Serializador
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('normal');
             }
@@ -276,7 +276,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
             }

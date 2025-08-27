@@ -2,7 +2,7 @@ import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaPREspecificas, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../listas/atribuicao-abreviada";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
@@ -14,13 +14,13 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let serializador: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            serializador = new Resolvedor();
         });
 
         it('Seletores que recebem múltiplos atributos do tipo valor-quantificador', () => {
@@ -78,7 +78,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                     );
 
                     // Serializador
-                    const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
+                    const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
 
                     // O Serializador deve serializar de acordo
                     expect(resultadoSerializacao).toContain('html');
@@ -147,7 +147,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
@@ -184,7 +184,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
@@ -230,7 +230,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
@@ -290,7 +290,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 );
 
                 // Tradutor
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoSerializador).toContain('html');
@@ -344,7 +344,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');

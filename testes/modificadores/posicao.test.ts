@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Posição } from "../listas/posição";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { posicoes } from "../../fontes/modificadores/atributos/posicoes";
@@ -14,13 +14,13 @@ describe('Testando Seletores de POSIÇÃO', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Serializador;
+    let serializador: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Serializador();
+        serializador = new Resolvedor();
     });
 
     it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -78,7 +78,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
 
 
             // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain('body');
             expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -130,7 +130,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
 
             // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
             expect(() => {
-                serializador.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                serializador.resolver(avaliador.analisar(resultadoLexador.simbolos));
             }).toHaveLength(0);
         }
     });
@@ -178,7 +178,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('place-content');
 
             // Serializador
-            const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
             expect(resultadoSerializacao).toContain(estilosCss[index]);
             expect(resultadoSerializacao).toContain('place-content');
         }

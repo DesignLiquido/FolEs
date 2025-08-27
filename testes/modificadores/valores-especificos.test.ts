@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { fontes } from "../../fontes/modificadores/atributos/fontes";
 import { ValoresPersonalizados, ValoresPersonalizadosMultiplos } from "../listas/valores-personalizados";
@@ -15,13 +15,13 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliadorSintatico: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let serializador: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliadorSintatico = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            serializador = new Resolvedor();
         });
 
         it('Casos de sucesso - Valores SVG', () => {
@@ -122,7 +122,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 );
 
                 // Serializador
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Serializador deve traduzir os valores SVG de acordo
                 expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
@@ -160,7 +160,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Tradutor
-                const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoSerializacao).toContain(valoresComPonto[index]);
             }
         });
@@ -193,7 +193,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(valor.literalTexto).toContain(valoresFonte[index]);
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain('font-family');
                 expect(resultadoTradutor).toContain(valoresFonte[index]);
             }
@@ -242,7 +242,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(valorTipado.qualitativo).toContain(valoresGrafia[index]);
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain('font-family');
                 expect(resultadoTradutor).toContain(valoresGrafia[index]);
             }
@@ -342,7 +342,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(valorTipado.qualitativo).toContain(valoresGrafia[index].foles);
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain('font-family');
                 expect(resultadoTradutor).toContain(valoresGrafia[index].css);
             }
@@ -398,7 +398,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(primeiroResultadoTipado.modificadores[0].valores.length).toBeGreaterThan(0);
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(valoresTagValue[index]);
             }
         });
@@ -455,7 +455,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
@@ -501,7 +501,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');

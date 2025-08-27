@@ -5,17 +5,17 @@ import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { Metodo } from "../valores/metodos/foles/metodo";
 
 /**
- * O serializador reverso traduz de CSS para FolEs. Pode traduzir tanto FolEs
+ * O resolvedor reverso traduz de CSS para FolEs. Pode traduzir tanto FolEs
  * aninhado quanto desaninhado.
  */
-export class SerializadorReverso {
-    serializarComAninhamentos: boolean;
+export class ResolvedorReverso {
+    resolverComAninhamentos: boolean;
 
-    constructor(serializarComAninhamentos: boolean = true) {
-        this.serializarComAninhamentos = serializarComAninhamentos;
+    constructor(resolverComAninhamentos: boolean = true) {
+        this.resolverComAninhamentos = resolverComAninhamentos;
     }
 
-    protected serializarValor(valor: Valor): string {
+    protected resolverValor(valor: Valor): string {
         if (valor instanceof MetodoCss) {
             return valor.paraTexto();
         } 
@@ -27,13 +27,13 @@ export class SerializadorReverso {
         return String(valor);
     }
 
-    serializarModificador(
+    resolverModificador(
         modificador: Modificador,
         indentacao: number = 0,
     ): string {
         let valoresResolvidos = "";
         for (const valor of modificador.valores) {
-            valoresResolvidos += this.serializarValor(valor) + " ";
+            valoresResolvidos += this.resolverValor(valor) + " ";
         }
         
         valoresResolvidos = valoresResolvidos.slice(0, -1);
@@ -44,7 +44,7 @@ export class SerializadorReverso {
         );
     }
 
-    serializar(
+    resolver(
         declaracoes: Declaracao[],
         indentacao: number = 0,
         seletorAnterior: string = undefined,
@@ -73,14 +73,14 @@ export class SerializadorReverso {
                 resultado += " {\n";
 
                 for (const modificador of declaracao.modificadores) {
-                    resultado += this.serializarModificador(
+                    resultado += this.resolverModificador(
                         modificador,
                         indentacao + 4,
                     );
                 }
 
-                if (this.serializarComAninhamentos) {
-                    resultado += this.serializar(
+                if (this.resolverComAninhamentos) {
+                    resultado += this.resolver(
                         declaracao.declaracoesAninhadas,
                         indentacao + 4,
                     );
@@ -90,7 +90,7 @@ export class SerializadorReverso {
                     resultado += `${" ".repeat(indentacao)}}\n\n`;
 
                     for (const prefixo of prefixos) {
-                        resultado += this.serializar(
+                        resultado += this.resolver(
                             declaracao.declaracoesAninhadas,
                             indentacao,
                             prefixo,

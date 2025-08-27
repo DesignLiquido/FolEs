@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador, Simbolo } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosFolEs, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValor } from "../../fontes/valores/seletor-valor";
@@ -13,13 +13,13 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Serializador;
+    let serializador: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Serializador();
+        serializador = new Resolvedor();
     });
 
     it('Atribuindo Método "anotação()" com valor numérico - caso de sucesso', () => {
@@ -67,7 +67,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir anotação para annotation
                 expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -90,7 +90,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função anotação() deve estar entre 1 e 99');
         }
     });
@@ -135,7 +135,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir anotação para annotation e conter o valor string
                 expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -159,7 +159,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
         }
     });
@@ -221,7 +221,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir borrar para blur
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBorrar[index]]);
@@ -285,7 +285,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir brilho para brightness
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBrilho[index]]);
@@ -336,7 +336,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCalcular[index]]);
             expect(resultadoTradutor).toContain('calc(100px - 80px);');
@@ -385,7 +385,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
             expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -407,7 +407,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow('Os valores da função conjunto-estilos() devem estar entre 1 e 20');
         }
     });
@@ -456,7 +456,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain('content');
             expect(resultadoTradutor).toContain(`counter(contador1, ${estilosTraduzidos[index]});`);
         }
@@ -489,7 +489,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
             // O Serializador deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico)
+                serializador.resolver(resultadoAvaliadorSintatico)
             }).toThrow(`Valor de estilo ${estiloErroDigitacao} inválido para a função contador().`);
         }
     });
@@ -550,7 +550,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoContraste[index]]);
                 expect(resultadoTradutor).toContain(`contrast(${valoresAceitos[valIndex]});`);
@@ -599,7 +599,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // // // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
             expect(resultadoTradutor).toContain('cubic-bezier(0.42, 0, 1, 1);');
@@ -649,7 +649,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]);
             expect(resultadoTradutor).toContain('fit-content(200px)');
@@ -711,7 +711,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir escala-cinza para grayscale
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEscalaCinza[index]]);
@@ -765,7 +765,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir escalamento para scale
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -815,7 +815,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir escalamento para scale
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -864,7 +864,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir escalamento-3d para scale3d
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -917,7 +917,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir escalamento-eixo-z para scaleZ
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -971,7 +971,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir escalamento-horizontal para scaleX
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -1025,7 +1025,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -1077,7 +1077,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir espirrar para swash
             expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1099,7 +1099,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função espirrar() deve estar entre 1 e 99');
         }
     });
@@ -1147,7 +1147,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir estilístico para stylistic
             expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1169,7 +1169,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função estilistico() deve estar entre 1 e 20');
         }
     });
@@ -1216,7 +1216,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
             expect(resultadoTradutor).toContain('linear-gradient(90deg, green, yellow);');
@@ -1265,7 +1265,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
             expect(resultadoTradutor).toContain('linear-gradient(90deg, green, yellow);');
@@ -1315,7 +1315,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
 
@@ -1394,7 +1394,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir inclinar para skew
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -1449,7 +1449,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir inclinar para skew
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -1511,7 +1511,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosInclinar[index]]
                 );
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir inclinar-horizontal para skewX
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -1579,7 +1579,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir inclinar-vertical para skewY
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -1646,7 +1646,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoInverter[index]]
                 );
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir inverter para invert
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoInverter[index]]);
@@ -1697,7 +1697,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLimitar[index]]);
             expect(resultadoTradutor).toContain('clamp(10vw, 20em, 100vw);');
@@ -1745,7 +1745,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // // // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLinear[index]]);
             expect(resultadoTradutor).toContain('linear(0, 0.25, 1);');
@@ -1794,7 +1794,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // // // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
             expect(resultadoTradutor).toContain('minmax(100px, max-content);');
@@ -1856,7 +1856,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir opacar para opacity
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoOpacar[index]]);
@@ -1908,7 +1908,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments
             expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1930,7 +1930,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função ornamentos() deve estar entre 1 e 99');
         }
     });
@@ -1972,7 +1972,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments e conter o valor string
             expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -1996,7 +1996,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
         }
     });
@@ -2043,7 +2043,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // // // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPassos[index]]);
             expect(resultadoTradutor).toContain('steps(2, jump-start);');
@@ -2112,7 +2112,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir perspectivar para perspective
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPerspectivar[index]]);
@@ -2165,7 +2165,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir projetar-sombra para drop-shadow  
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
@@ -2217,7 +2217,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoProjetarSombra[index]]
                 );
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir vermelho para red
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
@@ -2274,7 +2274,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir raio para ray
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
@@ -2325,7 +2325,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir raio para ray
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
@@ -2389,7 +2389,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotacionar para rotate
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -2458,7 +2458,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotacionar-3d para rotate3d
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -2495,7 +2495,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
             // Serializador não deve aceitar 'px' como quantificador válido
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow();
         }
     });
@@ -2555,7 +2555,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotacionar-eixo-z para rotateZ
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -2623,7 +2623,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotacionar-horizontal para rotateX
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -2691,7 +2691,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotacionar-matiz para hue-rotate
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]);
@@ -2759,7 +2759,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosRotacionar[index]]
                 );
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotacionar-vertical para rotateY
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -2827,7 +2827,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir saturar para saturate
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoSaturar[index]]);
@@ -2891,7 +2891,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir sépia para sepia
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoSepia[index]]);
@@ -2955,7 +2955,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação para translate
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3010,7 +3010,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir translacao para translate
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3060,7 +3060,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir translação-3d para translate3d
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3156,7 +3156,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-3d para translate3d
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3224,7 +3224,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-eixo-z para translateZ
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3288,7 +3288,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translacao-eixo-z para translateZ
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3352,7 +3352,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-horizontal para translateX
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3416,7 +3416,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-horizontal para translateX
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3480,7 +3480,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3544,7 +3544,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
                 expect(resultadoSerializacao).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
@@ -3596,7 +3596,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir variar-caractere para character-variant
             expect(resultadoTradutor).toContain('font-variant-alternates');
@@ -3618,7 +3618,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função variar-caractere() deve estar entre 1 e 99');
         }
     });
@@ -3678,7 +3678,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);

@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 
 describe.skip('Testando Suporte a VARIÁVEIS', () => {
@@ -11,13 +11,13 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let serializador: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            serializador = new Resolvedor();
         });
 
         // TODO: Consertar
@@ -75,7 +75,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
             expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // Serializador deve traduzir de acordo o valor qualitativo
-            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
             expect(resultadoSerializador).toContain('body {');
             expect(resultadoSerializador).toContain('scrollbar-color: white;');
         });
@@ -134,7 +134,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
             expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // Serializador deve traduzir de acordo
-            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
             expect(resultadoSerializador).toContain('body {');
             expect(resultadoSerializador).toContain('z-index: 0;');
         });
@@ -194,7 +194,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
             expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // Serializador deve traduzir de acordo
-            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
             expect(resultadoSerializador).toContain('body {');
             expect(resultadoSerializador).toContain('padding-right: 12px;');
         });
@@ -267,7 +267,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
                 expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador deve traduzir de acordo
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoSerializador).toContain('body {');
                 expect(resultadoSerializador).toContain(`box-shadow: ${valoresMetodo[index]};`);
             }
@@ -355,7 +355,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
                 expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador deve traduzir de acordo
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoSerializador).toContain('body {');
                 expect(resultadoSerializador).toContain(`backdrop-filter: ${valoresMetodo[index].css};`);
             }
@@ -376,7 +376,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
 
             // Serializador deve retornar erro de valor inválido antes de traduzir
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com valor branc inválido`);
         });
 
@@ -395,7 +395,7 @@ describe.skip('Testando Suporte a VARIÁVEIS', () => {
 
             // Serializador deve retornar erro de valor inválido antes de traduzir
             expect(() => {
-                serializador.serializar(resultadoAvaliadorSintatico);
+                serializador.resolver(resultadoAvaliadorSintatico);
             }).toThrow(`A variável 'cor-secundaria' deve ser declarada antes da atribuição de valor.`);;
         });
     });

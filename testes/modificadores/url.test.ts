@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { TraducaoUrl, Url } from "../listas/url";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
@@ -12,13 +12,13 @@ describe('Testando Seletores que recebem URL como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintatico;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -54,7 +54,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(TraducaoUrl[Url[index]]);
                 expect(resultadoTradutor).toContain('url');
@@ -93,7 +93,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
+                    tradutor.resolver(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

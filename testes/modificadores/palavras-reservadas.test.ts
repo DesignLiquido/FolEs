@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { PalavrasReservadas } from "../listas/palavras-reservadas";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { ValorQualitativo } from "../../fontes/valores";
@@ -14,13 +14,13 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de sucesso - Valores globais válidos', () => {
@@ -78,7 +78,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain('body');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -150,7 +150,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 );
 
                 // Tradutor deve tranformar o código corretamente em CSS
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain('body');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
