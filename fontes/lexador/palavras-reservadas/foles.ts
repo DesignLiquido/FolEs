@@ -1002,7 +1002,9 @@ export default {
     // "cor-fundo": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
     // "flex": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
     // "borda": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de modificador
+
     // "sobre": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de pseudoclasse
+
     // "inverter": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
     // "saturar": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
     // "linear": tiposDeSimbolos.QUALITATIVO, // Avaliar: mesmo nome de método
