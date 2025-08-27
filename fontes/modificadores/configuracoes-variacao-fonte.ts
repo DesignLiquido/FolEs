@@ -10,6 +10,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
@@ -17,17 +18,19 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas,
         );
 
-       // TODO: Aceita valores string
-
-        validarValorNumerico(
-            "configurações-variação-fonte",
-            valores,
-            this.valoresAceitos,
-            null,
-            null,
-            true,
-        );
+        // TODO: Aceita valores string
+        if (!variavel) {
+            validarValorNumerico(
+                "configurações-variação-fonte",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                true,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

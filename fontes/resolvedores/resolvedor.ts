@@ -35,9 +35,6 @@ export class Resolvedor {
         switch (valor.constructor.name) {
             case 'ReferenciaVariavel':
                 const valorReferenciaVariavel = valor as ReferenciaVariavel;
-                console.log('ref', valorReferenciaVariavel);
-                console.log('vars', this.variaveis);
-                
                 const valoresVariavelCorrespondente = this.variaveis[valorReferenciaVariavel.nomeVariavel];
                 if (valoresVariavelCorrespondente === undefined) {
                     throw new Error(`A variável '${valorReferenciaVariavel.nomeVariavel}' deve ser declarada antes da atribuição de valor.`);
@@ -195,22 +192,6 @@ export class Resolvedor {
         return resultado;
     }
 
-    validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
-        const nomeFolEs =
-            declaracao.modificadores[0].nomeFoles.length > 1 &&
-                typeof declaracao.modificadores[0].nomeFoles === "object"
-                ? declaracao.modificadores[0].nomeFoles[0].toString()
-                : declaracao.modificadores[0].nomeFoles.toString();
-
-        const valoresModificador = declaracao.modificadores[0].valores;
-
-        new SeletorModificador(
-            nomeFolEs,
-            valoresModificador,
-            declaracao.modificadores[0].pragmas,
-        );
-    }
-
     /**
      * Esta função pode ter dois comportamentos, dependendo da configuração
      * do Resolvedor:
@@ -257,7 +238,7 @@ export class Resolvedor {
                     break;
             }
         }
-
+        
         return resultado;
     }
 }

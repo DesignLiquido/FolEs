@@ -14,31 +14,35 @@ export class EstiloLista extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-lista", "list-style", pragmas);
 
         const valoresExtra = ["url"];
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "estilo-lista", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra, 
-                unidadesMedida,
-            );
-            // TODO: Recebia validacaoPersonalizada como true
-        } else {
-            validarValorNumerico(
-                "estilo-lista", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "estilo-lista",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida,
+                );
+                // TODO: Recebia validacaoPersonalizada como true
+            } else {
+                validarValorNumerico(
+                    "estilo-lista",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

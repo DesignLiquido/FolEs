@@ -16,26 +16,30 @@ export class EstiloFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-fonte", "font-style", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "estilo-fonte", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                angulos
-            );
-        } else {
-            validarValores(
-                "estilo-fonte", 
-                valores, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "estilo-fonte",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    angulos
+                );
+            } else {
+                validarValores(
+                    "estilo-fonte",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

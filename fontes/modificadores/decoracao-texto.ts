@@ -18,6 +18,7 @@ export class DecoracaoTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["decoracao-texto", "decoração-texto"],
@@ -25,21 +26,24 @@ export class DecoracaoTexto extends Modificador {
             pragmas,
         );
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos",
-                "decoração-texto",
-                valores,
-                this.valoresAceitos
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "decoração-texto",
-                valores,
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "decoração-texto",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "decoração-texto",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

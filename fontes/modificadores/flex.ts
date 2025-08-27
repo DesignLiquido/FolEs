@@ -20,28 +20,32 @@ export class Flex extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("flex", "flex", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "flex", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarValorNumerico(
-                "flex", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "flex",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "flex",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

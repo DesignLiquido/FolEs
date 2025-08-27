@@ -11,19 +11,23 @@ export class FatiarImagemBorda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("fatiar-imagem-borda", "border-image-slice", pragmas);
-
+        
         const valoresExtra = ["url"];
-
-        validarValorNumerico(
-            "fatiar-imagem-borda",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            ListaDeValorPercentual
-        );
+        
+        if (!variavel) {
+            validarValorNumerico(
+                "fatiar-imagem-borda",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                ListaDeValorPercentual
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

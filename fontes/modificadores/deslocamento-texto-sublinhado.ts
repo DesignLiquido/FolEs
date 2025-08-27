@@ -11,6 +11,7 @@ export class DeslocamentoTextoSublinhado extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             "deslocamento-texto-sublinhado",
@@ -18,14 +19,17 @@ export class DeslocamentoTextoSublinhado extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "deslocamento-texto-sublinhado",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "deslocamento-texto-sublinhado",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

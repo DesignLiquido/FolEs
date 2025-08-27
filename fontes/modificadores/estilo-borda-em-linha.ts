@@ -7,11 +7,13 @@ export class EstiloBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-borda-em-linha", "border-inline-style", pragmas);
 
-        validarValoresAdicionais("estilo-borda-em-linha", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-em-linha", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

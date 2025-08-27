@@ -11,31 +11,35 @@ export class FimLinhaEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("fim-linha-em-grade", "grid-row-end", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "fim-linha-em-grade", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                null,
-                true
-            );
-            // TODO: Recebe validacaoPersonalizada como true
-        } else {   
-            validarValorNumerico(
-                "fim-linha-em-grade",
-                valores,
-                this.valoresAceitos,
-                null,
-                null,
-                true
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "fim-linha-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+                // TODO: Recebe validacaoPersonalizada como true
+            } else {
+                validarValorNumerico(
+                    "fim-linha-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -8,6 +8,7 @@ export class DuracaoAnimacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["duracao-animacao", "duração-animação"],
@@ -15,25 +16,28 @@ export class DuracaoAnimacao extends Modificador {
             pragmas,
         );
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "duração-animação", 
-                valores,
-                null,
-                null,
-                valoresTemporais
-            );
-        } else {
-            validarValorNumerico(
-                "duração-animação", 
-                valores,
-                null,
-                null,
-                valoresTemporais
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "duração-animação",
+                    valores,
+                    null,
+                    null,
+                    valoresTemporais
+                );
+            } else {
+                validarValorNumerico(
+                    "duração-animação",
+                    valores,
+                    null,
+                    null,
+                    valoresTemporais
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -21,31 +21,35 @@ export class BordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
 
         const valoresExtra: Array<string> = ["url"];
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica",
-                "borda-máscara",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-                unidadesMedida
-            )
-        } else {
-            validarValorNumerico(
-                "borda-máscara", 
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-                unidadesMedida
-            )
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "borda-máscara",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                )
+            } else {
+                validarValorNumerico(
+                    "borda-máscara",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                )
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

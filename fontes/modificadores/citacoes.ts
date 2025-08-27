@@ -10,14 +10,17 @@ export class Citacoes extends Modificador {
 
     constructor(
         valores: Valor[],
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
+
     ) {
         super(["citacoes", "citações"], "quotes", pragmas);
 
         // TODO: Aceita valores string
 
-        validarValores("citações", valores, this.valoresAceitos);
+        if (!variavel) validarValores("citações", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

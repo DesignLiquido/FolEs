@@ -15,27 +15,31 @@ export class BordaDireita extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("borda-direita", "border-right", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "borda-direita", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "borda-direita", 
-                valores, 
-                this.valoresAceitos, 
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "borda-direita",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "borda-direita",
+                    valores,
+                    this.valoresAceitos,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

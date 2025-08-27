@@ -7,17 +7,21 @@ export class EstenderBordaImagem extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estender-borda-imagem", "border-image-outset", pragmas);
 
-        validarValorNumerico(
-            "estender-borda-imagem", 
-            valores,
-            null,
-            null,
-            comprimentos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "estender-borda-imagem",
+                valores,
+                null,
+                null,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

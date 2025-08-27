@@ -11,11 +11,13 @@ export class EstenderColuna extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estender-coluna", "column-span", pragmas);
 
-        validarValores("estender-coluna", valores, this.valoresAceitos);
+        if (!variavel) validarValores("estender-coluna", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

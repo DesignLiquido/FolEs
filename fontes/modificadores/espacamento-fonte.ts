@@ -12,6 +12,7 @@ export class EspacamentoFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["espacamento-fonte", "espaçamento-fonte"],
@@ -19,8 +20,9 @@ export class EspacamentoFonte extends Modificador {
             pragmas,
         );
 
-        validarValores("espaçamento-fonte", valores, this.valoresAceitos);
+        if (!variavel) validarValores("espaçamento-fonte", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

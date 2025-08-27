@@ -7,6 +7,7 @@ export class EspacamentoLinhaEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["espacamento-linha-em-grade", "espaçamento-linha-em-grade"],
@@ -14,14 +15,17 @@ export class EspacamentoLinhaEmGrade extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "espaçamento-linha-em-grade", 
-            valores,
-            null,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "espaçamento-linha-em-grade",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

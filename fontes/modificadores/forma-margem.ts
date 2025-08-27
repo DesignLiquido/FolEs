@@ -7,17 +7,21 @@ export class FormaMargem extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("forma-margem", "shape-margin", pragmas);
 
-        validarValorNumerico(
-            "forma-margem", 
-            valores,
-            null,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "forma-margem",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -7,6 +7,7 @@ export class DuracaoTransicao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["duracao-transicao", "duração-transição"],
@@ -14,14 +15,17 @@ export class DuracaoTransicao extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "duração-transição", 
-            valores,
-            null,
-            null,
-            valoresTemporais
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "duração-transição",
+                valores,
+                null,
+                null,
+                valoresTemporais
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

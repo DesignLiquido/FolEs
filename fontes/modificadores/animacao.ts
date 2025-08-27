@@ -22,29 +22,33 @@ export class Animacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["animacao", "animação"], "animation", pragmas);
 
         const valoresExtra = ["linear", "cubic-bezier", "steps"];
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica",
-                "animação",
-                valores,
-                this.valoresAceitos,
-                valoresExtra
-            );
-        } else {
-            validarValorNumerico(
-                "animação",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "animação",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra
+                );
+            } else {
+                validarValorNumerico(
+                    "animação",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

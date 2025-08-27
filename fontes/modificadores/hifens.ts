@@ -12,11 +12,13 @@ export class Hifens extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["hifens", "hífens"], "hyphens", pragmas);
 
-        validarValores("hífens", valores, this.valoresAceitos);
+        if (!variavel) validarValores("hífens", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

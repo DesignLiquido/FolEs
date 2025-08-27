@@ -23,39 +23,42 @@ export class Grade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("grade", "grid", pragmas);
 
         const valoresExtra = ["minmax"];
 
-        const quantificadoresAceitos: { [nome: string]: string } = {...unidadesMedida, ...valoresFlex};
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "comum", 
-                "grade", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra
-            );
-        } else if (valores[0] instanceof ValorNumerico) {
-            validarValorNumerico(
-                 "grade", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra,
-                quantificadoresAceitos
-            );
-        } else {
-            validarValores(
-                "grade", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra
-            );
-            
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra
+                );
+            } else if (valores[0] instanceof ValorNumerico) {
+                validarValorNumerico(
+                    "grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValores(
+                    "grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

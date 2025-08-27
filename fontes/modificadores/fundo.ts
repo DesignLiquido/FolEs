@@ -35,25 +35,29 @@ export class Fundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("fundo", "background", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "fundo", 
-                valores, 
-                this.valoresAceitos
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "fundo", 
-                valores, 
-                this.valoresAceitos, 
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "fundo",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "fundo",
+                    valores,
+                    this.valoresAceitos,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -13,32 +13,37 @@ export class Deslocamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("deslocamento", "offset", pragmas);
 
         // TODO: Também aceita receber a função path()
         const valoresExtra = ["url", "ray"];
 
-        const quantificadoresAceitos: { [valor: string]: string } = {...unidadesMedida, ...angulos};
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica",
-                "deslocamento",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-                quantificadoresAceitos
-            );
-        } else {
-            validarValorNumerico(
-                "deslocamento",
-                valores,
-                this.valoresAceitos,
-                valoresExtra,
-                quantificadoresAceitos
-            );
+        const quantificadoresAceitos: { [valor: string]: string } = { ...unidadesMedida, ...angulos };
+
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "deslocamento",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "deslocamento",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    quantificadoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

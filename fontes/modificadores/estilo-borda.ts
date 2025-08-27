@@ -10,24 +10,28 @@ export class EstiloBorda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-borda", "border-style", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "comum", 
-                "estilo-borda", 
-                valores, 
-                this.valoresAceitos
-            );
-        } else {
-            validarValores(
-                "estilo-borda", 
-                valores, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "estilo-borda",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValores(
+                    "estilo-borda",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -11,6 +11,7 @@ export class EspacamentoLetras extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["espacamento-letras", "espaçamento-letras"],
@@ -18,14 +19,17 @@ export class EspacamentoLetras extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "espaçamento-letras",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "espaçamento-letras",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

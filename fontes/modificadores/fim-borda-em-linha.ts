@@ -8,24 +8,28 @@ export class FimBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("fim-borda-em-linha", "border-inline-end", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "fim-borda-em-linha", 
-                valores
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "fim-borda-em-linha", 
-                valores, 
-                null, 
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "fim-borda-em-linha",
+                    valores
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "fim-borda-em-linha",
+                    valores,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

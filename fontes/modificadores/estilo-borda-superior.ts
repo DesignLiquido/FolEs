@@ -7,11 +7,13 @@ export class EstiloBordaSuperior extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-borda-superior", "border-top-style", pragmas);
 
-        validarValoresAdicionais("estilo-borda-superior", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-superior", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -13,11 +13,13 @@ export class FlexDirecao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["flex-direcao", "flex-direção"], "flex-direction", pragmas);
 
-        validarValores("flex-direção", valores, this.valoresAceitos);
+        if (!variavel) validarValores("flex-direção", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

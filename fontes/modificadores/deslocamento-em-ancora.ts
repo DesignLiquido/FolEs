@@ -16,6 +16,7 @@ export class DeslocamentoEmAncora extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["deslocamento-em-ancora", "deslocamento-em-âncora"],
@@ -23,14 +24,17 @@ export class DeslocamentoEmAncora extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "deslocamento-em-âncora",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "deslocamento-em-âncora",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

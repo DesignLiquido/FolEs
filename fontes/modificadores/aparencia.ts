@@ -37,6 +37,7 @@ export class Aparencia extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["aparencia", "aparência"], "appearance", pragmas);
 
@@ -45,8 +46,9 @@ export class Aparencia extends Modificador {
             valores[0].qualitativo = "auto";
         }
 
-        validarValores("aparência", valores, this.valoresAceitos);
+        if (!variavel) validarValores("aparência", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -12,28 +12,32 @@ export class Colunas extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("colunas", "columns", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "colunas", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarValorNumerico(
-                "colunas", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "colunas",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "colunas",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

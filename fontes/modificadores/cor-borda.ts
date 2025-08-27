@@ -7,22 +7,26 @@ export class CorBorda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("cor-borda", "border-color", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "cor",
-                "cor-borda",
-                valores
-            );
-        } else {
-            validarValorCor(
-                "cor-borda",
-                valores
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "cor",
+                    "cor-borda",
+                    valores
+                );
+            } else {
+                validarValorCor(
+                    "cor-borda",
+                    valores
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

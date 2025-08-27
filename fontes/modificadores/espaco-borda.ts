@@ -7,17 +7,21 @@ export class EspacoBorda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["espaco-borda", "espaço-borda"], "border-spacing", pragmas);
 
-        validarValorNumerico(
-            "espaço-borda", 
-            valores,
-            null,
-            null,
-            comprimentos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "espaço-borda",
+                valores,
+                null,
+                null,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

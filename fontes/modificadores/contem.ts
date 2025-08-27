@@ -18,11 +18,13 @@ export class Contem extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["contem", "contém"], "contain", pragmas);
-
-        validarValores("contém", valores, this.valoresAceitos);
-
+        
+        if (!variavel) validarValores("contém", valores, this.valoresAceitos);
+        
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

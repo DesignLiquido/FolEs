@@ -51,29 +51,34 @@ export class Fonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("fonte", "font", pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
-        const quantificadoresAceitos: { [nome: string]: string} = {...unidadesMedida, ...valoresFonte};
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "fonte", 
-                valores, 
-                this.valoresAceitos,
-                quantificadoresAceitos
-            );
-        } else {
-            validarValorNumerico(
-                "fonte", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                quantificadoresAceitos
-            );
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFonte };
+
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "fonte",
+                    valores,
+                    this.valoresAceitos,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "fonte",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    quantificadoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -6,11 +6,13 @@ export class Cor extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("cor", "color", pragmas);
 
-        validarValorCor("cor", valores);
+        if (!variavel) validarValorCor("cor", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

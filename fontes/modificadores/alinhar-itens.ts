@@ -19,6 +19,7 @@ export class AlinharItens extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("alinhar-itens", "align-items", pragmas);
 
@@ -33,13 +34,16 @@ export class AlinharItens extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index];
         });
 
-        validarValoresAdicionais(
-            "alinhar-itens",
-            valores,
-            posicoesValidas,
-            this.valoresAceitos,
-        );
+        if (!variavel) {
+            validarValoresAdicionais(
+                "alinhar-itens",
+                valores,
+                posicoesValidas,
+                this.valoresAceitos,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }
