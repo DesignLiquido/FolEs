@@ -29,9 +29,9 @@ export class Serializador {
     }
 
     protected serializarValor(
-        valor: Valor, 
+        valor: Valor,
         valoresAceitos?: { [valorFoles: string]: string }
-    ): string {        
+    ): string {
         switch (valor.constructor.name) {
             case 'ReferenciaVariavel':
                 const valorReferenciaVariavel = valor as ReferenciaVariavel;
@@ -61,12 +61,12 @@ export class Serializador {
                 }
 
                 return `${literalNumerico}${valorNumerico.quantificador || ''}`;
-            case 'ValorQualitativo':                
+            case 'ValorQualitativo':
                 const valorQualitativo = valor as ValorQualitativo;
                 let traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
-                
-                if(!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
-                
+
+                if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
+
                 return `${traducaoQualitativo}`;
             case 'ValorTexto':
                 const valorTexto = valor as ValorTexto;
@@ -89,7 +89,7 @@ export class Serializador {
         indentacao: number = 0,
     ): string {
         let valoresTraduzidos = "";
-        
+
         for (const valor of modificador.valores) {
             let valoresAceitos: { [valorFoles: string]: string } = null;
             if (modificador.valoresAceitos) valoresAceitos = modificador.valoresAceitos;
@@ -100,7 +100,7 @@ export class Serializador {
             }
             valoresTraduzidos += valorSerializado + " ";
         }
-        
+
         valoresTraduzidos = valoresTraduzidos.slice(0, -1);
         return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos};\n`;
     }
@@ -205,7 +205,7 @@ export class Serializador {
         new SeletorModificador(
             nomeFolEs,
             valoresModificador,
-            declaracao.modificadores[0].pragmas
+            declaracao.modificadores[0].pragmas,
         );
     }
 
@@ -220,7 +220,6 @@ export class Serializador {
     serializarDeclaracaoVariavel(
         declaracaoVariavel: DeclaracaoVariavel
     ): void {
-        // TODO: Implementar escrita de `var()` no resultado. 
         this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valores;
     }
 
@@ -234,6 +233,8 @@ export class Serializador {
         indentacao: number = 0,
         seletorAnterior: string = undefined,
     ) {
+        // console.log('ser', declaracoes);
+
         this.variaveis = {};
         let resultado = "";
         let textoSeletorAnterior = "";
@@ -243,7 +244,7 @@ export class Serializador {
 
         for (const declaracao of declaracoes) {
             switch (declaracao.constructor.name) {
-                case "BlocoDeclaracao":                    
+                case "BlocoDeclaracao":
                     resultado += this.serializarBlocoDeclaracao(
                         declaracao as BlocoDeclaracao,
                         indentacao,
