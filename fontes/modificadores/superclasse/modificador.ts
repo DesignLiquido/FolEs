@@ -8,6 +8,7 @@ export class Modificador {
     pragmas?: PragmasModificador;
     pragmasTraducao?: PragmasModificador;
     valoresAceitos?: { [valorFoles: string]: string };
+    variavel: boolean = false;
 
     constructor(
         nomeFoles: string | string[],
