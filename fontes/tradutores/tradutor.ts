@@ -65,9 +65,7 @@ export class Tradutor {
         return seletorTraduzido;
     }
 
-    private traduzirModificador(modificador: Modificador): Modificador {
-        // console.log('MODF', modificador);
-        
+    private traduzirModificador(modificador: Modificador): Modificador {        
         this.linha = modificador.pragmas.linha;
         const novosPragmasModificador =
             this.calcularPragmasModificador(modificador);

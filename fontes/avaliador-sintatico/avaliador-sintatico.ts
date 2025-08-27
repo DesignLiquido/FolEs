@@ -1730,7 +1730,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.PONTO_E_VIRGULA,
             "Esperado ponto-e-vírgula após declaração de valores de modificador.",
         );
-        // console.log('VR', valoresResolvidos);
 
         return valoresResolvidos;
     }
@@ -1919,7 +1918,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
 
         let valoresModificador: Array<any> = this.valoresModificador(modificador.lexema);
-        // console.log('VM', valoresModificador);
 
         let classeModificadora;
         if (valoresModificador[0] instanceof ReferenciaVariavel) {           

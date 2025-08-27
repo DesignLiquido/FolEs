@@ -233,8 +233,6 @@ export class Serializador {
         indentacao: number = 0,
         seletorAnterior: string = undefined,
     ) {
-        // console.log('ser', declaracoes);
-
         this.variaveis = {};
         let resultado = "";
         let textoSeletorAnterior = "";
