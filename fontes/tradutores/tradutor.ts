@@ -1,6 +1,6 @@
 import * as vlq from "vlq";
 
-import { BlocoDeclaracao, Declaracao } from "../declaracoes";
+import { BlocoDeclaracao, Declaracao, DeclaracaoVariavel } from "../declaracoes";
 import { SeletorEstruturasHtml } from "../estruturas/seletor-estruturas-html";
 import { Modificador } from "../modificadores";
 import {
@@ -66,6 +66,8 @@ export class Tradutor {
     }
 
     private traduzirModificador(modificador: Modificador): Modificador {
+        // console.log('MODF', modificador);
+        
         this.linha = modificador.pragmas.linha;
         const novosPragmasModificador =
             this.calcularPragmasModificador(modificador);
@@ -75,6 +77,7 @@ export class Tradutor {
                 : modificador.nomeFoles,
             modificador.valores,
             modificador.pragmas,
+            modificador.variavel
         ) as Modificador;
 
         modificadorTraduzido.pragmasTraducao = novosPragmasModificador;
@@ -116,9 +119,9 @@ export class Tradutor {
                         [],
                     ),
                 );
+            } else if (declaracao instanceof DeclaracaoVariavel) {
+                declaracoesTraduzidas.push(declaracao);
             }
-
-            // TODO: Adicionar caso if (declaracao instanceof DeclaracaoVariavel)
         }
 
         return declaracoesTraduzidas;
