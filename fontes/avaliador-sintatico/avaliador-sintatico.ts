@@ -1730,6 +1730,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             tiposDeSimbolos.PONTO_E_VIRGULA,
             "Esperado ponto-e-vírgula após declaração de valores de modificador.",
         );
+        // console.log('VR', valoresResolvidos);
 
         return valoresResolvidos;
     }
@@ -1918,16 +1919,31 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         );
 
         let valoresModificador: Array<any> = this.valoresModificador(modificador.lexema);
+        // console.log('VM', valoresModificador);
 
-        const classeModificadora = new SeletorModificador(
-            modificador.lexema,
-            valoresModificador,
-            {
-                linha: modificador.linha,
-                colunaInicial: modificador.colunaInicial,
-                colunaFinal: modificador.colunaFinal,
-            }
-        );
+        let classeModificadora;
+        if (valoresModificador[0] instanceof ReferenciaVariavel) {           
+            classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valoresModificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal,
+                },
+                true 
+            );
+        } else {            
+            classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valoresModificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal,
+                }
+            );
+        }
 
         return classeModificadora as Modificador;
     }
@@ -1989,7 +2005,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const seletores = this.resolverSeletores();
                 const modificadoresEDeclaracoesAninhadas =
                     this.resolverModificadoresEDeclaracoesAninhadas();
-
+                
                 return new BlocoDeclaracao(
                     seletores,
                     modificadoresEDeclaracoesAninhadas.modificadores,
@@ -2008,7 +2024,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             declaracoes.push(this.declaracao());
             this.referenciaDeclaracoes = declaracoes;
         }
-
+        
         return declaracoes.filter((d) => d);
     }
 }
