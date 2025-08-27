@@ -235,7 +235,6 @@ export class Resolvedor {
         indentacao: number = 0,
         seletorAnterior: string = undefined,
     ) {       
-        // this.variaveis = {};
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {

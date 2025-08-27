@@ -2,14 +2,15 @@ import { AvaliadorSintatico } from "./avaliador-sintatico";
 import { AvaliadorSintaticoReverso } from "./avaliador-sintatico/avaliador-sintatico-reverso";
 import { Lexador } from "./lexador";
 import { LexadorReverso } from "./lexador/lexador-reverso";
-import { Serializador } from "./serializadores";
-import { SerializadorReverso } from "./serializadores/serializador-reverso";
+import { Resolvedor } from "./resolvedores";
+import { ResolvedorReverso } from "./resolvedores/resolvedor-reverso";
 import { Importador } from "./importador";
 import { ResultadoLexadorInterface, SimboloInterface } from "./interfaces";
 import { Tradutor } from "./tradutores/tradutor";
 import { TradutorReverso } from "./tradutores/tradutor-reverso";
 import { Base64 } from "./utilidades/base64";
 import { GeradorMapaCss } from "./gerador-mapa";
+import { BlocoDeclaracao } from "./declaracoes";
 
 /**
  * O núcleo da linguagem FolEs.
@@ -21,8 +22,8 @@ export class FolEs {
     avaliadorSintaticoReverso: AvaliadorSintaticoReverso;
     importador: Importador;
     importadorReverso: Importador;
-    serializador: Serializador;
-    serializadorReverso: SerializadorReverso;
+    resolvedor: Resolvedor;
+    resolvedorReverso: ResolvedorReverso;
     tradutor: Tradutor;
     tradutorReverso: TradutorReverso;
     geradorMapaCss: GeradorMapaCss;
@@ -37,8 +38,8 @@ export class FolEs {
         this.avaliadorSintaticoReverso = new AvaliadorSintaticoReverso(
             this.importadorReverso,
         );
-        this.serializador = new Serializador(traduzirComAninhamentos);
-        this.serializadorReverso = new SerializadorReverso(
+        this.resolvedor = new Resolvedor(traduzirComAninhamentos);
+        this.resolvedorReverso = new ResolvedorReverso(
             traduzirComAninhamentos,
         );
         this.tradutor = new Tradutor();
@@ -54,12 +55,13 @@ export class FolEs {
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico =
             this.avaliadorSintatico.analisar(simbolos);
-
+        // console.log(resultadoAvaliadorSintatico);
+        
         const resultadoTraducao = this.tradutor.traduzir(
             resultadoAvaliadorSintatico
         );
-
-        const traducao = this.serializador.serializar(
+        
+        const traducao = this.resolvedor.resolver(
             resultadoTraducao
         );
         
@@ -69,7 +71,7 @@ export class FolEs {
     private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintaticoReverso =
             this.avaliadorSintaticoReverso.analisar(simbolos);
-        const traducaoReversa = this.serializadorReverso.serializar(
+        const traducaoReversa = this.resolvedorReverso.resolver(
             resultadoAvaliadorSintaticoReverso,
         );
         return traducaoReversa;
@@ -78,7 +80,8 @@ export class FolEs {
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);
-
+        // console.log(resultadoLexador[1].simbolos);
+        
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }
 
@@ -88,7 +91,7 @@ export class FolEs {
         const resultadoAvaliadorSintatico = this.avaliadorSintatico.analisar(
             resultadoLexador[1].simbolos,
         );
-        const traducao = this.serializador.serializar(
+        const traducao = this.resolvedor.resolver(
             resultadoAvaliadorSintatico,
         );
         const resultadoTraducao = this.tradutor.traduzir(
@@ -123,6 +126,6 @@ export class FolEs {
 }
 
 //  const testeFoles = new FolEs(false);
-//  console.log(testeFoles.converterParaCss('../exemplos/exemplo3.foles'));
+//  console.log(testeFoles.converterParaCss('../exemplos/exemplo5.foles'));
 //  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
 //  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
