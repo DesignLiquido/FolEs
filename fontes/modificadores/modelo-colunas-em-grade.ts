@@ -18,6 +18,7 @@ export class ModeloColunasEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("modelo-colunas-em-grade", "grid-template-columns", pragmas);
 
@@ -25,14 +26,17 @@ export class ModeloColunasEmGrade extends Modificador {
 
         const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
 
-        validarValorNumerico(
-            "modelo-colunas-em-grade",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            quantificadoresAceitos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "modelo-colunas-em-grade",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                quantificadoresAceitos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

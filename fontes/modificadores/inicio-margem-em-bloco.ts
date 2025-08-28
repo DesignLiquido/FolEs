@@ -11,6 +11,7 @@ export class InicioMargemEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["inicio-margem-em-bloco", "início-margem-em-bloco"],
@@ -18,14 +19,17 @@ export class InicioMargemEmBloco extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "início-margem-em-bloco",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "início-margem-em-bloco",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

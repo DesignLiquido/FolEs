@@ -11,24 +11,28 @@ export class LinhaEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("linha-em-grade", "grid-row", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica",
-                "linha-em-grade",
-                valores,
-                this.valoresAceitos
-            );
-        } else {
-            validarValorNumerico(
-                "linha-em-grade", 
-                valores, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "linha-em-grade",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "linha-em-grade",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

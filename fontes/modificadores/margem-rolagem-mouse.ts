@@ -8,28 +8,32 @@ export class MargemRolagemMouse extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("margem-rolagem-mouse", "scroll-margin", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica",
-                "margem-rolagem-mouse",
-                valores,
-                null,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarValorNumerico(
-                "margem-rolagem-mouse",
-                valores,
-                null,
-                null,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "margem-rolagem-mouse",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "margem-rolagem-mouse",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -7,11 +7,13 @@ export class PosicaoObjeto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["posicao-objeto", "posição-objeto"], "object-position", pragmas);
 
-        validarValoresAdicionais("posição-objeto", valores, posicoesBasicas);
+        if (!variavel) validarValoresAdicionais("posição-objeto", valores, posicoesBasicas);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

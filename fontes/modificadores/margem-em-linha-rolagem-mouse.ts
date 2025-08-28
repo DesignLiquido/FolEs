@@ -7,17 +7,21 @@ export class MargemEmLinhaRolagemMouse extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("margem-em-linha-rolagem-mouse", "scroll-margin-inline", pragmas);
 
-        validarValorNumerico(
-            "margem-em-linha-rolagem-mouse", 
-            valores,
-            null,
-            null,
-            comprimentos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "margem-em-linha-rolagem-mouse",
+                valores,
+                null,
+                null,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

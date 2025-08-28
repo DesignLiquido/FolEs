@@ -14,17 +14,21 @@ export class LarguraFimBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("largura-fim-borda-em-linha", "border-inline-end-width", pragmas);
 
-        validarValorNumerico(
-            "largura-fim-borda-em-linha",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "largura-fim-borda-em-linha",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

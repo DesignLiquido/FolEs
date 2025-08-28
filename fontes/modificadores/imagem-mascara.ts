@@ -10,6 +10,7 @@ export class ImagemMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["imagem-mascara", "imagem-máscara"], "mask-image", pragmas);
 
@@ -17,13 +18,16 @@ export class ImagemMascara extends Modificador {
         // Ex.: mask-image: image(url(mask.png), skyblue);
         const valoresExtra = ["url", "linear-gradient"];
 
-        validarValores(
-            "imagem-máscara",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-        );
+        if (!variavel) {
+            validarValores(
+                "imagem-máscara",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

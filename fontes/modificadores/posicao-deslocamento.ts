@@ -13,6 +13,7 @@ export class PosicaoDeslocamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["posicao-deslocamento", "posição-deslocamento"],
@@ -21,40 +22,42 @@ export class PosicaoDeslocamento extends Modificador {
         );
 
         // No caso de múltiplos valores, pode receber tanto as posições básicas quanto número-quantificador
-        if (valores.length > 1) {
-            valores.forEach((valor) => {
-                const arrayValores: Valor[] = [];
-                arrayValores.push(valor);
+        if (!variavel) {
+            if (valores.length > 1) {
+                valores.forEach((valor) => {
+                    const arrayValores: Valor[] = [];
+                    arrayValores.push(valor);
 
-                if (valor instanceof ValorQualitativo) {
-                    validarValoresAdicionais(
-                        "posição-deslocamento",
-                        arrayValores,
-                        posicoesBasicas,
-                        this.valoresAceitos,
-                    );
-                } else if (valor instanceof ValorNumerico) {
-                    const valoresExtra: Array<string> = [];
-                    Object.keys(posicoesBasicas).forEach((posicao) => valoresExtra.push(posicao));
+                    if (valor instanceof ValorQualitativo) {
+                        validarValoresAdicionais(
+                            "posição-deslocamento",
+                            arrayValores,
+                            posicoesBasicas,
+                            this.valoresAceitos,
+                        );
+                    } else if (valor instanceof ValorNumerico) {
+                        const valoresExtra: Array<string> = [];
+                        Object.keys(posicoesBasicas).forEach((posicao) => valoresExtra.push(posicao));
 
-                    validarValorNumerico(
-                        "posição-deslocamento",
-                        arrayValores,
-                        this.valoresAceitos,
-                        valoresExtra,
-                        unidadesMedida
-                    )
-                }
-            });
-        } else {
-            validarValoresAdicionais(
-                "posição-deslocamento",
-                valores,
-                posicoesBasicas,
-                this.valoresAceitos,
-            );
+                        validarValorNumerico(
+                            "posição-deslocamento",
+                            arrayValores,
+                            this.valoresAceitos,
+                            valoresExtra,
+                            unidadesMedida
+                        )
+                    }
+                });
+            } else {
+                validarValoresAdicionais(
+                    "posição-deslocamento",
+                    valores,
+                    posicoesBasicas,
+                    this.valoresAceitos,
+                );
+            }
         }
-
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

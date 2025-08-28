@@ -11,19 +11,23 @@ export class PosicaoDireita extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["posicao-direita", "posição-direita"], "right", pragmas);
 
         const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...ListaDeValorPercentual };
 
-        validarValorNumerico(
-            "posição-direita",
-            valores,
-            this.valoresAceitos,
-            null,
-            quantificadoresAceitos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "posição-direita",
+                valores,
+                this.valoresAceitos,
+                null,
+                quantificadoresAceitos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

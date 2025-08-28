@@ -47,26 +47,30 @@ export class Mascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["mascara", "máscara"], "mask", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "condição-extra", 
-                "máscara", 
-                valores, 
-                posicoesBasicas, 
-                this.valoresAceitos
-            );
-        } else {
-            validarValoresAdicionais(
-                "máscara", 
-                valores, 
-                posicoesBasicas, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "condição-extra",
+                    "máscara",
+                    valores,
+                    posicoesBasicas,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValoresAdicionais(
+                    "máscara",
+                    valores,
+                    posicoesBasicas,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

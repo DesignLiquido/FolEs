@@ -8,6 +8,7 @@ export class PosicaoHorizontalFundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["posicao-horizontal-fundo", "posição-horizontal-fundo"],
@@ -15,14 +16,17 @@ export class PosicaoHorizontalFundo extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "posição-horizontal-fundo",
-            valores,
-            posicoesBasicas,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "posição-horizontal-fundo",
+                valores,
+                posicoesBasicas,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

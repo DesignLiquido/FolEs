@@ -14,6 +14,7 @@ export class PosicaoTextoSublinhado extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["posicao-texto-sublinhado", "posição-texto-sublinhado"],
@@ -21,12 +22,15 @@ export class PosicaoTextoSublinhado extends Modificador {
             pragmas,
         );
 
-        validarValores(
-            "posição-texto-sublinhado",
-            valores,
-            this.valoresAceitos,
-        );
+        if (!variavel) {
+            validarValores(
+                "posição-texto-sublinhado",
+                valores,
+                this.valoresAceitos,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

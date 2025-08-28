@@ -16,6 +16,7 @@ export class OrientacaoTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["orientacao-texto", "orientação-texto"],
@@ -23,8 +24,9 @@ export class OrientacaoTexto extends Modificador {
             pragmas,
         );
 
-        validarValores("orientação-texto", valores, this.valoresAceitos);
+        if (!variavel) validarValores("orientação-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }
