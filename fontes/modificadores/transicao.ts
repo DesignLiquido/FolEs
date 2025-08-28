@@ -22,30 +22,34 @@ export class Transicao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["transicao", "transição"], "transition", pragmas);
 
         const valoresExtra = ["linear"];
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "transição", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra,
-                valoresTemporais
-            );
-        } else {
-            validarValorNumerico(
-                "transição", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra,
-                valoresTemporais
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "transição",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    valoresTemporais
+                );
+            } else {
+                validarValorNumerico(
+                    "transição",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    valoresTemporais
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

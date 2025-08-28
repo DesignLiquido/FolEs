@@ -7,17 +7,21 @@ export class RecuoEsquerdo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recuo-esquerdo", "padding-left", pragmas);
 
-        validarValorNumerico(
-            "recuo-esquerdo", 
-            valores,
-            null,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "recuo-esquerdo",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

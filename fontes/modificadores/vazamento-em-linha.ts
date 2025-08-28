@@ -15,11 +15,13 @@ export class VazamentoEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("vazamento-em-linha", "overflow-inline", pragmas);
 
-        validarValores("vazamento-em-linha", valores, this.valoresAceitos);
+        if (!variavel) validarValores("vazamento-em-linha", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

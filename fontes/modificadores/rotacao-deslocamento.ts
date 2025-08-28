@@ -12,6 +12,7 @@ export class RotacaoDeslocamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["rotacao-deslocamento", "rotação-deslocamento"],
@@ -19,14 +20,17 @@ export class RotacaoDeslocamento extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "rotação-deslocamento",
-            valores,
-            this.valoresAceitos,
-            null,
-            angulos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "rotação-deslocamento",
+                valores,
+                this.valoresAceitos,
+                null,
+                angulos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -14,17 +14,21 @@ export class RegrasLarguraColuna extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("regras-largura-coluna", "column-rule-width", pragmas);
 
-        validarValorNumerico(
-            "regras-largura-coluna",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "regras-largura-coluna",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

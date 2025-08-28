@@ -10,6 +10,7 @@ export class RecursosFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recursos-fonte", "font-feature-settings", pragmas);
 
@@ -19,13 +20,16 @@ export class RecursosFonte extends Modificador {
         // 1. String
         // 2. feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
 
-        validarValores(
-            "recursos-fonte",
-            valores,
-            this.valoresAceitos,
-            valoresExtra
-        );
+        if (!variavel) {
+            validarValores(
+                "recursos-fonte",
+                valores,
+                this.valoresAceitos,
+                valoresExtra
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -16,24 +16,28 @@ export class SintetizarFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("sintetizar-fonte", "font-synthesis", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "comum",
-                "sintetizar-fonte",
-                valores,
-                this.valoresAceitos
-            );
-        } else {
-            validarValores(
-                "sintetizar-fonte",
-                valores,
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "sintetizar-fonte",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValores(
+                    "sintetizar-fonte",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

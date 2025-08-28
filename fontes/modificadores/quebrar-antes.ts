@@ -27,11 +27,13 @@ export class QuebrarAntes extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("quebrar-antes", "break-before", pragmas);
 
-        validarValores("quebrar-antes", valores, this.valoresAceitos);
+        if (!variavel) validarValores("quebrar-antes", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

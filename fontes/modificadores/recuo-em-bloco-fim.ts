@@ -7,17 +7,21 @@ export class RecuoEmBlocoFim extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recuo-em-bloco-fim", "padding-block-end", pragmas);
 
-        validarValorNumerico(
-            "recuo-em-bloco-fim", 
-            valores,
-            null,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "recuo-em-bloco-fim",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

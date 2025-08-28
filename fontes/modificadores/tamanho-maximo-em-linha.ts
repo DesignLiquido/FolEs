@@ -15,6 +15,7 @@ export class TamanhoMaximoEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["tamanho-maximo-em-linha", "tamanho-máximo-em-linha"],
@@ -24,14 +25,17 @@ export class TamanhoMaximoEmLinha extends Modificador {
 
         const valoresExtra = ["fit-content"];
 
-        validarValorNumerico(
-            "tamanho-máximo-em-linha",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "tamanho-máximo-em-linha",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -13,6 +13,7 @@ export class VisibilidadeConteudo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["visibilidade-conteudo", "visibilidade-conteúdo"],
@@ -20,8 +21,9 @@ export class VisibilidadeConteudo extends Modificador {
             pragmas,
         );
 
-        validarValores("visibilidade-conteúdo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("visibilidade-conteúdo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

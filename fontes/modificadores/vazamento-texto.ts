@@ -11,13 +11,14 @@ export class VazamentoTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("vazamento-texto", "text-overflow", pragmas);
 
         // TODO: Aceita valores string
-
-        validarValores("vazamento-texto", valores, this.valoresAceitos);
+        if (!variavel) validarValores("vazamento-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

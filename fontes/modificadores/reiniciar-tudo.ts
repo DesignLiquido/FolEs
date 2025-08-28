@@ -7,11 +7,13 @@ export class ReiniciarTudo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("reiniciar-tudo", "all", pragmas);
 
-        validarValores("reiniciar-tudo", valores, {});
+        if (!variavel) validarValores("reiniciar-tudo", valores, {});
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -10,11 +10,13 @@ export class Recortar extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recortar", "clip", pragmas);
 
-        validarValores("recortar", valores, this.valoresAceitos);
+        if (!variavel) validarValores("recortar", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

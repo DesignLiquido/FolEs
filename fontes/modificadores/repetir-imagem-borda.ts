@@ -14,11 +14,13 @@ export class RepetirImagemBorda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("repetir-imagem-borda", "border-image-repeat", pragmas);
 
-        validarValores("repetir-imagem-borda", valores, this.valoresAceitos);
+        if (!variavel) validarValores("repetir-imagem-borda", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

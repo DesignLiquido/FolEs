@@ -12,18 +12,22 @@ export class TrajetoDeslocamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("trajeto-deslocamento", "offset-path", pragmas);
 
         const valoresExtra = ["url", "ray"];
 
-        validarValores(
-            "trajeto-deslocamento",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-        );
+        if (!variavel) {
+            validarValores(
+                "trajeto-deslocamento",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }
