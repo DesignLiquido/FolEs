@@ -15,27 +15,31 @@ export class Borda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("borda", "border", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos",
-                "borda",
-                valores,
-                this.valoresAceitos,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "borda",
-                valores,
-                this.valoresAceitos,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "borda",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "borda",
+                    valores,
+                    this.valoresAceitos,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

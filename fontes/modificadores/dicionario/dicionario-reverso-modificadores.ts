@@ -361,55 +361,50 @@ import { VelocidadeAnimacao } from "../velocidade-animacao";
 import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
+import { Annotation } from "../../valores/metodos/css/annotation";
 import { Blur } from "../../valores/metodos/css/blur";
 import { Brightness } from "../../valores/metodos/css/brightness";
 import { Calc } from "../../valores/metodos/css/calc";
+import { CharacterVariant } from "../../valores/metodos/css/character-variant";
+import { Clamp } from "../../valores/metodos/css/clamp";
 import { Contrast } from "../../valores/metodos/css/constrast";
+import { Counter } from "../../valores/metodos/css/counter";
 import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
+import { DropShadow } from "../../valores/metodos/css/drop-shadow";
 import { FitContent } from "../../valores/metodos/css/fit-content";
 import { Grayscale } from "../../valores/metodos/css/grayscale";
-import { Scale3d } from "../../valores/metodos/css/scale3d";
-import { Scale } from "../../valores/metodos/css/scale";
-import { ScaleX } from "../../valores/metodos/css/scaleX";
-import { ScaleY } from "../../valores/metodos/css/scaleY";
-import { ScaleZ } from "../../valores/metodos/css/scaleZ";
-import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
 import { Hsl } from "../../valores/metodos/foles/hsl";
 import { Hsla } from "../../valores/metodos/foles/hsla";
-import { SkewX } from "../../valores/metodos/css/skewX";
-import { SkewY } from "../../valores/metodos/css/skewY";
-import { Skew } from "../../valores/metodos/css/skew";
+import { HueRotate } from "../../valores/metodos/css/hue-rotate";
 import { Invert } from "../../valores/metodos/css/invert";
-import { Clamp } from "../../valores/metodos/css/clamp";
 import { Linear } from "../../valores/metodos/foles/linear";
+import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
 import { MinMax } from "../../valores/metodos/css/minmax";
-import { Opacity } from "../../valores/metodos/css/opacity";
-import { Steps } from "../../valores/metodos/css/steps";
-import { Perspective } from "../../valores/metodos/css/perspective";
-import { DropShadow } from "../../valores/metodos/css/drop-shadow";
+import { Ornaments } from "../../valores/metodos/css/ornaments";
 import { Ray } from "../../valores/metodos/css/ray";
 import { Rgb } from "../../valores/metodos/foles/rgb";
 import { Rgba } from "../../valores/metodos/foles/rgba";
-import { Rotate } from "../../valores/metodos/css/rotate";
+import { Rotate3d } from "../../valores/metodos/css/rotate3d";
 import { RotateX } from "../../valores/metodos/css/rotateX";
 import { RotateY } from "../../valores/metodos/css/rotateY";
 import { RotateZ } from "../../valores/metodos/css/rotateZ";
-import { HueRotate } from "../../valores/metodos/css/hue-rotate";
 import { Saturate } from "../../valores/metodos/css/saturate";
 import { Sepia } from "../../valores/metodos/css/sepia";
+import { Scale3d } from "../../valores/metodos/css/scale3d";
+import { ScaleX } from "../../valores/metodos/css/scaleX";
+import { ScaleY } from "../../valores/metodos/css/scaleY";
+import { ScaleZ } from "../../valores/metodos/css/scaleZ";
+import { SkewX } from "../../valores/metodos/css/skewX";
+import { SkewY } from "../../valores/metodos/css/skewY";
+import { Skew } from "../../valores/metodos/css/skew";
+import { Steps } from "../../valores/metodos/css/steps";
+import { Styleset } from "../../valores/metodos/css/styleset";
+import { Swash } from "../../valores/metodos/css/swash";
 import { Translate3d } from "../../valores/metodos/css/translate3d";
 import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
-import { Translate } from "../../valores/metodos/css/translate";
-import { Counter } from "../../valores/metodos/css/counter";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
-import { Styleset } from "../../valores/metodos/css/styleset";
-import { CharacterVariant } from "../../valores/metodos/css/character-variant";
-import { Swash } from "../../valores/metodos/css/swash";
-import { Ornaments } from "../../valores/metodos/css/ornaments";
-import { Annotation } from "../../valores/metodos/css/annotation";
-import { Rotate3d } from "../../valores/metodos/css/rotate3d";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -776,7 +771,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "content-visibility": VisibilidadeConteudo,
     "backface-visibility": VisibilidadeFundo,
 
-    // METODOS
+    // MÉTODOS
     annotation: Annotation,
     blur: Blur,
     brightness: Brightness,
@@ -796,20 +791,16 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     linear: Linear,
     "linear-gradient": LinearGradient,
     minmax: MinMax,
-    // "opacity": Opacity,
     ornaments: Ornaments,
-    // "perspective": Perspective,
     ray: Ray,
     rgb: Rgb,
     rgba: Rgba,
-    // "rotate": Rotate,
     rotate3d: Rotate3d,
     rotateX: RotateX,
     rotateY: RotateY,
     rotateZ: RotateZ,
     saturate: Saturate,
     scale3d: Scale3d,
-    // "scale": Scale,
     scaleX: ScaleX,
     scaleY: ScaleY,
     scaleZ: ScaleZ,
@@ -821,7 +812,6 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     skewY: SkewY,
     steps: Steps,
     swash: Swash,
-    // "translate": Translate,
     translate3d: Translate3d,
     translateX: TranslateX,
     translateY: TranslateY,

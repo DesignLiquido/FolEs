@@ -13,16 +13,20 @@ export class AlinharTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("alinhar-texto", "text-align", pragmas);
 
-        validarValoresAdicionais(
-            "alinhar-texto",
-            valores,
-            posicoesBasicas,
-            this.valoresAceitos,
-        );
+        if (!variavel) {
+            validarValoresAdicionais(
+                "alinhar-texto",
+                valores,
+                posicoesBasicas,
+                this.valoresAceitos,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

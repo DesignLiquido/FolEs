@@ -8,7 +8,7 @@ export class Vazamento extends Modificador {
         visivel: "visible",
         visível: "visible",
         escondido: "hidden",
-        recortar: "clip",
+        recorte: "clip",
         "barra-rolagem": "scroll",
         auto: "auto",
     };
@@ -16,24 +16,28 @@ export class Vazamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("vazamento", "overflow", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "comum", 
-                "vazamento", 
-                valores, 
-                this.valoresAceitos
-            );
-        } else {
-            validarValores(
-                "vazamento", 
-                valores, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "vazamento",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValores(
+                    "vazamento",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

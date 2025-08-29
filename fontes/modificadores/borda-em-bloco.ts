@@ -8,27 +8,31 @@ export class BordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("borda-em-bloco", "border-block", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "borda-em-bloco", 
-                valores,
-                null,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "borda-em-bloco", 
-                valores, 
-                null, 
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "borda-em-bloco",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "borda-em-bloco",
+                    valores,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

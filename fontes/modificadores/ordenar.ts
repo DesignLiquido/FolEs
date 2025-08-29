@@ -6,19 +6,22 @@ export class Ordenar extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("ordenar", "order", pragmas);
 
-        validarValorNumerico(
-            "ordenar", 
-            valores,
-            null,
-            null,
-            null,
-            null,
-            true
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "ordenar",
+                valores,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

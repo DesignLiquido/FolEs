@@ -7,11 +7,13 @@ export class EstiloBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-borda-em-bloco", "border-block-style", pragmas);
 
-        validarValoresAdicionais("estilo-borda-em-bloco", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-em-bloco", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -8,27 +8,31 @@ export class BordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("borda-em-linha", "border-inline", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "borda-em-linha", 
-                valores,
-                null,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "borda-em-linha", 
-                valores, 
-                null, 
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "borda-em-linha",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "borda-em-linha",
+                    valores,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

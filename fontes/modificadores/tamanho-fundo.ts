@@ -13,17 +13,21 @@ export class TamanhoFundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("tamanho-fundo", "background-size", pragmas);
 
-        validarValorNumerico(
-            "tamanho-fundo", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "tamanho-fundo",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

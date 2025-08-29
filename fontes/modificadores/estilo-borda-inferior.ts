@@ -7,11 +7,13 @@ export class EstiloBordaInferior extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-borda-inferior", "border-bottom-style", pragmas);
 
-        validarValoresAdicionais("estilo-borda-inferior", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-inferior", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -8,6 +8,7 @@ export class InicioBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["inicio-borda-em-linha", "início-borda-em-linha"],
@@ -15,21 +16,23 @@ export class InicioBordaEmLinha extends Modificador {
             pragmas,
         );
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "início-borda-em-linha", 
-                valores
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "início-borda-em-linha", 
-                valores, 
-                null, 
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "início-borda-em-linha",
+                    valores
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "início-borda-em-linha",
+                    valores,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
-
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

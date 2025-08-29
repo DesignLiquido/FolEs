@@ -7,6 +7,7 @@ export class DistanciaDeslocamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["distancia-deslocamento", "distância-deslocamento"],
@@ -14,14 +15,17 @@ export class DistanciaDeslocamento extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "distância-deslocamento", 
-            valores,
-            null,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "distância-deslocamento",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

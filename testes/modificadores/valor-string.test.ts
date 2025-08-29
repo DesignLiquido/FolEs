@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { ValorString, ValorStringAcentuado } from "../listas/valor-string";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { ValorTexto } from "../../fontes/valores";
@@ -12,13 +12,13 @@ describe('Testando Seletores com VALORES STRING', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorSintatico: AvaliadorSintaticoInterface;
-    let serializador: Serializador;
+    let serializador: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliadorSintatico = new AvaliadorSintatico(importador);
-        serializador = new Serializador();
+        serializador = new Resolvedor();
     });
 
     // TODO: Corrigir teste.
@@ -76,7 +76,7 @@ describe('Testando Seletores com VALORES STRING', () => {
                 expect(valorTipado.literalTexto).toContain(valoresString[valIndex]);
 
                 // Serializador
-                const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoSerializacao).toContain(valoresString[valIndex]);
             }
         }

@@ -19,17 +19,21 @@ export class EsticarFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("esticar-fonte", "font-stretch", pragmas);
 
-        validarValorNumerico(
-            "esticar-fonte",
-            valores,
-            this.valoresAceitos,
-            null,
-            ListaDeValorPercentual
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "esticar-fonte",
+                valores,
+                this.valoresAceitos,
+                null,
+                ListaDeValorPercentual
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

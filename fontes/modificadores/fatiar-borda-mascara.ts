@@ -11,6 +11,7 @@ export class FatiarBordaMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["fatiar-borda-mascara", "fatiar-borda-máscara"],
@@ -18,14 +19,17 @@ export class FatiarBordaMascara extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "fatiar-borda-máscara",
-            valores,
-            this.valoresAceitos,
-            null,
-            ListaDeValorPercentual
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "fatiar-borda-máscara",
+                valores,
+                this.valoresAceitos,
+                null,
+                ListaDeValorPercentual
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -1,68 +1,68 @@
 export const ValoresPersonalizados: Array<object> = [
     {
         modificador: 'ao-mudar',
-        valor: 'esquerda, direita',
         css: 'will-change',
+        valor: 'esquerda, direita',
     },
     {
         modificador: 'coluna-em-grade',
-        valor: 'span 3',
         css: 'grid-column',
+        valor: 'span 3',
     },
     {
         modificador: 'definir-contador',
-        valor: 'meu-contador 5 contador2 0',
         css: 'counter-set',
+        valor: 'meu-contador 5 contador2 0',
     },
     {
         modificador: 'estilo-lista',
-        valor: 'georgian lower-roman',
         css: 'list-style',
+        valor: 'georgian lower-roman',
     },
     {
         modificador: 'fim-linha-em-grade',
-        valor: 'span 3',
         css: 'grid-row-end',
+        valor: 'span 3',
     },
     {
         modificador: 'fim-coluna-em-grade',
-        valor: 'span 3',
         css: 'grid-column-end',
+        valor: 'span 3',
     },
     {
         modificador: 'incrementar-contador',
-        valor: 'meu-contador -4',
         css: 'counter-increment',
+        valor: 'meu-contador -4',
     },
     {
         modificador: 'início-linha-em-grade',
-        valor: 'span 2',
         css: 'grid-row-start',
+        valor: 'span 2',
     },
     {
         modificador: 'início-coluna-em-grade',
+        css: 'grid-column-start',
         valor: 'span 2',
-        css: 'grid-column-start'
     },
     {
         modificador: 'linha-em-grade',
+        css: 'grid-row',
         valor: 'span area-em-grade',
-        css: 'grid-row'
     },
     {
         modificador: 'nome-animação',
-        valor: 'test_05',
         css: 'animation-name',
+        valor: 'test_05',
     },
     {
         modificador: 'propriedade-transição',
-        valor: 'test1, animacao4',
         css: 'transition-property',
+        valor: 'test1, animacao4',
     },
     {
         modificador: 'tamanho-grade',
-        valor: 'span 2',
         css: 'grid-area',
+        valor: 'span 2',
     },
 ];
 

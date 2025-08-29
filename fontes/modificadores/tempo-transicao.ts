@@ -1,6 +1,4 @@
 import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -26,6 +24,7 @@ export class TempoTransicao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["tempo-transicao", "tempo-transição"],
@@ -35,13 +34,16 @@ export class TempoTransicao extends Modificador {
 
         const valoresExtra = ["cubic-bezier", "steps"];
 
-        validarValores(
-            "tempo-transição",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-        );
+        if (!variavel) {
+            validarValores(
+                "tempo-transição",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

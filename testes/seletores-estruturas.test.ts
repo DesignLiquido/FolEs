@@ -2,7 +2,7 @@ import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador"
-import { Serializador } from "../fontes/serializadores";
+import { Resolvedor } from "../fontes/resolvedores";
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
 import { SeletorClasse, SeletorId } from "../fontes/seletores";
 import { SeletorEspacoReservado } from "../fontes/seletores/seletor-espaco-reservado";
@@ -13,13 +13,13 @@ describe('Testando seletores e estruturas', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorSintatico: AvaliadorSintaticoInterface;
-    let tradutor: Serializador;
+    let tradutor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliadorSintatico = new AvaliadorSintatico(importador);
-        tradutor = new Serializador();
+        tradutor = new Resolvedor();
     });
 
     it('Seletor Classe - caso de sucesso', () => {
@@ -63,7 +63,7 @@ describe('Testando seletores e estruturas', () => {
         expect(primeiroResultadoTipado.seletores[0]['nomeClasse']).toBe('minha-classe');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toBeTruthy();
     });
 
@@ -120,7 +120,7 @@ describe('Testando seletores e estruturas', () => {
         expect(primeiroResultadoTipado.seletores[0].pseudoclasse['nomeFoles']).toBe('foco');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toBeTruthy();
     });
 
@@ -165,7 +165,7 @@ describe('Testando seletores e estruturas', () => {
         expect(primeiroResultadoTipado.seletores[0]['id']).toBe('meu-id');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toBeTruthy();
     });
 
@@ -222,7 +222,7 @@ describe('Testando seletores e estruturas', () => {
         expect(primeiroResultadoTipado.seletores[0].pseudoclasse['nomeFoles']).toBe('escopo');
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toBeTruthy();
     });
 
@@ -264,7 +264,7 @@ describe('Testando seletores e estruturas', () => {
         expect(primeiroResultadoTipado.seletores[0]).toBeInstanceOf(SeletorEspacoReservado);
 
         // O resultado do Avaliador deve ser recebido em um formato aceito pelo Serializador
-        const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+        const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
         expect(resultadoTradutor).toHaveLength(0);
     });
 

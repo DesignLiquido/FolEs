@@ -11,6 +11,7 @@ export class LarguraBordaMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["largura-borda-mascara", "largura-borda-máscara"],
@@ -18,14 +19,17 @@ export class LarguraBordaMascara extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "largura-borda-máscara",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "largura-borda-máscara",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

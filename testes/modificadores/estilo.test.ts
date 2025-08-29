@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Estilo, EstiloBorda } from "../listas/estilo";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { estilos } from "../../fontes/modificadores/atributos/estilo";
@@ -15,20 +15,20 @@ describe('Testando Seletores com ESTILO como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Valor válido', () => {
             for (let index = 0; index < Estilo.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    Estilo[index], 
-                    [new ValorQualitativo('pontilhado')], 
+                    Estilo[index],
+                    [new ValorQualitativo('pontilhado')],
                     null
                 );
 
@@ -74,7 +74,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
 
                 // // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain('body');
 
@@ -125,7 +125,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    tradutor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -148,7 +148,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        // TODO: Consertar
+        // TODO: Consertar após ajustar processo de atribuição de valor via variável
         it.skip('Casos de sucesso - Valores de estilo atribuídos por meio de variável', () => {
             const estilosFolEs = Object.keys(estilos);
             const estilosCss = Object.values(estilos);
@@ -158,7 +158,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 const resultadoLexador = lexador.mapear([
                     `$estilo-padrao: ${estilosFolEs[index]};`,
                     "corpo {",
-                        'contorno: $estilo-padrao;',
+                    'contorno: $estilo-padrao;',
                     "}"
                 ]);
 
@@ -196,7 +196,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('outline');
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(estilosCss[index]);
             }
         });

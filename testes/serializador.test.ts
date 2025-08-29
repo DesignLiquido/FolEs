@@ -1,7 +1,7 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
-import { Serializador } from "../fontes/serializadores";
+import { Resolvedor } from "../fontes/resolvedores";
 import { ValoresQuantificadores } from "./listas/valores-quantificadores"
 
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
@@ -14,13 +14,13 @@ describe('Serializador', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Serializador;
+    let serializador: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Serializador();
+        serializador = new Resolvedor();
     });
 
     describe('Casos de Sucesso', () => {
@@ -37,7 +37,7 @@ describe('Serializador', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
                 
                 // Tradutor deve retornar a estrutura HTML correspondente
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
             }
         });
@@ -60,7 +60,7 @@ describe('Serializador', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
     
                 // Tradutor deve funcionar de acordo
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
     
                 expect(resultadoTradutor).toBeTruthy();
                 expect(resultadoTradutor).toContain("html");
@@ -81,7 +81,7 @@ describe('Serializador', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador deve funcionar de acordo
-            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoSerializador).toBeTruthy();
             expect(resultadoSerializador).toContain("html");
@@ -122,7 +122,7 @@ describe('Serializador', () => {
                 ]);
 
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoSerializador).toBeTruthy();
                 expect(resultadoSerializador).toContain('.minha-classe {');
@@ -185,7 +185,7 @@ describe('Serializador', () => {
                 ]);
 
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoSerializador).toBeTruthy();
             });
@@ -205,11 +205,11 @@ describe('Serializador', () => {
     
                 // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
                 expect(() => {
-                    serializador.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    serializador.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).not.toBeTruthy;
     
                 expect(() => {
-                    serializador.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    serializador.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

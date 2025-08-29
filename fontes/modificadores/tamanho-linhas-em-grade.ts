@@ -15,20 +15,25 @@ export class TamanhoLinhasEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("tamanho-linhas-em-grade", "grid-auto-rows", pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 
-        validarValorNumerico(
-            "tamanho-linhas-em-grade",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            unidadesMedida,
-            valoresFlex,
-        );
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
+        if (!variavel) {
+            validarValorNumerico(
+                "tamanho-linhas-em-grade",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                quantificadoresAceitos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

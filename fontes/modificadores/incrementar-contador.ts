@@ -11,30 +11,35 @@ export class IncrementarContador extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("incrementar-contador", "counter-increment", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "incrementar-contador", 
-                valores, 
-                this.valoresAceitos, 
-                null,
-            );
-            // OBS.: Recebe validacaoPersonalizada como true
-        } else {
-            validarValorNumerico(
-                "incrementar-contador", 
-                valores, 
-                this.valoresAceitos,
-                null,
-                null,
-                null,
-                true
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "incrementar-contador",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+                // TODO: Recebia validacaoPersonalizada como true
+            } else {
+                validarValorNumerico(
+                    "incrementar-contador",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

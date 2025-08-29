@@ -1,6 +1,6 @@
 import { AvaliadorSintaticoReverso } from "../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
-import { SerializadorReverso } from "../fontes/serializadores/serializador-reverso";
+import { ResolvedorReverso } from "../fontes/resolvedores/resolvedor-reverso";
 import estruturasLmht from "../fontes/tradutores/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
@@ -10,13 +10,13 @@ describe('Serializador Reverso', () => {
     let lexadorReverso: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorReverso: AvaliadorSintaticoInterface;
-    let serializadorReverso: SerializadorReverso;
+    let serializadorReverso: ResolvedorReverso;
 
     beforeEach(() => {
         lexadorReverso = new LexadorReverso();
         importador = new Importador(lexadorReverso);
         avaliadorReverso = new AvaliadorSintaticoReverso(importador);
-        serializadorReverso = new SerializadorReverso();
+        serializadorReverso = new ResolvedorReverso();
     });
 
     // TODO: Descobrir por que  dá erro.
@@ -34,7 +34,7 @@ describe('Serializador Reverso', () => {
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
             // Tradutor deve retornar a estrutura HTML correspondente
-            const resultadoSerializador = serializadorReverso.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializadorReverso.resolver(resultadoAvaliadorSintatico);
 
             if (Object.values(estruturasLmht)[index].length > 1) {
                 const estruturaLmhtString = Object.values(estruturasLmht)[index][0].toString();
@@ -61,7 +61,7 @@ describe('Serializador Reverso', () => {
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
             // Serializador reverso
-            const resultadoSerializador = serializadorReverso.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializador = serializadorReverso.resolver(resultadoAvaliadorSintatico);
 
             // Serializador reverso deve retornar a estrutura HTML correspondente
             expect(resultadoSerializador).toContain('lmht');
@@ -84,7 +84,7 @@ describe('Serializador Reverso', () => {
         const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
         // Serializador reverso
-        const resultadoSerializador = serializadorReverso.serializar(resultadoAvaliadorSintatico);
+        const resultadoSerializador = serializadorReverso.resolver(resultadoAvaliadorSintatico);
 
         // Serializador reverso deve retornar a estrutura HTML correspondente
         expect(resultadoSerializador).toContain('lmht');

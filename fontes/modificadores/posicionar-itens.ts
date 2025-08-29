@@ -26,26 +26,30 @@ export class PosicionarItens extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("posicionar-itens", "place-items", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "condição-extra", 
-                "posicionar-itens", 
-                valores, 
-                posicoes, 
-                this.valoresAceitos
-            );
-        } else {   
-            validarValoresAdicionais(
-                "posicionar-itens", 
-                valores, 
-                posicoes, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "condição-extra",
+                    "posicionar-itens",
+                    valores,
+                    posicoes,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValoresAdicionais(
+                    "posicionar-itens",
+                    valores,
+                    posicoes,
+                    this.valoresAceitos
+                );
+            }
         }
-            
+
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

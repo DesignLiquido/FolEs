@@ -29,6 +29,7 @@ import { BordaInferior } from "../borda-inferior";
 import { BordaMascara } from "../borda-mascara";
 import { BordaSuperior } from "../borda-superior";
 import { CalhaBarraRolagem } from "../calha-barra-rolagem";
+import { CaminhoRecorte } from "../caminho-recorte";
 import { CelulasVazias } from "../celulas-vazias";
 import { Citacoes } from "../citacoes";
 import { ColunaEmGrade } from "../coluna-em-grade";
@@ -361,7 +362,6 @@ import { VelocidadeAnimacao } from "../velocidade-animacao";
 import { Visibilidade } from "../visibilidade";
 import { VisibilidadeConteudo } from "../visibilidade-conteudo";
 import { VisibilidadeFundo } from "../visibilidade-fundo";
-import { CaminhoRecorte } from "../caminho-recorte";
 
 export const DicionarioModificadores: { [nomeFolEs: string]: any } = {
     "agrupar-palavra": AgruparPalavra,

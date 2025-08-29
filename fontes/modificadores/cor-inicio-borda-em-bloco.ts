@@ -6,6 +6,7 @@ export class CorInicioBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["cor-inicio-borda-em-bloco", "cor-início-borda-em-bloco"],
@@ -13,8 +14,9 @@ export class CorInicioBordaEmBloco extends Modificador {
             pragmas,
         );
 
-        validarValorCor("cor-início-borda-em-bloco", valores);
+        if (!variavel) validarValorCor("cor-início-borda-em-bloco", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

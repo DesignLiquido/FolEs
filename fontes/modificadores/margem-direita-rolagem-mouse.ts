@@ -7,17 +7,21 @@ export class MargemDireitaRolagemMouse extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("margem-direita-rolagem-mouse", "scroll-margin-right", pragmas);
 
-        validarValorNumerico(
-            "margem-direita-rolagem-mouse", 
-            valores,
-            null,
-            null,
-            comprimentos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "margem-direita-rolagem-mouse",
+                valores,
+                null,
+                null,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

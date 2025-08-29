@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { ValorAngulo, ValorComprimento, ValorPercentual, ValoresQuantificadores, ValorQuantificadorInvalido, ValorTempo } from "../listas/valores-quantificadores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
@@ -14,14 +14,14 @@ describe('Testes: Valor-Quantificador', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Serializador;
+    let tradutor: Resolvedor;
 
     describe('Testando Seletores que aceitam QUALQUER Valor e Quantificador', () => {
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -64,7 +64,7 @@ describe('Testes: Valor-Quantificador', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -97,8 +97,7 @@ describe('Testes: Valor-Quantificador', () => {
             }
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Casos de Falha - Atribuição de valor inválido', () => {
+        it('Casos de Falha - Atribuição de valor inválido', () => {
             for (let index = 0; index < Object.keys(ValorQuantificadorInvalido).length; index += 1) {
 
                 // Lexador - valor numérico não informado
@@ -123,7 +122,7 @@ describe('Testes: Valor-Quantificador', () => {
             }
         });
 
-        // TODO: Descobrir por que  dá erro.
+        // TODO: Descomentar ao consertar o processo de atribuição via variável
         it.skip('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
             for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
                 const seletor = new SeletorModificador(
@@ -168,7 +167,7 @@ describe('Testes: Valor-Quantificador', () => {
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('20px');
             }
@@ -180,7 +179,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -222,7 +221,7 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
@@ -234,7 +233,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -276,7 +275,7 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
@@ -288,7 +287,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -330,7 +329,7 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }
@@ -342,7 +341,7 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
@@ -384,7 +383,7 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
             }

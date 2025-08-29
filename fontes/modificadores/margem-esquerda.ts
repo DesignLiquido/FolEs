@@ -11,17 +11,21 @@ export class MargemEsquerda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("margem-esquerda", "margin-left", pragmas);
 
-        validarValorNumerico(
-            "margem-esquerda", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "margem-esquerda",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

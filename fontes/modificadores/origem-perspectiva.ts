@@ -15,18 +15,21 @@ export class OrigemPerspectiva extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("origem-perspectiva", "perspective-origin", pragmas);
 
-        validarValorNumerico(
-            "origem-perspectiva",
-            valores,
-            this.valoresAceitos,
-            null,
-            ListaDeValorPercentual
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "origem-perspectiva",
+                valores,
+                this.valoresAceitos,
+                null,
+                ListaDeValorPercentual
+            );
+        }
 
-        // TODO: Também pode receber somente o valor numérico, sem quantificador
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

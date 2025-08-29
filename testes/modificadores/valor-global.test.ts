@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Valor } from "../../fontes/valores/valor";
 import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
@@ -16,19 +16,19 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliadorSintatico: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliadorSintatico = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(
-                    ValorGlobal[index], 
+                    ValorGlobal[index],
                     [new ValorQualitativo('herdar')],
                     null
                 );
@@ -64,7 +64,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('inherit');
@@ -90,7 +90,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliadorSintatico.analisar(resultadoLexador.simbolos));
+                    tradutor.resolver(avaliadorSintatico.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -129,7 +129,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliadorSintatico.analisar(novoLexador.simbolos));
+                    tradutor.resolver(avaliadorSintatico.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -152,7 +152,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             }
         });
 
-        // TODO: Consertar
+        // TODO: Consertar após ajustar processo de atribuição de valor via variável
         it.skip('Caso de Sucesso - Posição atribuída por meio de variável', () => {
             const globaisFolEs = Object.keys(valoresGlobais);
             const globaisCss = Object.values(valoresGlobais);
@@ -162,7 +162,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 const resultadoLexador = lexador.mapear([
                     `$valor-padrao: ${globaisFolEs[index]};`,
                     "lmht {",
-                        'conteúdo: $valor-padrao;',
+                    'conteúdo: $valor-padrao;',
                     "}"
                 ]);
 
@@ -195,7 +195,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(globaisCss[index]);
                 expect(resultadoTradutor).toContain('content');
             }

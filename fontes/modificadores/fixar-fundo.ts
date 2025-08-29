@@ -12,11 +12,13 @@ export class FixarFundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("fixar-fundo", "background-attachment", pragmas);
 
-        validarValores("fixar-fundo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("fixar-fundo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

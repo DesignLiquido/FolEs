@@ -14,6 +14,7 @@ export class LarguraInicioBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["largura-inicio-borda-em-bloco", "largura-início-borda-em-bloco"],
@@ -21,14 +22,17 @@ export class LarguraInicioBordaEmBloco extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "largura-início-borda-em-bloco",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "largura-início-borda-em-bloco",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

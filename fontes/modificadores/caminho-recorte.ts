@@ -18,18 +18,22 @@ export class CaminhoRecorte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("caminho-recorte", "clip-path", pragmas);
 
         const valoresExtra = ['inset', 'circle', 'ellipse', 'polygon', 'path', 'rect', 'shape', 'xywh'];
 
-        validarValores(
-            "caminho-recorte",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-        );
+        if (!variavel) {
+            validarValores(
+                "caminho-recorte",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

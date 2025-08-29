@@ -1,9 +1,9 @@
-import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
+import { Valor, ValorNumerico, ValorQualitativo } from "../valores";
+import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Grade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,7 +16,6 @@ export class Grade extends Modificador {
         coluna: "column",
         denso: "dense",
         nenhum: "none",
-        "conteudo-mínimo": "min-content",
         "sub-grade": "subgrid",
         alvenaria: "masonry",
     };
@@ -24,29 +23,42 @@ export class Grade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("grade", "grid", pragmas);
 
         const valoresExtra = ["minmax"];
 
-        // TODO: Adaptar para receber também número-quantificador
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "comum", 
-                "grade", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra
-            );
-        } else {
-            validarValores(
-                "grade", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra
-            );
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra
+                );
+            } else if (valores[0] instanceof ValorNumerico) {
+                validarValorNumerico(
+                    "grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValores(
+                    "grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

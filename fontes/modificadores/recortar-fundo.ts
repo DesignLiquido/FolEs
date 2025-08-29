@@ -14,11 +14,13 @@ export class RecortarFundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recortar-fundo", "background-clip", pragmas);
 
-        validarValores("recortar-fundo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("recortar-fundo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

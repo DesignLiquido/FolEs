@@ -15,25 +15,29 @@ export class RegrasColuna extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("regras-coluna", "column-rule", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "múltiplos-qualitativos", 
-                "regras-coluna", 
-                valores, 
-                this.valoresAceitos
-            );
-        } else {
-            validarMultiplosQualitativos(
-                "regras-coluna", 
-                valores, 
-                this.valoresAceitos, 
-                comprimentos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "regras-coluna",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "regras-coluna",
+                    valores,
+                    this.valoresAceitos,
+                    comprimentos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

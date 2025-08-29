@@ -11,11 +11,13 @@ export class Isolamento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("isolamento", "isolation", pragmas);
 
-        validarValores("isolamento", valores, this.valoresAceitos);
+        if (!variavel) validarValores("isolamento", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

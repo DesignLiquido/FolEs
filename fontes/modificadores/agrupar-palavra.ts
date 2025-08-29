@@ -12,11 +12,13 @@ export class AgruparPalavra extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("agrupar-palavra", "word-break", pragmas);
 
-        validarValores("agrupar-palavra", valores, this.valoresAceitos);
+        if (!variavel) validarValores("agrupar-palavra", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

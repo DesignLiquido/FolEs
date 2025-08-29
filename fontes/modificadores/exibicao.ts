@@ -45,11 +45,13 @@ export class Exibicao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["exibicao", "exibição"], "display", pragmas);
 
-        validarValores("exibição", valores, this.valoresAceitos);
+        if (!variavel) validarValores("exibição", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

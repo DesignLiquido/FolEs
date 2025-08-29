@@ -7,15 +7,19 @@ export class EstiloFimBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-fim-borda-em-bloco", "border-block-end-style", pragmas);
 
-        validarValoresAdicionais(
-            "estilo-fim-borda-em-bloco",
-            valores,
-            estilos,
-        );
+        if (!variavel) {
+            validarValoresAdicionais(
+                "estilo-fim-borda-em-bloco",
+                valores,
+                estilos,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

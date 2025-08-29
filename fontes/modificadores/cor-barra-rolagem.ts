@@ -10,11 +10,13 @@ export class CorBarraRolagem extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("cor-barra-rolagem", "scrollbar-color", pragmas);
 
-        validarValorCor("cor-barra-rolagem", valores, this.valoresAceitos);
+        if (!variavel) validarValorCor("cor-barra-rolagem", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

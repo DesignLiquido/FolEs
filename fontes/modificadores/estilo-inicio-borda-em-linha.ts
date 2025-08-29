@@ -7,6 +7,7 @@ export class EstiloInicioBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["estilo-inicio-borda-em-linha", "estilo-início-borda-em-linha"],
@@ -14,12 +15,15 @@ export class EstiloInicioBordaEmLinha extends Modificador {
             pragmas,
         );
 
-        validarValoresAdicionais(
-            "estilo-início-borda-em-linha",
-            valores,
-            estilos,
-        );
+        if (!variavel) {
+            validarValoresAdicionais(
+                "estilo-início-borda-em-linha",
+                valores,
+                estilos,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -6,19 +6,22 @@ export class FlexCrescimento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("flex-crescimento", "flex-grow", pragmas);
 
-        validarValorNumerico(
-            "flex-crescimento", 
-            valores,
-            null,
-            null,
-            null,
-            null,
-            true
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "flex-crescimento",
+                valores,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

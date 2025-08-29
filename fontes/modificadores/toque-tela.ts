@@ -21,11 +21,13 @@ export class ToqueTela extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("toque-tela", "touch-action", pragmas);
 
-        validarValores("toque-tela", valores, this.valoresAceitos);
+        if (!variavel) validarValores("toque-tela", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

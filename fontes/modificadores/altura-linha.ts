@@ -11,17 +11,21 @@ export class AlturaLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("altura-linha", "line-height", pragmas);
 
-        validarValorNumerico(
-            "altura-linha", 
-            valores, 
-            this.valoresAceitos, 
-            null, 
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "altura-linha",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

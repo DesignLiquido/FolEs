@@ -7,6 +7,7 @@ export class AtrasoAnimacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["atraso-animacao", "atraso-animação"],
@@ -14,14 +15,17 @@ export class AtrasoAnimacao extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "atraso-animação", 
-            valores,
-            null,
-            null,
-            valoresTemporais
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "atraso-animação",
+                valores,
+                null,
+                null,
+                valoresTemporais
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

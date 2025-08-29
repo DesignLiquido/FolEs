@@ -7,6 +7,7 @@ export class RaioDireitoBordaSuperior extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             "raio-direito-borda-superior",
@@ -14,14 +15,17 @@ export class RaioDireitoBordaSuperior extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "raio-direito-borda-superior", 
-            valores,
-            null,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "raio-direito-borda-superior",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

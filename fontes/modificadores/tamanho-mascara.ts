@@ -13,16 +13,20 @@ export class TamanhoMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["tamanho-mascara", "tamanho-máscara"], "mask-size", pragmas);
 
-        validarValorNumerico(
-            "tamanho-máscara", 
-            valores, 
-            this.valoresAceitos,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "tamanho-máscara",
+                valores,
+                this.valoresAceitos,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -11,17 +11,21 @@ export class Girar extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("girar", "rotate", pragmas);
 
-        validarValorNumerico(
-            "girar", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            angulos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "girar",
+                valores,
+                this.valoresAceitos,
+                null,
+                angulos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

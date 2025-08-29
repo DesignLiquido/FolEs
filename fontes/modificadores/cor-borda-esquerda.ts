@@ -6,11 +6,13 @@ export class CorBordaEsquerda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("cor-borda-esquerda", "border-left-color", pragmas);
 
-        validarValorCor("cor-borda-esquerda", valores);
+        if (!variavel) validarValorCor("cor-borda-esquerda", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

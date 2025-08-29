@@ -4,7 +4,7 @@ import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
-import { Serializador } from "../fontes/serializadores";
+import { Resolvedor } from "../fontes/resolvedores";
 import { ValorNumerico } from "../fontes/valores";
 import { ValoresQuantificadores } from "./listas/valores-quantificadores"
 
@@ -12,13 +12,13 @@ describe('Avaliador Sintático', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorSintatico: AvaliadorSintaticoInterface;
-    let tradutor: Serializador;
+    let tradutor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliadorSintatico = new AvaliadorSintatico(importador);
-        tradutor = new Serializador();
+        tradutor = new Resolvedor();
     });
 
 
@@ -65,7 +65,7 @@ describe('Avaliador Sintático', () => {
             expect(valor.quantificador).toStrictEqual('px');
 
             // O resultado do Avaliador deve ser recebido corretamente pelo Tradutor
-            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toBeTruthy();
         }

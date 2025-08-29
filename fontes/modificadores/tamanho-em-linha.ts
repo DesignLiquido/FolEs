@@ -15,19 +15,23 @@ export class TamanhoEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("tamanho-em-linha", "inline-size", pragmas);
 
         const valoresExtra = ["fit-content"];
 
-        validarValorNumerico(
-            "tamanho-em-linha",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "tamanho-em-linha",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

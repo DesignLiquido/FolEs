@@ -11,11 +11,13 @@ export class ComportamentoRolagem extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("comportamento-rolagem", "scroll-behavior", pragmas);
 
-        validarValores("comportamento-rolagem", valores, this.valoresAceitos);
+        if (!variavel) validarValores("comportamento-rolagem", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

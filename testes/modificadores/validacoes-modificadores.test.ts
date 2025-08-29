@@ -3,20 +3,20 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 
 describe('Testando Validações de Valores e Quantificadores dos Seletores', () => {
     describe('Validação comum de valores', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let serializador: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            serializador = new Resolvedor();
         });
 
         it('Caso de sucesso - Validações não retornam erros', () => {
@@ -42,7 +42,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoTradutor).toContain('div');
@@ -83,13 +83,13 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let serializador: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            serializador = new Resolvedor();
         });
 
         it('Caso de sucesso - Validações não retornam erros', () => {
@@ -115,7 +115,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador
-            const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
+            const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoSerializacao).toContain('div');
@@ -155,13 +155,13 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de sucesso - Validações não retornam erros', () => {
@@ -188,7 +188,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador
-            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoTradutor).toContain('div');
@@ -243,13 +243,13 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de sucesso - Validações não retornam erros ao atribuir nome de cor', () => {
@@ -275,7 +275,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador
-            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoTradutor).toContain('div');
@@ -283,8 +283,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             expect(resultadoTradutor).toContain('blue;');
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Caso de sucesso - Validações não retornam erros ao atribuir código hexadecimal', () => {
+        it('Caso de sucesso - Validações não retornam erros ao atribuir código hexadecimal', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 'divisão {',
@@ -307,7 +306,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador
-            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoTradutor).toContain('div');
@@ -315,8 +314,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             expect(resultadoTradutor).toContain('#ffffff;');
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Caso de falha - Validação retorna erro de código hexadecimal inválido', () => {
+        it('Caso de falha - Validação retorna erro de código hexadecimal inválido', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 'divisão {',
@@ -330,8 +328,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com hexadecimal inválido`);
         });
 
-        // TODO: Descobrir por que não dá erro.
-        it.skip('Caso de falha - Validação retorna erro de método inválido', () => {
+        it('Caso de falha - Validação retorna erro de método inválido', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 'divisão {',
@@ -378,13 +375,13 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de sucesso - Validações não retornam erros', () => {
@@ -411,7 +408,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Serializador
-            const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoTradutor).toContain('div');
@@ -452,13 +449,13 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de falha - Validação retorna erro de quantificador proibido', () => {

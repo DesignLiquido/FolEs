@@ -7,11 +7,13 @@ export class PosicaoMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["posicao-mascara", "posição-máscara"], "mask-position", pragmas);
 
-        validarValoresAdicionais("posição-máscara", valores, posicoesBasicas);
+        if (!variavel) validarValoresAdicionais("posição-máscara", valores, posicoesBasicas);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

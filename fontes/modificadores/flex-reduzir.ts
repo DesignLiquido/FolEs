@@ -6,19 +6,22 @@ export class FlexReduzir extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("flex-reduzir", "flex-shrink", pragmas);
 
-        validarValorNumerico(
-            "flex-reduzir", 
-            valores,
-            null,
-            null,
-            null,
-            null,
-            true
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "flex-reduzir",
+                valores,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

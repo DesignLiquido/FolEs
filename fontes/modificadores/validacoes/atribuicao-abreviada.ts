@@ -15,6 +15,7 @@ export function validarAtribuicaoAbreviada(
     valoresAceitos: { [valorFoles: string]: string } = null,
     valoresExtra: any = null,
     quantificadoresAceitos: { [valorFoles: string]: string } = null,
+    naoAceitaQuantificador: boolean = false,
     // validacaoString: boolean = false,
     // validacaoPersonalizada: boolean = false,
 ): void {
@@ -28,7 +29,7 @@ export function validarAtribuicaoAbreviada(
                     validarValores(nomePropriedade, arrayValores, valoresAceitos, valoresExtra);
                     break;
                 case "condição-extra":
-                    validarValoresAdicionais(nomePropriedade, arrayValores, valoresAceitos, valoresExtra);
+                    validarValoresAdicionais(nomePropriedade, arrayValores, valoresExtra, valoresAceitos);
                     break;
                 case "cor":
                     validarValorCor(nomePropriedade, arrayValores, valoresAceitos);
@@ -40,7 +41,7 @@ export function validarAtribuicaoAbreviada(
                     validarMultiplosQualitativos(nomePropriedade, arrayValores, valoresAceitos, quantificadoresAceitos);
                     break;
                 case "numérica":
-                    validarValorNumerico(nomePropriedade, arrayValores, valoresAceitos, valoresExtra, quantificadoresAceitos);
+                    validarValorNumerico(nomePropriedade, arrayValores, valoresAceitos, valoresExtra, quantificadoresAceitos, naoAceitaQuantificador);
                     break;
                 default:
                     break;

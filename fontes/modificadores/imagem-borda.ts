@@ -18,31 +18,34 @@ export class ImagemBorda extends Modificador {
 
     constructor(
         valores: Valor[],
-        pragmas?: PragmasModificador,
+        pragmas?: PragmasModificador, variavel?: boolean
     ) {
         super("imagem-borda", "border-image", pragmas);
 
         const valoresExtra = ["linear-gradient", "url"];
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "imagem-borda", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra,
-                unidadesMedida
-            );
-        } else {
-            validarValorNumerico(
-                "imagem-borda", 
-                valores, 
-                this.valoresAceitos, 
-                valoresExtra,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "imagem-borda",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "imagem-borda",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

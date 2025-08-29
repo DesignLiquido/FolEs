@@ -10,19 +10,22 @@ export class ContarColuna extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("contar-coluna", "column-count", pragmas);
 
-        validarValorNumerico(
-            "contar-coluna", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            null,
-            null,
-            true
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "contar-coluna",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

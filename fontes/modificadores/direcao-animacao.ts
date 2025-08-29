@@ -13,15 +13,17 @@ export class DirecaoAnimacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["direcao-animacao", "direção-animação"],
             "animation-direction",
             pragmas,
         );
-
-        validarValores("direção-animação", valores, this.valoresAceitos);
-
+        
+        if (!variavel) validarValores("direção-animação", valores, this.valoresAceitos);
+        
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

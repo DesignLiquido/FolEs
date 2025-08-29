@@ -11,33 +11,29 @@ export class NomeAnimacao extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "comum",
-                "nome-animação",
-                valores,
-                this.valoresAceitos,
-            );
-            // OBS.: Recebe validacaoPersonalizada como true
-        } else {
-            validarValores(
-                "nome-animação",
-                valores,
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "nome-animação",
+                    valores,
+                    this.valoresAceitos,
+                );
+                // TODO: Recebia validacaoPersonalizada como true
+            } else {
+                validarValores(
+                    "nome-animação",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
         }
 
-        //      else {
-        //         if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
-
-        //             validarIdentificacaoPersonalizada("nome-animação", valor);
-        //             this.valoresAceitos[valor] = valor;
-        //         }
-        //     }
-
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

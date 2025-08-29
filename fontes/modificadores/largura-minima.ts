@@ -15,19 +15,23 @@ export class LarguraMinima extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["largura-minima", "largura-minima"], "min-width", pragmas);
 
         const valoresExtra = ["fit-content"];
 
-        validarValorNumerico(
-            "largura-minima",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "largura-minima",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -16,28 +16,34 @@ export class AjustarTamanhoFonte extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica",
-                "ajustar-tamanho-fonte",
-                valores,
-                this.valoresAceitos
-            );
-        } else {
-            validarValorNumerico(
-                "ajustar-tamanho-fonte",
-                valores,
-                this.valoresAceitos,
-                null,
-                null,
-                null,
-                true,
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "ajustar-tamanho-fonte",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+            } else {
+                validarValorNumerico(
+                    "ajustar-tamanho-fonte",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true,
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

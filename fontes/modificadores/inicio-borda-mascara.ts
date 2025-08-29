@@ -7,6 +7,7 @@ export class InicioBordaMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["inicio-borda-mascara", "início-borda-máscara"],
@@ -14,14 +15,17 @@ export class InicioBordaMascara extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "início-borda-máscara", 
-            valores,
-            null,
-            null,
-            comprimentos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "início-borda-máscara",
+                valores,
+                null,
+                null,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

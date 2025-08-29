@@ -7,11 +7,13 @@ export class EstiloBordaEsquerda extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("estilo-borda-esquerda", "border-left-style", pragmas);
 
-        validarValoresAdicionais("estilo-borda-esquerda", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-esquerda", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

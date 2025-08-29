@@ -8,30 +8,34 @@ export class Recuo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recuo", "padding", pragmas);
 
-        if (valores.length > 1) {
-            const quantificadoresAceitos: { [nome: string]: string } = {...comprimentos, ...ListaDeValorPercentual}; 
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "recuo", 
-                valores,
-                null,
-                null,
-                quantificadoresAceitos
-            );
-        } else {
-            validarValorNumerico(
-                "recuo", 
-                valores,
-                null,
-                null,
-                comprimentos,
-                ListaDeValorPercentual
-            );
+        const quantificadoresAceitos: { [nome: string]: string } = { ...comprimentos, ...ListaDeValorPercentual };
+
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "recuo",
+                    valores,
+                    null,
+                    null,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "recuo",
+                    valores,
+                    null,
+                    null,
+                    quantificadoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Cores, CoresNomeFolEs } from "../listas/cores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { cores } from "../../fontes/modificadores/atributos/cores";
@@ -15,19 +15,19 @@ describe('Testando Seletores que recebem COR como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
         it('Caso de Sucesso - Cor válida', () => {
             for (let index = 0; index < Cores.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    Cores[index], 
+                    Cores[index],
                     [new ValorQualitativo('castanho')]
                 );
 
@@ -62,7 +62,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain("brown;");
@@ -100,7 +100,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("#f015ca;");
@@ -138,7 +138,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("rgb(34, 12, 64);");
@@ -177,7 +177,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("rgba(34, 64, 300);");
@@ -217,7 +217,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
+                    tradutor.resolver(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -252,7 +252,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("hsl(34, 50%, 120%);");
@@ -289,24 +289,24 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(CoresNomeFolEs[Cores[index]]);
                 expect(resultadoTradutor).toContain("hsla(34, 50%, 120%);");
             }
         });
 
-        // TODO: Consertar
+        // TODO: Consertar após ajustar processo de atribuição de valor via variável
         it.skip('Caso de Sucesso - Cores atribuídas por meio de variável', () => {
             const coresFolEs = Object.keys(cores);
             const coresCss = Object.values(cores);
- 
+
             for (let index = 0; index < coresFolEs.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     `$cor-padrao: ${coresFolEs[index]};`,
                     "lmht {",
-                        'cor-fundo: $cor-padrao;',
+                    'cor-fundo: $cor-padrao;',
                     "}"
                 ]);
 
@@ -334,9 +334,9 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 expect(segundoResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('cor-fundo');
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-color');
-                
+
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(coresCss[index]);
             }
         });

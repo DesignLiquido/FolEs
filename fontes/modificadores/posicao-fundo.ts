@@ -7,13 +7,14 @@ export class PosicaoFundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["posicao-fundo", "posição-fundo"],
             "background-position",
             pragmas,
         );
-
+        
         const quantificadoresAceitos = {
             px: "px",
             "%": "%",
@@ -21,15 +22,18 @@ export class PosicaoFundo extends Modificador {
             vmin: "vmin",
             vmax: "vmax",
         };
-
-        validarValorNumerico(
-            "posição-fundo",
-            valores,
-            posicoesBasicas,
-            null,
-            quantificadoresAceitos
-        );
-
+        
+        if (!variavel) {
+            validarValorNumerico(
+                "posição-fundo",
+                valores,
+                posicoesBasicas,
+                null,
+                quantificadoresAceitos
+            );
+        }
+        
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

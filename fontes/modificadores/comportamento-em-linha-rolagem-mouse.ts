@@ -12,6 +12,7 @@ export class ComportamentoEmLinhaRolagemMouse extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             "comportamento-em-linha-rolagem-mouse",
@@ -19,13 +20,15 @@ export class ComportamentoEmLinhaRolagemMouse extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        validarValores(
-            "comportamento-em-linha-rolagem-mouse",
-            valores,
-            this.valoresAceitos,
-        );
+        if (!variavel) {
+            validarValores(
+                "comportamento-em-linha-rolagem-mouse",
+                valores,
+                this.valoresAceitos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

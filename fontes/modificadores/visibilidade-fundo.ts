@@ -12,11 +12,13 @@ export class VisibilidadeFundo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("visibilidade-fundo", "backface-visibility", pragmas);
 
-        validarValores("visibilidade-fundo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("visibilidade-fundo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

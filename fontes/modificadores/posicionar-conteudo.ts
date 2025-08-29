@@ -28,6 +28,7 @@ export class PosicionarConteudo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["posicionar-conteudo", "posicionar-conteúdo"],
@@ -35,23 +36,26 @@ export class PosicionarConteudo extends Modificador {
             pragmas,
         );
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "condição-extra", 
-                "posicionar-conteúdo", 
-                valores, 
-                posicoes, 
-                this.valoresAceitos
-            );
-        } else {
-            validarValoresAdicionais(
-                "posicionar-conteúdo", 
-                valores, 
-                posicoes, 
-                this.valoresAceitos
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "condição-extra",
+                    "posicionar-conteúdo",
+                    valores,
+                    posicoes,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValoresAdicionais(
+                    "posicionar-conteúdo",
+                    valores,
+                    posicoes,
+                    this.valoresAceitos
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

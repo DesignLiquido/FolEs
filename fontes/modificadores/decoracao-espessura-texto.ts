@@ -12,6 +12,7 @@ export class DecoracaoEspessuraTexto extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["decoracao-espessura-texto", "decoração-espessura-texto"],
@@ -19,14 +20,17 @@ export class DecoracaoEspessuraTexto extends Modificador {
             pragmas,
         );
 
-        validarValorNumerico(
-            "decoração-espessura-texto",
-            valores,
-            this.valoresAceitos,
-            null,
-            unidadesMedida,
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "decoração-espessura-texto",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

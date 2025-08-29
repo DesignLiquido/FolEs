@@ -1,4 +1,7 @@
 lmht {
+    posicao-deslocamento: 20% centro;
+    limite-forma-imagem: 0.9;
+    espaçamento-letras: .2rem;
     area-mascara: completar-caixa, preenchimento;
     coluna-em-grade: auto / auto;
 }

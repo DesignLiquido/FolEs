@@ -11,11 +11,13 @@ export class SombraCaixa extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("sombra-caixa", "box-shadow", pragmas);
 
-        validarMultiplosQualitativos("sombra-caixa", valores, null, unidadesMedida);
+        if (!variavel) validarMultiplosQualitativos("sombra-caixa", valores, null, unidadesMedida);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

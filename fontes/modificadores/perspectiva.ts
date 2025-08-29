@@ -11,17 +11,21 @@ export class Perspectiva extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("perspectiva", "perspective", pragmas);
 
-        validarValorNumerico(
-            "perspectiva", 
-            valores, 
-            this.valoresAceitos,
-            null,
-            comprimentos
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "perspectiva",
+                valores,
+                this.valoresAceitos,
+                null,
+                comprimentos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

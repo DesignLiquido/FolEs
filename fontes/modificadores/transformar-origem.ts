@@ -8,17 +8,21 @@ export class TransformarOrigem extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("transformar-origem", "transform-origin", pragmas);
 
-        validarValorNumerico(
-            "transformar-origem", 
-            valores, 
-            posicoesBasicas,
-            null,
-            unidadesMedida
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "transformar-origem",
+                valores,
+                posicoesBasicas,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

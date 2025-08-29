@@ -6,19 +6,22 @@ export class LinhasInferiores extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("linhas-inferiores", "orphans", pragmas);
 
-        validarValorNumerico(
-            "linhas-inferiores", 
-            valores,
-            null,
-            null,
-            null,
-            null,
-            true
-        );
+        if (!variavel) {
+            validarValorNumerico(
+                "linhas-inferiores",
+                valores,
+                null,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

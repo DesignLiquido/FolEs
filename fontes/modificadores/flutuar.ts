@@ -15,11 +15,13 @@ export class Flutuar extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("flutuar", "float", pragmas);
 
-        validarValores("flutuar", valores, this.valoresAceitos);
+        if (!variavel) validarValores("flutuar", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

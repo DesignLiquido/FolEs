@@ -7,7 +7,7 @@ export class VazamentoEmBloco extends Modificador {
         visivel: "visible",
         visível: "visible",
         escondido: "hidden",
-        recortar: "clip",
+        recorte: "clip",
         "barra-rolagem": "scroll",
         auto: "auto",
     };
@@ -15,11 +15,13 @@ export class VazamentoEmBloco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("vazamento-em-bloco", "overflow-block", pragmas);
 
-        validarValores("vazamento-em-bloco", valores, this.valoresAceitos);
+        if (!variavel) validarValores("vazamento-em-bloco", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

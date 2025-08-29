@@ -17,11 +17,13 @@ export class EspacoEmBranco extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["espaco-em-branco", "espaço-em-branco"], "white-space", pragmas);
 
-        validarValores("espaço-em-branco", valores, this.valoresAceitos);
+        if (!variavel) validarValores("espaço-em-branco", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

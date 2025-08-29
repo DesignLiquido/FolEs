@@ -8,28 +8,32 @@ export class RecuoEmLinha extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("recuo-em-linha", "padding-inline", pragmas);
 
-        if (valores.length > 1) {
-            validarAtribuicaoAbreviada(
-                "numérica", 
-                "recuo-em-linha", 
-                valores,
-                null,
-                null,
-                unidadesMedida
-            );
-        } else {
-            validarValorNumerico(
-                "recuo-em-linha",
-                valores,
-                null,
-                null,
-                unidadesMedida
-            );
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "recuo-em-linha",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "recuo-em-linha",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

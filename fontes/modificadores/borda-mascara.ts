@@ -1,8 +1,8 @@
 import { Valor } from "../valores";
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
-import { validarQuantificador } from "./validacoes/quantificador";
+import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class BordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -21,39 +21,35 @@ export class BordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
 
-        let valorURL;
+        const valoresExtra: Array<string> = ["url"];
 
-        // TODO: Repensar
-        // if (valor["traducao"] !== undefined) {
-        //     valorURL = valor["traducao"];
-        // }
-
-        //     if (
-        //         !(valor in this.valoresAceitos) &&
-        //         Number.isNaN(parseInt(valor)) &&
-        //         !valorURL.includes("url") &&
-        //         !(valor in valoresGlobais)
-        //     ) {
-        //         throw new Error(`Modificador ou variável 'borda-mascara' com valor ${valor} inválido. Valores aceitos: 
-        //             número-quantificador, URL, 
-        //             ${Object.keys(this.valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-        //             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "borda-máscara",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "borda-máscara",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                )
+            } else {
+                validarValorNumerico(
+                    "borda-máscara",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    unidadesMedida
+                )
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

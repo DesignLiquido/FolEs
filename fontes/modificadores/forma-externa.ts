@@ -1,6 +1,4 @@
 import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -17,18 +15,22 @@ export class FormaExterna extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("forma-externa", "shape-outside", pragmas);
 
         const valoresExtra = ["url"];
 
-        validarValores(
-            "forma-externa",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-        );
+        if (!variavel) {
+            validarValores(
+                "forma-externa",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

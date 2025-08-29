@@ -18,20 +18,25 @@ export class ModeloColunasEmGrade extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("modelo-colunas-em-grade", "grid-template-columns", pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 
-        validarValorNumerico(
-            "modelo-colunas-em-grade",
-            valores,
-            this.valoresAceitos,
-            valoresExtra,
-            unidadesMedida,
-            valoresFlex
-        );
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
+        if (!variavel) {
+            validarValorNumerico(
+                "modelo-colunas-em-grade",
+                valores,
+                this.valoresAceitos,
+                valoresExtra,
+                quantificadoresAceitos
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

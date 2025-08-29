@@ -11,6 +11,7 @@ export class AjusteCorForcado extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["ajuste-cor-forcado", "ajuste-cor-forçado"],
@@ -18,8 +19,9 @@ export class AjusteCorForcado extends Modificador {
             pragmas,
         );
 
-        validarValores("ajuste-cor-forçado", valores, this.valoresAceitos);
+        if (!variavel) validarValores("ajuste-cor-forçado", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }
