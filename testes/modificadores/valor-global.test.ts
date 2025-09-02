@@ -5,7 +5,6 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { Valor } from "../../fontes/valores/valor";
 import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { valoresGlobais } from "../../fontes/modificadores/atributos/globais";
@@ -16,16 +15,16 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliadorSintatico: AvaliadorSintaticoInterface;
-        let tradutor: Resolvedor;
+        let resolvedor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliadorSintatico = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorGlobal[index],
@@ -63,11 +62,11 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('inherit');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('inherit');
             }
         });
 
@@ -88,9 +87,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.resolver(avaliadorSintatico.analisar(resultadoLexador.simbolos));
+                    resolvedor.resolver(avaliadorSintatico.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -127,9 +126,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.resolver(avaliadorSintatico.analisar(novoLexador.simbolos));
+                    resolvedor.resolver(avaliadorSintatico.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -152,8 +151,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             }
         });
 
-        // TODO: Consertar após ajustar processo de atribuição de valor via variável
-        it.skip('Caso de Sucesso - Posição atribuída por meio de variável', () => {
+        it('Caso de Sucesso - Posição atribuída por meio de variável', () => {
             const globaisFolEs = Object.keys(valoresGlobais);
             const globaisCss = Object.values(valoresGlobais);
 
@@ -194,10 +192,10 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toContain('conteúdo');
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(globaisCss[index]);
-                expect(resultadoTradutor).toContain('content');
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(globaisCss[index]);
+                expect(resultadoResolvedor).toContain('content');
             }
         });
     });

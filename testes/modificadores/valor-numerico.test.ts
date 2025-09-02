@@ -13,16 +13,16 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Resolvedor;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        tradutor = new Resolvedor();
+        resolvedor = new Resolvedor();
     });
 
-    it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < ModificadoresDeValorNumerico.length; index += 1) {
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumerico[index],
@@ -61,14 +61,14 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
                 seletor['propriedadeCss']
             );
 
-            // Tradutor
-            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
         }
     });
 
-    it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de Falha - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < Object.keys(ModificadoresDeValorNumericoApenas).length; index += 1) {
 
             // Lexador - valor numérico não informado
@@ -104,9 +104,9 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
                 }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoApenas[index]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
             }
 
-            // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+            // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
             expect(() => {
-                tradutor.resolver(avaliador.analisar(novoLexador.simbolos));
+                resolvedor.resolver(avaliador.analisar(novoLexador.simbolos));
             }).toHaveLength(0);
         }
     });
@@ -126,8 +126,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
         }
     });
 
-    // TODO: Consertar após ajustar processo de atribuição de valor via variável
-    it.skip('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
+    it('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
         for (let index = 0; index < ModificadoresDeValorNumerico.length; index += 1) {
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumerico[index],
@@ -170,10 +169,10 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
             expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(seletor['nomeFoles']);
             expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
 
-            // Tradutor
-            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
-            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-            expect(resultadoTradutor).toContain('1');
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain('1');
         }
     });
 });
@@ -182,16 +181,16 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Resolvedor;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        tradutor = new Resolvedor();
+        resolvedor = new Resolvedor();
     });
 
-    it('Casos de sucesso - valor numérico apenas - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de sucesso - valor numérico apenas - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < ModificadoresDeValorNumericoComQuantificador.length; index += 1) {
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumericoComQuantificador[index],
@@ -228,14 +227,14 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
                 seletor['propriedadeCss']
             );
 
-            // Tradutor
-            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
         }
     });
 
-    it('Casos de Sucesso - valor numérico com quantificador - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de Sucesso - valor numérico com quantificador - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < ModificadoresDeValorNumericoComQuantificador.length; index += 1) {
             const excecoes = ['fatiar-imagem-borda', 'opacidade'];
 
@@ -283,14 +282,14 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
                 seletor['propriedadeCss']
             );
 
-            // Tradutor
-            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
         }
     });
 
-    it('Casos de Falha - valor numérico com quantificador - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de Falha - valor numérico com quantificador - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < ModificadoresDeValorNumericoComQuantificador.length; index += 1) {
             // Lexador
             const resultadoLexador = lexador.mapear([
@@ -320,9 +319,9 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
                 avaliador.analisar(novoLexador.simbolos);
             }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
-            // // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+            // // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
             expect(() => {
-                tradutor.resolver(avaliador.analisar(novoLexador.simbolos));
+                resolvedor.resolver(avaliador.analisar(novoLexador.simbolos));
             }).toHaveLength(0);
         }
     });
