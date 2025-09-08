@@ -54,9 +54,15 @@ export class Resolvedor {
             case 'ValorAbreviacao':
                 return "/";
             case 'ValorNumerico':
+                // console.log(valor);
+                
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
-                if (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0) {
+                // console.log(valorNumerico.quantificador);
+                
+                if ((valorNumerico.quantificador) && 
+                    (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
+                ) {
                     literalNumerico = literalNumerico.replace(/^0\./, '.');
                 }
 
@@ -215,7 +221,7 @@ export class Resolvedor {
         declaracoes: Declaracao[],
         indentacao: number = 0,
         seletorAnterior: string = undefined,
-    ) {       
+    ) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -238,7 +244,7 @@ export class Resolvedor {
                     break;
             }
         }
-        
+
         return resultado;
     }
 }

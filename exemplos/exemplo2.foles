@@ -1,4 +1,13 @@
 /** Valores específicos */
+
+lmht {
+    opacidade: 0.5;
+}
+
+lmht {
+    espacamento-letras: .2rem;
+}
+
 lmht {
     recuo: 10px 10px 100px 20px;
     borda-direita: 2px pontilhado;
