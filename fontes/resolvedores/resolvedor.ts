@@ -54,11 +54,8 @@ export class Resolvedor {
             case 'ValorAbreviacao':
                 return "/";
             case 'ValorNumerico':
-                // console.log(valor);
-                
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
-                // console.log(valorNumerico.quantificador);
                 
                 if ((valorNumerico.quantificador) && 
                     (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
