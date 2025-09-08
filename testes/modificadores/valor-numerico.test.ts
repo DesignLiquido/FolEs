@@ -190,7 +190,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
         resolvedor = new Resolvedor();
     });
 
-    it('Casos de sucesso - valor numérico apenas - Lexador, Avaliador e Resolvedor', () => {
+    it('Casos de Sucesso - valor numérico apenas - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < ModificadoresDeValorNumericoComQuantificador.length; index += 1) {
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumericoComQuantificador[index],
@@ -323,6 +323,50 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
             expect(() => {
                 resolvedor.resolver(avaliador.analisar(novoLexador.simbolos));
             }).toHaveLength(0);
+        }
+    });
+
+    it('Casos de Sucesso - valor numérico fracionário - Lexador, Avaliador e Resolvedor', () => {
+        for (let index = 0; index < ModificadoresDeValorNumericoComQuantificador.length; index += 1) {
+            const seletor = new SeletorModificador(
+                ModificadoresDeValorNumericoComQuantificador[index],
+                [new ValorNumerico(ModificadoresDeValorNumericoComQuantificador[index], 1)]
+            );
+
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "corpo {",
+                `${ModificadoresDeValorNumericoComQuantificador[index]}: 0.5;`,
+                "}"
+            ]);
+
+            expect(resultadoLexador.simbolos).toHaveLength(7);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático                
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
+                seletor['nomeFoles']
+            );
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                seletor['propriedadeCss']
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain('body');
+            expect(resultadoResolvedor).toContain('0.5');
         }
     });
 });
