@@ -1,7 +1,8 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorCor } from "./validacoes/cor";
+import { validarValorString } from "./validacoes/string";
 
 export class EnfaseTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -26,9 +27,14 @@ export class EnfaseTexto extends Modificador {
     ) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
-        // TODO: Aceita valor string
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
 
-        if (!variavel) {
+        if (!variavel && !validarString) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "cor",

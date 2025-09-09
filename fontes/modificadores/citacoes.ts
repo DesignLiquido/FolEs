@@ -1,6 +1,7 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class Citacoes extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,9 +17,15 @@ export class Citacoes extends Modificador {
     ) {
         super(["citacoes", "citações"], "quotes", pragmas);
 
-        // TODO: Aceita valores string
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
 
-        if (!variavel) validarValores("citações", valores, this.valoresAceitos);
+
+        if (!variavel && !validarString) validarValores("citações", valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

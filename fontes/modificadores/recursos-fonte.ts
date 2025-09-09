@@ -1,6 +1,7 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class RecursosFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,11 +17,16 @@ export class RecursosFonte extends Modificador {
 
         const valoresExtra = ["feature-tag-value"];
 
-        // TODO: Aceita valores:
-        // 1. String
-        // 2. feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
-
-        if (!variavel) {
+        // TODO: Aceita valor:
+        // 1. feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
+        
+        if (!variavel && !validarString) {
             validarValores(
                 "recursos-fonte",
                 valores,
