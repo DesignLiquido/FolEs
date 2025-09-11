@@ -1,3 +1,24 @@
+export const ModificadoresValorPersonalizado: Array<string> = [
+    'ao-mudar',
+    'coluna-em-grade',
+    'definir-contador',
+    'estilo-lista-tipo',
+    'estilo-lista',
+    'fim-coluna-em-grade',
+    'fim-linha-em-grade',
+    'incrementar-contador',
+    'início-coluna-em-grade',
+    'inicio-coluna-em-grade',
+    'início-linha-em-grade',
+    'inicio-linha-em-grade',
+    'linha-em-grade',
+    'nome-animação',
+    'nome-animacao',
+    'propriedade-transição',
+    'propriedade-transicao',
+    'tamanho-grade',
+];
+
 export const ValoresPersonalizados: Array<object> = [
     {
         modificador: 'ao-mudar',

@@ -31,6 +31,7 @@ import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { ReferenciaVariavel } from "../valores/referencia-variavel";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
+import { ModificadoresValorPersonalizado } from "../../testes/listas/valores-personalizados";
 
 /**
  * Implementação do avaliador sintático.
@@ -1718,7 +1719,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;
                     }
-
+                    
+                    if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
+                        valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                        break;
+                    }
+                    
                     throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
             }
         } while (

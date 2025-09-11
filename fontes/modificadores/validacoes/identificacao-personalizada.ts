@@ -4,17 +4,17 @@ import { Metodo } from "../../valores/metodos/foles/metodo";
 
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
-    valores: Valor[],
+    valor: Valor,
 ): void {    
     let valorModificador: string;
 
-    if (valores[0] instanceof ValorTexto) {
-        valorModificador = valores[0].literalTexto;
+    if (valor instanceof ValorTexto) {
+        valorModificador = valor.literalTexto;
         valorModificador = valorModificador.replace(/^["']|["']$/g, '');
-    } if (valores[0] instanceof ValorQualitativo) {
-        valorModificador = valores[0].qualitativo;
-    } else if (valores[0] instanceof Metodo || valores[0] instanceof MetodoCss) {
-        valorModificador = valores[0].constructor.name.toLowerCase();
+    } if (valor instanceof ValorQualitativo) {
+        valorModificador = valor.qualitativo;
+    } else if (valor instanceof Metodo || valor instanceof MetodoCss) {
+        valorModificador = valor.constructor.name.toLowerCase();
     }
 
     // Regex para um identificador CSS válido
