@@ -27,8 +27,11 @@ export class PropriedadeTransicao extends Modificador {
                     "propriedade-transição",
                     valores,
                     this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
-                // TODO: Recebe validacaoPersonalizada como true
             } else {
                 validarValores(
                     "propriedade-transição",

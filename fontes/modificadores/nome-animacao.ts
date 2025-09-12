@@ -22,8 +22,11 @@ export class NomeAnimacao extends Modificador {
                     "nome-animação",
                     valores,
                     this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
-                // TODO: Recebia validacaoPersonalizada como true
             } else {
                 validarValores(
                     "nome-animação",

@@ -22,6 +22,10 @@ export class TamanhoGrade extends Modificador {
                     "tamanho-grade",
                     valores,
                     this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
             } else {
                 validarValorNumerico(

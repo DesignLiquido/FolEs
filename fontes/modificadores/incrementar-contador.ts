@@ -24,9 +24,9 @@ export class IncrementarContador extends Modificador {
                     this.valoresAceitos,
                     null,
                     null,
+                    true,
                     true
                 );
-                // TODO: Recebia validacaoPersonalizada como true
             } else {
                 validarValorNumerico(
                     "incrementar-contador",
