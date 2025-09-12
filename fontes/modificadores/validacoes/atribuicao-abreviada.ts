@@ -1,4 +1,4 @@
-import { Valor, ValorAbreviacao, ValorQualitativo, ValorVirgula } from "../../valores";
+import { Valor, ValorAbreviacao, ValorNumerico, ValorQualitativo, ValorVirgula } from "../../valores";
 import { validarValores } from "./comum";
 import { validarValoresAdicionais } from "./condicao-extra";
 import { validarValorCor } from "./cor";
@@ -21,20 +21,18 @@ export function validarAtribuicaoAbreviada(
         const arrayValores: Valor[] = [];
         arrayValores.push(valor);
 
-        const valorTipado = valor as ValorQualitativo;
-        if (validacaoPersonalizada) {
-             if (
-                !(Object.keys(valoresAceitos).includes(valorTipado.qualitativo))
-                && typeof valorTipado.qualitativo !== 'number'
-                && !(Number(valorTipado.qualitativo))
-                && valorTipado.qualitativo !== '0'
-            ) {                
-                validarIdentificacaoPersonalizada(nomePropriedade, valorTipado);
-                valoresAceitos[valorTipado.qualitativo] = valorTipado.qualitativo;
-            }
-        }
-
         if (!(valor instanceof ValorAbreviacao || valor instanceof ValorVirgula)) {
+            const valorTipado = valor as ValorQualitativo;
+            if (validacaoPersonalizada) {
+                if (
+                    !(Object.keys(valoresAceitos).includes(valorTipado.qualitativo))
+                    && !(valor instanceof ValorNumerico)
+                ) {
+                    validarIdentificacaoPersonalizada(nomePropriedade, valorTipado);
+                    valoresAceitos[valorTipado.qualitativo] = valorTipado.qualitativo;
+                }
+            }
+
             switch (tipoValidacao) {
                 case "comum":
                     validarValores(nomePropriedade, arrayValores, valoresAceitos, valoresExtra);

@@ -4,9 +4,9 @@ import { Metodo } from "../../valores/metodos/foles/metodo";
 
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
-    valor: Valor,
+    valor: Valor | string,
 ): void {    
-    let valorModificador: string;
+    let valorModificador: Valor | string;
 
     if (valor instanceof ValorTexto) {
         valorModificador = valor.literalTexto;
@@ -15,6 +15,8 @@ export function validarIdentificacaoPersonalizada(
         valorModificador = valor.qualitativo;
     } else if (valor instanceof Metodo || valor instanceof MetodoCss) {
         valorModificador = valor.constructor.name.toLowerCase();
+    } else {
+        valorModificador = valor;
     }
 
     // Regex para um identificador CSS válido
@@ -37,8 +39,7 @@ export function validarIdentificacaoPersonalizada(
 
     // // Retorna erro caso não passe nas validações acima
     if (!(validacoesIdentificador)) {
-        throw new Error(`Modificador ou variável '${nomePropriedade}' com valor personalizado ${valorModificador} inválido. 
-        O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
+        throw new Error(`Modificador ou variável '${nomePropriedade}' com valor personalizado ${valorModificador} inválido. O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
     }
 }
 
