@@ -15,23 +15,25 @@ export class RecursosFonte extends Modificador {
     ) {
         super("recursos-fonte", "font-feature-settings", pragmas);
 
-        const valoresExtra = ["feature-tag-value"];
-
-        // TODO: Aceita valor:
-        // 1. feature-tag-value: string de 4 caracteres (comprimento 6 com as aspas)
         let validarString: boolean = false;
+        let validarTagValue: boolean = false;
         valores.forEach((valor) => {
             if (valor instanceof ValorTexto) {
                 validarString = validarValorString(valor);
+
+                validarTagValue = valor.literalTexto.length === 6;
+                if (!validarTagValue) {
+                    throw new Error(`Modificador ou variável 'recursos-fonte' com valor ${valor.literalTexto} inválido`);
+                }
             }
         });
-        
+
         if (!variavel && !validarString) {
             validarValores(
                 "recursos-fonte",
                 valores,
                 this.valoresAceitos,
-                valoresExtra
+                null
             );
         }
 

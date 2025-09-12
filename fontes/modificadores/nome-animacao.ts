@@ -31,7 +31,8 @@ export class NomeAnimacao extends Modificador {
                 validarValores(
                     "nome-animação",
                     valores,
-                    this.valoresAceitos
+                    this.valoresAceitos,
+                    null
                 );
             }
         }
