@@ -365,8 +365,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
 
         });
 
-        // TODO: Consertar após implementar nova lógica de valores feature-tag-value
-        it.skip('Caso de sucesso - Valores do tipo feature-tag-value', () => {
+        it('Caso de sucesso - Valores do tipo feature-tag-value', () => {
             const valoresTagValue = [
                 '"c2sc", "hist"',
                 '"c2sc"',
@@ -510,8 +509,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             }
         });
 
-        // TODO: Consertar após implementar atribuição de valores personalizados
-        it.skip('Caso de falha - Atribuição de valor personalizado inválido', () => {
+        it('Caso de falha - Atribuição de valor personalizado inválido', () => {
             const valoresInvalidos = [
                 '--valorPersonalizado',
                 '1111',
