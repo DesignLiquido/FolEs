@@ -144,8 +144,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         }
     });
 
-    // TODO: Consertar após ajustar validação de valores string
-    it.skip('Atribuindo Método "anotação()" com valor string - caso de falha', () => {
+    it('Atribuindo Método "anotação()" com valor string - caso de falha', () => {
         const valoresAceitos = ['--valorPersonalizado', 'herdar', 'inicial'];
 
         for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -160,7 +159,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
             expect(() => {
                 serializador.resolver(resultadoAvaliadorSintatico);
-            }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
+            }).toThrow(`Modificador ou variável 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido. O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
         }
     });
 
@@ -1981,8 +1980,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         }
     });
 
-    // TODO: Consertar após ajustar validação string
-    it.skip('Atribuindo Método "ornamentos()" com valor string - caso de falha', () => {
+    it('Atribuindo Método "ornamentos()" com valor string - caso de falha', () => {
         const valoresAceitos = ['--valorPersonalizado', 'herdar', 'inicial'];
 
         for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -1997,7 +1995,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
             expect(() => {
                 serializador.resolver(resultadoAvaliadorSintatico);
-            }).toThrow(`Propriedade 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido.`);
+            }).toThrow(`Modificador ou variável 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido. O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
         }
     });
 
