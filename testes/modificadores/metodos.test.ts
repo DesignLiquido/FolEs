@@ -13,13 +13,13 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Resolvedor;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Resolvedor();
+        resolvedor = new Resolvedor();
     });
 
     it('Atribuindo Método "anotação()" com valor numérico - caso de sucesso', () => {
@@ -66,12 +66,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     'font-variant-alternates'
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir anotação para annotation
-                expect(resultadoTradutor).toContain('font-variant-alternates');
-                expect(resultadoTradutor).toContain(`annotation(${valoresAceitos[index]});`);
+                // O Resolvedor deve resolver de acordo e traduzir anotação para annotation
+                expect(resultadoResolvedor).toContain('font-variant-alternates');
+                expect(resultadoResolvedor).toContain(`annotation(${valoresAceitos[index]});`);
             }
         }
     });
@@ -90,7 +90,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função anotação() deve estar entre 1 e 99');
         }
     });
@@ -134,12 +134,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     'font-variant-alternates'
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir anotação para annotation e conter o valor string
-                expect(resultadoTradutor).toContain('font-variant-alternates');
-                expect(resultadoTradutor).toContain(`annotation('${valoresAceitos[index]}');`);
+                // O Resolvedor deve resolver de acordo e traduzir anotação para annotation e conter o valor string
+                expect(resultadoResolvedor).toContain('font-variant-alternates');
+                expect(resultadoResolvedor).toContain(`annotation('${valoresAceitos[index]}');`);
             }
         }
     });
@@ -158,7 +158,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow(`Modificador ou variável 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido. O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
         }
     });
@@ -219,12 +219,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoBorrar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir borrar para blur
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBorrar[index]]);
-                expect(resultadoTradutor).toContain(`blur(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir borrar para blur
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoBorrar[index]]);
+                expect(resultadoResolvedor).toContain(`blur(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -283,12 +283,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoBrilho[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir brilho para brightness
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBrilho[index]]);
-                expect(resultadoTradutor).toContain(`brightness(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir brilho para brightness
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoBrilho[index]]);
+                expect(resultadoResolvedor).toContain(`brightness(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -334,11 +334,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoCalcular[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCalcular[index]]);
-            expect(resultadoTradutor).toContain('calc(100px - 80px);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoCalcular[index]]);
+            expect(resultadoResolvedor).toContain('calc(100px - 80px);');
         }
     });
 
@@ -383,12 +383,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 'font-variant-alternates'
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
-            expect(resultadoTradutor).toContain('font-variant-alternates');
-            expect(resultadoTradutor).toContain(`styleset(${valoresAceitos[index]});`);
+            // O Resolvedor deve resolver de acordo e traduzir escalamento-vertical para scaleY
+            expect(resultadoResolvedor).toContain('font-variant-alternates');
+            expect(resultadoResolvedor).toContain(`styleset(${valoresAceitos[index]});`);
         }
     });
 
@@ -406,7 +406,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow('Os valores da função conjunto-estilos() devem estar entre 1 e 20');
         }
     });
@@ -454,10 +454,10 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
             expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
-            expect(resultadoTradutor).toContain('content');
-            expect(resultadoTradutor).toContain(`counter(contador1, ${estilosTraduzidos[index]});`);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('content');
+            expect(resultadoResolvedor).toContain(`counter(contador1, ${estilosTraduzidos[index]});`);
         }
     });
 
@@ -486,9 +486,9 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             // O Avaliador Sintático também deve retornar o seu objeto sem retornar erros
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-            // O Serializador deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
+            // O Resolvedor deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico)
+                resolvedor.resolver(resultadoAvaliadorSintatico)
             }).toThrow(`Valor de estilo ${estiloErroDigitacao} inválido para a função contador().`);
         }
     });
@@ -548,11 +548,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoContraste[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoContraste[index]]);
-                expect(resultadoTradutor).toContain(`contrast(${valoresAceitos[valIndex]});`);
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoContraste[index]]);
+                expect(resultadoResolvedor).toContain(`contrast(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -597,11 +597,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoCurvaCubica[index]]
             );
 
-            // // // // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // // // // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
-            expect(resultadoTradutor).toContain('cubic-bezier(0.42, 0, 1, 1);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
+            expect(resultadoResolvedor).toContain('cubic-bezier(0.42, 0, 1, 1);');
         }
     });
 
@@ -647,11 +647,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]
             );
 
-            // // // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // // // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]);
-            expect(resultadoTradutor).toContain('fit-content(200px)');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]);
+            expect(resultadoResolvedor).toContain('fit-content(200px)');
         }
     });
 
@@ -709,12 +709,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoEscalaCinza[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir escala-cinza para grayscale
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEscalaCinza[index]]);
-                expect(resultadoTradutor).toContain(`grayscale(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir escala-cinza para grayscale
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoEscalaCinza[index]]);
+                expect(resultadoResolvedor).toContain(`grayscale(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -763,12 +763,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosEscalamento[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir escalamento para scale
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-                expect(resultadoTradutor).toContain(`scale(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir escalamento para scale
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+                expect(resultadoResolvedor).toContain(`scale(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -813,12 +813,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodosEscalamento[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir escalamento para scale
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-            expect(resultadoTradutor).toContain(`scale(1.3, 0.4);`);
+            // O Resolvedor deve resolver de acordo e traduzir escalamento para scale
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+            expect(resultadoResolvedor).toContain(`scale(1.3, 0.4);`);
         }
     });
 
@@ -862,12 +862,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodosEscalamento[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir escalamento-3d para scale3d
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-            expect(resultadoTradutor).toContain(`scale3d(0.5, 1, 1.7);`);
+            // O Resolvedor deve resolver de acordo e traduzir escalamento-3d para scale3d
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+            expect(resultadoResolvedor).toContain(`scale3d(0.5, 1, 1.7);`);
         }
     });
 
@@ -915,12 +915,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosEscalamento[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir escalamento-eixo-z para scaleZ
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-                expect(resultadoTradutor).toContain(`scaleZ(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir escalamento-eixo-z para scaleZ
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+                expect(resultadoResolvedor).toContain(`scaleZ(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -969,12 +969,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosEscalamento[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir escalamento-horizontal para scaleX
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-                expect(resultadoTradutor).toContain(`scaleX(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir escalamento-horizontal para scaleX
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+                expect(resultadoResolvedor).toContain(`scaleX(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -1023,12 +1023,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosEscalamento[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir escalamento-vertical para scaleY
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
-                expect(resultadoTradutor).toContain(`scaleY(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir escalamento-vertical para scaleY
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
+                expect(resultadoResolvedor).toContain(`scaleY(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -1075,12 +1075,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 'font-variant-alternates'
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir espirrar para swash
-            expect(resultadoTradutor).toContain('font-variant-alternates');
-            expect(resultadoTradutor).toContain(`swash(${valoresAceitos[index]});`);
+            // O Resolvedor deve resolver de acordo e traduzir espirrar para swash
+            expect(resultadoResolvedor).toContain('font-variant-alternates');
+            expect(resultadoResolvedor).toContain(`swash(${valoresAceitos[index]});`);
         }
     });
 
@@ -1098,7 +1098,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função espirrar() deve estar entre 1 e 99');
         }
     });
@@ -1145,12 +1145,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 'font-variant-alternates'
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir estilístico para stylistic
-            expect(resultadoTradutor).toContain('font-variant-alternates');
-            expect(resultadoTradutor).toContain(`stylistic(${valoresAceitos[index]});`);
+            // O Resolvedor deve resolver de acordo e traduzir estilístico para stylistic
+            expect(resultadoResolvedor).toContain('font-variant-alternates');
+            expect(resultadoResolvedor).toContain(`stylistic(${valoresAceitos[index]});`);
         }
     });
 
@@ -1168,7 +1168,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função estilistico() deve estar entre 1 e 20');
         }
     });
@@ -1214,11 +1214,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoGradienteLinear[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
-            expect(resultadoTradutor).toContain('linear-gradient(90deg, green, yellow);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
+            expect(resultadoResolvedor).toContain('linear-gradient(90deg, green, yellow);');
         }
     });
 
@@ -1263,11 +1263,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoGradienteLinear[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
-            expect(resultadoTradutor).toContain('linear-gradient(90deg, green, yellow);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
+            expect(resultadoResolvedor).toContain('linear-gradient(90deg, green, yellow);');
         }
     });
 
@@ -1313,23 +1313,23 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoGradienteLinear[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
 
                 switch (posicoes[posIndex]) {
                     case 'superior':
-                        expect(resultadoTradutor).toContain('linear-gradient(0deg, blue, red);');
+                        expect(resultadoResolvedor).toContain('linear-gradient(0deg, blue, red);');
                         break;
                     case 'direita':
-                        expect(resultadoTradutor).toContain('linear-gradient(90deg, blue, red);');
+                        expect(resultadoResolvedor).toContain('linear-gradient(90deg, blue, red);');
                         break;
                     case 'inferior':
-                        expect(resultadoTradutor).toContain('linear-gradient(180deg, blue, red);');
+                        expect(resultadoResolvedor).toContain('linear-gradient(180deg, blue, red);');
                         break;
                     case 'esquerda':
-                        expect(resultadoTradutor).toContain('linear-gradient(270deg, blue, red);');
+                        expect(resultadoResolvedor).toContain('linear-gradient(270deg, blue, red);');
                         break;
                     default:
                         break;
@@ -1392,15 +1392,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosInclinar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir inclinar para skew
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir inclinar para skew
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`skew(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`skew(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`skew(90deg);`);
+                    expect(resultadoResolvedor).toContain(`skew(90deg);`);
                 }
             }
         }
@@ -1447,12 +1447,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodosInclinar[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir inclinar para skew
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
-            expect(resultadoTradutor).toContain(`skew(15deg, 15deg);`);
+            // O Resolvedor deve resolver de acordo e traduzir inclinar para skew
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
+            expect(resultadoResolvedor).toContain(`skew(15deg, 15deg);`);
         }
     });
 
@@ -1509,15 +1509,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     TraducaoValoresMetodos[MetodosInclinar[index]]
                 );
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir inclinar-horizontal para skewX
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir inclinar-horizontal para skewX
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`skewX(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`skewX(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`skewX(180deg);`);
+                    expect(resultadoResolvedor).toContain(`skewX(180deg);`);
                 }
             }
         }
@@ -1577,15 +1577,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosInclinar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir inclinar-vertical para skewY
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir inclinar-vertical para skewY
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`skewY(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`skewY(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`skewY(180deg);`);
+                    expect(resultadoResolvedor).toContain(`skewY(180deg);`);
                 }
             }
         }
@@ -1644,12 +1644,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     TraducaoValoresMetodos[MetodoInverter[index]]
                 );
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir inverter para invert
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoInverter[index]]);
-                expect(resultadoTradutor).toContain(`invert(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir inverter para invert
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoInverter[index]]);
+                expect(resultadoResolvedor).toContain(`invert(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -1695,11 +1695,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoLimitar[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLimitar[index]]);
-            expect(resultadoTradutor).toContain('clamp(10vw, 20em, 100vw);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoLimitar[index]]);
+            expect(resultadoResolvedor).toContain('clamp(10vw, 20em, 100vw);');
         }
     });
 
@@ -1743,11 +1743,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoLinear[index]]
             );
 
-            // // // // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // // // // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLinear[index]]);
-            expect(resultadoTradutor).toContain('linear(0, 0.25, 1);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoLinear[index]]);
+            expect(resultadoResolvedor).toContain('linear(0, 0.25, 1);');
         }
     });
 
@@ -1792,11 +1792,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoMinMax[index]]
             );
 
-            // // // // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // // // // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
-            expect(resultadoTradutor).toContain('minmax(100px, max-content);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
+            expect(resultadoResolvedor).toContain('minmax(100px, max-content);');
         }
     });
 
@@ -1854,12 +1854,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoOpacar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir opacar para opacity
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoOpacar[index]]);
-                expect(resultadoTradutor).toContain(`opacity(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir opacar para opacity
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoOpacar[index]]);
+                expect(resultadoResolvedor).toContain(`opacity(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -1906,12 +1906,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 'font-variant-alternates'
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments
-            expect(resultadoTradutor).toContain('font-variant-alternates');
-            expect(resultadoTradutor).toContain(`ornaments(${valoresAceitos[index]});`);
+            // O Resolvedor deve resolver de acordo e traduzir ornamentos para ornaments
+            expect(resultadoResolvedor).toContain('font-variant-alternates');
+            expect(resultadoResolvedor).toContain(`ornaments(${valoresAceitos[index]});`);
         }
     });
 
@@ -1929,7 +1929,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função ornamentos() deve estar entre 1 e 99');
         }
     });
@@ -1970,12 +1970,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 'font-variant-alternates'
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir ornamentos para ornaments e conter o valor string
-            expect(resultadoTradutor).toContain('font-variant-alternates');
-            expect(resultadoTradutor).toContain(`ornaments('${valoresAceitos[index]}');`);
+            // O Resolvedor deve resolver de acordo e traduzir ornamentos para ornaments e conter o valor string
+            expect(resultadoResolvedor).toContain('font-variant-alternates');
+            expect(resultadoResolvedor).toContain(`ornaments('${valoresAceitos[index]}');`);
 
         }
     });
@@ -1994,7 +1994,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow(`Modificador ou variável 'variação-fonte-alternativa' com valor personalizado ${valoresAceitos[index]} inválido. O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
         }
     });
@@ -2040,11 +2040,11 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoPassos[index]]
             );
 
-            // // // // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // // // // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPassos[index]]);
-            expect(resultadoTradutor).toContain('steps(2, jump-start);');
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoPassos[index]]);
+            expect(resultadoResolvedor).toContain('steps(2, jump-start);');
         }
     });
 
@@ -2109,12 +2109,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoPerspectivar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir perspectivar para perspective
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPerspectivar[index]]);
-                expect(resultadoTradutor).toContain(`perspective(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir perspectivar para perspective
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoPerspectivar[index]]);
+                expect(resultadoResolvedor).toContain(`perspective(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -2162,12 +2162,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoProjetarSombra[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir projetar-sombra para drop-shadow  
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
-                expect(resultadoTradutor).toContain(`drop-shadow(${comprimentos[posIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir projetar-sombra para drop-shadow  
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
+                expect(resultadoResolvedor).toContain(`drop-shadow(${comprimentos[posIndex]});`);
             }
         }
     });
@@ -2214,12 +2214,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     TraducaoValoresMetodos[MetodoProjetarSombra[index]]
                 );
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir vermelho para red
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
-                expect(resultadoTradutor).toContain('red');
+                // O Resolvedor deve resolver de acordo e traduzir vermelho para red
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
+                expect(resultadoResolvedor).toContain('red');
             }
         }
     });
@@ -2271,12 +2271,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoRaio[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir raio para ray
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
-                expect(resultadoTradutor).toContain(`ray(${traducaoValoresAceitos[valIndex]} 200deg);`);
+                // O Resolvedor deve resolver de acordo e traduzir raio para ray
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
+                expect(resultadoResolvedor).toContain(`ray(${traducaoValoresAceitos[valIndex]} 200deg);`);
             }
         }
     });
@@ -2322,12 +2322,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodoRaio[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir raio para ray
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
-            expect(resultadoTradutor).toContain(`ray(200deg);`);
+            // O Resolvedor deve resolver de acordo e traduzir raio para ray
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoRaio[index]]);
+            expect(resultadoResolvedor).toContain(`ray(200deg);`);
 
         }
     });
@@ -2386,15 +2386,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosRotacionar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotacionar para rotate
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir rotacionar para rotate
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`rotate(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`rotate(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`rotate(45deg);`);
+                    expect(resultadoResolvedor).toContain(`rotate(45deg);`);
 
                 }
             }
@@ -2455,15 +2455,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosRotacionar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotacionar-3d para rotate3d
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir rotacionar-3d para rotate3d
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
                 if (valIndex < 2) {
-                    expect(resultadoTradutor).toContain(`rotate3d(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`rotate3d(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`rotate3d(1, 1, 1, 90deg);`);
+                    expect(resultadoResolvedor).toContain(`rotate3d(1, 1, 1, 90deg);`);
                 }
             }
         }
@@ -2491,9 +2491,9 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             // Avaliador Sintático 
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-            // Serializador não deve aceitar 'px' como quantificador válido
+            // Resolvedor não deve aceitar 'px' como quantificador válido
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow();
         }
     });
@@ -2552,15 +2552,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosRotacionar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotacionar-eixo-z para rotateZ
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir rotacionar-eixo-z para rotateZ
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`rotateZ(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`rotateZ(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`rotateZ(45deg);`);
+                    expect(resultadoResolvedor).toContain(`rotateZ(45deg);`);
                 }
             }
         }
@@ -2620,15 +2620,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosRotacionar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotacionar-horizontal para rotateX
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir rotacionar-horizontal para rotateX
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`rotateX(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`rotateX(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`rotateX(45deg);`);
+                    expect(resultadoResolvedor).toContain(`rotateX(45deg);`);
                 }
             }
         }
@@ -2688,16 +2688,16 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotacionar-matiz para hue-rotate
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir rotacionar-matiz para hue-rotate
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoRotacionarMatiz[index]]);
 
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`hue-rotate(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`hue-rotate(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`hue-rotate(90deg);`);
+                    expect(resultadoResolvedor).toContain(`hue-rotate(90deg);`);
                 }
             }
         }
@@ -2756,15 +2756,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
                     TraducaoValoresMetodos[MetodosRotacionar[index]]
                 );
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotacionar-vertical para rotateY
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir rotacionar-vertical para rotateY
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`rotateY(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`rotateY(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`rotateY(45deg);`);
+                    expect(resultadoResolvedor).toContain(`rotateY(45deg);`);
                 }
             }
         }
@@ -2824,12 +2824,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoSaturar[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir saturar para saturate
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoSaturar[index]]);
-                expect(resultadoTradutor).toContain(`saturate(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir saturar para saturate
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoSaturar[index]]);
+                expect(resultadoResolvedor).toContain(`saturate(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -2888,12 +2888,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodoSepia[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir sépia para sepia
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoSepia[index]]);
-                expect(resultadoTradutor).toContain(`sepia(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir sépia para sepia
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoSepia[index]]);
+                expect(resultadoResolvedor).toContain(`sepia(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -2952,15 +2952,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação para translate
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir translação para translate
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
                 if (valIndex !== 0) {
-                    expect(resultadoTradutor).toContain(`translate(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`translate(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`translate(270deg);`);
+                    expect(resultadoResolvedor).toContain(`translate(270deg);`);
                 }
             }
         }
@@ -3007,12 +3007,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodosTranslacao[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir translacao para translate
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-            expect(resultadoTradutor).toContain(`translate(100deg, 100deg);`);
+            // O Resolvedor deve resolver de acordo e traduzir translacao para translate
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+            expect(resultadoResolvedor).toContain(`translate(100deg, 100deg);`);
         }
     });
 
@@ -3057,12 +3057,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 TraducaoValoresMetodos[MetodosTranslacao[index]]
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir translação-3d para translate3d
-            expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-            expect(resultadoTradutor).toContain(`translate3d(5ch, 0.4in, 5em);`);
+            // O Resolvedor deve resolver de acordo e traduzir translação-3d para translate3d
+            expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+            expect(resultadoResolvedor).toContain(`translate3d(5ch, 0.4in, 5em);`);
         }
     });
 
@@ -3153,15 +3153,15 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-3d para translate3d
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                // O Resolvedor deve resolver de acordo e traduzir translação-3d para translate3d
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
                 if (valIndex !== 8) {
-                    expect(resultadoTradutor).toContain(`translate3d(${valoresAceitos[valIndex]});`);
+                    expect(resultadoResolvedor).toContain(`translate3d(${valoresAceitos[valIndex]});`);
                 } else {
-                    expect(resultadoTradutor).toContain(`translate3d(0);`);
+                    expect(resultadoResolvedor).toContain(`translate3d(0);`);
                 }
             }
         }
@@ -3221,12 +3221,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-eixo-z para translateZ
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoTradutor).toContain(`translateZ(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translação-eixo-z para translateZ
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolvedor).toContain(`translateZ(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -3285,12 +3285,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translacao-eixo-z para translateZ
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoTradutor).toContain(`translateZ(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translacao-eixo-z para translateZ
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolvedor).toContain(`translateZ(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -3349,12 +3349,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-horizontal para translateX
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoTradutor).toContain(`translateX(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translação-horizontal para translateX
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolvedor).toContain(`translateX(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -3413,12 +3413,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-horizontal para translateX
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoTradutor).toContain(`translateX(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translação-horizontal para translateX
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolvedor).toContain(`translateX(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -3477,12 +3477,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoTradutor).toContain(`translateY(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translação-vertical para translateY
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolvedor).toContain(`translateY(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -3541,12 +3541,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolucao = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
-                expect(resultadoSerializacao).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoSerializacao).toContain(`translateY(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translação-vertical para translateY
+                expect(resultadoResolucao).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolucao).toContain(`translateY(${valoresAceitos[valIndex]});`);
             }
         }
     });
@@ -3593,12 +3593,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 'font-variant-alternates'
             );
 
-            // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir variar-caractere para character-variant
-            expect(resultadoTradutor).toContain('font-variant-alternates');
-            expect(resultadoTradutor).toContain(`character-variant(${valoresAceitos[index]});`);
+            // O Resolvedor deve resolver de acordo e traduzir variar-caractere para character-variant
+            expect(resultadoResolvedor).toContain('font-variant-alternates');
+            expect(resultadoResolvedor).toContain(`character-variant(${valoresAceitos[index]});`);
         }
     });
 
@@ -3616,7 +3616,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow('O valor da função variar-caractere() deve estar entre 1 e 99');
         }
     });
@@ -3675,12 +3675,12 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     TraducaoValoresMetodos[MetodosTranslacao[index]]
                 );
 
-                // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translação-vertical para translateY
-                expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
-                expect(resultadoTradutor).toContain(`translateY(${valoresAceitos[valIndex]});`);
+                // O Resolvedor deve resolver de acordo e traduzir translação-vertical para translateY
+                expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodosTranslacao[index]]);
+                expect(resultadoResolvedor).toContain(`translateY(${valoresAceitos[valIndex]});`);
             }
         }
     });
