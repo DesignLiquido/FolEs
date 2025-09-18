@@ -141,7 +141,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 // Avaliador Sintático
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrowError(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
+                }).toThrow(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
             }
         });
 

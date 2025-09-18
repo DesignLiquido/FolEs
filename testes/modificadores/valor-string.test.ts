@@ -92,7 +92,7 @@ describe('Testando Seletores com VALORES STRING', () => {
             // Avaliador Sintático não deve aceitar o valor string sem aspas
             expect(() => {
                 avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrowError(`Modificador ou variável '${ValorStringAcentuado[index]}' com valor 'x' inválido`);
+            }).toThrow(`Modificador ou variável '${ValorStringAcentuado[index]}' com valor 'x' inválido`);
         }
     });
 });
