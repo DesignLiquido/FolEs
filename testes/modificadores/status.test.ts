@@ -14,13 +14,13 @@ describe('Testando Seletores com STATUS como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Resolvedor;
+        let resolvedor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
         it('Casos de sucesso - Valor válido (auto)', () => {
@@ -30,9 +30,6 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     [new ValorQualitativo('auto')],
                     null
                 );
-
-                // A classe do modificador deve aceitar 'auto' como valor
-                // expect(seletor['valor']).toEqual('auto');
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -60,7 +57,6 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     ])
                 );
 
-
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -78,7 +74,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
@@ -117,10 +113,9 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     avaliador.analisar(novoLexador.simbolos);
                 }).toThrow();
 
-
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    serializador.resolver(avaliador.analisar(novoLexador.simbolos));
+                    resolvedor.resolver(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -132,9 +127,6 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     [new ValorQualitativo('nenhum')],
                     null
                 );
-
-                // A classe do modificador deve aceitar 'normal' como valor
-                // expect(seletor['valor']).toEqual('nenhum');
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -170,11 +162,11 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Serializador
-                const resultadoSerializador = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
-                expect(resultadoSerializador).toContain('none');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('none');
             }
         });
 
@@ -223,15 +215,14 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Serializador
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('normal');
             }
         });
 
-        // TODO: Consertar após ajustar atribuição de valores via variável
-        it.skip('Caso de Sucesso - Status atribuído por meio de variável', () => {
+        it('Caso de Sucesso - Status atribuído por meio de variável', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(
                     StatusAuto[index],
@@ -276,7 +267,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
             }

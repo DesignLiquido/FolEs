@@ -365,8 +365,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
 
         });
 
-        // TODO: Consertar após implementar nova lógica de valores feature-tag-value
-        it.skip('Caso de sucesso - Valores do tipo feature-tag-value', () => {
+        it('Caso de sucesso - Valores do tipo feature-tag-value', () => {
             const valoresTagValue = [
                 '"c2sc", "hist"',
                 '"c2sc"',
@@ -403,8 +402,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             }
         });
 
-        // TODO: Consertar após implementar nova lógica de valores feature-tag-value
-        it.skip('Caso de falha - Valor feature-tag-value com mais de 4 caracteres', () => {
+        it('Caso de falha - Valor feature-tag-value com mais de 4 caracteres', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "lmht {",
@@ -418,8 +416,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             }).toThrow(`Modificador ou variável 'recursos-fonte' com valor "cs2af" inválido`);
         });
 
-        // TODO: Consertar após implementar atribuição de valores personalizados
-        it.skip('Caso de sucesso - Seletores que recebem valores personalizados (custom-indent) válidos', () => {
+        it('Caso de sucesso - Seletores que recebem valores personalizados (custom-indent) válidos', () => {
             for (let index = 0; index < ValoresPersonalizados.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -460,12 +457,11 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 // O Tradutor deve serializar de acordo
                 expect(resultadoTradutor).toContain('html');
                 expect(resultadoTradutor).toContain(ValoresPersonalizados[index]['css']);
-                expect(resultadoTradutor).toContain(ValoresPersonalizados[index]['valor']);
+                expect(resultadoTradutor).toContain(ValoresPersonalizados[index]['traducao']);
             }
         });
 
-        // TODO: Consertar após implementar atribuição de valores personalizados
-        it.skip('Caso de sucesso - Seletores que recebem múltiplos valores, sendo um personalizado', () => {
+        it('Caso de sucesso - Seletores que recebem múltiplos valores, sendo um personalizado', () => {
             for (let index = 0; index < ValoresPersonalizadosMultiplos.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -510,8 +506,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             }
         });
 
-        // TODO: Consertar após implementar atribuição de valores personalizados
-        it.skip('Caso de falha - Atribuição de valor personalizado inválido', () => {
+        it('Caso de falha - Atribuição de valor personalizado inválido', () => {
             const valoresInvalidos = [
                 '--valorPersonalizado',
                 '1111',

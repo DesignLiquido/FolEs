@@ -14,16 +14,16 @@ describe('Testando Seletores de POSIÇÃO', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Resolvedor;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Resolvedor();
+        resolvedor = new Resolvedor();
     });
 
-    it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < Posição.length; index += 1) {
             const seletor = new SeletorModificador(
                 Posição[index],
@@ -76,13 +76,11 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 seletor['propriedadeCss']
             );
 
-
-            // // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
-
-            expect(resultadoTradutor).toContain('body');
-            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-            expect(resultadoTradutor).toContain('center;');
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('body');
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain('center;');
         }
     });
 
@@ -128,15 +126,14 @@ describe('Testando Seletores de POSIÇÃO', () => {
             }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
-            // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+            // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
             expect(() => {
-                serializador.resolver(avaliador.analisar(resultadoLexador.simbolos));
+                resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
             }).toHaveLength(0);
         }
     });
 
-    // TODO: Consertar após ajustar processo de atribuição de valor via variável
-    it.skip('Caso de Sucesso - Posição atribuída por meio de variável', () => {
+    it('Caso de Sucesso - Posição atribuída por meio de variável', () => {
         const estilosFolEs = Object.keys(posicoes);
         const estilosCss = Object.values(posicoes);
 
@@ -177,10 +174,10 @@ describe('Testando Seletores de POSIÇÃO', () => {
             expect(segundoResultadoTipado.modificadores[0].nomeFoles).toContain('posicionar-conteúdo');
             expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('place-content');
 
-            // Serializador
-            const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
-            expect(resultadoSerializacao).toContain(estilosCss[index]);
-            expect(resultadoSerializacao).toContain('place-content');
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain(estilosCss[index]);
+            expect(resultadoResolvedor).toContain('place-content');
         }
     });
 });

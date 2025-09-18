@@ -1,3 +1,5 @@
-export function validarValorString(valor: string) {
-    return valor.includes("'") || valor.includes('"');
+import { ValorTexto } from "../../valores";
+
+export function validarValorString(valor: ValorTexto) {
+    return valor.literalTexto.includes("'") || valor.literalTexto.includes('"');
 }

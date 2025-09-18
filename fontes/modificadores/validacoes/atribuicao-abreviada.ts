@@ -1,12 +1,11 @@
-import { Valor, ValorAbreviacao, ValorVirgula } from "../../valores";
+import { Valor, ValorAbreviacao, ValorNumerico, ValorQualitativo, ValorVirgula } from "../../valores";
 import { validarValores } from "./comum";
 import { validarValoresAdicionais } from "./condicao-extra";
 import { validarValorCor } from "./cor";
 import { validarValorFonte } from "./fonte";
+import { validarIdentificacaoPersonalizada } from "./identificacao-personalizada";
 import { validarMultiplosQualitativos } from "./multiplos-qualitativos";
 import { validarValorNumerico } from "./numerica";
-// import { validarValorString } from "./string";
-// import { validarIdentificacaoPersonalizada } from "./identificacao-personalizada";
 
 export function validarAtribuicaoAbreviada(
     tipoValidacao: string,
@@ -16,14 +15,24 @@ export function validarAtribuicaoAbreviada(
     valoresExtra: any = null,
     quantificadoresAceitos: { [valorFoles: string]: string } = null,
     naoAceitaQuantificador: boolean = false,
-    // validacaoString: boolean = false,
-    // validacaoPersonalizada: boolean = false,
+    validacaoPersonalizada: boolean = false,
 ): void {
     valores.forEach((valor) => {
         const arrayValores: Valor[] = [];
         arrayValores.push(valor);
 
         if (!(valor instanceof ValorAbreviacao || valor instanceof ValorVirgula)) {
+            const valorTipado = valor as ValorQualitativo;
+            if (validacaoPersonalizada) {
+                if (
+                    !(Object.keys(valoresAceitos).includes(valorTipado.qualitativo))
+                    && !(valor instanceof ValorNumerico)
+                ) {
+                    validarIdentificacaoPersonalizada(nomePropriedade, valorTipado);
+                    valoresAceitos[valorTipado.qualitativo] = valorTipado.qualitativo;
+                }
+            }
+
             switch (tipoValidacao) {
                 case "comum":
                     validarValores(nomePropriedade, arrayValores, valoresAceitos, valoresExtra);

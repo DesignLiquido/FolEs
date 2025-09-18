@@ -4,23 +4,26 @@ import { Metodo } from "../../valores/metodos/foles/metodo";
 
 export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
-    valores: Valor[],
+    valor: Valor | string,
+    valoresAceitos: { [valorFoles: string]: string } = undefined,
 ): void {    
-    let valorModificador: string;
+    let valorModificador: Valor | string;
 
-    if (valores[0] instanceof ValorTexto) {
-        valorModificador = valores[0].literalTexto;
+    if (valor instanceof ValorTexto) {
+        valorModificador = valor.literalTexto;
         valorModificador = valorModificador.replace(/^["']|["']$/g, '');
-    } if (valores[0] instanceof ValorQualitativo) {
-        valorModificador = valores[0].qualitativo;
-    } else if (valores[0] instanceof Metodo || valores[0] instanceof MetodoCss) {
-        valorModificador = valores[0].constructor.name.toLowerCase();
+    } if (valor instanceof ValorQualitativo) {
+        valorModificador = valor.qualitativo;
+    } else if (valor instanceof Metodo || valor instanceof MetodoCss) {
+        valorModificador = valor.constructor.name.toLowerCase();
+    } else {
+        valorModificador = valor;
     }
 
     // Regex para um identificador CSS válido
     const validarIdentificador: RegExp = /^-?[_a-zA-Z][-_a-zA-Z0-9]*$/;
 
-    // // Listagem de valores globais (não permitidos)
+    // Listagem de valores globais (não permitidos)
     const valoresGlobais: Array<string> = [
         'herdar',
         'inicial',
@@ -29,16 +32,21 @@ export function validarIdentificacaoPersonalizada(
         'desarmar',
     ];
 
-    // // Validações de um valor <custom-indent> válido
+    let listaValoresAceitos: Array<string> = [];
+    if (valoresAceitos) {
+        listaValoresAceitos = Object.keys(valoresAceitos); 
+    } 
+
+    // Validações de um valor <custom-indent> válido
     const validacoesIdentificador = typeof valorModificador === "string"
         && validarIdentificador.test(valorModificador)
+        && !(listaValoresAceitos.includes(valorModificador))
         && !(valoresGlobais.includes(valorModificador))
         && !(valorModificador.startsWith("--"));
 
-    // // Retorna erro caso não passe nas validações acima
+    // Retorna erro caso não passe nas validações acima
     if (!(validacoesIdentificador)) {
-        throw new Error(`Modificador ou variável '${nomePropriedade}' com valor personalizado ${valorModificador} inválido. 
-        O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
+        throw new Error(`Modificador ou variável '${nomePropriedade}' com valor personalizado ${valorModificador} inválido. O valor deve seguir as regras de sintaxe de uma identificação personalizada (<custom-indent>).`);
     }
 }
 

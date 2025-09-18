@@ -6,23 +6,22 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Importador } from "../fontes/importador";
 import { TraducaoReversa } from "./listas/traducao-reversa";
 
-describe('Serializador Reverso', () => {
+describe('Resolvedor Reverso', () => {
     let lexadorReverso: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorReverso: AvaliadorSintaticoInterface;
-    let serializadorReverso: ResolvedorReverso;
+    let resolvedorReverso: ResolvedorReverso;
 
     beforeEach(() => {
         lexadorReverso = new LexadorReverso();
         importador = new Importador(lexadorReverso);
         avaliadorReverso = new AvaliadorSintaticoReverso(importador);
-        serializadorReverso = new ResolvedorReverso();
+        resolvedorReverso = new ResolvedorReverso();
     });
 
     // TODO: Descobrir por que  dá erro.
     it.skip('Testando tradução das estruturas HTML', () => {
         for (let index = 0; index < Object.keys(estruturasLmht).length; index += 1) {
-
             // Lexador recebe as estruturas FolEs
             const resultadoLexador = lexadorReverso.mapear([
                 `${Object.keys(estruturasLmht)[index]} {`,
@@ -34,14 +33,14 @@ describe('Serializador Reverso', () => {
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
             // Tradutor deve retornar a estrutura HTML correspondente
-            const resultadoSerializador = serializadorReverso.resolver(resultadoAvaliadorSintatico);
+            const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
 
             if (Object.values(estruturasLmht)[index].length > 1) {
                 const estruturaLmhtString = Object.values(estruturasLmht)[index][0].toString();
-                expect(resultadoSerializador).toContain(estruturaLmhtString);
+                expect(resultadoResolvedor).toContain(estruturaLmhtString);
             } else {
                 const estruturaLmhtString = Object.values(estruturasLmht)[index].toString();
-                expect(resultadoSerializador).toContain(estruturaLmhtString);
+                expect(resultadoResolvedor).toContain(estruturaLmhtString);
             }
         }
     });
@@ -60,13 +59,13 @@ describe('Serializador Reverso', () => {
             // Avaliador Sintático Reverso
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
-            // Serializador reverso
-            const resultadoSerializador = serializadorReverso.resolver(resultadoAvaliadorSintatico);
+            // Resolvedor reverso
+            const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
 
-            // Serializador reverso deve retornar a estrutura HTML correspondente
-            expect(resultadoSerializador).toContain('lmht');
-            expect(resultadoSerializador).toContain(TraducaoReversa[index]['foles']);
-            expect(resultadoSerializador).toContain('60px;');
+            // Resolvedor reverso deve retornar a estrutura HTML correspondente
+            expect(resultadoResolvedor).toContain('lmht');
+            expect(resultadoResolvedor).toContain(TraducaoReversa[index]['foles']);
+            expect(resultadoResolvedor).toContain('60px;');
         }
     });
 
@@ -83,12 +82,12 @@ describe('Serializador Reverso', () => {
         // Avaliador Sintático Reverso
         const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
-        // Serializador reverso
-        const resultadoSerializador = serializadorReverso.resolver(resultadoAvaliadorSintatico);
+        // Resolvedor reverso
+        const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
 
-        // Serializador reverso deve retornar a estrutura HTML correspondente
-        expect(resultadoSerializador).toContain('lmht');
-        expect(resultadoSerializador).toContain('borrar');
-        expect(resultadoSerializador).toContain('4px;');
+        // Resolvedor reverso deve retornar a estrutura HTML correspondente
+        expect(resultadoResolvedor).toContain('lmht');
+        expect(resultadoResolvedor).toContain('borrar');
+        expect(resultadoResolvedor).toContain('4px;');
     });
 });

@@ -21,9 +21,12 @@ export class DefinirContador extends Modificador {
                     "numérica",
                     "definir-contador",
                     valores,
-                    this.valoresAceitos
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
-                // TODO: Recebe validacaoPersonalizada como true
             } else {
                 validarValorNumerico(
                     "definir-contador",

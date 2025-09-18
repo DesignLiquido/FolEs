@@ -28,9 +28,9 @@ export class InicioColunaEmGrade extends Modificador {
                     this.valoresAceitos,
                     null,
                     null,
-                    true
+                    true,
+                    true,
                 );
-                // TODO: Recebe validacaoPersonalizada como true
             } else {
                 validarValorNumerico(
                     "início-coluna-em-grade",

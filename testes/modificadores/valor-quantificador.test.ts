@@ -7,24 +7,23 @@ import { Resolvedor } from "../../fontes/resolvedores";
 import { ValorAngulo, ValorComprimento, ValorPercentual, ValoresQuantificadores, ValorQuantificadorInvalido, ValorTempo } from "../listas/valores-quantificadores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
-
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 
 describe('Testes: Valor-Quantificador', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let tradutor: Resolvedor;
+    let resolvedor: Resolvedor;
 
     describe('Testando Seletores que aceitam QUALQUER Valor e Quantificador', () => {
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValoresQuantificadores[index],
@@ -63,16 +62,16 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain('html');
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('12px');
+                expect(resultadoResolvedor).toContain('html');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('12px');
             }
         });
 
-        it('Casos de Falha - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de Falha - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < Object.keys(ValoresQuantificadores).length; index += 1) {
 
                 // Lexador - valor numérico não informado
@@ -122,8 +121,7 @@ describe('Testes: Valor-Quantificador', () => {
             }
         });
 
-        // TODO: Descomentar ao consertar o processo de atribuição via variável
-        it.skip('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
+        it('Caso de Sucesso - Valor numérico atribuído por meio de variável', () => {
             for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValoresQuantificadores[index],
@@ -166,10 +164,10 @@ describe('Testes: Valor-Quantificador', () => {
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(seletor['nomeFoles']);
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('20px');
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('20px');
             }
         });
     });
@@ -179,10 +177,10 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < ValorPercentual.length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorPercentual[index],
@@ -220,10 +218,10 @@ describe('Testes: Valor-Quantificador', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
             }
         });
     });
@@ -233,10 +231,10 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < ValorTempo.length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorTempo[index],
@@ -274,10 +272,10 @@ describe('Testes: Valor-Quantificador', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
             }
         });
     });
@@ -287,10 +285,10 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < ValorComprimento.length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorComprimento[index],
@@ -328,10 +326,10 @@ describe('Testes: Valor-Quantificador', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
             }
         });
     });
@@ -341,10 +339,10 @@ describe('Testes: Valor-Quantificador', () => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < ValorAngulo.length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorAngulo[index],
@@ -382,10 +380,10 @@ describe('Testes: Valor-Quantificador', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
             }
         });
     });

@@ -1,6 +1,7 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
+import { validarValorString } from "./validacoes/string";
 
 export class SubstituirIdiomaFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,8 +15,14 @@ export class SubstituirIdiomaFonte extends Modificador {
     ) {
         super("substituir-idioma-fonte", "font-language-override", pragmas);
 
-        // TODO: Aceita valores string
-        if (!variavel) {
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
+
+        if (!variavel && !validarString) {
             validarValores(
                 "substituir-idioma-fonte",
                 valores,

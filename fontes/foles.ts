@@ -55,7 +55,6 @@ export class FolEs {
     private converterParaCssInterno(simbolos: SimboloInterface[]): string {
         const resultadoAvaliadorSintatico =
             this.avaliadorSintatico.analisar(simbolos);
-        // console.log(resultadoAvaliadorSintatico);
         
         const resultadoTraducao = this.tradutor.traduzir(
             resultadoAvaliadorSintatico
@@ -64,7 +63,7 @@ export class FolEs {
         const traducao = this.resolvedor.resolver(
             resultadoTraducao
         );
-        
+
         return traducao;
     }
 
@@ -79,8 +78,7 @@ export class FolEs {
 
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: [string[], ResultadoLexadorInterface] =
-            this.importador.importar(nomeArquivo, true);
-        // console.log(resultadoLexador[1].simbolos);
+            this.importador.importar(nomeArquivo, true);        
         
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }
@@ -125,7 +123,7 @@ export class FolEs {
     }
 }
 
-//  const testeFoles = new FolEs(false);
-//  console.log(testeFoles.converterParaCss('../exemplos/exemplo5.foles'));
+// const testeFoles = new FolEs(false);
+// console.log(testeFoles.converterParaCss('../exemplos/exemplo6.foles'));
 //  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
 //  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));

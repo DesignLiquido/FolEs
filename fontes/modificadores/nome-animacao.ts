@@ -1,7 +1,10 @@
-import { Valor } from "../valores";
+import { NUltimoFilho } from "../pseudoclasses/n-último-filho";
+import { Valor, ValorQualitativo } from "../valores";
+import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
+import { validarIdentificacaoPersonalizada } from "./validacoes/identificacao-personalizada";
 
 export class NomeAnimacao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -22,14 +25,29 @@ export class NomeAnimacao extends Modificador {
                     "nome-animação",
                     valores,
                     this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
-                // TODO: Recebia validacaoPersonalizada como true
             } else {
-                validarValores(
-                    "nome-animação",
-                    valores,
-                    this.valoresAceitos
-                );
+                const valor = valores[0] as ValorQualitativo;
+                const globais: Array<string> = Object.keys(valoresGlobais);
+                const aceitos: Array<string> = Object.keys(this.valoresAceitos);
+                if (globais.includes(valor.qualitativo) || aceitos.includes(valor.qualitativo)) {
+                    validarValores(
+                        "nome-animação",
+                        valores,
+                        this.valoresAceitos,
+                        null
+                    );
+                } else {
+                    validarIdentificacaoPersonalizada(
+                        "nome-animação",
+                        valor,
+                        this.valoresAceitos
+                    );
+                }
             }
         }
 

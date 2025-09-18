@@ -1,6 +1,7 @@
-import { Valor, ValorNumerico } from "../valores";
+import { Valor, ValorNumerico, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
+import { validarValorString } from "./validacoes/string";
 
 export class ConfiguracoesVariacaoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -18,8 +19,14 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas,
         );
 
-        // TODO: Aceita valores string
-        if (!variavel) {
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
+
+        if (!variavel && !validarString) {
             validarValorNumerico(
                 "configurações-variação-fonte",
                 valores,

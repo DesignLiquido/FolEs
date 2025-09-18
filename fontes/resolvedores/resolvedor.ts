@@ -56,7 +56,10 @@ export class Resolvedor {
             case 'ValorNumerico':
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
-                if (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0) {
+                
+                if ((valorNumerico.quantificador) && 
+                    (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
+                ) {
                     literalNumerico = literalNumerico.replace(/^0\./, '.');
                 }
 
@@ -66,7 +69,7 @@ export class Resolvedor {
                 let traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
 
                 if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
-
+                if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
                 return `${traducaoQualitativo}`;
             case 'ValorTexto':
                 const valorTexto = valor as ValorTexto;
@@ -215,7 +218,7 @@ export class Resolvedor {
         declaracoes: Declaracao[],
         indentacao: number = 0,
         seletorAnterior: string = undefined,
-    ) {       
+    ) {
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -238,7 +241,7 @@ export class Resolvedor {
                     break;
             }
         }
-        
+
         return resultado;
     }
 }

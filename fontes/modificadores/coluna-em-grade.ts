@@ -21,7 +21,11 @@ export class ColunaEmGrade extends Modificador {
                     "numérica",
                     "coluna-em-grade",
                     valores,
-                    this.valoresAceitos
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
                 // TODO: Aceitava validacaoPersonalizada como true
             } else {

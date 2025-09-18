@@ -24,9 +24,9 @@ export class FimColunaEmGrade extends Modificador {
                     this.valoresAceitos,
                     null,
                     null,
+                    true,
                     true
                 );
-                // TODO: Recebe validacaoPersonalizada como true
             } else {
                 validarValorNumerico(
                     "fim-coluna-em-grade",

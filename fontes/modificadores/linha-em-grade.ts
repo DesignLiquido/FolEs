@@ -21,7 +21,11 @@ export class LinhaEmGrade extends Modificador {
                     "numérica",
                     "linha-em-grade",
                     valores,
-                    this.valoresAceitos
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
                 );
             } else {
                 validarValorNumerico(

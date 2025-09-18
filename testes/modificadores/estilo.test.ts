@@ -15,13 +15,13 @@ describe('Testando Seletores com ESTILO como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Resolvedor;
+        let resolvedor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Resolvedor();
+            resolvedor = new Resolvedor();
         });
 
         it('Casos de sucesso - Valor válido', () => {
@@ -55,7 +55,6 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     ])
                 );
 
-
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -72,14 +71,13 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     seletor['propriedadeCss']
                 );
 
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain('body');
 
-                expect(resultadoTradutor).toContain('body');
-
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('dotted');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('dotted');
             }
         });
 
@@ -122,10 +120,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     avaliador.analisar(resultadoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
-
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.resolver(avaliador.analisar(resultadoLexador.simbolos));
+                    resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -148,8 +145,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             }
         });
 
-        // TODO: Consertar após ajustar processo de atribuição de valor via variável
-        it.skip('Casos de sucesso - Valores de estilo atribuídos por meio de variável', () => {
+        it('Casos de sucesso - Valores de estilo atribuídos por meio de variável', () => {
             const estilosFolEs = Object.keys(estilos);
             const estilosCss = Object.values(estilos);
 
@@ -195,9 +191,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('contorno');
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('outline');
 
-                // Tradutor
-                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(estilosCss[index]);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(estilosCss[index]);
             }
         });
     });
