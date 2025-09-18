@@ -87,7 +87,7 @@ describe('Resolvedor', () => {
             expect(resultadoResolvedor).toContain('dotted');
         });
 
-        describe.skip('Exemplos mais elaborados', () => {
+        describe('Exemplos mais elaborados', () => {
             it('Exemplo 1', () => {
                 const resultadoLexador = lexador.mapear([
                     '.minha-classe {',
@@ -172,7 +172,7 @@ describe('Resolvedor', () => {
                     '    estilo-lista: dentro meu-estilo;',
                     '    fim-linha-em-grade: span 3;',
                     '    fim-coluna-em-grade: span 3;',
-                    '    incrementar-contador: meu-contador -4;',
+                    '    incrementar-contador: meu-contador 4;',
                     '    início-linha-em-grade: span 2;',
                     '    inicio-coluna-em-grade: span 2;',
                     '    linha-em-grade: span some-grid-area;',

@@ -69,7 +69,7 @@ export class Resolvedor {
                 let traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
 
                 if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
-
+                if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
                 return `${traducaoQualitativo}`;
             case 'ValorTexto':
                 const valorTexto = valor as ValorTexto;
