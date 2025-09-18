@@ -83,8 +83,8 @@ export const ValoresPersonalizados: Array<object> = [
     {
         modificador: 'nome-animação',
         css: 'animation-name',
-        valor: 'test_05, animation4',
-        traducao:  'test_05, animation4',
+        valor: 'test_05',
+        traducao:  'test_05',
     },
     {
         modificador: 'propriedade-transição',
