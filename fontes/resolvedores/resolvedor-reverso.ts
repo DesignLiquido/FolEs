@@ -1,8 +1,13 @@
-import { BlocoDeclaracao, Declaracao } from "../declaracoes";
+import { BlocoDeclaracao, Declaracao, DeclaracaoVariavel } from "../declaracoes";
+import { Estrutura } from "../estruturas/estrutura";
 import { Modificador } from "../modificadores";
-import { Valor } from "../valores";
+import { valoresGerais } from "../modificadores/atributos/gerais";
+import { SeletorEstrutura } from "../seletores";
+import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
+import estruturasLmht from "../tradutores/estruturas-lmht";
+import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../valores";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
+import { ReferenciaVariavel } from "../valores/referencia-variavel";
 
 /**
  * O resolvedor reverso traduz de CSS para FolEs. Pode traduzir tanto FolEs
@@ -10,38 +15,197 @@ import { Metodo } from "../valores/metodos/foles/metodo";
  */
 export class ResolvedorReverso {
     resolverComAninhamentos: boolean;
+    variaveis: { [key: string]: Valor[] };
 
     constructor(resolverComAninhamentos: boolean = true) {
         this.resolverComAninhamentos = resolverComAninhamentos;
+        this.variaveis = {};
     }
 
-    protected resolverValor(valor: Valor): string {
-        if (valor instanceof MetodoCss) {
-            return valor.paraTexto();
-        } 
-        
-        if (valor instanceof Metodo) {
-            return valor.paraTexto();
-        } 
-        
-        return String(valor);
+    protected resolverValor(
+        valor: Valor,
+        valoresAceitos?: { [valorFoles: string]: string }
+    ): string {
+        switch (valor.constructor.name) {
+            case 'ReferenciaVariavel':
+                const valorReferenciaVariavel = valor as ReferenciaVariavel;
+                const valoresVariavelCorrespondente = this.variaveis[valorReferenciaVariavel.nomeVariavel];
+                if (valoresVariavelCorrespondente === undefined) {
+                    throw new Error(`A variável '${valorReferenciaVariavel.nomeVariavel}' deve ser declarada antes da atribuição de valor.`);
+                }
+
+                let valoresVariavelResolvidos = "";
+                for (const valorVariavel of valoresVariavelCorrespondente) {
+                    const valorResolvido = this.resolverValor(valorVariavel);
+                    if (valorResolvido === ",") {
+                        valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
+                    }
+                    valoresVariavelResolvidos += valorResolvido + " ";
+                }
+
+                valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
+                return valoresVariavelResolvidos;
+            case 'ValorAbreviacao':
+                return "/";
+            case 'ValorNumerico':
+                const valorNumerico = valor as ValorNumerico;
+                let literalNumerico = String(valorNumerico.literalNumerico);
+
+                if ((valorNumerico.quantificador) &&
+                    (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
+                ) {
+                    literalNumerico = literalNumerico.replace(/^0\./, '.');
+                }
+
+                return `${literalNumerico}${valorNumerico.quantificador || ''}`;
+            case 'ValorQualitativo':
+                const valorQualitativo = valor as ValorQualitativo;
+                const valoresHtml = Object.keys(valoresGerais);
+
+                let traducaoQualitativo: any = undefined;
+                valoresHtml.forEach((valor) => {
+                    if (valor === valorQualitativo.qualitativo) {
+                        traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
+                    }
+                });
+
+                if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
+                if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
+
+                return `${traducaoQualitativo}`;
+            case 'ValorTexto':
+                const valorTexto = valor as ValorTexto;
+                return valorTexto.literalTexto;
+            case 'ValorVirgula':
+                return ",";
+            default:
+                // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
+                if (valor instanceof MetodoCss) {
+                    return valor.paraTexto();
+                }
+
+                throw new Error(JSON.stringify(valor) + " não é um valor válido para resolução.");
+        }
     }
 
     resolverModificador(
         modificador: Modificador,
         indentacao: number = 0,
     ): string {
-        let valoresResolvidos = "";
+        let valoresTraduzidos = "";
+
         for (const valor of modificador.valores) {
-            valoresResolvidos += this.resolverValor(valor) + " ";
+            let valoresAceitos: { [valorFoles: string]: string } = null;
+            if (modificador.valoresAceitos) valoresAceitos = modificador.valoresAceitos;
+
+            const valorResolvido = this.resolverValor(valor, valoresAceitos);
+            if (valorResolvido === ",") {
+                valoresTraduzidos = valoresTraduzidos.slice(0, -1);
+            }
+            valoresTraduzidos += valorResolvido + " ";
         }
-        
-        valoresResolvidos = valoresResolvidos.slice(0, -1);
+
+        valoresTraduzidos = valoresTraduzidos.slice(0, -1);
 
         return (
             " ".repeat(indentacao) +
-            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valoresResolvidos};\n`
+            `${Array.isArray(modificador.nomeFoles) ? modificador.nomeFoles[0] : modificador.nomeFoles}: ${valoresTraduzidos};\n`
         );
+    }
+
+    resolverDeclaracaoVariavel(
+        declaracaoVariavel: DeclaracaoVariavel
+    ): void {
+        this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valores;
+    }
+
+    resolverBlocoDeclaracao(
+        declaracao: BlocoDeclaracao,
+        indentacao: number,
+        textoSeletorAnterior: string,
+    ): string {
+        let resultado = "";
+        const prefixos = [];
+        let deveImprimir = true;
+
+        for (const seletor of declaracao.seletores) {
+            // Espaços reservados não são escritos diretamente no CSS.
+            if (seletor instanceof SeletorEspacoReservado) {
+                deveImprimir = false;
+                continue;
+            }
+
+            let prefixo: string;
+
+            if (seletor instanceof Estrutura) {
+                if (seletor.pseudoclasse) {
+                    const seletorHtml = seletor.tagHtml;
+                    const seletorSemPseudoclasse = seletorHtml.split(":")[0];
+
+                    const traducaoSeletor =
+                        estruturasLmht[seletorSemPseudoclasse][0];
+                    const traducaoPseudoclasse =
+                        seletor.pseudoclasse.pseudoclasseCss;
+
+                    prefixo = (
+                        textoSeletorAnterior +
+                        " " +
+                        `${traducaoSeletor}:${traducaoPseudoclasse}`
+                    ).trimStart();
+                } else {
+                    const seletorLmht = seletor.tagHtml;
+                    const traducaoSeletor = estruturasLmht[seletorLmht][0];
+                    prefixo = (
+                        textoSeletorAnterior +
+                        " " +
+                        traducaoSeletor
+                    ).trimStart();
+                }
+            } else {
+                prefixo = (
+                    textoSeletorAnterior +
+                    " " +
+                    seletor.paraTexto()
+                ).trimStart();
+            }
+
+            prefixos.push(prefixo);
+            resultado += " ".repeat(indentacao) + prefixo + ", ";
+        }
+
+        if (!deveImprimir) {
+            return resultado;
+        }
+
+        resultado = resultado.slice(0, -2);
+        resultado += " {\n";
+
+        for (const modificador of declaracao.modificadores) {
+            resultado += this.resolverModificador(
+                modificador,
+                indentacao + 4,
+            );
+        }
+
+        if (this.resolverComAninhamentos) {
+            resultado += this.resolver(
+                declaracao.declaracoesAninhadas,
+                indentacao + 4,
+            );
+            resultado += `${" ".repeat(indentacao)}}\n\n`;
+        } else {
+            resultado += `${" ".repeat(indentacao)}}\n\n`;
+
+            for (const prefixo of prefixos) {
+                resultado += this.resolver(
+                    declaracao.declaracoesAninhadas,
+                    indentacao,
+                    prefixo,
+                );
+            }
+        }
+
+        return resultado;
     }
 
     resolver(
@@ -56,51 +220,21 @@ export class ResolvedorReverso {
         }
 
         for (const declaracao of declaracoes) {
-            const prefixos = [];
-
-            if (declaracao instanceof BlocoDeclaracao) {
-                for (const seletor of declaracao.seletores) {
-                    const prefixo = (
-                        textoSeletorAnterior +
-                        " " +
-                        seletor.paraTexto()
-                    ).trimStart();
-                    prefixos.push(prefixo);
-                    resultado += " ".repeat(indentacao) + prefixo + ", ";
-                }
-
-                resultado = resultado.slice(0, -2);
-                resultado += " {\n";
-
-                for (const modificador of declaracao.modificadores) {
-                    resultado += this.resolverModificador(
-                        modificador,
-                        indentacao + 4,
+            switch (declaracao.constructor.name) {
+                case "BlocoDeclaracao":
+                    resultado += this.resolverBlocoDeclaracao(
+                        declaracao as BlocoDeclaracao,
+                        indentacao,
+                        textoSeletorAnterior,
                     );
-                }
-
-                if (this.resolverComAninhamentos) {
-                    resultado += this.resolver(
-                        declaracao.declaracoesAninhadas,
-                        indentacao + 4,
+                    break;
+                case "DeclaracaoVariavel":
+                    this.resolverDeclaracaoVariavel(
+                        declaracao as DeclaracaoVariavel
                     );
-
-                    resultado += `${" ".repeat(indentacao)}}\n\n`;
-                } else {
-                    resultado += `${" ".repeat(indentacao)}}\n\n`;
-
-                    for (const prefixo of prefixos) {
-                        resultado += this.resolver(
-                            declaracao.declaracoesAninhadas,
-                            indentacao,
-                            prefixo,
-                        );
-                    }
-                }
+                    break;
             }
         }
-
-        // TODO: Adicionar caso if (declaracao instanceof DeclaracaoVariavel)
 
         return resultado;
     }
