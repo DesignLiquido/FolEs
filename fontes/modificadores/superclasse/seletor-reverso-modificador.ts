@@ -7,6 +7,7 @@ export class SeletorReversoModificador {
         nomeCss: string,
         valores: Valor[],
         pragmas?: PragmasModificador,
+        variavel: boolean = false,
     ) {
         if (
             DicionarioReversoModificadores[nomeCss] === undefined ||
@@ -14,9 +15,7 @@ export class SeletorReversoModificador {
         ) {
             throw new Error(`O seletor \'${nomeCss}\' não foi encontrado.`);
         }
-        return new DicionarioReversoModificadores[nomeCss](
-            valores,
-            pragmas,
-        );
+
+        return new DicionarioReversoModificadores[nomeCss](valores, pragmas, variavel);
     }
 }
