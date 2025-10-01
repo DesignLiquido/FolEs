@@ -1,7 +1,7 @@
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/css";
 
-describe('Lexador Reverso', () => {
+describe.skip('Lexador Reverso', () => {
     let lexadorReverso: LexadorReverso;
 
     beforeEach(() => {

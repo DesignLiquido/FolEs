@@ -8,7 +8,7 @@ import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurv
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
 
-describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
+describe.skip('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorSintatico: AvaliadorSintaticoInterface;

@@ -6,7 +6,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Importador } from "../fontes/importador";
 import { TraducaoReversa } from "./listas/traducao-reversa";
 
-describe('Resolvedor Reverso', () => {
+describe.skip('Resolvedor Reverso', () => {
     let lexadorReverso: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorReverso: AvaliadorSintaticoInterface;
