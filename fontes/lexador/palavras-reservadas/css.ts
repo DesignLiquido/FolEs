@@ -326,4 +326,14 @@ export default {
     "farthest-corner": tiposDeSimbolos.QUALITATIVO,
     sides: tiposDeSimbolos.QUALITATIVO,
     contain: tiposDeSimbolos.QUALITATIVO,
+
+    // 3. VALORES GLOBAIS
+    unset: tiposDeSimbolos.QUALITATIVO,
+    inherit: tiposDeSimbolos.QUALITATIVO,
+    initial: tiposDeSimbolos.QUALITATIVO,
+    revert: tiposDeSimbolos.QUALITATIVO,
+    "revert-layer": tiposDeSimbolos.QUALITATIVO,
+
+    // 4. Qualitativos Gerais
+    textfield: tiposDeSimbolos.QUALITATIVO,
 };
