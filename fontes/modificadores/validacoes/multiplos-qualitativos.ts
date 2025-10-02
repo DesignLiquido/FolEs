@@ -32,21 +32,32 @@ export function validarMultiplosQualitativos(
         }
     }
 
+    const valoresCss: Array<string | number> = Object.values(cores);
+    const valoresEstiloCss: Array<string> = Object.values(estilos);
+    valoresEstiloCss.forEach((valor) => valoresCss.push(valor));
+    const valoresGlobaisCss: Array<string> = Object.values(valoresGlobais);
+    valoresGlobaisCss.forEach((valor) => valoresCss.push(valor));
+
     if (valoresAceitos === null) {
         if (
             validaçõesCor &&
             typeof valorModificador.valor !== 'number' &&
             !(valorModificador.valor in estilos) &&
             !(valorModificador.valor in cores) &&
-            !(valorModificador.valor in valoresGlobais)
+            !(valorModificador.valor in valoresGlobais) &&
+            !(valoresCss.includes(valorModificador.valor))
         ) {
             throw new Error(
                 `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
-                número-quantificador (ex.: 12px), 
+                número-quantificador (ex.: 12px);
+
+                Valores FolEs aceitos:
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
-                ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            `);
+                ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))};
+
+                Valores CSS aceitos:
+                ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     } else {
         if (
@@ -55,16 +66,21 @@ export function validarMultiplosQualitativos(
             typeof valorModificador.valor !== 'number' &&
             !(valorModificador.valor in estilos) &&
             !(valorModificador.valor in cores) &&
-            !(valorModificador.valor in valoresGlobais)
+            !(valorModificador.valor in valoresGlobais) &&
+            !(valoresCss.includes(valorModificador.valor))
         ) {
             throw new Error(
                 `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
-                número-quantificador (ex.: 12px),
+                número-quantificador (ex.: 12px);
+
+                Valores FolEs aceitos:
                 ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(estilos).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
                 ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            `);
+
+                Valores CSS aceitos:
+                ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     }
 }

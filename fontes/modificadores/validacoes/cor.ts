@@ -11,6 +11,10 @@ export function validarValorCor(
 ) {
     const valorModificador: { valor: string | number, metodo: boolean, numerico: boolean } = capturarValor(valores);
 
+    const valoresCss: Array<string | number> = Object.values(cores);
+    const valoresGlobaisCss: Array<string> = Object.values(valoresGlobais);
+    valoresGlobaisCss.forEach((valor) => valoresCss.push(valor));
+
     if (valorModificador.metodo) {
         if (valores[0] instanceof HexadecimalCor) {
             if (valores[0]["codigo"].length !== 3 && valores[0]["codigo"].length !== 6) {
@@ -25,30 +29,41 @@ export function validarValorCor(
             )
         ) {
             throw new Error(
-                `Modificador ou variável '${nomePropriedade}' com método '${valores[0].constructor.name}' inválido. Valores aceitos:
+                `Modificador ou variável '${nomePropriedade}' com método '${valores[0].constructor.name}' inválido. Métodos aceitos:
                 rgb(), rgba(), hsl(), hsla().`,
             );
         }
     } else {
-        if (valoresAceitos === null) {
-            if (!(valorModificador.valor in cores) && !(valorModificador.valor in valoresGlobais)) {
+        if (valoresAceitos === null || valoresAceitos === undefined) {
+            if (
+                !(valorModificador.valor in cores) &&
+                !(valoresCss.includes(valorModificador.valor)) &&
+                !(valorModificador.valor in valoresGlobais)
+            ) {
                 throw new Error(
-                    `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},    
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`,
+                    `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolEs aceitos:
+                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+                    
+                    Valores CSS aceitos:
+                    ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`,
                 );
             }
         } else {
             if (
                 !(valorModificador.valor in cores) &&
+                !(valoresCss.includes(valorModificador.valor)) &&
                 !(valorModificador.valor in valoresAceitos) &&
                 !(valorModificador.valor in valoresGlobais)
             ) {
                 throw new Error(
-                    `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},    
+                    `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolEs aceitos:
+                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
                     ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`,
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+
+                    Valores CSS aceitos:
+                    ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`,
                 );
             }
         }
