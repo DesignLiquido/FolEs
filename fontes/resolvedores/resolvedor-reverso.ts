@@ -2,7 +2,6 @@ import { BlocoDeclaracao, Declaracao, DeclaracaoVariavel } from "../declaracoes"
 import { Estrutura } from "../estruturas/estrutura";
 import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
-import { SeletorEstrutura } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import estruturasLmht from "../tradutores/estruturas-lmht";
 import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../valores";
@@ -60,16 +59,17 @@ export class ResolvedorReverso {
                 return `${literalNumerico}${valorNumerico.quantificador || ''}`;
             case 'ValorQualitativo':
                 const valorQualitativo = valor as ValorQualitativo;
-                const valoresHtml = Object.keys(valoresGerais);
+                const valoresHtml = Object.values(valoresGerais);
 
                 let traducaoQualitativo: any = undefined;
-                valoresHtml.forEach((valor) => {
-                    if (valor === valorQualitativo.qualitativo) {
-                        traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
-                    }
-                });
-
-                if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
+                traducaoQualitativo = valoresHtml.find((valor) => valor === valorQualitativo.qualitativo);
+                
+                if (!traducaoQualitativo) {
+                    traducaoQualitativo = Object.values(valoresAceitos).find(
+                        (valor) => valor === valorQualitativo.qualitativo
+                    );
+                }                
+                
                 if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
 
                 return `${traducaoQualitativo}`;
@@ -129,7 +129,6 @@ export class ResolvedorReverso {
         let deveImprimir = true;
 
         for (const seletor of declaracao.seletores) {
-            // Espaços reservados não são escritos diretamente no CSS.
             if (seletor instanceof SeletorEspacoReservado) {
                 deveImprimir = false;
                 continue;
