@@ -725,3 +725,9 @@ Alguns sites são fundamentais para entender a implementação feita aqui:
 - https://sokra.github.io/source-map-visualization/#custom
 - https://evanw.github.io/source-map-visualization
 - https://lachlan-miller.me/articles/decoding-variable-length-quantity-vlq-for-source-maps
+
+## Quem já Contribuiu
+
+<a href="https://github.com/DesignLiquido/FolEs/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DesignLiquido/FolEs" />
+</a>
