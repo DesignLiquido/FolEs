@@ -5,14 +5,14 @@ import { validarValorCor } from "./validacoes/cor";
 export class RegrasCorColuna extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("regras-cor-coluna", "column-rule-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("regras-cor-coluna", valores);
+        if (!variavel) validarValorCor("regras-cor-coluna", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

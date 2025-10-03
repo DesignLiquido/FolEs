@@ -19,9 +19,8 @@ export class JustificarConteudo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["justificar-conteudo", "justificar-conteúdo"],
@@ -40,14 +39,16 @@ export class JustificarConteudo extends Modificador {
             posicoesValidas[posicao] = posicoesAceitas[index];
         });
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValoresAdicionais(
                 "justificar-conteúdo",
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

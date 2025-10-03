@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TamanhoFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -21,26 +20,22 @@ export class TamanhoFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("tamanho-fonte", "font-size", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("tamanho-fonte", valores, this.valoresAceitos);
-
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "tamanho-fonte",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
+        if (!variavel) {
+            validarValorNumerico(
+                "tamanho-fonte",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

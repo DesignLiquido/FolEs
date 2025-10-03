@@ -2,27 +2,36 @@ import { Valor } from "../valores";
 import { estilos } from "./atributos/estilo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
+import { validarValores } from "./validacoes/comum";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloBorda extends Modificador {
     valoresAceitos = estilos;
     constructor(
         valores: Valor[],
-        quantificador: string,
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("estilo-borda", "border-style", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("condição-extra", "estilo-borda", valores, estilos);
-        //     } else {
-        //         validarValoresAdicionais("estilo-borda", valores, estilos);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "estilo-borda",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValores(
+                    "estilo-borda",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -9,9 +9,8 @@ export class ModeloGeralEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("modelo-geral-em-grade", "grid-template-areas", pragmas);
 
@@ -20,8 +19,9 @@ export class ModeloGeralEmGrade extends Modificador {
         //      "a b b"
         //      "a c d";
 
-        if (!valorVariavel)
-            validarValores("modelo-geral-em-grade", valores, this.valoresAceitos);
+        if (!variavel) validarValores("modelo-geral-em-grade", valores, this.valoresAceitos);
+
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -20,9 +20,8 @@ export class VariacaoFonteMaiuscula extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
@@ -30,13 +29,15 @@ export class VariacaoFonteMaiuscula extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValores(
                 "variação-fonte-maiúscula",
                 valores,
                 this.valoresAceitos,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

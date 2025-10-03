@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Posição } from "../listas/posição";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { posicoes } from "../../fontes/modificadores/atributos/posicoes";
@@ -14,20 +14,20 @@ describe('Testando Seletores de POSIÇÃO', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Serializador;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Serializador();
+        resolvedor = new Resolvedor();
     });
 
-    it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+    it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
         for (let index = 0; index < Posição.length; index += 1) {
             const seletor = new SeletorModificador(
-                Posição[index], 
-                [new ValorQualitativo('centro')], 
+                Posição[index],
+                [new ValorQualitativo('centro')],
                 null
             );
 
@@ -76,13 +76,11 @@ describe('Testando Seletores de POSIÇÃO', () => {
                 seletor['propriedadeCss']
             );
 
-
-            // // Tradutor
-            const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
-
-            expect(resultadoTradutor).toContain('body');
-            expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-            expect(resultadoTradutor).toContain('center;');
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('body');
+            expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+            expect(resultadoResolvedor).toContain('center;');
         }
     });
 
@@ -128,9 +126,9 @@ describe('Testando Seletores de POSIÇÃO', () => {
             }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
-            // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+            // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
             expect(() => {
-                serializador.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
             }).toHaveLength(0);
         }
     });
@@ -144,7 +142,7 @@ describe('Testando Seletores de POSIÇÃO', () => {
             const resultadoLexador = lexador.mapear([
                 `$posicao-padrao: ${estilosFolEs[index]};`,
                 "lmht {",
-                    'posicionar-conteúdo: $posicao-padrao;',
+                'posicionar-conteúdo: $posicao-padrao;',
                 "}"
             ]);
 
@@ -176,10 +174,10 @@ describe('Testando Seletores de POSIÇÃO', () => {
             expect(segundoResultadoTipado.modificadores[0].nomeFoles).toContain('posicionar-conteúdo');
             expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('place-content');
 
-            // Serializador
-            const resultadoSerializacao = serializador.serializar(resultadoAvaliadorSintatico);
-            expect(resultadoSerializacao).toContain(estilosCss[index]);
-            expect(resultadoSerializacao).toContain('place-content');
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain(estilosCss[index]);
+            expect(resultadoResolvedor).toContain('place-content');
         }
     });
 });

@@ -1,7 +1,6 @@
-import { Valor } from "../valores";
+import { Valor, ValorNumerico, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 import { validarValorString } from "./validacoes/string";
 
 export class ConfiguracoesVariacaoFonte extends Modificador {
@@ -11,8 +10,8 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
@@ -20,23 +19,25 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
             pragmas,
         );
 
-        // if (!valorVariavel) {
-        //     const validacaoString = validarValorString(valor);
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
 
-        //     if (validacaoString) {
-        //         this.valoresAceitos[valor] = valor;
-        //     }
-
-        //     validarValorNumerico(
-        //         "configurações-variação-fonte",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
-
-        //     // Não recebe quantificador
-        //     proibirQuantificador("configurações-variação-fonte", quantificador);
-        // }
+        if (!variavel && !validarString) {
+            validarValorNumerico(
+                "configurações-variação-fonte",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                true,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

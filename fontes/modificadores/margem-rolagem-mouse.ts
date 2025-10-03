@@ -3,32 +3,37 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class MargemRolagemMouse extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("margem-rolagem-mouse", "scroll-margin", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "margem-rolagem-mouse", valor);
-        //     } else {
-        //         validarValorNumerico("margem-rolagem-mouse", valor);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("margem-rolagem-mouse", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "margem-rolagem-mouse",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "margem-rolagem-mouse",
+                    valores,
+                    null,
+                    null,
+                    unidadesMedida
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -2,14 +2,12 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioRecuoEmLinha extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["inicio-recuo-em-linha", "início-recuo-em-linha"],
@@ -17,20 +15,17 @@ export class InicioRecuoEmLinha extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
-            validarValorNumerico("início-recuo-em-linha", valores);
-
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "início-recuo-em-linha",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
+        if (!variavel) {
+            validarValorNumerico(
+                "início-recuo-em-linha",
+                valores,
+                null,
+                null,
+                unidadesMedida
+            );
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

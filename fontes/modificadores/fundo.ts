@@ -1,17 +1,15 @@
-import { ValorPercentual } from "../../testes/listas/valores-quantificadores";
 import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fundo extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         fixo: "fixed",
         local: "local",
         rolar: "scroll",
-        borda: "border-box",
+        "borda-caixa": "border-box",
         preenchimento: "padding-box",
         conteudo: "content-box",
         conteúdo: "content-box",
@@ -36,32 +34,30 @@ export class Fundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("fundo", "background", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "fundo", valores, this.valoresAceitos);
-        //     } else {
-        //         validarMultiplosQualitativos("fundo", valores, this.valoresAceitos);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "fundo",
-        //             quantificador,
-        //             unidadesMedida,
-        //             ValorPercentual,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "fundo",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "fundo",
+                    valores,
+                    this.valoresAceitos,
+                    unidadesMedida
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

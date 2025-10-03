@@ -5,14 +5,14 @@ import { validarValorCor } from "./validacoes/cor";
 export class CorBordaSuperior extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("cor-borda-superior", "border-top-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor-borda-superior", valores);
+        if (!variavel) validarValorCor("cor-borda-superior", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorFonte } from "./validacoes/fonte";
-import { validarValorString } from "./validacoes/string";
 
 export class FonteTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -38,24 +37,30 @@ export class FonteTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("fonte-texto", "font-family", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(",")) {
-        //         validarAtribuicaoAbreviada("fonte", "fonte-texto", valores, this.valoresAceitos, undefined, true);
-        //     } else {
-        //         const valorString = validarValorString(valor);
-        //         if (valorString) valor = valor.replace(/^["']|["']$/g, '');
-        //         validarValorFonte("fonte-texto", valores, this.valoresAceitos);
-        //         if (valorString) valor = `"${valor}"`;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "fonte",
+                    "fonte-texto",
+                    valores,
+                    this.valoresAceitos,
+                );
+                // TODO: Recebe validacaoPersonalizada como true
+            } else {
+                validarValorFonte(
+                    "fonte-texto",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

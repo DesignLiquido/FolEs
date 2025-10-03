@@ -1,23 +1,27 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FlexCrescimento extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("flex-crescimento", "flex-grow", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("flex-crescimento", valores);
-
-            // TODO: Repensar
-            // proibirQuantificador("flex-crescimento", quantificador);
+        if (!variavel) {
+            validarValorNumerico(
+                "flex-crescimento",
+                valores,
+                null,
+                null,
+                null,
+                true
+            );
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

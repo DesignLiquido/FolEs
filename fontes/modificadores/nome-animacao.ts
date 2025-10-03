@@ -1,4 +1,5 @@
-import { Valor } from "../valores";
+import { NUltimoFilho } from "../pseudoclasses/n-último-filho";
+import { Valor, ValorQualitativo } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
@@ -12,26 +13,45 @@ export class NomeAnimacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ") || valor.includes(",")) {
-        //         validarAtribuicaoAbreviada("comum", "nome-animação", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         if (!(Object.keys(this.valoresAceitos).includes(valor)) && !(Object.keys(valoresGlobais).includes(valor))) {
-                    
-        //             validarIdentificacaoPersonalizada("nome-animação", valor);
-        //             this.valoresAceitos[valor] = valor;
-        //         }
-        //         validarValores("nome-animação", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "nome-animação",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
+                );
+            } else {
+                const valor = valores[0] as ValorQualitativo;
+                const globais: Array<string> = Object.keys(valoresGlobais);
+                const aceitos: Array<string> = Object.keys(this.valoresAceitos);
+                if (globais.includes(valor.qualitativo) || aceitos.includes(valor.qualitativo)) {
+                    validarValores(
+                        "nome-animação",
+                        valores,
+                        this.valoresAceitos,
+                        null
+                    );
+                } else {
+                    validarIdentificacaoPersonalizada(
+                        "nome-animação",
+                        valor,
+                        this.valoresAceitos
+                    );
+                }
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

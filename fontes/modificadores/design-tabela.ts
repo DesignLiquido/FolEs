@@ -10,15 +10,14 @@ export class DesignTabela extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("design-tabela", "table-layout", pragmas);
 
-        if (!valorVariavel)
-            validarValores("design-tabela", valores, this.valoresAceitos);
+        if (!variavel) validarValores("design-tabela", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -22,18 +22,17 @@ export class EventosPonteiro extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("eventos-ponteiro", "pointer-events", pragmas);
 
         // Também pode receber valores do tipo SVG
         // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
 
-        if (!valorVariavel)
-            validarValores("eventos-ponteiro", valores, this.valoresAceitos);
+        if (!variavel) validarValores("eventos-ponteiro", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

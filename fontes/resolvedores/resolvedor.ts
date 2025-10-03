@@ -19,16 +19,19 @@ import { ReferenciaVariavel } from "../valores/referencia-variavel";
  * entre navegadores. Até então, CSS aninhado é uma funcionalidade nova, e
  * apenas navegadores mais recentes a implementam.
  */
-export class Serializador {
-    serializarComAninhamentos: boolean;
+export class Resolvedor {
+    resolverComAninhamentos: boolean;
     variaveis: { [key: string]: Valor[] };
 
-    constructor(serializarComAninhamentos: boolean = false) {
-        this.serializarComAninhamentos = serializarComAninhamentos;
+    constructor(resolverComAninhamentos: boolean = false) {
+        this.resolverComAninhamentos = resolverComAninhamentos;
         this.variaveis = {};
     }
 
-    protected serializarValor(valor: Valor): string {
+    protected resolverValor(
+        valor: Valor,
+        valoresAceitos?: { [valorFoles: string]: string }
+    ): string {
         switch (valor.constructor.name) {
             case 'ReferenciaVariavel':
                 const valorReferenciaVariavel = valor as ReferenciaVariavel;
@@ -39,11 +42,11 @@ export class Serializador {
 
                 let valoresVariavelResolvidos = "";
                 for (const valorVariavel of valoresVariavelCorrespondente) {
-                    const valorSerializado = this.serializarValor(valorVariavel);
-                    if (valorSerializado === ",") {
+                    const valorResolvido = this.resolverValor(valorVariavel);
+                    if (valorResolvido === ",") {
                         valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
                     }
-                    valoresVariavelResolvidos += valorSerializado + " ";
+                    valoresVariavelResolvidos += valorResolvido + " ";
                 }
 
                 valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
@@ -53,14 +56,20 @@ export class Serializador {
             case 'ValorNumerico':
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
-                if (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0) {
+                
+                if ((valorNumerico.quantificador) && 
+                    (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
+                ) {
                     literalNumerico = literalNumerico.replace(/^0\./, '.');
                 }
 
                 return `${literalNumerico}${valorNumerico.quantificador || ''}`;
             case 'ValorQualitativo':
                 const valorQualitativo = valor as ValorQualitativo;
-                const traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
+                let traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
+
+                if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
+                if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
                 return `${traducaoQualitativo}`;
             case 'ValorTexto':
                 const valorTexto = valor as ValorTexto;
@@ -73,29 +82,32 @@ export class Serializador {
                     return valor.paraTexto();
                 }
 
-                throw new Error(JSON.stringify(valor) + " não é um valor válido para serialização.");
+                throw new Error(JSON.stringify(valor) + " não é um valor válido para resolução.");
         }
     }
 
-    // TODO @Vitor: Montar a lógica para reconhecer variáveis aqui.
-    protected serializarModificador(
+    protected resolverModificador(
         modificador: Modificador,
         indentacao: number = 0,
     ): string {
         let valoresTraduzidos = "";
+
         for (const valor of modificador.valores) {
-            const valorSerializado = this.serializarValor(valor);
-            if (valorSerializado === ",") {
+            let valoresAceitos: { [valorFoles: string]: string } = null;
+            if (modificador.valoresAceitos) valoresAceitos = modificador.valoresAceitos;
+
+            const valorResolvido = this.resolverValor(valor, valoresAceitos);
+            if (valorResolvido === ",") {
                 valoresTraduzidos = valoresTraduzidos.slice(0, -1);
             }
-            valoresTraduzidos += valorSerializado + " ";
+            valoresTraduzidos += valorResolvido + " ";
         }
-        
+
         valoresTraduzidos = valoresTraduzidos.slice(0, -1);
         return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos};\n`;
     }
 
-    serializarBlocoDeclaracao(
+    resolverBlocoDeclaracao(
         declaracao: BlocoDeclaracao,
         indentacao: number,
         textoSeletorAnterior: string,
@@ -156,14 +168,14 @@ export class Serializador {
         resultado += " {\n";
 
         for (const modificador of declaracao.modificadores) {
-            resultado += this.serializarModificador(
+            resultado += this.resolverModificador(
                 modificador,
                 indentacao + 4,
             );
         }
 
-        if (this.serializarComAninhamentos) {
-            resultado += this.serializar(
+        if (this.resolverComAninhamentos) {
+            resultado += this.resolver(
                 declaracao.declaracoesAninhadas,
                 indentacao + 4,
             );
@@ -172,7 +184,7 @@ export class Serializador {
             resultado += `${" ".repeat(indentacao)}}\n\n`;
 
             for (const prefixo of prefixos) {
-                resultado += this.serializar(
+                resultado += this.resolver(
                     declaracao.declaracoesAninhadas,
                     indentacao,
                     prefixo,
@@ -183,34 +195,17 @@ export class Serializador {
         return resultado;
     }
 
-    validarValoresVariaveis(declaracao: BlocoDeclaracao): void {
-        const nomeFolEs =
-            declaracao.modificadores[0].nomeFoles.length > 1 &&
-                typeof declaracao.modificadores[0].nomeFoles === "object"
-                ? declaracao.modificadores[0].nomeFoles[0].toString()
-                : declaracao.modificadores[0].nomeFoles.toString();
-
-        const valoresModificador = declaracao.modificadores[0].valores;
-
-        new SeletorModificador(
-            nomeFolEs,
-            valoresModificador,
-            declaracao.modificadores[0].pragmas
-        );
-    }
-
     /**
      * Esta função pode ter dois comportamentos, dependendo da configuração
-     * do serializador:
+     * do Resolvedor:
      * 
      * - Acumula o valor da variável para ser usada por outras declarações;
      * - Escreve um `var()` no resultado.
      * @param declaracaoVariavel 
      */
-    serializarDeclaracaoVariavel(
+    resolverDeclaracaoVariavel(
         declaracaoVariavel: DeclaracaoVariavel
     ): void {
-        // TODO: Implementar escrita de `var()` no resultado. 
         this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valores;
     }
 
@@ -219,12 +214,11 @@ export class Serializador {
      * @param declaracoes As declaracoes.
      * @returns Uma string com o resultado da tradução.
      */
-    serializar(
+    resolver(
         declaracoes: Declaracao[],
         indentacao: number = 0,
         seletorAnterior: string = undefined,
     ) {
-        this.variaveis = {};
         let resultado = "";
         let textoSeletorAnterior = "";
         if (seletorAnterior !== undefined) {
@@ -234,14 +228,14 @@ export class Serializador {
         for (const declaracao of declaracoes) {
             switch (declaracao.constructor.name) {
                 case "BlocoDeclaracao":
-                    resultado += this.serializarBlocoDeclaracao(
+                    resultado += this.resolverBlocoDeclaracao(
                         declaracao as BlocoDeclaracao,
                         indentacao,
                         textoSeletorAnterior,
                     );
                     break;
                 case "DeclaracaoVariavel":
-                    this.serializarDeclaracaoVariavel(
+                    this.resolverDeclaracaoVariavel(
                         declaracao as DeclaracaoVariavel
                     );
                     break;

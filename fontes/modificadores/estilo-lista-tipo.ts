@@ -5,10 +5,11 @@ export class EstiloListaTipo extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        // variavel?: boolean
     ) {
         super("estilo-lista-tipo", "list-style-type", pragmas);
 
         this.valores = valores;
+        // this.variavel = variavel;
     }
 }

@@ -3,7 +3,6 @@ import { angulos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EstiloFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -16,27 +15,31 @@ export class EstiloFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("estilo-fonte", "font-style", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "estilo-fonte", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("estilo-fonte", valores, this.valoresAceitos);
-        //     }
-            
-        //     if (valor.includes("obliqua") || valor.includes("oblíqua")) {
-        //         validarQuantificador("estilo-fonte", quantificador, angulos);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "estilo-fonte",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    angulos
+                );
+            } else {
+                validarValores(
+                    "estilo-fonte",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

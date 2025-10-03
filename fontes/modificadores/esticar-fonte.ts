@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class EsticarFonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,27 +18,22 @@ export class EsticarFonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("esticar-fonte", "font-stretch", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico("esticar-fonte", valores, this.valoresAceitos);
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "esticar-fonte",
-        //             quantificador,
-        //             ListaDeValorPercentual,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            validarValorNumerico(
+                "esticar-fonte",
+                valores,
+                this.valoresAceitos,
+                null,
+                ListaDeValorPercentual
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

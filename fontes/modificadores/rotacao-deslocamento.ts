@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { angulos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RotacaoDeslocamento extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,9 +11,8 @@ export class RotacaoDeslocamento extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["rotacao-deslocamento", "rotação-deslocamento"],
@@ -22,26 +20,17 @@ export class RotacaoDeslocamento extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
+        if (!variavel) {
             validarValorNumerico(
                 "rotação-deslocamento",
                 valores,
                 this.valoresAceitos,
+                null,
+                angulos
             );
-
-            // Quantificador deve ser do tipo ângulo (<angle>)
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "rotação-deslocamento",
-            //         quantificador,
-            //         angulos,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

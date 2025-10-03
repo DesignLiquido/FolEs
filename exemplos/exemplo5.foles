@@ -1,32 +1,11 @@
-$valor-padrao: herdar;
-$cor-secundaria: branco;
-
-$valor-recuo: 12px;
+$valor-padrao: 50%;
+$recuo-imediato: 20px;
 
 lmht {
   altura: $valor-padrao;
-  recuo-direito: $valor-recuo;
+  recuo: $recuo-imediato;
 }
 
 lmht {
-  cor-barra-rolagem: $cor-secundaria;
-}
-
-$valor-teste: verde;
-$valor-indice: 0;
-
-lmht {
-  borda-em-bloco: $valor-teste;
-  indice-z: $valor-indice; 
-}
-
-$cor-padrao: rgb(31, 120, 50);
-
-lmht {
-  sombra-caixa: $cor-padrao;
-}
-
-$cor-filtro: borrar(10px);
-lmht {
-  filtro-fundo: $cor-filtro;
+  largura: 20px;
 }

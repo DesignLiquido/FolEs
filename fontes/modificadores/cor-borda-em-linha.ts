@@ -5,14 +5,14 @@ import { validarValorCor } from "./validacoes/cor";
 export class CorBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("cor-borda-em-linha", "border-inline-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor-borda-em-linha", valores);
+        if (!variavel) validarValorCor("cor-borda-em-linha", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

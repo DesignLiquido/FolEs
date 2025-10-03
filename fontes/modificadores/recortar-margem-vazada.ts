@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RecortarMargemVazada extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,31 +11,22 @@ export class RecortarMargemVazada extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("recortar-margem-vazada", "overflow-clip-margin", pragmas);
 
-        if (!valorVariavel) {
+        if (!variavel) {
             validarValorNumerico(
                 "recortar-margem-vazada",
                 valores,
                 this.valoresAceitos,
+                null,
+                comprimentos
             );
-
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "recortar-margem-vazada",
-            //         quantificador,
-            //         comprimentos,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

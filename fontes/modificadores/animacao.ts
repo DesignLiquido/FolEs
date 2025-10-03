@@ -4,7 +4,6 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Animacao extends Modificador {
-    // Atribuição Abreviada: Esse seletor pode receber de 2 a 8 valores.
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
         reverter: "reverse",
@@ -23,26 +22,33 @@ export class Animacao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super(["animacao", "animação"], "animation", pragmas);
 
         const valoresExtra = ["linear", "cubic-bezier", "steps"];
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "animação", valores, this.valoresAceitos, valoresExtra);
-        //     } else {
-        //         validarValorNumerico(
-        //             "animação",
-        //             valor,
-        //             this.valoresAceitos,
-        //             valoresExtra,
-        //         );
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "animação",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra
+                );
+            } else {
+                validarValorNumerico(
+                    "animação",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                );
+            }
+        }
+
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

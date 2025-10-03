@@ -5,14 +5,14 @@ import { validarValorCor } from "./validacoes/cor";
 export class CorFimBordaEmBloco extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("cor-fim-borda-em-bloco", "border-block-end-color", pragmas);
 
-        if (!valorVariavel) validarValorCor("cor-fim-borda-em-bloco", valores);
+        if (!variavel) validarValorCor("cor-fim-borda-em-bloco", valores);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -6,21 +6,27 @@ import { validarValorCor } from "./validacoes/cor";
 export class CorBorda extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("cor-borda", "border-color", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (typeof valor === 'string' && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("cor", "cor-borda", valor);
-        //     } else {
-        //         validarValorCor("cor-borda", valor);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "cor",
+                    "cor-borda",
+                    valores
+                );
+            } else {
+                validarValorCor(
+                    "cor-borda",
+                    valores
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -9,15 +9,23 @@ export class IndiceZ extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["indice-z", "índice-z"], "z-index", pragmas);
 
-        if (!valorVariavel)
-            validarValorNumerico("índice-z", valores, this.valoresAceitos);
+        if (!variavel) {
+            validarValorNumerico(
+                "índice-z",
+                valores,
+                this.valoresAceitos,
+                null,
+                null,
+                true
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -10,9 +10,8 @@ export class QuebraDecoracaoCaixa extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["quebra-decoracao-caixa", "quebra-decoração-caixa"],
@@ -20,14 +19,15 @@ export class QuebraDecoracaoCaixa extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // if (!valorVariavel)
-        //     validarValores(
-        //         "quebra-decoração-caixa",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
+        if (!variavel) {
+            validarValores(
+                "quebra-decoração-caixa",
+                valores,
+                this.valoresAceitos,
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

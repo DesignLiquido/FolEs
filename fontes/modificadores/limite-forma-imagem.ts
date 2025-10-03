@@ -1,32 +1,42 @@
-import { Valor } from "../valores";
+import { Valor, ValorNumerico, ValorQualitativo } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
+import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LimiteFormaImagem extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("limite-forma-imagem", "shape-image-threshold", pragmas);
 
-        // if (!valorVariavel) {
-        //     // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
-        //     if (
-        //         (Number(parseInt(valor)) < 0 || Number(parseInt(valor)) > 1) &&
-        //         !(valor in valoresGlobais)
-        //     ) {
-        //         throw new Error(
-        //             `Modificador ou variável 'limite-forma-imagem' com valor ${valor} inválido. O valor deve estar entre 0 e 1 ou ser um dos valores:
-        //             ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`,
-        //         );
-        //     }
+        // Valor deve estar entre 0 e 1 (<alpha-value>) ou ser um valor global
+        const valorNumericoTipado = valores[0] as ValorNumerico;
+        const valorQualitativoTipado = valores[0] as ValorQualitativo;
 
-        //     proibirQuantificador("limite-forma-imagem", quantificador);
-        // }
+        if (!variavel) {
+            if (
+                (valorNumericoTipado.literalNumerico >= 0 && valorNumericoTipado.literalNumerico <= 1) ||
+                (valorQualitativoTipado.qualitativo in valoresGlobais)
+            ) {
+                validarValorNumerico(
+                    "limite-forma-imagem",
+                    valores,
+                    null,
+                    null,
+                    null,
+                    true
+                );
+            } else {
+                throw new Error(`Modificador ou variável 'limite-forma-imagem' com valor ${valorNumericoTipado.literalNumerico} inválido. Valores aceitos:
+                    número-quantificador (ex.: 12px),
+                    valor numérico do tipo <alpha-value> (deve ser entre 0 e 1),
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

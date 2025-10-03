@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { Estilo, EstiloBorda } from "../listas/estilo";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { estilos } from "../../fontes/modificadores/atributos/estilo";
@@ -15,20 +15,20 @@ describe('Testando Seletores com ESTILO como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let resolvedor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            resolvedor = new Resolvedor();
         });
 
         it('Casos de sucesso - Valor válido', () => {
             for (let index = 0; index < Estilo.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    Estilo[index], 
-                    [new ValorQualitativo('pontilhado')], 
+                    Estilo[index],
+                    [new ValorQualitativo('pontilhado')],
                     null
                 );
 
@@ -55,7 +55,6 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     ])
                 );
 
-
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -72,14 +71,13 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     seletor['propriedadeCss']
                 );
 
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain('body');
 
-                expect(resultadoTradutor).toContain('body');
-
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('dotted');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('dotted');
             }
         });
 
@@ -122,10 +120,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     avaliador.analisar(resultadoLexador.simbolos);
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
-
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -144,7 +141,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 // Avaliador Sintático
                 expect(() => {
                     avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrowError(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
+                }).toThrow(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
             }
         });
 
@@ -157,7 +154,7 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 const resultadoLexador = lexador.mapear([
                     `$estilo-padrao: ${estilosFolEs[index]};`,
                     "corpo {",
-                        'contorno: $estilo-padrao;',
+                    'contorno: $estilo-padrao;',
                     "}"
                 ]);
 
@@ -194,9 +191,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('contorno');
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('outline');
 
-                // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(estilosCss[index]);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(estilosCss[index]);
             }
         });
     });

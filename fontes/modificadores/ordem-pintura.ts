@@ -13,15 +13,14 @@ export class OrdemPintura extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("ordem-pintura", "paint-order", pragmas);
 
-        if (!valorVariavel)
-            validarValores("ordem-pintura", valores, this.valoresAceitos);
+        if (!variavel) validarValores("ordem-pintura", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

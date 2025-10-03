@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RecuoEmBlocoRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,27 +11,33 @@ export class RecuoEmBlocoRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("recuo-em-bloco-rolagem-mouse", "scroll-padding-block", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "recuo-em-bloco-rolagem-mouse", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("recuo-em-bloco-rolagem-mouse", valores, this.valoresAceitos);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("recuo-em-bloco-rolagem-mouse", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "recuo-em-bloco-rolagem-mouse",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "recuo-em-bloco-rolagem-mouse",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

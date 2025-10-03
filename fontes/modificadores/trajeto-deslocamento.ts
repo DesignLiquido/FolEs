@@ -1,6 +1,4 @@
 import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -13,22 +11,23 @@ export class TrajetoDeslocamento extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("trajeto-deslocamento", "offset-path", pragmas);
 
         const valoresExtra = ["url", "ray"];
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValores(
                 "trajeto-deslocamento",
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

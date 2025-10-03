@@ -1,26 +1,24 @@
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
-import { Serializador } from "../fontes/serializadores";
+import { Resolvedor } from "../fontes/resolvedores";
 import { ValoresQuantificadores } from "./listas/valores-quantificadores"
-
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 import { ValorNumerico } from "../fontes/valores";
-
 import estruturasHtml from "../fontes/tradutores/estruturas-html";
 
-describe('Serializador', () => {
+describe('Resolvedor', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
-    let serializador: Serializador;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliador = new AvaliadorSintatico(importador);
-        serializador = new Serializador();
+        resolvedor = new Resolvedor();
     });
 
     describe('Casos de Sucesso', () => {
@@ -37,7 +35,7 @@ describe('Serializador', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
                 
                 // Tradutor deve retornar a estrutura HTML correspondente
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
             }
         });
@@ -60,7 +58,7 @@ describe('Serializador', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
     
                 // Tradutor deve funcionar de acordo
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
     
                 expect(resultadoTradutor).toBeTruthy();
                 expect(resultadoTradutor).toContain("html");
@@ -80,16 +78,16 @@ describe('Serializador', () => {
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-            // Serializador deve funcionar de acordo
-            const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+            // Resolvedor deve funcionar de acordo
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            expect(resultadoSerializador).toBeTruthy();
-            expect(resultadoSerializador).toContain("html");
-            expect(resultadoSerializador).toContain("outline-style");
-            expect(resultadoSerializador).toContain('dotted');
+            expect(resultadoResolvedor).toBeTruthy();
+            expect(resultadoResolvedor).toContain("html");
+            expect(resultadoResolvedor).toContain("outline-style");
+            expect(resultadoResolvedor).toContain('dotted');
         });
 
-        describe.skip('Exemplos mais elaborados', () => {
+        describe('Exemplos mais elaborados', () => {
             it('Exemplo 1', () => {
                 const resultadoLexador = lexador.mapear([
                     '.minha-classe {',
@@ -122,27 +120,27 @@ describe('Serializador', () => {
                 ]);
 
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoSerializador).toBeTruthy();
-                expect(resultadoSerializador).toContain('.minha-classe {');
-                expect(resultadoSerializador).toContain('align-content: unsafe;');
-                expect(resultadoSerializador).toContain('outline-style: inherit;');
-                expect(resultadoSerializador).toContain('accent-color: hsl(12, 13%, 24%);');
-                expect(resultadoSerializador).toContain('color: #f100ff;');
-                expect(resultadoSerializador).toContain('background-color: red;');
-                expect(resultadoSerializador).toContain('font-size: 16px;');
-                expect(resultadoSerializador).toContain('max-width: 20cm;');
-                expect(resultadoSerializador).toContain('.minha-classe:hover {');
-                expect(resultadoSerializador).toContain('background-color: blue;');
-                expect(resultadoSerializador).toContain('#elemento-caixa {');
-                expect(resultadoSerializador).toContain('height: 40px;');
-                expect(resultadoSerializador).toContain('.minha-segunda-classe {');
-                expect(resultadoSerializador).toContain('margin-top: 13mm;');
-                expect(resultadoSerializador).toContain('#meu-segundo-id {');
-                expect(resultadoSerializador).toContain('width: 400mm;');
-                expect(resultadoSerializador).toContain('html {');
-                expect(resultadoSerializador).toContain('background-color: hsl(50, 80%, 80%);');
+                expect(resultadoResolvedor).toBeTruthy();
+                expect(resultadoResolvedor).toContain('.minha-classe {');
+                expect(resultadoResolvedor).toContain('align-content: unsafe;');
+                expect(resultadoResolvedor).toContain('outline-style: inherit;');
+                expect(resultadoResolvedor).toContain('accent-color: hsl(12, 13%, 24%);');
+                expect(resultadoResolvedor).toContain('color: #f100ff;');
+                expect(resultadoResolvedor).toContain('background-color: red;');
+                expect(resultadoResolvedor).toContain('font-size: 16px;');
+                expect(resultadoResolvedor).toContain('max-width: 20cm;');
+                expect(resultadoResolvedor).toContain('.minha-classe:hover {');
+                expect(resultadoResolvedor).toContain('background-color: blue;');
+                expect(resultadoResolvedor).toContain('#elemento-caixa {');
+                expect(resultadoResolvedor).toContain('height: 40px;');
+                expect(resultadoResolvedor).toContain('.minha-segunda-classe {');
+                expect(resultadoResolvedor).toContain('margin-top: 13mm;');
+                expect(resultadoResolvedor).toContain('#meu-segundo-id {');
+                expect(resultadoResolvedor).toContain('width: 400mm;');
+                expect(resultadoResolvedor).toContain('html {');
+                expect(resultadoResolvedor).toContain('background-color: hsl(50, 80%, 80%);');
             });
 
             it('Exemplo 2', () => {
@@ -174,7 +172,7 @@ describe('Serializador', () => {
                     '    estilo-lista: dentro meu-estilo;',
                     '    fim-linha-em-grade: span 3;',
                     '    fim-coluna-em-grade: span 3;',
-                    '    incrementar-contador: meu-contador -4;',
+                    '    incrementar-contador: meu-contador 4;',
                     '    início-linha-em-grade: span 2;',
                     '    inicio-coluna-em-grade: span 2;',
                     '    linha-em-grade: span some-grid-area;',
@@ -185,9 +183,9 @@ describe('Serializador', () => {
                 ]);
 
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoSerializador).toBeTruthy();
+                expect(resultadoResolvedor).toBeTruthy();
             });
         });
     });
@@ -205,11 +203,11 @@ describe('Serializador', () => {
     
                 // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
                 expect(() => {
-                    serializador.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).not.toBeTruthy;
     
                 expect(() => {
-                    serializador.serializar(avaliador.analisar(resultadoLexador.simbolos));
+                    resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

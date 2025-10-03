@@ -10,21 +10,33 @@ export class LinhaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("linha-em-grade", "grid-row", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ") || valor.includes("/")) {
-        //         validarAtribuicaoAbreviada("numérica", "linha-em-grade", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("linha-em-grade", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "linha-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
+                );
+            } else {
+                validarValorNumerico(
+                    "linha-em-grade",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

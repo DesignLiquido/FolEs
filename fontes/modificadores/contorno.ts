@@ -3,7 +3,6 @@ import { comprimentos } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Contorno extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,25 +14,32 @@ export class Contorno extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("contorno", "outline", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "contorno", valores, this.valoresAceitos);
-        //     } else {
-        //         validarMultiplosQualitativos("contorno", valores, this.valoresAceitos);
-        //     }
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("contorno", quantificador, comprimentos);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "contorno",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    comprimentos
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "contorno",
+                    valores,
+                    this.valoresAceitos,
+                    comprimentos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

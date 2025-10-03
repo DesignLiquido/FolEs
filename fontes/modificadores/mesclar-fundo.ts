@@ -27,15 +27,14 @@ export class MesclarFundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("mesclar-fundo", "background-blend-mode", pragmas);
 
-        if (!valorVariavel)
-            validarValores("mesclar-fundo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("mesclar-fundo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

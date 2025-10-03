@@ -13,15 +13,14 @@ export class QuebrarLinha extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("quebrar-linha", "line-break", pragmas);
 
-        if (!valorVariavel)
-            validarValores("quebrar-linha", valores, this.valoresAceitos);
+        if (!variavel) validarValores("quebrar-linha", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

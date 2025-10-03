@@ -1,4 +1,4 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 import { validarValorString } from "./validacoes/string";
@@ -11,21 +11,23 @@ export class Citacoes extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
+
     ) {
         super(["citacoes", "citações"], "quotes", pragmas);
 
-        // if (!valorVariavel) {
-        //     const validacaoString = validarValorString(valor);
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
 
-        //     if (validacaoString) {
-        //         this.valoresAceitos[valor] = valor;
-        //     }
 
-        //     validarValores("citações", valores, this.valoresAceitos);
-        // }
+        if (!variavel && !validarString) validarValores("citações", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

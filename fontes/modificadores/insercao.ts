@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Insercao extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,27 +11,33 @@ export class Insercao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["insercao", "inserção"], "inset", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "inserção", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("inserção", valores, this.valoresAceitos);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("inserção", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "inserção",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "inserção",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

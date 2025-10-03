@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class InicioColunaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,9 +10,8 @@ export class InicioColunaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["inicio-coluna-em-grade", "início-coluna-em-grade"],
@@ -21,17 +19,31 @@ export class InicioColunaEmGrade extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", 'início-coluna-em-grade', valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("início-coluna-em-grade", valores, this.valoresAceitos);
-        //     }
-
-        //     proibirQuantificador("início-coluna-em-grade", quantificador);
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    'início-coluna-em-grade',
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true,
+                    true,
+                );
+            } else {
+                validarValorNumerico(
+                    "início-coluna-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

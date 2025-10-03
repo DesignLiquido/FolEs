@@ -1,6 +1,4 @@
 import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -11,24 +9,25 @@ export class ImagemMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        quantificador: string,
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["imagem-mascara", "imagem-máscara"], "mask-image", pragmas);
 
-        // OBS.: Também pode receber a função image
+        // OBS.: Também pode receber a função image()
         // Ex.: mask-image: image(url(mask.png), skyblue);
         const valoresExtra = ["url", "linear-gradient"];
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValores(
                 "imagem-máscara",
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

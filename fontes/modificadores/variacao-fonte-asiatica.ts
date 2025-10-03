@@ -20,9 +20,8 @@ export class VariacaoFonteAsiatica extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["variacao-fonte-asiatica", "variação-fonte-asiática"],
@@ -30,13 +29,15 @@ export class VariacaoFonteAsiatica extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValores(
                 "variação-fonte-asiática",
                 valores,
                 this.valoresAceitos,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

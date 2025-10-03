@@ -1,6 +1,4 @@
 import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -12,19 +10,21 @@ export class ImagemFundo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("imagem-fundo", "background-image", pragmas);
 
-        // if (!valorVariavel) {
-        //     if (valor instanceof Metodo) {
-        //         this.valores = valores;
-        //     } else {
-        //         validarValores("imagem-fundo", valores, this.valoresAceitos);
-        //         this.valores = valores;
-        //     }
-        // }
+        if (!variavel) {
+            validarValores(
+                "imagem-fundo",
+                valores,
+                this.valoresAceitos,
+                null
+            );
+        }
+
+        this.valores = valores;
+        this.variavel = variavel;
     }
 }

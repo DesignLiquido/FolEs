@@ -11,15 +11,14 @@ export class TransformarEstilo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("transformar-estilo", "transform-style", pragmas);
 
-        if (!valorVariavel)
-            validarValores("transformar-estilo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("transformar-estilo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

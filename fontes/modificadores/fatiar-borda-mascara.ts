@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FatiarBordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,7 +11,7 @@ export class FatiarBordaMascara extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["fatiar-borda-mascara", "fatiar-borda-máscara"],
@@ -20,23 +19,17 @@ export class FatiarBordaMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
+        if (!variavel) {
             validarValorNumerico(
                 "fatiar-borda-máscara",
                 valores,
                 this.valoresAceitos,
+                null,
+                ListaDeValorPercentual
             );
-
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "fatiar-borda-máscara",
-            //         quantificador,
-            //         ListaDeValorPercentual,
-            //     );
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

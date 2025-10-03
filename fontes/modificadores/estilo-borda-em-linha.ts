@@ -6,15 +6,14 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 export class EstiloBordaEmLinha extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("estilo-borda-em-linha", "border-inline-style", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais("estilo-borda-em-linha", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-em-linha", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -1,9 +1,7 @@
 import { Valor } from "../valores";
-import { valoresGlobais } from "./atributos/globais";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class DeslocamentoTextoSublinhado extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -12,9 +10,8 @@ export class DeslocamentoTextoSublinhado extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             "deslocamento-texto-sublinhado",
@@ -22,25 +19,17 @@ export class DeslocamentoTextoSublinhado extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico(
-        //         "deslocamento-texto-sublinhado",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "deslocamento-texto-sublinhado",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            validarValorNumerico(
+                "deslocamento-texto-sublinhado",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

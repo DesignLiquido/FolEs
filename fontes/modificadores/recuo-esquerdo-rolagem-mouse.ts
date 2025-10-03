@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class RecuoEsquerdoRolagemMouse extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,31 +10,22 @@ export class RecuoEsquerdoRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("recuo-esquerdo-rolagem-mouse", "scroll-padding-left", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico(
-        //         "recuo-esquerdo-rolagem-mouse",
-        //         valor,
-        //         this.valoresAceitos,
-        //     );
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "recuo-esquerdo-rolagem-mouse",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            validarValorNumerico(
+                "recuo-esquerdo-rolagem-mouse",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

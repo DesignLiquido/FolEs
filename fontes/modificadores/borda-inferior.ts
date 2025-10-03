@@ -3,7 +3,6 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class BordaInferior extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,27 +14,33 @@ export class BordaInferior extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
+
     ) {
         super("borda-inferior", "border-bottom", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("múltiplos-qualitativos", "borda-direita", valores, this.valoresAceitos);
-        //     } else {
-        //         validarMultiplosQualitativos("borda-inferior", valores, this.valoresAceitos);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador("borda-inferior", quantificador, unidadesMedida);
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "múltiplos-qualitativos",
+                    "borda-direita",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    unidadesMedida
+                );
+            } else {
+                validarMultiplosQualitativos(
+                    "borda-inferior",
+                    valores,
+                    this.valoresAceitos,
+                    unidadesMedida
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

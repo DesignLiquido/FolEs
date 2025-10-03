@@ -6,15 +6,14 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 export class PosicaoMascara extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["posicao-mascara", "posição-máscara"], "mask-position", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais("posição-máscara", valores, posicoesBasicas);
+        if (!variavel) validarValoresAdicionais("posição-máscara", valores, posicoesBasicas);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -12,9 +12,8 @@ export class RenderizacaoImagem extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["renderizacao-imagem", "renderização-imagem"],
@@ -22,9 +21,9 @@ export class RenderizacaoImagem extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("renderização-imagem", valores, this.valoresAceitos);
+        if (!variavel) validarValores("renderização-imagem", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -7,22 +7,21 @@ export class VazamentoVertical extends Modificador {
         visivel: "visible",
         visível: "visible",
         escondido: "hidden",
-        recortar: "clip",
+        recorte: "clip",
         "barra-rolagem": "scroll",
         auto: "auto",
     };
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("vazamento-vertical", "overflow-y", pragmas);
 
-        if (!valorVariavel)
-            validarValores("vazamento-vertical", valores, this.valoresAceitos);
+        if (!variavel) validarValores("vazamento-vertical", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

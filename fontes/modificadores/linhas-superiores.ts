@@ -1,23 +1,27 @@
 import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class LinhasSuperiores extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("linhas-superiores", "widows", pragmas);
 
-        if (!valorVariavel) {
-            validarValorNumerico("linhas-superiores", valores);
-
-            // TODO: Repensar.
-            // proibirQuantificador("linhas-superiores", quantificador);
+        if (!variavel) {
+            validarValorNumerico(
+                "linhas-superiores",
+                valores,
+                null,
+                null,
+                null,
+                true
+            );
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

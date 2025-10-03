@@ -14,15 +14,14 @@ export class SelecaoUsuario extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["selecao-usuario", "seleção-usuário"], "user-select", pragmas);
 
-        if (!valorVariavel)
-            validarValores("seleção-usuário", valores, this.valoresAceitos);
+        if (!variavel) validarValores("seleção-usuário", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

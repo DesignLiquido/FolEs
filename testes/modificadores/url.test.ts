@@ -2,9 +2,8 @@ import { AvaliadorSintatico } from "../../fontes/avaliador-sintatico";
 import { Importador } from "../../fontes/importador";
 import { ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
-import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { TraducaoUrl, Url } from "../listas/url";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
@@ -13,19 +12,18 @@ describe('Testando Seletores que recebem URL como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintatico;
-        let tradutor: Serializador;
+        let tradutor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            tradutor = new Resolvedor();
         });
 
-        // TODO: TypeError: modificador.valores is not iterable
-        it.skip('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
             const URLexemplo = 'url("https://www.showmetech.com.br/wp-content/uploads//2018/12/email_ss_1920-1920x1024.png")';
-
+            
             for (let index = 0; index < Url.length; index += 1) {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -56,7 +54,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(TraducaoUrl[Url[index]]);
                 expect(resultadoTradutor).toContain('url');
@@ -95,7 +93,7 @@ describe('Testando Seletores que recebem URL como atributo', () => {
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliador.analisar(novoLexador.simbolos));
+                    tradutor.resolver(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });

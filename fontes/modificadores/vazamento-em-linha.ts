@@ -7,22 +7,21 @@ export class VazamentoEmLinha extends Modificador {
         visivel: "visible",
         visível: "visible",
         escondido: "hidden",
-        recortar: "clip",
+        recorte: "clip",
         "barra-rolagem": "scroll",
         auto: "auto",
     };
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("vazamento-em-linha", "overflow-inline", pragmas);
 
-        if (!valorVariavel)
-            validarValores("vazamento-em-linha", valores, this.valoresAceitos);
+        if (!variavel) validarValores("vazamento-em-linha", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

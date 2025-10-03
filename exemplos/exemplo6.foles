@@ -1,4 +1,8 @@
 lmht {
+    estilo-lista: dentro meu-estilo;
+}
+
+lmht {
     recursos-fonte: "c2sc", "hist";
 }
 

@@ -3,7 +3,6 @@ import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class ModeloEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -19,9 +18,8 @@ export class ModeloEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("modelo-em-grade", "grid-template", pragmas);
 
@@ -31,20 +29,31 @@ export class ModeloEmGrade extends Modificador {
         //      "b b b" auto;
 
         const valoresExtra = ["fit-content"];
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (typeof valor === 'string' && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "modelo-em-grade", valores, this.valoresAceitos, valoresExtra);
-        //     } else {
-        //         validarValorNumerico("modelo-em-grade", valores, this.valoresAceitos, valoresExtra);
-        //     }
 
-        //     if (quantificador !== undefined) {
-        //         validarQuantificador("modelo-em-grade", quantificador, unidadesMedida, valoresFlex);
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "modelo-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "modelo-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    valoresExtra,
+                    quantificadoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

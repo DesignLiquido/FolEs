@@ -10,20 +10,21 @@ export class EstiloContorno extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("estilo-contorno", "outline-style", pragmas);
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValoresAdicionais(
                 "estilo-contorno",
                 valores,
                 estilos,
                 this.valoresAceitos,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

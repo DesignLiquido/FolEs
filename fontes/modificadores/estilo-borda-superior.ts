@@ -6,15 +6,14 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 export class EstiloBordaSuperior extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("estilo-borda-superior", "border-top-style", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais("estilo-borda-superior", valores, estilos);
+        if (!variavel) validarValoresAdicionais("estilo-borda-superior", valores, estilos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

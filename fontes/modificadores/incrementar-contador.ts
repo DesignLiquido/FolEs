@@ -10,21 +10,36 @@ export class IncrementarContador extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("incrementar-contador", "counter-increment", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "incrementar-contador", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("incrementar-contador", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "incrementar-contador",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true,
+                    true
+                );
+            } else {
+                validarValorNumerico(
+                    "incrementar-contador",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

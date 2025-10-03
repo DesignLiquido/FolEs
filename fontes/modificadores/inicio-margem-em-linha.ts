@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class InicioMargemEmLinha extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,34 +10,26 @@ export class InicioMargemEmLinha extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["inicio-margem-em-linha", "início-margem-em-linha"],
             "margin-inline-start",
             pragmas,
         );
-
-        if (!valorVariavel) {
+        
+        if (!variavel) {
             validarValorNumerico(
                 "início-margem-em-linha",
                 valores,
                 this.valoresAceitos,
+                null,
+                unidadesMedida
             );
-
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "início-margem-em-linha",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
         }
-
+        
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

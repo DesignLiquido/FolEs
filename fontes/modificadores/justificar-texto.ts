@@ -13,15 +13,14 @@ export class JustificarTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("justificar-texto", "text-justify", pragmas);
 
-        if (!valorVariavel)
-            validarValores("justificar-texto", valores, this.valoresAceitos);
+        if (!variavel) validarValores("justificar-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

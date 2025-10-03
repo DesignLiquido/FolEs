@@ -10,9 +10,8 @@ export class EstiloListaPosicao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["estilo-lista-posicao", "estilo-lista-posição"],
@@ -20,9 +19,9 @@ export class EstiloListaPosicao extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("estilo-lista-posição", valores, this.valoresAceitos);
+        if (!variavel) validarValores("estilo-lista-posição", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

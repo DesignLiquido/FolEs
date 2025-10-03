@@ -12,9 +12,8 @@ export class ComposicaoMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["composicao-mascara", "composição-máscara"],
@@ -22,9 +21,9 @@ export class ComposicaoMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
-            validarValores("composição-máscara", valores, this.valoresAceitos);
+        if (!variavel) validarValores("composição-máscara", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

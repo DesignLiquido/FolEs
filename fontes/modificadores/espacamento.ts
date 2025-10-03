@@ -3,38 +3,39 @@ import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Espacamento extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["espacamento", "espaçamento"], "gap", pragmas);
 
         const valoresExtra = ["calc"];
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (typeof valor === 'string' && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "espaçamento", valores, undefined, valoresExtra);
-        //     } else {
-        //         validarValorNumerico("espaçamento", valores, undefined, valoresExtra);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "espaçamento",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "espaçamento",
+                    valores,
+                    null,
+                    valoresExtra,
+                    unidadesMedida
+                );
+            } else {
+                validarValorNumerico(
+                    "espaçamento",
+                    valores,
+                    null,
+                    valoresExtra,
+                    unidadesMedida
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

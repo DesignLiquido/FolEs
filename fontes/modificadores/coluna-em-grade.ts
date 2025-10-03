@@ -10,20 +10,34 @@ export class ColunaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("coluna-em-grade", "grid-column", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes("/") || valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "coluna-em-grade", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("coluna-em-grade", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "coluna-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
+                );
+                // TODO: Aceitava validacaoPersonalizada como true
+            } else {
+                validarValorNumerico(
+                    "coluna-em-grade",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

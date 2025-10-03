@@ -15,19 +15,30 @@ export class AoMudar extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("ao-mudar", "will-change", pragmas);
 
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "ao-mudar", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValores("ao-mudar", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel) {
+
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "ao-mudar",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    false,
+                    true
+                );
+            } else {
+                validarValores("ao-mudar", valores, this.valoresAceitos);
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

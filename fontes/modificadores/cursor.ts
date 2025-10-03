@@ -44,17 +44,16 @@ export class Cursor extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("cursor", "cursor", pragmas);
 
         const valoresExtra = ["url"];
 
-        if (!valorVariavel)
-            validarValores("cursor", valores, this.valoresAceitos, valoresExtra);
+        if (!variavel) validarValores("cursor", valores, this.valoresAceitos, valoresExtra);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

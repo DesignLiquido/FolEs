@@ -6,15 +6,14 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 export class PosicaoObjeto extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["posicao-objeto", "posição-objeto"], "object-position", pragmas);
 
-        if (!valorVariavel)
-            validarValoresAdicionais("posição-objeto", valores, posicoesBasicas);
+        if (!variavel) validarValoresAdicionais("posição-objeto", valores, posicoesBasicas);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

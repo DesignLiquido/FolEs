@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida, valoresFlex } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class TamanhoColunasEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -15,36 +14,26 @@ export class TamanhoColunasEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("tamanho-colunas-em-grade", "grid-auto-columns", pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 
-        if (!valorVariavel) {
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFlex };
+
+        if (!variavel) {
             validarValorNumerico(
                 "tamanho-colunas-em-grade",
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
+                quantificadoresAceitos
             );
-
-            // Além dos quantificadores de Comprimento e Percentual, também pode receber a unidade 'fr', do tipo Flex.
-            // TODO: Repensar
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "tamanho-colunas-em-grade",
-            //         quantificador,
-            //         unidadesMedida,
-            //         valoresFlex,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

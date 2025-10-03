@@ -12,25 +12,29 @@ export class ComportamentoRolagemMouse extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("comportamento-rolagem-mouse", "overscroll-behavior", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "comportamento-rolagem-mouse", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores(
-        //             "comportamento-rolagem-mouse",
-        //             valor,
-        //             this.valoresAceitos,
-        //         );
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "comportamento-rolagem-mouse",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValores(
+                    "comportamento-rolagem-mouse",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -11,15 +11,14 @@ export class PreencherColuna extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("preencher-coluna", "column-fill", pragmas);
 
-        if (!valorVariavel)
-            validarValores("preencher-coluna", valores, this.valoresAceitos);
+        if (!variavel) validarValores("preencher-coluna", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

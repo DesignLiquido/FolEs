@@ -10,15 +10,14 @@ export class Direcao extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["direcao", "direção"], "direction", pragmas);
 
-        if (!valorVariavel)
-            validarValores("direção", valores, this.valoresAceitos);
+        if (!variavel) validarValores("direção", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

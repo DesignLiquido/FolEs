@@ -3,32 +3,39 @@ import { comprimentos, ListaDeValorPercentual } from "./atributos/quantificadore
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Recuo extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("recuo", "padding", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "recuo", valor);
-        //     } else {
-        //         validarValorNumerico("recuo", valor);
-                
-        //         if (Number(parseInt(valor))) {
-        //             validarQuantificador("recuo", quantificador, comprimentos, ListaDeValorPercentual);
-                    
-        //             this.quantificador = quantificador;
-        //         }
-        //     }
-        // }
-        
+        const quantificadoresAceitos: { [nome: string]: string } = { ...comprimentos, ...ListaDeValorPercentual };
+
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "recuo",
+                    valores,
+                    null,
+                    null,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "recuo",
+                    valores,
+                    null,
+                    null,
+                    quantificadoresAceitos
+                );
+            }
+        }
+
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

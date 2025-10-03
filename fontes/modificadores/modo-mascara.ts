@@ -12,15 +12,14 @@ export class ModoMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["modo-mascara", "modo-máscara"], "mask-mode", pragmas);
 
-        if (!valorVariavel)
-            validarValores("modo-máscara", valores, this.valoresAceitos);
+        if (!variavel) validarValores("modo-máscara", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

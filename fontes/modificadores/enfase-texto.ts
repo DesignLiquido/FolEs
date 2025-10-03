@@ -1,4 +1,4 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorCor } from "./validacoes/cor";
@@ -22,26 +22,36 @@ export class EnfaseTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
 
-        // const validacaoString = validarValorString(valor);
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
 
-        // if (validacaoString) {
-        //     this.valoresAceitos[valor] = valor;
-        // }
-
-        // if (!valorVariavel) {
-        //     if (!validacaoString && valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("cor", "ênfase-texto", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorCor("ênfase-texto", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel && !validarString) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "cor",
+                    "ênfase-texto",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValorCor(
+                    "ênfase-texto",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

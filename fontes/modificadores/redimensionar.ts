@@ -1,5 +1,4 @@
 import { Valor } from "../valores";
-import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -15,15 +14,14 @@ export class Redimensionar extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("redimensionar", "resize", pragmas);
 
-        if (!valorVariavel)
-            validarValores("redimensionar", valores, this.valoresAceitos);
+        if (!variavel) validarValores("redimensionar", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

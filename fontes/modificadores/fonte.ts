@@ -3,7 +3,6 @@ import { valoresFonte, unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class Fonte extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -36,7 +35,7 @@ export class Fonte extends Modificador {
         itálica: "italic",
         obliqua: "oblique",
         oblíqua: "oblique",
-        negrito: "bold",
+        "em-negrito": "bold",
         "mais-clara": "lighter",
         "mais-escura": "bolder",
         "ultra-condensada": "ultra-condensed",
@@ -51,33 +50,35 @@ export class Fonte extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("fonte", "font", pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "fonte", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValorNumerico("fonte", valores, this.valoresAceitos);
-        //     }
+        const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFonte };
 
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "fonte",
-        //             quantificador,
-        //             unidadesMedida,
-        //             valoresFonte,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "fonte",
+                    valores,
+                    this.valoresAceitos,
+                    quantificadoresAceitos
+                );
+            } else {
+                validarValorNumerico(
+                    "fonte",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    quantificadoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

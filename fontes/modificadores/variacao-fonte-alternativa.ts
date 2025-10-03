@@ -12,7 +12,7 @@ export class VariacaoFonteAlternativa extends Modificador {
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["variacao-fonte-alternativa", "variação-fonte-alternativa"],
@@ -21,15 +21,17 @@ export class VariacaoFonteAlternativa extends Modificador {
         );
 
         const valoresExtra = ['annotation', 'character-variant', 'ornaments', 'styleset', 'stylistic', 'swash'];
-        
-        if (!valorVariavel)
+
+        if (!variavel) {
             validarValores(
                 "variação-fonte-alternativa",
                 valores,
                 this.valoresAceitos,
                 valoresExtra
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

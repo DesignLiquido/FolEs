@@ -1,6 +1,4 @@
 import { Valor } from "../valores";
-import { MetodoCss } from "../valores/metodos/css/metodo-css";
-import { Metodo } from "../valores/metodos/foles/metodo";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
@@ -11,9 +9,8 @@ export class Transformar extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("transformar", "transform", pragmas);
 
@@ -39,14 +36,16 @@ export class Transformar extends Modificador {
             "translateZ",
         ];
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValores(
                 "transformar",
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

@@ -12,26 +12,22 @@ export class Coordenadas extends Modificador {
 
     constructor(
         valores: Valor[],
-        
-        pragmas?: PragmasModificador
+        pragmas?: PragmasModificador,
+        variavel?: boolean
     ) {
         super("coordenadas", "translate", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     validarValorNumerico("coordenadas", valores, this.valoresAceitos);
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "coordenadas",
-        //             quantificador,
-        //             unidadesMedida,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            validarValorNumerico(
+                "coordenadas",
+                valores,
+                this.valoresAceitos,
+                null,
+                unidadesMedida
+            );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

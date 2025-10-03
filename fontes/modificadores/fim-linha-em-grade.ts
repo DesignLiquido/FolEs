@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { proibirQuantificador } from "./validacoes/proibir-quantificador";
 
 export class FimLinhaEmGrade extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,22 +10,36 @@ export class FimLinhaEmGrade extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("fim-linha-em-grade", "grid-row-end", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("numérica", "fim-linha-em-grade", valores, this.valoresAceitos, undefined, false, true);
-        //     } else {
-        //         validarValorNumerico("fim-linha-em-grade", valores, this.valoresAceitos);
-        //     }
-        // }
-        // proibirQuantificador("fim-linha-em-grade", quantificador);
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "fim-linha-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true,
+                    true
+                );
+            } else {
+                validarValorNumerico(
+                    "fim-linha-em-grade",
+                    valores,
+                    this.valoresAceitos,
+                    null,
+                    null,
+                    true
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

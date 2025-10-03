@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { StatusAuto, StatusNenhum, StatusNormal } from "../listas/status";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorQualitativo } from "../../fontes/valores";
@@ -14,25 +14,22 @@ describe('Testando Seletores com STATUS como atributo', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliador: AvaliadorSintaticoInterface;
-        let serializador: Serializador;
+        let resolvedor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliador = new AvaliadorSintatico(importador);
-            serializador = new Serializador();
+            resolvedor = new Resolvedor();
         });
 
         it('Casos de sucesso - Valor válido (auto)', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    StatusAuto[index], 
-                    [new ValorQualitativo('auto')], 
+                    StatusAuto[index],
+                    [new ValorQualitativo('auto')],
                     null
                 );
-
-                // A classe do modificador deve aceitar 'auto' como valor
-                // expect(seletor['valor']).toEqual('auto');
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -60,7 +57,6 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     ])
                 );
 
-
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -78,7 +74,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 );
 
                 // // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
@@ -117,25 +113,20 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     avaliador.analisar(novoLexador.simbolos);
                 }).toThrow();
 
-
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    serializador.serializar(avaliador.analisar(novoLexador.simbolos));
+                    resolvedor.resolver(avaliador.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
 
-        // TODO: TypeError: modificador.valores is not iterable
-        it.skip('Casos de sucesso - Valor válido (nenhum)', () => {
+        it('Casos de sucesso - Valor válido (nenhum)', () => {
             for (let index = 0; index < StatusNenhum.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    StatusNenhum[index], 
-                    [new ValorQualitativo('nenhum')], 
+                    StatusNenhum[index],
+                    [new ValorQualitativo('nenhum')],
                     null
                 );
-
-                // A classe do modificador deve aceitar 'normal' como valor
-                // expect(seletor['valor']).toEqual('nenhum');
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -171,19 +162,19 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Serializador
-                const resultadoSerializador = serializador.serializar(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoSerializador).toContain(seletor['propriedadeCss']);
-                expect(resultadoSerializador).toContain('none');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('none');
             }
         });
 
         it('Casos de sucesso - Valor válido (normal)', () => {
             for (let index = 0; index < StatusNormal.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    StatusNormal[index], 
-                    [new ValorQualitativo('normal')], 
+                    StatusNormal[index],
+                    [new ValorQualitativo('normal')],
                     null
                 );
 
@@ -224,10 +215,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Serializador
-                // console.log(StatusNormal[index]);
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
-
+                // Resolvedor
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('normal');
             }
@@ -236,8 +225,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
         it('Caso de Sucesso - Status atribuído por meio de variável', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    StatusAuto[index], 
-                    [new ValorQualitativo('auto')], 
+                    StatusAuto[index],
+                    [new ValorQualitativo('auto')],
                     null
                 );
                 
@@ -259,7 +248,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                         expect.objectContaining({ tipo: tiposDeSimbolos.VARIAVEL }),
                     ])
                 );
-
+                
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -278,7 +267,7 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(seletor['propriedadeCss']);
 
                 // Tradutor
-                const resultadoTradutor = serializador.serializar(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
                 expect(resultadoTradutor).toContain('auto');
             }

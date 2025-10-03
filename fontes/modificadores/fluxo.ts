@@ -15,14 +15,14 @@ export class Fluxo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("fluxo", "clear", pragmas);
 
-        if (!valorVariavel) validarValores("fluxo", valores, this.valoresAceitos);
+        if (!variavel) validarValores("fluxo", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

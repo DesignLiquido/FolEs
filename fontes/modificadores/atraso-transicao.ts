@@ -3,14 +3,12 @@ import { valoresTemporais } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class AtrasoTransicao extends Modificador {
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["atraso-transicao", "atraso-transição"],
@@ -18,25 +16,28 @@ export class AtrasoTransicao extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(",")) {
-        //         validarAtribuicaoAbreviada("numérica", "atraso-transição", valor);
-        //     } else {
-        //         validarValorNumerico("atraso-transição", valor);
-        //     }
-
-        //     if (Number(parseInt(valor))) {
-        //         validarQuantificador(
-        //             "atraso-transição",
-        //             quantificador,
-        //             valoresTemporais,
-        //         );
-
-        //         this.quantificador = quantificador;
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "numérica",
+                    "atraso-transição",
+                    valores,
+                    null,
+                    null,
+                    valoresTemporais
+                );
+            } else {
+                validarValorNumerico(
+                    "atraso-transição",
+                    valores,
+                    null,
+                    null,
+                    valoresTemporais
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

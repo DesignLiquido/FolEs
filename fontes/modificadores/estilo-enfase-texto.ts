@@ -1,4 +1,4 @@
-import { Valor } from "../valores";
+import { Valor, ValorTexto } from "../valores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 import { validarValorString } from "./validacoes/string";
@@ -21,9 +21,8 @@ export class EstiloEnfaseTexto extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
@@ -31,16 +30,16 @@ export class EstiloEnfaseTexto extends Modificador {
             pragmas,
         );
 
-        // TODO: Repensar
-        // const validacaoString = validarValorString(valores);
+        let validarString: boolean = false;
+        valores.forEach((valor) => {
+            if (valor instanceof ValorTexto) {
+                validarString = validarValorString(valor);
+            }
+        });
 
-        // if (validacaoString) {
-        //     this.valoresAceitos[valor] = valor;
-        // }
-
-        if (!valorVariavel)
-            validarValores("estilo-ênfase-texto", valores, this.valoresAceitos);
+        if (!variavel && !validarString) validarValores("estilo-ênfase-texto", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

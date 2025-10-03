@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraBordaMascara extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,9 +10,8 @@ export class LarguraBordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["largura-borda-mascara", "largura-borda-máscara"],
@@ -21,26 +19,17 @@ export class LarguraBordaMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel) {
+        if (!variavel) {
             validarValorNumerico(
                 "largura-borda-máscara",
                 valores,
                 this.valoresAceitos,
+                null,
+                unidadesMedida
             );
-
-            // Também pode receber somente o valor numérico, sem quantificador
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "largura-borda-máscara",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

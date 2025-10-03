@@ -31,6 +31,7 @@ import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { ReferenciaVariavel } from "../valores/referencia-variavel";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
+import { ModificadoresValorPersonalizado } from "../../testes/listas/valores-personalizados";
 
 /**
  * Implementação do avaliador sintático.
@@ -131,7 +132,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorBorrar,
                     quantificadorBorrar,
-                ])  as Metodo;
+                ]) as Metodo;
 
             case "brilho":
                 this.consumir(
@@ -817,8 +818,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         parametro01,
                         valor02["lexema"],
                     ]) as Metodo;
-                } 
-                
+                }
+
                 if (parametro02 !== null) {
                     return new SeletorValor(lexema, [
                         valor01["lexema"],
@@ -1654,7 +1655,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     }
 
     protected valorNumerico(
-        nomeModificador: string, 
+        nomeModificador: string,
         valorModificador: SimboloInterface,
         ponto: boolean
     ): ValorNumerico {
@@ -1713,14 +1714,19 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valoresResolvidos.push(valorVirgula);
                     break;
                 default:
-                    // TODO @Vitor: Avaliar se isso é uma boa ideia.
+                    // // TODO @Vitor: Avaliar se isso é uma boa ideia.
                     if (valorModificador.lexema in valoresGerais) {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;
                     }
-
+                    
+                    if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
+                        valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                        break;
+                    }
+                    
                     throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
-            } 
+            }
         } while (
             this.atual < this.simbolos.length &&
             this.simbolos[this.atual].tipo !== tiposDeSimbolos.PONTO_E_VIRGULA
@@ -1919,15 +1925,29 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         let valoresModificador: Array<any> = this.valoresModificador(modificador.lexema);
 
-        const classeModificadora = new SeletorModificador(
-            modificador.lexema,
-            valoresModificador,
-            {
-                linha: modificador.linha,
-                colunaInicial: modificador.colunaInicial,
-                colunaFinal: modificador.colunaFinal,
-            }
-        );
+        let classeModificadora;
+        if (valoresModificador[0] instanceof ReferenciaVariavel) {           
+            classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valoresModificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal,
+                },
+                true 
+            );
+        } else {            
+            classeModificadora = new SeletorModificador(
+                modificador.lexema,
+                valoresModificador,
+                {
+                    linha: modificador.linha,
+                    colunaInicial: modificador.colunaInicial,
+                    colunaFinal: modificador.colunaFinal,
+                }
+            );
+        }
 
         return classeModificadora as Modificador;
     }
@@ -1989,7 +2009,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const seletores = this.resolverSeletores();
                 const modificadoresEDeclaracoesAninhadas =
                     this.resolverModificadoresEDeclaracoesAninhadas();
-
+                
                 return new BlocoDeclaracao(
                     seletores,
                     modificadoresEDeclaracoesAninhadas.modificadores,
@@ -2008,7 +2028,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             declaracoes.push(this.declaracao());
             this.referenciaDeclaracoes = declaracoes;
         }
-
+        
         return declaracoes.filter((d) => d);
     }
 }

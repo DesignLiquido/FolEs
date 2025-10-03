@@ -4,8 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
-import { Serializador } from "../../fontes/serializadores";
-import { Valor } from "../../fontes/valores/valor";
+import { Resolvedor } from "../../fontes/resolvedores";
 import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { valoresGlobais } from "../../fontes/modificadores/atributos/globais";
@@ -16,19 +15,19 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
         let lexador: LexadorInterface;
         let importador: ImportadorInterface;
         let avaliadorSintatico: AvaliadorSintaticoInterface;
-        let tradutor: Serializador;
+        let resolvedor: Resolvedor;
 
         beforeEach(() => {
             lexador = new Lexador();
             importador = new Importador(lexador);
             avaliadorSintatico = new AvaliadorSintatico(importador);
-            tradutor = new Serializador();
+            resolvedor = new Resolvedor();
         });
 
-        it('Casos de sucesso - Lexador, Avaliador e Tradutor', () => {
+        it('Casos de sucesso - Lexador, Avaliador e Resolvedor', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(
-                    ValorGlobal[index], 
+                    ValorGlobal[index],
                     [new ValorQualitativo('herdar')],
                     null
                 );
@@ -63,11 +62,11 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                     seletor['propriedadeCss']
                 );
 
-                // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
-                expect(resultadoTradutor).toContain('inherit');
+                expect(resultadoResolvedor).toContain(seletor['propriedadeCss']);
+                expect(resultadoResolvedor).toContain('inherit');
             }
         });
 
@@ -88,9 +87,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliadorSintatico.analisar(resultadoLexador.simbolos));
+                    resolvedor.resolver(avaliadorSintatico.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -127,9 +126,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
 
 
-                // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
+                // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
-                    tradutor.serializar(avaliadorSintatico.analisar(novoLexador.simbolos));
+                    resolvedor.resolver(avaliadorSintatico.analisar(novoLexador.simbolos));
                 }).toHaveLength(0);
             }
         });
@@ -161,7 +160,7 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 const resultadoLexador = lexador.mapear([
                     `$valor-padrao: ${globaisFolEs[index]};`,
                     "lmht {",
-                        'conteúdo: $valor-padrao;',
+                    'conteúdo: $valor-padrao;',
                     "}"
                 ]);
 
@@ -193,10 +192,10 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 expect(segundoResultadoTipado.modificadores[0].nomeFoles).toContain('conteúdo');
                 expect(segundoResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
 
-                // Tradutor
-                const resultadoTradutor = tradutor.serializar(resultadoAvaliadorSintatico);
-                expect(resultadoTradutor).toContain(globaisCss[index]);
-                expect(resultadoTradutor).toContain('content');
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(globaisCss[index]);
+                expect(resultadoResolvedor).toContain('content');
             }
         });
     });

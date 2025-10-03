@@ -14,15 +14,14 @@ export class TransformarCaixa extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("transformar-caixa", "transform-box", pragmas);
 
-        if (!valorVariavel)
-            validarValores("transformar-caixa", valores, this.valoresAceitos);
+        if (!variavel) validarValores("transformar-caixa", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

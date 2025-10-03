@@ -17,21 +17,29 @@ export class FlexFluxo extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("flex-fluxo", "flex-flow", pragmas);
 
-        // TODO: Repensar
-        // if (!valorVariavel) {
-        //     if (valor.includes(" ")) {
-        //         validarAtribuicaoAbreviada("comum", "flex-fluxo", valores, this.valoresAceitos);
-        //     } else {
-        //         validarValores("flex-fluxo", valores, this.valoresAceitos);
-        //     }
-        // }
+        if (!variavel) {
+            if (valores.length > 1) {
+                validarAtribuicaoAbreviada(
+                    "comum",
+                    "flex-fluxo",
+                    valores,
+                    this.valoresAceitos
+                );
+            } else {
+                validarValores(
+                    "flex-fluxo",
+                    valores,
+                    this.valoresAceitos
+                );
+            }
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

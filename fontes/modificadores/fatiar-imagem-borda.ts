@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { ListaDeValorPercentual } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class FatiarImagemBorda extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -11,32 +10,24 @@ export class FatiarImagemBorda extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("fatiar-imagem-borda", "border-image-slice", pragmas);
-
+        
         const valoresExtra = ["url"];
-
-        if (!valorVariavel) {
+        
+        if (!variavel) {
             validarValorNumerico(
                 "fatiar-imagem-borda",
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
+                ListaDeValorPercentual
             );
-
-            // TODO: Repensar
-            // if (quantificador !== undefined) {
-            //     validarQuantificador(
-            //         "fatiar-imagem-borda",
-            //         quantificador,
-            //         ListaDeValorPercentual,
-            //     );
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

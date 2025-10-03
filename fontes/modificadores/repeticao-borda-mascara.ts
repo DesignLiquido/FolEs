@@ -13,9 +13,8 @@ export class RepeticaoBordaMascara extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super(
             ["repeticao-borda-mascara", "repetição-borda-máscara"],
@@ -23,13 +22,15 @@ export class RepeticaoBordaMascara extends Modificador {
             pragmas,
         );
 
-        if (!valorVariavel)
+        if (!variavel) {
             validarValores(
                 "repetição-borda-máscara",
                 valores,
                 this.valoresAceitos,
             );
+        }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

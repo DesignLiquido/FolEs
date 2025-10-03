@@ -2,7 +2,6 @@ import { Valor } from "../valores";
 import { unidadesMedida } from "./atributos/quantificadores";
 import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
-import { validarQuantificador } from "./validacoes/quantificador";
 
 export class LarguraBordaSuperior extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
@@ -14,30 +13,22 @@ export class LarguraBordaSuperior extends Modificador {
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("largura-borda-superior", "border-top-width", pragmas);
 
-        if (!valorVariavel) {
+        if (!variavel) {
             validarValorNumerico(
                 "largura-borda-superior",
                 valores,
                 this.valoresAceitos,
+                null,
+                unidadesMedida
             );
-
-            // if (Number(parseInt(valor))) {
-            //     validarQuantificador(
-            //         "largura-borda-superior",
-            //         quantificador,
-            //         unidadesMedida,
-            //     );
-
-            //     this.quantificador = quantificador;
-            // }
         }
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }

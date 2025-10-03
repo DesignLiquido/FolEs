@@ -7,22 +7,21 @@ export class VazamentoHorizontal extends Modificador {
         visivel: "visible",
         visível: "visible",
         escondido: "hidden",
-        recortar: "clip",
+        recorte: "clip",
         "barra-rolagem": "scroll",
         auto: "auto",
     };
 
     constructor(
         valores: Valor[],
-        
         pragmas?: PragmasModificador,
-        valorVariavel: boolean = false,
+        variavel?: boolean
     ) {
         super("vazamento-horizontal", "overflow-x", pragmas);
 
-        if (!valorVariavel)
-            validarValores("vazamento-horizontal", valores, this.valoresAceitos);
+        if (!variavel) validarValores("vazamento-horizontal", valores, this.valoresAceitos);
 
         this.valores = valores;
+        this.variavel = variavel;
     }
 }
