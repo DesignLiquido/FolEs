@@ -46,7 +46,7 @@ export class Aparencia extends Modificador {
             valores[0].qualitativo = "auto";
         }
 
-        if (!variavel) validarValores("aparência", valores, this.valoresAceitos);
+        if (!variavel) validarValores("aparência", valores, this.valoresAceitos, null);
 
         this.valores = valores;
         this.variavel = variavel;
