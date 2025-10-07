@@ -146,8 +146,6 @@ export default {
     minmax: tiposDeSimbolos.METODO,
     opacity: tiposDeSimbolos.METODO,
     ornaments: tiposDeSimbolos.METODO,
-    // AVALIAR: perspective é a tradução tanto de um modificador quanto de um método
-    // 'perspective': tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
@@ -155,7 +153,6 @@ export default {
     rotateZ: tiposDeSimbolos.METODO,
     rotateY: tiposDeSimbolos.METODO,
     rotateX: tiposDeSimbolos.METODO,
-    // 'rotate': tiposDeSimbolos.METODO,
     saturate: tiposDeSimbolos.METODO,
     scale3d: tiposDeSimbolos.METODO,
     scaleZ: tiposDeSimbolos.METODO,
@@ -201,7 +198,6 @@ export default {
     invalid: tiposDeSimbolos.PSEUDO_CLASSE,
     "read-write": tiposDeSimbolos.PSEUDO_CLASSE,
     "local-link": tiposDeSimbolos.PSEUDO_CLASSE,
-    // link: tiposDeSimbolos.PSEUDO_CLASSE,
     "placeholder-shown": tiposDeSimbolos.PSEUDO_CLASSE,
     "nth-child": tiposDeSimbolos.PSEUDO_CLASSE,
     "nth-of-type": tiposDeSimbolos.PSEUDO_CLASSE,
@@ -515,13 +511,11 @@ export default {
     clone: tiposDeSimbolos.QUALITATIVO,
     "break-word": tiposDeSimbolos.QUALITATIVO,
     "border-box": tiposDeSimbolos.QUALITATIVO,
-    padding: tiposDeSimbolos.QUALITATIVO,
     "padding-box": tiposDeSimbolos.QUALITATIVO,
     "balance": tiposDeSimbolos.QUALITATIVO,
     "balance-all": tiposDeSimbolos.QUALITATIVO,
     strict: tiposDeSimbolos.QUALITATIVO,
     size: tiposDeSimbolos.QUALITATIVO,
-    "inline-size": tiposDeSimbolos.QUALITATIVO,
     "layout": tiposDeSimbolos.QUALITATIVO,
     style: tiposDeSimbolos.QUALITATIVO,
     paint: tiposDeSimbolos.QUALITATIVO,
@@ -561,7 +555,6 @@ export default {
     inline: tiposDeSimbolos.QUALITATIVO,
     flow: tiposDeSimbolos.QUALITATIVO,
     "flow-root": tiposDeSimbolos.QUALITATIVO,
-    grid: tiposDeSimbolos.QUALITATIVO,
     "ruby": tiposDeSimbolos.QUALITATIVO,
     "inline-block": tiposDeSimbolos.QUALITATIVO,
     "inline-table": tiposDeSimbolos.QUALITATIVO,
@@ -620,7 +613,7 @@ export default {
     subtract: tiposDeSimbolos.QUALITATIVO,
     intersect: tiposDeSimbolos.QUALITATIVO,
     exclude: tiposDeSimbolos.QUALITATIVO,
-    
+
     // TODO: Traduzir daqui para baixo
     "match-source": tiposDeSimbolos.QUALITATIVO,
     "repeat-x": tiposDeSimbolos.QUALITATIVO,
@@ -825,4 +818,12 @@ export default {
     "achatar": tiposDeSimbolos.QUALITATIVO,
     clip: tiposDeSimbolos.QUALITATIVO,
     "sublinhar": tiposDeSimbolos.QUALITATIVO,
+
+    // AVALIAR: nomenclaturas conflitantes com outras estruturas
+    // perspective: tiposDeSimbolos.METODO,
+    // rotate: tiposDeSimbolos.METODO,
+    // link: tiposDeSimbolos.PSEUDO_CLASSE,
+    // padding: tiposDeSimbolos.QUALITATIVO,
+    // "inline-size": tiposDeSimbolos.QUALITATIVO,
+    // grid: tiposDeSimbolos.QUALITATIVO,
 };
