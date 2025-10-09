@@ -1165,8 +1165,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    // TODO: Descobrir porque dá erro
-    it.skip('Atribuindo Método "linear()"', () => {
+    it('Atribuindo Método "linear()"', () => {
         for (let index = 0; index < MetodoLinear.length; index += 1) {
             // Lexador
             const resultadoLexador = lexador.mapear([
@@ -1381,8 +1380,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    // TODO: Descobrir porque dá erro
-    it.skip('Atribuindo Método "perspective()"', () => {
+    it('Atribuindo Método "perspective()"', () => {
         for (let index = 0; index < MetodoPerspectivar.length; index += 1) {
 
             const valoresAceitos = ['800px', '6.5cm', '0.1', '0', '1', '1.75'];
@@ -1723,8 +1721,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    // TODO: Descobrir porque dá erro
-    it.skip('Atribuindo Método "rotate()"', () => {
+    it('Atribuindo Método "rotate()"', () => {
         for (let index = 0; index < MetodosRotacionar.length; index += 1) {
 
             const valoresAceitos = ['45deg', '3.142rad', '0.1', '0', '1', '1.75'];

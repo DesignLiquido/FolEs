@@ -5,3 +5,13 @@ div {
 p {
     border: 50px;
 }
+
+html {
+    appearance: textfield;
+    mask-clip: textfield;
+    border-color: blue;
+}
+
+div {
+    padding: inherit;
+}

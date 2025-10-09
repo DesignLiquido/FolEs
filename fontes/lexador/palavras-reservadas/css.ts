@@ -146,9 +146,11 @@ export default {
     minmax: tiposDeSimbolos.METODO,
     opacity: tiposDeSimbolos.METODO,
     ornaments: tiposDeSimbolos.METODO,
+    perspective: tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
+    rotate: tiposDeSimbolos.METODO,
     rotate3d: tiposDeSimbolos.METODO,
     rotateZ: tiposDeSimbolos.METODO,
     rotateY: tiposDeSimbolos.METODO,
@@ -754,8 +756,8 @@ export default {
     clip: tiposDeSimbolos.QUALITATIVO,
     
     // AVALIAR: nomenclaturas conflitantes com outras estruturas
-    // perspective: tiposDeSimbolos.METODO,
-    // rotate: tiposDeSimbolos.METODO,
+    // rotate: tiposDeSimbolos.TAG,
+    // perspective: tiposDeSimbolos.TAG,
     // link: tiposDeSimbolos.PSEUDO_CLASSE,
     // padding: tiposDeSimbolos.QUALITATIVO,
     // "inline-size": tiposDeSimbolos.QUALITATIVO,

@@ -6,6 +6,7 @@ import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import estruturasLmht from "../tradutores/estruturas-lmht";
 import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../valores";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
+import { Metodo } from "../valores/metodos/foles/metodo";
 import { ReferenciaVariavel } from "../valores/referencia-variavel";
 
 /**
@@ -78,9 +79,9 @@ export class ResolvedorReverso {
                 return valorTexto.literalTexto;
             case 'ValorVirgula':
                 return ",";
-            default:
+            default:                
                 // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
-                if (valor instanceof MetodoCss) {
+                if (valor instanceof MetodoCss || valor instanceof Metodo) {
                     return valor.paraTexto();
                 }
 

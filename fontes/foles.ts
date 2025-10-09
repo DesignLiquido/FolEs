@@ -68,12 +68,19 @@ export class FolEs {
     }
 
     private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {        
-        const resultadoAvaliadorSintaticoReverso =
-            this.avaliadorSintaticoReverso.analisar(simbolos);
-        const traducaoReversa = this.resolvedorReverso.resolver(
-            resultadoAvaliadorSintaticoReverso,
+        const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(
+            simbolos
         );
-        return traducaoReversa;
+
+        const traducaoReversa = this.tradutorReverso.traduzir(
+            resultadoAvaliadorSintaticoReverso
+        );
+
+        const resolvedorReverso = this.resolvedorReverso.resolver(
+            traducaoReversa,
+        );
+
+        return resolvedorReverso;
     }
 
     converterParaCss(nomeArquivo: string): string {

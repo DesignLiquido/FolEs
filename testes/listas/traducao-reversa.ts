@@ -16,10 +16,6 @@ export const TraducaoReversa: Array<Object> = [
         css: 'overflow-clip-margin',
     },
     {
-        foles: 'perspectiva',
-        css: 'perspective',
-    },
-    {
         foles: 'margem-inferior-rolagem-mouse',
         css: 'scroll-margin-bottom',
     },
