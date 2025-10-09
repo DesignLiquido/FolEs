@@ -285,17 +285,6 @@ export default {
     verificado: tiposDeSimbolos.PSEUDO_CLASSE,
     visitado: tiposDeSimbolos.PSEUDO_CLASSE,
 
-    // Qualitativos
-    alvenaria: tiposDeSimbolos.QUALITATIVO,
-    "caixa-batida": tiposDeSimbolos.QUALITATIVO,
-    final: tiposDeSimbolos.QUALITATIVO,
-    "margem-caixa": tiposDeSimbolos.QUALITATIVO,
-    "salto-conjunto": tiposDeSimbolos.QUALITATIVO,
-    "salto-inicial": tiposDeSimbolos.QUALITATIVO,
-    "salto-final": tiposDeSimbolos.QUALITATIVO,
-    "salto-nenhum": tiposDeSimbolos.QUALITATIVO,
-    "sub-grade": tiposDeSimbolos.QUALITATIVO,
-
     // Qualitativos - Globais
     desarmar: tiposDeSimbolos.QUALITATIVO,
     herdar: tiposDeSimbolos.QUALITATIVO,
@@ -639,6 +628,15 @@ export default {
     par: tiposDeSimbolos.QUALITATIVO,
 
     // Qualitativos - Palavras reservadas aceitas pelos Modificadores
+    alvenaria: tiposDeSimbolos.QUALITATIVO,
+    "caixa-batida": tiposDeSimbolos.QUALITATIVO,
+    final: tiposDeSimbolos.QUALITATIVO,
+    "margem-caixa": tiposDeSimbolos.QUALITATIVO,
+    "salto-conjunto": tiposDeSimbolos.QUALITATIVO,
+    "salto-inicial": tiposDeSimbolos.QUALITATIVO,
+    "salto-final": tiposDeSimbolos.QUALITATIVO,
+    "salto-nenhum": tiposDeSimbolos.QUALITATIVO,
+    "sub-grade": tiposDeSimbolos.QUALITATIVO,
     "repetir": tiposDeSimbolos.QUALITATIVO,
     "completar": tiposDeSimbolos.QUALITATIVO,
     "espacar": tiposDeSimbolos.QUALITATIVO,

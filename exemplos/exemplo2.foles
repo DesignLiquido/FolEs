@@ -1,5 +1,11 @@
 /** Valores específicos */
+lmht {
+    margem-superior: 12px;
+}
 
+lmht {
+    borda: 50px;
+}
 
 lmht {
     recursos-fonte: "c2sc", "hist";

@@ -23,15 +23,27 @@ export function validarValorNumerico(
         validarQuantificador(nomePropriedade, valorNumericoTipado.quantificador, quantificadoresAceitos);
     }
 
+    let valoresCss: Array<string | number> = [];
+    if (valoresAceitos) {
+        valoresCss = Object.values(valoresAceitos);
+    }
+    const valoresGlobaisCss: Array<string> = Object.values(valoresGlobais);
+    valoresGlobaisCss.forEach((valor) => valoresCss.push(valor));
 
     if (valoresAceitos === null && valoresExtra === null) {
         if (
-            typeof valorModificador.valor !== 'number' && 
+            typeof valorModificador.valor !== 'number' &&
+            !(valoresCss.includes(valorModificador.valor)) &&
             !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-            número-quantificador (ex.: 12px),
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            número-quantificador (ex.: 12px);
+
+            Valores Foles aceitos:
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+            
+            Valores CSS aceitos:
+            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     }
 
@@ -39,36 +51,48 @@ export function validarValorNumerico(
         if (
             typeof valorModificador.valor !== 'number' &&
             !(valorModificador.valor in valoresAceitos) &&
+            !(valoresCss.includes(valorModificador.valor)) &&
             !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-            número-quantificador (ex.: 12px),
+            número-quantificador (ex.: 12px);
+
+            Valores FolEs aceitos:
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+            
+            Valores CSS aceitos:
+            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     }
 
     if (valoresAceitos !== null && valoresExtra !== null) {
         let metodoValido = false;
-        if (valorModificador.metodo) {            
+        if (valorModificador.metodo) {
             for (let index = 0; index < valoresExtra.length; index++) {
                 if (metodoValido === false) {
                     metodoValido = valorModificador.valor === valoresExtra[index];
                 }
             }
         }
-        
+
         if (
             typeof valorModificador.valor !== 'number' &&
             !(valorModificador.valor in valoresAceitos) &&
+            !(valoresCss.includes(valorModificador.valor)) &&
             !metodoValido &&
             !(valorModificador.valor in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
-            número-quantificador (ex.: 12px),
+            número-quantificador (ex.: 12px);
+
+            Valores FolEs aceitos:
             ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
             ${valoresExtra.reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+            
+            Valores CSS aceitos:
+            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
         }
     }
 }

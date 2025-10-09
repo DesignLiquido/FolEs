@@ -14,7 +14,8 @@ export class MargemSuperior extends Modificador {
         variavel?: boolean
     ) {
         super("margem-superior", "margin-top", pragmas);
-
+        // console.log('v', valores);
+        
         if (!variavel) {
             validarValorNumerico(
                 "margem-superior",

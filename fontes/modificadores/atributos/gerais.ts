@@ -22,6 +22,7 @@ export const valoresGerais: { [valorFolEs: string]: string } = {
     "linha-de-base": "baseline",
     nenhum: "none",
     normal: "normal",
+    ondulado: "wavy",
     pontilhado: "dotted",
     reverter: "revert",
     "reverter-camada": "revert-layer",

@@ -10,7 +10,7 @@ export class CorBorda extends Modificador {
         variavel?: boolean
     ) {
         super("cor-borda", "border-color", pragmas);
-
+        
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
@@ -21,7 +21,8 @@ export class CorBorda extends Modificador {
             } else {
                 validarValorCor(
                     "cor-borda",
-                    valores
+                    valores,
+                    null
                 );
             }
         }

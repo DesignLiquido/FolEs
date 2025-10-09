@@ -67,19 +67,26 @@ export class FolEs {
         return traducao;
     }
 
-    private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {
-        const resultadoAvaliadorSintaticoReverso =
-            this.avaliadorSintaticoReverso.analisar(simbolos);
-        const traducaoReversa = this.resolvedorReverso.resolver(
-            resultadoAvaliadorSintaticoReverso,
+    private converterParaFolEsInterno(simbolos: SimboloInterface[]): string {        
+        const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(
+            simbolos
         );
-        return traducaoReversa;
+
+        const traducaoReversa = this.tradutorReverso.traduzir(
+            resultadoAvaliadorSintaticoReverso
+        );
+
+        const resolvedorReverso = this.resolvedorReverso.resolver(
+            traducaoReversa,
+        );
+
+        return resolvedorReverso;
     }
 
     converterParaCss(nomeArquivo: string): string {
         const resultadoLexador: [string[], ResultadoLexadorInterface] =
             this.importador.importar(nomeArquivo, true);        
-        
+
         return this.converterParaCssInterno(resultadoLexador[1].simbolos);
     }
 
@@ -124,6 +131,6 @@ export class FolEs {
 }
 
 // const testeFoles = new FolEs(false);
-// console.log(testeFoles.converterParaCss('../exemplos/exemplo6.foles'));
+// console.log(testeFoles.converterParaCss('../exemplos/exemplo2.foles'));
 //  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
 //  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));

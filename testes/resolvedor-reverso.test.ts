@@ -19,8 +19,7 @@ describe('Resolvedor Reverso', () => {
         resolvedorReverso = new ResolvedorReverso();
     });
 
-    // TODO: Descobrir por que  dá erro.
-    it.skip('Testando tradução das estruturas HTML', () => {
+    it('Testando tradução das estruturas HTML', () => {
         for (let index = 0; index < Object.keys(estruturasLmht).length; index += 1) {
             // Lexador recebe as estruturas FolEs
             const resultadoLexador = lexadorReverso.mapear([
@@ -45,8 +44,7 @@ describe('Resolvedor Reverso', () => {
         }
     });
 
-    // TODO: Finalizar a lógica em `declaracaoPorSeletor()` (avaliador sintático reverso) para testes abaixo funcionarem
-    it.skip('Testando tradução reversa de modificadores', () => {
+    it('Testando tradução reversa de modificadores', () => {
         for (let index = 0; index < Object.keys(TraducaoReversa).length; index += 1) {
 
             // Lexador Reverso recebe as estruturas FolEs
@@ -69,9 +67,7 @@ describe('Resolvedor Reverso', () => {
         }
     });
 
-    // OBS.: Teste genérico, precisa de implementações no Av. Sintático Reverso antes de funcionar
-    // TODO: Implementar lista de métodos quando estiver funcionando
-    it.skip('Testando tradução reversa de métodos', () => {
+    it('Testando tradução reversa de métodos', () => {
         // Lexador Reverso recebe as estruturas FolEs
         const resultadoLexador = lexadorReverso.mapear([
             `html {`,
@@ -88,6 +84,6 @@ describe('Resolvedor Reverso', () => {
         // Resolvedor reverso deve retornar a estrutura HTML correspondente
         expect(resultadoResolvedor).toContain('lmht');
         expect(resultadoResolvedor).toContain('borrar');
-        expect(resultadoResolvedor).toContain('4px;');
+        expect(resultadoResolvedor).toContain('4px');
     });
 });

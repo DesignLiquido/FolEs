@@ -1714,7 +1714,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valoresResolvidos.push(valorVirgula);
                     break;
                 default:
-                    // // TODO @Vitor: Avaliar se isso é uma boa ideia.
                     if (valorModificador.lexema in valoresGerais) {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;

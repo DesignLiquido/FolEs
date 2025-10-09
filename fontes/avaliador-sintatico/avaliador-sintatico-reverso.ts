@@ -16,6 +16,7 @@ import {
 import {
     AvaliadorSintaticoInterface,
     ImportadorInterface,
+    SimboloInterface,
 } from "../interfaces";
 import { HexadecimalCor } from "../valores/metodos/foles/hexadecimal-cor";
 import { Estrutura } from "../estruturas/estrutura";
@@ -23,6 +24,10 @@ import { Valor } from "../valores/valor";
 import { SeletorValorReverso } from "../valores/seletor-valor-reverso";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { MetodoCss } from "../valores/metodos/css/metodo-css";
+import { ValorAbreviacao, ValorNumerico, ValorQualitativo, ValorTexto, ValorVirgula } from "../valores";
+import { ReferenciaVariavel } from "../valores/referencia-variavel";
+import { valoresGerais } from "../modificadores/atributos/gerais";
+import { ModificadoresValorPersonalizado } from "../../testes/listas/valores-personalizados";
 
 /**
  * O avaliador sintático reverso avalia símbolos de arquivos CSS,
@@ -135,14 +140,14 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 case tiposDeSimbolos.TAG:
                     seletores.push(this.seletorPorEstrutura());
                     break;
-                case tiposDeSimbolos.IDENTIFICADOR:
-                    throw new Error("Não deveria cair aqui.");
                 case tiposDeSimbolos.PONTO:
                     seletores.push(this.seletorPorNomeDeClasse());
                     break;
                 case tiposDeSimbolos.CERQUILHA:
                     seletores.push(this.seletorPorId());
                     break;
+                case tiposDeSimbolos.IDENTIFICADOR:
+                    throw new Error("Não deveria cair aqui.");
             }
         } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
 
@@ -1766,7 +1771,28 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         }
     }
 
-    protected valoresModificador(): Array<Valor> {
+        protected valorNumerico(
+            nomeModificador: string,
+            valorModificador: SimboloInterface,
+            ponto: boolean
+        ): ValorNumerico {
+            let literalNumero = Number(valorModificador.lexema);
+            if (ponto) {
+                literalNumero = literalNumero / Math.pow(10, valorModificador.lexema.length);
+            }
+    
+            let quantificadorNumero: string;
+            if (this.verificarTipoSimboloAtual(tiposDeSimbolos.QUANTIFICADOR)) {
+                const simboloQuantificadorNumero = this.avancarEDevolverAnterior();
+                quantificadorNumero = simboloQuantificadorNumero.lexema;
+            }
+    
+            const valorNumerico = new ValorNumerico(nomeModificador, literalNumero, quantificadorNumero);
+            return valorNumerico;
+        }
+    
+
+    protected valoresModificador(nomeModificador: string): Array<Valor> {
         const valoresResolvidos = [];
         while (
             this.atual < this.simbolos.length &&
@@ -1774,20 +1800,53 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         ) {
             const valorModificador = this.avancarEDevolverAnterior();
 
-            switch (valorModificador.tipo) {
-                case tiposDeSimbolos.CERQUILHA:
-                    valoresResolvidos.push(this.resolverCor());
-                    break;
-                case tiposDeSimbolos.METODO:
-                    valoresResolvidos.push(this.resolverMetodo(valorModificador.lexema));
-                    break;
-                case tiposDeSimbolos.IDENTIFICADOR:
-                    valoresResolvidos.push(this.resolverMetodo(valorModificador.lexema));
-                    break;
-                default:
-                    valoresResolvidos.push(valorModificador);
-                    break;
-            }
+               switch (valorModificador.tipo) {
+                        case tiposDeSimbolos.BARRA:
+                            valoresResolvidos.push(new ValorAbreviacao());
+                            break;
+                        case tiposDeSimbolos.CIFRAO:
+                            const nomeVariavel = this.avancarEDevolverAnterior();
+                            const referenciaVariavel = new ReferenciaVariavel(nomeVariavel.lexema);
+                            valoresResolvidos.push(referenciaVariavel);
+                            break;
+                        case tiposDeSimbolos.METODO:
+                            const metodo = this.resolverMetodo(valorModificador.lexema);
+                            valoresResolvidos.push(metodo);
+                            break;
+                        case tiposDeSimbolos.NUMERO:
+                            const valorNumerico = this.valorNumerico(nomeModificador, valorModificador, false);
+                            valoresResolvidos.push(valorNumerico);
+                            break;
+                        case tiposDeSimbolos.PONTO:
+                            const simboloNumero = this.consumir(tiposDeSimbolos.NUMERO, "Esperado número após ponto para valor de modificador.");
+                            const valorNumericoComecadoPorPonto = this.valorNumerico(nomeModificador, simboloNumero, true);
+                            valoresResolvidos.push(valorNumericoComecadoPorPonto);
+                            break;
+                        case tiposDeSimbolos.QUALITATIVO:
+                            const valorQualitativo = new ValorQualitativo(valorModificador.lexema);
+                            valoresResolvidos.push(valorQualitativo);
+                            break;
+                        case tiposDeSimbolos.TEXTO:
+                            const valorTexto = new ValorTexto(valorModificador.lexema);
+                            valoresResolvidos.push(valorTexto);
+                            break;
+                        case tiposDeSimbolos.VIRGULA:
+                            const valorVirgula = new ValorVirgula();
+                            valoresResolvidos.push(valorVirgula);
+                            break;
+                        default:
+                            if (valorModificador.lexema in valoresGerais) {
+                                valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                                break;
+                            }
+                            
+                            if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
+                                valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                                break;
+                            }
+                            
+                            throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
+                    }
         }
 
         this.consumir(
@@ -1809,8 +1868,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
             `Esperado ':' após declaração de Modificador ou variável '${modificador.lexema}'.`,
         );
 
-        const valoresModificador = this.valoresModificador();
-
+        const valoresModificador = this.valoresModificador(modificador.lexema);
+        
         const classeModificadora = new SeletorReversoModificador(
             modificador.lexema,
             valoresModificador,
