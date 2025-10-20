@@ -42,7 +42,6 @@ describe('Lexador Reverso', () => {
         );
     });
 
-
     it('Caso de sucesso - função analisarNumero() mapeia números com denotação pontual', () => {
         const resultadoLexador = lexadorReverso.mapear([
             "html {",
