@@ -69,9 +69,11 @@ export class ResolvedorReverso {
                 }
 
                 if (!traducaoQualitativo) {
-                    traducaoQualitativo = Object.values(valoresAceitos).find(
-                        (valor) => valor === valorQualitativo.qualitativo
-                    );
+                    for (const [chave, valor] of Object.entries(valoresAceitos)) {
+                        if (valor === valorQualitativo.qualitativo) {
+                            traducaoQualitativo = chave;
+                        }
+                    }
                 }
 
                 if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;

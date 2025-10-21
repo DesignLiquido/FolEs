@@ -16,6 +16,8 @@ export function validarValores(
     }
     const valoresGlobaisCss: Array<string> = Object.values(valoresGlobais);
     valoresGlobaisCss.forEach((valor) => valoresCss.push(valor));
+    // Eliminando valores duplicados
+    valoresCss = [... new Set(valoresCss)];
 
     if (valoresExtra === null || valoresExtra === undefined) {
         if (
