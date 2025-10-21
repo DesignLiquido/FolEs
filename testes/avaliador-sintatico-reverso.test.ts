@@ -96,7 +96,7 @@ describe('Avaliador Sintático Reverso', () => {
     });
 
     it('Casos de sucesso - testando seletores que recebem qualitativos', () => {
-        for (let index = 0; index < ValoresQualitativosCss.length; index += 1) {            
+        for (let index = 0; index < ValoresQualitativosCss.length; index += 1) {
             // Lexador recebe modificadores com valor-quantificador
             const resultadoLexador = lexadorReverso.mapear([
                 `div {`,
