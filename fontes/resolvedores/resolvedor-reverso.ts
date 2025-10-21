@@ -60,17 +60,20 @@ export class ResolvedorReverso {
                 return `${literalNumerico}${valorNumerico.quantificador || ''}`;
             case 'ValorQualitativo':
                 const valorQualitativo = valor as ValorQualitativo;
-                const valoresHtml = Object.values(valoresGerais);
-
                 let traducaoQualitativo: any = undefined;
-                traducaoQualitativo = valoresHtml.find((valor) => valor === valorQualitativo.qualitativo);
-                
+
+                for (const [chave, valor] of Object.entries(valoresGerais)) {
+                    if (valor === valorQualitativo.qualitativo) {
+                        traducaoQualitativo = chave;
+                    }
+                }
+
                 if (!traducaoQualitativo) {
                     traducaoQualitativo = Object.values(valoresAceitos).find(
                         (valor) => valor === valorQualitativo.qualitativo
                     );
-                }                
-                
+                }
+
                 if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
 
                 return `${traducaoQualitativo}`;
@@ -79,7 +82,7 @@ export class ResolvedorReverso {
                 return valorTexto.literalTexto;
             case 'ValorVirgula':
                 return ",";
-            default:                
+            default:
                 // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
                 if (valor instanceof MetodoCss || valor instanceof Metodo) {
                     return valor.paraTexto();
