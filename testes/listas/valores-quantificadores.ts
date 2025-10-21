@@ -321,6 +321,63 @@ export const ValoresQuantificadoresCSS: Array<string> = [
     'grid-row-gap',
 ];
 
+export const ValoresQualitativosCss: Array<Object> = [
+    {
+        modificador: 'area-mascara',
+        css: 'mask-clip',
+        valor: 'visualizar-caixa',
+        traducao: 'view-box',
+    },
+    {
+        modificador: 'borda',
+        css: 'border',
+        valor: 'pontilhado',
+        traducao: 'dotted',
+    },
+    {
+        modificador: 'borda-em-bloco',
+        css: 'border-block',
+        valor: 'pontilhado',
+        traducao: 'dotted',
+    },
+    {
+        modificador: 'borda-em-linha',
+        css: 'border-inline',
+        valor: 'pontilhado',
+        traducao: 'dotted',
+    },
+    {
+        modificador: 'colunas',
+        css: 'columns',
+        valor: 'auto',
+        traducao: 'auto',
+    },
+    {
+        modificador: 'contorno',
+        css: 'outline',
+        valor: 'grossa',
+        traducao: 'thick',
+    },
+    {
+        modificador: 'estilo-fonte',
+        css: 'font-style',
+        valor: 'oblíqua',
+        traducao: 'oblique',
+    },
+    {
+        modificador: 'fim-borda-em-bloco',
+        css: 'border-block-end',
+        valor: 'pontilhado',
+        traducao: 'dotted',
+    },
+    {
+        modificador: 'fim-borda-em-linha',
+        css: 'border-inline-end',
+        valor: 'pontilhado',
+        traducao: 'dotted',
+    },
+];
+
 
 /*
 
