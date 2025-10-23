@@ -1,4 +1,10 @@
 div {
+    border: dotted;
+    mask-clip: view-box;
+    outline: thick;
+}
+
+div {
     margin-top: 12px;
 }
 
@@ -8,7 +14,6 @@ p {
 
 html {
     appearance: textfield;
-    mask-clip: textfield;
     border-color: blue;
 }
 

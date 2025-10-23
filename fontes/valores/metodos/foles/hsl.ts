@@ -14,6 +14,6 @@ export class Hsl extends Metodo {
     }
 
     paraTexto() {
-        return `hsl(${this.matiz}, ${this.saturacao}%, ${this.luminosidade}%)`;
+        return `hsl(${this.matiz} ${this.saturacao}% ${this.luminosidade}%)`;
     }
 }
