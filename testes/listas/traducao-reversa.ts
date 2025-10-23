@@ -52,3 +52,9 @@ export const TraducaoReversa: Array<Object> = [
         css: 'column-rule',
     },
 ];
+
+export const TraducaoReversaValorNumericoFracionario = [
+    'tab-size',
+    'line-height',
+    'columns',
+];

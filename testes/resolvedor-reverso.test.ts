@@ -4,7 +4,7 @@ import { ResolvedorReverso } from "../fontes/resolvedores/resolvedor-reverso";
 import estruturasLmht from "../fontes/tradutores/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
-import { TraducaoReversa } from "./listas/traducao-reversa";
+import { TraducaoReversa, TraducaoReversaValorNumericoFracionario } from "./listas/traducao-reversa";
 
 describe('Resolvedor Reverso', () => {
     let lexadorReverso: LexadorInterface;
@@ -53,7 +53,7 @@ describe('Resolvedor Reverso', () => {
                 `   ${TraducaoReversa[index]['css']}: 60px;`,
                 "}"
             ])
-            
+
             // Avaliador Sintático Reverso
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
 
@@ -85,5 +85,64 @@ describe('Resolvedor Reverso', () => {
         expect(resultadoResolvedor).toContain('lmht');
         expect(resultadoResolvedor).toContain('borrar');
         expect(resultadoResolvedor).toContain('4px');
+    });
+
+    it('Testando tradução reversa de valores numéricos fracionários com quantificador', () => {
+        for (let index = 0; index < Object.keys(TraducaoReversaValorNumericoFracionario).length; index += 1) {
+            // Lexador Reverso recebe as estruturas FolEs
+            const resultadoLexador = lexadorReverso.mapear([
+                `html {`,
+                `   ${TraducaoReversaValorNumericoFracionario[index]}: 0.5px;`,
+                "}"
+            ])
+
+            // Avaliador Sintático Reverso
+            const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
+
+            // Resolvedor reverso
+            const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
+
+            // Resolvedor reverso deve retornar a estrutura HTML e valor numérico correspondente
+            expect(resultadoResolvedor).toContain('lmht');
+            expect(resultadoResolvedor).toContain('0.5px;');
+        }
+    });
+
+    it('Testando tradução reversa de valores numéricos fracionários sem quantificador', () => {
+        // Lexador Reverso recebe as estruturas FolEs
+        const resultadoLexador = lexadorReverso.mapear([
+            `html {`,
+            '   shape-image-threshold: 0.5;',
+            "}"
+        ])
+
+        // Avaliador Sintático Reverso
+        const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
+
+        // Resolvedor reverso
+        const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
+
+        // Resolvedor reverso deve retornar a estrutura HTML e valor numérico correspondente
+        expect(resultadoResolvedor).toContain('lmht');
+        expect(resultadoResolvedor).toContain('0.5;');
+    });
+
+    it('Testando tradução reversa de valores numéricos precedidos de ponto e com quantificador', () => {
+        // Lexador Reverso recebe as estruturas FolEs
+        const resultadoLexador = lexadorReverso.mapear([
+            `html {`,
+            '   letter-spacing: .2rem;',
+            "}"
+        ])
+
+        // Avaliador Sintático Reverso
+        const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
+
+        // Resolvedor reverso
+        const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
+
+        // Resolvedor reverso deve retornar a estrutura HTML e valor numérico correspondente
+        expect(resultadoResolvedor).toContain('lmht');
+        expect(resultadoResolvedor).toContain('.2rem;');
     });
 });
