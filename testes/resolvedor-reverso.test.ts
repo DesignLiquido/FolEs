@@ -4,7 +4,8 @@ import { ResolvedorReverso } from "../fontes/resolvedores/resolvedor-reverso";
 import estruturasLmht from "../fontes/tradutores/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
-import { TraducaoReversa, TraducaoReversaValorNumericoFracionario } from "./listas/traducao-reversa";
+import { TraducaoReversa, TraducaoReversaMetodos, TraducaoReversaValorNumericoFracionario } from "./listas/traducao-reversa";
+import { BlocoDeclaracao } from "../fontes/declaracoes";
 
 describe('Resolvedor Reverso', () => {
     let lexadorReverso: LexadorInterface;
@@ -144,5 +145,46 @@ describe('Resolvedor Reverso', () => {
         // Resolvedor reverso deve retornar a estrutura HTML e valor numérico correspondente
         expect(resultadoResolvedor).toContain('lmht');
         expect(resultadoResolvedor).toContain('.2rem;');
+    });
+
+    // TraducaoReversaMetodos
+    it('Testando tratamento de métodos reversos', () => {
+        for (let index = 0; index < Object.keys(TraducaoReversaMetodos).length; index += 1) {            
+            // Lexador Reverso recebe as estruturas FolEs
+            const resultadoLexador = lexadorReverso.mapear([
+                `html {`,
+                `   ${TraducaoReversaMetodos[index]['modificador']}: ${TraducaoReversaMetodos[index]['metodo']}(${TraducaoReversaMetodos[index]['valor']});`,
+                "}"
+            ]);
+            // console.log(resultadoLexador.simbolos);
+            
+
+            // Avaliador Sintático Reverso
+            const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
+
+            // A estrutura deve ser devidamente instanciada como BlocoDeclaracao
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+            // O primeiro resultado deve conter modificadores em seu mapeamento
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
+            // O valor deve ser instanciado como ValorNumerico
+            // const resultadoAvaliadorSintaticoTipado = primeiroResultado as BlocoDeclaracao;
+            // expect(resultadoAvaliadorSintaticoTipado.modificadores[0].valores[0]).toBeInstanceOf(Valorm);
+
+            // Resolvedor reverso
+            const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
+
+            // Resolvedor reverso deve retornar a estrutura HTML correspondente
+            expect(resultadoResolvedor).toContain('lmht');
+
+            if (TraducaoReversaMetodos[index]['contemTraducao']) {
+                expect(resultadoResolvedor).toContain(TraducaoReversaMetodos[index]['traducao']);
+            } else {
+                expect(resultadoResolvedor).toContain(TraducaoReversaMetodos[index]['valor']);
+            }
+        }
     });
 });
