@@ -222,11 +222,11 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: hsl(34, 50%, 120%);`,
+                    `${Cores[index]}: hsl(34 50% 120%);`,
                     "}"
                 ]);
 
-                expect(resultadoLexador.simbolos).toHaveLength(16);
+                expect(resultadoLexador.simbolos).toHaveLength(14);
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
@@ -250,7 +250,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 expect(resultadoResolvedor).toContain(CoresNomeFolEs[Cores[index]]);
-                expect(resultadoResolvedor).toContain("hsl(34, 50%, 120%);");
+                expect(resultadoResolvedor).toContain("hsl(34 50% 120%);");
             }
         });
 
@@ -259,11 +259,11 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
-                    `${Cores[index]}: hsla(34, 50%, 120%);`,
+                    `${Cores[index]}: hsla(34 50% 120%);`,
                     "}"
                 ]);
 
-                expect(resultadoLexador.simbolos).toHaveLength(16);
+                expect(resultadoLexador.simbolos).toHaveLength(14);
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
@@ -286,7 +286,7 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 // Resolvedor
                 const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoResolvedor).toContain(CoresNomeFolEs[Cores[index]]);
-                expect(resultadoResolvedor).toContain("hsla(34, 50%, 120%);");
+                expect(resultadoResolvedor).toContain("hsla(34 50% 120%);");
             }
         });
 

@@ -200,8 +200,8 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             const valoresMetodo = [
                 'rgb(31, 120, 50)',
                 'rgba(31, 120, 50)',
-                'hsl(50, 80%, 40%)',
-                'hsla(50, 80%, 40%)',
+                'hsl(50 80% 40%)',
+                'hsla(50 80% 40%)',
             ]
 
             for (let index = 0; index < valoresMetodo.length; index += 1) {
@@ -213,12 +213,9 @@ describe('Testando Suporte a VARIÁVEIS', () => {
                     "}"
                 ]);
 
-                // O Lexador deve montar um objeto de comprimento 14 ou 20 sem retornar nenhum erro
-                if (index <= 1) {
-                    expect(resultadoLexador.simbolos).toHaveLength(20);
-                } else {
-                    expect(resultadoLexador.simbolos).toHaveLength(22);
-                }
+                // O Lexador deve montar um objeto de comprimento 20 sem retornar nenhum erro
+                expect(resultadoLexador.simbolos).toHaveLength(20);
+
                 expect(resultadoLexador.erros).toHaveLength(0);
 
                 // O Lexador deve reconhecer a variável declarada

@@ -93,7 +93,7 @@ describe('Resolvedor', () => {
                     '.minha-classe {',
                     '    alinhar-conteudo: inseguro;',
                     '    estilo-contorno: herdar;',
-                    '    cor-destaque: hsl(12, 13%, 24%);',
+                    '    cor-destaque: hsl(12 13% 24%);',
                     '    cor: #f100ff;',
                     '    cor-fundo: vermelho;',
                     '    tamanho-fonte: 16px;',
@@ -115,7 +115,7 @@ describe('Resolvedor', () => {
                     '    margem-inferior: 50px;',
                     '}',
                     'lmht {',
-                    '    cor-fundo: hsl(50, 80%, 80%);',
+                    '    cor-fundo: hsl(50 80% 80%);',
                     '}',
                 ]);
 
@@ -126,7 +126,7 @@ describe('Resolvedor', () => {
                 expect(resultadoResolvedor).toContain('.minha-classe {');
                 expect(resultadoResolvedor).toContain('align-content: unsafe;');
                 expect(resultadoResolvedor).toContain('outline-style: inherit;');
-                expect(resultadoResolvedor).toContain('accent-color: hsl(12, 13%, 24%);');
+                expect(resultadoResolvedor).toContain('accent-color: hsl(12 13% 24%);');
                 expect(resultadoResolvedor).toContain('color: #f100ff;');
                 expect(resultadoResolvedor).toContain('background-color: red;');
                 expect(resultadoResolvedor).toContain('font-size: 16px;');
@@ -140,7 +140,7 @@ describe('Resolvedor', () => {
                 expect(resultadoResolvedor).toContain('#meu-segundo-id {');
                 expect(resultadoResolvedor).toContain('width: 400mm;');
                 expect(resultadoResolvedor).toContain('html {');
-                expect(resultadoResolvedor).toContain('background-color: hsl(50, 80%, 80%);');
+                expect(resultadoResolvedor).toContain('background-color: hsl(50 80% 80%);');
             });
 
             it('Exemplo 2', () => {
