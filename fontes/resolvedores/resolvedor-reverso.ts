@@ -47,17 +47,9 @@ export class ResolvedorReverso {
                 return valoresVariavelResolvidos;
             case 'ValorAbreviacao':
                 return "/";
-            case 'ValorNumerico':
+            case 'ValorNumerico':                
                 const valorNumerico = valor as ValorNumerico;
-                let literalNumerico = String(valorNumerico.literalNumerico);
-
-                if ((valorNumerico.quantificador) &&
-                    (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
-                ) {
-                    literalNumerico = literalNumerico.replace(/^0\./, '.');
-                }
-
-                return `${literalNumerico}${valorNumerico.quantificador || ''}`;
+                return `${valorNumerico.literalNumerico}${valorNumerico.quantificador || ''}`;
             case 'ValorQualitativo':
                 const valorQualitativo = valor as ValorQualitativo;
                 let traducaoQualitativo: any = undefined;
