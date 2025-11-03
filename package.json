@@ -44,7 +44,7 @@
         "jest-coverage-badges": "^1.1.2",
         "prettier": "^3.5.3",
         "release-it": "^19.0.3",
-        "rimraf": "^3.0.2",
+        "rimraf": "^6.1.0",
         "ts-jest": "^29.0.3",
         "ts-node": "^10.9.1",
         "typescript": "^5.6.3"
