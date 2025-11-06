@@ -1790,6 +1790,214 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "styleset()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '1, 2', '6, 12, 18'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: styleset(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto contendo valores numéricos
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir de acordo
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`conjunto-estilos(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "styleset()" - caso de falha', () => {
+        const valoresAceitos = ['0', '1, 21, 12', '3, 13, 30'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: styleset(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('Os valores da função styleset() devem estar entre 1 e 20');
+        }
+    });
+
+    it('Atribuindo Método "stylistic()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: stylistic(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir estilístico para stylistic
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`estilístico(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "stylistic()" - caso de falha', () => {
+        const valoresAceitos = ['0', '21', '30'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: stylistic(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função stylistic() deve estar entre 1 e 20');
+        }
+    });
+
+    it('Atribuindo Método "swash()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: swash(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir espirrar para swash
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`espirrar(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "swash()" - caso de falha', () => {
+        const valoresAceitos = ['0', '100', '300'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: swash(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função swash() deve estar entre 1 e 99');
+        }
+    });
     it('Atribuindo Método "drop-shadow()" com valores de comprimento', () => {
         for (let index = 0; index < MetodoProjetarSombra.length; index += 1) {
             const comprimentos = ['15px 15px', '15px 15px 15px', '0.5rem 0.5rem', '0.5rem 0.5rem 1rem'];
