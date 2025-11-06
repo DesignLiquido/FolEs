@@ -1,5 +1,4 @@
 import { Simbolo } from "../../../lexador";
-import { validarIdentificacaoPersonalizada } from "../../../modificadores/validacoes/identificacao-personalizada";
 import { MetodoCss } from "./metodo-css";
 
 export class Annotation extends MetodoCss {
@@ -17,12 +16,7 @@ export class Annotation extends MetodoCss {
             if (this.valor < 1 || this.valor > 99) {
                 throw new Error('O valor da função annotation() deve estar entre 1 e 99');
             }
-            return `anotação(${this.valor})`;
         }
-        
-        const valorSemAspas = this.valor.replace(/^['"]|['"]$/g, '');
-        // TODO: Repensar
-        // validarIdentificacaoPersonalizada('variação-fonte-alternativa', valorSemAspas);
-        return `anotação("${this.valor}")`;
+        return `anotação(${this.valor})`;
     }
 }
