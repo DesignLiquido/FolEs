@@ -7,6 +7,8 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
+import { Simbolo } from "../../fontes/lexador";
+import { Contador } from "../../fontes/valores/metodos/foles/contador";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     let lexador: LexadorInterface;
@@ -405,6 +407,90 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoContraste[index]]);
                 expect(resultadoTradutor).toContain(`contraste(${valoresAceitos[valIndex]});`);
             }
+        }
+    });
+
+    it('Atribuindo Método "counter()"', () => {
+        const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
+        const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
+
+        const instanciaContador: Contador = new Contador(nomeSimbolo, estiloSimbolo);
+
+        const estilosAceitos: Array<string> = [];
+        Object.values(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
+        console.log(estilosAceitos);
+        
+        const estilosTraduzidos: Array<string> = [];
+        Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosTraduzidos.push(valor));
+
+        for (let index = 0; index < estilosAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `content: counter(contador1, ${estilosAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 12 sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(12);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('conteudo');
+            expect(resultadoResolvedor).toContain('contador');
+            expect(resultadoResolvedor).toContain('contador1');
+        }
+    });
+
+    it('Caso de Falha - Método "counter()" com valor de estilo inválido', () => {
+        const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
+        const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
+
+        const instanciaContador: Contador = new Contador(nomeSimbolo, estiloSimbolo);
+
+        const estilosAceitos: Array<string> = [];
+        Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
+
+        for (let index = 0; index < estilosAceitos.length; index += 1) {
+            const estiloErroDigitacao = estilosAceitos[index].replace(/./, "x");
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `content: counter(contador1, ${estiloErroDigitacao});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 12 sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(12);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Avaliador Sintático também deve retornar o seu objeto sem retornar erros
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Resolvedor deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico)
+            }).toThrow(`Valor de estilo ${estiloErroDigitacao} inválido para a função counter().`);
         }
     });
 
