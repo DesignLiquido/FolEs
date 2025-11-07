@@ -576,19 +576,13 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'hsl'.",
                 );
                 const HdeHSL = this.avancarEDevolverAnterior();
-                // this.consumir(
-                //     tiposDeSimbolos.VIRGULA,
-                //     "Esperado vírgula após argumento de matiz (H) no método 'hsl'.",
-                // );
+
                 const SdeHSL = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.QUANTIFICADOR,
                     "Esperado símbolo percentual após argumento de saturação (S) no método 'hsl'.",
                 );
-                // this.consumir(
-                //     tiposDeSimbolos.VIRGULA,
-                //     "Esperado vírgula após argumento de saturação (S) no método 'hsl'.",
-                // );
+ 
                 const LdeHSL = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.QUANTIFICADOR,
