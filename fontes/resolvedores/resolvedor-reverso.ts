@@ -47,30 +47,27 @@ export class ResolvedorReverso {
                 return valoresVariavelResolvidos;
             case 'ValorAbreviacao':
                 return "/";
-            case 'ValorNumerico':
+            case 'ValorNumerico':                
                 const valorNumerico = valor as ValorNumerico;
-                let literalNumerico = String(valorNumerico.literalNumerico);
-
-                if ((valorNumerico.quantificador) &&
-                    (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
-                ) {
-                    literalNumerico = literalNumerico.replace(/^0\./, '.');
-                }
-
-                return `${literalNumerico}${valorNumerico.quantificador || ''}`;
+                return `${valorNumerico.literalNumerico}${valorNumerico.quantificador || ''}`;
             case 'ValorQualitativo':
                 const valorQualitativo = valor as ValorQualitativo;
-                const valoresHtml = Object.values(valoresGerais);
-
                 let traducaoQualitativo: any = undefined;
-                traducaoQualitativo = valoresHtml.find((valor) => valor === valorQualitativo.qualitativo);
-                
+
+                for (const [chave, valor] of Object.entries(valoresGerais)) {
+                    if (valor === valorQualitativo.qualitativo) {
+                        traducaoQualitativo = chave;
+                    }
+                }
+
                 if (!traducaoQualitativo) {
-                    traducaoQualitativo = Object.values(valoresAceitos).find(
-                        (valor) => valor === valorQualitativo.qualitativo
-                    );
-                }                
-                
+                    for (const [chave, valor] of Object.entries(valoresAceitos)) {
+                        if (valor === valorQualitativo.qualitativo) {
+                            traducaoQualitativo = chave;
+                        }
+                    }
+                }
+
                 if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
 
                 return `${traducaoQualitativo}`;
@@ -79,7 +76,7 @@ export class ResolvedorReverso {
                 return valorTexto.literalTexto;
             case 'ValorVirgula':
                 return ",";
-            default:                
+            default:
                 // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
                 if (valor instanceof MetodoCss || valor instanceof Metodo) {
                     return valor.paraTexto();

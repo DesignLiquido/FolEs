@@ -32,11 +32,19 @@ export function validarMultiplosQualitativos(
         }
     }
 
-    const valoresCss: Array<string | number> = Object.values(cores);
+    let valoresCss: Array<string | number> = [];
+    if (valoresAceitos) {
+        valoresCss = Object.values(valoresAceitos);
+    }
+    const valoresCorCss: Array<string | number> = Object.values(cores);
+    valoresCorCss.forEach((valor) => valoresCss.push(valor));
     const valoresEstiloCss: Array<string> = Object.values(estilos);
     valoresEstiloCss.forEach((valor) => valoresCss.push(valor));
     const valoresGlobaisCss: Array<string> = Object.values(valoresGlobais);
     valoresGlobaisCss.forEach((valor) => valoresCss.push(valor));
+
+    // Eliminando valores duplicados
+    valoresCss = [... new Set(valoresCss)];
 
     if (valoresAceitos === null) {
         if (

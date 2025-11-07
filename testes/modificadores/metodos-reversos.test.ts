@@ -7,18 +7,90 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
 import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
+import { Simbolo } from "../../fontes/lexador";
+import { Contador } from "../../fontes/valores/metodos/foles/contador";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorSintatico: AvaliadorSintaticoInterface;
-    let serializador: ResolvedorReverso;
+    let resolvedor: ResolvedorReverso;
 
     beforeEach(() => {
         lexador = new LexadorReverso();
         importador = new Importador(lexador);
         avaliadorSintatico = new AvaliadorSintaticoReverso(importador);
-        serializador = new ResolvedorReverso();
+        resolvedor = new ResolvedorReverso();
+    });
+
+    it('Atribuindo Método "annotation()" com valor numérico - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: annotation(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir anotação para annotation
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`anotação(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "annotation()" com valor numérico - caso de falha', () => {
+        const valoresAceitos = ['0', '100', '300'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: annotation(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função annotation() deve estar entre 1 e 99');
+        }
     });
 
     it('Atribuindo Método "blur()"', () => {
@@ -79,7 +151,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir blur para borrar
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBorrar[index]]);
@@ -146,7 +218,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir brightness para brilho
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoBrilho[index]]);
@@ -197,9 +269,79 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor deve serializar de acordo e traduzir calc para calcular
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCalcular[index]]);
             expect(resultadoTradutor).toContain('calcular(100px - 80px);');
+        }
+    });
+
+    it('Atribuindo Método "character-variant()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: character-variant(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir character-variant para character-variant
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`variar-caractere(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "character-variant()" - caso de falha', () => {
+        const valoresAceitos = ['0', '210', '100'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: character-variant(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função character-variant() deve estar entre 1 e 99');
         }
     });
 
@@ -261,10 +403,135 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor deve serializar de acordo e traduzir contrast para contraste
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoContraste[index]]);
                 expect(resultadoTradutor).toContain(`contraste(${valoresAceitos[valIndex]});`);
             }
+        }
+    });
+
+    it('Atribuindo Método "counter()" com parâmetro único', () => {
+        const valoresAceitos: Array<string> = ['contador1', 'meu-contador', 'contador-personalizado'];
+        
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                    `content: counter(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 10 sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('conteudo');
+            expect(resultadoResolvedor).toContain('contador');
+            expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+        }
+    });
+
+    it('Atribuindo Método "counter()" com dois parâmetros', () => {
+        const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
+        const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
+
+        const instanciaContador: Contador = new Contador(nomeSimbolo, estiloSimbolo);
+
+        const estilosAceitos: Array<string> = [];
+        Object.values(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
+
+        const estilosTraduzidos: Array<string> = [];
+        Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosTraduzidos.push(valor));
+
+        for (let index = 0; index < estilosAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `content: counter(contador1, ${estilosAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 12 sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(12);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('conteudo');
+            expect(resultadoResolvedor).toContain('contador');
+            expect(resultadoResolvedor).toContain('contador1');
+        }
+    });
+
+    it('Caso de Falha - Método "counter()" com valor de estilo inválido', () => {
+        const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
+        const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
+
+        const instanciaContador: Contador = new Contador(nomeSimbolo, estiloSimbolo);
+
+        const estilosAceitos: Array<string> = [];
+        Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
+
+        for (let index = 0; index < estilosAceitos.length; index += 1) {
+            const estiloErroDigitacao = estilosAceitos[index].replace(/./, "x");
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `content: counter(contador1, ${estiloErroDigitacao});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 12 sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(12);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Avaliador Sintático também deve retornar o seu objeto sem retornar erros
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Resolvedor deve retornar o erro de estilo inválido uma vez que não consegue traduzir o valor
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico)
+            }).toThrow(`Valor de estilo ${estiloErroDigitacao} inválido para a função counter().`);
         }
     });
 
@@ -309,7 +576,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
             expect(resultadoTradutor).toContain('curva-cubica(0.42, 0, 1, 1);');
         }
@@ -358,7 +625,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoEncaixarConteudo[index]]);
             expect(resultadoTradutor).toContain('encaixar-conteudo(200px)');
         }
@@ -422,7 +689,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir grayscale para escala-cinza
                 expect(resultadoTradutor).toContain(`escala-cinza(${valoresAceitos[valIndex]});`);
@@ -471,7 +738,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir scale para escalamento
                 expect(resultadoTradutor).toContain(`escalamento(${valoresAceitos[valIndex]});`);
@@ -516,7 +783,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir scale para escalamento
             expect(resultadoTradutor).toContain(`escalamento(1.3, 0.4);`);
@@ -568,7 +835,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir scale3d para escalamento-3d 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -624,7 +891,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir scaleZ para escalamento-eixo-z
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -681,7 +948,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir scaleX para escalamento-horizontal
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -738,7 +1005,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir scaleY para escalamento-vertical
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
@@ -789,7 +1056,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoGradienteLinear[index]]);
             expect(resultadoTradutor).toContain('gradiente-linear(90deg, verde, amarelo);');
         }
@@ -853,7 +1120,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir skew para inclinar
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -907,7 +1174,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir skew para inclinar
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -972,7 +1239,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir skewX para inclinar-horizontal
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -1037,7 +1304,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir skewY para inclinar-vertical 
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
@@ -1105,7 +1372,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir invert para inverter
                 expect(resultadoTradutor).toContain(`inverter(${valoresAceitos[valIndex]});`);
@@ -1158,7 +1425,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLimitar[index]]);
             expect(resultadoTradutor).toContain('limitar(10vw, 20em, 100vw);');
@@ -1206,7 +1473,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoLinear[index]]);
             expect(resultadoTradutor).toContain('linear(0, 0.25, 1);');
         }
@@ -1257,7 +1524,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
             expect(resultadoTradutor).toContain('minmax(100px, conteudo-máximo);');
         }
@@ -1308,7 +1575,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoMinMax[index]]);
             expect(resultadoTradutor).toContain('minmax(conteudo-mínimo, 100px);');
         }
@@ -1372,11 +1639,127 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir opacity para opacar
                 expect(resultadoTradutor).toContain(`opacar(${valoresAceitos[valIndex]});`);
             }
+        }
+    });
+
+    it('Atribuindo Método "ornaments()" com valor numérico - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir ornamentos para ornaments
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`ornamentos(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "ornaments()" com valor string - caso de sucesso', () => {
+        const valoresAceitos = ['Arial', 'Courier'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento dos valores
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir ornamentos para ornaments, assim como o valor
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`ornamentos("${valoresAceitos[index]}");`);
+        }
+    });
+
+    it('Atribuindo Método "ornaments()" com valor numérico - caso de falha', () => {
+        const valoresAceitos = ['0', '100', '300'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função ornaments() deve estar entre 1 e 99');
         }
     });
 
@@ -1439,7 +1822,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir perspective para perspectivar
                 expect(resultadoTradutor).toContain(`perspectivar(${valoresAceitos[valIndex]});`);
@@ -1488,12 +1871,220 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor deve serializar de acordo e traduzir steps para passos, assim como o termo de salto
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodoPassos[index]]);
             expect(resultadoTradutor).toContain('passos(2, salto-inicial);');
         }
     });
 
+    it('Atribuindo Método "styleset()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '1, 2', '6, 12, 18'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: styleset(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto contendo valores numéricos
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir de acordo
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`conjunto-estilos(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "styleset()" - caso de falha', () => {
+        const valoresAceitos = ['0', '1, 21, 12', '3, 13, 30'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: styleset(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('Os valores da função styleset() devem estar entre 1 e 20');
+        }
+    });
+
+    it('Atribuindo Método "stylistic()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: stylistic(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir estilístico para stylistic
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`estilístico(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "stylistic()" - caso de falha', () => {
+        const valoresAceitos = ['0', '21', '30'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: stylistic(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função stylistic() deve estar entre 1 e 20');
+        }
+    });
+
+    it('Atribuindo Método "swash()" - caso de sucesso', () => {
+        const valoresAceitos = ['1', '2', '12', '20'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: swash(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento de valores numéricos
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.NUMERO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir espirrar para swash
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`espirrar(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "swash()" - caso de falha', () => {
+        const valoresAceitos = ['0', '100', '300'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: swash(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliadorSintatico);
+            }).toThrow('O valor da função swash() deve estar entre 1 e 99');
+        }
+    });
     it('Atribuindo Método "drop-shadow()" com valores de comprimento', () => {
         for (let index = 0; index < MetodoProjetarSombra.length; index += 1) {
             const comprimentos = ['15px 15px', '15px 15px 15px', '0.5rem 0.5rem', '0.5rem 0.5rem 1rem'];
@@ -1541,7 +2132,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir drop-shadow para projetar-sombra  
                 expect(resultadoTradutor).toContain(`projetar-sombra(${comprimentos[posIndex]});`);
@@ -1602,7 +2193,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir red para vermelho
                 expect(resultadoTradutor).toContain('vermelho');
@@ -1661,7 +2252,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir ray para raio
                 expect(resultadoTradutor).toContain(`raio(${traducaoValoresAceitos[valIndex]} 200deg);`);
@@ -1714,7 +2305,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir ray para raio
             expect(resultadoTradutor).toContain(`raio(200deg);`);
@@ -1772,7 +2363,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotate para rotacionar
                 expect(resultadoTradutor).toContain(`rotacionar(${valoresAceitos[valIndex]});`);
@@ -1835,7 +2426,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotate3d para rotacionar-3d  
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
@@ -1868,7 +2459,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
             // Serializador não deve aceitar 'px' como quantificador válido
             expect(() => {
-                serializador.resolver(resultadoAvaliadorSintatico);
+                resolvedor.resolver(resultadoAvaliadorSintatico);
             }).toThrow();
         }
     });
@@ -1931,7 +2522,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotateX para rotacionar-horizontal
                 expect(resultadoTradutor).toContain(`rotacionar-horizontal(${valoresAceitos[valIndex]});`);
@@ -1997,7 +2588,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotateY para rotacionar-vertical
                 expect(resultadoTradutor).toContain(`rotacionar-vertical(${valoresAceitos[valIndex]});`);
@@ -2063,7 +2654,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir rotateZ para rotacionar-eixo-z
                 expect(resultadoTradutor).toContain(`rotacionar-eixo-z(${valoresAceitos[valIndex]});`);
@@ -2129,7 +2720,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir hue-rotate para rotacionar-matiz
                 expect(resultadoTradutor).toContain(`rotacionar-matiz(${valoresAceitos[valIndex]});`);
@@ -2195,7 +2786,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir saturate para saturar
                 expect(resultadoTradutor).toContain(`saturar(${valoresAceitos[valIndex]});`);
@@ -2261,7 +2852,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir sépia para sepia
                 expect(resultadoTradutor).toContain(`sepia(${valoresAceitos[valIndex]});`);
@@ -2320,7 +2911,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translate para translação
                 expect(resultadoTradutor).toContain(`translação(${valoresAceitos[valIndex]});`);
@@ -2364,7 +2955,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir translate para translação
             expect(resultadoTradutor).toContain(`translação(100deg, 100deg);`);
@@ -2429,7 +3020,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translateX para translacao-horizontal 
                 expect(resultadoTradutor).toContain(`translacao-horizontal(${valoresAceitos[valIndex]});`);
@@ -2495,7 +3086,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Serialização
-                const resultadoSerializacao = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoSerializacao = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O serializador deve serializar de acordo e traduzir translateY para translacao-vertical
                 expect(resultadoSerializacao).toContain(`translacao-vertical(${valoresAceitos[valIndex]});`);
@@ -2561,7 +3152,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translateZ para translação-eixo-z
                 expect(resultadoTradutor).toContain(`translacao-eixo-z(${valoresAceitos[valIndex]});`);
@@ -2611,7 +3202,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             );
 
             // Tradutor
-            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             // O Tradutor deve serializar de acordo e traduzir translate3d para translação-3d
             expect(resultadoTradutor).toContain(`translacao-3d(5ch, 0.4in, 5px);`);
@@ -2709,7 +3300,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 );
 
                 // Tradutor
-                const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+                const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
                 // O Tradutor deve serializar de acordo e traduzir translate3d para translacao-3d
                 if (valIndex !== 8) {

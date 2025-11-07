@@ -10,7 +10,7 @@ export class Counter extends MetodoCss {
     constructor(nome: Simbolo, estilo: Simbolo) {
         super();
         this.nome = nome.lexema;
-        this.estilo = estilo ? estilo.lexema : null;
+        this.estilo = estilo ? estilo.lexema : undefined;
         this.traducao = "counter";
 
         this.estilosAceitos = {

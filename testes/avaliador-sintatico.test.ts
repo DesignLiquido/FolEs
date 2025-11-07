@@ -5,8 +5,8 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, Res
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Resolvedor } from "../fontes/resolvedores";
-import { ValorNumerico } from "../fontes/valores";
-import { ValoresQuantificadores } from "./listas/valores-quantificadores"
+import { ValorNumerico, ValorQualitativo } from "../fontes/valores";
+import { ValoresQualitativosCss, ValoresQuantificadores } from "./listas/valores-quantificadores"
 
 describe('Avaliador Sintático', () => {
     let lexador: LexadorInterface;
@@ -25,7 +25,7 @@ describe('Avaliador Sintático', () => {
     it('Casos de sucesso - testando seletores valor-quantificador', () => {
         for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
             const seletor: Object = new SeletorModificador(
-                ValoresQuantificadores[index], 
+                ValoresQuantificadores[index],
                 [new ValorNumerico(ValoresQuantificadores[index], 25, 'px')]
             );
 
@@ -49,10 +49,10 @@ describe('Avaliador Sintático', () => {
             expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
             const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
             expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-            
+
             expect(primeiroResultadoTipado.seletores[0]['estrutura'].tagHtml).toBe('html');
             expect(primeiroResultadoTipado.seletores[0]['pseudoclasse']).toBe(undefined);
-            
+
             expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(
                 seletor['nomeFoles']
             );
@@ -99,6 +99,48 @@ describe('Avaliador Sintático', () => {
             expect(() => {
                 avaliadorSintatico.analisar(resultadoLexador.simbolos);
             }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+        }
+    });
+
+    it('Casos de sucesso - testando seletores que recebem qualitativos', () => {
+        for (let index = 0; index < ValoresQualitativosCss.length; index += 1) {
+            // Lexador recebe modificadores com valor-quantificador
+            const resultadoLexador = lexador.mapear([
+                `lmht {`,
+                `   ${ValoresQualitativosCss[index]['modificador']}: ${ValoresQualitativosCss[index]['valor']};`,
+                "}"
+            ]);
+            
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // A estrutura deve ser devidamente instanciada como BlocoDeclaracao
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+
+            // O primeiro resultado deve conter modificadores em seu mapeamento
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+
+            // O valor deve ser instanciado como ValorNumerico
+            const resultadoAvaliadorSintaticoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(resultadoAvaliadorSintaticoTipado.modificadores[0].valores[0]).toBeInstanceOf(ValorQualitativo);
+
+            // O mapeamento de valor e quantificador deve ser feito de acordo 
+            expect(primeiroResultadoTipado.modificadores[0].valores.length).toBeGreaterThan(0);
+            const valorModificadorTipado = resultadoAvaliadorSintaticoTipado.modificadores[0].valores[0] as ValorQualitativo;
+            expect(valorModificadorTipado.qualitativo).toStrictEqual(ValoresQualitativosCss[index]['valor']);
+
+            // As estruturas CSS e FolEs devem ser mapeadas de acordo
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toContain(ValoresQualitativosCss[index]['modificador']);
+            expect(primeiroResultadoTipado.seletores[0]['estrutura'].tagHtml).toBe('html');
+            expect(primeiroResultadoTipado.seletores[0]['pseudoclasse']).toBe(undefined);
+
+            // A estrutura retornada pelo Av. Sintático Reverso deve ser capaz de ser traduzida nas etapas seguintes 
+            const resultadoResolvedor = tradutor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('html');
+            expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['css']);
+            expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['traducao']);
         }
     });
 });

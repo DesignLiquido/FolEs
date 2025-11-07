@@ -1,5 +1,4 @@
 import { Simbolo } from "../../../lexador";
-import { validarIdentificacaoPersonalizada } from "../../../modificadores/validacoes/identificacao-personalizada";
 import { MetodoCss } from "./metodo-css";
 
 export class Ornaments extends MetodoCss {
@@ -20,9 +19,6 @@ export class Ornaments extends MetodoCss {
             return `ornamentos(${this.valor})`;
         }
 
-        const valorSemAspas = this.valor.replace(/^['"]|['"]$/g, '');
-        // TODO: Repensar
-        // validarIdentificacaoPersonalizada('variação-fonte-alternativa', valorSemAspas);
         return `ornamentos("${this.valor}")`;
     }
 }
