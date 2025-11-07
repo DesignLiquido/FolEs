@@ -410,7 +410,49 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    it('Atribuindo Método "counter()"', () => {
+    it('Atribuindo Método "counter()" com parâmetro único', () => {
+        const valoresAceitos: Array<string> = ['contador1', 'meu-contador', 'contador-personalizado'];
+        
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                    `content: counter(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 10 sem retornar erros
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('content');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('conteudo');
+            expect(resultadoResolvedor).toContain('contador');
+            expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+        }
+    });
+
+    it('Atribuindo Método "counter()" com dois parâmetros', () => {
         const nomeSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'contador', 'any', 1, 2, 3);
         const estiloSimbolo: Simbolo = new Simbolo('IDENTIFICADOR', 'romano-maiusculo', 'any', 1, 2, 3);
 
@@ -418,7 +460,6 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
         const estilosAceitos: Array<string> = [];
         Object.values(instanciaContador.estilosAceitos).forEach((valor) => estilosAceitos.push(valor));
-        console.log(estilosAceitos);
 
         const estilosTraduzidos: Array<string> = [];
         Object.keys(instanciaContador.estilosAceitos).forEach((valor) => estilosTraduzidos.push(valor));
@@ -1654,6 +1695,52 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             // O Resolvedor deve resolver de acordo e traduzir ornamentos para ornaments
             expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
             expect(resultadoResolvedor).toContain(`ornamentos(${valoresAceitos[index]});`);
+        }
+    });
+
+    it('Atribuindo Método "ornaments()" com valor string - caso de sucesso', () => {
+        const valoresAceitos = ['Arial', 'Courier'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `font-variant-alternates: ornaments(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 10, incluindo mapeamento dos valores
+            expect(resultadoLexador.simbolos).toHaveLength(10);
+
+            // O Lexador não deve encontrar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O valor recebido deve ser mapeado como METODO
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(
+                'font-variant-alternates'
+            );
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+
+            // O Resolvedor deve resolver de acordo e traduzir ornamentos para ornaments, assim como o valor
+            expect(resultadoResolvedor).toContain('variacao-fonte-alternativa');
+            expect(resultadoResolvedor).toContain(`ornamentos("${valoresAceitos[index]}");`);
         }
     });
 
