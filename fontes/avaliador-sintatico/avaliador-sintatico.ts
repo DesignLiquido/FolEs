@@ -323,6 +323,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     parametro4cc,
                 ]) as Metodo;
 
+            case "definir-imagem":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'definir-imagem'.",
+                );
+
+                const linkImagem = this.avancarEDevolverAnterior();
+                const proporcaoImagem = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método 'definir-imagem'.",
+                );
+                return new SeletorValor(lexema, [linkImagem, proporcaoImagem]) as Metodo;
+
             case "encaixar-conteudo":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -582,7 +597,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.QUANTIFICADOR,
                     "Esperado símbolo percentual após argumento de saturação (S) no método 'hsl'.",
                 );
- 
+
                 const LdeHSL = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.QUANTIFICADOR,
@@ -600,7 +615,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'hsla'.",
                 );
                 const HdeHSLA = this.avancarEDevolverAnterior();
- 
+
                 const SdeHSLA = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.QUANTIFICADOR,
@@ -1706,12 +1721,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;
                     }
-                    
+
                     if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;
                     }
-                    
+
                     throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
             }
         } while (
@@ -1913,7 +1928,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let valoresModificador: Array<any> = this.valoresModificador(modificador.lexema);
 
         let classeModificadora;
-        if (valoresModificador[0] instanceof ReferenciaVariavel) {           
+        if (valoresModificador[0] instanceof ReferenciaVariavel) {
             classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador,
@@ -1922,9 +1937,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     colunaInicial: modificador.colunaInicial,
                     colunaFinal: modificador.colunaFinal,
                 },
-                true 
+                true
             );
-        } else {            
+        } else {
             classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador,
@@ -1996,7 +2011,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const seletores = this.resolverSeletores();
                 const modificadoresEDeclaracoesAninhadas =
                     this.resolverModificadoresEDeclaracoesAninhadas();
-                
+
                 return new BlocoDeclaracao(
                     seletores,
                     modificadoresEDeclaracoesAninhadas.modificadores,
@@ -2015,7 +2030,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             declaracoes.push(this.declaracao());
             this.referenciaDeclaracoes = declaracoes;
         }
-        
+
         return declaracoes.filter((d) => d);
     }
 }
