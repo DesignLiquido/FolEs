@@ -336,6 +336,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumento do método 'definir-imagem'.",
                 );
+                
                 return new SeletorValor(lexema, [linkImagem, proporcaoImagem]) as Metodo;
 
             case "encaixar-conteudo":
