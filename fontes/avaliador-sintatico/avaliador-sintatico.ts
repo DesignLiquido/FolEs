@@ -323,6 +323,31 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     parametro4cc,
                 ]) as Metodo;
 
+            case "definir-caminho":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'definir-caminho'.",
+                );
+
+                const proporcaoCaminho = this.avancarEDevolverAnterior();
+
+                let matrizCaminho = null;
+                if (this.simbolos[this.atual].tipo === 'TEXTO') {
+                    matrizCaminho = this.avancarEDevolverAnterior();
+                }
+
+                const arrayValoresCaminho: Array<Simbolo> = [proporcaoCaminho];
+                if (matrizCaminho !== null) {
+                    arrayValoresCaminho.push(matrizCaminho);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método 'definir-caminho'.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresCaminho) as Metodo;
+
             case "definir-imagem":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -336,8 +361,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumento do método 'definir-imagem'.",
                 );
-                
-                return new SeletorValor(lexema, [linkImagem, proporcaoImagem]) as Metodo;
+
+                return new SeletorValor(lexema, [matrizCaminho, proporcaoCaminho]) as Metodo;
 
             case "encaixar-conteudo":
                 this.consumir(
