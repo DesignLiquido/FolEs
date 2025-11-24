@@ -171,6 +171,7 @@ export default {
     contraste: tiposDeSimbolos.METODO,
     "curva-cubica": tiposDeSimbolos.METODO,
     "curva-cúbica": tiposDeSimbolos.METODO,
+    "definir-caminho": tiposDeSimbolos.METODO,
     "definir-imagem": tiposDeSimbolos.METODO,
     "encaixar-conteudo": tiposDeSimbolos.METODO,
     "encaixar-conteúdo": tiposDeSimbolos.METODO,
