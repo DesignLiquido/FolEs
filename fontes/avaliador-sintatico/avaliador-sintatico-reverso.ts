@@ -470,22 +470,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     ]
                 ) as MetodoCss;
 
-            case "image-set":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'image-set'.",
-                );
-
-                const linkImagem = this.avancarEDevolverAnterior();
-                const proporcaoImagem = this.avancarEDevolverAnterior();
-
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após argumento do método 'image-set'.",
-                );
-
-                return new SeletorValorReverso(lexema, [linkImagem, proporcaoImagem]) as MetodoCss;
-
             case "hsl": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -568,35 +552,21 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 ) as MetodoCss;
             }
 
-            case "scale3d": {
+            case "image-set":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scale3d'.",
+                    "Esperado parêntese esquerdo após método 'image-set'.",
                 );
-                const valorScale3d1 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após primeiro argumento do método scale3d.",
-                );
-                const valorScale3d2 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após segundo argumento do método scale3d.",
-                );
-                const valorScale3d3 = this.avancarEDevolverAnterior();
+
+                const linkImagem = this.avancarEDevolverAnterior();
+                const proporcaoImagem = this.avancarEDevolverAnterior();
+
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scale3d.",
+                    "Esperado parêntese direito após argumento do método 'image-set'.",
                 );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorScale3d1,
-                        valorScale3d2,
-                        valorScale3d3,
-                    ]
-                ) as MetodoCss;
-            }
+
+                return new SeletorValorReverso(lexema, [linkImagem, proporcaoImagem]) as MetodoCss;
 
             case "invert": {
                 this.consumir(
@@ -615,32 +585,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após método 'invert'.",
                 );
                 return new SeletorValorReverso(lexema, [valorInverter, quantificadorInverter]) as MetodoCss;
-            }
-
-            case "scaleX": {
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scaleX'.",
-                );
-                const valorScaleX = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scaleX.",
-                );
-                return new SeletorValorReverso(lexema, [valorScaleX]) as MetodoCss;
-            }
-
-            case "scaleY": {
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scaleY'.",
-                );
-                const valorScaleY = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scaleY.",
-                );
-                return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
             }
 
             case "linear-gradient":
@@ -714,6 +658,87 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         cor2,
                     ]
                 ) as MetodoCss;
+
+            case "path":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'path'.",
+                );
+
+                const proporcaoCaminho = this.avancarEDevolverAnterior();
+
+                let matrizCaminho = null;
+                if (this.simbolos[this.atual].tipo === 'TEXTO') {
+                    matrizCaminho = this.avancarEDevolverAnterior();
+                }
+
+                const arrayValoresCaminho: Array<Simbolo> = [proporcaoCaminho];
+                if (matrizCaminho !== null) {
+                    arrayValoresCaminho.push(matrizCaminho);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método 'path'.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresCaminho) as MetodoCss;
+
+            case "scale3d": {
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'scale3d'.",
+                );
+                const valorScale3d1 = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperado vírgula após primeiro argumento do método scale3d.",
+                );
+                const valorScale3d2 = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperado vírgula após segundo argumento do método scale3d.",
+                );
+                const valorScale3d3 = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após segundo argumento do método scale3d.",
+                );
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorScale3d1,
+                        valorScale3d2,
+                        valorScale3d3,
+                    ]
+                ) as MetodoCss;
+            }
+
+            case "scaleX": {
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'scaleX'.",
+                );
+                const valorScaleX = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após segundo argumento do método scaleX.",
+                );
+                return new SeletorValorReverso(lexema, [valorScaleX]) as MetodoCss;
+            }
+
+            case "scaleY": {
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'scaleY'.",
+                );
+                const valorScaleY = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após segundo argumento do método scaleY.",
+                );
+                return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
+            }
 
             case "skew": {
                 this.consumir(
