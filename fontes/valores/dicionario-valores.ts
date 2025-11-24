@@ -6,6 +6,7 @@ import { ConjuntoEstilos } from "./metodos/foles/conjunto-estilos";
 import { Contador } from "./metodos/foles/contador";
 import { Contraste } from "./metodos/foles/contraste";
 import { CurvaCubica } from "./metodos/foles/curva-cubica";
+import { DefinirImagem } from "./metodos/foles/definir-imagem";
 import { EncaixarConteudo } from "./metodos/foles/encaixar-conteudo";
 import { EscalaCinza } from "./metodos/foles/escala-cinza";
 import { Escalamento } from "./metodos/foles/escalamento";
@@ -61,6 +62,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     contador: Contador,
     "curva-cubica": CurvaCubica,
     "curva-cúbica": CurvaCubica,
+    "definir-imagem": DefinirImagem,
     "encaixar-conteudo": EncaixarConteudo,
     "encaixar-conteúdo": EncaixarConteudo,
     "escala-cinza": EscalaCinza,
