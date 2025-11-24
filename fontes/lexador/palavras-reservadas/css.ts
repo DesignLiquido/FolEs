@@ -147,6 +147,7 @@ export default {
     minmax: tiposDeSimbolos.METODO,
     opacity: tiposDeSimbolos.METODO,
     ornaments: tiposDeSimbolos.METODO,
+    path: tiposDeSimbolos.METODO,
     perspective: tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,

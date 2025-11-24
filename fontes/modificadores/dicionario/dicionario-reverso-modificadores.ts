@@ -373,6 +373,7 @@ import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
 import { DropShadow } from "../../valores/metodos/css/drop-shadow";
 import { FitContent } from "../../valores/metodos/css/fit-content";
 import { Grayscale } from "../../valores/metodos/css/grayscale";
+import { ImageSet } from "../../valores/metodos/css/image-set";
 import { Hsl } from "../../valores/metodos/foles/hsl";
 import { Hsla } from "../../valores/metodos/foles/hsla";
 import { HueRotate } from "../../valores/metodos/css/hue-rotate";
@@ -381,6 +382,7 @@ import { Linear } from "../../valores/metodos/foles/linear";
 import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
 import { MinMax } from "../../valores/metodos/css/minmax";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
+import { Path } from "../../valores/metodos/css/path";
 import { Ray } from "../../valores/metodos/css/ray";
 import { Rgb } from "../../valores/metodos/foles/rgb";
 import { Rgba } from "../../valores/metodos/foles/rgba";
@@ -405,7 +407,6 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
-import { ImageSet } from "../../valores/metodos/css/image-set";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -794,6 +795,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "linear-gradient": LinearGradient,
     minmax: MinMax,
     ornaments: Ornaments,
+    path: Path,
     ray: Ray,
     rgb: Rgb,
     rgba: Rgba,
