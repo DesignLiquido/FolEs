@@ -15,12 +15,14 @@ export class ImagemFundo extends Modificador {
     ) {
         super("imagem-fundo", "background-image", pragmas);
 
+        const valoresExtra: Array<string> = ['image-set'];
+
         if (!variavel) {
             validarValores(
                 "imagem-fundo",
                 valores,
                 this.valoresAceitos,
-                null
+                valoresExtra
             );
         }
 
