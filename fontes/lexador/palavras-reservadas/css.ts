@@ -137,6 +137,7 @@ export default {
     "drop-shadow": tiposDeSimbolos.METODO,
     "fit-content": tiposDeSimbolos.METODO,
     grayscale: tiposDeSimbolos.METODO,
+    "image-set": tiposDeSimbolos.METODO,
     hsl: tiposDeSimbolos.METODO,
     hsla: tiposDeSimbolos.METODO,
     "hue-rotate": tiposDeSimbolos.METODO,

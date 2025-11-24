@@ -405,6 +405,7 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
+import { ImageSet } from "../../valores/metodos/css/image-set";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -784,6 +785,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "drop-shadow": DropShadow,
     "fit-content": FitContent,
     grayscale: Grayscale,
+    "image-set": ImageSet,
     hsl: Hsl,
     hsla: Hsla,
     "hue-rotate": HueRotate,
