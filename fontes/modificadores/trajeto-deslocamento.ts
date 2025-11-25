@@ -16,7 +16,7 @@ export class TrajetoDeslocamento extends Modificador {
     ) {
         super("trajeto-deslocamento", "offset-path", pragmas);
 
-        const valoresExtra = ["url", "ray", "path"];
+        const valoresExtra = ['url', 'ray', 'path', 'inset', 'circle', 'ellipse', 'polygon', 'rect', 'shape', 'xywh'];
 
         if (!variavel) {
             validarValores(
