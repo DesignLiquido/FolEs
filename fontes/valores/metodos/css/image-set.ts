@@ -19,3 +19,10 @@ export class ImageSet extends MetodoCss {
         return `definir-imagem(${this.link} ${this.tamanho}${this.proporcao})`;
     }
 }
+
+/**
+ * Faltam os casos:
+ * image-set(url("image1.jpg") 1x);
+ * image-set(linear-gradient(blue, white) 1x);
+ * image-set(url("image1.avif") type("image/avif"));
+ */
