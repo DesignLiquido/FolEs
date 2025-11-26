@@ -375,16 +375,17 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'definir-imagem'.",
                 );
-
-                const linkImagem = this.avancarEDevolverAnterior();
-                const proporcaoImagem = this.avancarEDevolverAnterior();
+                
+                const linkImagem: Simbolo = this.avancarEDevolverAnterior();
+                const tamanhoImagem: Simbolo = this.avancarEDevolverAnterior();
+                const proporcaoImagem: Simbolo = this.avancarEDevolverAnterior();
 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumento do método 'definir-imagem'.",
                 );
 
-                return new SeletorValor(lexema, [matrizCaminho, proporcaoCaminho]) as Metodo;
+                return new SeletorValor(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as Metodo;
 
             case "encaixar-conteudo":
                 this.consumir(
