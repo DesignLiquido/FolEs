@@ -345,6 +345,71 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "circle()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = ['50px', 'closest-side', 'farthest-side'];
+        const traducaoValores: Array<string> = ['50px', 'lado-mais-próximo', 'lado-mais-distante'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `offset-path: circle(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto de comprimento 10 ou 11, sem retornar erros
+            if (index === 0) {
+                expect(resultadoLexador.simbolos).toHaveLength(11);
+            } else {
+                expect(resultadoLexador.simbolos).toHaveLength(10);
+            }
+
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('trajeto-deslocamento');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('trajeto-deslocamento');
+            expect(resultadoResolvedor).toContain('circular');
+            expect(resultadoResolvedor).toContain(traducaoValores[index]);
+        }
+    });
+
+    it('Atribuindo Método "circular()" - caso de falha', () => {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+            "div {",
+            `offset-path: circle(close-side);`,
+            "}"
+        ]);
+
+        // Avaliador Sintático
+        const resultadoAvaliador = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+        // Resolvedor deve retornar erro de valor inválido
+        expect(() => {
+            resolvedor.resolver(resultadoAvaliador);
+        }).toThrow("Valor close-side inválido para o método 'circle'");
+    });
+
     it('Atribuindo Método "contrast()"', () => {
         for (let index = 0; index < MetodoContraste.length; index += 1) {
 
@@ -412,12 +477,12 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
     it('Atribuindo Método "counter()" com parâmetro único', () => {
         const valoresAceitos: Array<string> = ['contador1', 'meu-contador', 'contador-personalizado'];
-        
+
         for (let index = 0; index < valoresAceitos.length; index += 1) {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "div {",
-                    `content: counter(${valoresAceitos[index]});`,
+                `content: counter(${valoresAceitos[index]});`,
                 "}"
             ]);
 
