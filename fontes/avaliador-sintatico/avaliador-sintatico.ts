@@ -375,7 +375,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'definir-imagem'.",
                 );
-                
+
                 const linkImagem: Simbolo = this.avancarEDevolverAnterior();
                 const tamanhoImagem: Simbolo = this.avancarEDevolverAnterior();
                 const proporcaoImagem: Simbolo = this.avancarEDevolverAnterior();
@@ -763,6 +763,29 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorInclinarY,
                     quantificadorInclinarY,
                 ]) as Metodo;
+
+            case "inserir":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'inserir'.",
+                );
+
+                const valorInserir1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorInserir1: Simbolo = this.avancarEDevolverAnterior();
+
+                const arrayValoresInserir: Array<Simbolo> = [valorInserir1, quantificadorInserir1];
+
+                while (this.simbolos[this.atual].tipo === 'NUMERO' || this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    const proximoValorInserir: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresInserir.push(proximoValorInserir);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método inserir.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresInserir) as Metodo;
 
             case "inverter":
                 this.consumir(

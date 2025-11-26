@@ -25,6 +25,7 @@ import { Hsla } from "./metodos/foles/hsla";
 import { Inclinar } from "./metodos/foles/inclinar";
 import { InclinarHorizontal } from "./metodos/foles/inclinar-horizontal";
 import { InclinarVertical } from "./metodos/foles/inclinar-vertical";
+import { Inserir } from "./metodos/foles/inserir";
 import { Inverter } from "./metodos/foles/inverter";
 import { Limitar } from "./metodos/foles/limitar";
 import { Linear } from "./metodos/foles/linear";
@@ -85,6 +86,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     inclinar: Inclinar,
     "inclinar-horizontal": InclinarHorizontal,
     "inclinar-vertical": InclinarVertical,
+    inserir: Inserir,
     inverter: Inverter,
     limitar: Limitar,
     linear: Linear,

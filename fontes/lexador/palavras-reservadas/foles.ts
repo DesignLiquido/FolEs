@@ -192,6 +192,7 @@ export default {
     inclinar: tiposDeSimbolos.METODO,
     "inclinar-horizontal": tiposDeSimbolos.METODO,
     "inclinar-vertical": tiposDeSimbolos.METODO,
+    inserir: tiposDeSimbolos.METODO,
     inverter: tiposDeSimbolos.METODO,
     limitar: tiposDeSimbolos.METODO,
     linear: tiposDeSimbolos.METODO,
