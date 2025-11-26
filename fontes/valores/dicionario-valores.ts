@@ -2,6 +2,7 @@ import { Anotacao } from "./metodos/foles/anotacao";
 import { Borrar } from "./metodos/foles/borrar";
 import { Brilho } from "./metodos/foles/brilho";
 import { Calcular } from "./metodos/foles/calcular";
+import { Circular } from "./metodos/foles/circular";
 import { ConjuntoEstilos } from "./metodos/foles/conjunto-estilos";
 import { Contador } from "./metodos/foles/contador";
 import { Contraste } from "./metodos/foles/contraste";
@@ -58,6 +59,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     borrar: Borrar,
     brilho: Brilho,
     calcular: Calcular,
+    circular: Circular,
     "conjunto-estilos": ConjuntoEstilos,
     contraste: Contraste,
     contador: Contador,

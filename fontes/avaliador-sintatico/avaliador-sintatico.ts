@@ -177,6 +177,28 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorCalc2,
                 ]) as Metodo;
 
+            case "circular":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'circular'.",
+                );
+                const valorCircular = this.avancarEDevolverAnterior();
+
+                let quantificadorCircular: Simbolo = null;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorCircular = this.avancarEDevolverAnterior();
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'circular'.",
+                );
+
+                return new SeletorValor(lexema, [
+                    valorCircular,
+                    quantificadorCircular,
+                ]) as Metodo
+
             case "conjunto-estilos":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

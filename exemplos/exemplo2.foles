@@ -11,3 +11,7 @@ lmht {
     recursos-fonte: "c2sc", "hist";
     citacoes: "blabla";
 }
+
+lmht {
+    trajeto-deslocamento: circular(lado-mais-distante);
+}
