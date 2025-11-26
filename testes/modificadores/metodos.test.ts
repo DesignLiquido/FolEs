@@ -400,7 +400,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
         // Avaliador Sintático
         const resultadoAvaliador = avaliador.analisar(resultadoLexador.simbolos);
-        
+
         // Resolvedor deve retornar erro de valor inválido
         expect(() => {
             resolvedor.resolver(resultadoAvaliador);
@@ -641,7 +641,6 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                     ])
                 );
 
-
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
@@ -710,6 +709,43 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoCurvaCubica[index]]);
             expect(resultadoResolvedor).toContain('cubic-bezier(0.42, 0, 1, 1);');
         }
+    });
+
+    it('Atribuindo Método "definir-imagem()" - caso de sucesso', () => {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `imagem-fundo: definir-imagem(imagem1 50x);`,
+            "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 12, sem retornar erros
+        expect(resultadoLexador.simbolos).toHaveLength(12);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com o devido nome CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-image');
+
+        // Resolvedor
+        const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);        
+        expect(resultadoResolvedor).toContain('background-image');
+        expect(resultadoResolvedor).toContain('image-set');
     });
 
     it('Atribuindo Método "encaixar-conteúdo" (fit-content)', () => {
