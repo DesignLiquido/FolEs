@@ -20,7 +20,7 @@ export class Circle extends MetodoCss {
 
     paraTexto() {
         if (this.quantificador) {
-            return `círculo(${this.valor}${this.quantificador})`;
+            return `circular(${this.valor}${this.quantificador})`;
         }
 
         const valorString: string = this.valor as string;
@@ -28,10 +28,10 @@ export class Circle extends MetodoCss {
         const traducaoValor: string = valoresCssAceitos.find((valorAceito) => valorAceito === valorString);
 
         if (traducaoValor) {
-            return `círculo(${this.valoresAceitos[traducaoValor]})`;
+            return `circular(${this.valoresAceitos[traducaoValor]})`;
         } else {
             throw new Error(
-                `Valor ${this.valor} inválido para o método 'circular'. Valores aceitos:
+                `Valor ${this.valor} inválido para o método 'circle'. Valores aceitos:
                 número-quantificador (ex.: 12px),
                 ${valoresCssAceitos.reduce((final, atual) => (final += `, ${atual}`))},`
             );
