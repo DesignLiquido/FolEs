@@ -1,4 +1,5 @@
 div {
+    offset-path: circle(closest-side);
     backdrop-filter: blur(10);
     gap: calc(100px - 10px);
     filter: contrast(50);

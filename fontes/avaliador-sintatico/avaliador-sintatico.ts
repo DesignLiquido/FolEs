@@ -197,7 +197,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [
                     valorCircular,
                     quantificadorCircular,
-                ]) as Metodo
+                ]) as Metodo;
 
             case "conjunto-estilos":
                 this.consumir(

@@ -252,6 +252,29 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValorReverso(lexema, [valorVariarCaractere]) as MetodoCss;
 
+            case "circle":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'circle'.",
+                );
+
+                const valorCircular = this.avancarEDevolverAnterior();
+
+                let quantificadorCircular: Simbolo = null;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorCircular = this.avancarEDevolverAnterior();
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'circle'.",
+                );
+
+                return new SeletorValorReverso(lexema, [
+                    valorCircular,
+                    quantificadorCircular,
+                ]) as MetodoCss;
+
             case "clamp": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

@@ -130,6 +130,7 @@ export default {
     brightness: tiposDeSimbolos.METODO,
     calc: tiposDeSimbolos.METODO,
     "character-variant": tiposDeSimbolos.METODO,
+    circle: tiposDeSimbolos.METODO,
     clamp: tiposDeSimbolos.METODO,
     contrast: tiposDeSimbolos.METODO,
     counter: tiposDeSimbolos.METODO,
@@ -705,7 +706,7 @@ export default {
     "filled": tiposDeSimbolos.QUALITATIVO,
     "open": tiposDeSimbolos.QUALITATIVO,
     "dot": tiposDeSimbolos.QUALITATIVO,
-    "circle": tiposDeSimbolos.QUALITATIVO,
+    // "circle": tiposDeSimbolos.QUALITATIVO,
     "double-circle": tiposDeSimbolos.QUALITATIVO,
     "triangle": tiposDeSimbolos.QUALITATIVO,
     "sesame": tiposDeSimbolos.QUALITATIVO,
@@ -767,4 +768,5 @@ export default {
     // content: tiposDeSimbolos.QUALITATIVO,
     // "fit-content": tiposDeSimbolos.QUALITATIVO,
     // contain: tiposDeSimbolos.QUALITATIVO,
+    // "circle": tiposDeSimbolos.QUALITATIVO,
 };

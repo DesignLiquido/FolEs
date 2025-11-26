@@ -366,6 +366,7 @@ import { Blur } from "../../valores/metodos/css/blur";
 import { Brightness } from "../../valores/metodos/css/brightness";
 import { Calc } from "../../valores/metodos/css/calc";
 import { CharacterVariant } from "../../valores/metodos/css/character-variant";
+import { Circle } from "../../valores/metodos/css/circle";
 import { Clamp } from "../../valores/metodos/css/clamp";
 import { Contrast } from "../../valores/metodos/css/constrast";
 import { Counter } from "../../valores/metodos/css/counter";
@@ -780,6 +781,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     calc: Calc,
     "character-variant": CharacterVariant,
     clamp: Clamp,
+    circle: Circle,
     contrast: Contrast,
     counter: Counter,
     "cubic-bezier": CubicBezier,
