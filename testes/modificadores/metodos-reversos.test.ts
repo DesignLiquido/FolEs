@@ -393,7 +393,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    it('Atribuindo Método "circular()" - caso de falha', () => {
+    it('Atribuindo Método "circle()" - caso de falha', () => {
         // Lexador
         const resultadoLexador = lexador.mapear([
             "div {",
@@ -760,6 +760,43 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 expect(resultadoTradutor).toContain(`escala-cinza(${valoresAceitos[valIndex]});`);
             }
         }
+    });
+
+    it('Atribuindo Método "image-set()" - caso de sucesso', () => {
+        // Lexador
+        const resultadoLexador = lexador.mapear([
+            "div {",
+            `background-image: image-set(image1 50x);`,
+            "}"
+        ]);
+
+        // O Lexador deve montar um objeto de comprimento 12, sem retornar erros
+        expect(resultadoLexador.simbolos).toHaveLength(12);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+            ])
+        );
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+        // O Avaliador deve montar um objeto com o devido nome CSS
+        expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+        const primeiroResultado = resultadoAvaliadorSintatico[0];
+        expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+        const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+        expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+        expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('imagem-fundo');
+
+        // Resolvedor
+        const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+        expect(resultadoResolvedor).toContain('imagem-fundo');
+        expect(resultadoResolvedor).toContain('definir-imagem');
     });
 
     it('Atribuindo Método "scale()"', () => {

@@ -581,15 +581,16 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'image-set'.",
                 );
 
-                const linkImagem = this.avancarEDevolverAnterior();
-                const proporcaoImagem = this.avancarEDevolverAnterior();
+                const linkImagem: Simbolo = this.avancarEDevolverAnterior();
+                const tamanhoImagem: Simbolo = this.avancarEDevolverAnterior();
+                const proporcaoImagem: Simbolo = this.avancarEDevolverAnterior();
 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após argumento do método 'image-set'.",
                 );
 
-                return new SeletorValorReverso(lexema, [linkImagem, proporcaoImagem]) as MetodoCss;
+                return new SeletorValorReverso(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as MetodoCss;
 
             case "invert": {
                 this.consumir(

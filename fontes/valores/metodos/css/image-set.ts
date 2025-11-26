@@ -3,17 +3,19 @@ import { MetodoCss } from "./metodo-css";
 
 export class ImageSet extends MetodoCss {
     link: string;
-    proporcao: number | string;
+    tamanho: number;
+    proporcao: string;
     traducao: string;
 
-    constructor(link: Simbolo, proporcao: Simbolo) {
+    constructor(link: Simbolo, tamanho: Simbolo, proporcao: Simbolo) {
         super();
         this.link = link.lexema;
-        this.proporcao = proporcao.tipo === 'NUMERO' ? Number(proporcao.lexema) : proporcao.lexema;
+        this.tamanho = Number(tamanho.lexema);
+        this.proporcao = proporcao.lexema;
         this.traducao = "image-set";
     }
 
     paraTexto() {
-        return `definir-imagem(${this.link} ${this.proporcao})`;
+        return `definir-imagem(${this.link} ${this.tamanho}${this.proporcao})`;
     }
 }
