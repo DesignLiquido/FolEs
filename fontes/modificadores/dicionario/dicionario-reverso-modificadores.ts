@@ -408,6 +408,7 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
+import { Inserir } from "../../valores/metodos/foles/inserir";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -792,6 +793,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     hsl: Hsl,
     hsla: Hsla,
     "hue-rotate": HueRotate,
+    // inset: Inserir,
     invert: Invert,
     linear: Linear,
     "linear-gradient": LinearGradient,

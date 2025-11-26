@@ -142,6 +142,7 @@ export default {
     hsl: tiposDeSimbolos.METODO,
     hsla: tiposDeSimbolos.METODO,
     "hue-rotate": tiposDeSimbolos.METODO,
+    // inset: tiposDeSimbolos.METODO,
     invert: tiposDeSimbolos.METODO,
     linear: tiposDeSimbolos.METODO,
     "linear-gradient": tiposDeSimbolos.METODO,

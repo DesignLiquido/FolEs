@@ -592,6 +592,29 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as MetodoCss;
 
+            case "inset":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'inset'.",
+                );
+
+                const valorInserir1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorInserir1: Simbolo = this.avancarEDevolverAnterior();
+
+                const arrayValoresInserir: Array<Simbolo> = [valorInserir1, quantificadorInserir1];
+
+                while (this.simbolos[this.atual].tipo === 'NUMERO' || this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    const proximoValorInserir: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresInserir.push(proximoValorInserir);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método inset.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresInserir) as MetodoCss;
+
             case "invert": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
