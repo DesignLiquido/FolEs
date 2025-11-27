@@ -16,9 +16,9 @@ export class Inset extends MetodoCss {
 
     constructor(
         valor1: Simbolo, quantificador1: Simbolo,
-        valor2: Simbolo, quantificador2: Simbolo,
-        valor3: Simbolo, quantificador3: Simbolo,
-        valor4: Simbolo, quantificador4: Simbolo,
+        valor2?: Simbolo, quantificador2?: Simbolo,
+        valor3?: Simbolo, quantificador3?: Simbolo,
+        valor4?: Simbolo, quantificador4?: Simbolo,
     ) {
         super();
         this.valor1 = Number(valor1.lexema);
