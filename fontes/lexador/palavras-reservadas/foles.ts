@@ -203,6 +203,8 @@ export default {
     perspectivar: tiposDeSimbolos.METODO,
     "projetar-sombra": tiposDeSimbolos.METODO,
     raio: tiposDeSimbolos.METODO,
+    retangulo: tiposDeSimbolos.METODO,
+    retângulo: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
     rotacionar: tiposDeSimbolos.METODO,

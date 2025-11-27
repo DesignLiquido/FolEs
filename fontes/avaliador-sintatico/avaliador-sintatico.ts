@@ -772,10 +772,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 const valorInserir1: Simbolo = this.avancarEDevolverAnterior();
                 const quantificadorInserir1: Simbolo = this.avancarEDevolverAnterior();
-
                 const arrayValoresInserir: Array<Simbolo> = [valorInserir1, quantificadorInserir1];
 
-                while (this.simbolos[this.atual].tipo === 'NUMERO' || this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
                     const proximoValorInserir: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresInserir.push(proximoValorInserir);
                 }
@@ -1042,6 +1041,50 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     numeroRaio,
                     quantificadorRaio,
                 ]) as Metodo;
+
+            case "retangulo":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'retangulo'.",
+                );
+
+                const valorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRect: Array<Simbolo> = [valorRect1, quantificadorRect1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRect: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRect.push(proximoValorRect);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método retangulo.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresRect) as Metodo;
+
+            case "retângulo":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'retangulo'.",
+                );
+
+                const valorRecta1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorRecta1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRecta: Array<Simbolo> = [valorRecta1, quantificadorRecta1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRecta: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRecta.push(proximoValorRecta);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método retangulo.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresRecta) as Metodo;
 
             case "rgb":
                 this.consumir(

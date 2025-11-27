@@ -36,6 +36,7 @@ import { Passos } from "./metodos/foles/passos";
 import { Perspectivar } from "./metodos/foles/perspectivar";
 import { ProjetarSombra } from "./metodos/foles/projetar-sombra";
 import { Raio } from "./metodos/foles/raio";
+import { Retangulo } from "./metodos/foles/retangulo";
 import { Rgb } from "./metodos/foles/rgb";
 import { Rgba } from "./metodos/foles/rgba";
 import { Rotacionar } from "./metodos/foles/rotacionar";
@@ -97,6 +98,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     perspectivar: Perspectivar,
     "projetar-sombra": ProjetarSombra,
     raio: Raio,
+    retangulo: Retangulo,
+    retângulo: Retangulo,
     rgb: Rgb,
     rgba: Rgba,
     rotacionar: Rotacionar,
