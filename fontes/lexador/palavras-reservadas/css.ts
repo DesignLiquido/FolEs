@@ -152,6 +152,7 @@ export default {
     path: tiposDeSimbolos.METODO,
     perspective: tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
+    rect: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
     rotate: tiposDeSimbolos.METODO,

@@ -603,7 +603,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 const arrayValoresInserir: Array<Simbolo> = [valorInserir1, quantificadorInserir1];
 
-                while (this.simbolos[this.atual].tipo === 'NUMERO' || this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
                     const proximoValorInserir: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresInserir.push(proximoValorInserir);
                 }
@@ -730,6 +730,28 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
 
                 return new SeletorValorReverso(lexema, arrayValoresCaminho) as MetodoCss;
+
+            case "rect":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'rect'.",
+                );
+
+                const valorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRect: Array<Simbolo> = [valorRect1, quantificadorRect1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRect: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRect.push(proximoValorRect);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método rect.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresRect) as MetodoCss;
 
             case "scale3d": {
                 this.consumir(

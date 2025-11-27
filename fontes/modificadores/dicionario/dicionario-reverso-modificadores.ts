@@ -378,6 +378,7 @@ import { ImageSet } from "../../valores/metodos/css/image-set";
 import { Hsl } from "../../valores/metodos/foles/hsl";
 import { Hsla } from "../../valores/metodos/foles/hsla";
 import { HueRotate } from "../../valores/metodos/css/hue-rotate";
+import { Inserir } from "../../valores/metodos/foles/inserir";
 import { Invert } from "../../valores/metodos/css/invert";
 import { Linear } from "../../valores/metodos/foles/linear";
 import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
@@ -385,6 +386,7 @@ import { MinMax } from "../../valores/metodos/css/minmax";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
 import { Path } from "../../valores/metodos/css/path";
 import { Ray } from "../../valores/metodos/css/ray";
+import { Rect } from "../../valores/metodos/css/rect";
 import { Rgb } from "../../valores/metodos/foles/rgb";
 import { Rgba } from "../../valores/metodos/foles/rgba";
 import { Rotate3d } from "../../valores/metodos/css/rotate3d";
@@ -408,7 +410,6 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
-import { Inserir } from "../../valores/metodos/foles/inserir";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -803,6 +804,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     ray: Ray,
     rgb: Rgb,
     rgba: Rgba,
+    rect: Rect,
     rotate3d: Rotate3d,
     rotateX: RotateX,
     rotateY: RotateY,
