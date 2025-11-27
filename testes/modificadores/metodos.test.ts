@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador, Simbolo } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodoSepia, MetodosEscalamento, MetodosFolEs, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosBasicShape, MetodoSepia, MetodosEscalamento, MetodosFolEs, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValor } from "../../fontes/valores/seletor-valor";
 import { Contador } from "../../fontes/valores/metodos/foles/contador";
@@ -346,65 +346,69 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         const valoresAceitos: Array<string> = ['50px', 'lado-mais-próximo', 'lado-mais-proximo', 'lado-mais-distante'];
         const traducaoValores: Array<string> = ['50px', 'closest-side', 'closest-side', 'farthest-side'];
 
-        for (let index = 0; index < valoresAceitos.length; index += 1) {
-            // Lexador
-            const resultadoLexador = lexador.mapear([
-                "lmht {",
-                `trajeto-deslocamento: circular(${valoresAceitos[index]});`,
-                "}"
-            ]);
+        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${MetodosBasicShape[i]['foles']}: circular(${valoresAceitos[index]});`,
+                    "}"
+                ]);
 
-            // O Lexador deve montar um objeto de comprimento 10 ou 11, sem retornar erros
-            if (index === 0) {
-                expect(resultadoLexador.simbolos).toHaveLength(11);
-            } else {
-                expect(resultadoLexador.simbolos).toHaveLength(10);
+                // O Lexador deve montar um objeto de comprimento 10 ou 11, sem retornar erros
+                if (index === 0) {
+                    expect(resultadoLexador.simbolos).toHaveLength(11);
+                } else {
+                    expect(resultadoLexador.simbolos).toHaveLength(10);
+                }
+
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com o devido nome CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(MetodosBasicShape[i]['css']);
+
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['css']);
+                expect(resultadoResolvedor).toContain('circle');
+                expect(resultadoResolvedor).toContain(traducaoValores[index]);
             }
-
-            expect(resultadoLexador.erros).toHaveLength(0);
-
-            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
-            expect(resultadoLexador.simbolos).toEqual(
-                expect.arrayContaining([
-                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
-                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-                ])
-            );
-
-            // Avaliador Sintático
-            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-
-            // O Avaliador deve montar um objeto com o devido nome CSS
-            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
-            const primeiroResultado = resultadoAvaliadorSintatico[0];
-            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
-            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('offset-path');
-
-            // Resolvedor
-            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
-            expect(resultadoResolvedor).toContain('offset-path');
-            expect(resultadoResolvedor).toContain('circle');
-            expect(resultadoResolvedor).toContain(traducaoValores[index]);
         }
     });
 
     it('Atribuindo Método "circular()" - caso de falha', () => {
-        // Lexador
-        const resultadoLexador = lexador.mapear([
-            "lmht {",
-            `trajeto-deslocamento: circular(lado-proximo);`,
-            "}"
-        ]);
+        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `${MetodosBasicShape[i]['foles']}: circular(lado-proximo);`,
+                "}"
+            ]);
 
-        // Avaliador Sintático
-        const resultadoAvaliador = avaliador.analisar(resultadoLexador.simbolos);
+            // Avaliador Sintático
+            const resultadoAvaliador = avaliador.analisar(resultadoLexador.simbolos);
 
-        // Resolvedor deve retornar erro de valor inválido
-        expect(() => {
-            resolvedor.resolver(resultadoAvaliador);
-        }).toThrow("Valor lado-proximo inválido para o método 'circular'");
+            // Resolvedor deve retornar erro de valor inválido
+            expect(() => {
+                resolvedor.resolver(resultadoAvaliador);
+            }).toThrow("Valor lado-proximo inválido para o método 'circular'");
+        }
     });
 
     it('Atribuindo Método "conjunto-estilos()" - caso de sucesso', () => {
@@ -1737,41 +1741,43 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     it('Atribuindo Método "inserir()" - casos de sucesso', () => {
         const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
 
-        for (let index = 0; index < valoresAceitos.length; index += 1) {
-            // Lexador
-            const resultadoLexador = lexador.mapear([
-                "lmht {",
-                `forma-externa: inserir(${valoresAceitos[index]});`,
-                "}"
-            ]);
+        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${MetodosBasicShape[i]['foles']}: inserir(${valoresAceitos[index]});`,
+                    "}"
+                ]);
 
-            // O Lexador deve montar um objeto sem retornar erros
-            expect(resultadoLexador.erros).toHaveLength(0);
+                // O Lexador deve montar um objeto sem retornar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
 
-            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
-            expect(resultadoLexador.simbolos).toEqual(
-                expect.arrayContaining([
-                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
-                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-                ])
-            );
+                // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
 
-            // Avaliador Sintático
-            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
-            // O Avaliador deve montar um objeto com o devido nome CSS
-            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
-            const primeiroResultado = resultadoAvaliadorSintatico[0];
-            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
-            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('shape-outside');
+                // O Avaliador deve montar um objeto com o devido nome CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(MetodosBasicShape[i]['css']);
 
-            // Resolvedor
-            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
-            expect(resultadoResolvedor).toContain('shape-outside');
-            expect(resultadoResolvedor).toContain('inset');
-            expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['css']);
+                expect(resultadoResolvedor).toContain('inset');
+                expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+            }
         }
     });
 
