@@ -54,6 +54,7 @@ import { TranslacaoHorizontal } from "./metodos/foles/translacao-horizontal";
 import { TranslacaoVertical } from "./metodos/foles/translacao-vertical";
 import { Url } from "./metodos/foles/url";
 import { VariarCaractere } from "./metodos/foles/variar-caractere";
+import { Xywh } from "./metodos/foles/xywh";
 
 export const DicionarioValores: { [nomeFolEs: string]: any } = {
     anotacao: Anotacao,
@@ -123,4 +124,5 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "translação-vertical": TranslacaoVertical,
     "variar-caractere": VariarCaractere,
     url: Url,
+    xywh: Xywh,
 };

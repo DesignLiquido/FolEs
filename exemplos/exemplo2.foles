@@ -3,6 +3,7 @@ lmht {
     trajeto-deslocamento: circular(lado-mais-proximo);
     forma-externa: inserir(1rem 30% 3px 4rem);
     caminho-recorte: retangulo(2em 40% 5% 60px);
+    trajeto-deslocamento: xywh(10% 10px 5em 6px);
     margem-superior: 12px;
 }
 

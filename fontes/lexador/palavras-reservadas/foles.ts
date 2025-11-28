@@ -228,6 +228,7 @@ export default {
     "translação-vertical": tiposDeSimbolos.METODO,
     "variar-caractere": tiposDeSimbolos.METODO,
     url: tiposDeSimbolos.METODO,
+    xywh: tiposDeSimbolos.METODO,
 
     // Pseudoclasses
     "alvo-destaque": tiposDeSimbolos.PSEUDO_CLASSE,
