@@ -180,6 +180,7 @@ export default {
     translateX: tiposDeSimbolos.METODO,
     translate: tiposDeSimbolos.METODO,
     url: tiposDeSimbolos.METODO,
+    xywh: tiposDeSimbolos.METODO,
 
     // Pseudoclasses
     "target-within": tiposDeSimbolos.PSEUDO_CLASSE,

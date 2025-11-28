@@ -1,5 +1,6 @@
 div {
     offset-path: circle(closest-side);
+    shape-outside: xywh(50% 50px 40em 4%);
     backdrop-filter: blur(10);
     gap: calc(100px - 10px);
     filter: contrast(50);

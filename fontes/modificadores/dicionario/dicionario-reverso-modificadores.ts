@@ -378,7 +378,7 @@ import { ImageSet } from "../../valores/metodos/css/image-set";
 import { Hsl } from "../../valores/metodos/foles/hsl";
 import { Hsla } from "../../valores/metodos/foles/hsla";
 import { HueRotate } from "../../valores/metodos/css/hue-rotate";
-import { Inserir } from "../../valores/metodos/foles/inserir";
+// import { Inserir } from "../../valores/metodos/foles/inserir";
 import { Invert } from "../../valores/metodos/css/invert";
 import { Linear } from "../../valores/metodos/foles/linear";
 import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
@@ -411,6 +411,7 @@ import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
 import { CaminhoRecorte } from "../caminho-recorte";
+import { Xywh } from "../../valores/metodos/foles/xywh";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -828,4 +829,5 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     translateX: TranslateX,
     translateY: TranslateY,
     translateZ: TranslateZ,
+    xywh: Xywh,
 };

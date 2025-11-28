@@ -1878,6 +1878,28 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         quantificadorTranslaçaoZ,
                     ]
                 ) as MetodoCss;
+
+            case "xywh":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'xywh'.",
+                );
+
+                const valorXywh: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorXywh: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresXywh: Array<Simbolo> = [valorXywh, quantificadorXywh];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorXywh: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresXywh.push(proximoValorXywh);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método xywh.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresXywh) as MetodoCss;
         }
     }
 
