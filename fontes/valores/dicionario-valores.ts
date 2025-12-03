@@ -35,6 +35,7 @@ import { Opacar } from "./metodos/foles/opacar";
 import { Ornamentos } from "./metodos/foles/ornamentos";
 import { Passos } from "./metodos/foles/passos";
 import { Perspectivar } from "./metodos/foles/perspectivar";
+import { Poligono } from "./metodos/foles/poligono";
 import { ProjetarSombra } from "./metodos/foles/projetar-sombra";
 import { Raio } from "./metodos/foles/raio";
 import { Retangulo } from "./metodos/foles/retangulo";
@@ -99,6 +100,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     ornamentos: Ornamentos,
     passos: Passos,
     perspectivar: Perspectivar,
+    poligono: Poligono,
+    polígono: Poligono,
     "projetar-sombra": ProjetarSombra,
     raio: Raio,
     retangulo: Retangulo,

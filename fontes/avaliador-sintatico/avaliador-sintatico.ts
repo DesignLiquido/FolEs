@@ -387,7 +387,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 return new SeletorValor(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as Metodo;
 
-            case "elipse":                
+            case "elipse":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'elipse'.",
@@ -401,7 +401,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     const proximoValorElipse: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresElipse.push(proximoValorElipse);
                 }
-                
+
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após último argumento do método 'elipse'.",
@@ -996,6 +996,64 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorPerspectivar,
                     quantificadorPerspectivar,
                 ]) as Metodo;
+
+            case "poligono":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'poligono'.",
+                );
+
+                const valorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresPoligono: Array<Simbolo> = [valorPoligono, quantificadorPoligono];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresPoligono.push(proximoValorPoligono);
+                    } else {
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'poligono'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'poligono'.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresPoligono) as Metodo;
+
+            case "polígono":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'polígono'.",
+                );
+
+                const valorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresPoligono1: Array<Simbolo> = [valorPoligono1, quantificadorPoligono1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresPoligono1.push(proximoValorPoligono1);
+                    } else {
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'poligono'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'polígono'.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresPoligono1) as Metodo;
 
             case "projetar-sombra":
                 this.consumir(

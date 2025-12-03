@@ -10,6 +10,7 @@ lmht {
 lmht {
     borda: 50px;
     trajeto-deslocamento: elipse(10% 10px 5em 6px);
+    forma-externa: polígono(10px 10px, 100px 100px, 200px 200px);
 }
 
 lmht {

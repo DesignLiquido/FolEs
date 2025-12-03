@@ -202,6 +202,8 @@ export default {
     opacar: tiposDeSimbolos.METODO,
     passos: tiposDeSimbolos.METODO,
     perspectivar: tiposDeSimbolos.METODO,
+    poligono: tiposDeSimbolos.METODO,
+    polígono: tiposDeSimbolos.METODO,
     "projetar-sombra": tiposDeSimbolos.METODO,
     raio: tiposDeSimbolos.METODO,
     retangulo: tiposDeSimbolos.METODO,
