@@ -372,6 +372,7 @@ import { Contrast } from "../../valores/metodos/css/constrast";
 import { Counter } from "../../valores/metodos/css/counter";
 import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
 import { DropShadow } from "../../valores/metodos/css/drop-shadow";
+import { Ellipse } from "../../valores/metodos/css/ellipse";
 import { FitContent } from "../../valores/metodos/css/fit-content";
 import { Grayscale } from "../../valores/metodos/css/grayscale";
 import { ImageSet } from "../../valores/metodos/css/image-set";
@@ -791,6 +792,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     counter: Counter,
     "cubic-bezier": CubicBezier,
     "drop-shadow": DropShadow,
+    ellipse: Ellipse,
     "fit-content": FitContent,
     grayscale: Grayscale,
     "image-set": ImageSet,

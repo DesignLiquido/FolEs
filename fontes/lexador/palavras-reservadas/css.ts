@@ -136,6 +136,7 @@ export default {
     counter: tiposDeSimbolos.METODO,
     "cubic-bezier": tiposDeSimbolos.METODO,
     "drop-shadow": tiposDeSimbolos.METODO,
+    ellipse: tiposDeSimbolos.METODO,
     "fit-content": tiposDeSimbolos.METODO,
     grayscale: tiposDeSimbolos.METODO,
     "image-set": tiposDeSimbolos.METODO,

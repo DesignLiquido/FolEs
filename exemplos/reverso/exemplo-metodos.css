@@ -9,6 +9,7 @@ div {
 }
 
 p {
+    offset-path: ellipse(50% 50px 40em 4%);
     backdrop-filter: grayscale(10%);
     transform: scale3d(1, 1, 1);
     border-image-source: linear-gradient(45deg, blue, red);
