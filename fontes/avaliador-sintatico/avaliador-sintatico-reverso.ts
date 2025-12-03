@@ -753,6 +753,35 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, arrayValoresCaminho) as MetodoCss;
 
+            case "polygon":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'polygon'.",
+                );
+
+                const valorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresPoligono: Array<Simbolo> = [valorPoligono, quantificadorPoligono];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresPoligono.push(proximoValorPoligono);
+                    } else {
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'polygon'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'polygon'.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresPoligono) as MetodoCss;
+
             case "rect":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

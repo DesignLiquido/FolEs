@@ -29,6 +29,7 @@ import { BordaInferior } from "../borda-inferior";
 import { BordaMascara } from "../borda-mascara";
 import { BordaSuperior } from "../borda-superior";
 import { CalhaBarraRolagem } from "../calha-barra-rolagem";
+import { CaminhoRecorte } from "../caminho-recorte";
 import { CelulasVazias } from "../celulas-vazias";
 import { Citacoes } from "../citacoes";
 import { ColunaEmGrade } from "../coluna-em-grade";
@@ -386,6 +387,7 @@ import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
 import { MinMax } from "../../valores/metodos/css/minmax";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
 import { Path } from "../../valores/metodos/css/path";
+import { Polygon } from "../../valores/metodos/css/polygon";
 import { Ray } from "../../valores/metodos/css/ray";
 import { Rect } from "../../valores/metodos/css/rect";
 import { Rgb } from "../../valores/metodos/foles/rgb";
@@ -411,7 +413,6 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
-import { CaminhoRecorte } from "../caminho-recorte";
 import { Xywh } from "../../valores/metodos/foles/xywh";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
@@ -806,6 +807,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     minmax: MinMax,
     ornaments: Ornaments,
     path: Path,
+    polygon: Polygon,
     ray: Ray,
     rgb: Rgb,
     rgba: Rgba,

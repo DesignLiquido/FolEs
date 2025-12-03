@@ -152,6 +152,7 @@ export default {
     ornaments: tiposDeSimbolos.METODO,
     path: tiposDeSimbolos.METODO,
     perspective: tiposDeSimbolos.METODO,
+    polygon: tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
     rect: tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
