@@ -2352,6 +2352,50 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         }
     });
 
+    it('Atribuindo Método "polígono()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = ['50px 50px, 100px 100px, 200px 200px', '50% 50%, 100em 100em, 200pp 200px, 300% 300em'];
+        const formasAceitas: Array<string> = ['poligono', 'polígono', 'polígono'];
+
+        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "lmht {",
+                    `${MetodosBasicShape[i]['foles']}: ${formasAceitas[i]}(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+                
+                // O Lexador deve montar um objeto sem retornar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com o devido nome CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual(MetodosBasicShape[i]['css']);
+
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['css']);
+                expect(resultadoResolvedor).toContain('polygon');
+                expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+            }
+        }
+    });
+
     it('Atribuindo Método "projetar-sombra()" com valores de comprimento somente', () => {
         for (let index = 0; index < MetodoProjetarSombra.length; index += 1) {
             const comprimentos = ['15px 15px', '15px 15px 15px', '0.5rem 0.5rem', '0.5rem 0.5rem 1rem'];
