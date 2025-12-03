@@ -174,6 +174,7 @@ export default {
     "curva-cúbica": tiposDeSimbolos.METODO,
     "definir-caminho": tiposDeSimbolos.METODO,
     "definir-imagem": tiposDeSimbolos.METODO,
+    elipse: tiposDeSimbolos.METODO,
     "encaixar-conteudo": tiposDeSimbolos.METODO,
     "encaixar-conteúdo": tiposDeSimbolos.METODO,
     "escala-cinza": tiposDeSimbolos.METODO,

@@ -9,6 +9,7 @@ lmht {
 
 lmht {
     borda: 50px;
+    trajeto-deslocamento: elipse(10% 10px 5em 6px);
 }
 
 lmht {
