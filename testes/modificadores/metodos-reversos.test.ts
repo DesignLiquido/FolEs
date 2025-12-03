@@ -1539,6 +1539,49 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "ellipse()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
+
+        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "div {",
+                    `${MetodosBasicShape[i]['css']}: ellipse(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                // O Lexador deve montar um objeto sem retornar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com o devido nome CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(MetodosBasicShape[i]['foles']);
+
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['foles']);
+                expect(resultadoResolvedor).toContain('elipse');
+                expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+            }
+        }
+    });
+
     it('Atribuindo Método "linear()"', () => {
         for (let index = 0; index < MetodoLinear.length; index += 1) {
             // Lexador

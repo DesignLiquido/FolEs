@@ -401,7 +401,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     const proximoValorElipse: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresElipse.push(proximoValorElipse);
                 }
-                console.log(arrayValoresElipse);
                 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
