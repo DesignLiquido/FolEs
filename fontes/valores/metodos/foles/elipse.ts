@@ -43,8 +43,9 @@ export class Elipse extends Metodo {
         this.traducao = "ellipse";
 
         this.valoresAceitos = {
-            "closest-side": "lado-mais-próximo",
-            "farthest-side": "lado-mais-distante",
+            "lado-mais-próximo": "closest-side",
+            "lado-mais-proximo": "closest-side",
+            "lado-mais-distante": "farthest-side",
         };
     }
 
