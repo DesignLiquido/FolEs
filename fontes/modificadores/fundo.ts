@@ -39,7 +39,7 @@ export class Fundo extends Modificador {
     ) {
         super("fundo", "background", pragmas);
 
-        const valoresExtra: Array<string> = ['repeating-conic-gradient'];
+        const valoresExtra: Array<string> = ['repeating-conic-gradient', 'repeating-radial-gradient'];
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(

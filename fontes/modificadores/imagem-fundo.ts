@@ -15,7 +15,7 @@ export class ImagemFundo extends Modificador {
     ) {
         super("imagem-fundo", "background-image", pragmas);
 
-        const valoresExtra: Array<string> = ['image-set', 'repeating-conic-gradient'];
+        const valoresExtra: Array<string> = ['image-set', 'repeating-conic-gradient', 'repeating-radial-gradient'];
 
         if (!variavel) {
             validarValores(

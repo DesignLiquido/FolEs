@@ -1180,6 +1180,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 return new SeletorValor(lexema, arrayValoresConico1) as Metodo;
 
+            case "repetir-gradiente-radial":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repetir-gradiente-radial'.",
+                );
+
+                const parametroRadial: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRadial: Array<Simbolo> = [parametroRadial];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresRadial.push(proximoValorRadial);
+                    } else {                        
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'repetir-gradiente-radial'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-conico'.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresRadial) as Metodo;
+
             case "retangulo":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
