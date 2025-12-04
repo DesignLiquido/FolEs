@@ -38,6 +38,7 @@ import { Perspectivar } from "./metodos/foles/perspectivar";
 import { Poligono } from "./metodos/foles/poligono";
 import { ProjetarSombra } from "./metodos/foles/projetar-sombra";
 import { Raio } from "./metodos/foles/raio";
+import { RepetirGradienteConico } from "./metodos/foles/repetir-gradiente-conico";
 import { Retangulo } from "./metodos/foles/retangulo";
 import { Rgb } from "./metodos/foles/rgb";
 import { Rgba } from "./metodos/foles/rgba";
@@ -104,6 +105,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     polígono: Poligono,
     "projetar-sombra": ProjetarSombra,
     raio: Raio,
+    "repetir-gradiente-conico": RepetirGradienteConico,
+    "repetir-gradiente-cônico": RepetirGradienteConico,
     retangulo: Retangulo,
     retângulo: Retangulo,
     rgb: Rgb,

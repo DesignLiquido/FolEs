@@ -11,6 +11,7 @@ lmht {
     borda: 50px;
     trajeto-deslocamento: elipse(10% 10px 5em 6px);
     forma-externa: polígono(10px 10px, 100px 100px, 200px 200px);
+    imagem-fundo: repetir-gradiente-cônico(vermelho 20px 10px, azul 30% 20px, verde 10% 15deg);
 }
 
 lmht {
