@@ -24,6 +24,7 @@ html {
     transform: skewY(15deg);
     backdrop-filter: invert(50%);
     grid-template-columns: minmax(100px, max-content);
+    background-image: repeating-radial-gradient(circle, 20px 2px 200px, 10% 1% 100%);
 }
 
 div {

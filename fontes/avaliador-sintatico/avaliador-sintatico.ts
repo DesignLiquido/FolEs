@@ -1203,7 +1203,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-conico'.",
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
                 );
 
                 return new SeletorValor(lexema, arrayValoresRadial) as Metodo;

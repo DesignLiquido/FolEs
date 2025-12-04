@@ -2505,6 +2505,49 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "rect()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
+
+        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
+            for (let index = 0; index < valoresAceitos.length; index += 1) {
+                // Lexador
+                const resultadoLexador = lexador.mapear([
+                    "div {",
+                    `${MetodosBasicShape[i]['css']}: rect(${valoresAceitos[index]});`,
+                    "}"
+                ]);
+
+                // O Lexador deve montar um objeto sem retornar erros
+                expect(resultadoLexador.erros).toHaveLength(0);
+
+                // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+                expect(resultadoLexador.simbolos).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                    ])
+                );
+
+                // Avaliador Sintático
+                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+                // O Avaliador deve montar um objeto com o devido nome CSS
+                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+                const primeiroResultado = resultadoAvaliadorSintatico[0];
+                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(MetodosBasicShape[i]['foles']);
+
+                // Resolvedor
+                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+                expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['foles']);
+                expect(resultadoResolvedor).toContain('retângulo');
+                expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+            }
+        }
+    });
+
     it('Atribuindo Método "repetir-gradiente-cônico()" - casos de sucesso', () => {
         const valoresAceitos: Array<string> = [
             'red 20px 10px',
@@ -2556,46 +2599,62 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    it('Atribuindo Método "rect()" - casos de sucesso', () => {
-        const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
+    it('Atribuindo Método "repeating-radial-gradient()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = [
+            'closest-side, 20px',
+            'farthest-side, 20px 2px 200px',
+            'farthest-corner, 30px 3px 300px',
+            'green, 100deg',
+            'black, 20px 2px 200px',
+            'circle, 20px 2px 200px, 10% 1% 100%',
+            'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
+        ];
 
-        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
-            for (let index = 0; index < valoresAceitos.length; index += 1) {
-                // Lexador
-                const resultadoLexador = lexador.mapear([
-                    "div {",
-                    `${MetodosBasicShape[i]['css']}: rect(${valoresAceitos[index]});`,
-                    "}"
-                ]);
+        const traducaoValoresAceitos: Array<string> = [
+            'lado-mais-próximo, 20px',
+            'lado-mais-distante, 20px 2px 200px',
+            'canto-mais-distante, 30px 3px 300px',
+            'verde, 100deg',
+            'preto, 20px 2px 200px',
+            'círculo, 20px 2px 200px, 10% 1% 100%',
+            'canto-mais-próximo, 20% 2% 200%, 10deg 1deg 100deg',
+        ];
 
-                // O Lexador deve montar um objeto sem retornar erros
-                expect(resultadoLexador.erros).toHaveLength(0);
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `background-image: repeating-radial-gradient(${valoresAceitos[index]});`,
+                "}"
+            ]);
 
-                // O Lexador deve mapear METODO e IDENTIFICADOR no processo
-                expect(resultadoLexador.simbolos).toEqual(
-                    expect.arrayContaining([
-                        expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
-                        expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
-                    ])
-                );
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
 
-                // Avaliador Sintático
-                const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
 
-                // O Avaliador deve montar um objeto com o devido nome CSS
-                expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
-                const primeiroResultado = resultadoAvaliadorSintatico[0];
-                expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
-                expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
-                expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual(MetodosBasicShape[i]['foles']);
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
-                // Resolvedor
-                const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
-                expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['foles']);
-                expect(resultadoResolvedor).toContain('retângulo');
-                expect(resultadoResolvedor).toContain(valoresAceitos[index]);
-            }
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('imagem-fundo');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('imagem-fundo');
+            expect(resultadoResolvedor).toContain('repetir-gradiente-radial');
+            expect(resultadoResolvedor).toContain(traducaoValoresAceitos[index]);
         }
     });
 
