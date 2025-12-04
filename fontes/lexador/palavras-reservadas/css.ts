@@ -155,6 +155,7 @@ export default {
     polygon: tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
     rect: tiposDeSimbolos.METODO,
+    "repeating-conic-gradient": tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,
     rotate: tiposDeSimbolos.METODO,

@@ -16,6 +16,7 @@ p {
     border-image-source: linear-gradient(45deg, blue, red);
     height: clamp(1.5rem, 2.5vw, 4rem);
     color: rgba(150, 0, 150);
+    background-image: repeating-conic-gradient(red 100deg 20deg, blue 20deg 40deg, green 40% 50px);
 }
 
 html {

@@ -804,6 +804,35 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, arrayValoresRect) as MetodoCss;
 
+            case "repeating-conic-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repeating-conic-gradient'.",
+                );
+
+                const valorConico: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorConico: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresConico: Array<Simbolo> = [valorConico, quantificadorConico];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresConico.push(proximoValorConico);
+                    } else {
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'repeating-conic-gradient'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repeating-conic-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresConico) as MetodoCss;
+
             case "scale3d": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
