@@ -450,6 +450,22 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 ) as MetodoCss;
             }
 
+            case "element":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'element'.",
+                );
+
+                const simboloElemento: Simbolo = this.avancarEDevolverAnterior();
+                const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();                
+                
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'element'.",
+                );
+
+                return new SeletorValorReverso(lexema, [simboloElemento, referenciaElemento]) as MetodoCss;
+
             case "ellipse":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

@@ -136,6 +136,7 @@ export default {
     counter: tiposDeSimbolos.METODO,
     "cubic-bezier": tiposDeSimbolos.METODO,
     "drop-shadow": tiposDeSimbolos.METODO,
+    element: tiposDeSimbolos.METODO,
     ellipse: tiposDeSimbolos.METODO,
     "fit-content": tiposDeSimbolos.METODO,
     grayscale: tiposDeSimbolos.METODO,
@@ -454,7 +455,6 @@ export default {
     "max-content": tiposDeSimbolos.QUALITATIVO,
     "min-content": tiposDeSimbolos.QUALITATIVO,
     distribute: tiposDeSimbolos.QUALITATIVO,
-    element: tiposDeSimbolos.QUALITATIVO,
     "inter-character": tiposDeSimbolos.QUALITATIVO,
     "inter-word": tiposDeSimbolos.QUALITATIVO,
     dark: tiposDeSimbolos.QUALITATIVO,
@@ -776,4 +776,5 @@ export default {
     // "fit-content": tiposDeSimbolos.QUALITATIVO,
     // contain: tiposDeSimbolos.QUALITATIVO,
     // "circle": tiposDeSimbolos.QUALITATIVO,
+    // element: tiposDeSimbolos.QUALITATIVO,
 };

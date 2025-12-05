@@ -214,7 +214,7 @@ export class LexadorReverso implements LexadorInterface {
                 this.avancar();
                 break;
             case "#":
-                this.adicionarSimbolo(tiposDeSimbolos.CERQUILHA);
+                this.adicionarSimbolo(tiposDeSimbolos.CERQUILHA, null, "#");
                 this.avancar();
                 break;
             case " ":
