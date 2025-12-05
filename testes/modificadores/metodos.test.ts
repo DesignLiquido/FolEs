@@ -752,6 +752,60 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         expect(resultadoResolvedor).toContain('image-set');
     });
 
+    it('Atribuindo Método "elemento()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = ['#avatar', '#meu-id', '#meuId', '#meu-id-super-mega-personalizado'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `imagem-fundo: elemento(${valoresAceitos[index]});`,
+                "}",
+            ]);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-image');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('background-image');
+            expect(resultadoResolvedor).toContain('element');
+            expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+        }
+    });
+
+    it('Atribuindo Método "elemento()" - caso de falha', () => {
+        const resultadoLexador = lexador.mapear([
+            "lmht {",
+            `imagem-fundo: elemento(.minha-classe);`,
+            "}",
+        ]);
+
+        const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+        expect(() => {
+            resolvedor.resolver(resultadoAvaliadorSintatico);
+        }).toThrow('Atribuição inválida de referência para a função elemento(). O valor deve ser um id válido (ex.: #meu-id)');
+    });
+
     it('Atribuindo Método "elipse()" - casos de sucesso', () => {
         const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
 

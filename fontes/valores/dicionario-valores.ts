@@ -9,6 +9,7 @@ import { Contraste } from "./metodos/foles/contraste";
 import { CurvaCubica } from "./metodos/foles/curva-cubica";
 import { DefinirCaminho } from "./metodos/foles/definir-caminho";
 import { DefinirImagem } from "./metodos/foles/definir-imagem";
+import { Elemento } from "./metodos/foles/elemento";
 import { Elipse } from "./metodos/foles/elipse";
 import { EncaixarConteudo } from "./metodos/foles/encaixar-conteudo";
 import { EscalaCinza } from "./metodos/foles/escala-cinza";
@@ -74,6 +75,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "curva-cúbica": CurvaCubica,
     "definir-caminho": DefinirCaminho,
     "definir-imagem": DefinirImagem,
+    elemento: Elemento,
     elipse: Elipse,
     "encaixar-conteudo": EncaixarConteudo,
     "encaixar-conteúdo": EncaixarConteudo,

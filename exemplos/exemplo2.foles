@@ -19,3 +19,7 @@ lmht {
     recursos-fonte: "c2sc", "hist";
     citacoes: "blabla";
 }
+
+lmht {
+    imagem-fundo: elemento(#meu-id);
+} 

@@ -387,6 +387,22 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 return new SeletorValor(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as Metodo;
 
+            case "elemento":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'elemento'.",
+                );
+
+                const simboloElemento: Simbolo = this.avancarEDevolverAnterior();
+                const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();
+                
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'elemento'.",
+                );
+
+                return new SeletorValor(lexema, [simboloElemento, referenciaElemento]) as Metodo;
+
             case "elipse":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
