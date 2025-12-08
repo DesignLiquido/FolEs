@@ -209,6 +209,7 @@ export default {
     raio: tiposDeSimbolos.METODO,
     "repetir-gradiente-conico": tiposDeSimbolos.METODO,
     "repetir-gradiente-cônico": tiposDeSimbolos.METODO,
+    "repetir-gradiente-linear": tiposDeSimbolos.METODO,
     "repetir-gradiente-radial": tiposDeSimbolos.METODO,
     retangulo: tiposDeSimbolos.METODO,
     retângulo: tiposDeSimbolos.METODO,

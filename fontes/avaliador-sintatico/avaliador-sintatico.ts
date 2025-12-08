@@ -395,7 +395,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 const simboloElemento: Simbolo = this.avancarEDevolverAnterior();
                 const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();
-                
+
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'elemento'.",
@@ -1196,6 +1196,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
                 return new SeletorValor(lexema, arrayValoresConico1) as Metodo;
 
+            case "repetir-gradiente-linear":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repetir-gradiente-linear'.",
+                );
+
+                const parametroLinear: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresLinear: Array<Simbolo> = [parametroLinear];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresLinear.push(proximoValorLinear);
+                    } else {
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'repetir-gradiente-linear'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresLinear) as Metodo;
+
             case "repetir-gradiente-radial":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -1209,7 +1237,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
                         const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
                         arrayValoresRadial.push(proximoValorRadial);
-                    } else {                        
+                    } else {
                         this.consumir(
                             tiposDeSimbolos.VIRGULA,
                             "Esperada vírgula após argumento do método 'repetir-gradiente-radial'.",

@@ -5,6 +5,7 @@ lmht {
     caminho-recorte: retangulo(2em 40% 5% 60px);
     trajeto-deslocamento: xywh(10% 10px 5em 6px);
     margem-superior: 12px;
+    imagem-fundo: repetir-gradiente-linear(círculo, 20px 2px 200px, 10% 1% 100%);
 }
 
 lmht {

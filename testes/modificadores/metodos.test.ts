@@ -2783,6 +2783,59 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         }
     });
 
+    it('Atribuindo Método "repetir-gradiente-linear()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = [
+            'vermelho, 20px',
+            'azul, 20px 2px 200px',
+            'verde, 30px 3px 300px',
+            'preto, 20px 2px 200px',
+        ];
+
+        const traducaoValoresAceitos: Array<string> = [
+            'red, 20px',
+            'blue, 20px 2px 200px',
+            'green, 30px 3px 300px',
+            'black, 20px 2px 200px',
+        ];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `imagem-fundo: repetir-gradiente-linear(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-image');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('background-image');
+            expect(resultadoResolvedor).toContain('repeating-linear-gradient');
+            expect(resultadoResolvedor).toContain(traducaoValoresAceitos[index]);
+        }
+    });
+
     it('Atribuindo Método "retangulo()" - casos de sucesso', () => {
         const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
         const formasAceitas: Array<string> = ['retangulo', 'retângulo', 'retangulo'];

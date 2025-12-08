@@ -40,6 +40,7 @@ import { Poligono } from "./metodos/foles/poligono";
 import { ProjetarSombra } from "./metodos/foles/projetar-sombra";
 import { Raio } from "./metodos/foles/raio";
 import { RepetirGradienteConico } from "./metodos/foles/repetir-gradiente-conico";
+import { RepetirGradienteLinear } from "./metodos/foles/repetir-gradiente-linear";
 import { RepetirGradienteRadial } from "./metodos/foles/repetir-gradiente-radial";
 import { Retangulo } from "./metodos/foles/retangulo";
 import { Rgb } from "./metodos/foles/rgb";
@@ -110,6 +111,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     raio: Raio,
     "repetir-gradiente-conico": RepetirGradienteConico,
     "repetir-gradiente-cônico": RepetirGradienteConico,
+    "repetir-gradiente-linear": RepetirGradienteLinear,
     "repetir-gradiente-radial": RepetirGradienteRadial,
     retangulo: Retangulo,
     retângulo: Retangulo,
