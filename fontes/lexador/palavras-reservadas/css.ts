@@ -157,6 +157,7 @@ export default {
     ray: tiposDeSimbolos.METODO,
     rect: tiposDeSimbolos.METODO,
     "repeating-conic-gradient": tiposDeSimbolos.METODO,
+    "repeating-linear-gradient": tiposDeSimbolos.METODO,
     "repeating-radial-gradient": tiposDeSimbolos.METODO,
     rgb: tiposDeSimbolos.METODO,
     rgba: tiposDeSimbolos.METODO,

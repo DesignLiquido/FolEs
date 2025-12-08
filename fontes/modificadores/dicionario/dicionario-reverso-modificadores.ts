@@ -392,6 +392,7 @@ import { Polygon } from "../../valores/metodos/css/polygon";
 import { Ray } from "../../valores/metodos/css/ray";
 import { Rect } from "../../valores/metodos/css/rect";
 import { RepeatingConicGradient } from "../../valores/metodos/css/repeating-conic-gradient";
+import { RepeatingLinearGradient } from "../../valores/metodos/css/repeating-linear-gradient";
 import { RepeatRadialGradient } from "../../valores/metodos/css/repeating-radial-gradient";
 import { Rgb } from "../../valores/metodos/foles/rgb";
 import { Rgba } from "../../valores/metodos/foles/rgba";
@@ -817,6 +818,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     rgba: Rgba,
     rect: Rect,
     "repeating-conic-gradient": RepeatingConicGradient,
+    "repeating-linear-gradient": RepeatingLinearGradient,
     "repeating-radial-gradient": RepeatRadialGradient,
     rotate3d: Rotate3d,
     rotateX: RotateX,

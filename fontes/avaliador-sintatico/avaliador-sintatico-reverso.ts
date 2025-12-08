@@ -457,8 +457,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
 
                 const simboloElemento: Simbolo = this.avancarEDevolverAnterior();
-                const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();                
-                
+                const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();
+
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'element'.",
@@ -849,6 +849,34 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, arrayValoresConico) as MetodoCss;
 
+            case "repeating-linear-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repeating-linear-gradient'.",
+                );
+
+                const parametroLinear: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresLinear: Array<Simbolo> = [parametroLinear];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
+                        const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
+                        arrayValoresLinear.push(proximoValorLinear);
+                    } else {
+                        this.consumir(
+                            tiposDeSimbolos.VIRGULA,
+                            "Esperada vírgula após argumento do método 'repeating-linear-gradient'.",
+                        );
+                    }
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repeating-linear-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresLinear) as MetodoCss;
+
             case "repeating-radial-gradient":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -872,7 +900,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
+                    "Esperado parêntese direito após último argumento do método 'repeating-radial-gradient'.",
                 );
 
                 return new SeletorValorReverso(lexema, arrayValoresRadial) as MetodoCss;

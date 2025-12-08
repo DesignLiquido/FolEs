@@ -38,6 +38,7 @@ div {
 a {
     backdrop-filter: hue-rotate(90deg);
     transform: translateX(200px);
+    background-image: repeating-linear-gradient(green, 20px 2px 200px, 10% 1% 100%);
 }
 
 p {
