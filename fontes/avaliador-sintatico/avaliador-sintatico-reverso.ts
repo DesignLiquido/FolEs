@@ -817,20 +817,10 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'repeating-conic-gradient'.",
                 );
 
-                const valorConico: Simbolo = this.avancarEDevolverAnterior();
-                const quantificadorConico: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresConico: Array<Simbolo> = [valorConico, quantificadorConico];
-
+                const arrayValoresConico: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresConico.push(proximoValorConico);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repeating-conic-gradient'.",
-                        );
-                    }
+                    const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresConico.push(proximoValorConico);
                 }
 
                 this.consumir(
@@ -838,7 +828,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'repeating-conic-gradient'.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresConico) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresConico]) as MetodoCss;
 
             case "repeating-linear-gradient":
                 this.consumir(
@@ -846,19 +836,10 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'repeating-linear-gradient'.",
                 );
 
-                const parametroLinear: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresLinear: Array<Simbolo> = [parametroLinear];
-
+                const arrayValoresLinear: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresLinear.push(proximoValorLinear);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repeating-linear-gradient'.",
-                        );
-                    }
+                    const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresLinear.push(proximoValorLinear);
                 }
 
                 this.consumir(
@@ -866,7 +847,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'repeating-linear-gradient'.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresLinear) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresLinear]) as MetodoCss;
 
             case "repeating-radial-gradient":
                 this.consumir(
@@ -874,19 +855,10 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'repeating-radial-gradient'.",
                 );
 
-                const parametroRadial: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresRadial: Array<Simbolo> = [parametroRadial];
-
+                const arrayValoresRadial: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
                         const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresRadial.push(proximoValorRadial);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repeating-radial-gradient'.",
-                        );
-                    }
+                        arrayValoresRadial.push(proximoValorRadial);                   
                 }
 
                 this.consumir(
@@ -894,7 +866,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'repeating-radial-gradient'.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresRadial) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresRadial]) as MetodoCss;
 
             case "scale3d": {
                 this.consumir(
