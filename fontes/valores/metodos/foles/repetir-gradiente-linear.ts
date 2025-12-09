@@ -1,5 +1,5 @@
 import { Simbolo } from "../../../lexador";
-import { cores } from "../../../modificadores/atributos/cores";
+import { tratarValores } from "../comum";
 import { Metodo } from "./metodo";
 
 export class RepetirGradienteLinear extends Metodo {
@@ -24,34 +24,8 @@ export class RepetirGradienteLinear extends Metodo {
         };
     }
 
-    paraTexto() {
-        let traducaoRetorno: string = '';
-        const coresFolEs: Array<string> = Object.keys(cores);
-        const valoresFolEs: Array<string> = Object.keys(this.valoresAceitos);
-
-        this.arrayValores.forEach((valor, index) => {
-            if (valor.tipo === 'NUMERO') {
-                if (index === 0) {
-                    traducaoRetorno += `${valor.lexema}`;
-                } else {
-                    traducaoRetorno += ` ${valor.lexema}`;
-                }
-            } else if (coresFolEs.includes(valor.lexema)) {
-                if (index === 0) {
-                    traducaoRetorno += `${cores[valor.lexema]}`;
-                } else {
-                    traducaoRetorno += ` ${cores[valor.lexema]}`;
-                }
-            } else if (valoresFolEs.includes(valor.lexema)) {
-                if (index === 0) {
-                    traducaoRetorno += `${this.valoresAceitos[valor.lexema]}`;
-                } else {
-                    traducaoRetorno += ` ${this.valoresAceitos[valor.lexema]}`;
-                }
-            } else {
-                traducaoRetorno += `${valor.lexema}`;
-            }
-        });
+    paraTexto() {        
+        const traducaoRetorno: string = tratarValores(this.arrayValores, this.valoresAceitos);
 
         return `repeating-linear-gradient(${traducaoRetorno})`;
     }

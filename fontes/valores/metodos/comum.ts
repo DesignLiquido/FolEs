@@ -4,13 +4,13 @@ import { cores } from "../../modificadores/atributos/cores";
 export function tratarValores(
     arrayValores: Array<Simbolo>,
     valoresAceitos?: { [nomeFolEs: string]: string },
-): string {    
+): string {
     let traducaoRetorno: string = '';
     const coresFolEs: Array<string> = Object.keys(cores);
 
     let valoresFolEs: Array<string> = [];
     if (valoresAceitos) valoresFolEs = Object.keys(valoresAceitos);
-    
+
     arrayValores.forEach((valor, index) => {
         if (valor.tipo === 'NUMERO') {
             if (index === 0) {
@@ -32,7 +32,7 @@ export function tratarValores(
             }
         } else if (valor.tipo === 'QUANTIFICADOR' || valor.tipo === 'VIRGULA') {
             traducaoRetorno += `${valor.lexema}`;
-        }  else {
+        } else {
             traducaoRetorno += ` ${valor.lexema}`;
         }
     });
