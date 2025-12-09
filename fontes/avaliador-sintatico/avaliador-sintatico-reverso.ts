@@ -258,11 +258,14 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'circle'.",
                 );
 
+                let arrayValoresCircular: Array<Simbolo> = [];
                 const valorCircular = this.avancarEDevolverAnterior();
+                arrayValoresCircular.push(valorCircular);
 
                 let quantificadorCircular: Simbolo = null;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                     quantificadorCircular = this.avancarEDevolverAnterior();
+                    arrayValoresCircular.push(quantificadorCircular)
                 }
 
                 this.consumir(
@@ -270,10 +273,10 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após método 'circle'.",
                 );
 
-                return new SeletorValorReverso(lexema, [
-                    valorCircular,
-                    quantificadorCircular,
-                ]) as MetodoCss;
+                return new SeletorValorReverso(
+                    lexema,
+                    [arrayValoresCircular],
+                ) as MetodoCss;
 
             case "clamp": {
                 this.consumir(
@@ -472,10 +475,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'ellipse'.",
                 );
 
-                const valorElipse: Simbolo = this.avancarEDevolverAnterior();
-                const quantificadorElipse: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresElipse: Array<Simbolo> = [valorElipse, quantificadorElipse];
-
+                const arrayValoresElipse: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
                     const proximoValorElipse: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresElipse.push(proximoValorElipse);
@@ -486,7 +486,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'ellipse'.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresElipse) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresElipse]) as MetodoCss;
 
             case "fit-content":
                 this.consumir(
@@ -651,7 +651,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método inset.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresInserir) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresInserir]) as MetodoCss;
 
             case "invert": {
                 this.consumir(
@@ -775,20 +775,11 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'polygon'.",
                 );
 
-                const valorPoligono: Simbolo = this.avancarEDevolverAnterior();
-                const quantificadorPoligono: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresPoligono: Array<Simbolo> = [valorPoligono, quantificadorPoligono];
+                const arrayValoresPoligono: Array<Simbolo> = [];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresPoligono.push(proximoValorPoligono);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'polygon'.",
-                        );
-                    }
+                    const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresPoligono.push(proximoValorPoligono);
                 }
 
                 this.consumir(
@@ -796,7 +787,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'polygon'.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresPoligono) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresPoligono]) as MetodoCss;
 
             case "rect":
                 this.consumir(
@@ -818,7 +809,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método rect.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresRect) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresRect]) as MetodoCss;
 
             case "repeating-conic-gradient":
                 this.consumir(
@@ -2051,7 +2042,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método xywh.",
                 );
 
-                return new SeletorValorReverso(lexema, arrayValoresXywh) as MetodoCss;
+                return new SeletorValorReverso(lexema, [arrayValoresXywh]) as MetodoCss;
         }
     }
 

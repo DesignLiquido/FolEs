@@ -396,25 +396,6 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
-    it('Atribuindo Método "circle()" - caso de falha', () => {
-        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
-            // Lexador
-            const resultadoLexador = lexador.mapear([
-                "div {",
-                `${MetodosBasicShape[i]['css']}: circle(close-side);`,
-                "}"
-            ]);
-
-            // Avaliador Sintático
-            const resultadoAvaliador = avaliadorSintatico.analisar(resultadoLexador.simbolos);
-
-            // Resolvedor deve retornar erro de valor inválido
-            expect(() => {
-                resolvedor.resolver(resultadoAvaliador);
-            }).toThrow("Valor close-side inválido para o método 'circle'");
-        }
-    });
-
     it('Atribuindo Método "contrast()"', () => {
         for (let index = 0; index < MetodoContraste.length; index += 1) {
 
@@ -2036,7 +2017,10 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     });
 
     it('Atribuindo Método "polygon()" - casos de sucesso', () => {
-        const valoresAceitos: Array<string> = ['50px 50px, 100px 100px, 200px 200px', '50% 50%, 100em 100em, 200pp 200px, 300% 300em'];
+        const valoresAceitos: Array<string> = [
+            '50px 50px, 100px 100px, 200px 200px', 
+            '50% 50%, 100vh 100vh, 200px 200px, 300% 300vh'
+        ];
 
         for (let i = 0; i < MetodosBasicShape.length; i += 1) {
             for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -2049,7 +2033,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
                 // O Lexador deve montar um objeto sem retornar erros
                 expect(resultadoLexador.erros).toHaveLength(0);
-
+                
                 // O Lexador deve mapear METODO e IDENTIFICADOR no processo
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([

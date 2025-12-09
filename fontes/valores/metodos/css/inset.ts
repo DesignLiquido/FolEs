@@ -2,44 +2,14 @@ import { Simbolo } from "../../../lexador";
 import { MetodoCss } from "./metodo-css";
 
 export class Inset extends MetodoCss {
-    valor1: number;
-    quantificador1: string;
-    valor2: number;
-    quantificador2: string;
-    valor3: number;
-    quantificador3: string;
-    valor4: number;
-    quantificador4: string;
-    arrayValores: Array<string | number> = [];
+    arrayValores: Array<Simbolo> = [];
     traducao: string;
     valoresAceitos: { [nomeFolEs: string]: string };
 
-    constructor(
-        valor1: Simbolo, quantificador1: Simbolo,
-        valor2?: Simbolo, quantificador2?: Simbolo,
-        valor3?: Simbolo, quantificador3?: Simbolo,
-        valor4?: Simbolo, quantificador4?: Simbolo,
-    ) {
+    constructor(arrayValores: Array<Simbolo>) {
         super();
-        this.valor1 = Number(valor1.lexema);
-        this.quantificador1 = quantificador1 ? quantificador1.lexema : null;
 
-        this.valor2 = valor2 ? Number(valor2.lexema) : null;
-        this.quantificador2 = quantificador2 ? quantificador2.lexema : null;
-
-        this.valor3 = valor3 ? Number(valor3.lexema) : null;
-        this.quantificador3 = quantificador3 ? quantificador3.lexema : null;
-
-        this.valor4 = valor4 ? Number(valor4.lexema) : null;
-        this.quantificador4 = quantificador4 ? quantificador4.lexema : null;
-
-        this.arrayValores.push(
-            this.valor1, this.quantificador1,
-            this.valor2, this.quantificador2,
-            this.valor3, this.quantificador3,
-            this.valor4, this.quantificador4,
-        );
-
+        this.arrayValores = arrayValores;
         this.traducao = "inset";
 
         this.valoresAceitos = {
@@ -49,26 +19,28 @@ export class Inset extends MetodoCss {
 
     paraTexto() {
         let traducaoRetorno: string = '';
+        const valoresFolEs: Array<string> = Object.keys(this.valoresAceitos);
 
-        this.arrayValores.forEach((valorIndividual, index) => {
-            if (valorIndividual) {
-                if (typeof valorIndividual === 'number') {
-                    if (index === 0) {
-                        traducaoRetorno += `${valorIndividual}`;
-                    } else {
-                        traducaoRetorno += ` ${valorIndividual}`;
-                    }
+        this.arrayValores.forEach((valor, index) => {
+            if (valor.tipo === 'NUMERO') {
+                if (index === 0) {
+                    traducaoRetorno += `${valor.lexema}`;
                 } else {
-                    traducaoRetorno += `${valorIndividual}`;
+                    traducaoRetorno += ` ${valor.lexema}`;
                 }
+            } else if (valoresFolEs.includes(valor.lexema)) {
+                if (index === 0) {
+                    traducaoRetorno += `${this.valoresAceitos[valor.lexema]}`;
+                } else {
+                    traducaoRetorno += ` ${this.valoresAceitos[valor.lexema]}`;
+                }
+            } else if (valor.tipo === 'QUANTIFICADOR') {
+                traducaoRetorno += `${valor.lexema}`;
+            } else {
+                traducaoRetorno += ` ${valor.lexema}`;
             }
         });
 
         return `inserir(${traducaoRetorno})`;
     }
 }
-
-/**
- * Caso não coberto:
- * inset(20% 30% round 20px);
- */
