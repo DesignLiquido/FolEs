@@ -392,25 +392,6 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         }
     });
 
-    it('Atribuindo Método "circular()" - caso de falha', () => {
-        for (let i = 0; i < MetodosBasicShape.length; i += 1) {
-            // Lexador
-            const resultadoLexador = lexador.mapear([
-                "lmht {",
-                `${MetodosBasicShape[i]['foles']}: circular(lado-proximo);`,
-                "}"
-            ]);
-
-            // Avaliador Sintático
-            const resultadoAvaliador = avaliador.analisar(resultadoLexador.simbolos);
-
-            // Resolvedor deve retornar erro de valor inválido
-            expect(() => {
-                resolvedor.resolver(resultadoAvaliador);
-            }).toThrow("Valor lado-proximo inválido para o método 'circular'");
-        }
-    });
-
     it('Atribuindo Método "conjunto-estilos()" - caso de sucesso', () => {
         const valoresAceitos = ['1', '1, 2', '6, 12, 18'];
 

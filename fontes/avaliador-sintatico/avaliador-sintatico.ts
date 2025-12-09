@@ -182,11 +182,15 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'circular'.",
                 );
+
+                const arrayValoresCircular: Array<Simbolo> = [];
                 const valorCircular = this.avancarEDevolverAnterior();
+                arrayValoresCircular.push(valorCircular);
 
                 let quantificadorCircular: Simbolo = null;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
                     quantificadorCircular = this.avancarEDevolverAnterior();
+                    arrayValoresCircular.push(quantificadorCircular);
                 }
 
                 this.consumir(
@@ -194,10 +198,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após método 'circular'.",
                 );
 
-                return new SeletorValor(lexema, [
-                    valorCircular,
-                    quantificadorCircular,
-                ]) as Metodo;
+                return new SeletorValor(lexema,
+                    [arrayValoresCircular],
+                ) as Metodo;
 
             case "conjunto-estilos":
                 this.consumir(
@@ -423,7 +426,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'elipse'.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresElipse) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresElipse]) as Metodo;
 
             case "encaixar-conteudo":
                 this.consumir(
@@ -822,7 +825,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método inserir.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresInserir) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresInserir]) as Metodo;
 
             case "inverter":
                 this.consumir(
@@ -1024,15 +1027,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const arrayValoresPoligono: Array<Simbolo> = [valorPoligono, quantificadorPoligono];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresPoligono.push(proximoValorPoligono);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'poligono'.",
-                        );
-                    }
+                    const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresPoligono.push(proximoValorPoligono);
                 }
 
                 this.consumir(
@@ -1040,7 +1036,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'poligono'.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresPoligono) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresPoligono]) as Metodo;
 
             case "polígono":
                 this.consumir(
@@ -1053,15 +1049,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const arrayValoresPoligono1: Array<Simbolo> = [valorPoligono1, quantificadorPoligono1];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorPoligono1: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresPoligono1.push(proximoValorPoligono1);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'poligono'.",
-                        );
-                    }
+                    const proximoValorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresPoligono1.push(proximoValorPoligono1);
                 }
 
                 this.consumir(
@@ -1069,7 +1058,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'polígono'.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresPoligono1) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresPoligono1]) as Metodo;
 
             case "projetar-sombra":
                 this.consumir(
@@ -1244,7 +1233,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método retangulo.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresRect) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresRect]) as Metodo;
 
             case "retângulo":
                 this.consumir(
@@ -1266,7 +1255,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método retangulo.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresRecta) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresRecta]) as Metodo;
 
             case "rgb":
                 this.consumir(
@@ -1915,7 +1904,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método xywh.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresXywh) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresXywh]) as Metodo;
         }
 
         throw new Error(`Método ${lexema} não reconhecido em FolEs.`);

@@ -1,101 +1,19 @@
 import { Simbolo } from "../../../lexador";
+import { tratarValores } from "../comum";
 import { Metodo } from "./metodo";
 
 export class Poligono extends Metodo {
-    valor1: number;
-    quantificador1: string;
-    valor2: number;
-    quantificador2: string;
-    valor3: number;
-    quantificador3: string;
-    valor4: number;
-    quantificador4: string;
-    valor5: number;
-    quantificador5: string;
-    valor6: number;
-    quantificador6: string;
-    valor7: number;
-    quantificador7: string;
-    valor8: number;
-    quantificador8: string;
-    arrayValores: Array<number | string> = [];
+    arrayValores: Array<Simbolo> = [];
     traducao: string;
-    valoresAceitos: { [nomeFolEs: string]: string };
 
-    constructor(
-        valor1: Simbolo, quantificador1: Simbolo,
-        valor2?: Simbolo, quantificador2?: Simbolo,
-        valor3?: Simbolo, quantificador3?: Simbolo,
-        valor4?: Simbolo, quantificador4?: Simbolo,
-        valor5?: Simbolo, quantificador5?: Simbolo,
-        valor6?: Simbolo, quantificador6?: Simbolo,
-        valor7?: Simbolo, quantificador7?: Simbolo,
-        valor8?: Simbolo, quantificador8?: Simbolo,
-    ) {
+    constructor(arrayValores: Array<Simbolo>) {
         super();
-        this.valor1 = Number(valor1.lexema);
-        this.quantificador1 = quantificador1 ? quantificador1.lexema : null;
-
-        this.valor2 = valor2 ? Number(valor2.lexema) : null;
-        this.quantificador2 = quantificador2 ? quantificador2.lexema : null;
-
-        this.valor3 = valor3 ? Number(valor3.lexema) : null;
-        this.quantificador3 = quantificador3 ? quantificador3.lexema : null;
-
-        this.valor4 = valor4 ? Number(valor4.lexema) : null;
-        this.quantificador4 = quantificador4 ? quantificador4.lexema : null;
-
-        this.valor5 = Number(valor5.lexema);
-        this.quantificador5 = quantificador5 ? quantificador5.lexema : null;
-
-        this.valor6 = valor6 ? Number(valor6.lexema) : null;
-        this.quantificador6 = quantificador6 ? quantificador6.lexema : null;
-
-        this.valor7 = valor7 ? Number(valor7.lexema) : null;
-        this.quantificador7 = quantificador7 ? quantificador7.lexema : null;
-
-        this.valor8 = valor8 ? Number(valor8.lexema) : null;
-        this.quantificador8 = quantificador8 ? quantificador8.lexema : null;
-
-        this.arrayValores.push(
-            this.valor1, this.quantificador1,
-            this.valor2, this.quantificador2,
-            this.valor3, this.quantificador3,
-            this.valor4, this.quantificador4,
-            this.valor5, this.quantificador5,
-            this.valor6, this.quantificador6,
-            this.valor7, this.quantificador7,
-            this.valor8, this.quantificador8,
-        );
-
-        this.arrayValores = this.arrayValores.filter((valorIndividual) => valorIndividual !== null);
-
+        this.arrayValores = arrayValores;
         this.traducao = "polygon";
     }
 
-    paraTexto() {
-        let traducaoRetorno: string = '';
-
-        this.arrayValores.forEach((valorIndividual, index) => {
-            const limiteArray: number = this.arrayValores.length - 1;
-            const indicesComVirgula: Array<number> = [3, 7, 11];
-            if (valorIndividual) {
-                if (typeof valorIndividual === 'number') {
-                    if (index === 0) {
-                        traducaoRetorno += `${valorIndividual}`;
-                    } else {
-                        traducaoRetorno += ` ${valorIndividual}`;
-                    }
-                } else {
-                    traducaoRetorno += `${valorIndividual}`;
-
-                    if (indicesComVirgula.includes(index) && index < limiteArray) {
-                        traducaoRetorno += ',';
-                    }
-                }
-
-            }
-        });
+    paraTexto() {        
+        const traducaoRetorno: string = tratarValores(this.arrayValores);
 
         return `polygon(${traducaoRetorno})`;
     }

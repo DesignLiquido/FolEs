@@ -1,15 +1,13 @@
 /** Valores específicos */
 lmht {
+    caminho-recorte: retangulo(2em 40% arredondar 5% at 60px);
     imagem-fundo: repetir-gradiente-linear(círculo, 20px 2px 200px, 10% 1% 100%);
     trajeto-deslocamento: circular(lado-mais-proximo);
     forma-externa: inserir(1rem 30% 3px 4rem);
-    caminho-recorte: retangulo(2em 40% 5% 60px);
     trajeto-deslocamento: xywh(10% 10px 5em 6px);
-    margem-superior: 12px;
 }
 
 lmht {
-    borda: 50px;
     trajeto-deslocamento: elipse(10% 10px 5em 6px);
     forma-externa: polígono(10px 10px, 100px 100px, 200px 200px);
     imagem-fundo: repetir-gradiente-cônico(vermelho 20px 10px, azul 30% 20px, verde 10% 15deg);
