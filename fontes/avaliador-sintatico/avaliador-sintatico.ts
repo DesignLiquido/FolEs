@@ -1206,23 +1206,16 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const arrayValoresLinear: Array<Simbolo> = [parametroLinear];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresLinear.push(proximoValorLinear);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repetir-gradiente-linear'.",
-                        );
-                    }
+                    const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresLinear.push(proximoValorLinear);
                 }
 
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
-                );
+                );                
 
-                return new SeletorValor(lexema, arrayValoresLinear) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresLinear]) as Metodo;
 
             case "repetir-gradiente-radial":
                 this.consumir(
