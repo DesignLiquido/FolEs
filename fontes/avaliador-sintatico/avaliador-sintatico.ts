@@ -1149,15 +1149,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const arrayValoresConico: Array<Simbolo> = [valorConico, quantificadorConico];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresConico.push(proximoValorConico);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repetir-gradiente-conico'.",
-                        );
-                    }
+                    const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresConico.push(proximoValorConico);
                 }
 
                 this.consumir(
@@ -1165,7 +1158,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'repetir-gradiente-conico'.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresConico) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresConico]) as Metodo;
 
             case "repetir-gradiente-cônico":
                 this.consumir(
@@ -1178,15 +1171,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const arrayValoresConico1: Array<Simbolo> = [valorConico1, quantificadorConico1];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorConico1: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresConico1.push(proximoValorConico1);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repetir-gradiente-cônico'.",
-                        );
-                    }
+                    const proximoValorConico1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresConico1.push(proximoValorConico1);
                 }
 
                 this.consumir(
@@ -1194,7 +1180,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'repetir-gradiente-cônico'.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresConico1) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresConico1]) as Metodo;
 
             case "repetir-gradiente-linear":
                 this.consumir(
@@ -1213,7 +1199,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
-                );                
+                );
 
                 return new SeletorValor(lexema, [arrayValoresLinear]) as Metodo;
 
@@ -1227,15 +1213,8 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const arrayValoresRadial: Array<Simbolo> = [parametroRadial];
 
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                    if (this.simbolos[this.atual].tipo !== 'VIRGULA') {
-                        const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresRadial.push(proximoValorRadial);
-                    } else {
-                        this.consumir(
-                            tiposDeSimbolos.VIRGULA,
-                            "Esperada vírgula após argumento do método 'repetir-gradiente-radial'.",
-                        );
-                    }
+                    const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRadial.push(proximoValorRadial);
                 }
 
                 this.consumir(
@@ -1243,7 +1222,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
                 );
 
-                return new SeletorValor(lexema, arrayValoresRadial) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresRadial]) as Metodo;
 
             case "retangulo":
                 this.consumir(
