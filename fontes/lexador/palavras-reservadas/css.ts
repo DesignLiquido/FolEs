@@ -155,6 +155,7 @@ export default {
     path: tiposDeSimbolos.METODO,
     perspective: tiposDeSimbolos.METODO,
     polygon: tiposDeSimbolos.METODO,
+    "radial-gradient": tiposDeSimbolos.METODO,
     ray: tiposDeSimbolos.METODO,
     rect: tiposDeSimbolos.METODO,
     "repeating-conic-gradient": tiposDeSimbolos.METODO,

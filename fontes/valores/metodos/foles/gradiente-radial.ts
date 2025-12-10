@@ -7,9 +7,7 @@ export class GradienteRadial extends Metodo {
     traducao: string;
     valoresAceitos: { [nomeFolEs: string]: string };
 
-    constructor(
-        arrayValores: Array<Simbolo>
-    ) {
+    constructor(arrayValores: Array<Simbolo>) {
         super();
 
         this.arrayValores = arrayValores;

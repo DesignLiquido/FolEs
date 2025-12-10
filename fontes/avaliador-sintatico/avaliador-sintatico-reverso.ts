@@ -789,6 +789,25 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, [arrayValoresPoligono]) as MetodoCss;
 
+            case "radial-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'radial-gradient'.",
+                );
+
+                const arrayGradienteRadial: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteRadial.push(proximoValorGradienteRadial);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'radial-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayGradienteRadial]) as MetodoCss;
+
             case "rect":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

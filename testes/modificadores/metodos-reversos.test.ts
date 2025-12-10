@@ -2473,6 +2473,69 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "radial-gradient()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = [
+            'closest-side, 20px',
+            'farthest-side, 20px 2px 200px',
+            'farthest-corner, 30px 3px 300px',
+            'green, 100deg',
+            'black, 20px 2px 200px',
+            'circle, 20px 2px 200px, 10% 1% 100%',
+            'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
+            'circle at farthest-side',
+            'circle at closest-side',
+        ];
+
+        const traducaoValoresAceitos: Array<string> = [
+            'lado-mais-próximo, 20px',
+            'lado-mais-distante, 20px 2px 200px',
+            'canto-mais-distante, 30px 3px 300px',
+            'verde, 100deg',
+            'preto, 20px 2px 200px',
+            'círculo, 20px 2px 200px, 10% 1% 100%',
+            'canto-mais-próximo, 20% 2% 200%, 10deg 1deg 100deg',
+            'círculo no lado-mais-distante',
+            'círculo no lado-mais-próximo',
+        ];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {            
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `background-image: radial-gradient(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('imagem-fundo');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('imagem-fundo');
+            expect(resultadoResolvedor).toContain('gradiente-radial');
+            expect(resultadoResolvedor).toContain(traducaoValoresAceitos[index]);
+        }
+    });
+
     it('Atribuindo Método "ray()" com valores de posição e número/quantificador', () => {
         for (let index = 0; index < MetodoRaio.length; index += 1) {
 
@@ -2684,6 +2747,8 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             'blue, 20px 2px 200px',
             'green, 30px 3px 300px',
             'black, 20px 2px 200px',
+            'circle at farthest-side',
+            'circle at closest-side',
         ];
 
         const traducaoValoresAceitos: Array<string> = [
@@ -2691,6 +2756,8 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             'azul, 20px 2px 200px',
             'verde, 30px 3px 300px',
             'preto, 20px 2px 200px',
+            'círculo no lado-mais-distante',
+            'círculo no lado-mais-próximo'
         ];
 
         for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -2740,6 +2807,8 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             'black, 20px 2px 200px',
             'circle, 20px 2px 200px, 10% 1% 100%',
             'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
+            'circle at farthest-side',
+            'circle at closest-side',
         ];
 
         const traducaoValoresAceitos: Array<string> = [
@@ -2750,6 +2819,8 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             'preto, 20px 2px 200px',
             'círculo, 20px 2px 200px, 10% 1% 100%',
             'canto-mais-próximo, 20% 2% 200%, 10deg 1deg 100deg',
+            'círculo no lado-mais-distante',
+            'círculo no lado-mais-próximo',
         ];
 
         for (let index = 0; index < valoresAceitos.length; index += 1) {

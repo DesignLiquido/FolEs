@@ -389,6 +389,7 @@ import { MinMax } from "../../valores/metodos/css/minmax";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
 import { Path } from "../../valores/metodos/css/path";
 import { Polygon } from "../../valores/metodos/css/polygon";
+import { RadialGradient } from "../../valores/metodos/css/radial-gradient";
 import { Ray } from "../../valores/metodos/css/ray";
 import { Rect } from "../../valores/metodos/css/rect";
 import { RepeatingConicGradient } from "../../valores/metodos/css/repeating-conic-gradient";
@@ -815,13 +816,14 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     paint: Paint,
     path: Path,
     polygon: Polygon,
+    "radial-gradient": RadialGradient,
     ray: Ray,
-    rgb: Rgb,
-    rgba: Rgba,
-    rect: Rect,
     "repeating-conic-gradient": RepeatingConicGradient,
     "repeating-linear-gradient": RepeatingLinearGradient,
     "repeating-radial-gradient": RepeatRadialGradient,
+    rgb: Rgb,
+    rgba: Rgba,
+    rect: Rect,
     rotate3d: Rotate3d,
     rotateX: RotateX,
     rotateY: RotateY,
