@@ -21,6 +21,7 @@ export class RepetirGradienteLinear extends Metodo {
             'canto-mais-distante': 'farthest-corner',
             'circulo': 'circle',
             'círculo': 'circle',
+            'no': 'at',
         };
     }
 

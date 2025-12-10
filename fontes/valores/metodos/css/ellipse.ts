@@ -16,6 +16,7 @@ export class Ellipse extends MetodoCss {
         this.valoresAceitos = {
             "closest-side": "lado-mais-próximo",
             "farthest-side": "lado-mais-distante",
+            "at": "no",
         };
     }
 

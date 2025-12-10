@@ -14,6 +14,7 @@ export class Circular extends Metodo {
             "lado-mais-próximo": "closest-side",
             "lado-mais-proximo": "closest-side",
             "lado-mais-distante": "farthest-side",
+            "no": "at",
         }
         this.traducao = "circle";
     }

@@ -343,8 +343,23 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     });
 
     it('Atribuindo Método "circular()" - casos de sucesso', () => {
-        const valoresAceitos: Array<string> = ['50px', 'lado-mais-próximo', 'lado-mais-proximo', 'lado-mais-distante'];
-        const traducaoValores: Array<string> = ['50px', 'closest-side', 'closest-side', 'farthest-side'];
+        const valoresAceitos: Array<string> = [
+            '50px',
+            'lado-mais-próximo',
+            'lado-mais-proximo',
+            'lado-mais-distante',
+            '50% no 50% 50%',
+            '100% no lado-mais-próximo'
+        ];
+
+        const traducaoValores: Array<string> = [
+            '50px',
+            'closest-side',
+            'closest-side',
+            'farthest-side',
+            '50% at 50% 50%',
+            '100% at closest-side',
+        ];
 
         for (let i = 0; i < MetodosBasicShape.length; i += 1) {
             for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -358,6 +373,10 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 // O Lexador deve montar um objeto de comprimento 10 ou 11, sem retornar erros
                 if (index === 0) {
                     expect(resultadoLexador.simbolos).toHaveLength(11);
+                } else if (index === 4) {
+                    expect(resultadoLexador.simbolos).toHaveLength(16);
+                } else if (index === 5) {
+                    expect(resultadoLexador.simbolos).toHaveLength(13);
                 } else {
                     expect(resultadoLexador.simbolos).toHaveLength(10);
                 }
@@ -788,7 +807,21 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     });
 
     it('Atribuindo Método "elipse()" - casos de sucesso', () => {
-        const valoresAceitos: Array<string> = ['50px', '1rem 2rem', '30% 20% 60px', '3rem 20% 40px 1vh'];
+        const valoresAceitos: Array<string> = [
+            '50px',
+            '1rem 2rem',
+            '30% 20% 60px',
+            '3rem 20% 40px 1vh',
+            '50% no 50% 50%',
+        ];
+
+        const traducaoValoresAceitos: Array<string> = [
+            '50px',
+            '1rem 2rem',
+            '30% 20% 60px',
+            '3rem 20% 40px 1vh',
+            '50% at 50% 50%',
+        ];
 
         for (let i = 0; i < MetodosBasicShape.length; i += 1) {
             for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -825,7 +858,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoResolvedor).toContain(MetodosBasicShape[i]['css']);
                 expect(resultadoResolvedor).toContain('ellipse');
-                expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+                expect(resultadoResolvedor).toContain(traducaoValoresAceitos[index]);
             }
         }
     });
@@ -1560,6 +1593,77 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                         break;
                 }
             }
+        }
+    });
+
+    it('Atribuindo Método "gradiente-radial()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = [
+            'lado-mais-proximo, 20px',
+            'lado-mais-próximo, 20px',
+            'lado-mais-distante, 20px 2px 200px',
+            'canto-mais-distante, 30px 3px 300px',
+            'verde, 100deg',
+            'preto, 20px 2px 200px',
+            'circulo, 20px 2px 200px, 10% 1% 100%',
+            'círculo, 20px 2px 200px, 10% 1% 100%',
+            'canto-mais-proximo, 20% 2% 200%, 10deg 1deg 100deg',
+            'canto-mais-próximo, 20% 2% 200%, 10deg 1deg 100deg',
+            '50% no 50% 50%',
+            '100% no lado-mais-próximo',
+            'círculo no centro, #ff0, #f00',
+        ];
+
+        const traducaoValoresAceitos: Array<string> = [
+            'closest-side, 20px',
+            'closest-side, 20px',
+            'farthest-side, 20px 2px 200px',
+            'farthest-corner, 30px 3px 300px',
+            'green, 100deg',
+            'black, 20px 2px 200px',
+            'circle, 20px 2px 200px, 10% 1% 100%',
+            'circle, 20px 2px 200px, 10% 1% 100%',
+            'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
+            'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
+            '50% at 50% 50%',
+            '100% at closest-side',
+            'circle at center, #ff0, #f00',
+        ];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `imagem-fundo: gradiente-radial(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-image');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('background-image');
+            expect(resultadoResolvedor).toContain('radial-gradient');
+            expect(resultadoResolvedor).toContain(traducaoValoresAceitos[index]);
         }
     });
 
@@ -2751,6 +2855,8 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             'círculo, 20px 2px 200px, 10% 1% 100%',
             'canto-mais-proximo, 20% 2% 200%, 10deg 1deg 100deg',
             'canto-mais-próximo, 20% 2% 200%, 10deg 1deg 100deg',
+            '50% no 50% 50%',
+            '100% no lado-mais-próximo',
         ];
 
         const traducaoValoresAceitos: Array<string> = [
@@ -2764,6 +2870,8 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             'circle, 20px 2px 200px, 10% 1% 100%',
             'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
             'closest-corner, 20% 2% 200%, 10deg 1deg 100deg',
+            '50% at 50% 50%',
+            '100% at closest-side'
         ];
 
         for (let index = 0; index < valoresAceitos.length; index += 1) {
@@ -2810,6 +2918,9 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             'azul, 20px 2px 200px',
             'verde, 30px 3px 300px',
             'preto, 20px 2px 200px',
+            '50% no 50% 50%',
+            '100% no lado-mais-próximo',
+            'círculo no lado-mais-distante'
         ];
 
         const traducaoValoresAceitos: Array<string> = [
@@ -2817,6 +2928,9 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
             'blue, 20px 2px 200px',
             'green, 30px 3px 300px',
             'black, 20px 2px 200px',
+            '50% at 50% 50%',
+            '100% at closest-side',
+            'circle at farthest-side'
         ];
 
         for (let index = 0; index < valoresAceitos.length; index += 1) {

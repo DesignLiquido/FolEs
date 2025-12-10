@@ -17,6 +17,7 @@ export class Elipse extends Metodo {
             "lado-mais-próximo": "closest-side",
             "lado-mais-proximo": "closest-side",
             "lado-mais-distante": "farthest-side",
+            "no": "at",
         };
     }
 

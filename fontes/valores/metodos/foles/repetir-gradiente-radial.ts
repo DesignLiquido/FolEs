@@ -23,6 +23,7 @@ export class RepetirGradienteRadial extends Metodo {
             'canto-mais-distante': 'farthest-corner',
             'circulo': 'circle',
             'círculo': 'circle',
+            'no': 'at',
         };
 
         this.traducao = "repeating-radial-gradient";

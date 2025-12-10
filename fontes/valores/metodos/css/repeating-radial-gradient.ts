@@ -19,6 +19,7 @@ export class RepeatRadialGradient extends MetodoCss {
             'farthest-side': 'lado-mais-distante',
             'farthest-corner': 'canto-mais-distante',
             'circle': 'círculo',
+            'at': 'no',
         };
     }
 
