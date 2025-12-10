@@ -16,12 +16,14 @@ export class ImagemFundo extends Modificador {
         super("imagem-fundo", "background-image", pragmas);
 
         const valoresExtra: Array<string> = [
+            'conic-gradient',
             'element',
             'image-set',
             'paint',
+            'radial-gradient',
             'repeating-conic-gradient',
             'repeating-linear-gradient',
-            'repeating-radial-gradient',
+            'repeating-radial-gradient',            
         ];
 
         if (!variavel) {

@@ -184,15 +184,11 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
 
                 const arrayValoresCircular: Array<Simbolo> = [];
-                const valorCircular = this.avancarEDevolverAnterior();
-                arrayValoresCircular.push(valorCircular);
-
-                let quantificadorCircular: Simbolo = null;
-                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
-                    quantificadorCircular = this.avancarEDevolverAnterior();
-                    arrayValoresCircular.push(quantificadorCircular);
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoSimboloCircular: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresCircular.push(proximoSimboloCircular);
                 }
-
+                
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'circular'.",
@@ -412,10 +408,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'elipse'.",
                 );
 
-                const valorElipse: Simbolo = this.avancarEDevolverAnterior();
-                const quantificadorElipse: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresElipse: Array<Simbolo> = [valorElipse, quantificadorElipse];
-
+                const arrayValoresElipse: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
                     const proximoValorElipse: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresElipse.push(proximoValorElipse);
@@ -674,6 +667,27 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     cor1,
                     cor2,
                 ]) as Metodo;
+
+            case "gradiente-radial":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'gradiente-radial'.",
+                );
+
+                const parametroGradienteRadial: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresGradienteRadial: Array<Simbolo> = [parametroGradienteRadial];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresGradienteRadial.push(proximoValorGradienteRadial);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'gradiente-radial'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresGradienteRadial]) as Metodo;
 
             case "hsl":
                 this.consumir(

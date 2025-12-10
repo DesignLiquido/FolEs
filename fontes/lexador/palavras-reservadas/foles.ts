@@ -188,6 +188,7 @@ export default {
     "estilistico": tiposDeSimbolos.METODO,
     "estilístico": tiposDeSimbolos.METODO,
     "gradiente-linear": tiposDeSimbolos.METODO,
+    "gradiente-radial": tiposDeSimbolos.METODO,
     hsl: tiposDeSimbolos.METODO,
     hsla: tiposDeSimbolos.METODO,
     hex: tiposDeSimbolos.METODO,
