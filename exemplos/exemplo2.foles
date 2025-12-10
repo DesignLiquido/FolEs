@@ -22,3 +22,7 @@ lmht {
 lmht {
     imagem-fundo: elemento(#meu-id);
 } 
+
+lmht {
+    imagem-fundo: pintura(card-decoration);
+} 

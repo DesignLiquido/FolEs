@@ -1016,6 +1016,21 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorPerspectivar,
                 ]) as Metodo;
 
+            case "pintura":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'pintura'.",
+                );
+
+                const referenciaPintura: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'pintura'.",
+                );
+
+                return new SeletorValor(lexema, [referenciaPintura]) as Metodo;
+
             case "poligono":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

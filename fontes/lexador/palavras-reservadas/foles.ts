@@ -203,6 +203,7 @@ export default {
     opacar: tiposDeSimbolos.METODO,
     passos: tiposDeSimbolos.METODO,
     perspectivar: tiposDeSimbolos.METODO,
+    pintura: tiposDeSimbolos.METODO,
     poligono: tiposDeSimbolos.METODO,
     polígono: tiposDeSimbolos.METODO,
     "projetar-sombra": tiposDeSimbolos.METODO,

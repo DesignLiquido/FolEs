@@ -40,10 +40,11 @@ export class Fundo extends Modificador {
         super("fundo", "background", pragmas);
 
         const valoresExtra: Array<string> = [
+            'element',
+            'paint',
             'repeating-conic-gradient',
             'repeating-linear-gradient', 
             'repeating-radial-gradient', 
-            'element'
         ];
 
         if (!variavel) {
