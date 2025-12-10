@@ -396,6 +396,57 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "conic-gradient" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = [
+            'red 20px 10px',
+            'red 20px 10px, blue 30% 20px',
+            'from 90deg, red, blue, green, yellow',
+        ];
+
+        const traducaoValoresAceitos: Array<string> = [
+            'vermelho 20px 10px',
+            'vermelho 20px 10px, azul 30% 20px',
+            'de 90deg, vermelho, azul, verde, amarelo',
+        ];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `background-image: conic-gradient(${valoresAceitos[index]});`,
+                "}"
+            ]);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('imagem-fundo');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('imagem-fundo');
+            expect(resultadoResolvedor).toContain('gradiente-cônico');
+            expect(resultadoResolvedor).toContain(traducaoValoresAceitos[index]);
+        }
+    });
+
     it('Atribuindo Método "contrast()"', () => {
         for (let index = 0; index < MetodoContraste.length; index += 1) {
 
@@ -2498,7 +2549,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             'círculo no lado-mais-próximo',
         ];
 
-        for (let index = 0; index < valoresAceitos.length; index += 1) {            
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 "div {",

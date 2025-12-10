@@ -132,6 +132,7 @@ export default {
     "character-variant": tiposDeSimbolos.METODO,
     circle: tiposDeSimbolos.METODO,
     clamp: tiposDeSimbolos.METODO,
+    "conic-gradient": tiposDeSimbolos.METODO,
     contrast: tiposDeSimbolos.METODO,
     counter: tiposDeSimbolos.METODO,
     "cubic-bezier": tiposDeSimbolos.METODO,
@@ -767,7 +768,7 @@ export default {
     flat: tiposDeSimbolos.QUALITATIVO,
     underline: tiposDeSimbolos.QUALITATIVO,
     clip: tiposDeSimbolos.QUALITATIVO,
-    
+
     // AVALIAR: nomenclaturas conflitantes com outras estruturas
     // rotate: tiposDeSimbolos.TAG,
     // perspective: tiposDeSimbolos.TAG,

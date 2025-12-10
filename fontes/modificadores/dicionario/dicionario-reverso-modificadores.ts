@@ -420,6 +420,7 @@ import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
 import { Xywh } from "../../valores/metodos/foles/xywh";
 import { Paint } from "../../valores/metodos/css/paint";
+import { ConicGradient } from "../../valores/metodos/css/conic-gradient";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -795,6 +796,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "character-variant": CharacterVariant,
     clamp: Clamp,
     circle: Circle,
+    "conic-gradient": ConicGradient,
     contrast: Contrast,
     counter: Counter,
     "cubic-bezier": CubicBezier,

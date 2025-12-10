@@ -188,7 +188,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     const proximoSimboloCircular: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresCircular.push(proximoSimboloCircular);
                 }
-                
+
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'circular'.",
@@ -598,6 +598,44 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após argumento do método estilístico.",
                 );
                 return new SeletorValor(lexema, [valorEstilistico1]) as Metodo;
+
+            case "gradiente-conico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'gradiente-conico'.",
+                );
+
+                const arrayGradienteConico: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteConico.push(proximoValorGradienteConico);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'gradiente-conico'.",
+                );
+
+                return new SeletorValor(lexema, [arrayGradienteConico]) as Metodo;
+
+            case "gradiente-cônico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'gradiente-cônico'.",
+                );
+
+                const arrayGradienteConico1: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteConico1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteConico1.push(proximoValorGradienteConico1);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'gradiente-cônico'.",
+                );
+
+                return new SeletorValor(lexema, [arrayGradienteConico1]) as Metodo;
 
             case "gradiente-linear":
                 this.consumir(
@@ -1162,10 +1200,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'repetir-gradiente-conico'.",
                 );
 
-                const valorConico: Simbolo = this.avancarEDevolverAnterior();
-                const quantificadorConico: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresConico: Array<Simbolo> = [valorConico, quantificadorConico];
-
+                const arrayValoresConico: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
                     const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresConico.push(proximoValorConico);
@@ -1184,10 +1219,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'repetir-gradiente-cônico'.",
                 );
 
-                const valorConico1: Simbolo = this.avancarEDevolverAnterior();
-                const quantificadorConico1: Simbolo = this.avancarEDevolverAnterior();
-                const arrayValoresConico1: Array<Simbolo> = [valorConico1, quantificadorConico1];
-
+                const arrayValoresConico1: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
                     const proximoValorConico1: Simbolo = this.avancarEDevolverAnterior();
                     arrayValoresConico1.push(proximoValorConico1);
