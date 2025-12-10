@@ -857,8 +857,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 const arrayValoresRadial: Array<Simbolo> = [];
                 while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
-                        const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
-                        arrayValoresRadial.push(proximoValorRadial);                   
+                    const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRadial.push(proximoValorRadial);
                 }
 
                 this.consumir(
@@ -1176,6 +1176,21 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
 
                 return new SeletorValorReverso(lexema, [valorOrnaments]) as MetodoCss;
+
+            case "paint":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'paint'.",
+                );
+
+                const referenciaPintura: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'paint'.",
+                );
+
+                return new SeletorValorReverso(lexema, [referenciaPintura]) as MetodoCss;
 
             case "perspective":
                 this.consumir(

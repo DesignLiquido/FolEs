@@ -418,6 +418,7 @@ import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
 import { Xywh } from "../../valores/metodos/foles/xywh";
+import { Paint } from "../../valores/metodos/css/paint";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -811,6 +812,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "linear-gradient": LinearGradient,
     minmax: MinMax,
     ornaments: Ornaments,
+    paint: Paint,
     path: Path,
     polygon: Polygon,
     ray: Ray,

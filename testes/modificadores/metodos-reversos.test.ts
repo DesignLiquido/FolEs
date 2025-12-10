@@ -2016,9 +2016,49 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
         }
     });
 
+    it('Atribuindo Método "paint()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = ['decoracao-card', 'card-decoration', 'estilo1', 'elemento-personalizado'];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            const resultadoLexador = lexador.mapear([
+                "div {",
+                `background-image: paint(${valoresAceitos[index]});`,
+                "}",
+            ]);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].nomeFoles).toStrictEqual('imagem-fundo');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('imagem-fundo');
+            expect(resultadoResolvedor).toContain('pintura');
+            expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+        }
+    });
+
     it('Atribuindo Método "polygon()" - casos de sucesso', () => {
         const valoresAceitos: Array<string> = [
-            '50px 50px, 100px 100px, 200px 200px', 
+            '50px 50px, 100px 100px, 200px 200px',
             '50% 50%, 100vh 100vh, 200px 200px, 300% 300vh'
         ];
 
@@ -2033,7 +2073,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
                 // O Lexador deve montar um objeto sem retornar erros
                 expect(resultadoLexador.erros).toHaveLength(0);
-                
+
                 // O Lexador deve mapear METODO e IDENTIFICADOR no processo
                 expect(resultadoLexador.simbolos).toEqual(
                     expect.arrayContaining([
