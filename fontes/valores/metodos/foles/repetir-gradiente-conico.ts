@@ -6,9 +6,7 @@ export class RepetirGradienteConico extends Metodo {
     arrayValores: Array<Simbolo> = [];
     traducao: string;
 
-    constructor(
-        arrayValores: Array<Simbolo>
-    ) {
+    constructor(arrayValores: Array<Simbolo>) {
         super();
         this.arrayValores = arrayValores;
         this.traducao = "repeating-conic-gradient";

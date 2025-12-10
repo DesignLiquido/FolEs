@@ -187,6 +187,8 @@ export default {
     "espirrar": tiposDeSimbolos.METODO,
     "estilistico": tiposDeSimbolos.METODO,
     "estilístico": tiposDeSimbolos.METODO,
+    "gradiente-conico": tiposDeSimbolos.METODO,
+    "gradiente-cônico": tiposDeSimbolos.METODO,
     "gradiente-linear": tiposDeSimbolos.METODO,
     "gradiente-radial": tiposDeSimbolos.METODO,
     hsl: tiposDeSimbolos.METODO,

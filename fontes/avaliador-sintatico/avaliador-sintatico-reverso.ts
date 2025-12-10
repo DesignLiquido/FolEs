@@ -312,7 +312,26 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         quantificadorMax,
                     ]
                 ) as MetodoCss;
-            }
+            };
+
+            case "conic-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'conic-gradient'.",
+                );
+
+                const arrayGradienteConico: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteConico.push(proximoValorGradienteConico);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'conic-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayGradienteConico]) as MetodoCss;
 
             case "contrast":
                 this.consumir(

@@ -21,8 +21,10 @@ lmht {
 
 lmht {
     imagem-fundo: elemento(#meu-id);
+    imagem-fundo: gradiente-cônico(de 90deg, vermelho, amarelo, verde, azul);
 } 
 
 lmht {
     imagem-fundo: gradiente-radial(círculo no centro, #ff0, #f00);
+    imagem-fundo: gradiente-conico(de 90deg, vermelho, amarelo, verde, azul);
 } 
