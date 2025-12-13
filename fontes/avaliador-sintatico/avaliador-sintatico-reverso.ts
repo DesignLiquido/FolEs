@@ -27,7 +27,7 @@ import { MetodoCss } from "../valores/metodos/css/metodo-css";
 import { ValorAbreviacao, ValorNumerico, ValorQualitativo, ValorTexto, ValorVirgula } from "../valores";
 import { ReferenciaVariavel } from "../valores/referencia-variavel";
 import { valoresGerais } from "../modificadores/atributos/gerais";
-import { ModificadoresValorPersonalizado } from "../../testes/listas/valores-personalizados";
+import { ModificadoresValorPersonalizado } from "../listas/valores-personalizados";
 
 /**
  * O avaliador sintático reverso avalia símbolos de arquivos CSS,

@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 
-import { Exportador } from './fontes/exportador';
-import { FolEs } from './fontes/foles';
+import { Exportador } from './exportador';
+import { FolEs } from './foles';
 
 const principal = () => {
     const analisadorArgumentos = new Command();

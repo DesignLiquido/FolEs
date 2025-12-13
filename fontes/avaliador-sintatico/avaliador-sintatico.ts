@@ -26,12 +26,12 @@ import {
 import {
     ModificadoresDeValorNumerico,
     ModificadoresDeValorNumericoComQuantificador,
-} from "../../testes/listas/valores-numericos";
+} from "../listas/valores-numericos";
 import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { ReferenciaVariavel } from "../valores/referencia-variavel";
 import { Metodo } from "../valores/metodos/foles/metodo";
 import { valoresGerais } from "../modificadores/atributos/gerais";
-import { ModificadoresValorPersonalizado } from "../../testes/listas/valores-personalizados";
+import { ModificadoresValorPersonalizado } from "../listas/valores-personalizados";
 
 /**
  * Implementação do avaliador sintático.

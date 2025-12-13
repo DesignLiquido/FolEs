@@ -3,11 +3,18 @@
         "outDir": "dist",
         "module": "commonjs",
         "target": "es2017",
-        "rootDir": ".",
+        "rootDir": "fontes",
         "allowJs": true,
         "sourceMap": true,
         "declaration": true,
         "esModuleInterop": true
     },
-    "exclude": ["babel.config.js", "dist/**/*"]
+    "exclude": [
+        "babel.config.js", 
+        "coverage/**/*", 
+        "dist/**/*", 
+        "jest.config.ts", 
+        "node_modules",
+        "testes/**/*"
+    ]
 }
