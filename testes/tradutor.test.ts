@@ -1,13 +1,9 @@
-import * as vlq from 'vlq';
-
 import { AvaliadorSintatico } from "../fontes/avaliador-sintatico";
 import { Importador } from "../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador";
 import { Tradutor } from "../fontes/tradutores/tradutor";
 import { GeradorMapaCss } from "../fontes/gerador-mapa"
-import { AlinharConteudo, CorDestaque, EstiloContorno } from '../fontes/modificadores';
-import { Hsl } from '../fontes/valores/metodos/foles/hsl';
 
 describe('Tradutor', () => {
     let lexador: LexadorInterface;
