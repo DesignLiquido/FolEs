@@ -177,6 +177,27 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorCalc2,
                 ]) as Metodo;
 
+            case "circular":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'circular'.",
+                );
+
+                const arrayValoresCircular: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoSimboloCircular: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresCircular.push(proximoSimboloCircular);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'circular'.",
+                );
+
+                return new SeletorValor(lexema,
+                    [arrayValoresCircular],
+                ) as Metodo;
+
             case "conjunto-estilos":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -322,6 +343,83 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     parametro3cc,
                     parametro4cc,
                 ]) as Metodo;
+
+            case "definir-caminho":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'definir-caminho'.",
+                );
+
+                const proporcaoCaminho = this.avancarEDevolverAnterior();
+
+                let matrizCaminho = null;
+                if (this.simbolos[this.atual].tipo === 'TEXTO') {
+                    matrizCaminho = this.avancarEDevolverAnterior();
+                }
+
+                const arrayValoresCaminho: Array<Simbolo> = [proporcaoCaminho];
+                if (matrizCaminho !== null) {
+                    arrayValoresCaminho.push(matrizCaminho);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método 'definir-caminho'.",
+                );
+
+                return new SeletorValor(lexema, arrayValoresCaminho) as Metodo;
+
+            case "definir-imagem":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'definir-imagem'.",
+                );
+
+                const linkImagem: Simbolo = this.avancarEDevolverAnterior();
+                const tamanhoImagem: Simbolo = this.avancarEDevolverAnterior();
+                const proporcaoImagem: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método 'definir-imagem'.",
+                );
+
+                return new SeletorValor(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as Metodo;
+
+            case "elemento":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'elemento'.",
+                );
+
+                const simboloElemento: Simbolo = this.avancarEDevolverAnterior();
+                const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'elemento'.",
+                );
+
+                return new SeletorValor(lexema, [simboloElemento, referenciaElemento]) as Metodo;
+
+            case "elipse":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'elipse'.",
+                );
+
+                const arrayValoresElipse: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorElipse: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresElipse.push(proximoValorElipse);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'elipse'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresElipse]) as Metodo;
 
             case "encaixar-conteudo":
                 this.consumir(
@@ -501,6 +599,44 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValor(lexema, [valorEstilistico1]) as Metodo;
 
+            case "gradiente-conico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'gradiente-conico'.",
+                );
+
+                const arrayGradienteConico: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteConico.push(proximoValorGradienteConico);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'gradiente-conico'.",
+                );
+
+                return new SeletorValor(lexema, [arrayGradienteConico]) as Metodo;
+
+            case "gradiente-cônico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'gradiente-cônico'.",
+                );
+
+                const arrayGradienteConico1: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteConico1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteConico1.push(proximoValorGradienteConico1);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'gradiente-cônico'.",
+                );
+
+                return new SeletorValor(lexema, [arrayGradienteConico1]) as Metodo;
+
             case "gradiente-linear":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -570,6 +706,27 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     cor2,
                 ]) as Metodo;
 
+            case "gradiente-radial":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'gradiente-radial'.",
+                );
+
+                const parametroGradienteRadial: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresGradienteRadial: Array<Simbolo> = [parametroGradienteRadial];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresGradienteRadial.push(proximoValorGradienteRadial);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'gradiente-radial'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresGradienteRadial]) as Metodo;
+
             case "hsl":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -582,7 +739,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.QUANTIFICADOR,
                     "Esperado símbolo percentual após argumento de saturação (S) no método 'hsl'.",
                 );
- 
+
                 const LdeHSL = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.QUANTIFICADOR,
@@ -600,7 +757,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese esquerdo após método 'hsla'.",
                 );
                 const HdeHSLA = this.avancarEDevolverAnterior();
- 
+
                 const SdeHSLA = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.QUANTIFICADOR,
@@ -699,6 +856,28 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorInclinarY,
                     quantificadorInclinarY,
                 ]) as Metodo;
+
+            case "inserir":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'inserir'.",
+                );
+
+                const valorInserir1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorInserir1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresInserir: Array<Simbolo> = [valorInserir1, quantificadorInserir1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorInserir: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresInserir.push(proximoValorInserir);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método inserir.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresInserir]) as Metodo;
 
             case "inverter":
                 this.consumir(
@@ -889,6 +1068,65 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorPerspectivar,
                 ]) as Metodo;
 
+            case "pintura":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'pintura'.",
+                );
+
+                const referenciaPintura: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'pintura'.",
+                );
+
+                return new SeletorValor(lexema, [referenciaPintura]) as Metodo;
+
+            case "poligono":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'poligono'.",
+                );
+
+                const valorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresPoligono: Array<Simbolo> = [valorPoligono, quantificadorPoligono];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresPoligono.push(proximoValorPoligono);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'poligono'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresPoligono]) as Metodo;
+
+            case "polígono":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'polígono'.",
+                );
+
+                const valorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresPoligono1: Array<Simbolo> = [valorPoligono1, quantificadorPoligono1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorPoligono1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresPoligono1.push(proximoValorPoligono1);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'polígono'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresPoligono1]) as Metodo;
+
             case "projetar-sombra":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -955,6 +1193,130 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     numeroRaio,
                     quantificadorRaio,
                 ]) as Metodo;
+
+            case "repetir-gradiente-conico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repetir-gradiente-conico'.",
+                );
+
+                const arrayValoresConico: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresConico.push(proximoValorConico);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-conico'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresConico]) as Metodo;
+
+            case "repetir-gradiente-cônico":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repetir-gradiente-cônico'.",
+                );
+
+                const arrayValoresConico1: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorConico1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresConico1.push(proximoValorConico1);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-cônico'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresConico1]) as Metodo;
+
+            case "repetir-gradiente-linear":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repetir-gradiente-linear'.",
+                );
+
+                const parametroLinear: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresLinear: Array<Simbolo> = [parametroLinear];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresLinear.push(proximoValorLinear);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresLinear]) as Metodo;
+
+            case "repetir-gradiente-radial":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repetir-gradiente-radial'.",
+                );
+
+                const parametroRadial: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRadial: Array<Simbolo> = [parametroRadial];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRadial.push(proximoValorRadial);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repetir-gradiente-radial'.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresRadial]) as Metodo;
+
+            case "retangulo":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'retangulo'.",
+                );
+
+                const valorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRect: Array<Simbolo> = [valorRect1, quantificadorRect1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRect: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRect.push(proximoValorRect);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método retangulo.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresRect]) as Metodo;
+
+            case "retângulo":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'retangulo'.",
+                );
+
+                const valorRecta1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorRecta1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRecta: Array<Simbolo> = [valorRecta1, quantificadorRecta1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRecta: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRecta.push(proximoValorRecta);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método retangulo.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresRecta]) as Metodo;
 
             case "rgb":
                 this.consumir(
@@ -1582,6 +1944,28 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após argumento do método url.",
                 );
                 return new SeletorValor(lexema, [url]) as Metodo;
+
+            case "xywh":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'xywh'.",
+                );
+
+                const valorXywh: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorXywh: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresXywh: Array<Simbolo> = [valorXywh, quantificadorXywh];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorXywh: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresXywh.push(proximoValorXywh);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método xywh.",
+                );
+
+                return new SeletorValor(lexema, [arrayValoresXywh]) as Metodo;
         }
 
         throw new Error(`Método ${lexema} não reconhecido em FolEs.`);
@@ -1706,12 +2090,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;
                     }
-                    
+
                     if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
                         valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
                         break;
                     }
-                    
+
                     throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
             }
         } while (
@@ -1913,7 +2297,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         let valoresModificador: Array<any> = this.valoresModificador(modificador.lexema);
 
         let classeModificadora;
-        if (valoresModificador[0] instanceof ReferenciaVariavel) {           
+        if (valoresModificador[0] instanceof ReferenciaVariavel) {
             classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador,
@@ -1922,9 +2306,9 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     colunaInicial: modificador.colunaInicial,
                     colunaFinal: modificador.colunaFinal,
                 },
-                true 
+                true
             );
-        } else {            
+        } else {
             classeModificadora = new SeletorModificador(
                 modificador.lexema,
                 valoresModificador,
@@ -1996,7 +2380,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 const seletores = this.resolverSeletores();
                 const modificadoresEDeclaracoesAninhadas =
                     this.resolverModificadoresEDeclaracoesAninhadas();
-                
+
                 return new BlocoDeclaracao(
                     seletores,
                     modificadoresEDeclaracoesAninhadas.modificadores,
@@ -2015,7 +2399,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             declaracoes.push(this.declaracao());
             this.referenciaDeclaracoes = declaracoes;
         }
-        
+
         return declaracoes.filter((d) => d);
     }
 }

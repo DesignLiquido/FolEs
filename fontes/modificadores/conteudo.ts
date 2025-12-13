@@ -23,8 +23,7 @@ export class Conteudo extends Modificador {
     ) {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
-        // Também aceita como valor a função image-set()
-        const valoresExtra = ["url", "linear-gradient", "counter"];
+        const valoresExtra = ["url", "linear-gradient", "counter", "image-set"];
 
         if (!variavel) {
             validarValores(

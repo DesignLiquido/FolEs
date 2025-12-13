@@ -223,3 +223,17 @@ export const MetodosFolEs: Array<string> = [
     'translacao',
     'url',
 ];
+
+export const MetodosBasicShape: Array<Object> = [
+    {
+        foles: 'caminho-recorte',
+        css: 'clip-path',
+    },
+    {
+        foles: 'forma-externa',
+        css: 'shape-outside',
+    }, {
+        foles: 'trajeto-deslocamento',
+        css: 'offset-path',
+    },
+];

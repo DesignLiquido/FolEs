@@ -292,7 +292,7 @@ export class Lexador implements LexadorInterface {
                 this.avancar();
                 break;
             case ",":
-                this.adicionarSimbolo(tiposDeSimbolos.VIRGULA);
+                this.adicionarSimbolo(tiposDeSimbolos.VIRGULA, null, ",");
                 this.avancar();
                 break;
             case "%":

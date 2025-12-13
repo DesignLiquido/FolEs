@@ -1,13 +1,30 @@
 /** Valores específicos */
 lmht {
-    margem-superior: 12px;
+    caminho-recorte: retangulo(2em 40% arredondar 5% at 60px);
+    imagem-fundo: repetir-gradiente-linear(círculo, 20px 2px 200px, 10% 1% 100%);
+    trajeto-deslocamento: circular(lado-mais-proximo);
+    forma-externa: inserir(1rem 30% 3px 4rem);
+    trajeto-deslocamento: xywh(10% 10px 5em 6px);
 }
 
 lmht {
-    borda: 50px;
+    trajeto-deslocamento: elipse(10% 10px 5em 6px);
+    forma-externa: polígono(10px 10px, 100px 100px, 200px 200px);
+    imagem-fundo: repetir-gradiente-cônico(vermelho 20px 10px, azul 30% 20px, verde 10% 15deg);
 }
 
 lmht {
+    imagem-fundo: repetir-gradiente-radial(círculo, 20px 2px 200px, 10% 1% 100%);
     recursos-fonte: "c2sc", "hist";
     citacoes: "blabla";
 }
+
+lmht {
+    imagem-fundo: elemento(#meu-id);
+    imagem-fundo: gradiente-cônico(de 90deg, vermelho, amarelo, verde, azul);
+} 
+
+lmht {
+    imagem-fundo: gradiente-radial(círculo no centro, #ff0, #f00);
+    imagem-fundo: gradiente-conico(de 90deg, vermelho, amarelo, verde, azul);
+} 

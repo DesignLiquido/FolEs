@@ -39,20 +39,31 @@ export class Fundo extends Modificador {
     ) {
         super("fundo", "background", pragmas);
 
+        const valoresExtra: Array<string> = [
+            'conic-gradient',
+            'element',
+            'paint',
+            'radial-gradient',
+            'repeating-conic-gradient',
+            'repeating-linear-gradient', 
+            'repeating-radial-gradient',
+        ];
+
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
                     "fundo",
                     valores,
-                    this.valoresAceitos
+                    this.valoresAceitos,
+                    valoresExtra
                 );
             } else {
                 validarMultiplosQualitativos(
                     "fundo",
                     valores,
                     this.valoresAceitos,
-                    unidadesMedida
+                    unidadesMedida,
                 );
             }
         }

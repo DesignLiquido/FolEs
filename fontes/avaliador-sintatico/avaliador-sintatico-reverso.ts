@@ -252,6 +252,32 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValorReverso(lexema, [valorVariarCaractere]) as MetodoCss;
 
+            case "circle":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'circle'.",
+                );
+
+                let arrayValoresCircular: Array<Simbolo> = [];
+                const valorCircular = this.avancarEDevolverAnterior();
+                arrayValoresCircular.push(valorCircular);
+
+                let quantificadorCircular: Simbolo = null;
+                if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
+                    quantificadorCircular = this.avancarEDevolverAnterior();
+                    arrayValoresCircular.push(quantificadorCircular)
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'circle'.",
+                );
+
+                return new SeletorValorReverso(
+                    lexema,
+                    [arrayValoresCircular],
+                ) as MetodoCss;
+
             case "clamp": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -286,7 +312,26 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         quantificadorMax,
                     ]
                 ) as MetodoCss;
-            }
+            };
+
+            case "conic-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'conic-gradient'.",
+                );
+
+                const arrayGradienteConico: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteConico.push(proximoValorGradienteConico);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'conic-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayGradienteConico]) as MetodoCss;
 
             case "contrast":
                 this.consumir(
@@ -427,6 +472,41 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 ) as MetodoCss;
             }
 
+            case "element":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'element'.",
+                );
+
+                const simboloElemento: Simbolo = this.avancarEDevolverAnterior();
+                const referenciaElemento: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'element'.",
+                );
+
+                return new SeletorValorReverso(lexema, [simboloElemento, referenciaElemento]) as MetodoCss;
+
+            case "ellipse":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'ellipse'.",
+                );
+
+                const arrayValoresElipse: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorElipse: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresElipse.push(proximoValorElipse);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'ellipse'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresElipse]) as MetodoCss;
+
             case "fit-content":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -552,35 +632,45 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 ) as MetodoCss;
             }
 
-            case "scale3d": {
+            case "image-set":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scale3d'.",
+                    "Esperado parêntese esquerdo após método 'image-set'.",
                 );
-                const valorScale3d1 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após primeiro argumento do método scale3d.",
-                );
-                const valorScale3d2 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após segundo argumento do método scale3d.",
-                );
-                const valorScale3d3 = this.avancarEDevolverAnterior();
+
+                const linkImagem: Simbolo = this.avancarEDevolverAnterior();
+                const tamanhoImagem: Simbolo = this.avancarEDevolverAnterior();
+                const proporcaoImagem: Simbolo = this.avancarEDevolverAnterior();
+
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scale3d.",
+                    "Esperado parêntese direito após argumento do método 'image-set'.",
                 );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorScale3d1,
-                        valorScale3d2,
-                        valorScale3d3,
-                    ]
-                ) as MetodoCss;
-            }
+
+                return new SeletorValorReverso(lexema, [linkImagem, tamanhoImagem, proporcaoImagem]) as MetodoCss;
+
+            case "inset":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'inset'.",
+                );
+
+                const valorInserir1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorInserir1: Simbolo = this.avancarEDevolverAnterior();
+
+                const arrayValoresInserir: Array<Simbolo> = [valorInserir1, quantificadorInserir1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorInserir: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresInserir.push(proximoValorInserir);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método inset.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresInserir]) as MetodoCss;
 
             case "invert": {
                 this.consumir(
@@ -599,32 +689,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após método 'invert'.",
                 );
                 return new SeletorValorReverso(lexema, [valorInverter, quantificadorInverter]) as MetodoCss;
-            }
-
-            case "scaleX": {
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scaleX'.",
-                );
-                const valorScaleX = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scaleX.",
-                );
-                return new SeletorValorReverso(lexema, [valorScaleX]) as MetodoCss;
-            }
-
-            case "scaleY": {
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scaleY'.",
-                );
-                const valorScaleY = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scaleY.",
-                );
-                return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
             }
 
             case "linear-gradient":
@@ -698,6 +762,205 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         cor2,
                     ]
                 ) as MetodoCss;
+
+            case "path":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'path'.",
+                );
+
+                const proporcaoCaminho = this.avancarEDevolverAnterior();
+
+                let matrizCaminho = null;
+                if (this.simbolos[this.atual].tipo === 'TEXTO') {
+                    matrizCaminho = this.avancarEDevolverAnterior();
+                }
+
+                const arrayValoresCaminho: Array<Simbolo> = [proporcaoCaminho];
+                if (matrizCaminho !== null) {
+                    arrayValoresCaminho.push(matrizCaminho);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após argumento do método 'path'.",
+                );
+
+                return new SeletorValorReverso(lexema, arrayValoresCaminho) as MetodoCss;
+
+            case "polygon":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'polygon'.",
+                );
+
+                const arrayValoresPoligono: Array<Simbolo> = [];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorPoligono: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresPoligono.push(proximoValorPoligono);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'polygon'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresPoligono]) as MetodoCss;
+
+            case "radial-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'radial-gradient'.",
+                );
+
+                const arrayGradienteRadial: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorGradienteRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteRadial.push(proximoValorGradienteRadial);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'radial-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayGradienteRadial]) as MetodoCss;
+
+            case "rect":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'rect'.",
+                );
+
+                const valorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorRect1: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresRect: Array<Simbolo> = [valorRect1, quantificadorRect1];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRect: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRect.push(proximoValorRect);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método rect.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresRect]) as MetodoCss;
+
+            case "repeating-conic-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repeating-conic-gradient'.",
+                );
+
+                const arrayValoresConico: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorConico: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresConico.push(proximoValorConico);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repeating-conic-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresConico]) as MetodoCss;
+
+            case "repeating-linear-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repeating-linear-gradient'.",
+                );
+
+                const arrayValoresLinear: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorLinear: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresLinear.push(proximoValorLinear);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repeating-linear-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresLinear]) as MetodoCss;
+
+            case "repeating-radial-gradient":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'repeating-radial-gradient'.",
+                );
+
+                const arrayValoresRadial: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorRadial: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresRadial.push(proximoValorRadial);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método 'repeating-radial-gradient'.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresRadial]) as MetodoCss;
+
+            case "scale3d": {
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'scale3d'.",
+                );
+                const valorScale3d1 = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperado vírgula após primeiro argumento do método scale3d.",
+                );
+                const valorScale3d2 = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.VIRGULA,
+                    "Esperado vírgula após segundo argumento do método scale3d.",
+                );
+                const valorScale3d3 = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após segundo argumento do método scale3d.",
+                );
+                return new SeletorValorReverso(
+                    lexema,
+                    [
+                        valorScale3d1,
+                        valorScale3d2,
+                        valorScale3d3,
+                    ]
+                ) as MetodoCss;
+            }
+
+            case "scaleX": {
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'scaleX'.",
+                );
+                const valorScaleX = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após segundo argumento do método scaleX.",
+                );
+                return new SeletorValorReverso(lexema, [valorScaleX]) as MetodoCss;
+            }
+
+            case "scaleY": {
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'scaleY'.",
+                );
+                const valorScaleY = this.avancarEDevolverAnterior();
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após segundo argumento do método scaleY.",
+                );
+                return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
+            }
 
             case "skew": {
                 this.consumir(
@@ -951,6 +1214,21 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
 
                 return new SeletorValorReverso(lexema, [valorOrnaments]) as MetodoCss;
+
+            case "paint":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'paint'.",
+                );
+
+                const referenciaPintura: Simbolo = this.avancarEDevolverAnterior();
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após método 'paint'.",
+                );
+
+                return new SeletorValorReverso(lexema, [referenciaPintura]) as MetodoCss;
 
             case "perspective":
                 this.consumir(
@@ -1768,29 +2046,51 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                         quantificadorTranslaçaoZ,
                     ]
                 ) as MetodoCss;
+
+            case "xywh":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'xywh'.",
+                );
+
+                const valorXywh: Simbolo = this.avancarEDevolverAnterior();
+                const quantificadorXywh: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresXywh: Array<Simbolo> = [valorXywh, quantificadorXywh];
+
+                while (this.simbolos[this.atual].tipo !== 'PARENTESE_DIREITO') {
+                    const proximoValorXywh: Simbolo = this.avancarEDevolverAnterior();
+                    arrayValoresXywh.push(proximoValorXywh);
+                }
+
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_DIREITO,
+                    "Esperado parêntese direito após último argumento do método xywh.",
+                );
+
+                return new SeletorValorReverso(lexema, [arrayValoresXywh]) as MetodoCss;
         }
     }
 
-        protected valorNumerico(
-            nomeModificador: string,
-            valorModificador: SimboloInterface,
-            ponto: boolean
-        ): ValorNumerico {
-            let literalNumero = Number(valorModificador.lexema);
-            if (ponto) {
-                literalNumero = literalNumero / Math.pow(10, valorModificador.lexema.length);
-            }
-    
-            let quantificadorNumero: string;
-            if (this.verificarTipoSimboloAtual(tiposDeSimbolos.QUANTIFICADOR)) {
-                const simboloQuantificadorNumero = this.avancarEDevolverAnterior();
-                quantificadorNumero = simboloQuantificadorNumero.lexema;
-            }
-    
-            const valorNumerico = new ValorNumerico(nomeModificador, literalNumero, quantificadorNumero);
-            return valorNumerico;
+    protected valorNumerico(
+        nomeModificador: string,
+        valorModificador: SimboloInterface,
+        ponto: boolean
+    ): ValorNumerico {
+        let literalNumero = Number(valorModificador.lexema);
+        if (ponto) {
+            literalNumero = literalNumero / Math.pow(10, valorModificador.lexema.length);
         }
-    
+
+        let quantificadorNumero: string;
+        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.QUANTIFICADOR)) {
+            const simboloQuantificadorNumero = this.avancarEDevolverAnterior();
+            quantificadorNumero = simboloQuantificadorNumero.lexema;
+        }
+
+        const valorNumerico = new ValorNumerico(nomeModificador, literalNumero, quantificadorNumero);
+        return valorNumerico;
+    }
+
 
     protected valoresModificador(nomeModificador: string): Array<Valor> {
         const valoresResolvidos = [];
@@ -1800,53 +2100,53 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         ) {
             const valorModificador = this.avancarEDevolverAnterior();
 
-               switch (valorModificador.tipo) {
-                        case tiposDeSimbolos.BARRA:
-                            valoresResolvidos.push(new ValorAbreviacao());
-                            break;
-                        case tiposDeSimbolos.CIFRAO:
-                            const nomeVariavel = this.avancarEDevolverAnterior();
-                            const referenciaVariavel = new ReferenciaVariavel(nomeVariavel.lexema);
-                            valoresResolvidos.push(referenciaVariavel);
-                            break;
-                        case tiposDeSimbolos.METODO:
-                            const metodo = this.resolverMetodo(valorModificador.lexema);
-                            valoresResolvidos.push(metodo);
-                            break;
-                        case tiposDeSimbolos.NUMERO:
-                            const valorNumerico = this.valorNumerico(nomeModificador, valorModificador, false);
-                            valoresResolvidos.push(valorNumerico);
-                            break;
-                        case tiposDeSimbolos.PONTO:
-                            const simboloNumero = this.consumir(tiposDeSimbolos.NUMERO, "Esperado número após ponto para valor de modificador.");
-                            const valorNumericoComecadoPorPonto = this.valorNumerico(nomeModificador, simboloNumero, true);
-                            valoresResolvidos.push(valorNumericoComecadoPorPonto);
-                            break;
-                        case tiposDeSimbolos.QUALITATIVO:
-                            const valorQualitativo = new ValorQualitativo(valorModificador.lexema);
-                            valoresResolvidos.push(valorQualitativo);
-                            break;
-                        case tiposDeSimbolos.TEXTO:
-                            const valorTexto = new ValorTexto(valorModificador.lexema);
-                            valoresResolvidos.push(valorTexto);
-                            break;
-                        case tiposDeSimbolos.VIRGULA:
-                            const valorVirgula = new ValorVirgula();
-                            valoresResolvidos.push(valorVirgula);
-                            break;
-                        default:
-                            if (valorModificador.lexema in valoresGerais) {
-                                valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
-                                break;
-                            }
-                            
-                            if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
-                                valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
-                                break;
-                            }
-                            
-                            throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
+            switch (valorModificador.tipo) {
+                case tiposDeSimbolos.BARRA:
+                    valoresResolvidos.push(new ValorAbreviacao());
+                    break;
+                case tiposDeSimbolos.CIFRAO:
+                    const nomeVariavel = this.avancarEDevolverAnterior();
+                    const referenciaVariavel = new ReferenciaVariavel(nomeVariavel.lexema);
+                    valoresResolvidos.push(referenciaVariavel);
+                    break;
+                case tiposDeSimbolos.METODO:
+                    const metodo = this.resolverMetodo(valorModificador.lexema);
+                    valoresResolvidos.push(metodo);
+                    break;
+                case tiposDeSimbolos.NUMERO:
+                    const valorNumerico = this.valorNumerico(nomeModificador, valorModificador, false);
+                    valoresResolvidos.push(valorNumerico);
+                    break;
+                case tiposDeSimbolos.PONTO:
+                    const simboloNumero = this.consumir(tiposDeSimbolos.NUMERO, "Esperado número após ponto para valor de modificador.");
+                    const valorNumericoComecadoPorPonto = this.valorNumerico(nomeModificador, simboloNumero, true);
+                    valoresResolvidos.push(valorNumericoComecadoPorPonto);
+                    break;
+                case tiposDeSimbolos.QUALITATIVO:
+                    const valorQualitativo = new ValorQualitativo(valorModificador.lexema);
+                    valoresResolvidos.push(valorQualitativo);
+                    break;
+                case tiposDeSimbolos.TEXTO:
+                    const valorTexto = new ValorTexto(valorModificador.lexema);
+                    valoresResolvidos.push(valorTexto);
+                    break;
+                case tiposDeSimbolos.VIRGULA:
+                    const valorVirgula = new ValorVirgula();
+                    valoresResolvidos.push(valorVirgula);
+                    break;
+                default:
+                    if (valorModificador.lexema in valoresGerais) {
+                        valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                        break;
                     }
+
+                    if (ModificadoresValorPersonalizado.includes(nomeModificador)) {
+                        valoresResolvidos.push(new ValorQualitativo(valorModificador.lexema));
+                        break;
+                    }
+
+                    throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
+            }
         }
 
         this.consumir(
@@ -1869,7 +2169,7 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         );
 
         const valoresModificador = this.valoresModificador(modificador.lexema);
-        
+
         const classeModificadora = new SeletorReversoModificador(
             modificador.lexema,
             valoresModificador,

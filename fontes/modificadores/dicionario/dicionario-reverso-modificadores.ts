@@ -29,6 +29,7 @@ import { BordaInferior } from "../borda-inferior";
 import { BordaMascara } from "../borda-mascara";
 import { BordaSuperior } from "../borda-superior";
 import { CalhaBarraRolagem } from "../calha-barra-rolagem";
+import { CaminhoRecorte } from "../caminho-recorte";
 import { CelulasVazias } from "../celulas-vazias";
 import { Citacoes } from "../citacoes";
 import { ColunaEmGrade } from "../coluna-em-grade";
@@ -366,22 +367,34 @@ import { Blur } from "../../valores/metodos/css/blur";
 import { Brightness } from "../../valores/metodos/css/brightness";
 import { Calc } from "../../valores/metodos/css/calc";
 import { CharacterVariant } from "../../valores/metodos/css/character-variant";
+import { Circle } from "../../valores/metodos/css/circle";
 import { Clamp } from "../../valores/metodos/css/clamp";
 import { Contrast } from "../../valores/metodos/css/constrast";
 import { Counter } from "../../valores/metodos/css/counter";
 import { CubicBezier } from "../../valores/metodos/css/cubic-bezier";
 import { DropShadow } from "../../valores/metodos/css/drop-shadow";
+import { Element } from "../../valores/metodos/css/element";
+import { Ellipse } from "../../valores/metodos/css/ellipse";
 import { FitContent } from "../../valores/metodos/css/fit-content";
 import { Grayscale } from "../../valores/metodos/css/grayscale";
+import { ImageSet } from "../../valores/metodos/css/image-set";
 import { Hsl } from "../../valores/metodos/foles/hsl";
 import { Hsla } from "../../valores/metodos/foles/hsla";
 import { HueRotate } from "../../valores/metodos/css/hue-rotate";
+// import { Inserir } from "../../valores/metodos/foles/inserir";
 import { Invert } from "../../valores/metodos/css/invert";
 import { Linear } from "../../valores/metodos/foles/linear";
 import { LinearGradient } from "../../valores/metodos/css/linear-gradient";
 import { MinMax } from "../../valores/metodos/css/minmax";
 import { Ornaments } from "../../valores/metodos/css/ornaments";
+import { Path } from "../../valores/metodos/css/path";
+import { Polygon } from "../../valores/metodos/css/polygon";
+import { RadialGradient } from "../../valores/metodos/css/radial-gradient";
 import { Ray } from "../../valores/metodos/css/ray";
+import { Rect } from "../../valores/metodos/css/rect";
+import { RepeatingConicGradient } from "../../valores/metodos/css/repeating-conic-gradient";
+import { RepeatingLinearGradient } from "../../valores/metodos/css/repeating-linear-gradient";
+import { RepeatRadialGradient } from "../../valores/metodos/css/repeating-radial-gradient";
 import { Rgb } from "../../valores/metodos/foles/rgb";
 import { Rgba } from "../../valores/metodos/foles/rgba";
 import { Rotate3d } from "../../valores/metodos/css/rotate3d";
@@ -405,6 +418,9 @@ import { TranslateZ } from "../../valores/metodos/css/translateZ";
 import { TranslateX } from "../../valores/metodos/css/translateX";
 import { TranslateY } from "../../valores/metodos/css/translateY";
 import { Stylistic } from "../../valores/metodos/css/stylistic";
+import { Xywh } from "../../valores/metodos/foles/xywh";
+import { Paint } from "../../valores/metodos/css/paint";
+import { ConicGradient } from "../../valores/metodos/css/conic-gradient";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -438,6 +454,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "mask-border": BordaMascara,
     "border-top": BordaSuperior,
     "scrollbar-gutter": CalhaBarraRolagem,
+    "clip-path": CaminhoRecorte,
     "empty-cells": CelulasVazias,
     quotes: Citacoes,
     "grid-column": ColunaEmGrade,
@@ -778,23 +795,37 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     calc: Calc,
     "character-variant": CharacterVariant,
     clamp: Clamp,
+    circle: Circle,
+    "conic-gradient": ConicGradient,
     contrast: Contrast,
     counter: Counter,
     "cubic-bezier": CubicBezier,
     "drop-shadow": DropShadow,
+    element: Element,
+    ellipse: Ellipse,
     "fit-content": FitContent,
     grayscale: Grayscale,
+    "image-set": ImageSet,
     hsl: Hsl,
     hsla: Hsla,
     "hue-rotate": HueRotate,
+    // inset: Inserir,
     invert: Invert,
     linear: Linear,
     "linear-gradient": LinearGradient,
     minmax: MinMax,
     ornaments: Ornaments,
+    paint: Paint,
+    path: Path,
+    polygon: Polygon,
+    "radial-gradient": RadialGradient,
     ray: Ray,
+    "repeating-conic-gradient": RepeatingConicGradient,
+    "repeating-linear-gradient": RepeatingLinearGradient,
+    "repeating-radial-gradient": RepeatRadialGradient,
     rgb: Rgb,
     rgba: Rgba,
+    rect: Rect,
     rotate3d: Rotate3d,
     rotateX: RotateX,
     rotateY: RotateY,
@@ -816,4 +847,5 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     translateX: TranslateX,
     translateY: TranslateY,
     translateZ: TranslateZ,
+    xywh: Xywh,
 };

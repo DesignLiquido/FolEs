@@ -9,7 +9,7 @@ export class SelecaoUsuario extends Modificador {
         texto: "text",
         tudo: "all",
         conter: "contain",
-        elemento: "element",
+        elementar: "element",
     };
 
     constructor(

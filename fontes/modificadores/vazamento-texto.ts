@@ -6,7 +6,8 @@ import { validarValorString } from "./validacoes/string";
 export class VazamentoTexto extends Modificador {
     valoresAceitos: { [valorFoles: string]: string } = {
         recorte: "clip",
-        elipse: "ellipsis",
+        reticencias: "ellipsis",
+        reticências: "ellipsis",
     };
 
     constructor(
