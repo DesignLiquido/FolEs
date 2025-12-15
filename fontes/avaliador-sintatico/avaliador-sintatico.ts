@@ -1580,6 +1580,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     quantificadorSépia,
                 ]) as Metodo;
 
+            case "transicao-gradual":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'transicao-gradual'.",
+                );
+
+                const arrayGradienteTransicao: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorTransicao: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteTransicao.push(proximoValorTransicao);
+                }
+
+                return new SeletorValor(lexema, [arrayGradienteTransicao]) as Metodo;
+
+            case "transição-gradual":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'transição-gradual'.",
+                );
+
+                const arrayGradienteTransicao1: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorTransicao1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteTransicao1.push(proximoValorTransicao1);
+                }
+
+                return new SeletorValor(lexema, [arrayGradienteTransicao1]) as Metodo;
+
             case "translação":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

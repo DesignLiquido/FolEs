@@ -32,6 +32,10 @@ export function tratarValores(
             }
         } else if (valor.tipo === 'QUANTIFICADOR' || valor.tipo === 'VIRGULA') {
             traducaoRetorno += `${valor.lexema}`;
+        } else if (valor.tipo === 'PARENTESE_DIREITO') {
+            traducaoRetorno += ')';
+        } else if (valor.tipo === 'PARENTESE_ESQUERDO') {
+            traducaoRetorno += '(';
         } else if (index !== 0 && array[index - 1].lexema === '#') {
             traducaoRetorno += `${valor.lexema}`;
         } else if (index === 0) {
@@ -76,6 +80,10 @@ export function tratarValoresReversos(
             }
         } else if (valor.tipo === 'QUANTIFICADOR' || valor.tipo === 'VIRGULA') {
             traducaoRetorno += `${valor.lexema}`;
+        } else if (valor.tipo === 'PARENTESE_DIREITO') {
+            traducaoRetorno += ')';
+        } else if (valor.tipo === 'PARENTESE_ESQUERDO') {
+            traducaoRetorno += '(';
         } else if (index !== 0 && array[index - 1].lexema === '#') {
             traducaoRetorno += `${valor.lexema}`;
         } else if (index === 0) {
