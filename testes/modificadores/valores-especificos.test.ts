@@ -7,7 +7,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { fontes } from "../../fontes/modificadores/atributos/fontes";
-import { ValoresPersonalizados, ValoresPersonalizadosMultiplos } from "../listas/valores-personalizados";
+import { ValoresPersonalizados, ValoresPersonalizadosMultiplos } from "../../fontes/listas/valores-personalizados";
 import { ValorQualitativo, ValorTexto } from "../../fontes/valores";
 
 describe('Testando Seletores com VALORES ESPECÍFICOS', () => {

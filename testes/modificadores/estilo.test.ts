@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { Estilo, EstiloBorda } from "../listas/estilo";
+import { Estilo, EstiloBorda } from "../../fontes/listas/estilo";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { estilos } from "../../fontes/modificadores/atributos/estilo";
 import { ValorQualitativo } from "../../fontes/valores";

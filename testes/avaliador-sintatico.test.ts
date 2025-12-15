@@ -6,7 +6,7 @@ import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Resolvedor } from "../fontes/resolvedores";
 import { ValorNumerico, ValorQualitativo } from "../fontes/valores";
-import { ValoresQualitativosCss, ValoresQuantificadores } from "./listas/valores-quantificadores"
+import { ValoresQualitativosCss, ValoresQuantificadores } from "../fontes/listas/valores-quantificadores"
 
 describe('Avaliador Sintático', () => {
     let lexador: LexadorInterface;

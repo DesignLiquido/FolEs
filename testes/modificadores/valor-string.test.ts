@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ValorString, ValorStringAcentuado } from "../listas/valor-string";
+import { ValorString, ValorStringAcentuado } from "../../fontes/listas/valor-string";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { ValorTexto } from "../../fontes/valores";
 

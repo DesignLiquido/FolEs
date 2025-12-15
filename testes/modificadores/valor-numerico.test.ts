@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ModificadoresDeValorNumerico, ModificadoresDeValorNumericoApenas, ModificadoresDeValorNumericoComQuantificador, ModificadoresDeValorNumericoZeroUm } from "../listas/valores-numericos";
+import { ModificadoresDeValorNumerico, ModificadoresDeValorNumericoApenas, ModificadoresDeValorNumericoComQuantificador, ModificadoresDeValorNumericoZeroUm } from "../../fontes/listas/valores-numericos";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";

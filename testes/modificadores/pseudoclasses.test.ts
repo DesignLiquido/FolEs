@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { Pseudoclasses } from "../listas/pseudoclasses";
+import { Pseudoclasses } from "../../fontes/listas/pseudoclasses";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorPseudoclasse } from "../../fontes/pseudoclasses/seletor-pseudoclasse";
 

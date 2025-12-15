@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
+import { ValorGlobal, ValorGlobalInvalido } from "../../fontes/listas/valor-global";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { valoresGlobais } from "../../fontes/modificadores/atributos/globais";
 import { ValorQualitativo } from "../../fontes/valores";

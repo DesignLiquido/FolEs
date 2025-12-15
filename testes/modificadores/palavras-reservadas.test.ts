@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { PalavrasReservadas } from "../listas/palavras-reservadas";
+import { PalavrasReservadas } from "../../fontes/listas/palavras-reservadas";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { ValorQualitativo } from "../../fontes/valores";
 

@@ -4,7 +4,7 @@ import { ResolvedorReverso } from "../fontes/resolvedores/resolvedor-reverso";
 import estruturasLmht from "../fontes/tradutores/estruturas-lmht";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
-import { TraducaoReversa, TraducaoReversaMetodos, TraducaoReversaValorNumericoFracionario } from "./listas/traducao-reversa";
+import { TraducaoReversa, TraducaoReversaMetodos, TraducaoReversaValorNumericoFracionario } from "../fontes/listas/traducao-reversa";
 import { BlocoDeclaracao } from "../fontes/declaracoes";
 
 describe('Resolvedor Reverso', () => {

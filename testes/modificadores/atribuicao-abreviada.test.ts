@@ -3,7 +3,7 @@ import { Importador } from "../../fontes/importador";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaPREspecificas, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../listas/atribuicao-abreviada";
+import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaPREspecificas, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../../fontes/listas/atribuicao-abreviada";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";

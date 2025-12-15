@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ValorAngulo, ValorComprimento, ValorPercentual, ValoresQuantificadores, ValorQuantificadorInvalido, ValorTempo } from "../listas/valores-quantificadores";
+import { ValorAngulo, ValorComprimento, ValorPercentual, ValoresQuantificadores, ValorQuantificadorInvalido, ValorTempo } from "../../fontes/listas/valores-quantificadores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";

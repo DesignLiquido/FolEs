@@ -3,7 +3,7 @@ import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
 import { ResolvedorReverso } from "../fontes/resolvedores/resolvedor-reverso";
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
-import { ValoresQualitativosCss, ValoresQuantificadoresCSS } from "./listas/valores-quantificadores";
+import { ValoresQualitativosCss, ValoresQuantificadoresCSS } from "../fontes/listas/valores-quantificadores";
 import { BlocoDeclaracao } from "../fontes/declaracoes";
 import { ValorNumerico, ValorQualitativo } from "../fontes/valores";
 
