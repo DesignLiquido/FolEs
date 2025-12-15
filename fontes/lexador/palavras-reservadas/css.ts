@@ -135,6 +135,7 @@ export default {
     "conic-gradient": tiposDeSimbolos.METODO,
     contrast: tiposDeSimbolos.METODO,
     counter: tiposDeSimbolos.METODO,
+    "cross-fade": tiposDeSimbolos.METODO,
     "cubic-bezier": tiposDeSimbolos.METODO,
     "drop-shadow": tiposDeSimbolos.METODO,
     element: tiposDeSimbolos.METODO,

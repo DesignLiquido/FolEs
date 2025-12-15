@@ -390,6 +390,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     ]
                 ) as MetodoCss;
 
+            case "cross-fade":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'cross-fade'.",
+                );
+
+                const arrayGradienteTransicao: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorTransicao: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteTransicao.push(proximoValorTransicao);
+                }
+
+                return new SeletorValorReverso(lexema, [arrayGradienteTransicao]) as MetodoCss;
+
             case "cubic-bezier":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

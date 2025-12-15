@@ -421,6 +421,7 @@ import { Stylistic } from "../../valores/metodos/css/stylistic";
 import { Xywh } from "../../valores/metodos/foles/xywh";
 import { Paint } from "../../valores/metodos/css/paint";
 import { ConicGradient } from "../../valores/metodos/css/conic-gradient";
+import { CrossFade } from "../../valores/metodos/css/cross-fade";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -799,6 +800,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "conic-gradient": ConicGradient,
     contrast: Contrast,
     counter: Counter,
+    "cross-fade": CrossFade,
     "cubic-bezier": CubicBezier,
     "drop-shadow": DropShadow,
     element: Element,
