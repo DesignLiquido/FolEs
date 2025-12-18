@@ -38,7 +38,7 @@
     "homepage": "https://github.com/DesignLiquido/FolEs#readme",
     "devDependencies": {
         "@types/jest": "^30",
-        "@types/node": "^24.0.1",
+        "@types/node": "^25.0.3",
         "copyfiles": "^2.4.1",
         "jest": "^30",
         "jest-coverage-badges": "^1.1.2",
