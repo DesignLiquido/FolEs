@@ -4,7 +4,6 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { Resolvedor } from "../../fontes/resolvedores";
 import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaPREspecificas, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../../fontes/listas/atribuicao-abreviada";
-import { SeletorModificadorInterface } from "../../fontes/interfaces/seletor-modificador-interface";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
