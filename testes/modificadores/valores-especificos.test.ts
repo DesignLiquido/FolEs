@@ -7,7 +7,7 @@ import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { fontes } from "../../fontes/modificadores/atributos/fontes";
-import { ValoresPersonalizados, ValoresPersonalizadosMultiplos } from "../listas/valores-personalizados";
+import { ValoresPersonalizados, ValoresPersonalizadosMultiplos } from "../../fontes/listas/valores-personalizados";
 import { ValorQualitativo, ValorTexto } from "../../fontes/valores";
 
 describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
@@ -80,9 +80,8 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 const valorSeletor = new ValorQualitativo(valoresSVG[index].folEs);
                 const seletor = new SeletorModificador(
                     'eventos-ponteiro',
-                    [valorSeletor],
-                    null
-                );
+                    [valorSeletor]
+                ) as any;
 
                 // O seletor deve aceitar o qualitativo SVG
                 expect(valorSeletor.qualitativo).toEqual(valoresSVG[index].folEs);
@@ -166,7 +165,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
         });
 
         it('Caso de sucesso - Valores do tipo fonte de texto', () => {
-            const valoresFonte = [];
+            const valoresFonte: Array<string> = [];
             Object.values(fontes).forEach((fonte) => valoresFonte.push(fonte));
 
             for (let index = 0; index < valoresFonte.length; index += 1) {

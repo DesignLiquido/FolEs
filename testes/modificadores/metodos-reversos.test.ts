@@ -4,12 +4,12 @@ import { LexadorReverso } from "../../fontes/lexador/lexador-reverso";
 import { AvaliadorSintaticoReverso } from "../../fontes/avaliador-sintatico/avaliador-sintatico-reverso";
 import { ResolvedorReverso } from "../../fontes/resolvedores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/css";
-import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../listas/metodos-css";
+import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurvaCubica, MetodoEncaixarConteudo, MetodoEscalaCinza, MetodoGradienteLinear, MetodoInverter, MetodoLimitar, MetodoLinear, MetodoMinMax, MetodoOpacar, MetodoPassos, MetodoPerspectivar, MetodoProjetarSombra, MetodoRaio, MetodoRotacionarMatiz, MetodoSaturar, MetodosCss, MetodoSepia, MetodosEscalamento, MetodosInclinar, MetodosRotacionar, MetodosTranslacao, TraducaoValoresMetodos } from "../../fontes/listas/metodos-css";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValorReverso } from "../../fontes/valores/seletor-valor-reverso";
 import { Simbolo } from "../../fontes/lexador";
 import { Contador } from "../../fontes/valores/metodos/foles/contador";
-import { MetodosBasicShape } from "../listas/metodos";
+import { MetodosBasicShape } from "../../fontes/listas/metodos";
 
 describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
     let lexador: LexadorInterface;

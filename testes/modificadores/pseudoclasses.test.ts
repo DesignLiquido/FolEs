@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { Pseudoclasses } from "../listas/pseudoclasses";
+import { Pseudoclasses } from "../../fontes/listas/pseudoclasses";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorPseudoclasse } from "../../fontes/pseudoclasses/seletor-pseudoclasse";
 
@@ -49,7 +49,7 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
                 const primeiroResultado = resultadoAvaliadorSintatico[0];
                 expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                const primeiroResultadoTipado = primeiroResultado as any;
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador

@@ -2,7 +2,7 @@ import { AvaliadorSintatico } from "../fontes/avaliador-sintatico"
 import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Resolvedor } from "../fontes/resolvedores";
-import { ValoresQuantificadores } from "./listas/valores-quantificadores"
+import { ValoresQuantificadores } from "../fontes/listas/valores-quantificadores"
 import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 import { ValorNumerico } from "../fontes/valores";
@@ -45,7 +45,7 @@ describe('Resolvedor', () => {
                 const seletor = new SeletorModificador(
                     ValoresQuantificadores[index], 
                     [new ValorNumerico(ValoresQuantificadores[index], 40, 'px')]
-                );
+                ) as any;
     
                 // Lexador
                 const resultadoLexador = lexador.mapear([

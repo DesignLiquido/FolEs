@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ValorAngulo, ValorComprimento, ValorPercentual, ValoresQuantificadores, ValorQuantificadorInvalido, ValorTempo } from "../listas/valores-quantificadores";
+import { ValorAngulo, ValorComprimento, ValorPercentual, ValoresQuantificadores, ValorQuantificadorInvalido, ValorTempo } from "../../fontes/listas/valores-quantificadores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
@@ -28,7 +28,7 @@ describe('Testes: Valor-Quantificador', () => {
                 const seletor = new SeletorModificador(
                     ValoresQuantificadores[index],
                     [new ValorNumerico(ValoresQuantificadores[index], 12, 'px')]
-                );
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -126,7 +126,7 @@ describe('Testes: Valor-Quantificador', () => {
                 const seletor = new SeletorModificador(
                     ValoresQuantificadores[index],
                     [new ValorNumerico(ValoresQuantificadores[index], 12, 'px')]
-                );
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -185,7 +185,7 @@ describe('Testes: Valor-Quantificador', () => {
                 const seletor = new SeletorModificador(
                     ValorPercentual[index],
                     [new ValorNumerico(ValorPercentual[index], 12, '%')]
-                );
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -239,7 +239,7 @@ describe('Testes: Valor-Quantificador', () => {
                 const seletor = new SeletorModificador(
                     ValorTempo[index],
                     [new ValorNumerico(ValorTempo[index], 12, 's')]
-                );
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -293,7 +293,7 @@ describe('Testes: Valor-Quantificador', () => {
                 const seletor = new SeletorModificador(
                     ValorComprimento[index],
                     [new ValorNumerico(ValorComprimento[index], 12, 'cm')]
-                );
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -347,7 +347,7 @@ describe('Testes: Valor-Quantificador', () => {
                 const seletor = new SeletorModificador(
                     ValorAngulo[index],
                     [new ValorNumerico(ValorAngulo[index], 12, 'deg')]
-                );
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([

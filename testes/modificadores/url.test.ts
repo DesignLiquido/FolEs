@@ -4,7 +4,7 @@ import { ImportadorInterface, LexadorInterface } from "../../fontes/interfaces";
 import { Lexador } from "../../fontes/lexador";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { TraducaoUrl, Url } from "../listas/url";
+import { TraducaoUrl, Url } from "../../fontes/listas/url";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 
 describe('Testando Seletores que recebem URL como atributo', () => {

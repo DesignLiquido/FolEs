@@ -4,7 +4,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ModificadoresDeValorNumerico, ModificadoresDeValorNumericoApenas, ModificadoresDeValorNumericoComQuantificador, ModificadoresDeValorNumericoZeroUm } from "../listas/valores-numericos";
+import { ModificadoresDeValorNumerico, ModificadoresDeValorNumericoApenas, ModificadoresDeValorNumericoComQuantificador, ModificadoresDeValorNumericoZeroUm } from "../../fontes/listas/valores-numericos";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { ValorNumerico } from "../../fontes/valores";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
@@ -27,7 +27,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumerico[index],
                 [new ValorNumerico(ModificadoresDeValorNumerico[index], 1)]
-            );
+            ) as any;
 
             const primeiroValor = (seletor as any).valores[0] as ValorNumerico;
 
@@ -131,7 +131,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumerico[index],
                 [new ValorNumerico(ModificadoresDeValorNumerico[index], 1)]
-            );
+            ) as any;
 
             // Lexador
             const resultadoLexador = lexador.mapear([
@@ -195,7 +195,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumericoComQuantificador[index],
                 [new ValorNumerico(ModificadoresDeValorNumericoComQuantificador[index], 1)]
-            );
+            ) as any;
 
             const primeiroValor = (seletor as any).valores[0] as ValorNumerico;
 
@@ -243,12 +243,12 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
                 seletor = new SeletorModificador(
                     ModificadoresDeValorNumericoComQuantificador[index],
                     [new ValorNumerico(ModificadoresDeValorNumericoComQuantificador[index], 15, '%')]
-                );
+                ) as any;
             } else {
                 seletor = new SeletorModificador(
                     ModificadoresDeValorNumericoComQuantificador[index],
                     [new ValorNumerico(ModificadoresDeValorNumericoComQuantificador[index], 15, 'px')]
-                );
+                ) as any;
             }
 
             const primeiroValor = seletor.valores[0] as ValorNumerico;
@@ -331,7 +331,7 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
             const seletor = new SeletorModificador(
                 ModificadoresDeValorNumericoComQuantificador[index],
                 [new ValorNumerico(ModificadoresDeValorNumericoComQuantificador[index], 1)]
-            );
+            ) as any;
 
             // Lexador
             const resultadoLexador = lexador.mapear([

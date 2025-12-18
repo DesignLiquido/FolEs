@@ -5,7 +5,7 @@ import { Lexador } from "../../fontes/lexador";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { Resolvedor } from "../../fontes/resolvedores";
-import { ValorGlobal, ValorGlobalInvalido } from "../listas/valor-global";
+import { ValorGlobal, ValorGlobalInvalido } from "../../fontes/listas/valor-global";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { valoresGlobais } from "../../fontes/modificadores/atributos/globais";
 import { ValorQualitativo } from "../../fontes/valores";
@@ -28,9 +28,8 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorGlobal[index],
-                    [new ValorQualitativo('herdar')],
-                    null
-                );
+                    [new ValorQualitativo('herdar')]
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
