@@ -56,6 +56,7 @@ import { RotacionarMatiz } from "./metodos/foles/rotacionar-matiz";
 import { RotacionarVertical } from "./metodos/foles/rotacionar-vertical";
 import { Saturar } from "./metodos/foles/saturar";
 import { Sepia } from "./metodos/foles/sepia";
+import { TransicaoGradual } from "./metodos/foles/transicao-gradual";
 import { Translacao } from "./metodos/foles/translacao";
 import { Translacao3d } from "./metodos/foles/translacao-3d";
 import { TranslacaoEixoZ } from "./metodos/foles/translacao-eixo-z";
@@ -133,6 +134,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     saturar: Saturar,
     sepia: Sepia,
     sépia: Sepia,
+    "transicao-gradual": TransicaoGradual,
+    "transição-gradual": TransicaoGradual,
     translacao: Translacao,
     translação: Translacao,
     "translacao-3d": Translacao3d,

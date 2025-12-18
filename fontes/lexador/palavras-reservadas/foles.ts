@@ -228,6 +228,8 @@ export default {
     saturar: tiposDeSimbolos.METODO,
     sepia: tiposDeSimbolos.METODO,
     sépia: tiposDeSimbolos.METODO,
+    "transição-gradual": tiposDeSimbolos.METODO,
+    "transicao-gradual": tiposDeSimbolos.METODO,
     translacao: tiposDeSimbolos.METODO,
     translação: tiposDeSimbolos.METODO,
     "translacao-3d": tiposDeSimbolos.METODO,
