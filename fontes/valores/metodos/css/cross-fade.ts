@@ -1,5 +1,5 @@
 import { Simbolo } from "../../../lexador";
-import { tratarValores } from "../comum";
+import { tratarValores, tratarValoresReversos } from "../comum";
 import { MetodoCss } from "./metodo-css";
 
 export class CrossFade extends MetodoCss {
@@ -17,7 +17,7 @@ export class CrossFade extends MetodoCss {
         // Elimina o parêntese direito a mais do objeto de valores
         this.arrayValores.pop();
 
-        const traducaoRetorno: string = tratarValores(this.arrayValores);
+        const traducaoRetorno: string = tratarValoresReversos(this.arrayValores);
 
         return `transição-gradual(${traducaoRetorno})`;
     }

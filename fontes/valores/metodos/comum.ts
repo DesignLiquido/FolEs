@@ -11,7 +11,7 @@ export function tratarValores(
     let valoresFolEs: Array<string> = [];
     if (valoresAceitos) valoresFolEs = Object.keys(valoresAceitos);
 
-    arrayValores.forEach((valor, index, array) => {        
+    arrayValores.forEach((valor, index, array) => {
         if (valor.tipo === 'NUMERO') {
             if (index === 0) {
                 traducaoRetorno += `${valor.lexema}`;
@@ -32,9 +32,13 @@ export function tratarValores(
             }
         } else if (valor.tipo === 'QUANTIFICADOR' || valor.tipo === 'VIRGULA') {
             traducaoRetorno += `${valor.lexema}`;
+        } else if (valor.tipo === 'PARENTESE_DIREITO') {
+            traducaoRetorno += ')';
+        } else if (valor.tipo === 'PARENTESE_ESQUERDO') {
+            traducaoRetorno += '(';
         } else if (index !== 0 && array[index - 1].lexema === '#') {
             traducaoRetorno += `${valor.lexema}`;
-        } else if (index === 0) {
+        } else if (index === 0 || (array[index - 1].tipo === 'PARENTESE_DIREITO' || array[index - 1].tipo === 'PARENTESE_ESQUERDO')) {
             traducaoRetorno += `${valor.lexema}`;
         } else {
             traducaoRetorno += ` ${valor.lexema}`;
@@ -76,9 +80,13 @@ export function tratarValoresReversos(
             }
         } else if (valor.tipo === 'QUANTIFICADOR' || valor.tipo === 'VIRGULA') {
             traducaoRetorno += `${valor.lexema}`;
+        } else if (valor.tipo === 'PARENTESE_DIREITO') {
+            traducaoRetorno += ')';
+        } else if (valor.tipo === 'PARENTESE_ESQUERDO') {
+            traducaoRetorno += '(';
         } else if (index !== 0 && array[index - 1].lexema === '#') {
             traducaoRetorno += `${valor.lexema}`;
-        } else if (index === 0) {
+        } else if (index === 0 || (array[index - 1].tipo === 'PARENTESE_DIREITO' || array[index - 1].tipo === 'PARENTESE_ESQUERDO')) {
             traducaoRetorno += `${valor.lexema}`;
         } else {
             traducaoRetorno += ` ${valor.lexema}`;
