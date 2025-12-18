@@ -4,7 +4,6 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { Lexador } from "../../fontes/lexador";
 import { Resolvedor } from "../../fontes/resolvedores";
 import { AtribuicaoAbreviadaPR, AtribuicaoAbreviadaPREspecificas, AtribuicaoAbreviadaVQ, AtribuicaoAbreviadaVQePR, AtribuicaoSeparadaPorBarra, AtribuicaoSeparadaPorVirgula } from "../../fontes/listas/atribuicao-abreviada";
-import { SeletorModificadorInterface } from "../../fontes/interfaces/seletor-modificador-interface";
 import tiposDeSimbolos from "../../fontes/tipos-de-simbolos/foles";
 import { SeletorModificador } from "../../fontes/modificadores/superclasse";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
@@ -35,7 +34,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                 ];
 
                 for (let valIndex = 0; valIndex < valoresAceitos.length; valIndex += 1) {
-                    const seletor: SeletorModificadorInterface = new SeletorModificador(
+                    const seletor = new SeletorModificador(
                         AtribuicaoAbreviadaVQ[index],
                         valoresAceitos[valIndex]
                     ) as any;                    
