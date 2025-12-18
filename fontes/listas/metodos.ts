@@ -1,3 +1,5 @@
+import { TraducaoMetodoInterface } from "../interfaces/listas-testes-interface";
+
 export const MetodoEncaixarConteudo: Array<string> = [
     'altura-maxima',
     'altura-máxima',
@@ -132,7 +134,7 @@ export const MetodosEscalamento: Array<string> = [
     'transformar',
 ];
 
-export const TraducaoValoresMetodos: Object = {
+export const TraducaoValoresMetodos: {[nomeFoles: string] : string} = {
     'altura-maxima': 'max-height',
     'altura-máxima': 'max-height',
     'altura-minima': 'min-height',
@@ -224,7 +226,7 @@ export const MetodosFolEs: Array<string> = [
     'url',
 ];
 
-export const MetodosBasicShape: Array<Object> = [
+export const MetodosBasicShape: TraducaoMetodoInterface[] = [
     {
         foles: 'caminho-recorte',
         css: 'clip-path',

@@ -1,3 +1,5 @@
+import { TraducaoValoresMetodoInterface } from "../interfaces/listas-testes-interface";
+
 export const ValoresQuantificadores: Array<string> = [
     'alinhar-vertical',
     'largura',
@@ -321,7 +323,7 @@ export const ValoresQuantificadoresCSS: Array<string> = [
     'grid-row-gap',
 ];
 
-export const ValoresQualitativosCss: Array<Object> = [
+export const ValoresQualitativosCss: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'area-mascara',
         css: 'mask-clip',

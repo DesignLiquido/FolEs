@@ -1,3 +1,5 @@
+import { TraducaoValoresMetodoInterface } from "../interfaces/listas-testes-interface";
+
 export const ModificadoresValorPersonalizado: Array<string> = [
     'ao-mudar',
     'coluna-em-grade',
@@ -19,7 +21,7 @@ export const ModificadoresValorPersonalizado: Array<string> = [
     'tamanho-grade',
 ];
 
-export const ValoresPersonalizados: Array<object> = [
+export const ValoresPersonalizados: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'ao-mudar',
         css: 'will-change',
@@ -100,7 +102,7 @@ export const ValoresPersonalizados: Array<object> = [
     },
 ];
 
-export const ValoresPersonalizadosMultiplos: Array<object> = [
+export const ValoresPersonalizadosMultiplos: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'estilo-lista',
         css: 'list-style',
