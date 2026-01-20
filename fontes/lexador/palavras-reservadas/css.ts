@@ -177,6 +177,7 @@ export default {
     scaleY: tiposDeSimbolos.METODO,
     scale: tiposDeSimbolos.METODO,
     sepia: tiposDeSimbolos.METODO,
+    shape: tiposDeSimbolos.METODO,
     skewX: tiposDeSimbolos.METODO,
     skewY: tiposDeSimbolos.METODO,
     skew: tiposDeSimbolos.METODO,

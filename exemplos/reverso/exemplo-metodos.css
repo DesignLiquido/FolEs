@@ -20,6 +20,7 @@ p {
 }
 
 html {
+    offset-path: shape(url("blue.png") 5%, url("yellow.png") 100%);
     background-color: hsla(50 80% 40%);
     transform: skewY(15deg);
     backdrop-filter: invert(50%);
