@@ -599,6 +599,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValor(lexema, [valorEstilistico1]) as Metodo;
 
+            case "formato":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'formato'.",
+                );
+
+                const arrayFormato: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorFormato: Simbolo = this.avancarEDevolverAnterior();
+                    arrayFormato.push(proximoValorFormato);
+                }
+
+                return new SeletorValor(lexema, [arrayFormato]) as Metodo;
+
             case "gradiente-conico":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,

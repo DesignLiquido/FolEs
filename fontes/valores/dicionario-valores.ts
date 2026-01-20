@@ -20,6 +20,7 @@ import { EscalamentoHorizontal } from "./metodos/foles/escalamento-horizontal";
 import { EscalamentoVertical } from "./metodos/foles/escalamento-vertical";
 import { Espirrar } from "./metodos/foles/espirrar";
 import { Estilistico } from "./metodos/foles/estilistico";
+import { Formato } from "./metodos/foles/formato";
 import { GradienteConico } from "./metodos/foles/gradiente-conico";
 import { GradienteLinear } from "./metodos/foles/gradiente-linear";
 import { GradienteRadial } from "./metodos/foles/gradiente-radial";
@@ -93,6 +94,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "espirrar": Espirrar,
     "estilistico": Estilistico,
     "estilístico": Estilistico,
+    "formato": Formato,
     "gradiente-conico": GradienteConico,
     "gradiente-cônico": GradienteConico,
     "gradiente-linear": GradienteLinear,

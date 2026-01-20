@@ -15,6 +15,7 @@ lmht {
 }
 
 lmht {
+    trajeto-deslocamento: formato(url("blue.png") 5%, url("yellow.png") 100%);
     imagem-fundo: repetir-gradiente-radial(círculo, 20px 2px 200px, 10% 1% 100%);
     recursos-fonte: "c2sc", "hist";
     citacoes: "blabla";
