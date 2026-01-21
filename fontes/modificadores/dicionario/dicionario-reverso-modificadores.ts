@@ -423,6 +423,7 @@ import { Paint } from "../../valores/metodos/css/paint";
 import { ConicGradient } from "../../valores/metodos/css/conic-gradient";
 import { CrossFade } from "../../valores/metodos/css/cross-fade";
 import { Shape } from "../../valores/metodos/css/shape";
+import { Image } from "../../valores/metodos/css/image";
 
 export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     "word-wrap": AgruparPalavra,
@@ -812,6 +813,7 @@ export const DicionarioReversoModificadores: { [nomeCss: string]: any } = {
     hsl: Hsl,
     hsla: Hsla,
     "hue-rotate": HueRotate,
+    image: Image,
     invert: Invert,
     linear: Linear,
     "linear-gradient": LinearGradient,
