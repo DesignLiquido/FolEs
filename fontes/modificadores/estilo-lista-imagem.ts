@@ -14,7 +14,7 @@ export class EstiloListaImagem extends Modificador {
     ) {
         super("estilo-lista-imagem", "list-style-image", pragmas);
 
-        const valoresExtra = ["cross-fade", "image-set", "url"];
+        const valoresExtra = ["cross-fade", "image", "image-set", "url"];
 
         if (!variavel) {
             validarValores(

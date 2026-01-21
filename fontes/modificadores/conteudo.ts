@@ -23,7 +23,7 @@ export class Conteudo extends Modificador {
     ) {
         super(["conteudo", "conteúdo"], "content", pragmas);
 
-        const valoresExtra = ["cross-fade", "counter", "image-set", "linear-gradient", "url",];
+        const valoresExtra = ["cross-fade", "counter", "image", "image-set", "linear-gradient", "url",];
 
         if (!variavel) {
             validarValores(

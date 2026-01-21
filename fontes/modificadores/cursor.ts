@@ -49,7 +49,7 @@ export class Cursor extends Modificador {
     ) {
         super("cursor", "cursor", pragmas);
 
-        const valoresExtra = ["url"];
+        const valoresExtra = ["image", "url"];
 
         if (!variavel) validarValores("cursor", valores, this.valoresAceitos, valoresExtra);
 

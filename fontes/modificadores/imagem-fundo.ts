@@ -19,6 +19,7 @@ export class ImagemFundo extends Modificador {
             'conic-gradient',
             'cross-fade',
             'element',
+            'image',
             'image-set',
             'paint',
             'radial-gradient',

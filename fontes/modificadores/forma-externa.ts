@@ -19,7 +19,7 @@ export class FormaExterna extends Modificador {
     ) {
         super("forma-externa", "shape-outside", pragmas);
 
-        const valoresExtra = ['url', 'inset', 'circle', 'ellipse', 'polygon', 'path', 'rect', 'shape', 'xywh'];
+        const valoresExtra = ['circle', 'ellipse', 'image', 'inset', 'polygon', 'path', 'rect', 'shape', 'url', 'xywh'];
 
         if (!variavel) {
             validarValores(

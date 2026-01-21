@@ -14,7 +14,7 @@ export class OrigemImagemBorda extends Modificador {
     ) {
         super("origem-imagem-borda", "border-image-source", pragmas);
 
-        const valoresExtra = ["cross-fade", "image-set", "linear-gradient", "url"];
+        const valoresExtra = ["cross-fade", "image", "image-set", "linear-gradient", "url"];
 
         if (!variavel) {
             validarValores(
