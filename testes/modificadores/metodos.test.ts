@@ -1767,6 +1767,52 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
         }
     });
 
+    it('Atribuindo Método "configurar-imagem()" - casos de sucesso', () => {
+        const valoresAceitos: Array<string> = [
+            'url("white.png") 0%, url("black.png")',
+            'url("white.png") 75%, url("green.png")',
+            'url("red.png"), url("yellow.png"), 100%',
+        ];
+
+        for (let index = 0; index < valoresAceitos.length; index += 1) {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                "lmht {",
+                `imagem-fundo: configurar-imagem(${valoresAceitos[index]});`,
+                "}"
+            ]);
+            // console.log(resultadoLexador.simbolos);
+
+            // O Lexador deve montar um objeto sem retornar erros
+            expect(resultadoLexador.erros).toHaveLength(0);
+
+            // O Lexador deve mapear METODO e IDENTIFICADOR no processo
+            expect(resultadoLexador.simbolos).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                    expect.objectContaining({ tipo: tiposDeSimbolos.METODO }),
+                ])
+            );
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+
+            // O Avaliador deve montar um objeto com o devido nome CSS
+            expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
+            const primeiroResultado = resultadoAvaliadorSintatico[0];
+            expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
+            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
+            expect(primeiroResultadoTipado.modificadores[0].propriedadeCss).toStrictEqual('background-image');
+
+            // Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain('background-image');
+            expect(resultadoResolvedor).toContain('image');
+            expect(resultadoResolvedor).toContain(valoresAceitos[index]);
+        }
+    });
+
     it('Atribuindo Método "inclinar()"', () => {
         for (let index = 0; index < MetodosInclinar.length; index += 1) {
 
