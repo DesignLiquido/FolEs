@@ -19,6 +19,6 @@ export class Image extends MetodoCss {
 
         const traducaoRetorno: string = tratarValoresReversos(this.arrayValores);
 
-        return `imagem(${traducaoRetorno})`;
+        return `configurar-imagem(${traducaoRetorno})`;
     }
 }
