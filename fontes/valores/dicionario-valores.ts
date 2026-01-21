@@ -1,3 +1,4 @@
+import { Image } from "./metodos/css/image";
 import { Anotacao } from "./metodos/foles/anotacao";
 import { Borrar } from "./metodos/foles/borrar";
 import { Brilho } from "./metodos/foles/brilho";
