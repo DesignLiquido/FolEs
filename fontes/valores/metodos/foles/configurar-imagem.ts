@@ -2,7 +2,7 @@ import { Simbolo } from "../../../lexador";
 import { tratarValores } from "../comum";
 import { Metodo } from "./metodo";
 
-export class Imagem extends Metodo {
+export class ConfigurarImagem extends Metodo {
     arrayValores: Array<Simbolo> = [];
     traducao: string;
     valoresAceitos: { [nomeFolEs: string]: string };

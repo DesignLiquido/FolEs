@@ -1,9 +1,9 @@
-import { Image } from "./metodos/css/image";
 import { Anotacao } from "./metodos/foles/anotacao";
 import { Borrar } from "./metodos/foles/borrar";
 import { Brilho } from "./metodos/foles/brilho";
 import { Calcular } from "./metodos/foles/calcular";
 import { Circular } from "./metodos/foles/circular";
+import { ConfigurarImagem } from "./metodos/foles/configurar-imagem";
 import { ConjuntoEstilos } from "./metodos/foles/conjunto-estilos";
 import { Contador } from "./metodos/foles/contador";
 import { Contraste } from "./metodos/foles/contraste";
@@ -75,6 +75,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     brilho: Brilho,
     calcular: Calcular,
     circular: Circular,
+    "configurar-imagem": ConfigurarImagem,
     "conjunto-estilos": ConjuntoEstilos,
     contraste: Contraste,
     contador: Contador,
@@ -103,7 +104,6 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     hsl: Hsl,
     hsla: Hsla,
     hex: HexadecimalCor,
-    image: Image,
     inclinar: Inclinar,
     "inclinar-horizontal": InclinarHorizontal,
     "inclinar-vertical": InclinarVertical,

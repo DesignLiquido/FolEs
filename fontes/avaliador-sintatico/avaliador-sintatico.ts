@@ -198,6 +198,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [arrayValoresCircular],
                 ) as Metodo;
 
+            case "configurar-imagem":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'configurar-imagem'.",
+                );
+
+                const arrayImagem: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorImagem: Simbolo = this.avancarEDevolverAnterior();
+                    arrayImagem.push(proximoValorImagem);
+                }
+
+                return new SeletorValor(lexema, [arrayImagem]) as Metodo;
+
             case "conjunto-estilos":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -788,20 +802,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após argumentos de método 'hsla'.",
                 );
                 return new SeletorValor(lexema, [HdeHSLA, SdeHSLA, LdeHSLA]) as Metodo;
-
-            case "imagem":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'imagem'.",
-                );
-
-                const arrayImagem: Array<Simbolo> = [];
-                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
-                    const proximoValorImagem: Simbolo = this.avancarEDevolverAnterior();
-                    arrayImagem.push(proximoValorImagem);
-                }
-
-                return new SeletorValor(lexema, [arrayImagem]) as Metodo;
 
             case "inclinar":
                 this.consumir(
