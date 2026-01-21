@@ -102,6 +102,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     hsl: Hsl,
     hsla: Hsla,
     hex: HexadecimalCor,
+    image: Image,
     inclinar: Inclinar,
     "inclinar-horizontal": InclinarHorizontal,
     "inclinar-vertical": InclinarVertical,

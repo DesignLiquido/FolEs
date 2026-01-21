@@ -195,6 +195,7 @@ export default {
     hsl: tiposDeSimbolos.METODO,
     hsla: tiposDeSimbolos.METODO,
     hex: tiposDeSimbolos.METODO,
+    image: tiposDeSimbolos.METODO,
     inclinar: tiposDeSimbolos.METODO,
     "inclinar-horizontal": tiposDeSimbolos.METODO,
     "inclinar-vertical": tiposDeSimbolos.METODO,
