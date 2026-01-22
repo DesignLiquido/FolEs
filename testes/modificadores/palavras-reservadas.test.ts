@@ -27,9 +27,8 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
             for (let index = 0; index < Object.keys(PalavrasReservadas).length; index += 1) {
                 const seletor = new SeletorModificador(
                     PalavrasReservadas[index], 
-                    [new ValorQualitativo('reverter')], 
-                    null
-                );
+                    [new ValorQualitativo('reverter')]
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -91,9 +90,8 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                 // Seletor inicial
                 let seletor = new SeletorModificador(
                     PalavrasReservadas[index], 
-                    [new ValorQualitativo('reverter')], 
-                    null
-                );
+                    [new ValorQualitativo('reverter')]
+                ) as any;
 
                 // Se há uma lista de valores aceitos, é atribuído o primeiro valor ao seletor.
                 // Se não há, a condicional abaixo não é executada e o seletor segue sendo o da linha acima.
@@ -101,8 +99,7 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                     const valor = Object.keys(seletor['valoresAceitos']);
                     seletor = new SeletorModificador(
                         PalavrasReservadas[index], 
-                        [new ValorQualitativo(valor[0])], 
-                        null
+                        [new ValorQualitativo(valor[0])]
                     );
                 };
 

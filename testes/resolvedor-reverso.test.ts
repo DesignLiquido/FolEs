@@ -149,15 +149,15 @@ describe('Resolvedor Reverso', () => {
 
     // TraducaoReversaMetodos
     it('Testando tratamento de métodos reversos', () => {
-        for (let index = 0; index < Object.keys(TraducaoReversaMetodos).length; index += 1) {            
+        for (let index = 0; index < Object.keys(TraducaoReversaMetodos).length; index += 1) {
             // Lexador Reverso recebe as estruturas FolEs
             const resultadoLexador = lexadorReverso.mapear([
                 `html {`,
-                `   ${TraducaoReversaMetodos[index]['modificador']}: ${TraducaoReversaMetodos[index]['metodo']}(${TraducaoReversaMetodos[index]['valor']});`,
+                `   ${TraducaoReversaMetodos[index]['modificador']}: ${TraducaoReversaMetodos[index]['css']}(${TraducaoReversaMetodos[index]['valor']});`,
                 "}"
             ]);
             // console.log(resultadoLexador.simbolos);
-            
+
 
             // Avaliador Sintático Reverso
             const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
@@ -179,12 +179,8 @@ describe('Resolvedor Reverso', () => {
 
             // Resolvedor reverso deve retornar a estrutura HTML correspondente
             expect(resultadoResolvedor).toContain('lmht');
+            expect(resultadoResolvedor).toContain(TraducaoReversaMetodos[index]['traducao']);
 
-            if (TraducaoReversaMetodos[index]['contemTraducao']) {
-                expect(resultadoResolvedor).toContain(TraducaoReversaMetodos[index]['traducao']);
-            } else {
-                expect(resultadoResolvedor).toContain(TraducaoReversaMetodos[index]['valor']);
-            }
         }
     });
 });

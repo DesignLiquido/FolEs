@@ -198,6 +198,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     [arrayValoresCircular],
                 ) as Metodo;
 
+            case "configurar-imagem":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'configurar-imagem'.",
+                );
+
+                const arrayImagem: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorImagem: Simbolo = this.avancarEDevolverAnterior();
+                    arrayImagem.push(proximoValorImagem);
+                }
+
+                return new SeletorValor(lexema, [arrayImagem]) as Metodo;
+
             case "conjunto-estilos":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -598,6 +612,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     "Esperado parêntese direito após argumento do método estilístico.",
                 );
                 return new SeletorValor(lexema, [valorEstilistico1]) as Metodo;
+
+            case "formato":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'formato'.",
+                );
+
+                const arrayFormato: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorFormato: Simbolo = this.avancarEDevolverAnterior();
+                    arrayFormato.push(proximoValorFormato);
+                }
+
+                return new SeletorValor(lexema, [arrayFormato]) as Metodo;
 
             case "gradiente-conico":
                 this.consumir(
@@ -1579,6 +1607,34 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     valorSépia,
                     quantificadorSépia,
                 ]) as Metodo;
+
+            case "transicao-gradual":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'transicao-gradual'.",
+                );
+
+                const arrayGradienteTransicao: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorTransicao: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteTransicao.push(proximoValorTransicao);
+                }
+
+                return new SeletorValor(lexema, [arrayGradienteTransicao]) as Metodo;
+
+            case "transição-gradual":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'transição-gradual'.",
+                );
+
+                const arrayGradienteTransicao1: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorTransicao1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteTransicao1.push(proximoValorTransicao1);
+                }
+
+                return new SeletorValor(lexema, [arrayGradienteTransicao1]) as Metodo;
 
             case "translação":
                 this.consumir(

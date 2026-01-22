@@ -22,7 +22,7 @@ export class ImagemBorda extends Modificador {
     ) {
         super("imagem-borda", "border-image", pragmas);
 
-        const valoresExtra = ["linear-gradient", "url"];
+        const valoresExtra = ["image", "linear-gradient", "url"];
 
         if (!variavel) {
             if (valores.length > 1) {

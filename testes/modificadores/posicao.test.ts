@@ -27,9 +27,8 @@ describe('Testando Seletores de POSIÇÃO', () => {
         for (let index = 0; index < Posição.length; index += 1) {
             const seletor = new SeletorModificador(
                 Posição[index],
-                [new ValorQualitativo('centro')],
-                null
-            );
+                [new ValorQualitativo('centro')]
+            ) as any;
 
             // Lexador
             const resultadoLexador = lexador.mapear([

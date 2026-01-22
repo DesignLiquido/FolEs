@@ -17,7 +17,9 @@ export class ImagemFundo extends Modificador {
 
         const valoresExtra: Array<string> = [
             'conic-gradient',
+            'cross-fade',
             'element',
+            'image',
             'image-set',
             'paint',
             'radial-gradient',

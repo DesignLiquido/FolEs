@@ -14,9 +14,7 @@ export class ImagemMascara extends Modificador {
     ) {
         super(["imagem-mascara", "imagem-máscara"], "mask-image", pragmas);
 
-        // OBS.: Também pode receber a função image()
-        // Ex.: mask-image: image(url(mask.png), skyblue);
-        const valoresExtra = ["url", "linear-gradient"];
+        const valoresExtra = ["image", "linear-gradient", "url"];
 
         if (!variavel) {
             validarValores(

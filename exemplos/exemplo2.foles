@@ -1,5 +1,6 @@
 /** Valores específicos */
 lmht {
+    conteudo: transição-gradual(url("green.png") 75%, url("red.png") 75%);
     caminho-recorte: retangulo(2em 40% arredondar 5% at 60px);
     imagem-fundo: repetir-gradiente-linear(círculo, 20px 2px 200px, 10% 1% 100%);
     trajeto-deslocamento: circular(lado-mais-proximo);
@@ -14,6 +15,7 @@ lmht {
 }
 
 lmht {
+    trajeto-deslocamento: formato(url("blue.png") 5%, url("yellow.png") 100%);
     imagem-fundo: repetir-gradiente-radial(círculo, 20px 2px 200px, 10% 1% 100%);
     recursos-fonte: "c2sc", "hist";
     citacoes: "blabla";

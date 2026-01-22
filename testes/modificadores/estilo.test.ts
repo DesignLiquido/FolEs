@@ -28,9 +28,8 @@ describe('Testando Seletores com ESTILO como atributo', () => {
             for (let index = 0; index < Estilo.length; index += 1) {
                 const seletor = new SeletorModificador(
                     Estilo[index],
-                    [new ValorQualitativo('pontilhado')],
-                    null
-                );
+                    [new ValorQualitativo('pontilhado')]
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([

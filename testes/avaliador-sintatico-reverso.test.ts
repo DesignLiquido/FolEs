@@ -37,7 +37,7 @@ describe('Avaliador Sintático Reverso', () => {
             expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
 
             // O primeiro resultado deve conter modificadores em seu mapeamento
-            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            const primeiroResultadoTipado = primeiroResultado as any;
             expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // O valor deve ser instanciado como ValorNumerico
@@ -112,7 +112,7 @@ describe('Avaliador Sintático Reverso', () => {
             expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
 
             // O primeiro resultado deve conter modificadores em seu mapeamento
-            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            const primeiroResultadoTipado = primeiroResultado as any;
             expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             // O valor deve ser instanciado como ValorNumerico

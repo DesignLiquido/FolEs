@@ -115,7 +115,7 @@ export const MetodosEscalamento: Array<string> = [
     'transform',
 ];
 
-export const TraducaoValoresMetodos: Object = {
+export const TraducaoValoresMetodos: {[nomeFoles: string] : string} = {
     'max-height': 'altura-maxima',
     'min-height': 'altura-minima',
     'height': 'altura',

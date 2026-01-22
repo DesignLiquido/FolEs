@@ -45,7 +45,7 @@ describe('Resolvedor', () => {
                 const seletor = new SeletorModificador(
                     ValoresQuantificadores[index], 
                     [new ValorNumerico(ValoresQuantificadores[index], 40, 'px')]
-                );
+                ) as any;
     
                 // Lexador
                 const resultadoLexador = lexador.mapear([

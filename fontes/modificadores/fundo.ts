@@ -42,6 +42,7 @@ export class Fundo extends Modificador {
         const valoresExtra: Array<string> = [
             'conic-gradient',
             'element',
+            'image',
             'paint',
             'radial-gradient',
             'repeating-conic-gradient',

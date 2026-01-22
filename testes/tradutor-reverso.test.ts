@@ -32,7 +32,7 @@ describe.skip('Tradutor Reverso', () => {
             const primeiroResultado = resultadoAvaliadorSintatico[0];
             expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
 
-            const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+            const primeiroResultadoTipado = primeiroResultado as any;
             expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
             const resultado = tradutorReverso.traduzir(primeiroResultadoTipado[0]);

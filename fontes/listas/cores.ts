@@ -25,7 +25,7 @@ export const Cores: Array<string> = [
     'cor-borda',
 ];
 
-export const CoresNomeFolEs: Object = {
+export const CoresNomeFolEs: {[nomeFoles: string] : string} = {
     'cor-destaque': 'accent-color',
     'cor-fundo': 'background-color',
     'cor-borda-em-bloco': 'border-block-color',

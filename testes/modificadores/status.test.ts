@@ -27,9 +27,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(
                     StatusAuto[index],
-                    [new ValorQualitativo('auto')],
-                    null
-                );
+                    [new ValorQualitativo('auto')]
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -124,9 +123,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
             for (let index = 0; index < StatusNenhum.length; index += 1) {
                 const seletor = new SeletorModificador(
                     StatusNenhum[index],
-                    [new ValorQualitativo('nenhum')],
-                    null
-                );
+                    [new ValorQualitativo('nenhum')]
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([
@@ -174,9 +172,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
             for (let index = 0; index < StatusNormal.length; index += 1) {
                 const seletor = new SeletorModificador(
                     StatusNormal[index],
-                    [new ValorQualitativo('normal')],
-                    null
-                );
+                    [new ValorQualitativo('normal')]
+                ) as any;
 
                 // A classe do modificador deve aceitar 'normal' como valor
                 // expect(seletor['valor']).toEqual('normal');
@@ -226,9 +223,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
             for (let index = 0; index < StatusAuto.length; index += 1) {
                 const seletor = new SeletorModificador(
                     StatusAuto[index],
-                    [new ValorQualitativo('auto')],
-                    null
-                );
+                    [new ValorQualitativo('auto')]
+                ) as any;
                 
                 // Lexador
                 const resultadoLexador = lexador.mapear([

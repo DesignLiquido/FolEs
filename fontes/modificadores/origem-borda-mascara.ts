@@ -18,7 +18,7 @@ export class OrigemBordaMascara extends Modificador {
             pragmas,
         );
 
-        const valoresExtra = ["url"];
+        const valoresExtra = ["image", "url"];
 
         if (!variavel) {
             validarValores(

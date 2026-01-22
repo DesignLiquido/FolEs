@@ -49,7 +49,7 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
                 const primeiroResultado = resultadoAvaliadorSintatico[0];
                 expect(primeiroResultado).toBeInstanceOf(BlocoDeclaracao);
-                const primeiroResultadoTipado = primeiroResultado as BlocoDeclaracao;
+                const primeiroResultadoTipado = primeiroResultado as any;
                 expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
                 // Serializador

@@ -28,9 +28,8 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
             for (let index = 0; index < Object.keys(ValorGlobal).length; index += 1) {
                 const seletor = new SeletorModificador(
                     ValorGlobal[index],
-                    [new ValorQualitativo('herdar')],
-                    null
-                );
+                    [new ValorQualitativo('herdar')]
+                ) as any;
 
                 // Lexador
                 const resultadoLexador = lexador.mapear([

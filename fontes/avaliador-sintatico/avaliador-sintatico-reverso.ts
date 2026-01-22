@@ -390,6 +390,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     ]
                 ) as MetodoCss;
 
+            case "cross-fade":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'cross-fade'.",
+                );
+
+                const arrayGradienteTransicao1: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorTransicao1: Simbolo = this.avancarEDevolverAnterior();
+                    arrayGradienteTransicao1.push(proximoValorTransicao1);
+                }
+
+                return new SeletorValorReverso(lexema, [arrayGradienteTransicao1]) as MetodoCss;
+
             case "cubic-bezier":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -671,6 +685,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
 
                 return new SeletorValorReverso(lexema, [arrayValoresInserir]) as MetodoCss;
+
+            case "image":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'image'.",
+                );
+
+                const arrayImage: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorImage: Simbolo = this.avancarEDevolverAnterior();
+                    arrayImage.push(proximoValorImage);
+                }
+
+                return new SeletorValorReverso(lexema, [arrayImage]) as MetodoCss;
 
             case "invert": {
                 this.consumir(
@@ -961,6 +989,20 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
             }
+
+            case "shape":
+                this.consumir(
+                    tiposDeSimbolos.PARENTESE_ESQUERDO,
+                    "Esperado parêntese esquerdo após método 'shape'.",
+                );
+
+                const arrayShape: Array<Simbolo> = [];
+                while (this.simbolos[this.atual].tipo !== 'PONTO_E_VIRGULA') {
+                    const proximoValorShape: Simbolo = this.avancarEDevolverAnterior();
+                    arrayShape.push(proximoValorShape);
+                }
+
+                return new SeletorValorReverso(lexema, [arrayShape]) as MetodoCss;
 
             case "skew": {
                 this.consumir(

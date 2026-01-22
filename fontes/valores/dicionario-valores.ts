@@ -3,6 +3,7 @@ import { Borrar } from "./metodos/foles/borrar";
 import { Brilho } from "./metodos/foles/brilho";
 import { Calcular } from "./metodos/foles/calcular";
 import { Circular } from "./metodos/foles/circular";
+import { ConfigurarImagem } from "./metodos/foles/configurar-imagem";
 import { ConjuntoEstilos } from "./metodos/foles/conjunto-estilos";
 import { Contador } from "./metodos/foles/contador";
 import { Contraste } from "./metodos/foles/contraste";
@@ -20,6 +21,7 @@ import { EscalamentoHorizontal } from "./metodos/foles/escalamento-horizontal";
 import { EscalamentoVertical } from "./metodos/foles/escalamento-vertical";
 import { Espirrar } from "./metodos/foles/espirrar";
 import { Estilistico } from "./metodos/foles/estilistico";
+import { Formato } from "./metodos/foles/formato";
 import { GradienteConico } from "./metodos/foles/gradiente-conico";
 import { GradienteLinear } from "./metodos/foles/gradiente-linear";
 import { GradienteRadial } from "./metodos/foles/gradiente-radial";
@@ -56,6 +58,7 @@ import { RotacionarMatiz } from "./metodos/foles/rotacionar-matiz";
 import { RotacionarVertical } from "./metodos/foles/rotacionar-vertical";
 import { Saturar } from "./metodos/foles/saturar";
 import { Sepia } from "./metodos/foles/sepia";
+import { TransicaoGradual } from "./metodos/foles/transicao-gradual";
 import { Translacao } from "./metodos/foles/translacao";
 import { Translacao3d } from "./metodos/foles/translacao-3d";
 import { TranslacaoEixoZ } from "./metodos/foles/translacao-eixo-z";
@@ -72,6 +75,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     brilho: Brilho,
     calcular: Calcular,
     circular: Circular,
+    "configurar-imagem": ConfigurarImagem,
     "conjunto-estilos": ConjuntoEstilos,
     contraste: Contraste,
     contador: Contador,
@@ -92,6 +96,7 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     "espirrar": Espirrar,
     "estilistico": Estilistico,
     "estilístico": Estilistico,
+    "formato": Formato,
     "gradiente-conico": GradienteConico,
     "gradiente-cônico": GradienteConico,
     "gradiente-linear": GradienteLinear,
@@ -133,6 +138,8 @@ export const DicionarioValores: { [nomeFolEs: string]: any } = {
     saturar: Saturar,
     sepia: Sepia,
     sépia: Sepia,
+    "transicao-gradual": TransicaoGradual,
+    "transição-gradual": TransicaoGradual,
     translacao: Translacao,
     translação: Translacao,
     "translacao-3d": Translacao3d,

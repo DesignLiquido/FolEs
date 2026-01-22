@@ -1,4 +1,6 @@
-export const AtribuicaoAbreviadaVQePR: Array<object> = [
+import { TraducaoValoresMetodoInterface } from "../interfaces/listas-testes-interface";
+
+export const AtribuicaoAbreviadaVQePR: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'animacao',
         css: 'animation',
@@ -109,7 +111,7 @@ export const AtribuicaoAbreviadaVQePR: Array<object> = [
     },
 ];
 
-export const AtribuicaoAbreviadaPREspecificas: Array<object> = [
+export const AtribuicaoAbreviadaPREspecificas: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'ajustar-tamanho-fonte',
         css: 'font-size-adjust',
@@ -241,45 +243,52 @@ export const AtribuicaoAbreviadaVQ: Array<string> = [
     'recuo-rolagem-mouse',
 ]
 
-export const AtribuicaoSeparadaPorBarra: Array<object> = [
+export const AtribuicaoSeparadaPorBarra: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'coluna-em-grade',
         css: 'grid-column',
         valor: 'auto / auto',
+        traducao: 'auto / auto',
     },
     {
         modificador: 'tamanho-grade',
         css: 'grid-area',
         valor: 'auto / auto / auto / auto',
+        traducao: 'auto / auto / auto / auto',
     },
     {
         modificador: 'linha-em-grade',
         css: 'grid-row',
         valor: '1 / 3',
+        traducao: '1 / 3',
     },
     {
         modificador: 'proporção-tela',
         css: 'aspect-ratio',
         valor: '16 / 9',
+        traducao: '16 / 9',
     },
     {
         modificador: 'raio-borda',
         css: 'border-radius',
         valor: '10px / 10px',
+        traducao: '10px / 10px',
     },
     {
         modificador: 'modelo-em-grade',
         css: 'grid-template',
         valor: '100px 1fr / 50px 1fr',
+        traducao: '100px 1fr / 50px 1fr',
     },
     {
         modificador: 'imagem-borda',
         css: 'border-image',
         valor: '27 / 35px',
+        traducao: '27 / 35px',
     }
 ];
 
-export const AtribuicaoSeparadaPorVirgula: Array<object> = [
+export const AtribuicaoSeparadaPorVirgula: TraducaoValoresMetodoInterface[] = [
     {
         modificador: 'area-mascara',
         css: 'mask-clip',

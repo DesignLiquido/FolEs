@@ -18,7 +18,7 @@ export const Url: Array<string> = [
     'trajeto-deslocamento',
 ];
 
-export const TraducaoUrl: Object = {
+export const TraducaoUrl: {[nomeFoles: string] : string} = {
     'imagem-fundo': 'background-image',
     'imagem-borda': 'border-image',
     'fatiar-imagem-borda': 'border-image-slice',
