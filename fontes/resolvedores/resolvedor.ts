@@ -9,7 +9,7 @@ import { DeclaracaoVariavel } from "../declaracoes/declaracao-variavel";
 import { Declaracao } from "../declaracoes/declaracao";
 import { SeletorModificador } from "../modificadores/superclasse";
 import { fontes } from "../modificadores/atributos/fontes";
-import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../valores";
+import { Valor, ValorAbreviacao, ValorNumerico, ValorQualitativo, ValorTexto, ValorVirgula } from "../valores";
 import { ReferenciaVariavel } from "../valores/referencia-variavel";
 
 /**
@@ -32,8 +32,8 @@ export class Resolvedor {
         valor: Valor,
         valoresAceitos?: { [valorFoles: string]: string }
     ): string {
-        switch (valor.constructor.name) {
-            case 'ReferenciaVariavel':
+        switch (valor.constructor) {
+            case ReferenciaVariavel:
                 const valorReferenciaVariavel = valor as ReferenciaVariavel;
                 const valoresVariavelCorrespondente = this.variaveis[valorReferenciaVariavel.nomeVariavel];
                 if (valoresVariavelCorrespondente === undefined) {
@@ -51,9 +51,9 @@ export class Resolvedor {
 
                 valoresVariavelResolvidos = valoresVariavelResolvidos.slice(0, -1);
                 return valoresVariavelResolvidos;
-            case 'ValorAbreviacao':
+            case ValorAbreviacao:
                 return "/";
-            case 'ValorNumerico':
+            case ValorNumerico:
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
                 
@@ -64,17 +64,17 @@ export class Resolvedor {
                 }
 
                 return `${literalNumerico}${valorNumerico.quantificador || ''}`;
-            case 'ValorQualitativo':
+            case ValorQualitativo:
                 const valorQualitativo = valor as ValorQualitativo;
                 let traducaoQualitativo = valoresGerais[valorQualitativo.qualitativo];
 
                 if (!traducaoQualitativo) traducaoQualitativo = valoresAceitos[valorQualitativo.qualitativo];
                 if (!traducaoQualitativo) traducaoQualitativo = valorQualitativo.qualitativo;
                 return `${traducaoQualitativo}`;
-            case 'ValorTexto':
+            case ValorTexto:
                 const valorTexto = valor as ValorTexto;
                 return valorTexto.literalTexto;
-            case 'ValorVirgula':
+            case ValorVirgula:
                 return ",";
             default:
                 // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.

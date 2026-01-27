@@ -41,7 +41,7 @@
             "cwd": "${workspaceRoot}",
             "console": "integratedTerminal",
             "args": [
-                "${workspaceFolder}${pathSeparator}execucao.ts",
+                "${workspaceFolder}${pathSeparator}fontes${pathSeparator}execucao.ts",
                 "--mapas",
                 "${workspaceFolder}${pathSeparator}exemplos${pathSeparator}mapas-fontes${pathSeparator}exemplo.foles"
             ],
