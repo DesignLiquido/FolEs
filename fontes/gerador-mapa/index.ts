@@ -14,17 +14,22 @@ export class GeradorMapaCss {
      * - Quarto número: coluna no código original.
      *
      * @param declaracoes As declarações já traduzidas.
+     * @param conteudoArquivoOriginal O conteúdo do arquivo original.
+     * @param nomeArquivoOriginal O nome do arquivo original (opcional, padrão "teste.foles").
+     * @param nomeArquivoDestino O nome do arquivo de destino (opcional, padrão "teste.css").
      * @returns {MapaOrigensInterface} O mapa de origens pronto.
      */
     gerarMapaFontes(
         declaracoes: BlocoDeclaracao[],
         conteudoArquivoOriginal: string,
+        nomeArquivoOriginal: string = "teste.foles",
+        nomeArquivoDestino: string = "teste.css",
     ): MapaOrigensInterface {
         const retorno: MapaOrigensInterface = {
             version: 3,
-            file: "teste.css",
+            file: nomeArquivoDestino,
             sourceRoot: "",
-            sources: ["teste.foles"],
+            sources: [nomeArquivoOriginal],
             sourcesContent: [conteudoArquivoOriginal],
             mappings: "",
         };
