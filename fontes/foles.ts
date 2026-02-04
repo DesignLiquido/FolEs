@@ -8,7 +8,6 @@ import { Importador } from "./importador";
 import { ResultadoLexadorInterface, SimboloInterface } from "./interfaces";
 import { Tradutor } from "./tradutores/tradutor";
 import { TradutorReverso } from "./tradutores/tradutor-reverso";
-import { Base64 } from "./utilidades/base64";
 import { GeradorMapaCss } from "./gerador-mapa";
 import { BlocoDeclaracao } from "./declaracoes";
 
@@ -102,12 +101,19 @@ export class FolEs {
         const resultadoTraducao = this.tradutor.traduzir(
             resultadoAvaliadorSintatico,
         );
+        
+        // Extrair apenas o nome do arquivo (sem caminho)
+        const nomeArquivoBase = nomeArquivo.split('/').pop() || nomeArquivo;
+        const nomeArquivoDestino = nomeArquivoBase.replace(/\.foles$/, '.css');
+        
         const mapa = this.geradorMapaCss.gerarMapaFontes(
             resultadoTraducao,
             resultadoLexador[0].join("\n"),
+            nomeArquivoBase,
+            nomeArquivoDestino,
         );
 
-        return [traducao, new Base64().encode(JSON.stringify(mapa))];
+        return [traducao, JSON.stringify(mapa)];
     }
 
     converterParaFolEs(nomeArquivo: string): string {

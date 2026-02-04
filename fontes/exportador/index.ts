@@ -18,16 +18,31 @@ export class Exportador {
         conteudo: string,
         mapa?: string,
     ) {
+        let nomeArquivoSaida: string;
+        let nomeArquivoMapa: string;
         let conteudoCompleto = conteudo;
-        if (mapa) {
-            conteudoCompleto += `\n/*# sourceMappingURL=data:application/json;base64,`;
-            conteudoCompleto += `${mapa} */\n`;
-        }
 
         switch (formato) {
             case "css":
+                nomeArquivoSaida = arquivoOrigem.replace("foles", "css");
+                nomeArquivoMapa = nomeArquivoSaida + ".map";
+                
+                if (mapa) {
+                    // Escrever o arquivo de mapa de fontes separado
+                    sistemaArquivos.writeFile(
+                        nomeArquivoMapa,
+                        mapa,
+                        (erro) => {
+                            if (erro) throw erro;
+                        },
+                    );
+                    
+                    // Adicionar referência ao mapa de fontes no CSS
+                    conteudoCompleto += `\n/*# sourceMappingURL=${nomeArquivoMapa.split('/').pop()} */\n`;
+                }
+                
                 sistemaArquivos.writeFile(
-                    arquivoOrigem.replace("foles", "css"),
+                    nomeArquivoSaida,
                     conteudoCompleto,
                     (erro) => {
                         if (erro) throw erro;
@@ -35,8 +50,25 @@ export class Exportador {
                 );
                 break;
             case "foles":
+                nomeArquivoSaida = arquivoOrigem.replace("css", "foles");
+                nomeArquivoMapa = nomeArquivoSaida + ".map";
+                
+                if (mapa) {
+                    // Escrever o arquivo de mapa de fontes separado
+                    sistemaArquivos.writeFile(
+                        nomeArquivoMapa,
+                        mapa,
+                        (erro) => {
+                            if (erro) throw erro;
+                        },
+                    );
+                    
+                    // Adicionar referência ao mapa de fontes no FolEs
+                    conteudoCompleto += `\n/*# sourceMappingURL=${nomeArquivoMapa.split('/').pop()} */\n`;
+                }
+                
                 sistemaArquivos.writeFile(
-                    arquivoOrigem.replace("css", "foles"),
+                    nomeArquivoSaida,
                     conteudoCompleto,
                     (erro) => {
                         if (erro) throw erro;
