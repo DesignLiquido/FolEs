@@ -10,6 +10,7 @@ import { Tradutor } from "./tradutores/tradutor";
 import { TradutorReverso } from "./tradutores/tradutor-reverso";
 import { GeradorMapaCss } from "./gerador-mapa";
 import { BlocoDeclaracao } from "./declaracoes";
+import caminho from "path";
 
 /**
  * O núcleo da linguagem FolEs.
@@ -102,8 +103,8 @@ export class FolEs {
             resultadoAvaliadorSintatico,
         );
         
-        // Extrair apenas o nome do arquivo (sem caminho)
-        const nomeArquivoBase = nomeArquivo.split('/').pop() || nomeArquivo;
+        // Extrair apenas o nome do arquivo (sem caminho) usando path.basename para compatibilidade cross-platform
+        const nomeArquivoBase = caminho.basename(nomeArquivo);
         const nomeArquivoDestino = nomeArquivoBase.replace(/\.foles$/, '.css');
         
         const mapa = this.geradorMapaCss.gerarMapaFontes(

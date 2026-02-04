@@ -1,4 +1,5 @@
 import sistemaArquivos from "fs";
+import caminho from "path";
 
 /**
  * Classe que exporta traduções em diferentes formatos de arquivos. Como possui dependência
@@ -28,52 +29,28 @@ export class Exportador {
                 nomeArquivoMapa = nomeArquivoSaida + ".map";
                 
                 if (mapa) {
-                    // Escrever o arquivo de mapa de fontes separado
-                    sistemaArquivos.writeFile(
-                        nomeArquivoMapa,
-                        mapa,
-                        (erro) => {
-                            if (erro) throw erro;
-                        },
-                    );
+                    // Escrever o arquivo de mapa de fontes separado primeiro
+                    sistemaArquivos.writeFileSync(nomeArquivoMapa, mapa);
                     
-                    // Adicionar referência ao mapa de fontes no CSS
-                    conteudoCompleto += `\n/*# sourceMappingURL=${nomeArquivoMapa.split('/').pop()} */\n`;
+                    // Adicionar referência ao mapa de fontes no CSS usando apenas o nome base do arquivo
+                    conteudoCompleto += `\n/*# sourceMappingURL=${caminho.basename(nomeArquivoMapa)} */\n`;
                 }
                 
-                sistemaArquivos.writeFile(
-                    nomeArquivoSaida,
-                    conteudoCompleto,
-                    (erro) => {
-                        if (erro) throw erro;
-                    },
-                );
+                sistemaArquivos.writeFileSync(nomeArquivoSaida, conteudoCompleto);
                 break;
             case "foles":
                 nomeArquivoSaida = arquivoOrigem.replace("css", "foles");
                 nomeArquivoMapa = nomeArquivoSaida + ".map";
                 
                 if (mapa) {
-                    // Escrever o arquivo de mapa de fontes separado
-                    sistemaArquivos.writeFile(
-                        nomeArquivoMapa,
-                        mapa,
-                        (erro) => {
-                            if (erro) throw erro;
-                        },
-                    );
+                    // Escrever o arquivo de mapa de fontes separado primeiro
+                    sistemaArquivos.writeFileSync(nomeArquivoMapa, mapa);
                     
-                    // Adicionar referência ao mapa de fontes no FolEs
-                    conteudoCompleto += `\n/*# sourceMappingURL=${nomeArquivoMapa.split('/').pop()} */\n`;
+                    // Adicionar referência ao mapa de fontes no FolEs usando apenas o nome base do arquivo
+                    conteudoCompleto += `\n/*# sourceMappingURL=${caminho.basename(nomeArquivoMapa)} */\n`;
                 }
                 
-                sistemaArquivos.writeFile(
-                    nomeArquivoSaida,
-                    conteudoCompleto,
-                    (erro) => {
-                        if (erro) throw erro;
-                    },
-                );
+                sistemaArquivos.writeFileSync(nomeArquivoSaida, conteudoCompleto);
                 break;
             default:
                 throw new Error("Formato de arquivo não reconhecido.");
