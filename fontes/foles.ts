@@ -11,6 +11,7 @@ import { TradutorReverso } from "./tradutores/tradutor-reverso";
 import { GeradorMapaCss } from "./gerador-mapa";
 import { BlocoDeclaracao } from "./declaracoes";
 import caminho from "path";
+import { Base64 } from "./utilidades/base64";
 
 /**
  * O núcleo da linguagem FolEs.

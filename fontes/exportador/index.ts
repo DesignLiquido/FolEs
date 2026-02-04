@@ -1,5 +1,6 @@
 import sistemaArquivos from "fs";
 import caminho from "path";
+import { Base64 } from "../utilidades/base64";
 
 /**
  * Classe que exporta traduções em diferentes formatos de arquivos. Como possui dependência
@@ -11,13 +12,15 @@ export class Exportador {
      * @param formato O formato do arquivo traduzido.
      * @param arquivoOrigem O nome do arquivo de origem.
      * @param conteudo O conteúdo da tradução.
-     * @param mapa Um mapa de fontes, se disponível.
+     * @param mapa Um mapa de fontes, se disponível (como string JSON).
+     * @param inline Se verdadeiro, incorpora o mapa como base64 inline; caso contrário, cria arquivo separado.
      */
     exportar(
         formato: string,
         arquivoOrigem: string,
         conteudo: string,
         mapa?: string,
+        inline: boolean = false,
     ) {
         let nomeArquivoSaida: string;
         let nomeArquivoMapa: string;
@@ -26,28 +29,36 @@ export class Exportador {
         switch (formato) {
             case "css":
                 nomeArquivoSaida = arquivoOrigem.replace(/\.foles$/, ".css");
-                nomeArquivoMapa = nomeArquivoSaida + ".map";
                 
                 if (mapa) {
-                    // Escrever o arquivo de mapa de fontes separado primeiro
-                    sistemaArquivos.writeFileSync(nomeArquivoMapa, mapa);
-                    
-                    // Adicionar referência ao mapa de fontes no CSS usando apenas o nome base do arquivo
-                    conteudoCompleto += `\n/*# sourceMappingURL=${caminho.basename(nomeArquivoMapa)} */\n`;
+                    if (inline) {
+                        // Modo inline: incorpora o mapa como base64
+                        const mapaBase64 = new Base64().encode(mapa);
+                        conteudoCompleto += `\n/*# sourceMappingURL=data:application/json;base64,${mapaBase64} */\n`;
+                    } else {
+                        // Modo separado: cria arquivo .map
+                        nomeArquivoMapa = nomeArquivoSaida + ".map";
+                        sistemaArquivos.writeFileSync(nomeArquivoMapa, mapa);
+                        conteudoCompleto += `\n/*# sourceMappingURL=${caminho.basename(nomeArquivoMapa)} */\n`;
+                    }
                 }
                 
                 sistemaArquivos.writeFileSync(nomeArquivoSaida, conteudoCompleto);
                 break;
             case "foles":
                 nomeArquivoSaida = arquivoOrigem.replace(/\.css$/, ".foles");
-                nomeArquivoMapa = nomeArquivoSaida + ".map";
                 
                 if (mapa) {
-                    // Escrever o arquivo de mapa de fontes separado primeiro
-                    sistemaArquivos.writeFileSync(nomeArquivoMapa, mapa);
-                    
-                    // Adicionar referência ao mapa de fontes no FolEs usando apenas o nome base do arquivo
-                    conteudoCompleto += `\n/*# sourceMappingURL=${caminho.basename(nomeArquivoMapa)} */\n`;
+                    if (inline) {
+                        // Modo inline: incorpora o mapa como base64
+                        const mapaBase64 = new Base64().encode(mapa);
+                        conteudoCompleto += `\n/*# sourceMappingURL=data:application/json;base64,${mapaBase64} */\n`;
+                    } else {
+                        // Modo separado: cria arquivo .map
+                        nomeArquivoMapa = nomeArquivoSaida + ".map";
+                        sistemaArquivos.writeFileSync(nomeArquivoMapa, mapa);
+                        conteudoCompleto += `\n/*# sourceMappingURL=${caminho.basename(nomeArquivoMapa)} */\n`;
+                    }
                 }
                 
                 sistemaArquivos.writeFileSync(nomeArquivoSaida, conteudoCompleto);

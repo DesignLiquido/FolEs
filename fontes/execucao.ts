@@ -26,6 +26,11 @@ const principal = () => {
             true
         )
         .option(
+            '-i, --inline',
+            'Gera mapas de fontes inline (base64) ao invés de arquivo separado.',
+            false
+        )
+        .option(
             '-v, --versao',
             'Imprime o número da versão atual de FolEs',
             false
@@ -72,9 +77,9 @@ const principal = () => {
         const resultadoMapas = foles.converterParaCssComMapas(nomeArquivo);
         const exportador = new Exportador();
         if (nomeArquivo.endsWith('foles')) {
-            exportador.exportar('css', nomeArquivo, resultadoMapas[0], resultadoMapas[1]);
+            exportador.exportar('css', nomeArquivo, resultadoMapas[0], resultadoMapas[1], opcoes.inline);
         } else {
-            exportador.exportar('foles', nomeArquivo, resultadoMapas[0], resultadoMapas[1]);
+            exportador.exportar('foles', nomeArquivo, resultadoMapas[0], resultadoMapas[1], opcoes.inline);
         }
     }
 }
