@@ -25,7 +25,7 @@ export class Exportador {
 
         switch (formato) {
             case "css":
-                nomeArquivoSaida = arquivoOrigem.replace("foles", "css");
+                nomeArquivoSaida = arquivoOrigem.replace(/\.foles$/, ".css");
                 nomeArquivoMapa = nomeArquivoSaida + ".map";
                 
                 if (mapa) {
@@ -39,7 +39,7 @@ export class Exportador {
                 sistemaArquivos.writeFileSync(nomeArquivoSaida, conteudoCompleto);
                 break;
             case "foles":
-                nomeArquivoSaida = arquivoOrigem.replace("css", "foles");
+                nomeArquivoSaida = arquivoOrigem.replace(/\.css$/, ".foles");
                 nomeArquivoMapa = nomeArquivoSaida + ".map";
                 
                 if (mapa) {
