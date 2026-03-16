@@ -2,13 +2,13 @@ import * as sistemaArquivos from "fs";
 import * as caminho from "path";
 import * as sistemaOperacional from "os";
 
-import { LexadorInterface, ResultadoLexadorInterface } from "../interfaces";
+import { ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../interfaces";
 
 /**
  * Importador, baseado no [Importador de Delégua Node](https://github.com/DesignLiquido/delegua-node/blob/principal/fontes/importador/importador.ts),
  * só que o retorno é o resultado do Lexador.
  */
-export class Importador {
+export class Importador implements ImportadorInterface {
     diretorioBase: string = process.cwd();
     lexador: LexadorInterface;
     extensaoPadrao: string;
