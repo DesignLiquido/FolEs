@@ -95,13 +95,13 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
             const regex = /[~çáéíóúÁÉÍÓÚ]/;
 
             if (!regex.test(ModificadoresDeValorNumericoApenas[index]) && regex.test(ModificadoresDeValorNumericoApenas[index + 1])) {
-                expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoApenas[index + 1]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
+                avaliador.analisar(novoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain(`Modificador ou variável '${ModificadoresDeValorNumericoApenas[index + 1]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
             } else {
-                expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoApenas[index]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
+                avaliador.analisar(novoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain(`Modificador ou variável '${ModificadoresDeValorNumericoApenas[index]}' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
             }
 
             // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
@@ -120,9 +120,9 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO sem quantificador', () 
                 "}"
             ]);
 
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável '${ModificadoresDeValorNumericoZeroUm[index]}' com valor 2 inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável '${ModificadoresDeValorNumericoZeroUm[index]}' com valor 2 inválido.`);
         }
     });
 
@@ -315,9 +315,9 @@ describe('Testando Seletores que recebem VALOR NUMÉRICO com ou sem quantificado
             ]);
 
             // Avaliador Sintático - Erro esperado como retorno
-            expect(() => {
-                avaliador.analisar(novoLexador.simbolos);
-            }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+            avaliador.analisar(novoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
 
             // // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
             expect(() => {

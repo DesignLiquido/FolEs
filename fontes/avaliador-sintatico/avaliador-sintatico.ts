@@ -55,6 +55,17 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return excecao;
     }
 
+    protected sincronizar(): void {
+        while (!this.estaNoFinal()) {
+            const tipo = this.simbolos[this.atual].tipo;
+            if (tipo === tiposDeSimbolos.CHAVE_DIREITA) {
+                this.avancarEDevolverAnterior();
+                return;
+            }
+            this.avancarEDevolverAnterior();
+        }
+    }
+
     estaNoFinal(): boolean {
         return this.atual === this.simbolos.length;
     }
@@ -2024,7 +2035,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 return new SeletorValor(lexema, [arrayValoresXywh]) as Metodo;
         }
 
-        throw new Error(`Método ${lexema} não reconhecido em FolEs.`);
+        throw this.erro(this.simbolos[this.atual - 1], `Método '${lexema}' não reconhecido em FolEs.`);
     }
 
     private validacaoUrl() {
@@ -2039,9 +2050,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     private validacaoUrlSimbolos(primeiroSimbolo: SimboloInterface) {
         if (!["http", "https"].includes(primeiroSimbolo.lexema.toLowerCase())) {
-            throw new Error(
-                `URL inválida. URLs devem começar com 'http' ou 'https'.`,
-            );
+            throw this.erro(primeiroSimbolo as Simbolo, `URL inválida. URLs devem começar com 'http' ou 'https'.`);
         }
 
         this.consumir(
@@ -2152,7 +2161,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                         break;
                     }
 
-                    throw new ErroAvaliadorSintatico(valorModificador, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
+                    throw this.erro(valorModificador as Simbolo, `Modificador ou variável '${nomeModificador}' com valor '${valorModificador.lexema || valorModificador.tipo}' inválido.`);
             }
         } while (
             this.atual < this.simbolos.length &&
@@ -2452,7 +2461,20 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
         const declaracoes: Declaracao[] = [];
         while (!this.estaNoFinal()) {
-            declaracoes.push(this.declaracao());
+            try {
+                const declaracao = this.declaracao();
+                if (declaracao) declaracoes.push(declaracao);
+            } catch (e: any) {
+                if (!(e instanceof ErroAvaliadorSintatico)) {
+                    this.erros.push(
+                        new ErroAvaliadorSintatico(
+                            this.simbolos[this.atual] ?? this.simbolos[this.simbolos.length - 1],
+                            e.message
+                        )
+                    );
+                }
+                this.sincronizar();
+            }
             this.referenciaDeclaracoes = declaracoes;
         }
 

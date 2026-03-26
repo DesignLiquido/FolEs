@@ -79,9 +79,8 @@ describe('Avaliador Sintático', () => {
             ]);
 
             // Avaliador Sintático deve retornar erro
-            expect(() => {
-                avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrow();
+            avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
 
             // Causar erro de digitação
             const seletorIncorreto = ValoresQuantificadores[index].replace(ValoresQuantificadores[index][0], '')
@@ -93,9 +92,9 @@ describe('Avaliador Sintático', () => {
             ]);
 
             // Erro esperado como retorno - seletor não encontrado
-            expect(() => {
-                avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+            avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+            expect(avaliadorSintatico.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
         }
     });
 

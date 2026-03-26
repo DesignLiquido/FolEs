@@ -205,9 +205,9 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+                avaliador.analisar(novoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático

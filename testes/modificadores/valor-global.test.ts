@@ -81,9 +81,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
+                expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+                expect(avaliadorSintatico.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
@@ -120,9 +120,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliadorSintatico.analisar(novoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+                avaliadorSintatico.analisar(novoLexador.simbolos);
+                expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+                expect(avaliadorSintatico.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
 
 
                 // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
@@ -144,9 +144,9 @@ describe('Testando Seletores com VALORES GLOBAIS', () => {
                 ]);
 
                 // Avaliador Sintático
-                expect(() => {
-                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Modificador ou variável '${ValorGlobalInvalido[index]}' com valor '${valorInvalido}' inválido.`);
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
+                expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+                expect(avaliadorSintatico.erros[0].message).toContain(`Modificador ou variável '${ValorGlobalInvalido[index]}' com valor '${valorInvalido}' inválido.`);
             }
         });
 

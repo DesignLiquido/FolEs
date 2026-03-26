@@ -108,9 +108,8 @@ describe('Testando Seletores com STATUS como atributo', () => {
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliador.analisar(novoLexador.simbolos);
-                }).toThrow();
+                avaliador.analisar(novoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
 
                 // Tradutor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {

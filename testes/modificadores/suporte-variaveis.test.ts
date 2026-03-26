@@ -363,9 +363,9 @@ describe('Testando Suporte a VARIÁVEIS', () => {
             ]);
 
             // Av. Sintático deve retornar erro de valor inválido
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'cor-secundaria' com valor 'branc' inválido`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'cor-secundaria' com valor 'branc' inválido`);
         });
 
         it('Caso de falha - Declaração de variável após atribuição (fora de ordem)', () => {

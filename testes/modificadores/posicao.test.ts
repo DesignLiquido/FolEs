@@ -102,9 +102,8 @@ describe('Testando Seletores de POSIÇÃO', () => {
             );
 
             // O Avaliador Sintático deve retornar um erro
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow();
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
         }
     });
 
@@ -120,9 +119,9 @@ describe('Testando Seletores de POSIÇÃO', () => {
             ]);
 
             // Avaliador Sintático - Erro esperado como retorno
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
 
 
             // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático

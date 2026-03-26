@@ -358,9 +358,9 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             expect(resultadoLexador.simbolos).toHaveLength(7);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrow("Modificador ou variável 'fonte-texto' com valor 'reservada' inválido");
+            avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+            expect(avaliadorSintatico.erros[0].message).toContain("Modificador ou variável 'fonte-texto' com valor 'reservada' inválido");
 
         });
 
@@ -410,9 +410,9 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'recursos-fonte' com valor "cs2af" inválido`);
+            avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+            expect(avaliadorSintatico.erros[0].message).toContain(`Modificador ou variável 'recursos-fonte' com valor "cs2af" inválido`);
         });
 
         it('Caso de sucesso - Seletores que recebem valores personalizados (custom-indent) válidos', () => {
@@ -530,9 +530,8 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 }
 
                 // Avaliador Sintático
-                expect(() => {
-                    avaliadorSintatico.analisar(resultadoLexador.simbolos);
-                }).toThrow();
+                avaliadorSintatico.analisar(resultadoLexador.simbolos);
+                expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
             }
         });
     });

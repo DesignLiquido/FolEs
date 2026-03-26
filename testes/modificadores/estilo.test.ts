@@ -97,9 +97,8 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                     ])
                 );
 
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow();
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
             }
         });
 
@@ -115,9 +114,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`O seletor '${seletorIncorreto}' não existe.`);
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain(`O seletor '${seletorIncorreto}' não existe.`);
 
                 // Resolvedor - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {
@@ -138,9 +137,9 @@ describe('Testando Seletores com ESTILO como atributo', () => {
                 ]);
 
                 // Avaliador Sintático
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain(`Modificador ou variável '${EstiloBorda[index]}' com valor '${valorInvalido}' inválido.`);
             }
         });
 

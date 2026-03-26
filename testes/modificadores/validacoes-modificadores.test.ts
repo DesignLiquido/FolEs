@@ -59,9 +59,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'agrupar-palavra' com valor 'nomal' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'agrupar-palavra' com valor 'nomal' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de valor extra inválido', () => {
@@ -73,9 +73,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'conteúdo' com valor 'linear-gradiente' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'conteúdo' com valor 'linear-gradiente' inválido.`);
         });
     });
 
@@ -131,9 +131,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'alinhar-itens' com valor 'seuro' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'alinhar-itens' com valor 'seuro' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de valor extra inválido', () => {
@@ -145,9 +145,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'estilo-borda-direita' com valor 'desconhecido' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'estilo-borda-direita' com valor 'desconhecido' inválido.`);
         });
     });
 
@@ -205,9 +205,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'alinhar-vertical' com valor 'desconhecido' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'alinhar-vertical' com valor 'desconhecido' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de valor extra inválido', () => {
@@ -219,9 +219,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'atraso-animação' com valor 'desconhecido' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'atraso-animação' com valor 'desconhecido' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de valor aceito, mas inválido', () => {
@@ -233,9 +233,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'altura-máxima' com valor 'desconhecido' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'altura-máxima' com valor 'desconhecido' inválido.`);
         });
     });
 
@@ -323,9 +323,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com hexadecimal inválido`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'cor-barra-rolagem' com hexadecimal inválido`);
         });
 
         it('Caso de falha - Validação retorna erro de método inválido', () => {
@@ -337,9 +337,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com método 'MinMax' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'cor-barra-rolagem' com método 'MinMax' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de valor inválido', () => {
@@ -351,9 +351,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'cor-borda-direita' com valor 'desconhecido' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'cor-borda-direita' com valor 'desconhecido' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de valor aceito, mas inválido', () => {
@@ -365,9 +365,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'cor-barra-rolagem' com valor 'desconhecido' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'cor-barra-rolagem' com valor 'desconhecido' inválido.`);
         });
     });
 
@@ -425,9 +425,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'alinhar-vertical' com valor 'ab' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'alinhar-vertical' com valor 'ab' inválido.`);
         });
 
         it('Caso de falha - Validação retorna erro de quantificador extra inválido', () => {
@@ -439,9 +439,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'deslocamento' com valor 'a' inválido.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'deslocamento' com valor 'a' inválido.`);
         });
     });
 
@@ -467,9 +467,9 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
             ]);
 
             // Avaliador Sintático
-            expect(() => {
-                avaliador.analisar(resultadoLexador.simbolos);
-            }).toThrow(`Modificador ou variável 'ajustar-tamanho-fonte' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
+            avaliador.analisar(resultadoLexador.simbolos);
+            expect(avaliador.erros.length).toBeGreaterThan(0);
+            expect(avaliador.erros[0].message).toContain(`Modificador ou variável 'ajustar-tamanho-fonte' aceita somente valores numéricos. O quantificador 'px' é inválido para esta operação.`);
         });
     });
 });

@@ -76,9 +76,9 @@ describe('Testando seletores e estruturas', () => {
         ]);
 
         // Avaliador Sintático deve retornar um erro por não reconhecer o identificador como nome de classe
-        expect(() => {
-            avaliadorSintatico.analisar(resultadoLexador.simbolos);
-        }).toThrow(`Esperado '{' após declaração de seletor.`);
+        avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+        expect(avaliadorSintatico.erros[0].message).toContain(`Esperado '{' após declaração de seletor.`);
     });
 
     it('Seletor Classe com pseudoclasse', () => {
@@ -178,9 +178,9 @@ describe('Testando seletores e estruturas', () => {
         ]);
 
         // Avaliador Sintático deve retornar um erro por não reconhecer o identificador como nome de classe
-        expect(() => {
-            avaliadorSintatico.analisar(resultadoLexador.simbolos);
-        }).toThrow(`Esperado '{' após declaração de seletor.`);
+        avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+        expect(avaliadorSintatico.erros[0].message).toContain(`Esperado '{' após declaração de seletor.`);
     });
 
     it('Seletor Id com pseudoclasse', () => {
@@ -288,8 +288,8 @@ describe('Testando seletores e estruturas', () => {
         );
 
         // Avaliador Sintático deve retornar um erro por não reconhecer o identificador
-        expect(() => {
-            avaliadorSintatico.analisar(resultadoLexador.simbolos);
-        }).toThrow('Esperado identificador válido para espaço reservado.');
+        avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
+        expect(avaliadorSintatico.erros[0].message).toContain('Esperado identificador válido para espaço reservado.');
     });
 });

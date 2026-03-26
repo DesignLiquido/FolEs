@@ -57,6 +57,10 @@ export class FolEs {
         const resultadoAvaliadorSintatico =
             this.avaliadorSintatico.analisar(simbolos);
 
+        if (this.avaliadorSintatico.erros.length > 0) {
+            throw this.avaliadorSintatico.erros[0];
+        }
+
         const resultadoTraducao = this.tradutor.traduzir(
             resultadoAvaliadorSintatico
         );

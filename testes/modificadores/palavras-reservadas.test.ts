@@ -173,10 +173,9 @@ describe('Testando Seletores que recebem PALAVRAS RESERVADAS como atributo', () 
                     ])
                 );
 
-                // Av. Sintático deve retornar um erro 
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow();
+                // Av. Sintático deve retornar um erro
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
             }
         });
     });

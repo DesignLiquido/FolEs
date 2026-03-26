@@ -75,9 +75,9 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                 ]);
 
                 // Avaliador Sintático - Erro esperado como retorno
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow('Esperado nome de pseudoclasse');
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain('Esperado nome de pseudoclasse');
 
                 // Serializador - Não deve traduzir devido ao erro do Avaliador Sintático
                 expect(() => {

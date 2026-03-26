@@ -90,9 +90,8 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
                 // Avaliador Sintático deve retornar erro
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow();
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
             }
         });
 
@@ -115,9 +114,9 @@ describe('Testes: Valor-Quantificador', () => {
                 );
 
                 // Avaliador Sintático deve retornar erro
-                expect(() => {
-                    avaliador.analisar(resultadoLexador.simbolos);
-                }).toThrow(`Modificador ou variável '${ValorQuantificadorInvalido[index]}' com valor pontilhado inválido.`);
+                avaliador.analisar(resultadoLexador.simbolos);
+                expect(avaliador.erros.length).toBeGreaterThan(0);
+                expect(avaliador.erros[0].message).toContain(`Modificador ou variável '${ValorQuantificadorInvalido[index]}' com valor pontilhado inválido.`);
             }
         });
 
