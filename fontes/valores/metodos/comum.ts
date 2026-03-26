@@ -13,13 +13,14 @@ export function tratarValores(
 
     arrayValores.forEach((valor, index, array) => {
         if (valor.tipo === 'NUMERO') {
-            if (index === 0) {
+            if (index === 0 || array[index - 1].lexema === '#') {
                 traducaoRetorno += `${valor.lexema}`;
             } else {
                 traducaoRetorno += ` ${valor.lexema}`;
             }
         } else if (valoresFolEs.includes(valor.lexema)) {
-            if (index === 0) {
+            const semEspaco = index === 0 || valor.tipo === 'QUANTIFICADOR' || array[index - 1].tipo === 'NUMERO';
+            if (semEspaco) {
                 traducaoRetorno += `${valoresAceitos[valor.lexema]}`;
             } else {
                 traducaoRetorno += ` ${valoresAceitos[valor.lexema]}`;
@@ -36,7 +37,13 @@ export function tratarValores(
             traducaoRetorno += ')';
         } else if (valor.tipo === 'PARENTESE_ESQUERDO') {
             traducaoRetorno += '(';
+        } else if (valor.lexema === '#') {
+            // Início de cor hexadecimal: adiciona espaço antes apenas se não for o primeiro token
+            traducaoRetorno += index === 0 ? '#' : ' #';
         } else if (index !== 0 && array[index - 1].lexema === '#') {
+            traducaoRetorno += `${valor.lexema}`;
+        } else if (index > 1 && array[index - 1].tipo === 'NUMERO' && array[index - 2].lexema === '#') {
+            // Continuação de código hex que começa com dígitos (ex.: #0000001a)
             traducaoRetorno += `${valor.lexema}`;
         } else if (index === 0 || (array[index - 1].tipo === 'PARENTESE_DIREITO' || array[index - 1].tipo === 'PARENTESE_ESQUERDO')) {
             traducaoRetorno += `${valor.lexema}`;
@@ -60,13 +67,14 @@ export function tratarValoresReversos(
 
     arrayValores.forEach((valor, index, array) => {
         if (valor.tipo === 'NUMERO') {
-            if (index === 0) {
+            if (index === 0 || array[index - 1].lexema === '#') {
                 traducaoRetorno += `${valor.lexema}`;
             } else {
                 traducaoRetorno += ` ${valor.lexema}`;
             }
         } else if (valoresFolEs.includes(valor.lexema)) {
-            if (index === 0) {
+            const semEspaco = index === 0 || valor.tipo === 'QUANTIFICADOR' || array[index - 1].tipo === 'NUMERO';
+            if (semEspaco) {
                 traducaoRetorno += `${valoresAceitos[valor.lexema]}`;
             } else {
                 traducaoRetorno += ` ${valoresAceitos[valor.lexema]}`;
@@ -84,7 +92,12 @@ export function tratarValoresReversos(
             traducaoRetorno += ')';
         } else if (valor.tipo === 'PARENTESE_ESQUERDO') {
             traducaoRetorno += '(';
+        } else if (valor.lexema === '#') {
+            traducaoRetorno += index === 0 ? '#' : ' #';
         } else if (index !== 0 && array[index - 1].lexema === '#') {
+            traducaoRetorno += `${valor.lexema}`;
+        } else if (index > 1 && array[index - 1].tipo === 'NUMERO' && array[index - 2].lexema === '#') {
+            // Continuação de código hex que começa com dígitos (ex.: #0000001a)
             traducaoRetorno += `${valor.lexema}`;
         } else if (index === 0 || (array[index - 1].tipo === 'PARENTESE_DIREITO' || array[index - 1].tipo === 'PARENTESE_ESQUERDO')) {
             traducaoRetorno += `${valor.lexema}`;

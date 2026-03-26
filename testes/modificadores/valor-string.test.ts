@@ -7,6 +7,7 @@ import { Resolvedor } from "../../fontes/resolvedores";
 import { ValorString, ValorStringAcentuado } from "../../fontes/listas/valor-string";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { ValorTexto } from "../../fontes/valores";
+import { FolEs } from "../../fontes/foles";
 
 describe('Testando Seletores com VALORES STRING', () => {
     let lexador: LexadorInterface;
@@ -94,5 +95,13 @@ describe('Testando Seletores com VALORES STRING', () => {
             expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
             expect(avaliadorSintatico.erros[0].message).toContain(`Modificador ou variável '${ValorStringAcentuado[index]}' com valor 'x' inválido`);
         }
+    });
+
+    it('Caso de sucesso - fonte-texto com identificadores sem aspas (nome de fonte e família genérica)', () => {
+        const foles = new FolEs(false);
+        const resultado = foles.converterTextoParaCss('corpo { fonte-texto: Arial, sem-serifa; }');
+        expect(resultado).toContain('font-family');
+        expect(resultado).toContain('Arial');
+        expect(resultado).toContain('sans-serif');
     });
 });

@@ -8,6 +8,7 @@ import { MetodoBorrar, MetodoBrilho, MetodoCalcular, MetodoContraste, MetodoCurv
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorValor } from "../../fontes/valores/seletor-valor";
 import { Contador } from "../../fontes/valores/metodos/foles/contador";
+import { FolEs } from "../../fontes/foles";
 
 describe('Testando Seletores que recebem MÉTODOS como valor', () => {
     let lexador: LexadorInterface;
@@ -4614,5 +4615,23 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 new SeletorValor(metodoIncorreto, []);
             }).toThrow(`O valor \'${metodoIncorreto}\' não foi encontrado.`);
         }
+    });
+
+    it('Caso de sucesso - gradiente-linear com cores hexadecimais e paradas percentuais', () => {
+        const foles = new FolEs(false);
+        const resultado = foles.converterTextoParaCss('.cabecalho { fundo: gradiente-linear(135deg, #667eea 0%, #764ba2 100%); }');
+        expect(resultado).toContain('background');
+        expect(resultado).toContain('linear-gradient');
+        expect(resultado).toContain('135deg');
+        expect(resultado).toContain('#667eea');
+        expect(resultado).toContain('#764ba2');
+    });
+
+    it('Caso de sucesso - transição com nome de propriedade FolEs e duração', () => {
+        const foles = new FolEs(false);
+        const resultado = foles.converterTextoParaCss('.link-nav { transição: opacidade 0.3s; }');
+        expect(resultado).toContain('transition');
+        expect(resultado).toContain('opacity');
+        expect(resultado).toContain('.3s');
     });
 });

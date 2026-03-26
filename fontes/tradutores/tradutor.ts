@@ -102,6 +102,8 @@ export class Tradutor {
                         );
                         continue;
                     }
+
+                    seletoresTraduzidos.push(seletor);
                 }
 
                 for (const modificador of declaracao.modificadores) {

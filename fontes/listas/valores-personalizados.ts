@@ -6,8 +6,11 @@ export const ModificadoresValorPersonalizado: Array<string> = [
     'definir-contador',
     'estilo-lista-tipo',
     'estilo-lista',
+    'exibicao',
+    'exibição',
     'fim-coluna-em-grade',
     'fim-linha-em-grade',
+    'fonte-texto',
     'incrementar-contador',
     'início-coluna-em-grade',
     'inicio-coluna-em-grade',
@@ -19,6 +22,8 @@ export const ModificadoresValorPersonalizado: Array<string> = [
     'propriedade-transição',
     'propriedade-transicao',
     'tamanho-grade',
+    'transicao',
+    'transição',
 ];
 
 export const ValoresPersonalizados: TraducaoValoresMetodoInterface[] = [

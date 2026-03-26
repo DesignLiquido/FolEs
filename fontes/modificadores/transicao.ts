@@ -17,6 +17,19 @@ export class Transicao extends Modificador {
         "passo-final": "step-end",
         nenhuma: "none",
         todas: "all",
+        // Nomes de propriedades FolEs que podem ser usados no shorthand de transição
+        opacidade: "opacity",
+        cor: "color",
+        fundo: "background",
+        largura: "width",
+        altura: "height",
+        transformar: "transform",
+        margem: "margin",
+        recuo: "padding",
+        borda: "border",
+        "tamanho-fonte": "font-size",
+        "raio-borda": "border-radius",
+        "sombra-caixa": "box-shadow",
     };
 
     constructor(
@@ -36,7 +49,9 @@ export class Transicao extends Modificador {
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
-                    valoresTemporais
+                    valoresTemporais,
+                    false,
+                    true
                 );
             } else {
                 validarValorNumerico(

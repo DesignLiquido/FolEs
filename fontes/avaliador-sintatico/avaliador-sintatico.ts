@@ -89,11 +89,22 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
     resolverMetodo(lexema: string): Metodo {
         switch (lexema) {
             case "#":
-                const codigoHEX = this.consumir(
-                    tiposDeSimbolos.IDENTIFICADOR,
-                    "Esperado código HEX válido após #'.",
-                );
-                return new SeletorValor("hex", [codigoHEX.lexema]) as Metodo;
+                let codigoHex: string;
+                if (this.verificarTipoSimboloAtual(tiposDeSimbolos.NUMERO)) {
+                    const numParteHex = this.avancarEDevolverAnterior();
+                    codigoHex = numParteHex.lexema;
+                    if (this.verificarTipoSimboloAtual(tiposDeSimbolos.IDENTIFICADOR)) {
+                        const alphaParteHex = this.avancarEDevolverAnterior();
+                        codigoHex += alphaParteHex.lexema;
+                    }
+                } else {
+                    const hexSimbolo = this.consumir(
+                        tiposDeSimbolos.IDENTIFICADOR,
+                        "Esperado código HEX válido após #'.",
+                    );
+                    codigoHex = hexSimbolo.lexema;
+                }
+                return new SeletorValor("hex", [codigoHex]) as Metodo;
 
             case "anotacao":
                 this.consumir(
@@ -681,69 +692,16 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
                     "Esperado parêntese esquerdo após método 'gradiente-linear'.",
                 );
-                const valorAngulo = this.avancarEDevolverAnterior();
-                let quantificadorAngulo;
-                if (valorAngulo.tipo === "QUALITATIVO") {
-                    switch (valorAngulo.lexema) {
-                        case "superior":
-                            valorAngulo.lexema = "0";
-                            valorAngulo.tipo = "NUMERO";
-                            quantificadorAngulo = {
-                                tipo: "QUANTIFICADOR",
-                                lexema: "deg",
-                            };
-                            break;
-                        case "direita":
-                            valorAngulo.lexema = "90";
-                            valorAngulo.tipo = "NUMERO";
-                            quantificadorAngulo = {
-                                tipo: "QUANTIFICADOR",
-                                lexema: "deg",
-                            };
-                            break;
-                        case "inferior":
-                            valorAngulo.lexema = "180";
-                            valorAngulo.tipo = "NUMERO";
-                            quantificadorAngulo = {
-                                tipo: "QUANTIFICADOR",
-                                lexema: "deg",
-                            };
-                            break;
-                        case "esquerda":
-                            valorAngulo.lexema = "270";
-                            valorAngulo.tipo = "NUMERO";
-                            quantificadorAngulo = {
-                                tipo: "QUANTIFICADOR",
-                                lexema: "deg",
-                            };
-                            break;
-                        default:
-                            break;
-                    }
-                } else {
-                    quantificadorAngulo = this.avancarEDevolverAnterior();
+                const primeiroTokenGradienteLinear: Simbolo = this.avancarEDevolverAnterior();
+                const arrayValoresGradienteLinear: Array<Simbolo> = [primeiroTokenGradienteLinear];
+                while (this.simbolos[this.atual].tipo !== tiposDeSimbolos.PARENTESE_DIREITO) {
+                    arrayValoresGradienteLinear.push(this.avancarEDevolverAnterior());
                 }
-
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após segundo argumento do método gradiente-linear.",
-                );
-                const cor1 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após segundo argumento do método gradiente-linear.",
-                );
-                const cor2 = this.avancarEDevolverAnterior();
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_DIREITO,
                     "Esperado parêntese direito após método 'gradiente-linear'.",
                 );
-                return new SeletorValor(lexema, [
-                    valorAngulo,
-                    quantificadorAngulo,
-                    cor1,
-                    cor2,
-                ]) as Metodo;
+                return new SeletorValor(lexema, [arrayValoresGradienteLinear]) as Metodo;
 
             case "gradiente-radial":
                 this.consumir(

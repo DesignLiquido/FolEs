@@ -17,10 +17,11 @@ export function validarValorCor(
 
     if (valorModificador.metodo) {
         if (valores[0] instanceof HexadecimalCor) {
-            if (valores[0]["codigo"].length !== 3 && valores[0]["codigo"].length !== 6) {
+            const codigoHexadecimal = valores[0]["codigo"];
+            if (codigoHexadecimal.length !== 3 && codigoHexadecimal.length !== 6 && codigoHexadecimal.length !== 8) {
                 throw new Error(
-                    `Modificador ou variável '${nomePropriedade}' com hexadecimal inválido: '${valores[0]["codigo"]}'. Hexadecimais
-                    devem ter 3 ou 6 caracteres após a cerquilha, sendo cada caracter de 0 até 9 ou de A até F.`,
+                    `Modificador ou variável '${nomePropriedade}' com hexadecimal inválido: '${codigoHexadecimal}'. Hexadecimais
+                    devem ter 3, 6 ou 8 caracteres após a cerquilha, sendo cada caracter de 0 até 9 ou de A até F.`,
                 );
             }
         } else if (

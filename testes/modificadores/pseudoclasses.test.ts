@@ -7,6 +7,7 @@ import { Resolvedor } from "../../fontes/resolvedores";
 import { Pseudoclasses } from "../../fontes/listas/pseudoclasses";
 import { BlocoDeclaracao } from "../../fontes/declaracoes";
 import { SeletorPseudoclasse } from "../../fontes/pseudoclasses/seletor-pseudoclasse";
+import { FolEs } from "../../fontes/foles";
 
 describe('Testando Seletores com PSEUDOCLASSES', () => {
     describe('Testes Unitários', () => {
@@ -95,6 +96,28 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
                     new SeletorPseudoclasse(pseudoclasseIncorreta)
                 }).toThrow(`A pseudoclasse \'${pseudoclasseIncorreta}\' não existe.`)
             }
+        });
+    });
+
+    describe('Pseudoclasses em seletores de classe', () => {
+        let foles: FolEs;
+
+        beforeEach(() => {
+            foles = new FolEs(false);
+        });
+
+        it('Caso de sucesso - seletor de classe com pseudoclasse :sobre', () => {
+            const resultado = foles.converterTextoParaCss('.link-nav:sobre { opacidade: 0.8; }');
+            expect(resultado).toContain('.link-nav:hover');
+            expect(resultado).toContain('opacity');
+            expect(resultado).toContain('0.8');
+        });
+
+        it('Caso de sucesso - seletor de classe com pseudoclasse :sobre e propriedade fundo', () => {
+            const resultado = foles.converterTextoParaCss('.btn:sobre { fundo: #5568d3; }');
+            expect(resultado).toContain('.btn:hover');
+            expect(resultado).toContain('background');
+            expect(resultado).toContain('#5568d3');
         });
     });
 });

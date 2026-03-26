@@ -8,6 +8,7 @@ import { Resolvedor } from "../../fontes/resolvedores";
 import { Cores, CoresNomeFolEs } from "../../fontes/listas/cores";
 import { BlocoDeclaracao, DeclaracaoVariavel } from "../../fontes/declaracoes";
 import { cores } from "../../fontes/modificadores/atributos/cores";
+import { FolEs } from "../../fontes/foles";
 import { ValorQualitativo } from "../../fontes/valores";
 
 describe('Testando Seletores que recebem COR como atributo', () => {
@@ -332,6 +333,33 @@ describe('Testando Seletores que recebem COR como atributo', () => {
                 const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoResolvedor).toContain(coresCss[index]);
             }
+        });
+    });
+
+    describe('Testes com cores hexadecimais', () => {
+        let foles: FolEs;
+
+        beforeEach(() => {
+            foles = new FolEs(false);
+        });
+
+        it('Caso de sucesso - fundo com cor hexadecimal de 6 dígitos', () => {
+            const resultado = foles.converterTextoParaCss('corpo { fundo: #f5f5f5; }');
+            expect(resultado).toContain('background');
+            expect(resultado).toContain('#f5f5f5');
+        });
+
+        it('Caso de sucesso - borda com cor hexadecimal de 6 dígitos', () => {
+            const resultado = foles.converterTextoParaCss('.cartao { borda: 2px sólido #e0e0e0; }');
+            expect(resultado).toContain('border');
+            expect(resultado).toContain('solid');
+            expect(resultado).toContain('#e0e0e0');
+        });
+
+        it('Caso de sucesso - sombra-caixa com cor hexadecimal de 8 dígitos (canal alfa)', () => {
+            const resultado = foles.converterTextoParaCss('.cartao { sombra-caixa: 0 4px 6px #0000001a; }');
+            expect(resultado).toContain('box-shadow');
+            expect(resultado).toContain('#0000001a');
         });
     });
 });

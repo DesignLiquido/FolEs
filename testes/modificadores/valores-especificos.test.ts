@@ -360,7 +360,7 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
             // Avaliador Sintático
             avaliadorSintatico.analisar(resultadoLexador.simbolos);
             expect(avaliadorSintatico.erros.length).toBeGreaterThan(0);
-            expect(avaliadorSintatico.erros[0].message).toContain("Modificador ou variável 'fonte-texto' com valor 'reservada' inválido");
+            expect(avaliadorSintatico.erros[0].message).toContain("Modificador ou variável 'fonte-texto' com valor reservada inválido");
 
         });
 
@@ -503,6 +503,21 @@ describe('Testando Seletores com VALORES ESPECÍFICOS', () => {
                 expect(resultadoTradutor).toContain(ValoresPersonalizadosMultiplos[index]['css']);
                 expect(resultadoTradutor).toContain(ValoresPersonalizadosMultiplos[index]['traducao']);
             }
+        });
+
+        it('Caso de sucesso - exibição com valor flex (identificador inglês)', () => {
+            const resultadoLexador = lexador.mapear([
+                '.navegacao {',
+                'exibição: flex;',
+                '}'
+            ]);
+
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            expect(avaliadorSintatico.erros).toHaveLength(0);
+
+            const resultadoTradutor = serializador.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoTradutor).toContain('display');
+            expect(resultadoTradutor).toContain('flex');
         });
 
         it('Caso de falha - Atribuição de valor personalizado inválido', () => {

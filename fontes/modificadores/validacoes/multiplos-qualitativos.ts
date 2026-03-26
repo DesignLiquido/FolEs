@@ -23,13 +23,7 @@ export function validarMultiplosQualitativos(
 
     let validaçõesCor: boolean = true;
     if (valorModificador.metodo) {
-        if (typeof valorModificador.valor === 'string') {
-            validaçõesCor =
-                !valorModificador.valor.includes("rgb") &&
-                !valorModificador.valor.includes("rgba") &&
-                !valorModificador.valor.includes("hsl") &&
-                !valorModificador.valor.includes("hsla");
-        }
+        validaçõesCor = false;
     }
 
     let valoresCss: Array<string | number> = [];
