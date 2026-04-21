@@ -45,9 +45,9 @@
         "prettier": "^3.5.3",
         "release-it": "^20.0.0",
         "rimraf": "^6.1.0",
-        "ts-jest": "^29.0.3",
+        "ts-jest": "^29.4.7",
         "ts-node": "^10.9.1",
-        "typescript": "^5.9.3"
+        "typescript": "^6.0.3"
     },
     "dependencies": {
         "commander": "^14.0.0",

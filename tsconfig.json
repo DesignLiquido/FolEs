@@ -2,12 +2,16 @@
     "compilerOptions": {
         "outDir": "dist",
         "module": "commonjs",
+        "moduleResolution": "node10",
         "target": "es2017",
         "rootDir": "fontes",
         "allowJs": true,
         "sourceMap": true,
         "declaration": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "strict": false,
+        "types": ["node", "jest"],
+        "ignoreDeprecations": "6.0"
     },
     "exclude": [
         "babel.config.js", 
