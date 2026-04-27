@@ -23,7 +23,7 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
             serializador = new Resolvedor();
         });
 
-        it.only('Seletores que recebem múltiplos atributos do tipo valor-quantificador', () => {
+        it('Seletores que recebem múltiplos atributos do tipo valor-quantificador', () => {
             for (let index = 0; index < AtribuicaoAbreviadaVQ.length; index += 1) {
                 const nomeModificador = AtribuicaoAbreviadaVQ[index];
                 const valoresAceitos = [

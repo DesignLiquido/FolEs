@@ -5,7 +5,7 @@ import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } fr
 import { LexadorReverso } from "../fontes/lexador/lexador-reverso";
 import { TradutorReverso } from "../fontes/tradutores/tradutor-reverso";
 
-describe.skip('Tradutor Reverso', () => {
+describe('Tradutor Reverso', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliador: AvaliadorSintaticoInterface;
@@ -35,7 +35,7 @@ describe.skip('Tradutor Reverso', () => {
             const primeiroResultadoTipado = primeiroResultado as any;
             expect(primeiroResultadoTipado.modificadores.length).toBeGreaterThanOrEqual(1);
 
-            const resultado = tradutorReverso.traduzir(primeiroResultadoTipado[0]);
+            const resultado = tradutorReverso.traduzir(resultadoAvaliadorSintatico as BlocoDeclaracao[]);
 
             expect(resultado).toBeTruthy();
         });
