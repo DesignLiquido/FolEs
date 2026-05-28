@@ -42,12 +42,14 @@ export class Exibicao extends Modificador {
         "texto-container-rubí": "ruby-text-container",
     };
 
+    static nomeCss: string = "display";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["exibicao", "exibição"], "display", pragmas);
+        super(["exibicao", "exibição"], Exibicao.nomeCss, pragmas);
 
         if (!variavel) validarValores("exibição", valores, this.valoresAceitos);
 

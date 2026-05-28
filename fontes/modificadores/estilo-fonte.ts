@@ -13,12 +13,14 @@ export class EstiloFonte extends Modificador {
         oblíqua: "oblique",
     };
 
+    static nomeCss: string = "font-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-fonte", "font-style", pragmas);
+        super("estilo-fonte", EstiloFonte.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

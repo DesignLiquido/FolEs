@@ -11,12 +11,14 @@ export class EstiloLista extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "list-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-lista", "list-style", pragmas);
+        super("estilo-lista", EstiloLista.nomeCss, pragmas);
 
         const valoresExtra = ["url"];
 

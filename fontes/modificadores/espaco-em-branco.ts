@@ -14,12 +14,14 @@ export class EspacoEmBranco extends Modificador {
         "quebrar-espaços": "break-spaces",
     };
 
+    static nomeCss: string = "white-space";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["espaco-em-branco", "espaço-em-branco"], "white-space", pragmas);
+        super(["espaco-em-branco", "espaço-em-branco"], EspacoEmBranco.nomeCss, pragmas);
 
         if (!variavel) validarValores("espaço-em-branco", valores, this.valoresAceitos);
 

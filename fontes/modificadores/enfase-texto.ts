@@ -20,12 +20,14 @@ export class EnfaseTexto extends Modificador {
         sésamo: "sesame",
     };
 
+    static nomeCss: string = "text-emphasis";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["enfase-texto", "ênfase-texto"], "text-emphasis", pragmas);
+        super(["enfase-texto", "ênfase-texto"], EnfaseTexto.nomeCss, pragmas);
 
         let validarString: boolean = false;
         valores.forEach((valor) => {

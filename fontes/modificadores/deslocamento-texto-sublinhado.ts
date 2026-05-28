@@ -8,6 +8,8 @@ export class DeslocamentoTextoSublinhado extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "text-underline-offset";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class DeslocamentoTextoSublinhado extends Modificador {
     ) {
         super(
             "deslocamento-texto-sublinhado",
-            "text-underline-offset",
+            DeslocamentoTextoSublinhado.nomeCss,
             pragmas,
         );
 

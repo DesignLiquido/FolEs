@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EspacamentoLinhas extends Modificador {
+    static nomeCss: string = "row-gap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["espacamento-linhas", "espaçamento-linhas"], "row-gap", pragmas);
+        super(["espacamento-linhas", "espaçamento-linhas"], EspacamentoLinhas.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

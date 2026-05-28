@@ -5,6 +5,8 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class DuracaoAnimacao extends Modificador {
+    static nomeCss: string = "animation-duration";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -12,7 +14,7 @@ export class DuracaoAnimacao extends Modificador {
     ) {
         super(
             ["duracao-animacao", "duração-animação"],
-            "animation-duration",
+            DuracaoAnimacao.nomeCss,
             pragmas,
         );
 

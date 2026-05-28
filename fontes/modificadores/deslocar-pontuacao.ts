@@ -13,6 +13,8 @@ export class DeslocarPontuacao extends Modificador {
         "permitir-fim": "allow-end",
     };
 
+    static nomeCss: string = "hanging-punctuation";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -20,7 +22,7 @@ export class DeslocarPontuacao extends Modificador {
     ) {
         super(
             ["deslocar-pontuacao", "deslocar-pontuação"],
-            "hanging-punctuation",
+            DeslocarPontuacao.nomeCss,
             pragmas,
         );
         

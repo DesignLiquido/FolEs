@@ -9,6 +9,8 @@ export class DecoracaoTextoSublinhado extends Modificador {
         tudo: "all",
     };
 
+    static nomeCss: string = "text-decoration-skip-ink";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class DecoracaoTextoSublinhado extends Modificador {
     ) {
         super(
             ["decoracao-texto-sublinhado", "decoração-texto-sublinhado"],
-            "text-decoration-skip-ink",
+            DecoracaoTextoSublinhado.nomeCss,
             pragmas,
         );
 

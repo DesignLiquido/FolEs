@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Espacamento extends Modificador {
+    static nomeCss: string = "gap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["espacamento", "espaçamento"], "gap", pragmas);
+        super(["espacamento", "espaçamento"], Espacamento.nomeCss, pragmas);
 
         const valoresExtra = ["calc"];
 

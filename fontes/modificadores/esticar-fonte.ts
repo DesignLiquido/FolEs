@@ -16,12 +16,14 @@ export class EsticarFonte extends Modificador {
         "ultra-expandida": "ultra-expanded",
     };
 
+    static nomeCss: string = "font-stretch";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("esticar-fonte", "font-stretch", pragmas);
+        super("esticar-fonte", EsticarFonte.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

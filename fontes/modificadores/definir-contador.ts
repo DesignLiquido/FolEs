@@ -8,12 +8,14 @@ export class DefinirContador extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "counter-set";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("definir-contador", "counter-set", pragmas);
+        super("definir-contador", DefinirContador.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

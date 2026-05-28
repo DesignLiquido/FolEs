@@ -8,6 +8,8 @@ export class EspacamentoColunaEmGrade extends Modificador {
         normal: "normal",
     };
 
+    static nomeCss: string = "grid-column-gap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class EspacamentoColunaEmGrade extends Modificador {
     ) {
         super(
             ["espacamento-coluna-em-grade", "espaçamento-coluna-em-grade"],
-            "grid-column-gap",
+            EspacamentoColunaEmGrade.nomeCss,
             pragmas,
         );
 

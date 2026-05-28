@@ -10,6 +10,8 @@ export class DirecaoAnimacao extends Modificador {
         "alternar-reverter": "alternate-reverse",
     };
 
+    static nomeCss: string = "animation-direction";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -17,7 +19,7 @@ export class DirecaoAnimacao extends Modificador {
     ) {
         super(
             ["direcao-animacao", "direção-animação"],
-            "animation-direction",
+            DirecaoAnimacao.nomeCss,
             pragmas,
         );
         

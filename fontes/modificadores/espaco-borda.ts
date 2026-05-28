@@ -4,12 +4,18 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EspacoBorda extends Modificador {
+    static nomeCss: string = "border-spacing";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["espaco-borda", "espaço-borda"], "border-spacing", pragmas);
+        super(
+            ["espaco-borda", "espaço-borda"],
+            EspacoBorda.nomeCss,
+            pragmas
+        );
 
         if (!variavel) {
             validarValorNumerico(

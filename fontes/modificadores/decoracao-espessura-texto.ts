@@ -9,6 +9,8 @@ export class DecoracaoEspessuraTexto extends Modificador {
         "de-frente": "from-font",
     };
 
+    static nomeCss: string = "text-decoration-thickness";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class DecoracaoEspessuraTexto extends Modificador {
     ) {
         super(
             ["decoracao-espessura-texto", "decoração-espessura-texto"],
-            "text-decoration-thickness",
+            DecoracaoEspessuraTexto.nomeCss,
             pragmas,
         );
 

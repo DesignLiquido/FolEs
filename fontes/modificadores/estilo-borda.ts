@@ -7,12 +7,14 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloBorda extends Modificador {
     valoresAceitos = estilos;
+    static nomeCss: string = "border-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-borda", "border-style", pragmas);
+        super("estilo-borda", EstiloBorda.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

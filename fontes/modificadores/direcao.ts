@@ -8,12 +8,14 @@ export class Direcao extends Modificador {
         "direita-esquerda": "rtl",
     };
 
+    static nomeCss: string = "direction";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["direcao", "direção"], "direction", pragmas);
+        super(["direcao", "direção"], Direcao.nomeCss, pragmas);
 
         if (!variavel) validarValores("direção", valores, this.valoresAceitos);
 

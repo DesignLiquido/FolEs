@@ -9,13 +9,15 @@ export class EspessuraFonte extends Modificador {
         "mais-clara": "lighter",
         "mais-escura": "bolder",
     };
+    
+    static nomeCss: string = "font-weight";
 
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("espessura-fonte", "font-weight", pragmas);
+        super("espessura-fonte", EspessuraFonte.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

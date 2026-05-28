@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloBordaDireita extends Modificador {
+    static nomeCss: string = "border-right-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-borda-direita", "border-right-style", pragmas);
+        super("estilo-borda-direita", EstiloBordaDireita.nomeCss, pragmas);
 
         if (!variavel) validarValoresAdicionais("estilo-borda-direita", valores, estilos);
 

@@ -10,12 +10,14 @@ export class Deslocamento extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "offset";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("deslocamento", "offset", pragmas);
+        super("deslocamento", Deslocamento.nomeCss, pragmas);
 
         // TODO: Também aceita receber a função path()
         const valoresExtra = ["url", "ray"];

@@ -8,12 +8,14 @@ export class DesignTabela extends Modificador {
         fixo: "fixed",
     };
 
+    static nomeCss: string = "table-layout";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("design-tabela", "table-layout", pragmas);
+        super("design-tabela", DesignTabela.nomeCss, pragmas);
 
         if (!variavel) validarValores("design-tabela", valores, this.valoresAceitos);
 

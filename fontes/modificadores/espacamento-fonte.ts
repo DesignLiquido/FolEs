@@ -9,6 +9,8 @@ export class EspacamentoFonte extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "font-kerning";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class EspacamentoFonte extends Modificador {
     ) {
         super(
             ["espacamento-fonte", "espaçamento-fonte"],
-            "font-kerning",
+            EspacamentoFonte.nomeCss,
             pragmas,
         );
 

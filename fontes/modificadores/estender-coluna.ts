@@ -8,12 +8,14 @@ export class EstenderColuna extends Modificador {
         todas: "all",
     };
 
+    static nomeCss: string = "column-span";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estender-coluna", "column-span", pragmas);
+        super("estender-coluna", EstenderColuna.nomeCss, pragmas);
 
         if (!variavel) validarValores("estender-coluna", valores, this.valoresAceitos);
 

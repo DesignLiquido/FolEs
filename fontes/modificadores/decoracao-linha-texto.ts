@@ -12,6 +12,8 @@ export class DecoracaoLinhaTexto extends Modificador {
         piscar: "blink",
     };
 
+    static nomeCss: string = "text-decoration-line";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -19,7 +21,7 @@ export class DecoracaoLinhaTexto extends Modificador {
     ) {
         super(
             ["decoracao-linha-texto", "decoração-linha-texto"],
-            "text-decoration-line",
+            DecoracaoLinhaTexto.nomeCss,
             pragmas,
         );
 

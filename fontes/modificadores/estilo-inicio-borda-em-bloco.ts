@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloInicioBordaEmBloco extends Modificador {
+    static nomeCss: string = "border-block-start-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class EstiloInicioBordaEmBloco extends Modificador {
     ) {
         super(
             ["estilo-inicio-borda-em-bloco", "estilo-início-borda-em-bloco"],
-            "border-block-start-style",
+            EstiloInicioBordaEmBloco.nomeCss,
             pragmas,
         );
 

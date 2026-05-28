@@ -8,6 +8,8 @@ export class EspacamentoColuna extends Modificador {
         normal: "normal",
     };
 
+    static nomeCss: string = "column-gap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class EspacamentoColuna extends Modificador {
     ) {
         super(
             ["espacamento-coluna", "espaçamento-coluna"],
-            "column-gap",
+            EspacamentoColuna.nomeCss,
             pragmas,
         );
         

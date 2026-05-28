@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class EstiloFimBordaEmLinha extends Modificador {
+    static nomeCss: string = "border-inline-end-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-fim-borda-em-linha", "border-inline-end-style", pragmas);
+        super("estilo-fim-borda-em-linha", EstiloFimBordaEmLinha.nomeCss, pragmas);
 
         if (!variavel) {
             validarValoresAdicionais(

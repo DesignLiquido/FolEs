@@ -8,6 +8,8 @@ export class EstiloListaPosicao extends Modificador {
         fora: "outside",
     };
 
+    static nomeCss: string = "list-style-position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class EstiloListaPosicao extends Modificador {
     ) {
         super(
             ["estilo-lista-posicao", "estilo-lista-posição"],
-            "list-style-position",
+            EstiloListaPosicao.nomeCss,
             pragmas,
         );
 

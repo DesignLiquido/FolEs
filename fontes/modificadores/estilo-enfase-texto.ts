@@ -19,6 +19,8 @@ export class EstiloEnfaseTexto extends Modificador {
         sésamo: "sesame",
     };
 
+    static nomeCss: string = "text-emphasis-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -26,7 +28,7 @@ export class EstiloEnfaseTexto extends Modificador {
     ) {
         super(
             ["estilo-enfase-texto", "estilo-ênfase-texto"],
-            "text-emphasis-style",
+            EstiloEnfaseTexto.nomeCss,
             pragmas,
         );
 

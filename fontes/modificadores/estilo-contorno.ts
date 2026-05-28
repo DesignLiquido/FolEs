@@ -8,12 +8,14 @@ export class EstiloContorno extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "outline-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-contorno", "outline-style", pragmas);
+        super("estilo-contorno", EstiloContorno.nomeCss, pragmas);
 
         if (!variavel) {
             validarValoresAdicionais(

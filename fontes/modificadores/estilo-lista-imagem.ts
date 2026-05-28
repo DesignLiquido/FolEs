@@ -7,12 +7,14 @@ export class EstiloListaImagem extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "list-style-image";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-lista-imagem", "list-style-image", pragmas);
+        super("estilo-lista-imagem", EstiloListaImagem.nomeCss, pragmas);
 
         const valoresExtra = ["cross-fade", "image", "image-set", "url"];
 

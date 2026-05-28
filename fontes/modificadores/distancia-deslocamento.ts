@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class DistanciaDeslocamento extends Modificador {
+    static nomeCss: string = "offset-distance";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class DistanciaDeslocamento extends Modificador {
     ) {
         super(
             ["distancia-deslocamento", "distância-deslocamento"],
-            "offset-distance",
+            DistanciaDeslocamento.nomeCss,
             pragmas,
         );
 

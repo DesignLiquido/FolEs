@@ -20,12 +20,14 @@ export class EventosPonteiro extends Modificador {
         tudo: "all",
     };
 
+    static nomeCss: string = "pointer-events";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("eventos-ponteiro", "pointer-events", pragmas);
+        super("eventos-ponteiro", EventosPonteiro.nomeCss, pragmas);
 
         // Também pode receber valores do tipo SVG
         // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events

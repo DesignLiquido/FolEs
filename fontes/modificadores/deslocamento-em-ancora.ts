@@ -13,6 +13,8 @@ export class DeslocamentoEmAncora extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "offset-anchor";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -20,7 +22,7 @@ export class DeslocamentoEmAncora extends Modificador {
     ) {
         super(
             ["deslocamento-em-ancora", "deslocamento-em-âncora"],
-            "offset-anchor",
+            DeslocamentoEmAncora.nomeCss,
             pragmas,
         );
 

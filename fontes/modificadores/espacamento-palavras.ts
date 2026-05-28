@@ -8,6 +8,8 @@ export class EspacamentoPalavras extends Modificador {
         normal: "normal",
     };
 
+    static nomeCss: string = "word-spacing";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class EspacamentoPalavras extends Modificador {
     ) {
         super(
             ["espacamento-palavras", "espaçamento-palavras"],
-            "word-spacing",
+            EspacamentoPalavras.nomeCss,
             pragmas,
         );
 

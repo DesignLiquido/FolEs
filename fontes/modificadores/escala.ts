@@ -8,12 +8,14 @@ export class Escala extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "scale";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("escala", "scale", pragmas);
+        super("escala", Escala.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

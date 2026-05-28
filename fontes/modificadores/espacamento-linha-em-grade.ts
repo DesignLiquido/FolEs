@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EspacamentoLinhaEmGrade extends Modificador {
+    static nomeCss: string = "grid-row-gap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class EspacamentoLinhaEmGrade extends Modificador {
     ) {
         super(
             ["espacamento-linha-em-grade", "espaçamento-linha-em-grade"],
-            "grid-row-gap",
+            EspacamentoLinhaEmGrade.nomeCss,
             pragmas,
         );
 

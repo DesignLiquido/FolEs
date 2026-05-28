@@ -13,6 +13,8 @@ export class DecoracaoEstiloTexto extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "text-decoration-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -20,7 +22,7 @@ export class DecoracaoEstiloTexto extends Modificador {
     ) {
         super(
             ["decoracao-estilo-texto", "decoração-estilo-texto"],
-            "text-decoration-style",
+            DecoracaoEstiloTexto.nomeCss,
             pragmas,
         );
 

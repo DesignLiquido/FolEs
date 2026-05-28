@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EstenderBordaImagem extends Modificador {
+    static nomeCss: string = "border-image-outset";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estender-borda-imagem", "border-image-outset", pragmas);
+        super("estender-borda-imagem", EstenderBordaImagem.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
