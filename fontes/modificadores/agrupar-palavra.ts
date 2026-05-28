@@ -14,7 +14,7 @@ export class AgruparPalavra extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("agrupar-palavra", "word-break", pragmas);
+        super("agrupar-palavra", "word-wrap", pragmas);
 
         if (!variavel) validarValores("agrupar-palavra", valores, this.valoresAceitos);
 
