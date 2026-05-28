@@ -16,12 +16,14 @@ export class AlinharSe extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "align-self";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-se", "align-self", pragmas);
+        super("alinhar-se", AlinharSe.nomeCss, pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
         const posicoesAceitas = Object.keys(posicoes).filter(

@@ -4,6 +4,7 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class AtrasoAnimacao extends Modificador {
+    static nomeCss: string = "animation-delay";
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +12,7 @@ export class AtrasoAnimacao extends Modificador {
     ) {
         super(
             ["atraso-animacao", "atraso-animação"],
-            "animation-delay",
+            AtrasoAnimacao.nomeCss,
             pragmas,
         );
 

@@ -12,12 +12,14 @@ export class AlturaMaxima extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "max-height";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["altura-maxima", "altura-máxima"], "max-height", pragmas);
+        super(["altura-maxima", "altura-máxima"], AlturaMaxima.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 

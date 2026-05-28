@@ -12,12 +12,14 @@ export class Altura extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "height";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("altura", "height", pragmas);
+        super("altura", Altura.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content", "clamp"];
 

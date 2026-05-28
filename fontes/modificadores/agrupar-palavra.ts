@@ -9,12 +9,14 @@ export class AgruparPalavra extends Modificador {
         "manter-tudo": "keep-all",
     };
 
+    static nomeCss: string = "word-wrap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("agrupar-palavra", "word-break", pragmas);
+        super("agrupar-palavra", AgruparPalavra.nomeCss, pragmas);
 
         if (!variavel) validarValores("agrupar-palavra", valores, this.valoresAceitos);
 

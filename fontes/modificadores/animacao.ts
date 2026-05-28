@@ -20,12 +20,14 @@ export class Animacao extends Modificador {
         deslizar: "slidein",
     };
 
+    static nomeCss: string = "animation";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["animacao", "animação"], "animation", pragmas);
+        super(["animacao", "animação"], Animacao.nomeCss, pragmas);
 
         const valoresExtra = ["linear", "cubic-bezier", "steps"];
 

@@ -10,12 +10,14 @@ export class AlinharTexto extends Modificador {
         "combinar-elemento-pai": "match-parent",
     };
 
+    static nomeCss: string = "text-align";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-texto", "text-align", pragmas);
+        super("alinhar-texto", AlinharTexto.nomeCss, pragmas);
 
         if (!variavel) {
             validarValoresAdicionais(

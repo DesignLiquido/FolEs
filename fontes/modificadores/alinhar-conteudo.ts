@@ -21,6 +21,8 @@ export class AlinharConteudo extends Modificador {
         "auto-fim": "self-end",
     };
 
+    static nomeCss: string = "align-content";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -28,7 +30,7 @@ export class AlinharConteudo extends Modificador {
     ) {
         super(
             ["alinhar-conteudo", "alinhar-conteúdo"],
-            "align-content",
+            AlinharConteudo.nomeCss,
             pragmas,
         );
 

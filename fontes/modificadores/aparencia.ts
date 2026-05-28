@@ -34,12 +34,14 @@ export class Aparencia extends Modificador {
         "área-texto": "textarea",
     };
 
+    static nomeCss: string = "appearance";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["aparencia", "aparência"], "appearance", pragmas);
+        super(["aparencia", "aparência"], Aparencia.nomeCss, pragmas);
 
         // Se for um valor equivalente, o valor atribuído é 'auto';
         if (valores[0] instanceof ValorQualitativo && valores[0].qualitativo in this.valoresEquivalentes) {

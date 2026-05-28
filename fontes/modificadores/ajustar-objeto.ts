@@ -11,13 +11,15 @@ export class AjustarObjeto extends Modificador {
         "diminuir-escala": "scale-down",
     };
 
+    static nomeCss: string = "object-fit";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
 
     ) {
-        super("ajustar-objeto", "object-fit", pragmas);
+        super("ajustar-objeto", AjustarObjeto.nomeCss, pragmas);
 
         if (!variavel) validarValores("ajustar-objeto", valores, this.valoresAceitos);
 

@@ -15,12 +15,14 @@ export class AlinharVertical extends Modificador {
         inferior: "bottom",
     };
 
+    static nomeCss: string = "vertical-align";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-vertical", "vertical-align", pragmas);
+        super("alinhar-vertical", AlinharVertical.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

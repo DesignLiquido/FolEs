@@ -13,12 +13,14 @@ export class AjustarTamanhoFonte extends Modificador {
         "altura-ic": "ic-height",
     };
 
+    static nomeCss: string = "font-size-adjust";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("ajustar-tamanho-fonte", "font-size-adjust", pragmas);
+        super("ajustar-tamanho-fonte", AjustarTamanhoFonte.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

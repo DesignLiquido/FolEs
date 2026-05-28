@@ -9,12 +9,14 @@ export class AgruparVazamento extends Modificador {
         "qualquer-lugar": "anywhere",
     };
 
+    static nomeCss: string = "overflow-wrap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("agrupar-vazamento", "overflow-wrap", pragmas);
+        super("agrupar-vazamento", AgruparVazamento.nomeCss, pragmas);
 
         if (!variavel) validarValores("agrupar-vazamento", valores, this.valoresAceitos);
 

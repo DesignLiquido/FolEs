@@ -13,12 +13,14 @@ export class AoMudar extends Modificador {
         "mudar-conteúdo": "contents",
     };
 
+    static nomeCss: string = "will-change";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("ao-mudar", "will-change", pragmas);
+        super("ao-mudar", AoMudar.nomeCss, pragmas);
 
         if (!variavel) {
 

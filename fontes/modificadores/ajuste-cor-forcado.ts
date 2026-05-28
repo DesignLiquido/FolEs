@@ -8,6 +8,8 @@ export class AjusteCorForcado extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "forced-color-adjust";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class AjusteCorForcado extends Modificador {
     ) {
         super(
             ["ajuste-cor-forcado", "ajuste-cor-forçado"],
-            "forced-color-adjust",
+            AjusteCorForcado.nomeCss,
             pragmas,
         );
 

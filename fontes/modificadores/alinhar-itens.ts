@@ -16,12 +16,14 @@ export class AlinharItens extends Modificador {
         inseguro: "unsafe",
     };
 
+    static nomeCss: string = "align-items";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-itens", "align-items", pragmas);
+        super("alinhar-itens", AlinharItens.nomeCss, pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
         const posicoesAceitas = Object.keys(posicoes).filter(

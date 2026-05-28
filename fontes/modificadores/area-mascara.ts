@@ -22,12 +22,14 @@ export class AreaMascara extends Modificador {
         texto: "text",
     };
 
+    static nomeCss: string = "mask-clip";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
+        super(["area-mascara", "área-máscara"], AreaMascara.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

@@ -12,12 +12,14 @@ export class AlturaMinima extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "min-height";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["altura-minima", "altura-mínima"], "min-height", pragmas);
+        super(["altura-minima", "altura-mínima"], AlturaMinima.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 

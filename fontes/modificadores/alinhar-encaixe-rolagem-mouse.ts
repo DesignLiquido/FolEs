@@ -11,12 +11,14 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
         centro: "center",
     };
 
+    static nomeCss: string = "scroll-snap-align";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-encaixe-rolagem-mouse", "scroll-snap-align", pragmas);
+        super("alinhar-encaixe-rolagem-mouse", AlinharEncaixeRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValores(

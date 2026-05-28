@@ -12,6 +12,8 @@ export class AlinharUltimoItem extends Modificador {
         fim: "end",
     };
 
+    static nomeCss: string = "text-align-last";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -19,7 +21,7 @@ export class AlinharUltimoItem extends Modificador {
     ) {
         super(
             ["alinhar-ultimo-item", "alinhar-último-item"],
-            "text-align-last",
+            AlinharUltimoItem.nomeCss,
             pragmas,
         );
 
