@@ -7,12 +7,14 @@ export class CorCursor extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "caret-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cor-cursor", "caret-color", pragmas);
+        super("cor-cursor", CorCursor.nomeCss, pragmas);
 
         if (!variavel) validarValorCor("cor-cursor", valores, this.valoresAceitos);
 

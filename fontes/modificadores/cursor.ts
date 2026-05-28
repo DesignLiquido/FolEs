@@ -42,12 +42,14 @@ export class Cursor extends Modificador {
         afastar: "zoom-out",
     };
 
+    static nomeCss: string = "cursor";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cursor", "cursor", pragmas);
+        super("cursor", Cursor.nomeCss, pragmas);
 
         const valoresExtra = ["image", "url"];
 

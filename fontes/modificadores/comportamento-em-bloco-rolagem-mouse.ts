@@ -9,6 +9,8 @@ export class ComportamentoEmBlocoRolagemMouse extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "overscroll-behavior-block";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,8 +18,8 @@ export class ComportamentoEmBlocoRolagemMouse extends Modificador {
     ) {
         super(
             "comportamento-em-bloco-rolagem-mouse",
-            "overscroll-behavior-block",
-            pragmas,
+            ComportamentoEmBlocoRolagemMouse.nomeCss,
+            pragmas
         );
 
         if (!variavel) {

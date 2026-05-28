@@ -7,12 +7,14 @@ export class CorDestaque extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "accent-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cor-destaque", "accent-color", pragmas);
+        super("cor-destaque", CorDestaque.nomeCss, pragmas);
 
         if (!variavel) validarValorCor("cor-destaque", valores, this.valoresAceitos);
 

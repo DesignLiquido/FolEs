@@ -8,12 +8,14 @@ export class CelulasVazias extends Modificador {
         ocultar: "hide",
     };
 
+    static nomeCss: string = "empty-cells";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["celulas-vazias", "células-vazias"], "empty-cells", pragmas);
+        super(["celulas-vazias", "células-vazias"], CelulasVazias.nomeCss, pragmas);
 
         if (!variavel) validarValores("células-vazias", valores, this.valoresAceitos);
 

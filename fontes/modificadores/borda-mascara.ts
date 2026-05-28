@@ -19,12 +19,14 @@ export class BordaMascara extends Modificador {
         alfa: "alpha",
     };
 
+    static nomeCss: string = "mask-border";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
+        super(["borda-mascara", "borda-máscara"], BordaMascara.nomeCss, pragmas);
 
         const valoresExtra: Array<string> = ["url"];
 

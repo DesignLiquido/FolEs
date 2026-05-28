@@ -3,12 +3,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorFundo extends Modificador {
+    static nomeCss: string = "background-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cor-fundo", "background-color", pragmas);
+        super("cor-fundo", CorFundo.nomeCss, pragmas);
 
         if (!variavel) validarValorCor("cor-fundo", valores);
 

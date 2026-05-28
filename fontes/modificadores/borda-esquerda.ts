@@ -12,13 +12,15 @@ export class BordaEsquerda extends Modificador {
         espessa: "thick",
     };
 
+    static nomeCss: string = "border-left";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
 
     ) {
-        super("borda-esquerda", "border-left", pragmas);
+        super("borda-esquerda", BordaEsquerda.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

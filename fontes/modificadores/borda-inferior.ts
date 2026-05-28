@@ -12,13 +12,15 @@ export class BordaInferior extends Modificador {
         espessa: "thick",
     };
 
+    static nomeCss: string = "border-bottom";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
 
     ) {
-        super("borda-inferior", "border-bottom", pragmas);
+        super("borda-inferior", BordaInferior.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

@@ -12,12 +12,14 @@ export class Contorno extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "outline";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("contorno", "outline", pragmas);
+        super("contorno", Contorno.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

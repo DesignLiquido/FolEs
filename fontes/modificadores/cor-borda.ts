@@ -4,12 +4,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorBorda extends Modificador {
+    static nomeCss: string = "border-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cor-borda", "border-color", pragmas);
+        super("cor-borda", CorBorda.nomeCss, pragmas);
         
         if (!variavel) {
             if (valores.length > 1) {

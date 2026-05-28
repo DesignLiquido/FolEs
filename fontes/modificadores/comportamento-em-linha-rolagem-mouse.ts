@@ -9,6 +9,8 @@ export class ComportamentoEmLinhaRolagemMouse extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "overscroll-behavior-inline";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class ComportamentoEmLinhaRolagemMouse extends Modificador {
     ) {
         super(
             "comportamento-em-linha-rolagem-mouse",
-            "overscroll-behavior-inline",
+            ComportamentoEmLinhaRolagemMouse.nomeCss,
             pragmas,
         );
 

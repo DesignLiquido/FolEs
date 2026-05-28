@@ -16,12 +16,14 @@ export class Conteudo extends Modificador {
         "não-fechar-citação": "no-close-quote",
     };
 
+    static nomeCss: string = "content";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["conteudo", "conteúdo"], "content", pragmas);
+        super(["conteudo", "conteúdo"], Conteudo.nomeCss, pragmas);
 
         const valoresExtra = ["cross-fade", "counter", "image", "image-set", "linear-gradient", "url",];
 

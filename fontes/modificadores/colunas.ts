@@ -9,12 +9,14 @@ export class Colunas extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "columns";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("colunas", "columns", pragmas);
+        super("colunas", Colunas.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

@@ -15,12 +15,14 @@ export class CaminhoRecorte extends Modificador {
         "visualizar-caixa": "view-box",
     };
 
+    static nomeCss: string = "clip-path";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("caminho-recorte", "clip-path", pragmas);
+        super("caminho-recorte", CaminhoRecorte.nomeCss, pragmas);
 
         const valoresExtra = ['inset', 'circle', 'ellipse', 'polygon', 'path', 'rect', 'shape', 'xywh'];
 

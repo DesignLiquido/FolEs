@@ -8,12 +8,14 @@ export class ComportamentoRolagem extends Modificador {
         suave: "smooth",
     };
 
+    static nomeCss: string = "scroll-behavior";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("comportamento-rolagem", "scroll-behavior", pragmas);
+        super("comportamento-rolagem", ComportamentoRolagem.nomeCss, pragmas);
 
         if (!variavel) validarValores("comportamento-rolagem", valores, this.valoresAceitos);
 

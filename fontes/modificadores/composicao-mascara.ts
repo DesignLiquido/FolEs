@@ -10,6 +10,8 @@ export class ComposicaoMascara extends Modificador {
         excluir: "exclude",
     };
 
+    static nomeCss: string = "mask-composite";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -17,7 +19,7 @@ export class ComposicaoMascara extends Modificador {
     ) {
         super(
             ["composicao-mascara", "composição-máscara"],
-            "mask-composite",
+            ComposicaoMascara.nomeCss,
             pragmas,
         );
 

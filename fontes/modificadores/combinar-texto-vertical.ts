@@ -10,12 +10,14 @@ export class CombinarTextoVertical extends Modificador {
         dígitos: "digits",
     };
 
+    static nomeCss: string = "text-combine-upright";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("combinar-texto-vertical", "text-combine-upright", pragmas);
+        super("combinar-texto-vertical", CombinarTextoVertical.nomeCss, pragmas);
 
         if (!variavel) {
             validarValores(

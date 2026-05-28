@@ -10,12 +10,14 @@ export class CalhaBarraRolagem extends Modificador {
         "ambas-bordas": "both-edges",
     };
 
+    static nomeCss: string = "scrollbar-gutter";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("calha-barra-rolagem", "scrollbar-gutter", pragmas);
+        super("calha-barra-rolagem", CalhaBarraRolagem.nomeCss, pragmas);
 
         if (!variavel) validarValores("calha-barra-rolagem", valores, this.valoresAceitos);
 

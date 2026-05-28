@@ -9,6 +9,8 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "overscroll-behavior-x";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class ComportamentoHorizontalRolagemMouse extends Modificador {
     ) {
         super(
             "comportamento-horizontal-rolagem-mouse",
-            "overscroll-behavior-x",
+            ComportamentoHorizontalRolagemMouse.nomeCss,
             pragmas,
         );
 

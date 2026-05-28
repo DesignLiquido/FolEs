@@ -6,6 +6,7 @@ import { validarValorNumerico } from "./validacoes/numerica";
 
 export class AtrasoTransicao extends Modificador {
     static nomeCss: string = "transition-delay";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,

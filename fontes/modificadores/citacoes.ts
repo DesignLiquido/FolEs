@@ -9,13 +9,15 @@ export class Citacoes extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "quotes";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
 
     ) {
-        super(["citacoes", "citações"], "quotes", pragmas);
+        super(["citacoes", "citações"], Citacoes.nomeCss, pragmas);
 
         let validarString: boolean = false;
         valores.forEach((valor) => {

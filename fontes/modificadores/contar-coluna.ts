@@ -7,12 +7,14 @@ export class ContarColuna extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "column-count";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("contar-coluna", "column-count", pragmas);
+        super("contar-coluna", ContarColuna.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

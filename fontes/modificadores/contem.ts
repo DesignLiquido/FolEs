@@ -15,12 +15,14 @@ export class Contem extends Modificador {
         pintar: "paint",
     };
 
+    static nomeCss: string = "contain";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["contem", "contém"], "contain", pragmas);
+        super(["contem", "contém"], Contem.nomeCss, pragmas);
         
         if (!variavel) validarValores("contém", valores, this.valoresAceitos);
         

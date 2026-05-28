@@ -7,12 +7,14 @@ export class CorBarraRolagem extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "scrollbar-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cor-barra-rolagem", "scrollbar-color", pragmas);
+        super("cor-barra-rolagem", CorBarraRolagem.nomeCss, pragmas);
 
         if (!variavel) validarValorCor("cor-barra-rolagem", valores, this.valoresAceitos);
 

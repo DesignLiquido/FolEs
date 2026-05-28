@@ -9,6 +9,8 @@ export class ComportamentoVerticalRolagemMouse extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "overscroll-behavior-y";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class ComportamentoVerticalRolagemMouse extends Modificador {
     ) {
         super(
             "comportamento-vertical-rolagem-mouse",
-            "overscroll-behavior-y",
+            ComportamentoVerticalRolagemMouse.nomeCss,
             pragmas,
         );
 

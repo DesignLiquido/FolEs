@@ -7,12 +7,14 @@ export class CorContorno extends Modificador {
         inverter: "invert",
     };
 
+    static nomeCss: string = "outline-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cor-contorno", "outline-color", pragmas);
+        super("cor-contorno", CorContorno.nomeCss, pragmas);
 
         if (!variavel) validarValorCor("cor-contorno", valores, this.valoresAceitos);
 

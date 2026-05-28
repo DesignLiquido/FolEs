@@ -8,12 +8,14 @@ export class ColunaEmGrade extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "grid-column";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("coluna-em-grade", "grid-column", pragmas);
+        super("coluna-em-grade", ColunaEmGrade.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

@@ -3,6 +3,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorEnfaseTexto extends Modificador {
+    static nomeCss: string = "text-emphasis-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -10,7 +12,7 @@ export class CorEnfaseTexto extends Modificador {
     ) {
         super(
             ["cor-enfase-texto", "cor-ênfase-texto"],
-            "text-emphasis-color",
+            CorEnfaseTexto.nomeCss,
             pragmas,
         );
 

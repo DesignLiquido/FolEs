@@ -10,12 +10,14 @@ export class Coordenadas extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "translate";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("coordenadas", "translate", pragmas);
+        super("coordenadas", Coordenadas.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

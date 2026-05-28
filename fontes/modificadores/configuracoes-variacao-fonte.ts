@@ -8,6 +8,8 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
         normal: "normal",
     };
 
+    static nomeCss: string = "font-variation-settings";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
     ) {
         super(
             ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
-            "font-variation-settings",
+            ConfiguracoesVariacaoFonte.nomeCss,
             pragmas,
         );
 

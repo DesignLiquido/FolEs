@@ -3,6 +3,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorCor } from "./validacoes/cor";
 
 export class CorInicioBordaEmBloco extends Modificador {
+    static nomeCss: string = "border-block-start-color";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -10,7 +12,7 @@ export class CorInicioBordaEmBloco extends Modificador {
     ) {
         super(
             ["cor-inicio-borda-em-bloco", "cor-início-borda-em-bloco"],
-            "border-block-start-color",
+            CorInicioBordaEmBloco.nomeCss,
             pragmas,
         );
 

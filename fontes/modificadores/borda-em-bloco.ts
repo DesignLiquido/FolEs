@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class BordaEmBloco extends Modificador {
+    static nomeCss: string = "border-block";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("borda-em-bloco", "border-block", pragmas);
+        super("borda-em-bloco", BordaEmBloco.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

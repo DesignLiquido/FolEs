@@ -5,6 +5,7 @@ import { validarValorNumerico } from "./validacoes/numerica";
 
 export class AtrasoAnimacao extends Modificador {
     static nomeCss: string = "animation-delay";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
