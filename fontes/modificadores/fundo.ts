@@ -32,12 +32,14 @@ export class Fundo extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "background";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fundo", "background", pragmas);
+        super("fundo", Fundo.nomeCss, pragmas);
 
         const valoresExtra: Array<string> = [
             'conic-gradient',

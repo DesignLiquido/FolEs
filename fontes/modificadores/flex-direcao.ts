@@ -10,12 +10,14 @@ export class FlexDirecao extends Modificador {
         "inverter-coluna": "column-reverse",
     };
 
+    static nomeCss: string = "flex-direction";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["flex-direcao", "flex-direção"], "flex-direction", pragmas);
+        super(["flex-direcao", "flex-direção"], FlexDirecao.nomeCss, pragmas);
 
         if (!variavel) validarValores("flex-direção", valores, this.valoresAceitos);
 

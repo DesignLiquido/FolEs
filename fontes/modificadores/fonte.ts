@@ -48,12 +48,14 @@ export class Fonte extends Modificador {
         "ultra-expandida": "ultra-expanded",
     };
 
+    static nomeCss: string = "font";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fonte", "font", pragmas);
+        super("fonte", Fonte.nomeCss, pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
         const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFonte };

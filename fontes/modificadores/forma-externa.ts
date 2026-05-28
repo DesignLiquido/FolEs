@@ -12,12 +12,14 @@ export class FormaExterna extends Modificador {
         "preenchimento-caixa": "padding-box",
     };
 
+    static nomeCss: string = "shape-outside";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("forma-externa", "shape-outside", pragmas);
+        super("forma-externa", FormaExterna.nomeCss, pragmas);
 
         const valoresExtra = ['circle', 'ellipse', 'image', 'inset', 'polygon', 'path', 'rect', 'shape', 'url', 'xywh'];
 

@@ -7,12 +7,14 @@ export class FiltroFundo extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "backdrop-filter";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("filtro-fundo", "backdrop-filter", pragmas);
+        super("filtro-fundo", FiltroFundo.nomeCss, pragmas);
 
         const valoresExtra = [
             "blur",

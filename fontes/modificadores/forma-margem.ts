@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class FormaMargem extends Modificador {
+    static nomeCss: string = "shape-margin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("forma-margem", "shape-margin", pragmas);
+        super("forma-margem", FormaMargem.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

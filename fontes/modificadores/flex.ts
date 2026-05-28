@@ -17,12 +17,14 @@ export class Flex extends Modificador {
         conteúdo: "content",
     };
 
+    static nomeCss: string = "flex";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex", "flex", pragmas);
+        super("flex", Flex.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

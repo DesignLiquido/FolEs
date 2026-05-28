@@ -7,6 +7,8 @@ export class Filtro extends Modificador {
         url: "url",
     };
 
+    static nomeCss: string = "brightness";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -14,7 +16,7 @@ export class Filtro extends Modificador {
     ) {
         super("filtro", "filter", pragmas);
 
-        const valoresExtra = ["url", "blur", "brightness", "contrast"];
+        const valoresExtra = ["url", "blur", Filtro.nomeCss, "contrast"];
 
         if (!variavel) validarValores("filtro", valores, this.valoresAceitos, valoresExtra);
 

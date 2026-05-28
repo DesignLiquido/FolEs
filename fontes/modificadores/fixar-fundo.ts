@@ -9,12 +9,14 @@ export class FixarFundo extends Modificador {
         rolar: "scroll",
     };
 
+    static nomeCss: string = "background-attachment";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fixar-fundo", "background-attachment", pragmas);
+        super("fixar-fundo", FixarFundo.nomeCss, pragmas);
 
         if (!variavel) validarValores("fixar-fundo", valores, this.valoresAceitos);
 

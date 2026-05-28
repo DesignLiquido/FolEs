@@ -13,12 +13,14 @@ export class Fluxo extends Modificador {
         "fim-em-linha": "inline-end",
     };
 
+    static nomeCss: string = "clear";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fluxo", "clear", pragmas);
+        super("fluxo", Fluxo.nomeCss, pragmas);
 
         if (!variavel) validarValores("fluxo", valores, this.valoresAceitos);
 

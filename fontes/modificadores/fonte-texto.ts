@@ -35,12 +35,14 @@ export class FonteTexto extends Modificador {
         "serifa-chinesa": "fangsong",
     };
 
+    static nomeCss: string = "font-family";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fonte-texto", "font-family", pragmas);
+        super("fonte-texto", FonteTexto.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

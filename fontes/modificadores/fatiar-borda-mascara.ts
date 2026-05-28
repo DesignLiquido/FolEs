@@ -8,6 +8,8 @@ export class FatiarBordaMascara extends Modificador {
         preencher: "fill",
     };
 
+    static nomeCss: string = "mask-border-slice";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class FatiarBordaMascara extends Modificador {
     ) {
         super(
             ["fatiar-borda-mascara", "fatiar-borda-máscara"],
-            "mask-border-slice",
+            FatiarBordaMascara.nomeCss,
             pragmas,
         );
 

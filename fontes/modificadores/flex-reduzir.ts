@@ -3,12 +3,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class FlexReduzir extends Modificador {
+    static nomeCss: string = "flex-shrink";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex-reduzir", "flex-shrink", pragmas);
+        super("flex-reduzir", FlexReduzir.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

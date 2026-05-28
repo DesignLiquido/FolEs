@@ -3,12 +3,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class FlexCrescimento extends Modificador {
+    static nomeCss: string = "flex-grow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex-crescimento", "flex-grow", pragmas);
+        super("flex-crescimento", FlexCrescimento.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

@@ -9,12 +9,14 @@ export class Hifens extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "hyphens";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["hifens", "hífens"], "hyphens", pragmas);
+        super(["hifens", "hífens"], Hifens.nomeCss, pragmas);
 
         if (!variavel) validarValores("hífens", valores, this.valoresAceitos);
 

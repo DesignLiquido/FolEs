@@ -15,12 +15,14 @@ export class FlexFluxo extends Modificador {
         "inverter-agrupamento": "wrap-reverse",
     };
 
+    static nomeCss: string = "flex-flow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex-fluxo", "flex-flow", pragmas);
+        super("flex-fluxo", FlexFluxo.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

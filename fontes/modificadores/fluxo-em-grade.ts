@@ -9,12 +9,14 @@ export class FluxoEmGrade extends Modificador {
         denso: "dense",
     };
 
+    static nomeCss: string = "grid-auto-flow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fluxo-em-grade", "grid-auto-flow", pragmas);
+        super("fluxo-em-grade", FluxoEmGrade.nomeCss, pragmas);
 
         if (!variavel) validarValores("fluxo-em-grade", valores, this.valoresAceitos);
 

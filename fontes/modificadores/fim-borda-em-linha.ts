@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class FimBordaEmLinha extends Modificador {
+    static nomeCss: string = "border-inline-end";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fim-borda-em-linha", "border-inline-end", pragmas);
+        super("fim-borda-em-linha", FimBordaEmLinha.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

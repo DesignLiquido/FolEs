@@ -12,12 +12,14 @@ export class Flutuar extends Modificador {
         "fim-em-linha": "inline-end",
     };
 
+    static nomeCss: string = "float";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flutuar", "float", pragmas);
+        super("flutuar", Flutuar.nomeCss, pragmas);
 
         if (!variavel) validarValores("flutuar", valores, this.valoresAceitos);
 

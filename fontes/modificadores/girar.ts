@@ -8,12 +8,14 @@ export class Girar extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "rotate";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("girar", "rotate", pragmas);
+        super("girar", Girar.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

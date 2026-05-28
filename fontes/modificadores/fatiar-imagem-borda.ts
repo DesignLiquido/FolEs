@@ -8,12 +8,14 @@ export class FatiarImagemBorda extends Modificador {
         preencher: "fill",
     };
 
+    static nomeCss: string = "border-image-slice";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fatiar-imagem-borda", "border-image-slice", pragmas);
+        super("fatiar-imagem-borda", FatiarImagemBorda.nomeCss, pragmas);
         
         const valoresExtra = ["url"];
         

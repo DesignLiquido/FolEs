@@ -16,12 +16,14 @@ export class FlexComprimento extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "flex-basis";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex-comprimento", "flex-basis", pragmas);
+        super("flex-comprimento", FlexComprimento.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

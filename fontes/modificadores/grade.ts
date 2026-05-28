@@ -20,12 +20,14 @@ export class Grade extends Modificador {
         alvenaria: "masonry",
     };
 
+    static nomeCss: string = "grid";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("grade", "grid", pragmas);
+        super("grade", Grade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax"];
 

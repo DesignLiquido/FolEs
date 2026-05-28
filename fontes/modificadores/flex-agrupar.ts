@@ -10,12 +10,14 @@ export class FlexAgrupar extends Modificador {
         "inverter-agrupamento": "wrap-reverse",
     };
 
+    static nomeCss: string = "flex-wrap";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex-agrupar", "flex-wrap", pragmas);
+        super("flex-agrupar", FlexAgrupar.nomeCss, pragmas);
 
         if (!variavel) validarValores("flex-agrupar", valores, this.valoresAceitos);
 
