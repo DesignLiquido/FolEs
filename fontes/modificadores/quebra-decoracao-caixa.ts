@@ -8,6 +8,8 @@ export class QuebraDecoracaoCaixa extends Modificador {
         clonar: "clone",
     };
 
+    static nomeCss: string = "box-decoration-break";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class QuebraDecoracaoCaixa extends Modificador {
     ) {
         super(
             ["quebra-decoracao-caixa", "quebra-decoração-caixa"],
-            "box-decoration-break",
+            QuebraDecoracaoCaixa.nomeCss,
             pragmas,
         );
 

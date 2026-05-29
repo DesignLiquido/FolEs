@@ -13,12 +13,14 @@ export class QuebrarDentro extends Modificador {
         "evitar-região": "avoid-region",
     };
 
+    static nomeCss: string = "break-inside";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("quebrar-dentro", "break-inside", pragmas);
+        super("quebrar-dentro", QuebrarDentro.nomeCss, pragmas);
 
         if (!variavel) validarValores("quebrar-dentro", valores, this.valoresAceitos);
 

@@ -11,6 +11,8 @@ export class RepeticaoBordaMascara extends Modificador {
         espaçar: "space",
     };
 
+    static nomeCss: string = "mask-border-repeat";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -18,7 +20,7 @@ export class RepeticaoBordaMascara extends Modificador {
     ) {
         super(
             ["repeticao-borda-mascara", "repetição-borda-máscara"],
-            "mask-border-repeat",
+            RepeticaoBordaMascara.nomeCss,
             pragmas,
         );
 

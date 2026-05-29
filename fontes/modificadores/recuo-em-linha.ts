@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RecuoEmLinha extends Modificador {
+    static nomeCss: string = "padding-inline";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recuo-em-linha", "padding-inline", pragmas);
+        super("recuo-em-linha", RecuoEmLinha.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

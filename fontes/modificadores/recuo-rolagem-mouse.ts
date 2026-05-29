@@ -9,12 +9,14 @@ export class RecuoRolagemMouse extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "scroll-padding";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recuo-rolagem-mouse", "scroll-padding", pragmas);
+        super("recuo-rolagem-mouse", RecuoRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

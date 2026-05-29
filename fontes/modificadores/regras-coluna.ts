@@ -12,12 +12,14 @@ export class RegrasColuna extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "column-rule";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("regras-coluna", "column-rule", pragmas);
+        super("regras-coluna", RegrasColuna.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

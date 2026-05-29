@@ -8,12 +8,14 @@ export class RecuoEsquerdoRolagemMouse extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "scroll-padding-left";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recuo-esquerdo-rolagem-mouse", "scroll-padding-left", pragmas);
+        super("recuo-esquerdo-rolagem-mouse", RecuoEsquerdoRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

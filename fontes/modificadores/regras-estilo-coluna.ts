@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class RegrasEstiloColuna extends Modificador {
+    static nomeCss: string = "column-rule-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("regras-estilo-coluna", "column-rule-style", pragmas);
+        super("regras-estilo-coluna", RegrasEstiloColuna.nomeCss, pragmas);
 
         if (!variavel) validarValoresAdicionais("regras-estilo-coluna", valores, estilos);
 

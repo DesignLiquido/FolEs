@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RecuoInferior extends Modificador {
+    static nomeCss: string = "padding-bottom";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recuo-inferior", "padding-bottom", pragmas);
+        super("recuo-inferior", RecuoInferior.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

@@ -24,12 +24,14 @@ export class QuebrarApos extends Modificador {
         região: "region",
     };
 
+    static nomeCss: string = "break-after";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["quebrar-apos", "quebrar-após"], "break-after", pragmas);
+        super(["quebrar-apos", "quebrar-após"], QuebrarApos.nomeCss, pragmas);
 
         if (!variavel) validarValores("quebrar-após", valores, this.valoresAceitos);
 

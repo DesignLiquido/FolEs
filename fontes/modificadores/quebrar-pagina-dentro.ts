@@ -8,6 +8,8 @@ export class QuebrarPaginaDentro extends Modificador {
         evitar: "avoid",
     };
 
+    static nomeCss: string = "page-break-inside";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class QuebrarPaginaDentro extends Modificador {
     ) {
         super(
             ["quebrar-pagina-dentro", "quebrar-página-dentro"],
-            "page-break-inside",
+            QuebrarPaginaDentro.nomeCss,
             pragmas,
         );
 

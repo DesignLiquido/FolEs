@@ -10,6 +10,8 @@ export class RenderizacaoImagem extends Modificador {
         pixelado: "pixelated",
     };
 
+    static nomeCss: string = "image-rendering";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -17,7 +19,7 @@ export class RenderizacaoImagem extends Modificador {
     ) {
         super(
             ["renderizacao-imagem", "renderização-imagem"],
-            "image-rendering",
+            RenderizacaoImagem.nomeCss,
             pragmas,
         );
 

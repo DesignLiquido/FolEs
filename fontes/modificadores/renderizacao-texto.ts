@@ -13,6 +13,8 @@ export class RenderizacaoTexto extends Modificador {
         precisãoGeométrica: "geometricPrecision",
     };
 
+    static nomeCss: string = "text-rendering";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -20,7 +22,7 @@ export class RenderizacaoTexto extends Modificador {
     ) {
         super(
             ["renderizacao-texto", "renderização-texto"],
-            "text-rendering",
+            RenderizacaoTexto.nomeCss,
             pragmas,
         );
 

@@ -14,12 +14,14 @@ export class RepetirFundo extends Modificador {
         "não-repetir": "no-repeat",
     };
 
+    static nomeCss: string = "background-repeat";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("repetir-fundo", "background-repeat", pragmas);
+        super("repetir-fundo", RepetirFundo.nomeCss, pragmas);
 
         if (!variavel) validarValores("repetir-fundo", valores, this.valoresAceitos);
 

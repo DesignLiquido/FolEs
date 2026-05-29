@@ -24,12 +24,14 @@ export class QuebrarAntes extends Modificador {
         região: "region",
     };
 
+    static nomeCss: string = "break-before";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("quebrar-antes", "break-before", pragmas);
+        super("quebrar-antes", QuebrarAntes.nomeCss, pragmas);
 
         if (!variavel) validarValores("quebrar-antes", valores, this.valoresAceitos);
 

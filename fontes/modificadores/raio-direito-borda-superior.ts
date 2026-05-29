@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RaioDireitoBordaSuperior extends Modificador {
+    static nomeCss: string = "border-top-right-radius";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class RaioDireitoBordaSuperior extends Modificador {
     ) {
         super(
             "raio-direito-borda-superior",
-            "border-top-right-radius",
+            RaioDireitoBordaSuperior.nomeCss,
             pragmas,
         );
 

@@ -12,12 +12,14 @@ export class Redimensionar extends Modificador {
         "em-linha": "inline",
     };
 
+    static nomeCss: string = "resize";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("redimensionar", "resize", pragmas);
+        super("redimensionar", Redimensionar.nomeCss, pragmas);
 
         if (!variavel) validarValores("redimensionar", valores, this.valoresAceitos);
 

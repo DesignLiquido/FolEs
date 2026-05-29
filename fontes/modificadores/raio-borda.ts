@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RaioBorda extends Modificador {
+    static nomeCss: string = "border-radius";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("raio-borda", "border-radius", pragmas);
+        super("raio-borda", RaioBorda.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

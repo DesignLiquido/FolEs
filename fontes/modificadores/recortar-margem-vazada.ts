@@ -9,12 +9,14 @@ export class RecortarMargemVazada extends Modificador {
         "conteudo-caixa": "content-box",
     };
 
+    static nomeCss: string = "overflow-clip-margin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recortar-margem-vazada", "overflow-clip-margin", pragmas);
+        super("recortar-margem-vazada", RecortarMargemVazada.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

@@ -11,12 +11,14 @@ export class RecortarFundo extends Modificador {
         texto: "text",
     };
 
+    static nomeCss: string = "background-clip";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recortar-fundo", "background-clip", pragmas);
+        super("recortar-fundo", RecortarFundo.nomeCss, pragmas);
 
         if (!variavel) validarValores("recortar-fundo", valores, this.valoresAceitos);
 

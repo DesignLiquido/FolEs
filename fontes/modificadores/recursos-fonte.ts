@@ -8,12 +8,14 @@ export class RecursosFonte extends Modificador {
         normal: "normal",
     };
 
+    static nomeCss: string = "font-feature-settings";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recursos-fonte", "font-feature-settings", pragmas);
+        super("recursos-fonte", RecursosFonte.nomeCss, pragmas);
 
         let validarString: boolean = false;
         let validarTagValue: boolean = false;

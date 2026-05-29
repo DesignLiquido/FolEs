@@ -13,6 +13,8 @@ export class QuebrarPaginaApos extends Modificador {
         verso: "verso",
     };
 
+    static nomeCss: string = "page-break-after";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -20,7 +22,7 @@ export class QuebrarPaginaApos extends Modificador {
     ) {
         super(
             ["quebrar-pagina-apos", "quebrar-página-após"],
-            "page-break-after",
+            QuebrarPaginaApos.nomeCss,
             pragmas,
         );
 

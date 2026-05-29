@@ -12,12 +12,14 @@ export class SelecaoUsuario extends Modificador {
         elementar: "element",
     };
 
+    static nomeCss: string = "user-select";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["selecao-usuario", "seleção-usuário"], "user-select", pragmas);
+        super(["selecao-usuario", "seleção-usuário"], SelecaoUsuario.nomeCss, pragmas);
 
         if (!variavel) validarValores("seleção-usuário", valores, this.valoresAceitos);
 

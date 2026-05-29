@@ -11,12 +11,14 @@ export class RepetirImagemBorda extends Modificador {
         espaçar: "space",
     };
 
+    static nomeCss: string = "border-image-repeat";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("repetir-imagem-borda", "border-image-repeat", pragmas);
+        super("repetir-imagem-borda", RepetirImagemBorda.nomeCss, pragmas);
 
         if (!variavel) validarValores("repetir-imagem-borda", valores, this.valoresAceitos);
 

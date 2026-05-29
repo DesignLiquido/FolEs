@@ -11,12 +11,14 @@ export class QuebrarLinha extends Modificador {
         "qualquer-lugar": "anywhere",
     };
 
+    static nomeCss: string = "line-break";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("quebrar-linha", "line-break", pragmas);
+        super("quebrar-linha", QuebrarLinha.nomeCss, pragmas);
 
         if (!variavel) validarValores("quebrar-linha", valores, this.valoresAceitos);
 

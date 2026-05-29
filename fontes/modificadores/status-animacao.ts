@@ -8,6 +8,8 @@ export class StatusAnimacao extends Modificador {
         pausada: "paused",
     };
 
+    static nomeCss: string = "animation-play-state";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class StatusAnimacao extends Modificador {
     ) {
         super(
             ["status-animacao", "status-animação"],
-            "animation-play-state",
+            StatusAnimacao.nomeCss,
             pragmas,
         );
 

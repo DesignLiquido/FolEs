@@ -14,12 +14,14 @@ export class RepetirMascara extends Modificador {
         "não-repetir": "no-repeat",
     };
 
+    static nomeCss: string = "mask-repeat";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["repetir-mascara", "repetir-máscara"], "mask-repeat", pragmas);
+        super(["repetir-mascara", "repetir-máscara"], RepetirMascara.nomeCss, pragmas);
 
         if (!variavel) validarValores("repetir-máscara", valores, this.valoresAceitos);
 

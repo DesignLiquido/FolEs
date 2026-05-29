@@ -13,12 +13,14 @@ export class SintetizarFonte extends Modificador {
         "maiúsculas-pequenas": "small-caps",
     };
 
+    static nomeCss: string = "font-synthesis";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("sintetizar-fonte", "font-synthesis", pragmas);
+        super("sintetizar-fonte", SintetizarFonte.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

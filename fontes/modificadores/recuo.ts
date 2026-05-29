@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Recuo extends Modificador {
+    static nomeCss: string = "padding";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recuo", "padding", pragmas);
+        super("recuo", Recuo.nomeCss, pragmas);
 
         const quantificadoresAceitos: { [nome: string]: string } = { ...comprimentos, ...ListaDeValorPercentual };
 

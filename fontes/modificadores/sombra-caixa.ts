@@ -8,12 +8,14 @@ export class SombraCaixa extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "box-shadow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("sombra-caixa", "box-shadow", pragmas);
+        super("sombra-caixa", SombraCaixa.nomeCss, pragmas);
 
         if (!variavel) validarMultiplosQualitativos("sombra-caixa", valores, null, unidadesMedida);
 

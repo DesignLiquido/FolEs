@@ -7,12 +7,14 @@ export class ReiniciarContador extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "counter-reset";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("reiniciar-contador", "counter-reset", pragmas);
+        super("reiniciar-contador", ReiniciarContador.nomeCss, pragmas);
 
         // OBS.: A sintaxe desse modificador espera receber:
         // 1. o NOME do contador (<custom-ident>);

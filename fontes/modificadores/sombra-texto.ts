@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class SombraTexto extends Modificador {
+    static nomeCss: string = "text-shadow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("sombra-texto", "text-shadow", pragmas);
+        super("sombra-texto", SombraTexto.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

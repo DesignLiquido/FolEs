@@ -7,12 +7,14 @@ export class Recortar extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "clip";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recortar", "clip", pragmas);
+        super("recortar", Recortar.nomeCss, pragmas);
 
         if (!variavel) validarValores("recortar", valores, this.valoresAceitos);
 

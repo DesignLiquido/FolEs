@@ -11,12 +11,14 @@ export class RegrasLarguraColuna extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "column-rule-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("regras-largura-coluna", "column-rule-width", pragmas);
+        super("regras-largura-coluna", RegrasLarguraColuna.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

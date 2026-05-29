@@ -7,6 +7,8 @@ export class RepetirAnimacao extends Modificador {
         infinito: "infinite",
     };
 
+    static nomeCss: string = "animation-iteration-count";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -14,7 +16,7 @@ export class RepetirAnimacao extends Modificador {
     ) {
         super(
             ["repetir-animacao", "repetir-animação"],
-            "animation-iteration-count",
+            RepetirAnimacao.nomeCss,
             pragmas,
         );
 

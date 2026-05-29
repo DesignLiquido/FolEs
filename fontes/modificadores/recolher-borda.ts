@@ -8,12 +8,14 @@ export class RecolherBorda extends Modificador {
         separar: "separate",
     };
 
+    static nomeCss: string = "border-collapse";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recolher-borda", "border-collapse", pragmas);
+        super("recolher-borda", RecolherBorda.nomeCss, pragmas);
 
         if (!variavel) validarValores("recolher-borda", valores, this.valoresAceitos);
 

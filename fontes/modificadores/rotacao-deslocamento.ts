@@ -9,6 +9,8 @@ export class RotacaoDeslocamento extends Modificador {
         inverter: "revert",
     };
 
+    static nomeCss: string = "offset-rotat";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class RotacaoDeslocamento extends Modificador {
     ) {
         super(
             ["rotacao-deslocamento", "rotação-deslocamento"],
-            "offset-rotate",
+            RotacaoDeslocamento.nomeCss,
             pragmas,
         );
 
