@@ -12,12 +12,14 @@ export class TransformarCaixa extends Modificador {
         "visualizar-caixa": "view-box",
     };
 
+    static nomeCss: string = "transform-box";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("transformar-caixa", "transform-box", pragmas);
+        super("transformar-caixa", TransformarCaixa.nomeCss, pragmas);
 
         if (!variavel) validarValores("transformar-caixa", valores, this.valoresAceitos);
 

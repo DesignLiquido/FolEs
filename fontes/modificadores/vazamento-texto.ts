@@ -10,12 +10,14 @@ export class VazamentoTexto extends Modificador {
         reticências: "ellipsis",
     };
 
+    static nomeCss: string = "text-overflow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("vazamento-texto", "text-overflow", pragmas);
+        super("vazamento-texto", VazamentoTexto.nomeCss, pragmas);
 
         let validarString: boolean = false;
         valores.forEach((valor) => {

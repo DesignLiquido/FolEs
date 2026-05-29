@@ -12,12 +12,14 @@ export class TextoBidirecional extends Modificador {
         "texto-simples": "plaintext",
     };
 
+    static nomeCss: string = "unicode-bidi";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("texto-bidirecional", "unicode-bidi", pragmas);
+        super("texto-bidirecional", TextoBidirecional.nomeCss, pragmas);
 
         if (!variavel) validarValores("texto-bidirecional", valores, this.valoresAceitos);
 

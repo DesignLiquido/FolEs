@@ -8,12 +8,14 @@ export class TamanhoGrade extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "grid-area";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-grade", "grid-area", pragmas);
+        super("tamanho-grade", TamanhoGrade.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

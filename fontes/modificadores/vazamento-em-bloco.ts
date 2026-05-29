@@ -12,12 +12,14 @@ export class VazamentoEmBloco extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "overflow-block";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("vazamento-em-bloco", "overflow-block", pragmas);
+        super("vazamento-em-bloco", VazamentoEmBloco.nomeCss, pragmas);
 
         if (!variavel) validarValores("vazamento-em-bloco", valores, this.valoresAceitos);
 

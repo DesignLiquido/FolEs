@@ -10,6 +10,8 @@ export class VisibilidadeConteudo extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "content-visibility";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -17,7 +19,7 @@ export class VisibilidadeConteudo extends Modificador {
     ) {
         super(
             ["visibilidade-conteudo", "visibilidade-conteúdo"],
-            "content-visibility",
+            VisibilidadeConteudo.nomeCss,
             pragmas,
         );
 

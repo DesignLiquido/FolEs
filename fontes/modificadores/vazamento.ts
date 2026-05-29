@@ -13,12 +13,14 @@ export class Vazamento extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "overflow";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("vazamento", "overflow", pragmas);
+        super("vazamento", Vazamento.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

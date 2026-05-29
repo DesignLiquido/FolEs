@@ -21,6 +21,8 @@ export class TempoTransicao extends Modificador {
         final: "end",
     };
 
+    static nomeCss: string = "transition-timing-function";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -28,7 +30,7 @@ export class TempoTransicao extends Modificador {
     ) {
         super(
             ["tempo-transicao", "tempo-transição"],
-            "transition-timing-function",
+            TempoTransicao.nomeCss,
             pragmas,
         );
 

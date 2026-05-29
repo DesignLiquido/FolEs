@@ -8,6 +8,8 @@ export class VazamentoEmAncora extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "overflow-anchor";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class VazamentoEmAncora extends Modificador {
     ) {
         super(
             ["vazamento-em-ancora", "vazamento-em-âncora"],
-            "overflow-anchor",
+            VazamentoEmAncora.nomeCss,
             pragmas,
         );
 

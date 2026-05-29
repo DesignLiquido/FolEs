@@ -18,12 +18,14 @@ export class ToqueTela extends Modificador {
         "zoom-pinça": "pinch-zoom",
     };
 
+    static nomeCss: string = "touch-action";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("toque-tela", "touch-action", pragmas);
+        super("toque-tela", ToqueTela.nomeCss, pragmas);
 
         if (!variavel) validarValores("toque-tela", valores, this.valoresAceitos);
 

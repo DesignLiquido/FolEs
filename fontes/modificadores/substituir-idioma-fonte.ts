@@ -8,12 +8,14 @@ export class SubstituirIdiomaFonte extends Modificador {
         normal: "normal",
     };
 
+    static nomeCss: string = "font-language-override";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("substituir-idioma-fonte", "font-language-override", pragmas);
+        super("substituir-idioma-fonte", SubstituirIdiomaFonte.nomeCss, pragmas);
 
         let validarString: boolean = false;
         valores.forEach((valor) => {

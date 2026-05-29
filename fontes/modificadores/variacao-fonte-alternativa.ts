@@ -9,6 +9,8 @@ export class VariacaoFonteAlternativa extends Modificador {
         "formas-históricas": "historical-forms",
     };
 
+    static nomeCss: string = "font-variant-alternates";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class VariacaoFonteAlternativa extends Modificador {
     ) {
         super(
             ["variacao-fonte-alternativa", "variação-fonte-alternativa"],
-            "font-variant-alternates",
+            VariacaoFonteAlternativa.nomeCss,
             pragmas,
         );
 

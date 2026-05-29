@@ -8,6 +8,8 @@ export class TamanhoOpticoFonte extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "font-optical-sizing";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class TamanhoOpticoFonte extends Modificador {
     ) {
         super(
             ["tamanho-optico-fonte", "tamanho-óptico-fonte"],
-            "font-optical-sizing",
+            TamanhoOpticoFonte.nomeCss,
             pragmas,
         );
 

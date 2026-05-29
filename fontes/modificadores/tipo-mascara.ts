@@ -9,12 +9,14 @@ export class TipoMascara extends Modificador {
         luminância: "luminance",
     };
 
+    static nomeCss: string = "mask-type";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["tipo-mascara", "tipo-máscara"], "mask-type", pragmas);
+        super(["tipo-mascara", "tipo-máscara"], TipoMascara.nomeCss, pragmas);
 
         if (!variavel) validarValores("tipo-máscara", valores, this.valoresAceitos);
 

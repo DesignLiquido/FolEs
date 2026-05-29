@@ -63,12 +63,14 @@ export class VariacaoFonte extends Modificador {
         sobrescrito: "super",
     };
 
+    static nomeCss: string = "font-variant";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["variacao-fonte", "variação-fonte"], "font-variant", pragmas);
+        super(["variacao-fonte", "variação-fonte"], VariacaoFonte.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

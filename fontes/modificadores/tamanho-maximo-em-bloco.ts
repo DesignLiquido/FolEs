@@ -12,6 +12,8 @@ export class TamanhoMaximoEmBloco extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "max-block-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -19,7 +21,7 @@ export class TamanhoMaximoEmBloco extends Modificador {
     ) {
         super(
             ["tamanho-maximo-em-bloco", "tamanho-máximo-em-bloco"],
-            "max-block-size",
+            TamanhoMaximoEmBloco.nomeCss,
             pragmas,
         );
 

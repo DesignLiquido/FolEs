@@ -12,6 +12,8 @@ export class TamanhoMaximoEmLinha extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "max-inline-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -19,7 +21,7 @@ export class TamanhoMaximoEmLinha extends Modificador {
     ) {
         super(
             ["tamanho-maximo-em-linha", "tamanho-máximo-em-linha"],
-            "max-inline-size",
+            TamanhoMaximoEmLinha.nomeCss,
             pragmas,
         );
 

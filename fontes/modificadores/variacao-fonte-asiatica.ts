@@ -18,6 +18,8 @@ export class VariacaoFonteAsiatica extends Modificador {
         "largura-completa": "full-width",
     };
 
+    static nomeCss: string = "font-variant-east-asian";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,

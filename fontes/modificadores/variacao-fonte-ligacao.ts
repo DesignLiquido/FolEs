@@ -23,6 +23,8 @@ export class VariacaoFonteLigacao extends Modificador {
         "não-contextual": "no-contextual",
     };
 
+    static nomeCss: string = "font-variant-ligatures";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -30,7 +32,7 @@ export class VariacaoFonteLigacao extends Modificador {
     ) {
         super(
             ["variacao-fonte-ligacao", "variação-fonte-ligação"],
-            "font-variant-ligatures",
+            VariacaoFonteLigacao.nomeCss,
             pragmas,
         );
 

@@ -10,12 +10,14 @@ export class Visibilidade extends Modificador {
         recolher: "collapse",
     };
 
+    static nomeCss: string = "visibility";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("visibilidade", "visibility", pragmas);
+        super("visibilidade", Visibilidade.nomeCss, pragmas);
 
         if (!variavel) validarValores("visibilidade", valores, this.valoresAceitos);
 

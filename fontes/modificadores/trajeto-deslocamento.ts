@@ -9,12 +9,14 @@ export class TrajetoDeslocamento extends Modificador {
         "caixa-batida": "stroke-box",
     };
 
+    static nomeCss: string = "offset-path";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("trajeto-deslocamento", "offset-path", pragmas);
+        super("trajeto-deslocamento", TrajetoDeslocamento.nomeCss, pragmas);
 
         const valoresExtra = ['url', 'ray', 'path', 'inset', 'circle', 'ellipse', 'polygon', 'rect', 'shape', 'xywh'];
 

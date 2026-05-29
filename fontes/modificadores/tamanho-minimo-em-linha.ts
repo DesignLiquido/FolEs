@@ -12,6 +12,8 @@ export class TamanhoMinimoEmLinha extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "min-inline-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -19,7 +21,7 @@ export class TamanhoMinimoEmLinha extends Modificador {
     ) {
         super(
             ["tamanho-minimo-em-linha", "tamanho-mínimo-em-linha"],
-            "min-inline-size",
+            TamanhoMinimoEmLinha.nomeCss,
             pragmas,
         );
 

@@ -32,6 +32,8 @@ export class Transicao extends Modificador {
         "sombra-caixa": "box-shadow",
     };
 
+    static nomeCss: string = "transition";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,

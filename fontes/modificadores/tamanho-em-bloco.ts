@@ -12,12 +12,14 @@ export class TamanhoEmBloco extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "block-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-em-bloco", "block-size", pragmas);
+        super("tamanho-em-bloco", TamanhoEmBloco.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

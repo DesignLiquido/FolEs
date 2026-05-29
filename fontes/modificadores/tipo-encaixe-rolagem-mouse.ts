@@ -15,12 +15,14 @@ export class TipoEncaixeRolagemMouse extends Modificador {
         proximidade: "proximity",
     };
 
+    static nomeCss: string = "scroll-snap-type";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tipo-encaixe-rolagem-mouse", "scroll-snap-type", pragmas);
+        super("tipo-encaixe-rolagem-mouse", TipoEncaixeRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValores(

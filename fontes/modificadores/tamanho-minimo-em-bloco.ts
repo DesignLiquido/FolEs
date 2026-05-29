@@ -12,6 +12,8 @@ export class TamanhoMinimoEmBloco extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "min-block-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -19,7 +21,7 @@ export class TamanhoMinimoEmBloco extends Modificador {
     ) {
         super(
             ["tamanho-minimo-em-bloco", "tamanho-mínimo-em-bloco"],
-            "min-block-size",
+            TamanhoMinimoEmBloco.nomeCss,
             pragmas,
         );
 

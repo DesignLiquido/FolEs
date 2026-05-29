@@ -12,12 +12,14 @@ export class TamanhoEmLinha extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "inline-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-em-linha", "inline-size", pragmas);
+        super("tamanho-em-linha", TamanhoEmLinha.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 

@@ -12,12 +12,14 @@ export class TamanhoLinhasEmGrade extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "grid-auto-rows";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-linhas-em-grade", "grid-auto-rows", pragmas);
+        super("tamanho-linhas-em-grade", TamanhoLinhasEmGrade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 

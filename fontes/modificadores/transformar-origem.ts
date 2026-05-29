@@ -5,12 +5,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TransformarOrigem extends Modificador {
+    static nomeCss: string = "transform-origin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("transformar-origem", "transform-origin", pragmas);
+        super("transformar-origem", TransformarOrigem.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

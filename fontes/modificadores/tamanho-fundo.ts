@@ -10,12 +10,14 @@ export class TamanhoFundo extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "background-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-fundo", "background-size", pragmas);
+        super("tamanho-fundo", TamanhoFundo.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

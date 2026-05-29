@@ -14,12 +14,14 @@ export class TransformarTexto extends Modificador {
         "tamanho-completo-kana": "full-size-kana",
     };
 
+    static nomeCss: string = "text-transform";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("transformar-texto", "text-transform", pragmas);
+        super("transformar-texto", TransformarTexto.nomeCss, pragmas);
 
         if (!variavel) validarValores("transformar-texto", valores, this.valoresAceitos);
 

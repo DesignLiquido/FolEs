@@ -7,12 +7,14 @@ export class Transformar extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "transform";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("transformar", "transform", pragmas);
+        super("transformar", Transformar.nomeCss, pragmas);
 
         const valoresExtra = [
             "perspective",

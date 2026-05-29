@@ -9,12 +9,14 @@ export class TamanhoCaixa extends Modificador {
         "borda-caixa": "border-box",
     };
 
+    static nomeCss: string = "box-sizing";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-caixa", "box-sizing", pragmas);
+        super("tamanho-caixa", TamanhoCaixa.nomeCss, pragmas);
 
         if (!variavel) validarValores("tamanho-caixa", valores, this.valoresAceitos);
 

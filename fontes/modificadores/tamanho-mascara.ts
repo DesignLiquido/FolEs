@@ -10,12 +10,14 @@ export class TamanhoMascara extends Modificador {
         cobrir: "cover",
     };
 
+    static nomeCss: string = "mask-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["tamanho-mascara", "tamanho-máscara"], "mask-size", pragmas);
+        super(["tamanho-mascara", "tamanho-máscara"], TamanhoMascara.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

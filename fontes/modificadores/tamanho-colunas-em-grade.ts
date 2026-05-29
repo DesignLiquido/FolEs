@@ -12,12 +12,14 @@ export class TamanhoColunasEmGrade extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "grid-auto-columns";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-colunas-em-grade", "grid-auto-columns", pragmas);
+        super("tamanho-colunas-em-grade", TamanhoColunasEmGrade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 

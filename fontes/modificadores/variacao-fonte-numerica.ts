@@ -21,6 +21,8 @@ export class VariacaoFonteNumerica extends Modificador {
         "frações-empilhadas": "stacked-fractions",
     };
 
+    static nomeCss: string = "font-variant-numeric";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -28,7 +30,7 @@ export class VariacaoFonteNumerica extends Modificador {
     ) {
         super(
             ["variacao-fonte-numerica", "variação-fonte-numérica"],
-            "font-variant-numeric",
+            VariacaoFonteNumerica.nomeCss,
             pragmas,
         );
 

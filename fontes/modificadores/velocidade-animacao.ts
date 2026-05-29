@@ -21,6 +21,8 @@ export class VelocidadeAnimacao extends Modificador {
         final: "end",
     };
 
+    static nomeCss: string = "animation-timing-function";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -28,7 +30,7 @@ export class VelocidadeAnimacao extends Modificador {
     ) {
         super(
             ["velocidade-animacao", "velocidade-animação"],
-            "animation-timing-function",
+            VelocidadeAnimacao.nomeCss,
             pragmas,
         );
 

@@ -9,6 +9,8 @@ export class VariacaoFontePosicao extends Modificador {
         sobrescrito: "super",
     };
 
+    static nomeCss: string = "font-variant-position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class VariacaoFontePosicao extends Modificador {
     ) {
         super(
             ["variacao-fonte-posicao", "variação-fonte-posição"],
-            "font-variant-position",
+            VariacaoFontePosicao.nomeCss,
             pragmas,
         );
 

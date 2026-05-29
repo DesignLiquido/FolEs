@@ -18,6 +18,8 @@ export class VariacaoFonteMaiuscula extends Modificador {
         "título-maiúsculo": "titling-caps",
     };
 
+    static nomeCss: string = "font-variant-caps";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -25,7 +27,7 @@ export class VariacaoFonteMaiuscula extends Modificador {
     ) {
         super(
             ["variacao-fonte-maiuscula", "variação-fonte-maiúscula"],
-            "font-variant-caps",
+            VariacaoFonteMaiuscula.nomeCss,
             pragmas,
         );
 

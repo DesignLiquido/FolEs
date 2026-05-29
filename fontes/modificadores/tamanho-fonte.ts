@@ -18,12 +18,14 @@ export class TamanhoFonte extends Modificador {
         menor: "smaller",
     };
 
+    static nomeCss: string = "font-size";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-fonte", "font-size", pragmas);
+        super("tamanho-fonte", TamanhoFonte.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

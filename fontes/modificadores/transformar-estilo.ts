@@ -9,12 +9,14 @@ export class TransformarEstilo extends Modificador {
         "espaço-3d": "preserve-3d",
     };
 
+    static nomeCss: string = "transform-style";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("transformar-estilo", "transform-style", pragmas);
+        super("transformar-estilo", TransformarEstilo.nomeCss, pragmas);
 
         if (!variavel) validarValores("transformar-estilo", valores, this.valoresAceitos);
 
