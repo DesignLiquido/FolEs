@@ -8,6 +8,8 @@ export class InsercaoEmLinha extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "inset-inline";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class InsercaoEmLinha extends Modificador {
     ) {
         super(
             ["insercao-em-linha", "inserção-em-linha"],
-            "inset-inline",
+            InsercaoEmLinha.nomeCss,
             pragmas,
         );
 

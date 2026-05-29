@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InicioRecuoEmLinha extends Modificador {
+    static nomeCss: string = "padding-inline-start";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class InicioRecuoEmLinha extends Modificador {
     ) {
         super(
             ["inicio-recuo-em-linha", "início-recuo-em-linha"],
-            "padding-inline-start",
+            InicioRecuoEmLinha.nomeCss,
             pragmas,
         );
 

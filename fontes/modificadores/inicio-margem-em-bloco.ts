@@ -8,6 +8,8 @@ export class InicioMargemEmBloco extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-block-start";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class InicioMargemEmBloco extends Modificador {
     ) {
         super(
             ["inicio-margem-em-bloco", "início-margem-em-bloco"],
-            "margin-block-start",
+            InicioMargemEmBloco.nomeCss,
             pragmas,
         );
 

@@ -11,6 +11,8 @@ export class LarguraInicioBordaEmBloco extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "border-block-start-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -18,7 +20,7 @@ export class LarguraInicioBordaEmBloco extends Modificador {
     ) {
         super(
             ["largura-inicio-borda-em-bloco", "largura-início-borda-em-bloco"],
-            "border-block-start-width",
+            LarguraInicioBordaEmBloco.nomeCss,
             pragmas,
         );
 

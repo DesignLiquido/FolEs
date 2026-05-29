@@ -8,12 +8,14 @@ export class LarguraImagemBorda extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "border-image-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-imagem-borda", "border-image-width", pragmas);
+        super("largura-imagem-borda", LarguraImagemBorda.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

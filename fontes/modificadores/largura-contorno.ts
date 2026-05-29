@@ -11,12 +11,14 @@ export class LarguraContorno extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "outline-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-contorno", "outline-width", pragmas);
+        super("largura-contorno", LarguraContorno.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

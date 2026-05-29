@@ -11,12 +11,14 @@ export class JustificarTexto extends Modificador {
         distribuir: "distribute",
     };
 
+    static nomeCss: string = "text-justify";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("justificar-texto", "text-justify", pragmas);
+        super("justificar-texto", JustificarTexto.nomeCss, pragmas);
 
         if (!variavel) validarValores("justificar-texto", valores, this.valoresAceitos);
 

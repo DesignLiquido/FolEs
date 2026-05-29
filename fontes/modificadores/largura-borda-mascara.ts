@@ -8,6 +8,8 @@ export class LarguraBordaMascara extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "mask-border-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class LarguraBordaMascara extends Modificador {
     ) {
         super(
             ["largura-borda-mascara", "largura-borda-máscara"],
-            "mask-border-width",
+            LarguraBordaMascara.nomeCss,
             pragmas,
         );
 

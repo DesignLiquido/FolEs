@@ -11,12 +11,14 @@ export class LarguraBordaDireita extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "border-right-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-borda-direita", "border-right-width", pragmas);
+        super("largura-borda-direita", LarguraBordaDireita.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

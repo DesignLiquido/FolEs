@@ -9,12 +9,14 @@ export class Insercao extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "inset";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["insercao", "inserção"], "inset", pragmas);
+        super(["insercao", "inserção"], Insercao.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

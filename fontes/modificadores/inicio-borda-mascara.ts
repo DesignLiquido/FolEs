@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InicioBordaMascara extends Modificador {
+    static nomeCss: string = "mask-border-outset";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class InicioBordaMascara extends Modificador {
     ) {
         super(
             ["inicio-borda-mascara", "início-borda-máscara"],
-            "mask-border-outset",
+            InicioBordaMascara.nomeCss,
             pragmas,
         );
 

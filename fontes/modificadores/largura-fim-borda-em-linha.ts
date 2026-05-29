@@ -11,12 +11,14 @@ export class LarguraFimBordaEmLinha extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "border-inline-end-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-fim-borda-em-linha", "border-inline-end-width", pragmas);
+        super("largura-fim-borda-em-linha", LarguraFimBordaEmLinha.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

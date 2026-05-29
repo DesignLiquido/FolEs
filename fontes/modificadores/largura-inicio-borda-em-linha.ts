@@ -11,6 +11,8 @@ export class LarguraInicioBordaEmLinha extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "border-inline-start-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -18,7 +20,7 @@ export class LarguraInicioBordaEmLinha extends Modificador {
     ) {
         super(
             ["largura-inicio-borda-em-linha", "largura-início-borda-em-linha"],
-            "border-inline-start-width",
+            LarguraInicioBordaEmLinha.nomeCss,
             pragmas,
         );
 

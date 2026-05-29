@@ -12,12 +12,14 @@ export class Largura extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura", "width", pragmas);
+        super("largura", Largura.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 

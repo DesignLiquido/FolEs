@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InicioRecuoEmBloco extends Modificador {
+    static nomeCss: string = "padding-block-start";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class InicioRecuoEmBloco extends Modificador {
     ) {
         super(
             ["inicio-recuo-em-bloco", "início-recuo-em-bloco"],
-            "padding-block-start",
+            InicioRecuoEmBloco.nomeCss,
             pragmas,
         );
 

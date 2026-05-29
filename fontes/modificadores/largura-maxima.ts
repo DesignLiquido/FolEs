@@ -12,12 +12,14 @@ export class LarguraMaxima extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "max-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["largura-maxima", "largura-máxima"], "max-width", pragmas);
+        super(["largura-maxima", "largura-máxima"], LarguraMaxima.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 

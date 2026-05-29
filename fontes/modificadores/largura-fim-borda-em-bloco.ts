@@ -11,12 +11,14 @@ export class LarguraFimBordaEmBloco extends Modificador {
         grossa: "thick",
     };
 
+    static nomeCss: string = "border-block-end-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-fim-borda-em-bloco", "border-block-end-width", pragmas);
+        super("largura-fim-borda-em-bloco", LarguraFimBordaEmBloco.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

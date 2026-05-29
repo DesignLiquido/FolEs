@@ -8,6 +8,8 @@ export class ImpressaoAjusteCor extends Modificador {
         exata: "exact",
     };
 
+    static nomeCss: string = "print-color-adjust";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class ImpressaoAjusteCor extends Modificador {
     ) {
         super(
             ["impressao-ajuste-cor", "impressão-ajuste-cor"],
-            "print-color-adjust",
+            ImpressaoAjusteCor.nomeCss,
             pragmas,
         );
 

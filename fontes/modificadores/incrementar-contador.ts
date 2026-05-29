@@ -8,12 +8,14 @@ export class IncrementarContador extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "counter-increment";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("incrementar-contador", "counter-increment", pragmas);
+        super("incrementar-contador", IncrementarContador.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

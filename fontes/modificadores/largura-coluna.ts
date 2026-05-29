@@ -8,12 +8,14 @@ export class LarguraColuna extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "column-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-coluna", "column-width", pragmas);
+        super("largura-coluna", LarguraColuna.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

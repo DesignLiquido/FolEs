@@ -7,12 +7,14 @@ export class IndiceZ extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "z-index";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["indice-z", "índice-z"], "z-index", pragmas);
+        super(["indice-z", "índice-z"], IndiceZ.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

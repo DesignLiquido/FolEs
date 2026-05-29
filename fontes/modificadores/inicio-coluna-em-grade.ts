@@ -8,6 +8,8 @@ export class InicioColunaEmGrade extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "grid-column-start";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class InicioColunaEmGrade extends Modificador {
     ) {
         super(
             ["inicio-coluna-em-grade", "início-coluna-em-grade"],
-            "grid-column-start",
+            InicioColunaEmGrade.nomeCss,
             pragmas,
         );
 

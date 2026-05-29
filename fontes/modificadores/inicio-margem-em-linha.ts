@@ -8,6 +8,8 @@ export class InicioMargemEmLinha extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-inline-start";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class InicioMargemEmLinha extends Modificador {
     ) {
         super(
             ["inicio-margem-em-linha", "início-margem-em-linha"],
-            "margin-inline-start",
+            InicioMargemEmLinha.nomeCss,
             pragmas,
         );
         

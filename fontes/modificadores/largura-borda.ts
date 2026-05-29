@@ -12,12 +12,14 @@ export class LarguraBorda extends Modificador {
         espessa: "thick",
     };
 
+    static nomeCss: string = "border-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-borda", "border-width", pragmas);
+        super("largura-borda", LarguraBorda.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

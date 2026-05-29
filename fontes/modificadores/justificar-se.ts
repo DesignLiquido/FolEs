@@ -13,12 +13,14 @@ export class JustificarSe extends Modificador {
         "auto-fim": "self-end",
     };
 
+    static nomeCss: string = "justify-self";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("justificar-se", "justify-self", pragmas);
+        super("justificar-se", JustificarSe.nomeCss, pragmas);
 
         // Além dos valores listados, aceita também todos os valores da Lista
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'

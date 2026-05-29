@@ -8,6 +8,8 @@ export class InsercaoEmBlocoFim extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "inset-block-end";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class InsercaoEmBlocoFim extends Modificador {
     ) {
         super(
             ["insercao-em-bloco-fim", "inserção-em-bloco-fim"],
-            "inset-block-end",
+            InsercaoEmBlocoFim.nomeCss,
             pragmas,
         );
 

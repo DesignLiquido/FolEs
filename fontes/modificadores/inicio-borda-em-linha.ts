@@ -5,6 +5,8 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class InicioBordaEmLinha extends Modificador {
+    static nomeCss: string = "border-inline-start";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -12,7 +14,7 @@ export class InicioBordaEmLinha extends Modificador {
     ) {
         super(
             ["inicio-borda-em-linha", "início-borda-em-linha"],
-            "border-inline-start",
+            InicioBordaEmLinha.nomeCss,
             pragmas,
         );
 

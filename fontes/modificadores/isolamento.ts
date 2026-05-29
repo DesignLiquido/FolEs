@@ -8,12 +8,14 @@ export class Isolamento extends Modificador {
         isolar: "isolate",
     };
 
+    static nomeCss: string = "isolation";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("isolamento", "isolation", pragmas);
+        super("isolamento", Isolamento.nomeCss, pragmas);
 
         if (!variavel) validarValores("isolamento", valores, this.valoresAceitos);
 

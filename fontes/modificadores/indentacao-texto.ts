@@ -9,12 +9,14 @@ export class IndentacaoTexto extends Modificador {
         inverter: "hanging",
     };
 
+    static nomeCss: string = "text-indent";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["indentacao-texto", "indentação-texto"], "text-indent", pragmas);
+        super(["indentacao-texto", "indentação-texto"], IndentacaoTexto.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

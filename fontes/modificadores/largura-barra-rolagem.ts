@@ -9,12 +9,14 @@ export class LarguraBarraRolagem extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "scrollbar-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-barra-rolagem", "scrollbar-width", pragmas);
+        super("largura-barra-rolagem", LarguraBarraRolagem.nomeCss, pragmas);
 
         if (!variavel) validarValores("largura-barra-rolagem", valores, this.valoresAceitos);
 

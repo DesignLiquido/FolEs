@@ -8,12 +8,14 @@ export class ImagemFundo extends Modificador {
         url: "url",
     };
 
+    static nomeCss: string = "background-image";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("imagem-fundo", "background-image", pragmas);
+        super("imagem-fundo", ImagemFundo.nomeCss, pragmas);
 
         const valoresExtra: Array<string> = [
             'conic-gradient',

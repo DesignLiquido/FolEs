@@ -17,6 +17,8 @@ export class JustificarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     };
 
+    static nomeCss: string = "justify-content";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -24,7 +26,7 @@ export class JustificarConteudo extends Modificador {
     ) {
         super(
             ["justificar-conteudo", "justificar-conteúdo"],
-            "justify-content",
+            JustificarConteudo.nomeCss,
             pragmas,
         );
 

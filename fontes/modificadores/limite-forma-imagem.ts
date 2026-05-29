@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LimiteFormaImagem extends Modificador {
+    static nomeCss: string = "shape-image-threshold";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("limite-forma-imagem", "shape-image-threshold", pragmas);
+        super("limite-forma-imagem", LimiteFormaImagem.nomeCss, pragmas);
 
         // Valor deve estar entre 0 e 1 (<alpha-value>) ou ser um valor global
         const valorNumericoTipado = valores[0] as ValorNumerico;

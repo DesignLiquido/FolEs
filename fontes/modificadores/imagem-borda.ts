@@ -16,11 +16,13 @@ export class ImagemBorda extends Modificador {
         espaçar: "space",
     };
 
+    static nomeCss: string = "border-image";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador, variavel?: boolean
     ) {
-        super("imagem-borda", "border-image", pragmas);
+        super("imagem-borda", ImagemBorda.nomeCss, pragmas);
 
         const valoresExtra = ["image", "linear-gradient", "url"];
 

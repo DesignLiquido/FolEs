@@ -12,12 +12,14 @@ export class LarguraMinima extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "min-width";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["largura-minima", "largura-minima"], "min-width", pragmas);
+        super(["largura-minima", "largura-minima"], LarguraMinima.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 

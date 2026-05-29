@@ -7,12 +7,14 @@ export class ImagemMascara extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "mask-image";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["imagem-mascara", "imagem-máscara"], "mask-image", pragmas);
+        super(["imagem-mascara", "imagem-máscara"], ImagemMascara.nomeCss, pragmas);
 
         const valoresExtra = ["image", "linear-gradient", "url"];
 

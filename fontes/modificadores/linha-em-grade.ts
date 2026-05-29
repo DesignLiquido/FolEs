@@ -8,12 +8,14 @@ export class LinhaEmGrade extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "grid-row";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("linha-em-grade", "grid-row", pragmas);
+        super("linha-em-grade", LinhaEmGrade.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

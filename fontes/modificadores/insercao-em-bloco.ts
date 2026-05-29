@@ -8,6 +8,8 @@ export class InsercaoEmBloco extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "inset-block";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class InsercaoEmBloco extends Modificador {
     ) {
         super(
             ["insercao-em-bloco", "inserção-em-bloco"],
-            "inset-block",
+            InsercaoEmBloco.nomeCss,
             pragmas,
         );
         
