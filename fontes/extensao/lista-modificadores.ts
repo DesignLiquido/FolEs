@@ -1,5 +1,7 @@
+import { AgruparPalavra } from "../modificadores";
+
 export default {
-    'agrupar-palavra': { nomeCss: 'word-wrap', descricao: 'Estiliza as quebras de linha do texto da aplicação.', documentacao: '# `agrupar-palavra`\nDefine se as quebras de linha aparecem ou não quando o texto transborda de sua caixa de conteúdo.`', exemploCodigo: 'p {\n  agrupar-palavra: manter-tudo;\n}' },
+    'agrupar-palavra': { nomeCss: AgruparPalavra.nomeCss, descricao: AgruparPalavra.descricao, documentacao: AgruparPalavra.documentacao, exemploCodigo: AgruparPalavra.exemploCodigo },
     'agrupar-vazamento': { nomeCss: 'overflow-wrap', descricao: 'Estiliza o texto dos elementos do tipo em-linha.', documentacao: '# `agrupar-vazamento`\nDefine se o navegador deve ou não inserir quebras de linha em uma string para evitar que o texto transborde.', exemploCodigo: 'p {\n  agrupar-vazamento: quebrar-palavras;\n}' },
     'ajustar-objeto': { nomeCss: 'object-fit', descricao: 'Estiliza o redimensionamento de um objeto da aplicação.', documentacao: '# `ajustar-objeto`\nDefine como o conteúdo de um elemento substituído, como uma imagem ou um vídeo, deve ser redimensionado para caber em seu contêiner.', exemploCodigo: 'imagem {\n  ajustar-objeto: preencher;\n}' },
     'ajustar-tamanho-fonte': { nomeCss: 'font-size-adjust', descricao: 'Estiliza o tamanho das letras minúsculas da aplicação.', documentacao: '# `ajustar-tamanho-fonte`\nUm valor numérico será sempre relativo ao valor especificado na propriedade tamanho-fonte, que define o tamanho das letras maiúsculas.', exemploCodigo: 'p {\n  ajustar-tamanho-fonte: 0.5;\n}' },
