@@ -8,12 +8,14 @@ export class MargemEmLinhaFim extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-inline-end";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-em-linha-fim", "margin-inline-end", pragmas);
+        super("margem-em-linha-fim", MargemEmLinhaFim.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

@@ -8,13 +8,14 @@ export class MargemSuperior extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-top";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-superior", "margin-top", pragmas);
-        // console.log('v', valores);
+        super("margem-superior", MargemSuperior.nomeCss, pragmas);
         
         if (!variavel) {
             validarValorNumerico(

@@ -8,12 +8,14 @@ export class Perspectiva extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "perspective";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("perspectiva", "perspective", pragmas);
+        super("perspectiva", Perspectiva.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

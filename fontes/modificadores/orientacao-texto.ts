@@ -13,6 +13,8 @@ export class OrientacaoTexto extends Modificador {
         "usar-orientação-glifo": "use-glyph-orientation",
     };
 
+    static nomeCss: string = "text-orientation";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -20,7 +22,7 @@ export class OrientacaoTexto extends Modificador {
     ) {
         super(
             ["orientacao-texto", "orientação-texto"],
-            "text-orientation",
+            OrientacaoTexto.nomeCss,
             pragmas,
         );
 

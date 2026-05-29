@@ -8,12 +8,14 @@ export class PosicaoEsquerda extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "left";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["posicao-esquerda", "posição-esquerda"], "left", pragmas);
+        super(["posicao-esquerda", "posição-esquerda"], PosicaoEsquerda.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

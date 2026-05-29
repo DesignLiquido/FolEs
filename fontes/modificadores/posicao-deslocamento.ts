@@ -10,6 +10,8 @@ export class PosicaoDeslocamento extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "offset-position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -17,7 +19,7 @@ export class PosicaoDeslocamento extends Modificador {
     ) {
         super(
             ["posicao-deslocamento", "posição-deslocamento"],
-            "offset-position",
+            PosicaoDeslocamento.nomeCss,
             pragmas,
         );
 

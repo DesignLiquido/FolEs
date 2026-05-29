@@ -3,12 +3,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Ordenar extends Modificador {
+    static nomeCss: string = "order";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("ordenar", "order", pragmas);
+        super("ordenar", Ordenar.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

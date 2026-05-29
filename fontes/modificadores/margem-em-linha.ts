@@ -9,12 +9,14 @@ export class MargemEmLinha extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-inline";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-em-linha", "margin-inline", pragmas);
+        super("margem-em-linha", MargemEmLinha.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

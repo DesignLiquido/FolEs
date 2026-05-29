@@ -8,6 +8,8 @@ export class OrientacaoImagem extends Modificador {
         "da-imagem": "from-image",
     };
 
+    static nomeCss: string = "image-orientation";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -15,7 +17,7 @@ export class OrientacaoImagem extends Modificador {
     ) {
         super(
             ["orientacao-imagem", "orientação-imagem"],
-            "image-orientation",
+            OrientacaoImagem.nomeCss,
             pragmas,
         );
 

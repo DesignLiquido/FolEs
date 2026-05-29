@@ -8,12 +8,14 @@ export class PosicaoDireita extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "right";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["posicao-direita", "posição-direita"], "right", pragmas);
+        super(["posicao-direita", "posição-direita"], PosicaoDireita.nomeCss, pragmas);
 
         const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...ListaDeValorPercentual };
 

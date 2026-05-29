@@ -25,6 +25,8 @@ export class PosicionarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     };
 
+    static nomeCss: string = "place-content";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -32,7 +34,7 @@ export class PosicionarConteudo extends Modificador {
     ) {
         super(
             ["posicionar-conteudo", "posicionar-conteúdo"],
-            "place-content",
+            PosicionarConteudo.nomeCss,
             pragmas,
         );
 

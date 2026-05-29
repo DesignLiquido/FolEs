@@ -7,12 +7,14 @@ export class ModeloGeralEmGrade extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "grid-template-areas";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-geral-em-grade", "grid-template-areas", pragmas);
+        super("modelo-geral-em-grade", ModeloGeralEmGrade.nomeCss, pragmas);
 
         // OBS.: Também aceita receber valores do tipo string e matriz
         // Ex.: grid-template-areas:

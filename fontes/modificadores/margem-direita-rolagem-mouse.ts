@@ -4,12 +4,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class MargemDireitaRolagemMouse extends Modificador {
+    static nomeCss: string = "scroll-margin-right";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-direita-rolagem-mouse", "scroll-margin-right", pragmas);
+        super("margem-direita-rolagem-mouse", MargemDireitaRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

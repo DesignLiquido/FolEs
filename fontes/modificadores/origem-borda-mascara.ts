@@ -7,6 +7,8 @@ export class OrigemBordaMascara extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "mask-border-source";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -14,7 +16,7 @@ export class OrigemBordaMascara extends Modificador {
     ) {
         super(
             ["origem-borda-mascara", "origem-borda-máscara"],
-            "mask-border-source",
+            OrigemBordaMascara.nomeCss,
             pragmas,
         );
 

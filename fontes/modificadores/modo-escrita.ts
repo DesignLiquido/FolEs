@@ -9,12 +9,14 @@ export class ModoEscrita extends Modificador {
         "vertical-esquerda-direita": "vertical-lr",
     };
 
+    static nomeCss: string = "writing-mode";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modo-escrita", "writing-mode", pragmas);
+        super("modo-escrita", ModoEscrita.nomeCss, pragmas);
 
         if (!variavel) validarValores("modo-escrita", valores, this.valoresAceitos);
 

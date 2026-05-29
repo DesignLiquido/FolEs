@@ -26,12 +26,14 @@ export class ModoMescla extends Modificador {
         luminosidade: "luminosity",
     };
 
+    static nomeCss: string = "mix-blend-mode";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modo-mescla", "mix-blend-mode", pragmas);
+        super("modo-mescla", ModoMescla.nomeCss, pragmas);
 
         if (!variavel) validarValores("modo-mescla", valores, this.valoresAceitos);
 

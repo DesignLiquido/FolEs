@@ -25,12 +25,14 @@ export class MesclarFundo extends Modificador {
         luminosidade: "luminosity",
     };
 
+    static nomeCss: string = "background-blend-mode";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("mesclar-fundo", "background-blend-mode", pragmas);
+        super("mesclar-fundo", MesclarFundo.nomeCss, pragmas);
 
         if (!variavel) validarValores("mesclar-fundo", valores, this.valoresAceitos);
 

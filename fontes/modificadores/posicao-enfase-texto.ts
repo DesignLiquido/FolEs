@@ -10,6 +10,8 @@ export class PosicaoEnfaseTexto extends Modificador {
         esquerda: "left",
     };
 
+    static nomeCss: string = "text-emphasis-position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -17,7 +19,7 @@ export class PosicaoEnfaseTexto extends Modificador {
     ) {
         super(
             ["posicao-enfase-texto", "posição-ênfase-texto"],
-            "text-emphasis-position",
+            PosicaoEnfaseTexto.nomeCss,
             pragmas,
         );
 

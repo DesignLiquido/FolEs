@@ -14,12 +14,14 @@ export class PosicaoLegenda extends Modificador {
         "fim-em-linha": "inline-end",
     };
 
+    static nomeCss: string = "caption-side";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["posicao-legenda", "posição-legenda"], "caption-side", pragmas);
+        super(["posicao-legenda", "posição-legenda"], PosicaoLegenda.nomeCss, pragmas);
 
         if (!variavel) validarValores("posição-legenda", valores, this.valoresAceitos);
 

@@ -8,12 +8,14 @@ export class ProporcaoTela extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "aspect-ratio";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["proporcao-tela", "proporção-tela"], "aspect-ratio", pragmas);
+        super(["proporcao-tela", "proporção-tela"], ProporcaoTela.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

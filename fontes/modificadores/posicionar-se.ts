@@ -23,12 +23,14 @@ export class PosicionarSe extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "place-self";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("posicionar-se", "place-self", pragmas);
+        super("posicionar-se", PosicionarSe.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

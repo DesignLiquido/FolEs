@@ -8,12 +8,14 @@ export class PosicaoInferior extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "bottom";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["posicao-inferior", "posição-inferior"], "bottom", pragmas);
+        super(["posicao-inferior", "posição-inferior"], PosicaoInferior.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

@@ -23,12 +23,14 @@ export class PosicionarItens extends Modificador {
         "auto-fim": "self-end",
     };
 
+    static nomeCss: string = "place-items";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("posicionar-itens", "place-items", pragmas);
+        super("posicionar-itens",PosicionarItens.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

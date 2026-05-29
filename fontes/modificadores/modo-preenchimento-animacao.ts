@@ -11,6 +11,8 @@ export class ModoPreenchimentoAnimacao extends Modificador {
         ambos: "both",
     };
 
+    static nomeCss: string = "animation-fill-mode";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -18,7 +20,7 @@ export class ModoPreenchimentoAnimacao extends Modificador {
     ) {
         super(
             ["modo-preenchimento-animacao", "modo-preenchimento-animação"],
-            "animation-fill-mode",
+            ModoPreenchimentoAnimacao.nomeCss,
             pragmas,
         );
 

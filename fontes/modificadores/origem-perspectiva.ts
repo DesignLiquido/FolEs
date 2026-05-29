@@ -12,12 +12,14 @@ export class OrigemPerspectiva extends Modificador {
         inferior: "bottom",
     };
 
+    static nomeCss: string = "perspective-origin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("origem-perspectiva", "perspective-origin", pragmas);
+        super("origem-perspectiva", OrigemPerspectiva.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

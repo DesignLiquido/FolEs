@@ -15,12 +15,14 @@ export class ModeloColunasEmGrade extends Modificador {
         alvenaria: "masonry",
     };
 
+    static nomeCss: string = "grid-template-columns";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-colunas-em-grade", "grid-template-columns", pragmas);
+        super("modelo-colunas-em-grade", ModeloColunasEmGrade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 

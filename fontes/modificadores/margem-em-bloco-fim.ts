@@ -8,12 +8,14 @@ export class MargemEmBlocoFim extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-block-end";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-em-bloco-fim", "margin-block-end", pragmas);
+        super("margem-em-bloco-fim", MargemEmBlocoFim.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

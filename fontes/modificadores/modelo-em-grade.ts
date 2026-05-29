@@ -16,12 +16,14 @@ export class ModeloEmGrade extends Modificador {
         alvenaria: "masonry",
     };
 
+    static nomeCss: string = "grid-template";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-em-grade", "grid-template", pragmas);
+        super("modelo-em-grade", ModeloEmGrade.nomeCss, pragmas);
 
         // TODO: Também aceita receber o valor do tipo matriz
         // Ex.: grid-template:

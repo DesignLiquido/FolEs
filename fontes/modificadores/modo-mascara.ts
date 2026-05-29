@@ -10,6 +10,8 @@ export class ModoMascara extends Modificador {
         "fonte-correspondente": "match-source",
     };
 
+    
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,

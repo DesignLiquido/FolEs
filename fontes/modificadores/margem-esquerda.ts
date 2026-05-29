@@ -8,12 +8,14 @@ export class MargemEsquerda extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-left";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-esquerda", "margin-left", pragmas);
+        super("margem-esquerda", MargemEsquerda.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

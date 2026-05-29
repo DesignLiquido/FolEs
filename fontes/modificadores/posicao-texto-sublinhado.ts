@@ -11,6 +11,8 @@ export class PosicaoTextoSublinhado extends Modificador {
         "de-frente": "from-front",
     };
 
+    static nomeCss: string = "text-underline-position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -18,7 +20,7 @@ export class PosicaoTextoSublinhado extends Modificador {
     ) {
         super(
             ["posicao-texto-sublinhado", "posição-texto-sublinhado"],
-            "text-underline-position",
+            PosicaoTextoSublinhado.nomeCss,
             pragmas,
         );
 

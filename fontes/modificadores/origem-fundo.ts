@@ -10,12 +10,14 @@ export class OrigemFundo extends Modificador {
         "conteúdo-caixa": "content-box",
     };
 
+    static nomeCss: string = "background-origin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("origem-fundo", "background-origin", pragmas);
+        super("origem-fundo", OrigemFundo.nomeCss, pragmas);
 
         if (!variavel) validarValores("origem-fundo", valores, this.valoresAceitos);
 

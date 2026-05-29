@@ -15,12 +15,14 @@ export class ModeloLinhasEmGrade extends Modificador {
         alvenaria: "masonry",
     };
 
+    static nomeCss: string = "grid-template-rows";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-linhas-em-grade", "grid-template-rows", pragmas);
+        super("modelo-linhas-em-grade", ModeloLinhasEmGrade.nomeCss, pragmas);
 
         // OBS.: Também aceita receber o valor do tipo [linename]
         const valoresExtra = ["minmax", "fit-content"];

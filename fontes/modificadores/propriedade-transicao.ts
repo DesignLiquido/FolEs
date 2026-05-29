@@ -9,6 +9,8 @@ export class PropriedadeTransicao extends Modificador {
         todas: "all",
     };
 
+    static nomeCss: string = "transition-property";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class PropriedadeTransicao extends Modificador {
     ) {
         super(
             ["propriedade-transicao", "propriedade-transição"],
-            "transition-property",
+            PropriedadeTransicao.nomeCss,
             pragmas,
         );
 

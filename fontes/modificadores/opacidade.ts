@@ -5,12 +5,14 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Opacidade extends Modificador {
+    static nomeCss: string = "opacity";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("opacidade", "opacity", pragmas);
+        super("opacidade", Opacidade.nomeCss, pragmas);
 
         // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
         // Caso haja um quantificador (%), pode ser qualquer número.        

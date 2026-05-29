@@ -5,12 +5,14 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class MargemRolagemMouse extends Modificador {
+    static nomeCss: string = "scroll-margin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-rolagem-mouse", "scroll-margin", pragmas);
+        super("margem-rolagem-mouse", MargemRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

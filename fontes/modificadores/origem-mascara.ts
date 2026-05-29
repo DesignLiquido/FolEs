@@ -16,12 +16,14 @@ export class OrigemMascara extends Modificador {
         borda: "border",
     };
 
+    static nomeCss: string = "mask-origin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["origem-mascara", "origem-máscara"], "mask-origin", pragmas);
+        super(["origem-mascara", "origem-máscara"], OrigemMascara.nomeCss, pragmas);
 
         if (!variavel) validarValores("origem-máscara", valores, this.valoresAceitos);
 

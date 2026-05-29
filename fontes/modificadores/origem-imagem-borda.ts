@@ -7,12 +7,14 @@ export class OrigemImagemBorda extends Modificador {
         nenhuma: "none",
     };
 
+    static nomeCss: string = "border-image-source";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("origem-imagem-borda", "border-image-source", pragmas);
+        super("origem-imagem-borda", OrigemImagemBorda.nomeCss, pragmas);
 
         const valoresExtra = ["cross-fade", "image", "image-set", "linear-gradient", "url"];
 

@@ -8,12 +8,14 @@ export class PararEncaixeRolagemMouse extends Modificador {
         sempre: "always",
     };
 
+    static nomeCss: string = "scroll-snap-stop";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("parar-encaixe-rolagem-mouse", "scroll-snap-stop", pragmas);
+        super("parar-encaixe-rolagem-mouse", PararEncaixeRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValores(

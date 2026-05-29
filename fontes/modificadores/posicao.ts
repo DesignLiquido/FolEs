@@ -11,12 +11,14 @@ export class Posicao extends Modificador {
         colada: "sticky",
     };
 
+    static nomeCss: string = "position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["posicao", "posição"], "position", pragmas);
+        super(["posicao", "posição"], Posicao.nomeCss, pragmas);
 
         if (!variavel) validarValores("posição", valores, this.valoresAceitos);
 

@@ -11,12 +11,14 @@ export class NomeAnimacao extends Modificador {
         nenhum: "none",
     };
 
+    static nomeCss: string = "animation-name";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["nome-animacao", "nome-animação"], "animation-name", pragmas);
+        super(["nome-animacao", "nome-animação"], NomeAnimacao.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

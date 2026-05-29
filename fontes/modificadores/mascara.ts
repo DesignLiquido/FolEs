@@ -44,12 +44,14 @@ export class Mascara extends Modificador {
         url: "url",
     };
 
+    static nomeCss: string = "mask";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["mascara", "máscara"], "mask", pragmas);
+        super(["mascara", "máscara"], Mascara.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

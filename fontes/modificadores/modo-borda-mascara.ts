@@ -9,6 +9,8 @@ export class ModoBordaMascara extends Modificador {
         alfa: "alpha",
     };
 
+    static nomeCss: string = "mask-border-mode";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -16,7 +18,7 @@ export class ModoBordaMascara extends Modificador {
     ) {
         super(
             ["modo-borda-mascara", "modo-borda-máscara"],
-            "mask-border-mode",
+            ModoBordaMascara.nomeCss,
             pragmas,
         );
 

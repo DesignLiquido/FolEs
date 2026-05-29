@@ -9,12 +9,14 @@ export class Margem extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem", "margin", pragmas);
+        super("margem", Margem.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {

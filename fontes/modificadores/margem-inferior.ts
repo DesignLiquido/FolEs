@@ -8,12 +8,14 @@ export class MargemInferior extends Modificador {
         auto: "auto",
     };
 
+    static nomeCss: string = "margin-bottom";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-inferior", "margin-bottom", pragmas);
+        super("margem-inferior", MargemInferior.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(

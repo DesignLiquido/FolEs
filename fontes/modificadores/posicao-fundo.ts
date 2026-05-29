@@ -4,6 +4,8 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class PosicaoFundo extends Modificador {
+    static nomeCss: string = "background-position";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
@@ -11,7 +13,7 @@ export class PosicaoFundo extends Modificador {
     ) {
         super(
             ["posicao-fundo", "posição-fundo"],
-            "background-position",
+            PosicaoFundo.nomeCss,
             pragmas,
         );
         

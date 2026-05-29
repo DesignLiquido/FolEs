@@ -9,12 +9,14 @@ export class PreencherColuna extends Modificador {
         "equilibrar-tudo": "balance-all",
     };
 
+    static nomeCss: string = "column-fill";
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("preencher-coluna", "column-fill", pragmas);
+        super("preencher-coluna", PreencherColuna.nomeCss, pragmas);
 
         if (!variavel) validarValores("preencher-coluna", valores, this.valoresAceitos);
 
