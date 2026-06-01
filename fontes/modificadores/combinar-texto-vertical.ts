@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class CombinarTextoVertical extends Modificador {
+    static nomeFolEs: string = "combinar-texto-vertical";
+    static nomeCss: string = "text-combine-upright";
+    static descricao: string = 'Define a combinação de caracteres no espaço de um único caractere.';
+    static documentacao: string = '# `combinar-texto-vertical`\nEsta propriedade só tem efeito no modo de escrita vertical. Se o texto combinado for maior que 1em, o agente do usuário deve ajustar o conteúdo em 1em.';
+    static exemploCodigo: string = 'título1 {\n  combinar-texto-vertical: tudo;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         tudo: "all",
@@ -10,18 +16,16 @@ export class CombinarTextoVertical extends Modificador {
         dígitos: "digits",
     };
 
-    static nomeCss: string = "text-combine-upright";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("combinar-texto-vertical", CombinarTextoVertical.nomeCss, pragmas);
+        super(CombinarTextoVertical.nomeFolEs, CombinarTextoVertical.nomeCss, pragmas);
 
         if (!variavel) {
             validarValores(
-                "combinar-texto-vertical",
+                CombinarTextoVertical.nomeFolEs,
                 valores,
                 this.valoresAceitos,
             );

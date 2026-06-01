@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class Cursor extends Modificador {
+    static nomeFolEs: string = "cursor";
+    static nomeCss: string = "cursor";
+    static descricao: string = 'Define define o cursor do mouse para mostrar quando o ponteiro do mouse estiver sobre um elemento.';
+    static documentacao: string = '# `cursor`\nA configuração do cursor deve informar aos usuários sobre as operações do mouse que podem ser executadas no local atual, incluindo: seleção de texto, ativação de ajuda ou menus de contexto, cópia de conteúdo, redimensionamento de tabelas e assim por diante. Você pode especificar o tipo de cursor usando uma palavra-chave ou carregar um ícone específico para usar.';
+    static exemploCodigo: string = 'campo {\n  cursor: indicador;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         padrao: "default",
@@ -42,18 +48,16 @@ export class Cursor extends Modificador {
         afastar: "zoom-out",
     };
 
-    static nomeCss: string = "cursor";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("cursor", Cursor.nomeCss, pragmas);
+        super(Cursor.nomeFolEs, Cursor.nomeCss, pragmas);
 
         const valoresExtra = ["image", "url"];
 
-        if (!variavel) validarValores("cursor", valores, this.valoresAceitos, valoresExtra);
+        if (!variavel) validarValores(Cursor.nomeFolEs, valores, this.valoresAceitos, valoresExtra);
 
         this.valores = valores;
         this.variavel = variavel;

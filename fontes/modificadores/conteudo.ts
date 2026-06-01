@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class Conteudo extends Modificador {
+    static nomeFolEs: string[] = ["conteudo", "conteúdo"];
+    static nomeCss: string = "content";
+    static descricao: string = 'Substitui um elemento por um valor gerado.';
+    static documentacao: string = '# `conteudo`\nOs objetos inseridos usando esta propriedade serão tratados pela aplicação como elementos substituídos anônimos.';
+    static exemploCodigo: string = 'p {\n  conteudo: não-abrir-citação;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
         nenhum: "none",
@@ -16,20 +22,18 @@ export class Conteudo extends Modificador {
         "não-fechar-citação": "no-close-quote",
     };
 
-    static nomeCss: string = "content";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["conteudo", "conteúdo"], Conteudo.nomeCss, pragmas);
+        super(Conteudo.nomeFolEs, Conteudo.nomeCss, pragmas);
 
         const valoresExtra = ["cross-fade", "counter", "image", "image-set", "linear-gradient", "url",];
 
         if (!variavel) {
             validarValores(
-                "conteúdo",
+                Conteudo.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

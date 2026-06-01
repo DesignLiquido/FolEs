@@ -4,11 +4,15 @@ import { validarValorNumerico } from "./validacoes/numerica";
 import { validarValorString } from "./validacoes/string";
 
 export class ConfiguracoesVariacaoFonte extends Modificador {
+    static nomeFolEs: string[] = ["configuracoes-variacao-fonte", "configurações-variação-fonte"];
+    static nomeCss: string = "font-variation-settings";
+    static descricao: string = 'Fornece controle sobre as características da fonte variável da aplicação.';
+    static documentacao: string = '# `configuracoes-variacao-fonte`\nEsta propriedade permite que você especifique os nomes do eixo das características que deseja variar junto com seus valores.';
+    static exemploCodigo: string = 'p {\n  configuracoes-variacao-fonte: "XHGT" 0.7;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
     };
-
-    static nomeCss: string = "font-variation-settings";
 
     constructor(
         valores: Valor[],
@@ -16,7 +20,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["configuracoes-variacao-fonte", "configurações-variação-fonte"],
+            ConfiguracoesVariacaoFonte.nomeFolEs,
             ConfiguracoesVariacaoFonte.nomeCss,
             pragmas,
         );
@@ -30,7 +34,7 @@ export class ConfiguracoesVariacaoFonte extends Modificador {
 
         if (!variavel && !validarString) {
             validarValorNumerico(
-                "configurações-variação-fonte",
+                ConfiguracoesVariacaoFonte.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 null,
