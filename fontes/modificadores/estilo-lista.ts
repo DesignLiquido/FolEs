@@ -5,20 +5,24 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EstiloLista extends Modificador {
+    static nomeFolEs: string = "estilo-lista";
+    static nomeCss: string = "list-style";
+    static descricao: string = 'Define a estilização de uma referida lista da aplicação, seja ordenada ou não-ordenada.';
+    static documentacao: string = '# `estilo-lista`\nPropriedade de atribuição abreviada que permite definir todas as propriedades de estilo de lista de uma só vez.';
+    static exemploCodigo: string = 'lista-numerada {\n  estilo-lista: dentro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         dentro: "inside",
         fora: "outside",
         nenhum: "none",
     };
 
-    static nomeCss: string = "list-style";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("estilo-lista", EstiloLista.nomeCss, pragmas);
+        super(EstiloLista.nomeFolEs, EstiloLista.nomeCss, pragmas);
 
         const valoresExtra = ["url"];
 
@@ -26,7 +30,7 @@ export class EstiloLista extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "estilo-lista",
+                    EstiloLista.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -36,7 +40,7 @@ export class EstiloLista extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "estilo-lista",
+                    EstiloLista.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,

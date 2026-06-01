@@ -5,6 +5,12 @@ import { validarValorCor } from "./validacoes/cor";
 import { validarValorString } from "./validacoes/string";
 
 export class EnfaseTexto extends Modificador {
+    static nomeFolEs: string[] = ["enfase-texto", "ênfase-texto"];
+    static nomeCss: string = "text-emphasis";
+    static descricao: string = 'Aplica marcas de ênfase em elementos de texto.';
+    static documentacao: string = '# `enfase-texto`\nPropriedade de atribuição abreviada para aplicar ênfases nos textos da aplicação, tais como estilo e cor. Aplicável para todos elementos de texto, exceto espaços e caracteres de controle.';
+    static exemploCodigo: string = 'título3 {\n  enfase-texto: preenchido sésamo #555;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         preenchido: "filled",
@@ -20,14 +26,12 @@ export class EnfaseTexto extends Modificador {
         sésamo: "sesame",
     };
 
-    static nomeCss: string = "text-emphasis";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["enfase-texto", "ênfase-texto"], EnfaseTexto.nomeCss, pragmas);
+        super(EnfaseTexto.nomeFolEs, EnfaseTexto.nomeCss, pragmas);
 
         let validarString: boolean = false;
         valores.forEach((valor) => {
@@ -40,13 +44,13 @@ export class EnfaseTexto extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "cor",
-                    "ênfase-texto",
+                    EnfaseTexto.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarValorCor(
-                    "ênfase-texto",
+                    EnfaseTexto.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );

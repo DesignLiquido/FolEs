@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class EsticarFonte extends Modificador {
+    static nomeFolEs: string = "esticar-fonte";
+    static nomeCss: string = "font-stretch";
+    static descricao: string = 'Define uma fonte normal, condensada ou expandida.';
+    static documentacao: string = '# `esticar-fonte`\nO valor desta propriedade pode ser definido com palavras-chaves listadas na documentação ou com um valor numérico seguido do quantificador percentual.';
+    static exemploCodigo: string = 'p {\n  esticar-fonte: extra-expandida;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "ultra-condensada": "ultra-condensed",
         "extra-condensada": "extra-condensed",
@@ -16,18 +22,16 @@ export class EsticarFonte extends Modificador {
         "ultra-expandida": "ultra-expanded",
     };
 
-    static nomeCss: string = "font-stretch";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("esticar-fonte", EsticarFonte.nomeCss, pragmas);
+        super(EsticarFonte.nomeFolEs, EsticarFonte.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "esticar-fonte",
+                EsticarFonte.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null,

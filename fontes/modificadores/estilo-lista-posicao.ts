@@ -3,12 +3,16 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class EstiloListaPosicao extends Modificador {
+    static nomeFolEs: string[] = ["estilo-lista-posicao", "estilo-lista-posição"];
+    static nomeCss: string = "list-style-position";
+    static descricao: string = 'Define a posição do marcador relativo a um item de lista.';
+    static documentacao: string = '# `estilo-lista-posicao`\nEsta propriedade também pode ser especificada utilizando a propriedade de atribuição abreviada `estilo-lista`';
+    static exemploCodigo: string = 'item-lista {\n  estilo-lista-posicao: fora;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         dentro: "inside",
         fora: "outside",
     };
-
-    static nomeCss: string = "list-style-position";
 
     constructor(
         valores: Valor[],
@@ -16,12 +20,12 @@ export class EstiloListaPosicao extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["estilo-lista-posicao", "estilo-lista-posição"],
+            EstiloListaPosicao.nomeFolEs,
             EstiloListaPosicao.nomeCss,
             pragmas,
         );
 
-        if (!variavel) validarValores("estilo-lista-posição", valores, this.valoresAceitos);
+        if (!variavel) validarValores(EstiloListaPosicao.nomeFolEs[1], valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

@@ -4,22 +4,26 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Escala extends Modificador {
+    static nomeFolEs: string = "escala";
+    static nomeCss: string = "scale";
+    static descricao: string = 'Permite especificar transformações de escala individualmente.';
+    static documentacao: string = '# `escala`\nPropriedade que permite especificar transformações de escala independentemente da propriedade `transformar`. Isso mapeia melhor o uso típico da interface do usuário e evita a necessidade de lembrar a ordem exata das funções de transformação a serem especificadas no valor da propriedade `transformar`.';
+    static exemploCodigo: string = 'imagem {\n  escala: 50%;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
     };
-
-    static nomeCss: string = "scale";
 
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("escala", Escala.nomeCss, pragmas);
+        super(Escala.nomeFolEs, Escala.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "escala",
+                Escala.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null,

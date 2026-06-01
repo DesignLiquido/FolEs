@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class EventosPonteiro extends Modificador {
+    static nomeFolEs: string = "eventos-ponteiro";
+    static nomeCss: string = "pointer-events";
+    static descricao: string = 'Define os eventos de ponteiro de um elemento.';
+    static documentacao: string = '# `eventos-ponteiro`\nEsta propriedade especifica sob quais circunstâncias (se houver) um determinado elemento gráfico pode se tornar o alvo dos eventos de ponteiro.';
+    static exemploCodigo: string = 'divisao {\n  eventos-ponteiro: auto;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
@@ -20,19 +26,17 @@ export class EventosPonteiro extends Modificador {
         tudo: "all",
     };
 
-    static nomeCss: string = "pointer-events";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("eventos-ponteiro", EventosPonteiro.nomeCss, pragmas);
+        super(EventosPonteiro.nomeFolEs, EventosPonteiro.nomeCss, pragmas);
 
         // Também pode receber valores do tipo SVG
         // Conferir em: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
 
-        if (!variavel) validarValores("eventos-ponteiro", valores, this.valoresAceitos);
+        if (!variavel) validarValores(EventosPonteiro.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;
