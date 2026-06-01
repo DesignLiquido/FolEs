@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Altura extends Modificador {
+    static nomeFolEs: string = "altura";
+    static nomeCss: string = "height";
+    static descricao: string = 'Especifica a altura de um elemento da aplicação.';
+    static documentacao: string = '# `altura`\nPor padrão, esta propriedade define a altura da área de conteúdo. No entanto, se a propriedade `tamanho-caixa` for definida com o valor borda-caixa, ele determinará a altura da área da borda.';
+    static exemploCodigo: string = 'titulo2 {\n  altura: 120px;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo-maximo": "max-content",
         "conteúdo-máximo": "max-content",
@@ -12,20 +18,18 @@ export class Altura extends Modificador {
         auto: "auto",
     };
 
-    static nomeCss: string = "height";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("altura", Altura.nomeCss, pragmas);
+        super(Altura.nomeFolEs, Altura.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content", "clamp"];
 
         if (!variavel) {
             validarValorNumerico(
-                "altura",
+                Altura.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

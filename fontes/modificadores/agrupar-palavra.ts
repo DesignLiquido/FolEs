@@ -22,7 +22,7 @@ export class AgruparPalavra extends Modificador {
     ) {
         super(AgruparPalavra.nomeFolEs, AgruparPalavra.nomeCss, pragmas);
 
-        if (!variavel) validarValores("agrupar-palavra", valores, this.valoresAceitos);
+        if (!variavel) validarValores(AgruparPalavra.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

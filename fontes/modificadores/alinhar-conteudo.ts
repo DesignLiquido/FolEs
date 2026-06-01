@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharConteudo extends Modificador {
+    static nomeFolEs: string[] = ["alinhar-conteudo", "alinhar-conteúdo"];
+    static nomeCss: string = "align-content";
+    static descricao: string = 'Organiza o alinhamento dos itens da aplicação.';
+    static documentacao: string = '# `alinhar-conteudo`\nDefine a distribuição entre e ao redor dos itens do conteúdo do eixo transversal de uma flexbox, ou do eixo de bloco de uma grade.';
+    static exemploCodigo: string = 'divisao {\n  alinhar-conteudo: centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
@@ -21,15 +27,13 @@ export class AlinharConteudo extends Modificador {
         "auto-fim": "self-end",
     };
 
-    static nomeCss: string = "align-content";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["alinhar-conteudo", "alinhar-conteúdo"],
+            AlinharConteudo.nomeFolEs,
             AlinharConteudo.nomeCss,
             pragmas,
         );
@@ -47,7 +51,7 @@ export class AlinharConteudo extends Modificador {
 
         if (!variavel) {
             validarValoresAdicionais(
-                "alinhar-conteúdo",
+                AlinharConteudo.nomeFolEs[1],
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,
