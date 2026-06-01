@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class Fundo extends Modificador {
+    static nomeFolEs: string = "fundo";
+    static nomeCss: string = "background";
+    static descricao: string = 'Define as estilizações do plano de fundo da aplicação.';
+    static documentacao: string = '# `fundo`\nPropriedade de atribuição abreviada que define todas as propriedades de estilo de plano de fundo de uma só vez, como cor, imagem, origem e tamanho ou método de repetição. As propriedades de fundo não definidas através desta propriedade são definidas com seus valores padrão.';
+    static exemploCodigo: string = 'imagem {\n  fundo: borda #f5f5a6;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fixo: "fixed",
         local: "local",
@@ -32,14 +38,12 @@ export class Fundo extends Modificador {
         auto: "auto",
     };
 
-    static nomeCss: string = "background";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fundo", Fundo.nomeCss, pragmas);
+        super(Fundo.nomeFolEs, Fundo.nomeCss, pragmas);
 
         const valoresExtra: Array<string> = [
             'conic-gradient',
@@ -48,7 +52,7 @@ export class Fundo extends Modificador {
             'paint',
             'radial-gradient',
             'repeating-conic-gradient',
-            'repeating-linear-gradient', 
+            'repeating-linear-gradient',
             'repeating-radial-gradient',
         ];
 
@@ -56,14 +60,14 @@ export class Fundo extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "fundo",
+                    Fundo.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "fundo",
+                    Fundo.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     unidadesMedida,

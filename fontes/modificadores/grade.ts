@@ -6,6 +6,12 @@ import { validarValores } from "./validacoes/comum";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Grade extends Modificador {
+    static nomeFolEs: string = "grade";
+    static nomeCss: string = "grid";
+    static descricao: string = 'Define as estilizações de grade da aplicação.';
+    static documentacao: string = '# `grade`\nPropriedade de atribuição abreviada que define todas as propriedades de grade explícitas e implícitas em uma única declaração.';
+    static exemploCodigo: string = 'coluna {\n  grade: 100px / 200px;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo-maximo": "max-content",
         "conteúdo-máximo": "max-content",
@@ -20,14 +26,12 @@ export class Grade extends Modificador {
         alvenaria: "masonry",
     };
 
-    static nomeCss: string = "grid";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("grade", Grade.nomeCss, pragmas);
+        super(Grade.nomeFolEs, Grade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax"];
 
@@ -37,14 +41,14 @@ export class Grade extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "grade",
+                    Grade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra
                 );
             } else if (valores[0] instanceof ValorNumerico) {
                 validarValorNumerico(
-                    "grade",
+                    Grade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -52,7 +56,7 @@ export class Grade extends Modificador {
                 );
             } else {
                 validarValores(
-                    "grade",
+                    Grade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra
