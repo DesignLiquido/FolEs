@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class DecoracaoTexto extends Modificador {
+    static nomeFolEs: string[] = ["decoracao-texto", "decoração-texto"];
+    static nomeCss: string = "text-decoration";
+    static descricao: string = 'Define define a aparência das linhas decoradas de um texto.';
+    static documentacao: string = '# `decoração-texto`\nPropriedade de atribuição abreviada para definir os valores de todas as propriedades de decoração de texto utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'p {\n  decoração-texto: linha-superior vermelho;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
         sublinhar: "underline",
@@ -15,15 +21,13 @@ export class DecoracaoTexto extends Modificador {
         "de-frente": "from-font",
     };
 
-    static nomeCss: string = "text-decoration";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["decoracao-texto", "decoração-texto"],
+            DecoracaoTexto.nomeFolEs,
             DecoracaoTexto.nomeCss,
             pragmas,
         );
@@ -32,13 +36,13 @@ export class DecoracaoTexto extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "decoração-texto",
+                    DecoracaoTexto.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "decoração-texto",
+                    DecoracaoTexto.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );

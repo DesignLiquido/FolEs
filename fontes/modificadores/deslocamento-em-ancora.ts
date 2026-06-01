@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class DeslocamentoEmAncora extends Modificador {
+    static nomeFolEs: string[] = ["deslocamento-em-ancora", "deslocamento-em-âncora"];
+    static nomeCss: string = "offset-anchor";
+    static descricao: string = 'Especifica o ponto dentro da caixa de um elemento em movimento no seu trajeto-deslocamento.';
+    static documentacao: string = '# `deslocamento-em-ancora`\nEsta propriedade especifica o ponto dentro da caixa de um elemento em movimento no seu `trajeto-deslocamento`.';
+    static exemploCodigo: string = 'p {\n  deslocamento-em-ancora: centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         superior: "top",
         inferior: "bottom",
@@ -13,22 +19,20 @@ export class DeslocamentoEmAncora extends Modificador {
         auto: "auto",
     };
 
-    static nomeCss: string = "offset-anchor";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["deslocamento-em-ancora", "deslocamento-em-âncora"],
+            DeslocamentoEmAncora.nomeFolEs,
             DeslocamentoEmAncora.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValorNumerico(
-                "deslocamento-em-âncora",
+                DeslocamentoEmAncora.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 null,
