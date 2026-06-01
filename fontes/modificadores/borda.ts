@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { Valor } from "../valores";
 
 export class Borda extends Modificador {
+    static nomeFolEs: string = "borda";
+    static nomeCss: string = "border";
+    static descricao: string = 'Define as estilizações referentes à borda de um elemento.';
+    static documentacao: string = '# `borda`\nPropriedade de atribuição abreviada para definir todos os valores das propriedades de borda de um elemento utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'botao {\n borda: 2px pontilhado;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fina: "thin",
         media: "medium",
@@ -12,20 +18,18 @@ export class Borda extends Modificador {
         espessa: "thick",
     };
 
-    static nomeCss: string = "border";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("borda", Borda.nomeCss, pragmas);
+        super(Borda.nomeFolEs, Borda.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "borda",
+                    Borda.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -33,7 +37,7 @@ export class Borda extends Modificador {
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "borda",
+                    Borda.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     unidadesMedida
