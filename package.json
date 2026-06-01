@@ -50,7 +50,7 @@
         "typescript": "^6.0.3"
     },
     "dependencies": {
-        "commander": "^14.0.0",
+        "commander": "^15.0.0",
         "vlq": "^2.0.4"
     }
 }
