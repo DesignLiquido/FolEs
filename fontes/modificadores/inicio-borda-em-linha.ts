@@ -5,7 +5,11 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class InicioBordaEmLinha extends Modificador {
+    static nomeFolEs: string[] = ["inicio-borda-em-linha", "início-borda-em-linha"];
     static nomeCss: string = "border-inline-start";
+    static descricao: string = 'Define a estilização do início de uma borda em linha.';
+    static documentacao: string = '# `inicio-borda-em-linha`\nPropriedade de atribuição abreviada para definir os valores das propriedades de início de borda em linha em um único local na folha de estilo.';
+    static exemploCodigo: string = 'divisao {\n  inicio-borda-em-linha: 3px tracejado azul;\n}';
 
     constructor(
         valores: Valor[],
@@ -13,7 +17,7 @@ export class InicioBordaEmLinha extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["inicio-borda-em-linha", "início-borda-em-linha"],
+            InicioBordaEmLinha.nomeFolEs,
             InicioBordaEmLinha.nomeCss,
             pragmas,
         );
@@ -22,12 +26,12 @@ export class InicioBordaEmLinha extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "início-borda-em-linha",
+                    InicioBordaEmLinha.nomeFolEs[1],
                     valores
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "início-borda-em-linha",
+                    InicioBordaEmLinha.nomeFolEs[1],
                     valores,
                     null,
                     unidadesMedida

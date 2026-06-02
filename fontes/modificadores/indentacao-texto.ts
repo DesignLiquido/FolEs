@@ -4,23 +4,27 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class IndentacaoTexto extends Modificador {
+    static nomeFolEs: string[] = ["indentacao-texto", "indentação-texto"];
+    static nomeCss: string = "text-indent";
+    static descricao: string = 'Define a indentação de um elemento de texto da aplicação.';
+    static documentacao: string = '# `indentacao-texto`\nEsta propriedade define o comprimento do espaço vazio (recuo) que é colocado antes das linhas de texto em um bloco.';
+    static exemploCodigo: string = 'p {\n  indentacao-texto: 40px;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "cada-linha": "each-line",
         inverter: "hanging",
     };
-
-    static nomeCss: string = "text-indent";
 
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["indentacao-texto", "indentação-texto"], IndentacaoTexto.nomeCss, pragmas);
+        super(IndentacaoTexto.nomeFolEs, IndentacaoTexto.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "indentação-texto",
+                IndentacaoTexto.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 null,

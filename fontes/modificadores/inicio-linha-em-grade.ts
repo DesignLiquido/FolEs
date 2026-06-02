@@ -4,11 +4,15 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InicioLinhaEmGrade extends Modificador {
+    static nomeFolEs: string[] = ["inicio-linha-em-grade", "início-linha-em-grade"];
+    static nomeCss: string = "grid-row-start";
+    static descricao: string = 'Define a estilização do início de uma linha em grade.';
+    static documentacao: string = '# `inicio-linha-em-grade`\nEsta propriedade especifica a posição inicial de um item dentro da linha da grade, contribuindo com uma linha, uma extensão ou nada (automático) para seu posicionamento na grade, especificando assim a borda inicial em linha de sua área de grade.';
+    static exemploCodigo: string = 'linha {\n  inicio-linha-em-grade: 2;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
-
-    static nomeCss: string = "grid-row-start";
 
     constructor(
         valores: Valor[],
@@ -16,7 +20,7 @@ export class InicioLinhaEmGrade extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["inicio-linha-em-grade", "início-linha-em-grade"],
+            InicioLinhaEmGrade.nomeFolEs,
             InicioLinhaEmGrade.nomeCss,
             pragmas,
         );
@@ -25,7 +29,7 @@ export class InicioLinhaEmGrade extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    'início-linha-em-grade',
+                    InicioLinhaEmGrade.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     null,
@@ -35,7 +39,7 @@ export class InicioLinhaEmGrade extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "início-linha-em-grade",
+                    InicioLinhaEmGrade.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     null,

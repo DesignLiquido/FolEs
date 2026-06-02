@@ -4,7 +4,11 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class InicioBordaMascara extends Modificador {
+    static nomeFolEs: string[] = ["inicio-borda-mascara", "início-borda-máscara"];
     static nomeCss: string = "mask-border-outset";
+    static descricao: string = 'Define a estilização do início da máscara de uma borda.';
+    static documentacao: string = '# `inicio-borda-mascara`\nEsta propriedade especifica a distância pela qual a borda da máscara de um elemento é definida fora de seu próprio bloco.';
+    static exemploCodigo: string = 'divisao {\n  inicio-borda-mascara: 1rem;\n}';
 
     constructor(
         valores: Valor[],
@@ -12,14 +16,14 @@ export class InicioBordaMascara extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["inicio-borda-mascara", "início-borda-máscara"],
+            InicioBordaMascara.nomeFolEs,
             InicioBordaMascara.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValorNumerico(
-                "início-borda-máscara",
+                InicioBordaMascara.nomeFolEs[1],
                 valores,
                 null,
                 null,
