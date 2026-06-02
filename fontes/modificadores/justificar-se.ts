@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class JustificarSe extends Modificador {
+    static nomeFolEs: string = "justificar-se";
+    static nomeCss: string = "justify-self";
+    static descricao: string = 'Define como um item deve ser justificado dentro de sua própria área.';
+    static documentacao: string = '# `justificar-se`\nEsta propriedade define a maneira como uma caixa é justificada dentro de seu contêiner de alinhamento ao longo do eixo apropriado.';
+    static exemploCodigo: string = 'p {\n  justificar-se: centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         seguro: "safe",
         inseguro: "unsafe",
@@ -13,14 +19,12 @@ export class JustificarSe extends Modificador {
         "auto-fim": "self-end",
     };
 
-    static nomeCss: string = "justify-self";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("justificar-se", JustificarSe.nomeCss, pragmas);
+        super(JustificarSe.nomeFolEs, JustificarSe.nomeCss, pragmas);
 
         // Além dos valores listados, aceita também todos os valores da Lista
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'
@@ -35,7 +39,7 @@ export class JustificarSe extends Modificador {
 
         if (!variavel) {
             validarValoresAdicionais(
-                "justificar-se",
+                JustificarSe.nomeFolEs,
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,

@@ -4,14 +4,18 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LimiteFormaImagem extends Modificador {
+    static nomeFolEs: string = "limite-forma-imagem";
     static nomeCss: string = "shape-image-threshold";
+    static descricao: string = 'Define o limite da forma de uma imagem da aplicação.';
+    static documentacao: string = '# `limite-forma-imagem`\nEsta propriedade especifica o limite do canal alfa usado para extrair a forma usando uma imagem como valor da propriedade `forma-externa`.';
+    static exemploCodigo: string = 'imagem {\n  limite-forma-imagem: 0.7;\n}';
 
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("limite-forma-imagem", LimiteFormaImagem.nomeCss, pragmas);
+        super(LimiteFormaImagem.nomeFolEs, LimiteFormaImagem.nomeCss, pragmas);
 
         // Valor deve estar entre 0 e 1 (<alpha-value>) ou ser um valor global
         const valorNumericoTipado = valores[0] as ValorNumerico;
@@ -23,7 +27,7 @@ export class LimiteFormaImagem extends Modificador {
                 (valorQualitativoTipado.qualitativo in valoresGlobais)
             ) {
                 validarValorNumerico(
-                    "limite-forma-imagem",
+                    LimiteFormaImagem.nomeFolEs,
                     valores,
                     null,
                     null,

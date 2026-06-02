@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class JustificarConteudo extends Modificador {
+    static nomeFolEs: string[] = ["justificar-conteudo", "justificar-conteúdo"];
+    static nomeCss: string = "justify-content";
+    static descricao: string = 'Define como o navegador distribui o espaço entre e ao redor dos itens ao longo do eixo principal de um contêiner flexível.';
+    static documentacao: string = '# `justificar-conteudo`\nO alinhamento é feito após a aplicação dos comprimentos e margens automáticas, ou seja, se houver pelo menos um elemento flexível em um layout Flexbox com a propriedade `flex-crescimento` sendo diferente de 0, esta propriedade não terá efeito, pois não haverá espaço disponível.';
+    static exemploCodigo: string = 'divisão {\n  justificar-conteudo: centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         seguro: "safe",
         inseguro: "unsafe",
@@ -17,15 +23,13 @@ export class JustificarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     };
 
-    static nomeCss: string = "justify-content";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["justificar-conteudo", "justificar-conteúdo"],
+            JustificarConteudo.nomeFolEs,
             JustificarConteudo.nomeCss,
             pragmas,
         );
@@ -43,7 +47,7 @@ export class JustificarConteudo extends Modificador {
 
         if (!variavel) {
             validarValoresAdicionais(
-                "justificar-conteúdo",
+                JustificarConteudo.nomeFolEs[1],
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,

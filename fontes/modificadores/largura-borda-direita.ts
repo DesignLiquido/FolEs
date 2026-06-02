@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LarguraBordaDireita extends Modificador {
+    static nomeFolEs: string = "largura-borda-direita";
+    static nomeCss: string = "border-right-width";
+    static descricao: string = 'Define a lagura da borda direita de um elemento.';
+    static documentacao: string = '# `largura-borda-direita`\nA largura da borda direita pode ser definida com um valor inteiro não negativo ou com uma palavra-chave.';
+    static exemploCodigo: string = 'divisao {\n  largura-borda-direita: grossa;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fina: "thin",
         media: "medium",
@@ -11,18 +17,16 @@ export class LarguraBordaDireita extends Modificador {
         grossa: "thick",
     };
 
-    static nomeCss: string = "border-right-width";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("largura-borda-direita", LarguraBordaDireita.nomeCss, pragmas);
+        super(LarguraBordaDireita.nomeFolEs, LarguraBordaDireita.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "largura-borda-direita",
+                LarguraBordaDireita.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null,

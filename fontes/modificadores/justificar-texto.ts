@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class JustificarTexto extends Modificador {
+    static nomeFolEs: string = "justificar-texto";
+    static nomeCss: string = "text-justify";
+    static descricao: string = 'Define a justificação de um elemento de texto da aplicação.';
+    static documentacao: string = '# `justificar-texto`\nEsta propriedadedefine qual tipo de justificação deve ser aplicada ao texto quando um elemento tem a propriedade `alinhar-texto` definida com o valor justificar.';
+    static exemploCodigo: string = 'p {\n  justificar-texto: distribuir;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
@@ -11,16 +17,14 @@ export class JustificarTexto extends Modificador {
         distribuir: "distribute",
     };
 
-    static nomeCss: string = "text-justify";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("justificar-texto", JustificarTexto.nomeCss, pragmas);
+        super(JustificarTexto.nomeFolEs, JustificarTexto.nomeCss, pragmas);
 
-        if (!variavel) validarValores("justificar-texto", valores, this.valoresAceitos);
+        if (!variavel) validarValores(JustificarTexto.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

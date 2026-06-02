@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class LarguraMinima extends Modificador {
+    static nomeFolEs: string[] = ["largura-minima", "largura-minima"];
+    static nomeCss: string = "min-width";
+    static descricao: string = 'Define a largura mínima de um elemento da aplicação.';
+    static documentacao: string = '# `largura-minima`\nO uso desta propriedade evita que o valor atribuído à propriedade `largura` seja menor que o valor especificado nesta propriedade.';
+    static exemploCodigo: string = 'p {\n  largura-minima: 10vw;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo-maximo": "max-content",
         "conteúdo-máximo": "max-content",
@@ -12,20 +18,18 @@ export class LarguraMinima extends Modificador {
         nenhuma: "none",
     };
 
-    static nomeCss: string = "min-width";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["largura-minima", "largura-minima"], LarguraMinima.nomeCss, pragmas);
+        super(LarguraMinima.nomeFolEs, LarguraMinima.nomeCss, pragmas);
 
         const valoresExtra = ["fit-content"];
 
         if (!variavel) {
             validarValorNumerico(
-                "largura-minima",
+                LarguraMinima.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 valoresExtra,
