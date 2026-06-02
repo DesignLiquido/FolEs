@@ -7,24 +7,28 @@ import { validarValores } from "./validacoes/comum";
 import { validarIdentificacaoPersonalizada } from "./validacoes/identificacao-personalizada";
 
 export class NomeAnimacao extends Modificador {
+    static nomeFolEs: string[] = ["nome-animacao", "nome-animação"];
+    static nomeCss: string = "animation-name";
+    static descricao: string = 'Especifica os nomes de uma ou mais regras que descrevem a animação a ser aplicada a um elemento.';
+    static documentacao: string = '# `nome-animacao`\nVárias regras de arroba são especificadas como uma lista de nomes separados por vírgula. Se o nome especificado não corresponder a nenhuma regra, nenhuma propriedade será animada.';
+    static exemploCodigo: string = 'imagem {\n  nome-animacao: teste_05;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
     };
-
-    static nomeCss: string = "animation-name";
 
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["nome-animacao", "nome-animação"], NomeAnimacao.nomeCss, pragmas);
+        super(NomeAnimacao.nomeFolEs, NomeAnimacao.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "nome-animação",
+                    NomeAnimacao.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     null,
@@ -38,7 +42,7 @@ export class NomeAnimacao extends Modificador {
                 const aceitos: Array<string> = Object.keys(this.valoresAceitos);
                 if (globais.includes(valor.qualitativo) || aceitos.includes(valor.qualitativo)) {
                     validarValores(
-                        "nome-animação",
+                        NomeAnimacao.nomeFolEs[1],
                         valores,
                         this.valoresAceitos,
                         null

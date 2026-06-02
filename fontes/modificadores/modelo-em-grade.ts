@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ModeloEmGrade extends Modificador {
+    static nomeFolEs: string = "modelo-em-grade";
+    static nomeCss: string = "grid-template";
+    static descricao: string = 'Define as estilizações de um elemento com exibição em grade.';
+    static documentacao: string = '# `modelo-em-grade`\nPropriedade de atribuição abreviada para definir colunas de grade, linhas de grade e áreas de grade.';
+    static exemploCodigo: string = 'tabela {\n  modelo-em-grade: auto;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         auto: "auto",
@@ -16,14 +22,12 @@ export class ModeloEmGrade extends Modificador {
         alvenaria: "masonry",
     };
 
-    static nomeCss: string = "grid-template";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-em-grade", ModeloEmGrade.nomeCss, pragmas);
+        super(ModeloEmGrade.nomeFolEs, ModeloEmGrade.nomeCss, pragmas);
 
         // TODO: Também aceita receber o valor do tipo matriz
         // Ex.: grid-template:
@@ -38,7 +42,7 @@ export class ModeloEmGrade extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "modelo-em-grade",
+                    ModeloEmGrade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -46,7 +50,7 @@ export class ModeloEmGrade extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "modelo-em-grade",
+                    ModeloEmGrade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
