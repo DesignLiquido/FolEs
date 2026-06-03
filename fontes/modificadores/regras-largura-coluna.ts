@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RegrasLarguraColuna extends Modificador {
+    static nomeFolEs: string = "regras-largura-coluna";
+    static nomeCss: string = "column-rule-width";
+    static descricao: string = 'Define a largura da linha desenhada entre as colunas em um layout de várias colunas.';
+    static documentacao: string = '# `regras-largura-coluna`\nEsta propriedade também pode ser definida através da propriedade de atribuição abreviada `regras-coluna`.';
+    static exemploCodigo: string = 'p {\n  regras-largura-coluna: pontilhado;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fina: "thin",
         media: "medium",
@@ -11,18 +17,16 @@ export class RegrasLarguraColuna extends Modificador {
         grossa: "thick",
     };
 
-    static nomeCss: string = "column-rule-width";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("regras-largura-coluna", RegrasLarguraColuna.nomeCss, pragmas);
+        super(RegrasLarguraColuna.nomeFolEs, RegrasLarguraColuna.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "regras-largura-coluna",
+                RegrasLarguraColuna.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null,

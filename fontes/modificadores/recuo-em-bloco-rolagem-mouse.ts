@@ -5,24 +5,28 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RecuoEmBlocoRolagemMouse extends Modificador {
+    static nomeFolEs: string = "recuo-em-bloco-rolagem-mouse";
+    static nomeCss: string = "scroll-padding-block";
+    static descricao: string = 'Define o preenchimento de rolagem de um elemento na dimensão do bloco.';
+    static documentacao: string = '# `recuo-em-bloco-rolagem-mouse`\nA área de preenchimento de um elemento é o espaço entre seu conteúdo e sua borda.';
+    static exemploCodigo: string = 'p {\n  recuo-em-bloco-rolagem-mouse: 1em 0.5em;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
-
-    static nomeCss: string = "scroll-padding-block";
 
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recuo-em-bloco-rolagem-mouse", RecuoEmBlocoRolagemMouse.nomeCss, pragmas);
+        super(RecuoEmBlocoRolagemMouse.nomeFolEs, RecuoEmBlocoRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "recuo-em-bloco-rolagem-mouse",
+                    RecuoEmBlocoRolagemMouse.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -30,7 +34,7 @@ export class RecuoEmBlocoRolagemMouse extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "recuo-em-bloco-rolagem-mouse",
+                    RecuoEmBlocoRolagemMouse.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,

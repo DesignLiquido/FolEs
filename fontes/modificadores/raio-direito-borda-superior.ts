@@ -4,7 +4,11 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RaioDireitoBordaSuperior extends Modificador {
+    static nomeFolEs: string = "raio-direito-borda-superior";
     static nomeCss: string = "border-top-right-radius";
+    static descricao: string = 'Arredonda o canto superior direito de um elemento.';
+    static documentacao: string = '# `raio-direito-borda-superior`\nAtravés desta propriedade é possível especificar o raio da elipse e definir a curvatura do canto.';
+    static exemploCodigo: string = 'divisão {\n  raio-direito-borda-superior: 5% 5%;\n}';
 
     constructor(
         valores: Valor[],
@@ -12,14 +16,14 @@ export class RaioDireitoBordaSuperior extends Modificador {
         variavel?: boolean
     ) {
         super(
-            "raio-direito-borda-superior",
+            RaioDireitoBordaSuperior.nomeFolEs,
             RaioDireitoBordaSuperior.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValorNumerico(
-                "raio-direito-borda-superior",
+                RaioDireitoBordaSuperior.nomeFolEs,
                 valores,
                 null,
                 null,

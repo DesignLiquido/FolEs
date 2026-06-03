@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class SintetizarFonte extends Modificador {
+    static nomeFolEs: string = "sintetizar-fonte";
+    static nomeCss: string = "font-synthesis";
+    static descricao: string = 'Define as fontes a serem sintetizadas pelo navegador.';
+    static documentacao: string = '# `sintetizar-fonte`\nPropriedade que controla quais tipos de letra (negrito, itálico ou maiúsculas pequenas) podem ser sintetizados pelo navegador.';
+    static exemploCodigo: string = 'p {\n  sintetizar-fonte: itálico;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
         "em-negrito": "weight",
@@ -13,26 +19,24 @@ export class SintetizarFonte extends Modificador {
         "maiúsculas-pequenas": "small-caps",
     };
 
-    static nomeCss: string = "font-synthesis";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("sintetizar-fonte", SintetizarFonte.nomeCss, pragmas);
+        super(SintetizarFonte.nomeFolEs, SintetizarFonte.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "sintetizar-fonte",
+                    SintetizarFonte.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarValores(
-                    "sintetizar-fonte",
+                    SintetizarFonte.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );
