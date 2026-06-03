@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarConteudo extends Modificador {
+    static nomeFolEs: string[] = ["posicionar-conteudo", "posicionar-conteúdo"];
+    static nomeCss: string = "place-content";
+    static descricao: string = 'Define a posição de um referido conteúdo.';
+    static documentacao: string = '# `posicionar-conteudo`\nPropriedade de atribuição abreviada que permite alinhar o conteúdo ao longo das direções de bloco e linha de uma só vez (ou seja, as propriedades `alinhar-conteúdo` e `justificar-conteúdo`) em um sistema de layout relevante, como Grid ou Flexbox.';
+    static exemploCodigo: string = 'p {\n  posicionar-conteudo: centro início;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
@@ -25,15 +31,13 @@ export class PosicionarConteudo extends Modificador {
         "última-linha-base": "last baseline",
     };
 
-    static nomeCss: string = "place-content";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["posicionar-conteudo", "posicionar-conteúdo"],
+            PosicionarConteudo.nomeFolEs,
             PosicionarConteudo.nomeCss,
             pragmas,
         );
@@ -42,14 +46,14 @@ export class PosicionarConteudo extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "condição-extra",
-                    "posicionar-conteúdo",
+                    PosicionarConteudo.nomeFolEs[1],
                     valores,
                     posicoes,
                     this.valoresAceitos
                 );
             } else {
                 validarValoresAdicionais(
-                    "posicionar-conteúdo",
+                    PosicionarConteudo.nomeFolEs[1],
                     valores,
                     posicoes,
                     this.valoresAceitos

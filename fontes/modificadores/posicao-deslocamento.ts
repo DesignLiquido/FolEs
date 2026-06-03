@@ -6,11 +6,15 @@ import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class PosicaoDeslocamento extends Modificador {
+    static nomeFolEs: string[] = ["posicao-deslocamento", "posição-deslocamento"];
+    static nomeCss: string = "offset-position";
+    static descricao: string = 'Define a posição inicial do deslocamento de um elemento.';
+    static documentacao: string = '# `posicao-deslocamento`\nEssa propriedade normalmente é usada em combinação com a propriedade `trajeto-deslocamento` para criar um efeito de movimento. O valor determina onde o elemento é colocado inicialmente para se mover ao longo de um trajeto.';
+    static exemploCodigo: string = 'p {\n  posicao-deslocamento: centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
-
-    static nomeCss: string = "offset-position";
 
     constructor(
         valores: Valor[],
@@ -18,7 +22,7 @@ export class PosicaoDeslocamento extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["posicao-deslocamento", "posição-deslocamento"],
+            PosicaoDeslocamento.nomeFolEs,
             PosicaoDeslocamento.nomeCss,
             pragmas,
         );
@@ -32,7 +36,7 @@ export class PosicaoDeslocamento extends Modificador {
 
                     if (valor instanceof ValorQualitativo) {
                         validarValoresAdicionais(
-                            "posição-deslocamento",
+                            PosicaoDeslocamento.nomeFolEs[1],
                             arrayValores,
                             posicoesBasicas,
                             this.valoresAceitos,
@@ -42,7 +46,7 @@ export class PosicaoDeslocamento extends Modificador {
                         Object.keys(posicoesBasicas).forEach((posicao) => valoresExtra.push(posicao));
 
                         validarValorNumerico(
-                            "posição-deslocamento",
+                            PosicaoDeslocamento.nomeFolEs[1],
                             arrayValores,
                             this.valoresAceitos,
                             valoresExtra,
@@ -52,7 +56,7 @@ export class PosicaoDeslocamento extends Modificador {
                 });
             } else {
                 validarValoresAdicionais(
-                    "posição-deslocamento",
+                    PosicaoDeslocamento.nomeFolEs[1],
                     valores,
                     posicoesBasicas,
                     this.valoresAceitos,

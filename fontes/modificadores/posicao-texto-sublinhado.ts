@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class PosicaoTextoSublinhado extends Modificador {
+    static nomeFolEs: string[] = ["posicao-texto-sublinhado", "posição-texto-sublinhado"];
+    static nomeCss: string = "text-underline-position";
+    static descricao: string = 'Especifica a posição do texto sublinhado.';
+    static documentacao: string = '# `posicao-texto-sublinhado`\nUm texto sublinhado na aplicação é definido ao atribuir o valor sublinhado à propriedade `decoração-texto`.';
+    static exemploCodigo: string = 'p {\n  posicao-texto-sublinhado: de-frente;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         direita: "right",
@@ -11,22 +17,20 @@ export class PosicaoTextoSublinhado extends Modificador {
         "de-frente": "from-front",
     };
 
-    static nomeCss: string = "text-underline-position";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["posicao-texto-sublinhado", "posição-texto-sublinhado"],
+            PosicaoTextoSublinhado.nomeFolEs,
             PosicaoTextoSublinhado.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValores(
-                "posição-texto-sublinhado",
+                PosicaoTextoSublinhado.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
             );

@@ -4,12 +4,16 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class PropriedadeTransicao extends Modificador {
+    static nomeFolEs: string[] = ["propriedade-transicao", "propriedade-transição"];
+    static nomeCss: string = "transition-property";
+    static descricao: string = 'Especifica as definições de uma transição a ser aplicada sobre um elemento.';
+    static documentacao: string = '# `propriedade-transicao`\nEsta propriedade define em quais propriedades deve ser aplicado um efeito de transição.';
+    static exemploCodigo: string = 'p {\n  propriedade-transicao: todas;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
         todas: "all",
     };
-
-    static nomeCss: string = "transition-property";
 
     constructor(
         valores: Valor[],
@@ -17,7 +21,7 @@ export class PropriedadeTransicao extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["propriedade-transicao", "propriedade-transição"],
+            PropriedadeTransicao.nomeFolEs,
             PropriedadeTransicao.nomeCss,
             pragmas,
         );
@@ -26,7 +30,7 @@ export class PropriedadeTransicao extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "propriedade-transição",
+                    PropriedadeTransicao.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     null,
@@ -36,7 +40,7 @@ export class PropriedadeTransicao extends Modificador {
                 );
             } else {
                 validarValores(
-                    "propriedade-transição",
+                    PropriedadeTransicao.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );
