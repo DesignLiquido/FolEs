@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class QuebrarDentro extends Modificador {
+    static nomeFolEs: string = "quebrar-dentro";
+    static nomeCss: string = "break-inside";
+    static descricao: string = 'Define como as quebras de página, de coluna ou de região devem se comportar dentro de uma caixa.';
+    static documentacao: string = '# `quebrar-dentro`\nSe não houver nenhuma caixa gerada, a propriedade será ignorada.';
+    static exemploCodigo: string = 'p {\n  quebrar-dentro: evitar-coluna;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         evitar: "avoid",
@@ -13,16 +19,14 @@ export class QuebrarDentro extends Modificador {
         "evitar-região": "avoid-region",
     };
 
-    static nomeCss: string = "break-inside";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("quebrar-dentro", QuebrarDentro.nomeCss, pragmas);
+        super(QuebrarDentro.nomeFolEs, QuebrarDentro.nomeCss, pragmas);
 
-        if (!variavel) validarValores("quebrar-dentro", valores, this.valoresAceitos);
+        if (!variavel) validarValores(QuebrarDentro.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;
