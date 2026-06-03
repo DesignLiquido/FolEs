@@ -3,11 +3,15 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class OrigemBordaMascara extends Modificador {
+    static nomeFolEs: string[] = ["origem-borda-mascara", "origem-borda-máscara"];
+    static nomeCss: string = "mask-border-source";
+    static descricao: string = 'Define a imagem de origem usada para criar a borda da máscara de um elemento.';
+    static documentacao: string = '# `origem-borda-mascara`\nUma propriedade relacionada para este tipo de estilização é a propriedade `fatiar-borda-máscara`, usada para dividir a imagem de origem em regiões, que são aplicadas dinamicamente à borda da máscara.';
+    static exemploCodigo: string = 'imagem {\n  origem-borda-mascara: url("image.png");\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
     };
-
-    static nomeCss: string = "mask-border-source";
 
     constructor(
         valores: Valor[],
@@ -15,7 +19,7 @@ export class OrigemBordaMascara extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["origem-borda-mascara", "origem-borda-máscara"],
+            OrigemBordaMascara.nomeFolEs,
             OrigemBordaMascara.nomeCss,
             pragmas,
         );
@@ -24,7 +28,7 @@ export class OrigemBordaMascara extends Modificador {
 
         if (!variavel) {
             validarValores(
-                "origem-borda-máscara",
+                OrigemBordaMascara.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

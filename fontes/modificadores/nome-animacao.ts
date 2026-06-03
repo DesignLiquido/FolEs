@@ -1,4 +1,3 @@
-import { NUltimoFilho } from "../pseudoclasses/n-último-filho";
 import { Valor, ValorQualitativo } from "../valores";
 import { valoresGlobais } from "./atributos/globais";
 import { Modificador, PragmasModificador } from "./superclasse";
