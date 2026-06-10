@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class VelocidadeAnimacao extends Modificador {
+    static nomeFolEs: string[] = ["velocidade-animacao", "velocidade-animação"];
+    static nomeCss: string = "animation-timing-function";
+    static descricao: string = 'Define como uma animação progride na duração de cada ciclo.';
+    static documentacao: string = '# `velocidade-animacao`\nMuitas vezes é conveniente usar a propriedade abreviada animationpara definir todas as propriedades da animação de uma só vez.';
+    static exemploCodigo: string = 'imagem {\n  velocidade-animacao: inicio-lento;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "velocidade-normal": "ease",
         linear: "linear",
@@ -21,15 +27,13 @@ export class VelocidadeAnimacao extends Modificador {
         final: "end",
     };
 
-    static nomeCss: string = "animation-timing-function";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["velocidade-animacao", "velocidade-animação"],
+            VelocidadeAnimacao.nomeFolEs,
             VelocidadeAnimacao.nomeCss,
             pragmas,
         );
@@ -38,7 +42,7 @@ export class VelocidadeAnimacao extends Modificador {
 
         if (!variavel) {
             validarValores(
-                "velocidade-animação",
+                VelocidadeAnimacao.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

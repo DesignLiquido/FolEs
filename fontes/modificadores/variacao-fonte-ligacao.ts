@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteLigacao extends Modificador {
+    static nomeFolEs: string[] = ["variacao-fonte-ligacao", "variação-fonte-ligação"];
+    static nomeCss: string = "font-variant-ligatures";
+    static descricao: string = 'Controla quais ligaduras e formas contextuais são usadas no conteúdo textual dos elementos aos quais ela se aplica.';
+    static documentacao: string = '# `variacao-fonte-ligacao`\nO uso desta propriedade leva a formas mais harmonizadas no texto resultante.';
+    static exemploCodigo: string = 'p {\n  variacao-fonte-ligacao: ligações-discretas;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
         nenhuma: "none",
@@ -23,22 +29,20 @@ export class VariacaoFonteLigacao extends Modificador {
         "não-contextual": "no-contextual",
     };
 
-    static nomeCss: string = "font-variant-ligatures";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["variacao-fonte-ligacao", "variação-fonte-ligação"],
+            VariacaoFonteLigacao.nomeFolEs,
             VariacaoFonteLigacao.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValores(
-                "variação-fonte-ligação",
+                VariacaoFonteLigacao.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
             );

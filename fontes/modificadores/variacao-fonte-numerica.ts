@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonteNumerica extends Modificador {
+    static nomeFolEs: string[] = ["variacao-fonte-numerica", "variação-fonte-numérica"];
+    static nomeCss: string = "font-variant-numeric";
+    static descricao: string = 'Controla o uso de glifos da fonte de um referido elemento.';
+    static documentacao: string = '# `variacao-fonte-numerica`\nPropriedade aplicável para números, frações e marcadores ordinais.';
+    static exemploCodigo: string = 'p {\n  variacao-fonte-numerica: numeros-antigos\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
         ordinal: "ordinal",
@@ -21,22 +27,20 @@ export class VariacaoFonteNumerica extends Modificador {
         "frações-empilhadas": "stacked-fractions",
     };
 
-    static nomeCss: string = "font-variant-numeric";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
         super(
-            ["variacao-fonte-numerica", "variação-fonte-numérica"],
+            VariacaoFonteNumerica.nomeFolEs,
             VariacaoFonteNumerica.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValores(
-                "variação-fonte-numérica",
+                VariacaoFonteNumerica.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
             );

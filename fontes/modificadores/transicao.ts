@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Transicao extends Modificador {
+    static nomeFolEs: string[] = ["transicao", "transição"];
+    static nomeCss: string = "transition";
+    static descricao: string = 'Especifica os efeitos de transição de um elemento.';
+    static documentacao: string = '# `transicao`\nPropriedade de atribuição abreviada para definir todos os efeitos de transição utilizando uma única propriedade.';
+    static exemploCodigo: string = 'imagem {\n  transicao: final-lento;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "velocidade-normal": "ease",
         "inicio-lento": "ease-in",
@@ -32,14 +38,12 @@ export class Transicao extends Modificador {
         "sombra-caixa": "box-shadow",
     };
 
-    static nomeCss: string = "transition";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["transicao", "transição"], "transition", pragmas);
+        super(Transicao.nomeFolEs, "transition", pragmas);
 
         const valoresExtra = ["linear"];
 
@@ -47,7 +51,7 @@ export class Transicao extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "transição",
+                    Transicao.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -57,7 +61,7 @@ export class Transicao extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "transição",
+                    Transicao.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
