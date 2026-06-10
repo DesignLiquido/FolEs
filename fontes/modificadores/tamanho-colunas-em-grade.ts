@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TamanhoColunasEmGrade extends Modificador {
+    static nomeFolEs: string = "tamanho-colunas-em-grade";
+    static nomeCss: string = "grid-auto-columns";
+    static descricao: string = 'Especifica o tamanho da trilha de uma coluna em grade.';
+    static documentacao: string = '# `tamanho-colunas-em-grade`\nEsta propriedade afeta apenas colunas cujo tamanho não está definido.';
+    static exemploCodigo: string = 'coluna {\n  tamanho-colunas-em-grade: 20cm;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo-maximo": "max-content",
         "conteúdo-máximo": "max-content",
@@ -12,14 +18,12 @@ export class TamanhoColunasEmGrade extends Modificador {
         auto: "auto",
     };
 
-    static nomeCss: string = "grid-auto-columns";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-colunas-em-grade", TamanhoColunasEmGrade.nomeCss, pragmas);
+        super(TamanhoColunasEmGrade.nomeFolEs, TamanhoColunasEmGrade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 
@@ -27,7 +31,7 @@ export class TamanhoColunasEmGrade extends Modificador {
 
         if (!variavel) {
             validarValorNumerico(
-                "tamanho-colunas-em-grade",
+                TamanhoColunasEmGrade.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

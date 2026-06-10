@@ -4,24 +4,28 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TamanhoFundo extends Modificador {
+    static nomeFolEs: string = "tamanho-fundo";
+    static nomeCss: string = "background-size";
+    static descricao: string = 'Define o tamanho da imagem de fundo do elemento.';
+    static documentacao: string = '# `tamanho-fundo`\nA imagem pode ser deixada em seu tamanho natural, esticado ou restrito para caber no espaço disponível.';
+    static exemploCodigo: string = 'corpo {\n  tamanho-fundo: alargar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         alargar: "contain",
         diminuir: "cover",
         auto: "auto",
     };
 
-    static nomeCss: string = "background-size";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("tamanho-fundo", TamanhoFundo.nomeCss, pragmas);
+        super(TamanhoFundo.nomeFolEs, TamanhoFundo.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "tamanho-fundo",
+                TamanhoFundo.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null,

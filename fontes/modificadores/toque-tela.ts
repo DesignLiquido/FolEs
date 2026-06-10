@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class ToqueTela extends Modificador {
+    static nomeFolEs: string = "toque-tela";
+    static nomeCss: string = "touch-action";
+    static descricao: string = 'Lida com eventos que ocorrem quando um usuário toca em uma tela touchscreen.';
+    static documentacao: string = '# `toque-tela`\nPropriedade que especifica como a região de um elemento pode ser manipulada por um usuário que utilize uma tela sensível ao toque (por exemplo, ampliando os recursos incorporados ao navegador).';
+    static exemploCodigo: string = 'imagem {\n  toque-tela: zoom-pinça;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
@@ -18,16 +24,14 @@ export class ToqueTela extends Modificador {
         "zoom-pinça": "pinch-zoom",
     };
 
-    static nomeCss: string = "touch-action";
-
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("toque-tela", ToqueTela.nomeCss, pragmas);
+        super(ToqueTela.nomeFolEs, ToqueTela.nomeCss, pragmas);
 
-        if (!variavel) validarValores("toque-tela", valores, this.valoresAceitos);
+        if (!variavel) validarValores(ToqueTela.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;
