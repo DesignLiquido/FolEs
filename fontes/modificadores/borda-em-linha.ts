@@ -5,18 +5,24 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class BordaEmLinha extends Modificador {
+    static nomeFolEs: string = "borda-em-linha";
+    static nomeCss: string = "border-inline";
+    static descricao: string = 'Define as estilizações referentes à borda em linha de um elemento.';
+    static documentacao: string = '# `borda-em-linha`\nPropriedade de atribuição abreviada para definir todos os valores das propriedades de borda em linha de um elemento utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'botao {\n borda-em-linha: 2px tracejado;\n}';
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("borda-em-linha", "border-inline", pragmas);
+        super(BordaEmLinha.nomeFolEs, BordaEmLinha.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "borda-em-linha",
+                    BordaEmLinha.nomeFolEs,
                     valores,
                     null,
                     null,
@@ -24,7 +30,7 @@ export class BordaEmLinha extends Modificador {
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "borda-em-linha",
+                    BordaEmLinha.nomeFolEs,
                     valores,
                     null,
                     unidadesMedida

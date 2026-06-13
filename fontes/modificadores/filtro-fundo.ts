@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class FiltroFundo extends Modificador {
+    static nomeFolEs: string = "filtro-fundo";
+    static nomeCss: string = "backdrop-filter";
+    static descricao: string = 'Permite aplicar efeitos gráficos como desfoque ou mudança de cor na área atrás de um elemento.';
+    static documentacao: string = '# `filtro-fundo`\nPara ver o efeito desta propriedade, tendo em vista que ela se aplica a tudo atrás do elemento, você deve tornar o elemento ou seu plano de fundo, pelo menos, parcialmente transparente.';
+    static exemploCodigo: string = 'imagem {\n  filtro-fundo: url(commonfilters.svg#filter); \n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
     };
@@ -12,7 +18,7 @@ export class FiltroFundo extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("filtro-fundo", "backdrop-filter", pragmas);
+        super(FiltroFundo.nomeFolEs, FiltroFundo.nomeCss, pragmas);
 
         const valoresExtra = [
             "blur",
@@ -30,7 +36,7 @@ export class FiltroFundo extends Modificador {
 
         if (!variavel) {
             validarValores(
-                "filtro-fundo",
+                FiltroFundo.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

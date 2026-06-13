@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class DecoracaoTextoSublinhado extends Modificador {
+    static nomeFolEs: string[] = ["decoracao-texto-sublinhado", "decoração-texto-sublinhado"];
+    static nomeCss: string = "text-decoration-skip-ink";
+    static descricao: string = 'Especifica como as linhas sobrepostas e sublinhadas são desenhadas.';
+    static documentacao: string = '# `decoracao-texto-sublinhado`\nEspecifica como as linhas sobrepostas e sublinhadas são desenhadas.';
+    static exemploCodigo: string = 'p {\n  decoracao-texto-sublinhado: tudo;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
@@ -15,14 +21,14 @@ export class DecoracaoTextoSublinhado extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["decoracao-texto-sublinhado", "decoração-texto-sublinhado"],
-            "text-decoration-skip-ink",
+            DecoracaoTextoSublinhado.nomeFolEs,
+            DecoracaoTextoSublinhado.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValores(
-                "decoração-texto-sublinhado",
+                DecoracaoTextoSublinhado.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
             );

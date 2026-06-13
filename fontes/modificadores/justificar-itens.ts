@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class JustificarItens extends Modificador {
+    static nomeFolEs: string = "justificar-itens";
+    static nomeCss: string = "justify-items";
+    static descricao: string = 'Define como justificar um item ao longo de um eixo especificado.';
+    static documentacao: string = '# `justificar-itens`\nEsta propriedade define o padrão da propriedade `justificar-se` para todos os itens de um bloco, dando a todos uma forma padrão de justificá-los ao longo do eixo especificado.';
+    static exemploCodigo: string = 'divisao {\n  justificar-itens: esticar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         seguro: "safe",
         inseguro: "unsafe",
@@ -18,7 +24,7 @@ export class JustificarItens extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("justificar-itens", "justify-items", pragmas);
+        super(JustificarItens.nomeFolEs, JustificarItens.nomeCss, pragmas);
 
         // Além dos valores listados, aceita também todos os valores da Lista
         // de Posições - exceto 'top' e 'bottom' - 'superior' e 'inferior'
@@ -33,7 +39,7 @@ export class JustificarItens extends Modificador {
 
         if (!variavel) {
             validarValoresAdicionais(
-                "justificar-itens",
+                JustificarItens.nomeFolEs,
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,

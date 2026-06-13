@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorFonte } from "./validacoes/fonte";
 
 export class FonteTexto extends Modificador {
+    static nomeFolEs: string = "fonte-texto";
+    static nomeCss: string = "font-family";
+    static descricao: string = 'Define uma família de fonte a ser aplicada em um elemento de texto.';
+    static documentacao: string = '# `fonte-texto`\nEsta propriedade especifica uma lista de um ou mais nomes de famílias de fontes e/ou nomes de famílias genéricas para o elemento selecionado.';
+    static exemploCodigo: string = 'p {\n  fonte-texto: sans-serif;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         serif: "serif",
         "sans-serif": "sans-serif",
@@ -40,20 +46,20 @@ export class FonteTexto extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fonte-texto", "font-family", pragmas);
+        super(FonteTexto.nomeFolEs, FonteTexto.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "fonte",
-                    "fonte-texto",
+                    FonteTexto.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                 );
                 // TODO: Recebe validacaoPersonalizada como true
             } else {
                 validarValorFonte(
-                    "fonte-texto",
+                    FonteTexto.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );

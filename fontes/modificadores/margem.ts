@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Margem extends Modificador {
+    static nomeFolEs: string = "margem";
+    static nomeCss: string = "margin";
+    static descricao: string = 'Define a estilização da margem de um elemento da aplicação.';
+    static documentacao: string = '# `margem`\nPropriedade de atribuição abreviada que define a área de margem em todos os quatro lados de um elemento.';
+    static exemploCodigo: string = 'divisao {\n  margem: 1em auto 2em 0;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
@@ -14,13 +20,13 @@ export class Margem extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem", "margin", pragmas);
+        super(Margem.nomeFolEs, Margem.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "margem",
+                    Margem.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -28,7 +34,7 @@ export class Margem extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "margem",
+                    Margem.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,

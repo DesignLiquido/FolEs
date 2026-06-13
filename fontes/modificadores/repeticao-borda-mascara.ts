@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class RepeticaoBordaMascara extends Modificador {
+    static nomeFolEs: string[] = ["repeticao-borda-mascara", "repetição-borda-máscara"];
+    static nomeCss: string = "mask-border-repeat";
+    static descricao: string = 'Especifica o modo de repetição da máscara de uma borda.';
+    static documentacao: string = '# `repeticao-borda-mascara`\nPropriedade que define como as regiões de borda de uma imagem de origem são ajustadas para caber nas dimensões da borda da máscara de um elemento.';
+    static exemploCodigo: string = 'imagem {\n  repeticao-borda-mascara: arredondar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         esticar: "stretch",
         repetir: "repeat",
@@ -17,14 +23,14 @@ export class RepeticaoBordaMascara extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["repeticao-borda-mascara", "repetição-borda-máscara"],
-            "mask-border-repeat",
+            RepeticaoBordaMascara.nomeFolEs,
+            RepeticaoBordaMascara.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValores(
-                "repetição-borda-máscara",
+                RepeticaoBordaMascara.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
             );

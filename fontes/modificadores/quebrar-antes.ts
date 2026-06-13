@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class QuebrarAntes extends Modificador {
+    static nomeFolEs: string = "quebrar-antes";
+    static nomeCss: string = "break-before";
+    static descricao: string = 'Define como as quebras de página, de coluna ou de região devem se comportar antes de uma caixa.';
+    static documentacao: string = '# `quebrar-antes`\nSe não houver nenhuma caixa gerada, a propriedade será ignorada.';
+    static exemploCodigo: string = 'p {\n  quebrar-antes: evitar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         evitar: "avoid",
@@ -29,9 +35,9 @@ export class QuebrarAntes extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("quebrar-antes", "break-before", pragmas);
+        super(QuebrarAntes.nomeFolEs, QuebrarAntes.nomeCss, pragmas);
 
-        if (!variavel) validarValores("quebrar-antes", valores, this.valoresAceitos);
+        if (!variavel) validarValores(QuebrarAntes.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

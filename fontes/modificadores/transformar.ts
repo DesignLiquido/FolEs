@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class Transformar extends Modificador {
+    static nomeFolEs: string = "transformar";
+    static nomeCss: string = "transform";
+    static descricao: string = 'Permite girar, dimensionar, inclinar ou traduzir um elemento.';
+    static documentacao: string = '# `transformar\nA propriedade modifica o espaço de coordenadas do modelo de formatação visual CSS.';
+    static exemploCodigo: string = 'p {\n  transformar: nenhum;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
     };
@@ -12,7 +18,7 @@ export class Transformar extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("transformar", "transform", pragmas);
+        super(Transformar.nomeFolEs, Transformar.nomeCss, pragmas);
 
         const valoresExtra = [
             "perspective",
@@ -38,7 +44,7 @@ export class Transformar extends Modificador {
 
         if (!variavel) {
             validarValores(
-                "transformar",
+                Transformar.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

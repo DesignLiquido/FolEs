@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharUltimoItem extends Modificador {
+    static nomeFolEs: string[] = ["alinhar-ultimo-item", "alinhar-último-item"];
+    static nomeCss: string = "text-align-last";
+    static descricao: string = 'Define o alinhamento da última linha de um bloco ou linha.';
+    static documentacao: string = '# `alinhar-ultimo-item`\nEsta propriedade só terá efeito se for aplicado logo antes de uma quebra de linha forçada.';
+    static exemploCodigo: string = 'titulo1 {\n  alinhar-ultimo-item: esquerda;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         justificar: "justify",
         auto: "auto",
@@ -18,8 +24,8 @@ export class AlinharUltimoItem extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["alinhar-ultimo-item", "alinhar-último-item"],
-            "text-align-last",
+            AlinharUltimoItem.nomeFolEs,
+            AlinharUltimoItem.nomeCss,
             pragmas,
         );
 
@@ -36,7 +42,7 @@ export class AlinharUltimoItem extends Modificador {
 
         if (!variavel) {
             validarValoresAdicionais(
-                "alinhar-último-item",
+                AlinharUltimoItem.nomeFolEs[1],
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,

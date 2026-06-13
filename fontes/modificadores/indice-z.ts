@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class IndiceZ extends Modificador {
+    static nomeFolEs: string[] = ["indice-z", "índice-z"];
+    static nomeCss: string = "z-index";
+    static descricao: string = 'Define a ordem de aparição um elemento quando esse sobrepõe seus descendentes ou outros elementos flexíveis.';
+    static documentacao: string = '# `indice-z`\nElementos com um índice-z maior cobrem aqueles com um índice-z menor.';
+    static exemploCodigo: string = 'divisao {\n  indice-z: 0;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
@@ -12,11 +18,11 @@ export class IndiceZ extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["indice-z", "índice-z"], "z-index", pragmas);
+        super(IndiceZ.nomeFolEs, IndiceZ.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "índice-z",
+                IndiceZ.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 null,

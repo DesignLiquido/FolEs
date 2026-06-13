@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class BordaEsquerda extends Modificador {
+    static nomeFolEs: string = "borda-esquerda";
+    static nomeCss: string = "border-left";
+    static descricao: string = 'Define as estilizações referentes à borda esquerda de um elemento.';
+    static documentacao: string = '# `borda-esquerda`\nPropriedade de atribuição abreviada para definir todos os valores das propriedades de borda esquerda de um elemento utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'botao {\n borda-esquerda: 5px pontilhado;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fina: "thin",
         media: "medium",
@@ -18,13 +24,13 @@ export class BordaEsquerda extends Modificador {
         variavel?: boolean
 
     ) {
-        super("borda-esquerda", "border-left", pragmas);
+        super(BordaEsquerda.nomeFolEs, BordaEsquerda.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "borda-esquerda",
+                    BordaEsquerda.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -32,7 +38,7 @@ export class BordaEsquerda extends Modificador {
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "borda-esquerda",
+                    BordaEsquerda.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     unidadesMedida

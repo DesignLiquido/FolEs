@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class RepetirAnimacao extends Modificador {
+    static nomeFolEs: string[] = ["repetir-animacao", "repetir-animação"];
+    static nomeCss: string = "animation-iteration-count";
+    static descricao: string = 'Define o número de vezes que uma sequência de animação deve ser reproduzida antes de parar.';
+    static documentacao: string = '# `repetir-animacao`\nPara definir as demais estilizações de uma animação, é recomendado utilizar a propriedade de atribuição abreviada `animação``.';
+    static exemploCodigo: string = 'divisao {\n  repetir-animacao: 3;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         infinito: "infinite",
     };
@@ -13,14 +19,14 @@ export class RepetirAnimacao extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["repetir-animacao", "repetir-animação"],
-            "animation-iteration-count",
+            RepetirAnimacao.nomeFolEs,
+            RepetirAnimacao.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValorNumerico(
-                "repetir-animação",
+                RepetirAnimacao.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 null,

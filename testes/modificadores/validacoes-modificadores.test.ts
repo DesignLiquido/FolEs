@@ -46,7 +46,7 @@ describe('Testando Validações de Valores e Quantificadores dos Seletores', () 
 
             // O Serializador deve traduzir devidamente os termos
             expect(resultadoTradutor).toContain('div');
-            expect(resultadoTradutor).toContain('word-break');
+            expect(resultadoTradutor).toContain('word-wrap');
             expect(resultadoTradutor).toContain('normal;');
         });
 

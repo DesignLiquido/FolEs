@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarItens extends Modificador {
+    static nomeFolEs: string = "posicionar-itens";
+    static nomeCss: string = "place-items";
+    static descricao: string = 'Define o posicionamento de referidos itens da aplicação.';
+    static documentacao: string = '# `posicionar-itens`\nPropriedade de atribuição abreviada que permite alinhar os itens ao longo das direções de bloco e linha de uma só vez (ou seja, as propriedades `alinhar-itens` e `justificar-itens`) em um sistema de layout relevante, como Grid ou Flexbox .';
+    static exemploCodigo: string = 'p {\n  posicionar-itens: centro;\n}';
+ 
     valoresAceitos: { [valorFoles: string]: string } = {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
@@ -28,20 +34,20 @@ export class PosicionarItens extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("posicionar-itens", "place-items", pragmas);
+        super(PosicionarItens.nomeFolEs,PosicionarItens.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "condição-extra",
-                    "posicionar-itens",
+                    PosicionarItens.nomeFolEs,
                     valores,
                     posicoes,
                     this.valoresAceitos
                 );
             } else {
                 validarValoresAdicionais(
-                    "posicionar-itens",
+                    PosicionarItens.nomeFolEs,
                     valores,
                     posicoes,
                     this.valoresAceitos

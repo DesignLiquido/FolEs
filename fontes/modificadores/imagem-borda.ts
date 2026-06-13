@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ImagemBorda extends Modificador {
+    static nomeFolEs: string = "imagem-borda";
+    static nomeCss: string = "border-image";
+    static descricao: string = 'Define uma imagem como a borda de um elemento.';
+    static documentacao: string = '# `imagem-borda`\nEsta propriedade desenha uma imagem em torno de um determinado elemento.';
+    static exemploCodigo: string = 'divisao {\n  imagem-borda: url("/images/border.png");\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         url: "url",
         nenhum: "none",
@@ -20,7 +26,7 @@ export class ImagemBorda extends Modificador {
         valores: Valor[],
         pragmas?: PragmasModificador, variavel?: boolean
     ) {
-        super("imagem-borda", "border-image", pragmas);
+        super(ImagemBorda.nomeFolEs, ImagemBorda.nomeCss, pragmas);
 
         const valoresExtra = ["image", "linear-gradient", "url"];
 
@@ -28,7 +34,7 @@ export class ImagemBorda extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "imagem-borda",
+                    ImagemBorda.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -36,7 +42,7 @@ export class ImagemBorda extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "imagem-borda",
+                    ImagemBorda.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,

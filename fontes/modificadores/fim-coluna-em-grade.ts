@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class FimColunaEmGrade extends Modificador {
+    static nomeFolEs: string = "fim-coluna-em-grade";
+    static nomeCss: string = "grid-column-end";
+    static descricao: string = 'Especifica a posição final de um item dentro da coluna da grade.';
+    static documentacao: string = '# `fim-coluna-em-grade`\nEsta propriedade pode contribuir com uma linha, uma extensão ou nada (automático) para o posicionamento de um item na grade - especificando assim a borda final do bloco de sua área de grade.';
+    static exemploCodigo: string = 'coluna {\n  fim-coluna-em-grade: 3;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
@@ -13,13 +19,13 @@ export class FimColunaEmGrade extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fim-coluna-em-grade", "grid-column-end", pragmas);
+        super(FimColunaEmGrade.nomeFolEs, FimColunaEmGrade.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "fim-coluna-em-grade",
+                    FimColunaEmGrade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -29,7 +35,7 @@ export class FimColunaEmGrade extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "fim-coluna-em-grade",
+                    FimColunaEmGrade.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,

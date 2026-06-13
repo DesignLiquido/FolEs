@@ -3,6 +3,13 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class CaminhoRecorte extends Modificador {
+    static nomeFolEs: string = "caminho-recorte";
+    static nomeCss: string = "clip-path";
+    // TODO: Complementar informações
+    static descricao: string = '';
+    static documentacao: string = '';
+    static exemploCodigo: string = '';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         "margem-caixa": "margin-box",
@@ -20,13 +27,13 @@ export class CaminhoRecorte extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("caminho-recorte", "clip-path", pragmas);
+        super(CaminhoRecorte.nomeFolEs, CaminhoRecorte.nomeCss, pragmas);
 
         const valoresExtra = ['inset', 'circle', 'ellipse', 'polygon', 'path', 'rect', 'shape', 'xywh'];
 
         if (!variavel) {
             validarValores(
-                "caminho-recorte",
+                CaminhoRecorte.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

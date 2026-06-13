@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ModeloLinhasEmGrade extends Modificador {
+    static nomeFolEs: string = "modelo-linhas-em-grade";
+    static nomeCss: string = "grid-template-rows";
+    static descricao: string = 'Define o modelo das linhas em grade.';
+    static documentacao: string = '# `modelo-linhas-em-grade`\nEsta propriedade define os nomes das linhas e as funções de dimensionamento das linhas da grade.';
+    static exemploCodigo: string = 'tabela {\n  modelo-linhas-em-grade: 3s linear 1s deslizar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         auto: "auto",
@@ -20,7 +26,7 @@ export class ModeloLinhasEmGrade extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-linhas-em-grade", "grid-template-rows", pragmas);
+        super(ModeloLinhasEmGrade.nomeFolEs, ModeloLinhasEmGrade.nomeCss, pragmas);
 
         // OBS.: Também aceita receber o valor do tipo [linename]
         const valoresExtra = ["minmax", "fit-content"];
@@ -29,7 +35,7 @@ export class ModeloLinhasEmGrade extends Modificador {
 
         if (!variavel) {
             validarValorNumerico(
-                "modelo-linhas-em-grade",
+                ModeloLinhasEmGrade.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

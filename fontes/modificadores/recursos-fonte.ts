@@ -4,6 +4,12 @@ import { validarValores } from "./validacoes/comum";
 import { validarValorString } from "./validacoes/string";
 
 export class RecursosFonte extends Modificador {
+    static nomeFolEs: string = "recursos-fonte";
+    static nomeCss: string = "font-feature-settings";
+    static descricao: string = 'Controla recursos tipográficos avançados em fontes do tipo OpenType.';
+    static documentacao: string = '# `recursos-fonte`\nEssa propriedade é especificada como palavra-chave normalou como uma lista de valores separados por vírgula.';
+    static exemploCodigo: string = 'p {\n  recursos-fonte: normal;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
     };
@@ -13,7 +19,7 @@ export class RecursosFonte extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("recursos-fonte", "font-feature-settings", pragmas);
+        super(RecursosFonte.nomeFolEs, RecursosFonte.nomeCss, pragmas);
 
         let validarString: boolean = false;
         let validarTagValue: boolean = false;
@@ -30,7 +36,7 @@ export class RecursosFonte extends Modificador {
 
         if (!variavel && !validarString) {
             validarValores(
-                "recursos-fonte",
+                RecursosFonte.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null

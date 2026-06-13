@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class DefinirContador extends Modificador {
+    static nomeFolEs: string = "definir-contador";
+    static nomeCss: string = "counter-set";
+    static descricao: string = 'Define um contador CSS para um determinado valor.';
+    static documentacao: string = '# `definir-contador`\nA propriedade manipula o valor dos contadores existentes e só criará novos contadores caso não exista um contador com o nome fornecido no elemento.';
+    static exemploCodigo: string = 'p {\n  definir-contador: meu-contador -1;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
     };
@@ -13,13 +19,13 @@ export class DefinirContador extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("definir-contador", "counter-set", pragmas);
+        super(DefinirContador.nomeFolEs, DefinirContador.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "definir-contador",
+                    DefinirContador.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -29,7 +35,7 @@ export class DefinirContador extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "definir-contador",
+                    DefinirContador.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );

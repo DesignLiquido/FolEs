@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Flex extends Modificador {
+    static nomeFolEs: string = "flex";
+    static nomeCss: string = "flex";
+    static descricao: string = 'Define as estilizações de um item com exibição do tipo flex.';
+    static documentacao: string = '# `flex`\nPropriedade de atribuição abreviada que define como um item flexível crescerá ou encolherá para caber no espaço disponível em seu contêiner.';
+    static exemploCodigo: string = 'divisao {\n  flex: 1 30px;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
@@ -22,13 +28,13 @@ export class Flex extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex", "flex", pragmas);
+        super(Flex.nomeFolEs, Flex.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "flex",
+                    Flex.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -36,7 +42,7 @@ export class Flex extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "flex",
+                    Flex.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,

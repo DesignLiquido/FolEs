@@ -4,16 +4,22 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class MargemSuperiorRolagemMouse extends Modificador {
+    static nomeFolEs: string = "margem-superior-rolagem-mouse";
+    static nomeCss: string = "scroll-margin-top";
+    static descricao: string = 'Define a margem superior da área de ajuste da barra de rolagem da página.';
+    static documentacao: string = '# `margem-superior-rolagem-mouse`\nA área de ajuste de rolagem é determinada a partir da borda do elemento, encontrando o limite da sua área e adicionando os ajustes especificados.';
+    static exemploCodigo: string = 'corpo {\n  margem-superior-rolagem-mouse: 10px;\n}';
+
     constructor(
         valores: Valor[],
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-superior-rolagem-mouse", "scroll-margin-top", pragmas);
+        super(MargemSuperiorRolagemMouse.nomeFolEs, MargemSuperiorRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "margem-superior-rolagem-mouse",
+                MargemSuperiorRolagemMouse.nomeFolEs,
                 valores,
                 null,
                 null,

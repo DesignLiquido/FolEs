@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class VariacaoFonte extends Modificador {
+    static nomeFolEs: string[] = ["variacao-fonte", "variação-fonte"];
+    static nomeCss: string = "font-variant";
+    static descricao: string = 'Define as variações de fonte de um referido elemento da aplicação.';
+    static documentacao: string = '# `variação-fonte`\nPropriedade de atribuição abreviada que permite que você defina todas as variações de fonte utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'p {\n  variação-fonte: maiúsculas-pequenas;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
         "formas-historicas": "historical-forms",
@@ -68,19 +74,19 @@ export class VariacaoFonte extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["variacao-fonte", "variação-fonte"], "font-variant", pragmas);
+        super(VariacaoFonte.nomeFolEs, VariacaoFonte.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "variação-fonte",
+                    VariacaoFonte.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarValores(
-                    "variação-fonte",
+                    VariacaoFonte.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );

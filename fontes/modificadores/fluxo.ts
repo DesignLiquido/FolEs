@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class Fluxo extends Modificador {
+    static nomeFolEs: string = "fluxo";
+    static nomeCss: string = "clear";
+    static descricao: string = 'Define se um elemento deve ser movido abaixo dos elementos flutuantes que o precedem.'; 
+    static documentacao: string = '# `fluxo`\nEsta propriedade se aplica a elementos flutuantes e não flutuantes.';
+    static exemploCodigo: string = 'divisão {\n  fluxo: direita;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         esquerda: "left",
@@ -18,9 +24,9 @@ export class Fluxo extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fluxo", "clear", pragmas);
+        super(Fluxo.nomeFolEs, Fluxo.nomeCss, pragmas);
 
-        if (!variavel) validarValores("fluxo", valores, this.valoresAceitos);
+        if (!variavel) validarValores(Fluxo.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

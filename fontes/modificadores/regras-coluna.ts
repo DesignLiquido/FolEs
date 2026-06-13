@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class RegrasColuna extends Modificador {
+    static nomeFolEs: string = "regras-coluna";
+    static nomeCss: string = "column-rule";
+    static descricao: string = 'Define as estilizações a serem aplicadas sobre uma referida coluna.';
+    static documentacao: string = '# `regras-coluna`\nPropriedade de atribuição abreviada que define a largura, o estilo e a cor da linha desenhada entre as colunas em um layout de várias colunas.';
+    static exemploCodigo: string = 'coluna {\n  regras-coluna: grossa embutido azul;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fina: "thin",
         media: "medium",
@@ -17,19 +23,19 @@ export class RegrasColuna extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("regras-coluna", "column-rule", pragmas);
+        super(RegrasColuna.nomeFolEs, RegrasColuna.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "regras-coluna",
+                    RegrasColuna.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "regras-coluna",
+                    RegrasColuna.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     comprimentos

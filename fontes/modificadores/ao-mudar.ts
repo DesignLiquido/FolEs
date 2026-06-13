@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { Valor } from "../valores";
 
 export class AoMudar extends Modificador {
+    static nomeFolEs: string = "ao-mudar";
+    static nomeCss: string = "will-change";
+    static descricao: string = 'Especifica aos navegadores como um elemento deve mudar.';
+    static documentacao: string = '# `ao-mudar`\nOs navegadores podem configurar otimizações antes que um elemento seja realmente alterado. Esses tipos de otimizações podem aumentar a capacidade de resposta de uma página.';
+    static exemploCodigo: string = 'título3 {\n  ao-mudar: posição-rolagem;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         "posicao-rolagem": "scroll-position",
@@ -18,14 +24,14 @@ export class AoMudar extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("ao-mudar", "will-change", pragmas);
+        super(AoMudar.nomeFolEs, AoMudar.nomeCss, pragmas);
 
         if (!variavel) {
 
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "ao-mudar",
+                    AoMudar.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -34,7 +40,7 @@ export class AoMudar extends Modificador {
                     true
                 );
             } else {
-                validarValores("ao-mudar", valores, this.valoresAceitos);
+                validarValores(AoMudar.nomeFolEs, valores, this.valoresAceitos);
             }
         }
 

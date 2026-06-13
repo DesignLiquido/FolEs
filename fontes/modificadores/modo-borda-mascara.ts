@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class ModoBordaMascara extends Modificador {
+    static nomeFolEs: string[] = ["modo-borda-mascara", "modo-borda-máscara"];
+    static nomeCss: string = "mask-border-mode";
+    static descricao: string = 'Especifica o modo de mesclagem usado em uma borda de máscara.';
+    static documentacao: string = 'Blablabla';
+    static exemploCodigo: string = 'imagem {\n  modo-borda-mascara: luminância;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         luminancia: "luminance",
         luminância: "luminance",
@@ -15,12 +21,12 @@ export class ModoBordaMascara extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["modo-borda-mascara", "modo-borda-máscara"],
-            "mask-border-mode",
+            ModoBordaMascara.nomeFolEs,
+            ModoBordaMascara.nomeCss,
             pragmas,
         );
 
-        if (!variavel) validarValores("modo-borda-máscara", valores, this.valoresAceitos);
+        if (!variavel) validarValores(ModoBordaMascara.nomeFolEs[1], valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

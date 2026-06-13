@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Fonte extends Modificador {
+    static nomeFolEs: string = "fonte";
+    static nomeCss: string = "font";
+    static descricao: string = 'Define as estilizações de fonte de um elemento de texto.';
+    static documentacao: string = '# `fonte`\nPropriedade de atribuição abreviada que define todas as diferentes propriedades da fonte de um elemento. Como alternativa, ele define a fonte de um elemento como uma fonte do sistema.';
+    static exemploCodigo: string = 'p {\n  fonte: monospace;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         serif: "serif",
         "sans-serif": "sans-serif",
@@ -53,7 +59,7 @@ export class Fonte extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("fonte", "font", pragmas);
+        super(Fonte.nomeFolEs, Fonte.nomeCss, pragmas);
 
         // TODO: Adaptar modificador para receber, dentre os múltiplos valores, o valor do tipo Fonte
         const quantificadoresAceitos: { [nome: string]: string } = { ...unidadesMedida, ...valoresFonte };
@@ -62,14 +68,14 @@ export class Fonte extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "fonte",
+                    Fonte.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     quantificadoresAceitos
                 );
             } else {
                 validarValorNumerico(
-                    "fonte",
+                    Fonte.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,

@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class Exibicao extends Modificador {
+    static nomeFolEs: string[] = ["exibicao", "exibição"];
+    static nomeCss: string = "display";
+    static descricao: string = 'Define se um elemento é tratado como sendo em bloco ou em linha e define também o layout usado para seus elementos filhos.';
+    static documentacao: string = '# `exibicao`\nFormalmente, esta propriedade define os tipos de exibição interna e externa de um elemento. O tipo externo define a participação de um elemento no layout de fluxo; o tipo interno define o layout dos elementos filhos.';
+    static exemploCodigo: string = 'p {\n  exibicao: em-bloco;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "em-bloco": "block",
         "em-linha": "inline",
@@ -47,9 +53,9 @@ export class Exibicao extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["exibicao", "exibição"], "display", pragmas);
+        super(Exibicao.nomeFolEs, Exibicao.nomeCss, pragmas);
 
-        if (!variavel) validarValores("exibição", valores, this.valoresAceitos);
+        if (!variavel) validarValores(Exibicao.nomeFolEs[1], valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

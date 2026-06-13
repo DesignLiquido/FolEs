@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class DecoracaoEspessuraTexto extends Modificador {
+    static nomeFolEs: string[] = ["decoracao-espessura-texto", "decoração-espessura-texto"];
+    static nomeCss: string = "text-decoration-thickness";
+    static descricao: string = 'Define a espessura da linha de decoração que é usada no texto de um elemento.';
+    static documentacao: string = '# `decoracao-espessura-texto`\nDefine a espessura da linha de decoração que é usada no texto de um elemento.';
+    static exemploCodigo: string = 'p {\n  decoracao-espessura-texto: de-frente;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         "de-frente": "from-font",
@@ -15,14 +21,14 @@ export class DecoracaoEspessuraTexto extends Modificador {
         variavel?: boolean
     ) {
         super(
-            ["decoracao-espessura-texto", "decoração-espessura-texto"],
-            "text-decoration-thickness",
+            DecoracaoEspessuraTexto.nomeFolEs,
+            DecoracaoEspessuraTexto.nomeCss,
             pragmas,
         );
 
         if (!variavel) {
             validarValorNumerico(
-                "decoração-espessura-texto",
+                DecoracaoEspessuraTexto.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 null,

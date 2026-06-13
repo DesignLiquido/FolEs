@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class ModeloColunasEmGrade extends Modificador {
+    static nomeFolEs: string = "modelo-colunas-em-grade";
+    static nomeCss: string = "grid-template-columns";
+    static descricao: string = 'Define o modelo das colunas em grade.';
+    static documentacao: string = '# `modelo-colunas-em-grade`\nEsta propriedade especifica os nomes das linhas e as funções de dimensionamento das colunas da grade.';
+    static exemploCodigo: string = 'tabela {\n  modelo-colunas-em-grade: conteudo-máximo;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         auto: "auto",
@@ -20,7 +26,7 @@ export class ModeloColunasEmGrade extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("modelo-colunas-em-grade", "grid-template-columns", pragmas);
+        super(ModeloColunasEmGrade.nomeFolEs, ModeloColunasEmGrade.nomeCss, pragmas);
 
         const valoresExtra = ["minmax", "fit-content"];
 
@@ -28,7 +34,7 @@ export class ModeloColunasEmGrade extends Modificador {
 
         if (!variavel) {
             validarValorNumerico(
-                "modelo-colunas-em-grade",
+                ModeloColunasEmGrade.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 valoresExtra,

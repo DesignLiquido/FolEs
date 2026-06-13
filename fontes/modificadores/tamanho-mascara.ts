@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class TamanhoMascara extends Modificador {
+    static nomeFolEs: string[] = ["tamanho-mascara", "tamanho-máscara"];
+    static nomeCss: string = "mask-size";
+    static descricao: string = 'Especifica os tamanhos das imagens de máscara.';
+    static documentacao: string = '# `tamanho-mascara`\nO tamanho da imagem pode ser total ou parcialmente limitado para preservar sua proporção.';
+    static exemploCodigo: string = 'imagem {\n  tamanho-mascara: cobrir;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         conter: "contain",
@@ -15,11 +21,11 @@ export class TamanhoMascara extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["tamanho-mascara", "tamanho-máscara"], "mask-size", pragmas);
+        super(TamanhoMascara.nomeFolEs, TamanhoMascara.nomeCss, pragmas);
 
         if (!variavel) {
             validarValorNumerico(
-                "tamanho-máscara",
+                TamanhoMascara.nomeFolEs[1],
                 valores,
                 this.valoresAceitos,
                 unidadesMedida

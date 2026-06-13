@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValores } from "./validacoes/comum";
 
 export class FlexFluxo extends Modificador {
+    static nomeFolEs: string = "flex-fluxo";
+    static nomeCss: string = "flex-flow";
+    static descricao: string = 'Especifica a direção de um contêiner com exibição do tipo flex.';
+    static documentacao: string = '# `flex-fluxo`\nPropriedade de atribuição abreviada que especifica a direção de um contêiner flexível, bem como suas definições de agrupamento.';
+    static exemploCodigo: string = 'divisao {\n  flex-fluxo: coluna agrupar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         linha: "row",
         "inverter-linha": "row-reverse",
@@ -20,19 +26,19 @@ export class FlexFluxo extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("flex-fluxo", "flex-flow", pragmas);
+        super(FlexFluxo.nomeFolEs, FlexFluxo.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "flex-fluxo",
+                    FlexFluxo.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarValores(
-                    "flex-fluxo",
+                    FlexFluxo.nomeFolEs,
                     valores,
                     this.valoresAceitos
                 );

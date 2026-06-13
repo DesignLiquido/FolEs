@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class PosicionarSe extends Modificador {
+    static nomeFolEs: string = "posicionar-se";
+    static nomeCss: string = "place-self";
+    static descricao: string = 'Define a auto posição de um elemento da aplicação.';
+    static documentacao: string = '# `posicionar-se`\nPropriedade de atribuição abreviada que permite alinhar um item individual ao longo das direções de bloco e linha de uma só vez (ou seja, as propriedades `alinhar-se` e `justificar-se`) em um sistema de layout relevante, como Grid ou Flexbox.';
+    static exemploCodigo: string = 'p {\n  posicionar-se: auto centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
@@ -28,20 +34,20 @@ export class PosicionarSe extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("posicionar-se", "place-self", pragmas);
+        super(PosicionarSe.nomeFolEs, PosicionarSe.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "condição-extra",
-                    "posicionar-se",
+                    PosicionarSe.nomeFolEs,
                     valores,
                     posicoes,
                     this.valoresAceitos
                 );
             } else {
                 validarValoresAdicionais(
-                    "posicionar-se",
+                    PosicionarSe.nomeFolEs,
                     valores,
                     posicoes,
                     this.valoresAceitos

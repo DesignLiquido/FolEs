@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class AlinharSe extends Modificador {
+    static nomeFolEs: string = "alinhar-se";
+    static nomeCss: string = "align-self";
+    static descricao: string = 'Substitui o valor da propriedade alinhar-itens de um elemento com a exibição em grade ou flexível.';
+    static documentacao: string = '# `alinhar-se`\nNo tipo em grade, a propriedade alinha o elemento dentro de sua própria área. No tipo flexbox, o elemento é alinhado no Eixo Cruzado.';
+    static exemploCodigo: string = 'divisao{\n  alinhar-se: início;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "inicio-linha-base": "first baseline",
         "início-linha-base": "first baseline",
@@ -21,7 +27,7 @@ export class AlinharSe extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-se", "align-self", pragmas);
+        super(AlinharSe.nomeFolEs, AlinharSe.nomeCss, pragmas);
 
         // O modificador não aceita os valores posicionais 'esquerda' e 'direita'
         const posicoesAceitas = Object.keys(posicoes).filter(
@@ -36,7 +42,7 @@ export class AlinharSe extends Modificador {
 
         if (!variavel) {
             validarValoresAdicionais(
-                "alinhar-se",
+                AlinharSe.nomeFolEs,
                 valores,
                 posicoesValidas,
                 this.valoresAceitos,

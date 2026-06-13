@@ -4,6 +4,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class MargemSuperior extends Modificador {
+    static nomeFolEs: string = "margem-superior";
+    static nomeCss: string = "margin-top";
+    static descricao: string = 'Define a estilização da margem superior de um elemento da aplicação.';
+    static documentacao: string = '# `margem-superior`\nUm valor positivo o coloca mais longe de seus elementos vizinhos, enquanto um valor negativo o aproxima.';
+    static exemploCodigo: string = 'p {\n  margem-superior: 5%;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
     };
@@ -13,12 +19,11 @@ export class MargemSuperior extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("margem-superior", "margin-top", pragmas);
-        // console.log('v', valores);
+        super(MargemSuperior.nomeFolEs, MargemSuperior.nomeCss, pragmas);
         
         if (!variavel) {
             validarValorNumerico(
-                "margem-superior",
+                MargemSuperior.nomeFolEs,
                 valores,
                 this.valoresAceitos,
                 null,

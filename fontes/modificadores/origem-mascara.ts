@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class OrigemMascara extends Modificador {
+    static nomeFolEs: string[] = ["origem-mascara", "origem-máscara"];
+    static nomeCss: string = "mask-origin";
+    static descricao: string = 'Define a origem de uma máscara.';
+    static documentacao: string = '# `origem-mascara`\nPara elementos renderizados como uma única caixa, esta propriedade especifica a área de posicionamento da máscara. Para elementos renderizados como caixas múltiplas, como caixas embutidas em diversas linhas ou caixas em diversas páginas`.';
+    static exemploCodigo: string = 'divisao {\n  origem-mascara: delimitar-caixa;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo-caixa": "content-box",
         "conteúdo-caixa": "content-box",
@@ -21,9 +27,9 @@ export class OrigemMascara extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["origem-mascara", "origem-máscara"], "mask-origin", pragmas);
+        super(OrigemMascara.nomeFolEs, OrigemMascara.nomeCss, pragmas);
 
-        if (!variavel) validarValores("origem-máscara", valores, this.valoresAceitos);
+        if (!variavel) validarValores(OrigemMascara.nomeFolEs[1], valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;

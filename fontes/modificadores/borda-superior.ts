@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarMultiplosQualitativos } from "./validacoes/multiplos-qualitativos";
 
 export class BordaSuperior extends Modificador {
+    static nomeFolEs: string = "borda-superior";
+    static nomeCss: string = "border-top";
+    static descricao: string = 'Define as estilizações referentes à borda superior de um elemento.';
+    static documentacao: string = '# `borda-superior`\nPropriedade de atribuição abreviada para definir todos os valores das propriedades de borda superior de um elemento utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'botao {\n borda-superior: 1px tracejado verde;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         fina: "thin",
         media: "medium",
@@ -17,13 +23,13 @@ export class BordaSuperior extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("borda-superior", "border-top", pragmas);
+        super(BordaSuperior.nomeFolEs, BordaSuperior.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "múltiplos-qualitativos",
-                    "borda-superior",
+                    BordaSuperior.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     null,
@@ -31,7 +37,7 @@ export class BordaSuperior extends Modificador {
                 );
             } else {
                 validarMultiplosQualitativos(
-                    "borda-superior",
+                    BordaSuperior.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     unidadesMedida

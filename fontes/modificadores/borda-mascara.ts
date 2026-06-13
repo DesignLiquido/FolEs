@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class BordaMascara extends Modificador {
+    static nomeFolEs: string[] = ["borda-mascara", "borda-máscara"];
+    static nomeCss: string = "mask-border";
+    static descricao: string = 'Define as estilizações referentes à mascara da borda de um elemento.';
+    static documentacao: string = '# `borda-mascara`\nPropriedade de atribuição abreviada que permite criar uma máscara ao longo da borda de um elemento.';
+    static exemploCodigo: string = 'botao {\n borda-mascara: url("border-mask.png") 25;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhuma: "none",
         preencher: "fill",
@@ -24,7 +30,7 @@ export class BordaMascara extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["borda-mascara", "borda-máscara"], "mask-border", pragmas);
+        super(BordaMascara.nomeFolEs, BordaMascara.nomeCss, pragmas);
 
         const valoresExtra: Array<string> = ["url"];
 
@@ -32,7 +38,7 @@ export class BordaMascara extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "borda-máscara",
+                    BordaMascara.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -40,7 +46,7 @@ export class BordaMascara extends Modificador {
                 )
             } else {
                 validarValorNumerico(
-                    "borda-máscara",
+                    BordaMascara.nomeFolEs[1],
                     valores,
                     this.valoresAceitos,
                     valoresExtra,

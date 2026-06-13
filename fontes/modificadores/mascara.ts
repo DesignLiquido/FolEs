@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValoresAdicionais } from "./validacoes/condicao-extra";
 
 export class Mascara extends Modificador {
+    static nomeFolEs: string[] = ["mascara", "máscara"];
+    static nomeCss: string = "mask";
+    static descricao: string = 'Define a estilização da máscara a ser aplicada a um elemento.';
+    static documentacao: string = '# `mascara`\nPropriedade de atribuição abreviada que oculta um elemento (parcial ou totalmente), mascarando ou recortando a imagem em pontos específicos.';
+    static exemploCodigo: string = 'divisão {\n  mascara: arredondar;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         alfa: "alpha",
         luminancia: "luminance",
@@ -49,20 +55,20 @@ export class Mascara extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["mascara", "máscara"], "mask", pragmas);
+        super(Mascara.nomeFolEs, Mascara.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "condição-extra",
-                    "máscara",
+                    Mascara.nomeFolEs[1],
                     valores,
                     posicoesBasicas,
                     this.valoresAceitos
                 );
             } else {
                 validarValoresAdicionais(
-                    "máscara",
+                    Mascara.nomeFolEs[1],
                     valores,
                     posicoesBasicas,
                     this.valoresAceitos

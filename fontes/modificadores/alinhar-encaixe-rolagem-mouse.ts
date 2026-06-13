@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { Valor } from "../valores";
 
 export class AlinharEncaixeRolagemMouse extends Modificador {
+    static nomeFolEs: string = "alinhar-encaixe-rolagem-mouse";
+    static nomeCss: string = "scroll-snap-align";
+    static descricao: string = 'Especifica a posição de permanência de um bloco no contêiner-pai.';
+    static documentacao: string = '# `alinhar-encaixe-rolagem-mouse`\nAo rolar a barra para qualquer posição, a fim de visualizar os demais elementos, o bloco marcado encaixa-se na posição definida pelo valor desta propriedade.';
+    static exemploCodigo: string = 'divisao {\n  alinhar-encaixe-rolagem-mouse: centro;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         nenhum: "none",
         inicio: "start",
@@ -16,11 +22,11 @@ export class AlinharEncaixeRolagemMouse extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("alinhar-encaixe-rolagem-mouse", "scroll-snap-align", pragmas);
+        super(AlinharEncaixeRolagemMouse.nomeFolEs, AlinharEncaixeRolagemMouse.nomeCss, pragmas);
 
         if (!variavel) {
             validarValores(
-                "alinhar-encaixe-rolagem-mouse",
+                AlinharEncaixeRolagemMouse.nomeFolEs,
                 valores,
                 this.valoresAceitos,
             );

@@ -4,6 +4,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { Valor } from "../valores";
 
 export class AreaMascara extends Modificador {
+    static nomeFolEs: string[] = ["area-mascara", "área-máscara"];
+    static nomeCss: string = "mask-clip";
+    static descricao: string = 'Determina a área que é afetada por uma máscara.';
+    static documentacao: string = '# `area-mascara`\nPara utilizar esta propriedade, o conteúdo pintado de um elemento deve ser restrito a esta área.';
+    static exemploCodigo: string = 'divisão {\n  area-mascara:  preenchimento-caixa;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         "conteudo-caixa": "content-box",
         "conteúdo-caixa": "content-box",
@@ -27,19 +33,19 @@ export class AreaMascara extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super(["area-mascara", "área-máscara"], "mask-clip", pragmas);
+        super(AreaMascara.nomeFolEs, AreaMascara.nomeCss, pragmas);
 
         if (!variavel) {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "comum",
-                    "área-máscara",
+                    AreaMascara.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );
             } else {
                 validarValores(
-                    "área-máscara",
+                    AreaMascara.nomeFolEs[1],
                     valores,
                     this.valoresAceitos
                 );

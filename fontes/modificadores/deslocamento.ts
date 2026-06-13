@@ -5,6 +5,12 @@ import { validarAtribuicaoAbreviada } from "./validacoes/atribuicao-abreviada";
 import { validarValorNumerico } from "./validacoes/numerica";
 
 export class Deslocamento extends Modificador {
+    static nomeFolEs: string = "deslocamento";
+    static nomeCss: string = "offset";
+    static descricao: string = 'Define a animação de um elemento ao longo de um caminho definido.';
+    static documentacao: string = '# `deslocamento`\nPropriedade de atribuição abreviada para definir os valores de todas as propriedades de deslocamento utilizando apenas uma propriedade.';
+    static exemploCodigo: string = 'p {\n  deslocamento: 10px 30px;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         auto: "auto",
         nenhum: "none",
@@ -15,7 +21,7 @@ export class Deslocamento extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("deslocamento", "offset", pragmas);
+        super(Deslocamento.nomeFolEs, Deslocamento.nomeCss, pragmas);
 
         // TODO: Também aceita receber a função path()
         const valoresExtra = ["url", "ray"];
@@ -26,7 +32,7 @@ export class Deslocamento extends Modificador {
             if (valores.length > 1) {
                 validarAtribuicaoAbreviada(
                     "numérica",
-                    "deslocamento",
+                    Deslocamento.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,
@@ -34,7 +40,7 @@ export class Deslocamento extends Modificador {
                 );
             } else {
                 validarValorNumerico(
-                    "deslocamento",
+                    Deslocamento.nomeFolEs,
                     valores,
                     this.valoresAceitos,
                     valoresExtra,

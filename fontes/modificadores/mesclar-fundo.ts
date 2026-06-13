@@ -3,6 +3,12 @@ import { Modificador, PragmasModificador } from "./superclasse";
 import { validarValores } from "./validacoes/comum";
 
 export class MesclarFundo extends Modificador {
+    static nomeFolEs: string = "mesclar-fundo";
+    static nomeCss: string = "background-blend-mode";
+    static descricao: string = 'Define como um elemento deve ser mesclado com o fundo.';
+    static documentacao: string = '# `mesclar-fundo`\nEsta propriedade define como as imagens de fundo de um elemento devem se misturar entre si e com a cor de fundo do elemento.';
+    static exemploCodigo: string = 'imagem {\n  mesclar-fundo: escurecer;\n}';
+
     valoresAceitos: { [valorFoles: string]: string } = {
         normal: "normal",
         multiplicar: "multiply",
@@ -30,9 +36,9 @@ export class MesclarFundo extends Modificador {
         pragmas?: PragmasModificador,
         variavel?: boolean
     ) {
-        super("mesclar-fundo", "background-blend-mode", pragmas);
+        super(MesclarFundo.nomeFolEs, MesclarFundo.nomeCss, pragmas);
 
-        if (!variavel) validarValores("mesclar-fundo", valores, this.valoresAceitos);
+        if (!variavel) validarValores(MesclarFundo.nomeFolEs, valores, this.valoresAceitos);
 
         this.valores = valores;
         this.variavel = variavel;
