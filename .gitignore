@@ -109,3 +109,6 @@ package-lock.json
 # Claude
 .claude/
 CLAUDE.md
+
+# Yarn install
+install-state.gz
