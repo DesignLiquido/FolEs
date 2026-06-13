@@ -1,6 +1,6 @@
 {
     "name": "@designliquido/foles",
-    "version": "0.15.1",
+    "version": "0.16.0",
     "description": "Linguagem de folhas de estilo para documentos em geral em português",
     "main": "index.js",
     "scripts": {
@@ -18,9 +18,7 @@
         "type": "git",
         "url": "git+https://github.com/DesignLiquido/FolEs.git"
     },
-    "bin": {
-        "foles": "./bin/foles"
-    },
+    "bin": "./bin/foles",
     "author": "Leonel Sanches da Silva",
     "contributors": [
         {
