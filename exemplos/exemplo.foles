@@ -1,3 +1,10 @@
+.barra paragrafo {
+   largura: 100%;
+    altura: 100%;
+    posicao: absoluta;
+    posicao-esquerda: 0%;
+}
+
 .minha-classe {
     alinhar-conteudo: inseguro;
     estilo-contorno: herdar;
@@ -31,3 +38,4 @@
 lmht {
     cor-fundo: hsl(50, 80%, 80%);
 }
+

@@ -18,9 +18,7 @@
         "type": "git",
         "url": "git+https://github.com/DesignLiquido/FolEs.git"
     },
-    "bin": {
-        "foles": "./bin/foles"
-    },
+    "bin": "./bin/foles",
     "author": "Leonel Sanches da Silva",
     "contributors": [
         {
