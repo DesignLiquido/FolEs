@@ -6,7 +6,7 @@ export class ModoBordaMascara extends Modificador {
     static nomeFolEs: string[] = ["modo-borda-mascara", "modo-borda-máscara"];
     static nomeCss: string = "mask-border-mode";
     static descricao: string = 'Especifica o modo de mesclagem usado em uma borda de máscara.';
-    static documentacao: string = 'Blablabla';
+    static documentacao: string = '# `modo-borda-mascara`\nO modo de mesclagem pode ser definido com o valor alfa ou de luminância.';
     static exemploCodigo: string = 'imagem {\n  modo-borda-mascara: luminância;\n}';
 
     valoresAceitos: { [valorFoles: string]: string } = {
