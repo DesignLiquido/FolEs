@@ -2285,7 +2285,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
      */
     protected resolverSeletores(espacoReservado: string = null): Seletor[] {
         const seletores: Seletor[] = [];
-
+        
         do {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.ESTRUTURA:
@@ -2301,8 +2301,12 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                     seletores.push(this.seletorPorId());
                     break;
             }
-        } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
-
+        } while (
+            this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA ||
+            this.simbolos[this.atual].tipo === tiposDeSimbolos.ESTRUTURA
+        );
+        // console.log(this.simbolos[this.atual]);
+        
         return seletores;
     }
 

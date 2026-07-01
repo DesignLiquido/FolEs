@@ -74,7 +74,7 @@ export class Resolvedor {
             case ValorTexto:
                 const valorTexto = valor as ValorTexto;
                 return valorTexto.literalTexto;
-            case ValorVirgula:
+            case ValorVirgula:                
                 return ",";
             default:
                 // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
@@ -111,7 +111,7 @@ export class Resolvedor {
         declaracao: BlocoDeclaracao,
         indentacao: number,
         textoSeletorAnterior: string,
-    ): string {
+    ): string {        
         let resultado = "";
         const prefixos = [];
         let deveImprimir = true;
@@ -157,7 +157,11 @@ export class Resolvedor {
             }
 
             prefixos.push(prefixo);
+            // console.log('res', resultado);
+            
             resultado += " ".repeat(indentacao) + prefixo + ", ";
+            // console.log('res após', resultado);
+
         }
 
         if (!deveImprimir) {

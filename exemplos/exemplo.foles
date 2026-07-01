@@ -4,38 +4,3 @@
     posicao: absoluta;
     posicao-esquerda: 0%;
 }
-
-.minha-classe {
-    alinhar-conteudo: inseguro;
-    estilo-contorno: herdar;
-    cor-destaque: hsl(12, 13%, 24%);
-    cor: #f100ff;
-    cor-fundo: vermelho;
-    tamanho-fonte: 16px;
-    largura-maxima: 20cm;
-}
-
-.minha-classe:sobre {
-    cor-fundo: azul;
-}
-
-#elemento-caixa {
-    altura: 40px;
-}
-
-.minha-segunda-classe {
-    margem-superior: 13mm;
-}
-
-#meu-segundo-id {
-    largura: 400mm;
-}
-
-%campos {
-    margem-inferior: 50px;
-}
-
-lmht {
-    cor-fundo: hsl(50, 80%, 80%);
-}
-
