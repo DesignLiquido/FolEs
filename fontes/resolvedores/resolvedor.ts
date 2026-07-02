@@ -56,8 +56,8 @@ export class Resolvedor {
             case ValorNumerico:
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
-                
-                if ((valorNumerico.quantificador) && 
+
+                if ((valorNumerico.quantificador) &&
                     (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
                 ) {
                     literalNumerico = literalNumerico.replace(/^0\./, '.');
@@ -74,7 +74,7 @@ export class Resolvedor {
             case ValorTexto:
                 const valorTexto = valor as ValorTexto;
                 return valorTexto.literalTexto;
-            case ValorVirgula:                
+            case ValorVirgula:
                 return ",";
             default:
                 // Valor é RGB, RGBA, HSL, HSLA ou HEX, ou seja, um método.
@@ -111,7 +111,7 @@ export class Resolvedor {
         declaracao: BlocoDeclaracao,
         indentacao: number,
         textoSeletorAnterior: string,
-    ): string {        
+    ): string {
         let resultado = "";
         const prefixos = [];
         let deveImprimir = true;
@@ -157,11 +157,8 @@ export class Resolvedor {
             }
 
             prefixos.push(prefixo);
-            // console.log('res', resultado);
-            
-            resultado += " ".repeat(indentacao) + prefixo + ", ";
-            // console.log('res após', resultado);
 
+            resultado += " ".repeat(indentacao) + prefixo + ", ";
         }
 
         if (!deveImprimir) {
@@ -170,6 +167,7 @@ export class Resolvedor {
 
         resultado = resultado.slice(0, -2);
         resultado += " {\n";
+        if (resultado.includes(",")) resultado = resultado.replace(",", "");
 
         for (const modificador of declaracao.modificadores) {
             resultado += this.resolverModificador(
