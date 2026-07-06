@@ -3,7 +3,7 @@ import { Lexador } from "../fontes/lexador"
 import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Resolvedor } from "../fontes/resolvedores";
 import { ValoresQuantificadores } from "../fontes/listas/valores-quantificadores"
-import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface } from "../fontes/interfaces";
+import { AvaliadorSintaticoInterface, ImportadorInterface, LexadorInterface, ResultadoLexadorInterface } from "../fontes/interfaces";
 import { Importador } from "../fontes/importador";
 import { ValorNumerico } from "../fontes/valores";
 import estruturasHtml from "../fontes/tradutores/estruturas-html";
@@ -33,33 +33,33 @@ describe('Resolvedor', () => {
 
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-                
+
                 // Tradutor deve retornar a estrutura HTML correspondente
                 const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
                 expect(resultadoTradutor).toContain(Object.values(estruturasHtml)[index]);
             }
         });
-    
+
         it('Casos de sucesso - traduzindo seletores valor-quantificador', () => {
             for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
                 const seletor = new SeletorModificador(
-                    ValoresQuantificadores[index], 
+                    ValoresQuantificadores[index],
                     [new ValorNumerico(ValoresQuantificadores[index], 40, 'px')]
                 ) as any;
-    
+
                 // Lexador
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValoresQuantificadores[index]}: 40px;`,
                     "}"
                 ]);
-    
+
                 // Avaliador Sintático
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
-    
+
                 // Tradutor deve funcionar de acordo
                 const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
-    
+
                 expect(resultadoTradutor).toBeTruthy();
                 expect(resultadoTradutor).toContain("html");
                 expect(resultadoTradutor).toContain(seletor['propriedadeCss']);
@@ -85,6 +85,24 @@ describe('Resolvedor', () => {
             expect(resultadoResolvedor).toContain("html");
             expect(resultadoResolvedor).toContain("outline-style");
             expect(resultadoResolvedor).toContain('dotted');
+        });
+
+        it.only('Caso de sucesso - traduzindo classe seguida de estrutura', () => {
+            // Lexador
+            const resultadoLexador = lexador.mapear([
+                ".classe divisão {",
+                "   estilo-contorno: pontilhado;",
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
+            expect(resultadoAvaliadorSintatico).toBeTruthy();
+
+            // Resolvedor deve traduzir corretamente a classe e a estrutura
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toContain(".classe");
+            expect(resultadoResolvedor).toContain("div");
         });
 
         describe('Exemplos mais elaborados', () => {
@@ -193,19 +211,19 @@ describe('Resolvedor', () => {
     describe('Casos de Falha', () => {
         it('Casos de Falha - seletores valor-quantificador', () => {
             for (let index = 0; index < Object.keys(ValoresQuantificadores).length; index += 1) {
-    
+
                 // Lexador - valor e quantificador não informados
                 const resultadoLexador = lexador.mapear([
                     "lmht {",
                     `${ValoresQuantificadores[index]}: ;`,
                     "}"
                 ]);
-    
+
                 // Tradutor - Não deve ser executado, dado o erro gerado no Avaliador Sintático
                 expect(() => {
                     resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).not.toBeTruthy;
-    
+
                 expect(() => {
                     resolvedor.resolver(avaliador.analisar(resultadoLexador.simbolos));
                 }).toHaveLength(0);
