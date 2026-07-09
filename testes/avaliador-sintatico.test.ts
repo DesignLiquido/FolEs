@@ -7,20 +7,21 @@ import { SeletorModificador } from "../fontes/modificadores/superclasse"
 import { Resolvedor } from "../fontes/resolvedores";
 import { ValorNumerico, ValorQualitativo } from "../fontes/valores";
 import { ValoresQualitativosCss, ValoresQuantificadores } from "../fontes/listas/valores-quantificadores"
+import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
+import { SeletorClasse, SeletorEstrutura } from "../fontes/seletores";
 
 describe('Avaliador Sintático', () => {
     let lexador: LexadorInterface;
     let importador: ImportadorInterface;
     let avaliadorSintatico: AvaliadorSintaticoInterface;
-    let tradutor: Resolvedor;
+    let resolvedor: Resolvedor;
 
     beforeEach(() => {
         lexador = new Lexador();
         importador = new Importador(lexador);
         avaliadorSintatico = new AvaliadorSintatico(importador);
-        tradutor = new Resolvedor();
+        resolvedor = new Resolvedor();
     });
-
 
     it('Casos de sucesso - testando seletores valor-quantificador', () => {
         for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
@@ -63,7 +64,7 @@ describe('Avaliador Sintático', () => {
             expect(valor.quantificador).toStrictEqual('px');
 
             // O resultado do Avaliador deve ser recebido corretamente pelo Tradutor
-            const resultadoTradutor = tradutor.resolver(resultadoAvaliadorSintatico);
+            const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
             expect(resultadoTradutor).toBeTruthy();
         }
@@ -106,7 +107,7 @@ describe('Avaliador Sintático', () => {
                 `   ${ValoresQualitativosCss[index]['modificador']}: ${ValoresQualitativosCss[index]['valor']};`,
                 "}"
             ]);
-            
+
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
@@ -133,10 +134,34 @@ describe('Avaliador Sintático', () => {
             expect(primeiroResultadoTipado.seletores[0]['pseudoclasse']).toBe(undefined);
 
             // A estrutura retornada pelo Av. Sintático Reverso deve ser capaz de ser traduzida nas etapas seguintes 
-            const resultadoResolvedor = tradutor.resolver(resultadoAvaliadorSintatico);
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoResolvedor).toContain('html');
             expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['css']);
             expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['traducao']);
         }
+    });
+
+    it('Caso de sucesso - estilizando estruturas de uma referida classe', () => {
+            // Lexador
+            const resultadoLexador: ResultadoLexadorInterface = lexador.mapear([
+                ".barra paragrafo {",
+                `   altura: 25px;`,
+                "}"
+            ]);
+
+            // Avaliador Sintático
+            const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+            
+            // Deve receber corretamente o objeto do Lexador, sem retornar erros
+            expect(resultadoAvaliadorSintatico).toBeTruthy()
+
+            // Espera-se o mapeamento de instâncias de SeletorClasse e SeletorEstrutura, respectivamente
+            const resultadoAvaliadorTipado = resultadoAvaliadorSintatico[0] as BlocoDeclaracao;
+            expect(resultadoAvaliadorTipado.seletores[0]).toBeInstanceOf(SeletorClasse);
+            expect(resultadoAvaliadorTipado.seletores[1]).toBeInstanceOf(SeletorEstrutura);
+
+            // O resultado do Avaliador deve ser recebido corretamente pelo Resolvedor
+            const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
+            expect(resultadoResolvedor).toBeTruthy();
     });
 });

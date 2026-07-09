@@ -1,12 +1,19 @@
+import { AvaliadorSintatico } from "../fontes/avaliador-sintatico";
+import { Importador } from "../fontes/importador";
+import { AvaliadorSintaticoInterface, ImportadorInterface } from "../fontes/interfaces";
 import { Lexador } from "../fontes/lexador";
 
 import tiposDeSimbolos from "../fontes/tipos-de-simbolos/foles";
 
 describe('Lexador', () => {
     let lexador: Lexador;
+    let importador: ImportadorInterface;
+    let avaliadorSintatico: AvaliadorSintaticoInterface;
 
     beforeEach(() => {
         lexador = new Lexador();
+        importador = new Importador(lexador);
+        avaliadorSintatico = new AvaliadorSintatico(importador);
     });
 
     it('Caso de sucesso - função mapear() monta objeto corretamente', () => {
@@ -69,5 +76,30 @@ describe('Lexador', () => {
                 expect.objectContaining({ tipo: tiposDeSimbolos.QUANTIFICADOR }),
             ])
         );
+    });
+
+    it('Caso de sucesso - declarando classe seguida de estrutura', () => {
+        const resultadoLexador = lexador.mapear([
+            ".minha-classe paragrafo {",
+            "    tamanho-texto: 10px;",
+            "}"
+        ]);
+
+        // Deve montar um objeto de comprimento 10, sem retornar erros
+        expect(resultadoLexador.simbolos).toHaveLength(10);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // Deve mapear tanto o nome de classe quanto a estrutura
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.PONTO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.ESTRUTURA }),
+            ])
+        );
+
+        // O objeto deve ser recebido corretamente pelo Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
+        expect(resultadoAvaliadorSintatico).toBeTruthy();
     });
 });

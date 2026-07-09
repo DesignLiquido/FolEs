@@ -56,8 +56,8 @@ export class Resolvedor {
             case ValorNumerico:
                 const valorNumerico = valor as ValorNumerico;
                 let literalNumerico = String(valorNumerico.literalNumerico);
-                
-                if ((valorNumerico.quantificador) && 
+
+                if ((valorNumerico.quantificador) &&
                     (valorNumerico.literalNumerico < 1 && valorNumerico.literalNumerico > 0)
                 ) {
                     literalNumerico = literalNumerico.replace(/^0\./, '.');
@@ -157,6 +157,7 @@ export class Resolvedor {
             }
 
             prefixos.push(prefixo);
+
             resultado += " ".repeat(indentacao) + prefixo + ", ";
         }
 
@@ -166,6 +167,7 @@ export class Resolvedor {
 
         resultado = resultado.slice(0, -2);
         resultado += " {\n";
+        if (resultado.includes(",")) resultado = resultado.replace(",", "");
 
         for (const modificador of declaracao.modificadores) {
             resultado += this.resolverModificador(
