@@ -87,7 +87,7 @@ describe('Resolvedor', () => {
             expect(resultadoResolvedor).toContain('dotted');
         });
 
-        it.only('Caso de sucesso - traduzindo classe seguida de estrutura', () => {
+        it('Caso de sucesso - traduzindo classe seguida de estrutura', () => {
             // Lexador
             const resultadoLexador = lexador.mapear([
                 ".classe divisão {",
