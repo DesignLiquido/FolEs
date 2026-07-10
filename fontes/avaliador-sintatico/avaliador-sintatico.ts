@@ -2305,7 +2305,6 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA ||
             this.simbolos[this.atual].tipo === tiposDeSimbolos.ESTRUTURA
         );
-        // console.log(this.simbolos[this.atual]);
         
         return seletores;
     }

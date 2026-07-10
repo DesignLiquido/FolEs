@@ -76,12 +76,10 @@ export class FolEs {
         const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(
             simbolos
         );
-        // console.log(resultadoAvaliadorSintaticoReverso);
         
         const traducaoReversa = this.tradutorReverso.traduzir(
             resultadoAvaliadorSintaticoReverso
         );
-        // console.log(traducaoReversa);
         
         const resolvedorReverso = this.resolvedorReverso.resolver(
             traducaoReversa,

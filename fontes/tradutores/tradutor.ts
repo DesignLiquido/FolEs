@@ -8,7 +8,6 @@ import {
     SeletorModificador,
 } from "../modificadores/superclasse";
 import { PragmasSeletor, Seletor, SeletorEstrutura } from "../seletores";
-import { Metodo } from "../valores/metodos/foles/metodo";
 
 import estruturasHtml from "./estruturas-html";
 import { Estrutura } from "../estruturas/estrutura";
