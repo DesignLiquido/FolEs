@@ -126,15 +126,36 @@ describe('Lexador Reverso', () => {
     });
 
     it('Caso de falha - caractere inesperado', () => {
-            const resultadoLexador = lexadorReverso.mapear([
-                `html {`,
-                "    padding: 10px&;",
-                "}"
-            ]);
-            
-            expect(resultadoLexador.erros).toHaveLength(1);
-            expect(resultadoLexador.erros).toEqual(
-                [{"caractere": "&", "linha": 2, "mensagem": "Caractere inesperado."}]
-            );
+        const resultadoLexador = lexadorReverso.mapear([
+            `html {`,
+            "    padding: 10px&;",
+            "}"
+        ]);
+
+        expect(resultadoLexador.erros).toHaveLength(1);
+        expect(resultadoLexador.erros).toEqual(
+            [{ "caractere": "&", "linha": 2, "mensagem": "Caractere inesperado." }]
+        );
+    });
+
+    it('Caso de sucesso - declarando classe seguida de estrutura', () => {
+        const resultadoLexador = lexadorReverso.mapear([
+            ".my-class p {",
+            "    font-size: 10px;",
+            "}"
+        ]);
+
+        // Deve montar um objeto de comprimento 10, sem retornar erros
+        expect(resultadoLexador.simbolos).toHaveLength(10);
+        expect(resultadoLexador.erros).toHaveLength(0);
+
+        // Deve mapear tanto o nome de classe quanto a estrutura
+        expect(resultadoLexador.simbolos).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipo: tiposDeSimbolos.PONTO }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.IDENTIFICADOR }),
+                expect.objectContaining({ tipo: tiposDeSimbolos.TAG }),
+            ])
+        );
     });
 });

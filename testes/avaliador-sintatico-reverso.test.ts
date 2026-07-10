@@ -6,6 +6,7 @@ import { Importador } from "../fontes/importador";
 import { ValoresQualitativosCss, ValoresQuantificadoresCSS } from "../fontes/listas/valores-quantificadores";
 import { BlocoDeclaracao } from "../fontes/declaracoes";
 import { ValorNumerico, ValorQualitativo } from "../fontes/valores";
+import { SeletorClasse, SeletorEstrutura } from "../fontes/seletores";
 
 describe('Avaliador Sintático Reverso', () => {
     let lexadorReverso: LexadorInterface;
@@ -135,5 +136,29 @@ describe('Avaliador Sintático Reverso', () => {
             expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['modificador']);
             expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['valor']);
         }
+    });
+
+    it('Caso de sucesso - estilizando estruturas de uma referida classe', () => {
+        // Lexador
+        const resultadoLexador = lexadorReverso.mapear([
+            ".bar-class p {",
+            `   height: 25px;`,
+            "}"
+        ]);
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
+
+        // Deve receber corretamente o objeto do Lexador, sem retornar erros
+        expect(resultadoAvaliadorSintatico).toBeTruthy()
+
+        // Espera-se o mapeamento de instâncias de SeletorClasse e SeletorEstrutura, respectivamente
+        const resultadoAvaliadorTipado = resultadoAvaliadorSintatico[0] as BlocoDeclaracao;
+        expect(resultadoAvaliadorTipado.seletores[0]).toBeInstanceOf(SeletorClasse);
+        expect(resultadoAvaliadorTipado.seletores[1]).toBeInstanceOf(SeletorEstrutura);
+
+        // O resultado do Avaliador deve ser recebido corretamente pelo Resolvedor
+        const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
+        expect(resultadoResolvedor).toBeTruthy();
     });
 });

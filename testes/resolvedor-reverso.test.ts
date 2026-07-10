@@ -183,4 +183,22 @@ describe('Resolvedor Reverso', () => {
 
         }
     });
+
+    it('Caso de sucesso - traduzindo classe seguida de estrutura', () => {
+        // Lexador
+        const resultadoLexador = lexadorReverso.mapear([
+            ".my-class div {",
+            "   background-color: red;",
+            "}"
+        ]);
+
+        // Avaliador Sintático
+        const resultadoAvaliadorSintatico = avaliadorReverso.analisar(resultadoLexador.simbolos);
+        expect(resultadoAvaliadorSintatico).toBeTruthy();
+
+        // Resolvedor deve traduzir corretamente a classe e a estrutura
+        const resultadoResolvedor = resolvedorReverso.resolver(resultadoAvaliadorSintatico);
+        expect(resultadoResolvedor).toContain(".my-class");
+        expect(resultadoResolvedor).toContain("divisao");
+    });
 });
