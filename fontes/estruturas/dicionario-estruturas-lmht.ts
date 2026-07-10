@@ -149,6 +149,7 @@ export const DicionarioEstruturasLmht: { [nomeFolEs: string]: any } = {
     opção: Opcao,
     paragrafo: Paragrafo,
     parágrafo: Paragrafo,
+    p: Paragrafo,
     preformatado: Preformatado,
     principal: Principal,
     progresso: Progresso,
