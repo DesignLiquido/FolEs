@@ -1,4 +1,4 @@
-div {
+.my-class {
     border: dotted;
     mask-clip: view-box;
     outline: thick;

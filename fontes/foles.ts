@@ -61,9 +61,15 @@ export class FolEs {
             throw this.avaliadorSintatico.erros[0];
         }
 
+        console.log('av sint', resultadoAvaliadorSintatico);
+        
+
         const resultadoTraducao = this.tradutor.traduzir(
             resultadoAvaliadorSintatico
         );
+
+        console.log('trad', resultadoTraducao);
+        
 
         const traducao = this.resolvedor.resolver(
             resultadoTraducao
@@ -76,10 +82,13 @@ export class FolEs {
         const resultadoAvaliadorSintaticoReverso = this.avaliadorSintaticoReverso.analisar(
             simbolos
         );
+        // console.log('asr', resultadoAvaliadorSintaticoReverso);
+        
 
         const traducaoReversa = this.tradutorReverso.traduzir(
             resultadoAvaliadorSintaticoReverso
         );
+        // console.log('trad', traducaoReversa);
 
         const resolvedorReverso = this.resolvedorReverso.resolver(
             traducaoReversa,
@@ -145,4 +154,4 @@ export class FolEs {
 // const testeFoles = new FolEs(false);
 // console.log(testeFoles.converterParaCss('../exemplos/exemplo.foles'));
 // console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-metodos.css'));
-//  console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
+// console.log(testeFoles.converterParaFolEs('../exemplos/reverso/exemplo-codigo.css'));
