@@ -149,7 +149,10 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 case tiposDeSimbolos.IDENTIFICADOR:
                     throw new Error("Não deveria cair aqui.");
             }
-        } while (this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA);
+        } while (
+            this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA ||
+            this.simbolos[this.atual].tipo === tiposDeSimbolos.TAG
+        );
 
         return seletores;
     }

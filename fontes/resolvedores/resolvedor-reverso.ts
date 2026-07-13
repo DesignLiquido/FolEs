@@ -176,6 +176,7 @@ export class ResolvedorReverso {
 
         resultado = resultado.slice(0, -2);
         resultado += " {\n";
+        if (resultado.includes(",")) resultado = resultado.replace(",", "");
 
         for (const modificador of declaracao.modificadores) {
             resultado += this.resolverModificador(
