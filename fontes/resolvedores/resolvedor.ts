@@ -22,10 +22,12 @@ import { ReferenciaVariavel } from "../valores/referencia-variavel";
 export class Resolvedor {
     resolverComAninhamentos: boolean;
     variaveis: { [key: string]: Valor[] };
+    indentacao: number = 0;
 
-    constructor(resolverComAninhamentos: boolean = false) {
+    constructor(resolverComAninhamentos: boolean = false, configuracaoIndentacao: number = 4) {
         this.resolverComAninhamentos = resolverComAninhamentos;
         this.variaveis = {};
+        this.indentacao = configuracaoIndentacao;
     }
 
     protected resolverValor(
@@ -87,8 +89,7 @@ export class Resolvedor {
     }
 
     protected resolverModificador(
-        modificador: Modificador,
-        indentacao: number = 0,
+        modificador: Modificador
     ): string {
         let valoresTraduzidos = "";
 
@@ -104,12 +105,11 @@ export class Resolvedor {
         }
 
         valoresTraduzidos = valoresTraduzidos.slice(0, -1);
-        return `${" ".repeat(indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos};\n`;
+        return `${" ".repeat(this.indentacao)}${modificador.propriedadeCss}: ${valoresTraduzidos};\n`;
     }
 
     resolverBlocoDeclaracao(
         declaracao: BlocoDeclaracao,
-        indentacao: number,
         textoSeletorAnterior: string,
     ): string {
         let resultado = "";
@@ -158,7 +158,7 @@ export class Resolvedor {
 
             prefixos.push(prefixo);
 
-            resultado += " ".repeat(indentacao) + prefixo + ", ";
+            resultado += " ".repeat(this.indentacao) + prefixo + ", ";
         }
 
         if (!deveImprimir) {
@@ -171,24 +171,21 @@ export class Resolvedor {
 
         for (const modificador of declaracao.modificadores) {
             resultado += this.resolverModificador(
-                modificador,
-                indentacao + 4,
+                modificador
             );
         }
 
         if (this.resolverComAninhamentos) {
             resultado += this.resolver(
                 declaracao.declaracoesAninhadas,
-                indentacao + 4,
             );
-            resultado += `${" ".repeat(indentacao)}}\n\n`;
+            resultado += `${" ".repeat(this.indentacao)}}\n\n`;
         } else {
-            resultado += `${" ".repeat(indentacao)}}\n\n`;
+            resultado += `${" ".repeat(this.indentacao)}}\n\n`;
 
             for (const prefixo of prefixos) {
                 resultado += this.resolver(
                     declaracao.declaracoesAninhadas,
-                    indentacao,
                     prefixo,
                 );
             }
@@ -218,7 +215,6 @@ export class Resolvedor {
      */
     resolver(
         declaracoes: Declaracao[],
-        indentacao: number = 0,
         seletorAnterior: string = undefined,
     ) {
         let resultado = "";
@@ -232,7 +228,6 @@ export class Resolvedor {
                 case "BlocoDeclaracao":
                     resultado += this.resolverBlocoDeclaracao(
                         declaracao as BlocoDeclaracao,
-                        indentacao,
                         textoSeletorAnterior,
                     );
                     break;
