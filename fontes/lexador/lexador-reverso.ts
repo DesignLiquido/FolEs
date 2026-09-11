@@ -221,7 +221,6 @@ export class LexadorReverso implements LexadorInterface {
             case "\0":
             case "\r":
             case "\t":
-            case ";":
                 this.avancar();
                 break;
             default:
