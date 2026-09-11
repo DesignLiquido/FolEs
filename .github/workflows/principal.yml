@@ -1,31 +1,32 @@
-name: Commit e PR - Principal
+name: Testes - Cobertura
 
 on:
-  pull_request_target:
+  pull_request:
     branches: [ principal ]
 
 jobs:
   testes-unitarios:
     permissions:
-      checks: write
-      pull-requests: write
-      contents: write
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
     - uses: actions/setup-node@v4
       with:
         node-version: '22'
-    - uses: ArtiomTr/jest-coverage-report-action@v2
-      id: coverage
+    - run: yarn install --frozen-lockfile
+    - name: Roda testes e gera relatorio de cobertura
+      run: yarn testes-unitarios --ci --json --testLocationInResults --outputFile=report.json
+    - name: Salva numero da PR
+      if: always()
+      run: echo "${{ github.event.pull_request.number }}" > pr-number.txt
+    - name: Envia relatorio como artefato
+      if: always()
+      uses: actions/upload-artifact@v4
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        test-script: yarn testes-unitarios
-        package-manager: yarn
-        output: report-markdown
-    - uses: marocchino/sticky-pull-request-comment@v2
-      with:
-        message: ${{ steps.coverage.outputs.report }}
+        name: relatorio-cobertura
+        path: |
+          report.json
+          pr-number.txt
+        retention-days: 1

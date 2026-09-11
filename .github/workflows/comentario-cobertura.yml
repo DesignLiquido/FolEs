@@ -1,0 +1,40 @@
+name: Comentario de cobertura na PR
+
+on:
+  workflow_run:
+    workflows: ["Testes - Cobertura"]
+    types: [completed]
+
+jobs:
+  comentario:
+    if: github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      checks: write
+      pull-requests: write
+
+    steps:
+    - name: Baixa relatorio de cobertura
+      uses: actions/download-artifact@v4
+      with:
+        name: relatorio-cobertura
+        run-id: ${{ github.event.workflow_run.id }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Le numero da PR
+      id: pr
+      run: echo "numero=$(cat pr-number.txt)" >> "$GITHUB_OUTPUT"
+
+    - uses: ArtiomTr/jest-coverage-report-action@v2
+      id: coverage
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        coverage-file: ./report.json
+        base-coverage-file: ./report.json
+        output: report-markdown
+
+    - uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        number_force: ${{ steps.pr.outputs.numero }}
+        message: ${{ steps.coverage.outputs.report }}
