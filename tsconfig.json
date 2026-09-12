@@ -14,11 +14,12 @@
         "ignoreDeprecations": "6.0"
     },
     "exclude": [
-        "babel.config.js", 
-        "coverage/**/*", 
-        "dist/**/*", 
-        "jest.config.ts", 
+        "babel.config.js",
+        "coverage/**/*",
+        "dist/**/*",
+        "jest.config.ts",
         "node_modules",
-        "testes/**/*"
+        "testes/**/*",
+        "eslint.config.mjs",
     ]
 }

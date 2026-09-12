@@ -7,7 +7,7 @@ export class FatiarBordaMascara extends Modificador {
     static nomeFolEs: string[] = ["fatiar-borda-mascara", "fatiar-borda-máscara"];
     static nomeCss: string = "mask-border-slice";
     static descricao: string = 'Divide uma imagem em regiões.';
-    static documentacao: string = '# `fatiar-borda-mascara`\A imagem a ser dividida deve ser definida pela propriedade `origem-borda-máscara`. As regiões são usadas para formar os componentes da borda da máscara de um elemento.';
+    static documentacao: string = '# `fatiar-borda-mascara`A imagem a ser dividida deve ser definida pela propriedade `origem-borda-máscara`. As regiões são usadas para formar os componentes da borda da máscara de um elemento.';
     static exemploCodigo: string = 'imagem {\n  fatiar-borda-mascara: 10% 30%;\n}';
 
     valoresAceitos: { [valorFoles: string]: string } = {

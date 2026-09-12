@@ -5,7 +5,7 @@ export class SeletorPseudoclasse {
     constructor(nomeFolEs: string, pragmas?: PragmasPseudoclasse) {
         const pseudoclasse = DicionarioPseudoClasses[nomeFolEs];
         if (pseudoclasse === undefined || pseudoclasse === null) {
-            throw new Error(`A pseudoclasse \'${nomeFolEs}\' não existe.`);
+            throw new Error(`A pseudoclasse '${nomeFolEs}' não existe.`);
         }
 
         return new pseudoclasse(pragmas);

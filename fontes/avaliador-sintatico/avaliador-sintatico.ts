@@ -2039,7 +2039,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
 
     private validacaoUrlTexto(textoUrl: string) {
         if (
-            !/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/gi.test(
+            !/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/gi.test(
                 textoUrl,
             )
         ) {
@@ -2159,7 +2159,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
         return atribuicaoAbreviada;
     }
 
-    private tratarValorNumerico(modificador: Simbolo): Boolean {
+    private tratarValorNumerico(modificador: Simbolo): boolean {
         if (!ModificadoresDeValorNumerico.includes(modificador.lexema)) {
             if (ModificadoresDeValorNumericoComQuantificador.includes(modificador.lexema)) {
                 if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
@@ -2285,7 +2285,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
      */
     protected resolverSeletores(espacoReservado: string = null): Seletor[] {
         const seletores: Seletor[] = [];
-        
+
         do {
             switch (this.simbolos[this.atual].tipo) {
                 case tiposDeSimbolos.ESTRUTURA:
@@ -2305,7 +2305,7 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
             this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA ||
             this.simbolos[this.atual].tipo === tiposDeSimbolos.ESTRUTURA
         );
-        
+
         return seletores;
     }
 

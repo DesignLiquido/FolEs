@@ -25,7 +25,7 @@ describe('Avaliador Sintático', () => {
 
     it('Casos de sucesso - testando seletores valor-quantificador', () => {
         for (let index = 0; index < ValoresQuantificadores.length; index += 1) {
-            const seletor: Object = new SeletorModificador(
+            const seletor: object = new SeletorModificador(
                 ValoresQuantificadores[index],
                 [new ValorNumerico(ValoresQuantificadores[index], 25, 'px')]
             ) as any;
@@ -123,7 +123,7 @@ describe('Avaliador Sintático', () => {
             const resultadoAvaliadorSintaticoTipado = primeiroResultado as BlocoDeclaracao;
             expect(resultadoAvaliadorSintaticoTipado.modificadores[0].valores[0]).toBeInstanceOf(ValorQualitativo);
 
-            // O mapeamento de valor e quantificador deve ser feito de acordo 
+            // O mapeamento de valor e quantificador deve ser feito de acordo
             expect(primeiroResultadoTipado.modificadores[0].valores.length).toBeGreaterThan(0);
             const valorModificadorTipado = resultadoAvaliadorSintaticoTipado.modificadores[0].valores[0] as ValorQualitativo;
             expect(valorModificadorTipado.qualitativo).toStrictEqual(ValoresQualitativosCss[index]['valor']);
@@ -133,7 +133,7 @@ describe('Avaliador Sintático', () => {
             expect(primeiroResultadoTipado.seletores[0]['estrutura'].tagHtml).toBe('html');
             expect(primeiroResultadoTipado.seletores[0]['pseudoclasse']).toBe(undefined);
 
-            // A estrutura retornada pelo Av. Sintático Reverso deve ser capaz de ser traduzida nas etapas seguintes 
+            // A estrutura retornada pelo Av. Sintático Reverso deve ser capaz de ser traduzida nas etapas seguintes
             const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
             expect(resultadoResolvedor).toContain('html');
             expect(resultadoResolvedor).toContain(ValoresQualitativosCss[index]['css']);
@@ -151,7 +151,7 @@ describe('Avaliador Sintático', () => {
 
             // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
-            
+
             // Deve receber corretamente o objeto do Lexador, sem retornar erros
             expect(resultadoAvaliadorSintatico).toBeTruthy()
 

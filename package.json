@@ -6,7 +6,8 @@
     "scripts": {
         "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./bin/foles ./bin/foles.cmd ./dist && yarn copyfiles -V ./package.json ./dist && yarn copyfiles -V ./README.md ./dist",
         "testes-unitarios": "yarn jest --coverage",
-        "testes-unitarios:insignias": "yarn jest-coverage-badges --output ./recursos/imagens"
+        "testes-unitarios:insignias": "yarn jest-coverage-badges --output ./recursos/imagens",
+        "lint": "yarn eslint . --ext .ts"
     },
     "keywords": [
         "foles",
@@ -35,9 +36,15 @@
     },
     "homepage": "https://github.com/DesignLiquido/FolEs#readme",
     "devDependencies": {
+        "@eslint/js": "^10.0.1",
         "@types/jest": "^30",
         "@types/node": "^25.0.3",
+        "@typescript-eslint/eslint-plugin": "^8.69.0",
+        "@typescript-eslint/parser": "^8.69.0",
         "copyfiles": "^2.4.1",
+        "eslint": "^10.10.0",
+        "eslint-plugin-prettier": "^5.5.6",
+        "globals": "^17.12.0",
         "jest": "^30",
         "jest-coverage-badges": "^1.1.2",
         "prettier": "^3.5.3",

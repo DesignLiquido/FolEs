@@ -55,7 +55,7 @@ export const TraducaoReversa: TraducaoMetodoInterface[] = [
     },
 ];
 
-export const TraducaoReversaValorNumericoFracionario: Array<String> = [
+export const TraducaoReversaValorNumericoFracionario: Array<string> = [
     'tab-size',
     'line-height',
     'columns',

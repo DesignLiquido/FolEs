@@ -1058,7 +1058,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             // Tradutor
             const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-            // O Tradutor deve serializar de acordo e traduzir scale3d para escalamento-3d 
+            // O Tradutor deve serializar de acordo e traduzir scale3d para escalamento-3d
             expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosEscalamento[index]]);
             expect(resultadoTradutor).toContain(`escalamento-3d(0.5, 1, 1.7);`);
         }
@@ -1527,7 +1527,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // Tradutor
                 const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir skewY para inclinar-vertical 
+                // O Tradutor deve serializar de acordo e traduzir skewY para inclinar-vertical
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosInclinar[index]]);
                 expect(resultadoTradutor).toContain(`inclinar-vertical(${valoresAceitos[valIndex]});`);
 
@@ -2539,7 +2539,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // Tradutor
                 const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir drop-shadow para projetar-sombra  
+                // O Tradutor deve serializar de acordo e traduzir drop-shadow para projetar-sombra
                 expect(resultadoTradutor).toContain(`projetar-sombra(${comprimentos[posIndex]});`);
             }
         }
@@ -2555,7 +2555,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
             ];
 
             for (let posIndex = 0; posIndex < comprimentos.length; posIndex += 1) {
-                // Lexador                    
+                // Lexador
                 const resultadoLexador = lexador.mapear([
                     "div {",
                     `${MetodoProjetarSombra[index]}: drop-shadow(${comprimentos[posIndex]});`,
@@ -3110,7 +3110,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // Tradutor
                 const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir rotate3d para rotacionar-3d  
+                // O Tradutor deve serializar de acordo e traduzir rotate3d para rotacionar-3d
                 expect(resultadoTradutor).toContain(TraducaoValoresMetodos[MetodosRotacionar[index]]);
                 expect(resultadoTradutor).toContain(`rotacionar-3d(${valoresAceitos[valIndex]});`);
             }
@@ -3136,7 +3136,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 ])
             );
 
-            // Avaliador Sintático 
+            // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliadorSintatico.analisar(resultadoLexador.simbolos);
 
             // Serializador não deve aceitar 'px' como quantificador válido
@@ -3744,7 +3744,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
                 // Tradutor
                 const resultadoTradutor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Tradutor deve serializar de acordo e traduzir translateX para translacao-horizontal 
+                // O Tradutor deve serializar de acordo e traduzir translateX para translacao-horizontal
                 expect(resultadoTradutor).toContain(`translacao-horizontal(${valoresAceitos[valIndex]});`);
             }
         }
@@ -4083,7 +4083,7 @@ describe('Testando MÉTODOS no processo de TRADUÇÃO REVERSA', () => {
 
             expect(() => {
                 new SeletorValorReverso(metodoIncorreto, []);
-            }).toThrow(`O valor \'${metodoIncorreto}\' não foi encontrado.`);
+            }).toThrow(`O valor '${metodoIncorreto}' não foi encontrado.`);
         }
     });
 });

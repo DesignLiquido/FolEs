@@ -29,7 +29,7 @@ export class Path extends MetodoCss {
                 throw new Error(
                     `Valor de preenchimento ${this.preenchimento} inválido para o método path.
                     Valores aceitos:
-                    ${valoresCssAceitos.reduce((final, atual) => (final += `, ${atual}`))},`
+                    ${valoresCssAceitos.reduce((final, atual) => (final + `, ${atual}`))},`
                 );
             }
         }

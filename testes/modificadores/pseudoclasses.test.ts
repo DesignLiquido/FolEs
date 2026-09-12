@@ -94,7 +94,7 @@ describe('Testando Seletores com PSEUDOCLASSES', () => {
 
                 expect(() => {
                     new SeletorPseudoclasse(pseudoclasseIncorreta)
-                }).toThrow(`A pseudoclasse \'${pseudoclasseIncorreta}\' não existe.`)
+                }).toThrow(`A pseudoclasse '${pseudoclasseIncorreta}' não existe.`)
             }
         });
     });

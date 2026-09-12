@@ -265,10 +265,8 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 const valorCircular = this.avancarEDevolverAnterior();
                 arrayValoresCircular.push(valorCircular);
 
-                let quantificadorCircular: Simbolo = null;
                 if (this.simbolos[this.atual].tipo === 'QUANTIFICADOR') {
-                    quantificadorCircular = this.avancarEDevolverAnterior();
-                    arrayValoresCircular.push(quantificadorCircular)
+                    arrayValoresCircular.push(this.avancarEDevolverAnterior())
                 }
 
                 this.consumir(
@@ -937,36 +935,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
 
                 return new SeletorValorReverso(lexema, [arrayValoresRadial]) as MetodoCss;
 
-            case "scale3d": {
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scale3d'.",
-                );
-                const valorScale3d1 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após primeiro argumento do método scale3d.",
-                );
-                const valorScale3d2 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após segundo argumento do método scale3d.",
-                );
-                const valorScale3d3 = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scale3d.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorScale3d1,
-                        valorScale3d2,
-                        valorScale3d3,
-                    ]
-                ) as MetodoCss;
-            }
-
             case "scaleX": {
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -1100,65 +1068,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     ]
                 ) as MetodoCss;
             }
-
-            case "invert":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'invert'.",
-                );
-                const valorInverter = this.avancarEDevolverAnterior();
-                let quantificadorInverter;
-                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
-                    quantificadorInverter = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorInverter = null;
-                }
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'invert'.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorInverter,
-                        quantificadorInverter,
-                    ]
-                ) as MetodoCss;
-
-            case "clamp":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'clamp'.",
-                );
-                const valorMin = this.avancarEDevolverAnterior();
-                const quantificadorMin = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após primeiro argumento do método 'clamp'.",
-                );
-                const valorMed = this.avancarEDevolverAnterior();
-                const quantificadorMed = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.VIRGULA,
-                    "Esperado vírgula após segundo argumento do método 'clamp'.",
-                );
-                const valorMax = this.avancarEDevolverAnterior();
-                const quantificadorMax = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método clamp.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorMin,
-                        quantificadorMin,
-                        valorMed,
-                        quantificadorMed,
-                        valorMax,
-                        quantificadorMax,
-                    ]
-                ) as MetodoCss;
 
             case "linear":
                 this.consumir(
@@ -1295,52 +1204,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     lexema,
                     [valorPerspectivar, quantificadorPerspectivar],
                     true
-                ) as MetodoCss;
-
-            case "drop-shadow":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'drop-shadow'.",
-                );
-                let corSombra = null;
-                if (this.simbolos[this.atual].tipo === "QUALITATIVO") {
-                    corSombra = this.avancarEDevolverAnterior();
-                }
-
-                const valorSombra1 = this.avancarEDevolverAnterior();
-                const quantificadorSombra1 = this.avancarEDevolverAnterior();
-
-                const valorSombra2 = this.avancarEDevolverAnterior();
-                const quantificadorSombra2 = this.avancarEDevolverAnterior();
-
-                let valorSombra3;
-                let quantificadorSombra3;
-                if (this.simbolos[this.atual].tipo === "NUMERO") {
-                    valorSombra3 = this.avancarEDevolverAnterior();
-                    quantificadorSombra3 = this.avancarEDevolverAnterior();
-                } else {
-                    valorSombra3 = null;
-                    quantificadorSombra3 = null;
-                }
-
-                if (this.simbolos[this.atual].tipo === "QUALITATIVO") {
-                    corSombra = this.avancarEDevolverAnterior();
-                }
-
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'drop-shadow'.",
-                );
-                return new SeletorValorReverso(lexema,
-                    [
-                        valorSombra1,
-                        quantificadorSombra1,
-                        valorSombra2,
-                        quantificadorSombra2,
-                        valorSombra3,
-                        quantificadorSombra3,
-                        corSombra,
-                    ]
                 ) as MetodoCss;
 
             case "ray":
@@ -1538,30 +1401,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     ]
                 ) as MetodoCss;
 
-            case "hue-rotate":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'hue-rotate'.",
-                );
-                const valorRotacao = this.avancarEDevolverAnterior();
-                let quantificadorRotacao;
-                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
-                    quantificadorRotacao = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorRotacao = null;
-                }
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'hue-rotate'.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorRotacao,
-                        quantificadorRotacao,
-                    ]
-                ) as MetodoCss;
-
             case "rotateY":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -1676,30 +1515,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 );
                 return new SeletorValorReverso(lexema, [valorScaleZ]) as MetodoCss;
 
-            case "scaleX":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scaleX'.",
-                );
-                const valorScaleX = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scaleX.",
-                );
-                return new SeletorValorReverso(lexema, [valorScaleX]) as MetodoCss;
-
-            case "scaleY":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'scaleY'.",
-                );
-                const valorScaleY = this.avancarEDevolverAnterior();
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após segundo argumento do método scaleY.",
-                );
-                return new SeletorValorReverso(lexema, [valorScaleY]) as MetodoCss;
-
             case "sepia":
                 this.consumir(
                     tiposDeSimbolos.PARENTESE_ESQUERDO,
@@ -1721,97 +1536,6 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                     [
                         valorSepia,
                         quantificadorSepia,
-                    ]
-                ) as MetodoCss;
-
-            case "skew":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'skew'.",
-                );
-
-                const valorInclinar1 = this.avancarEDevolverAnterior();
-
-                let quantificadorInclinar1;
-                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
-                    quantificadorInclinar1 = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorInclinar1 = null;
-                }
-
-                let valorInclinar2;
-                let quantificadorInclinar2;
-                if (this.simbolos[this.atual].tipo === "VIRGULA") {
-                    this.consumir(
-                        tiposDeSimbolos.VIRGULA,
-                        "Esperado vírgula após primeiro argumento do método 'skew'.",
-                    );
-                    valorInclinar2 = this.avancarEDevolverAnterior();
-                    quantificadorInclinar2 = this.avancarEDevolverAnterior();
-                } else {
-                    valorInclinar2 = null;
-                    quantificadorInclinar2 = null;
-                }
-
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'skew'.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorInclinar1,
-                        quantificadorInclinar1,
-                        valorInclinar2,
-                        quantificadorInclinar2,
-                    ]
-                ) as MetodoCss;
-
-            case "skewX":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'skewX'.",
-                );
-                const valorInclinarX = this.avancarEDevolverAnterior();
-                let quantificadorInclinarX;
-                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
-                    quantificadorInclinarX = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorInclinarX = null;
-                }
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'skewX'.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorInclinarX,
-                        quantificadorInclinarX,
-                    ]
-                ) as MetodoCss;
-
-            case "skewY":
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_ESQUERDO,
-                    "Esperado parêntese esquerdo após método 'skewY'.",
-                );
-                const valorInclinarY = this.avancarEDevolverAnterior();
-                let quantificadorInclinarY;
-                if (this.simbolos[this.atual].tipo === "QUANTIFICADOR") {
-                    quantificadorInclinarY = this.avancarEDevolverAnterior();
-                } else {
-                    quantificadorInclinarY = null;
-                }
-                this.consumir(
-                    tiposDeSimbolos.PARENTESE_DIREITO,
-                    "Esperado parêntese direito após método 'skewY'.",
-                );
-                return new SeletorValorReverso(
-                    lexema,
-                    [
-                        valorInclinarY,
-                        quantificadorInclinarY,
                     ]
                 ) as MetodoCss;
 

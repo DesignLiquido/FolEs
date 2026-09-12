@@ -6,13 +6,12 @@ export function validarIdentificacaoPersonalizada(
     nomePropriedade: string,
     valor: Valor | string,
     valoresAceitos: { [valorFoles: string]: string } = undefined,
-): void {    
+): void {
     let valorModificador: Valor | string;
 
     if (valor instanceof ValorTexto) {
-        valorModificador = valor.literalTexto;
-        valorModificador = valorModificador.replace(/^["']|["']$/g, '');
-    } if (valor instanceof ValorQualitativo) {
+        valorModificador = valor.literalTexto.replace(/^["']|["']$/g, '');
+    } else if (valor instanceof ValorQualitativo) {
         valorModificador = valor.qualitativo;
     } else if (valor instanceof Metodo || valor instanceof MetodoCss) {
         valorModificador = valor.constructor.name.toLowerCase();
@@ -34,8 +33,8 @@ export function validarIdentificacaoPersonalizada(
 
     let listaValoresAceitos: Array<string> = [];
     if (valoresAceitos) {
-        listaValoresAceitos = Object.keys(valoresAceitos); 
-    } 
+        listaValoresAceitos = Object.keys(valoresAceitos);
+    }
 
     // Validações de um valor <custom-indent> válido
     const validacoesIdentificador = typeof valorModificador === "string"

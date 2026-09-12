@@ -31,7 +31,7 @@ export class DefinirCaminho extends Metodo {
                 throw new Error(
                     `Valor de preenchimento ${this.preenchimento} inválido para o método definir-caminho.
                     Valores aceitos:
-                    ${valoresFolEsAceitos.reduce((final, atual) => (final += `, ${atual}`))},`
+                    ${valoresFolEsAceitos.reduce((final, atual) => (final + `, ${atual}`))},`
                 );
             }
         }

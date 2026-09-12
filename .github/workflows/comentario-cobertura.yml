@@ -1,40 +1,48 @@
-name: Comentario de cobertura na PR
+name: Relatório de Cobertura
 
 on:
   workflow_run:
-    workflows: ["Testes - Cobertura"]
-    types: [completed]
+    workflows: ["Integração Contínua - Principal"]
+    types:
+      - completed
 
 jobs:
-  comentario:
-    if: github.event.workflow_run.event == 'pull_request'
+  relatorio:
+    name: Publicar Cobertura no PR
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+
     permissions:
-      actions: read
       checks: write
       pull-requests: write
+      actions: read
 
     steps:
-    - name: Baixa relatorio de cobertura
-      uses: actions/download-artifact@v4
-      with:
-        name: relatorio-cobertura
-        run-id: ${{ github.event.workflow_run.id }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Baixar artefatos
+        uses: actions/download-artifact@v4
+        with:
+          name: relatorio-testes
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Le numero da PR
-      id: pr
-      run: echo "numero=$(cat pr-number.txt)" >> "$GITHUB_OUTPUT"
+      - name: Ler número do PR
+        id: pr
+        run: echo "number=$(cat pr-number.txt)" >> $GITHUB_OUTPUT
 
-    - uses: ArtiomTr/jest-coverage-report-action@v2
-      id: coverage
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        coverage-file: ./report.json
-        base-coverage-file: ./report.json
-        output: report-markdown
+      - name: Gerar relatório de cobertura
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        id: coverage
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-file: report.json
+          base-coverage-file: report.json
+          prnumber: ${{ steps.pr.outputs.number }}
+          skip-step: all
+          output: report-markdown
 
-    - uses: marocchino/sticky-pull-request-comment@v2
-      with:
-        number_force: ${{ steps.pr.outputs.numero }}
-        message: ${{ steps.coverage.outputs.report }}
+      - name: Publicar comentário no PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.pr.outputs.number }}
+          message: ${{ steps.coverage.outputs.report }}

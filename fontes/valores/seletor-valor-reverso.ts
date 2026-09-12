@@ -12,7 +12,7 @@ export class SeletorValorReverso {
         }
 
         if (modificador === undefined || modificador === null) {
-            throw new Error(`O valor \'${nomeCss}\' não foi encontrado.`);
+            throw new Error(`O valor '${nomeCss}' não foi encontrado.`);
         }
         return new modificador(...valores);
     }

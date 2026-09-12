@@ -19,7 +19,7 @@ export class Opacidade extends Modificador {
         super(Opacidade.nomeFolEs, Opacidade.nomeCss, pragmas);
 
         // Valor numérico deve estar entre 0 e 1 (<alpha-value>).
-        // Caso haja um quantificador (%), pode ser qualquer número.        
+        // Caso haja um quantificador (%), pode ser qualquer número.
         const valorTipado = valores[0] as ValorNumerico;
 
         if (!variavel) {
@@ -45,7 +45,7 @@ export class Opacidade extends Modificador {
                     `Modificador ou variável 'opacidade' com valor ${valorTipado.literalNumerico} inválido. Valores aceitos:
                     número-quantificador (ex.: 12px),
                     valor numérico do tipo <alpha-value> (deve ser entre 0 e 1),
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
                 `);
             }
         }
