@@ -25,12 +25,12 @@ export function validarValoresAdicionais(
             !(valorModificador in valoresGlobais)
         ) {
             throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores FolEs aceitos:
-            ${Object.keys(valoresAdicionais).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            
+            ${Object.keys(valoresAdicionais).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     } else {
         if (
@@ -38,12 +38,12 @@ export function validarValoresAdicionais(
             !(valoresCss.includes(valorModificador)) &&
             !(valorModificador in valoresGlobais)
         ) {
-            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores FolEs aceitos: 
-            ${Object.keys(valoresAdicionais).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            
+            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador} inválido. Valores FolEs aceitos:
+            ${Object.keys(valoresAdicionais).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     }
 }

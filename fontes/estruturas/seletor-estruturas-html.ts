@@ -5,7 +5,7 @@ export class SeletorEstruturasHtml {
     constructor(nomeCss: string, pragmas?: PragmasSeletor) {
         const estrutura = DicionarioEstruturasHtml[nomeCss];
         if (estrutura === undefined || estrutura === null) {
-            throw new Error(`A estrutura \'${nomeCss}\' não existe.`);
+            throw new Error(`A estrutura '${nomeCss}' não existe.`);
         }
 
         return new estrutura(pragmas);

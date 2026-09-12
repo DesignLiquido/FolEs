@@ -21,16 +21,16 @@ export function validarValores(
 
     if (valoresExtra === null || valoresExtra === undefined) {
         if (
-            !(valorModificador.valor in valoresAceitos) && 
+            !(valorModificador.valor in valoresAceitos) &&
             !(valoresCss.includes(valorModificador.valor)) &&
             !(valorModificador.valor in valoresGlobais)
         ) {
-            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolES aceitos: 
-            ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolES aceitos:
+            ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
 
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     } else {
         let metodoValido = false;
@@ -47,13 +47,13 @@ export function validarValores(
             !metodoValido &&
             !(valorModificador.valor in valoresGlobais)
         ) {
-            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos: 
-            ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${valoresExtra.reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            
+            throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores aceitos:
+            ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+            ${valoresExtra.reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     }
 }

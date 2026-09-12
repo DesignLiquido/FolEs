@@ -11,7 +11,7 @@ export class SeletorModificador {
     ) {
         const modificador = DicionarioModificadores[nomeFolEs];
         if (modificador === undefined || modificador === null) {
-            throw new Error(`O seletor \'${nomeFolEs}\' não existe.`);
+            throw new Error(`O seletor '${nomeFolEs}' não existe.`);
         }
 
         return new modificador(valores, pragmas, variavel);

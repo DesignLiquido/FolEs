@@ -24,11 +24,11 @@ export function validarValorFonte(
         !(valorModificador.valor in valoresGlobais)
     ) {
         throw new Error(`Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolEs aceitos:
-            ${Object.keys(fontes).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-        
+            ${Object.keys(fontes).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
         Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
     }
 }

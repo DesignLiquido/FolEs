@@ -13,7 +13,7 @@ export class SeletorReversoModificador {
             DicionarioReversoModificadores[nomeCss] === undefined ||
             DicionarioReversoModificadores[nomeCss] === null
         ) {
-            throw new Error(`O seletor \'${nomeCss}\' não foi encontrado.`);
+            throw new Error(`O seletor '${nomeCss}' não foi encontrado.`);
         }
 
         return new DicionarioReversoModificadores[nomeCss](valores, pragmas, variavel);

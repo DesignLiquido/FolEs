@@ -43,11 +43,11 @@ export function validarValorCor(
             ) {
                 throw new Error(
                     `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolEs aceitos:
-                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-                    
+                    ${Object.keys(cores).reduce((final, atual) => (final + `, ${atual}`))},
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
                     Valores CSS aceitos:
-                    ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`,
+                    ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`,
                 );
             }
         } else {
@@ -59,12 +59,12 @@ export function validarValorCor(
             ) {
                 throw new Error(
                     `Modificador ou variável '${nomePropriedade}' com valor ${valorModificador.valor} inválido. Valores FolEs aceitos:
-                    ${Object.keys(cores).reduce((final, atual) => (final += `, ${atual}`))},
-                    ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
+                    ${Object.keys(cores).reduce((final, atual) => (final + `, ${atual}`))},
+                    ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
 
                     Valores CSS aceitos:
-                    ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`,
+                    ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`,
                 );
             }
         }

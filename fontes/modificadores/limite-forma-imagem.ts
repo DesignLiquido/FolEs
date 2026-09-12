@@ -38,7 +38,7 @@ export class LimiteFormaImagem extends Modificador {
                 throw new Error(`Modificador ou variável 'limite-forma-imagem' com valor ${valorNumericoTipado.literalNumerico} inválido. Valores aceitos:
                     número-quantificador (ex.: 12px),
                     valor numérico do tipo <alpha-value> (deve ser entre 0 e 1),
-                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.`);
+                    ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.`);
             }
         }
 

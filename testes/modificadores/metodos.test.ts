@@ -209,7 +209,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
                 // O Avaliador deve montar um objeto com os devidos nomes FolEs e CSS
-                // TODO @Vitor: Alterei um caso para você. 
+                // TODO @Vitor: Alterei um caso para você.
                 // Os demais podem seguir a mesma lógica.
                 expect(resultadoAvaliadorSintatico.length).toBeGreaterThanOrEqual(1);
                 const primeiroResultado = resultadoAvaliadorSintatico[0];
@@ -2768,7 +2768,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 // Resolvedor
                 const resultadoResolvedor = resolvedor.resolver(resultadoAvaliadorSintatico);
 
-                // O Resolvedor deve resolver de acordo e traduzir projetar-sombra para drop-shadow  
+                // O Resolvedor deve resolver de acordo e traduzir projetar-sombra para drop-shadow
                 expect(resultadoResolvedor).toContain(TraducaoValoresMetodos[MetodoProjetarSombra[index]]);
                 expect(resultadoResolvedor).toContain(`drop-shadow(${comprimentos[posIndex]});`);
             }
@@ -3318,7 +3318,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
                 ])
             );
 
-            // Avaliador Sintático 
+            // Avaliador Sintático
             const resultadoAvaliadorSintatico = avaliador.analisar(resultadoLexador.simbolos);
 
             // Resolvedor não deve aceitar 'px' como quantificador válido
@@ -4613,7 +4613,7 @@ describe('Testando Seletores que recebem MÉTODOS como valor', () => {
 
             expect(() => {
                 new SeletorValor(metodoIncorreto, []);
-            }).toThrow(`O valor \'${metodoIncorreto}\' não foi encontrado.`);
+            }).toThrow(`O valor '${metodoIncorreto}' não foi encontrado.`);
         }
     });
 

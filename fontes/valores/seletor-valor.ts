@@ -6,7 +6,7 @@ export class SeletorValor {
             DicionarioValores[nomeFolEs] === undefined ||
             DicionarioValores[nomeFolEs] === null
         ) {
-            throw new Error(`O valor \'${nomeFolEs}\' não foi encontrado.`);
+            throw new Error(`O valor '${nomeFolEs}' não foi encontrado.`);
         }
         return new DicionarioValores[nomeFolEs](...valores);
     }

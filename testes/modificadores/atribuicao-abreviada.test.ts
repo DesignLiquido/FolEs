@@ -37,9 +37,9 @@ describe('Testando Seletores de Atribuição Abreviada, que recebem dois ou mais
                     const seletor = new SeletorModificador(
                         AtribuicaoAbreviadaVQ[index],
                         valoresAceitos[valIndex]
-                    ) as any;                    
+                    ) as any;
 
-                    let valoresResolvidos = valoresAceitos[valIndex].reduce((acumulador, proximo) => acumulador += `${proximo.literalNumerico}${proximo.quantificador || ""} `, "");
+                    let valoresResolvidos = valoresAceitos[valIndex].reduce((acumulador, proximo) => acumulador + `${proximo.literalNumerico}${proximo.quantificador || ""} `, "");
                     valoresResolvidos = valoresResolvidos.slice(0, -1);
                     const codigo = [
                         "lmht {",

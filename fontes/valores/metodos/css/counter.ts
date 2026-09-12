@@ -5,7 +5,7 @@ export class Counter extends MetodoCss {
     nome: string;
     estilo: string;
     traducao: string;
-    estilosAceitos: Object;
+    estilosAceitos: object;
 
     constructor(nome: Simbolo, estilo: Simbolo) {
         super();
@@ -50,7 +50,7 @@ export class Counter extends MetodoCss {
                 this.estilo = this.estilosAceitos[this.estilo];
             } else {
                 throw new Error(`Valor de estilo ${this.estilo} inválido para a função counter(). Valores aceitos:
-                ${Object.keys(this.estilosAceitos).reduce((final, atual) => (final += `, ${atual}`))},`);
+                ${Object.keys(this.estilosAceitos).reduce((final, atual) => (final + `, ${atual}`))},`);
             }
 
             return `contador(${this.nome}, ${this.estilo})`;

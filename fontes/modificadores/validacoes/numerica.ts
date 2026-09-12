@@ -40,10 +40,10 @@ export function validarValorNumerico(
             número-quantificador (ex.: 12px);
 
             Valores Foles aceitos:
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     }
 
@@ -58,11 +58,11 @@ export function validarValorNumerico(
             número-quantificador (ex.: 12px);
 
             Valores FolEs aceitos:
-            ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            
+            ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     }
 
@@ -87,12 +87,12 @@ export function validarValorNumerico(
             número-quantificador (ex.: 12px);
 
             Valores FolEs aceitos:
-            ${Object.keys(valoresAceitos).reduce((final, atual) => (final += `, ${atual}`))},
-            ${valoresExtra.reduce((final, atual) => (final += `, ${atual}`))},
-            ${Object.keys(valoresGlobais).reduce((final, atual) => (final += `, ${atual}`))}.
-            
+            ${Object.keys(valoresAceitos).reduce((final, atual) => (final + `, ${atual}`))},
+            ${valoresExtra.reduce((final, atual) => (final + `, ${atual}`))},
+            ${Object.keys(valoresGlobais).reduce((final, atual) => (final + `, ${atual}`))}.
+
             Valores CSS aceitos:
-            ${valoresCss.reduce((final, atual) => (final += `, ${atual}`))}.`);
+            ${valoresCss.reduce((final, atual) => (final + `, ${atual}`))}.`);
         }
     }
 }
