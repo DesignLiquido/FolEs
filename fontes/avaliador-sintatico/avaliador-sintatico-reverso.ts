@@ -134,27 +134,53 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
      */
     protected resolverSeletores(espacoReservado: string = null): Seletor[] {
         const seletores: Seletor[] = [];
+        let separadoPorVirgula = false;
 
-        do {
-            switch (this.simbolos[this.atual].tipo) {
-                case tiposDeSimbolos.TAG:
-                    seletores.push(this.seletorPorEstrutura());
-                    break;
-                case tiposDeSimbolos.PONTO:
-                    seletores.push(this.seletorPorNomeDeClasse());
-                    break;
-                case tiposDeSimbolos.CERQUILHA:
-                    seletores.push(this.seletorPorId());
-                    break;
-                case tiposDeSimbolos.IDENTIFICADOR:
-                    throw new Error("Não deveria cair aqui.");
+        while (true) {
+            const seletor = this.resolverSeletor();
+            if (!seletor) {
+                if (separadoPorVirgula) {
+                    throw this.erro(
+                        this.simbolos[this.atual] ?? this.simbolos[this.simbolos.length - 1],
+                        "Esperado seletor após ','.",
+                    );
+                }
+                break;
             }
-        } while (
-            this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA ||
-            this.simbolos[this.atual].tipo === tiposDeSimbolos.TAG
-        );
+
+            seletor.separadoPorVirgula = separadoPorVirgula;
+            seletores.push(seletor);
+            separadoPorVirgula = false;
+
+            if (this.verificarTipoSimboloAtual(tiposDeSimbolos.VIRGULA)) {
+                this.avancarEDevolverAnterior();
+                separadoPorVirgula = true;
+                continue;
+            }
+
+            if (!this.verificarTipoSimboloAtual(tiposDeSimbolos.TAG)) {
+                break;
+            }
+        }
 
         return seletores;
+    }
+
+    private resolverSeletor(): Seletor | null {
+        if (this.estaNoFinal()) return null;
+
+        switch (this.simbolos[this.atual].tipo) {
+            case tiposDeSimbolos.TAG:
+                return this.seletorPorEstrutura();
+            case tiposDeSimbolos.PONTO:
+                return this.seletorPorNomeDeClasse();
+            case tiposDeSimbolos.CERQUILHA:
+                return this.seletorPorId();
+            case tiposDeSimbolos.IDENTIFICADOR:
+                throw new Error("Não deveria cair aqui.");
+            default:
+                return null;
+        }
     }
 
     private resolverCor(): Metodo {
@@ -1926,11 +1952,31 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return valoresResolvidos;
     }
 
-    private resolverModificador(): Modificador {
-        const modificador = this.consumir(
-            tiposDeSimbolos.IDENTIFICADOR,
-            "Esperado nome do atributo de identificação.",
+    /**
+     * Algumas propriedades CSS têm o mesmo nome de valores qualitativos
+     * (por exemplo, `color`, que também é valor de `mix-blend-mode`).
+     * Dentro de um bloco, um qualitativo seguido de `:` é o nome de uma
+     * propriedade, não um seletor aninhado.
+     */
+    private eInicioDeModificador(): boolean {
+        const simboloAtual = this.simbolos[this.atual];
+        if (simboloAtual.tipo === tiposDeSimbolos.IDENTIFICADOR) return true;
+
+        const proximoSimbolo = this.simbolos[this.atual + 1];
+        return (
+            simboloAtual.tipo === tiposDeSimbolos.QUALITATIVO &&
+            proximoSimbolo !== undefined &&
+            proximoSimbolo.tipo === tiposDeSimbolos.DOIS_PONTOS
         );
+    }
+
+    private resolverModificador(): Modificador {
+        const modificador = this.verificarTipoSimboloAtual(tiposDeSimbolos.QUALITATIVO)
+            ? this.avancarEDevolverAnterior()
+            : this.consumir(
+                tiposDeSimbolos.IDENTIFICADOR,
+                "Esperado nome do atributo de identificação.",
+            );
 
         this.consumir(
             tiposDeSimbolos.DOIS_PONTOS,
@@ -1964,15 +2010,17 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         const modificadores: Modificador[] = [];
         const declaracoesAninhadas: BlocoDeclaracao[] = [];
         while (!this.verificarTipoSimboloAtual(tiposDeSimbolos.CHAVE_DIREITA)) {
-            switch (this.simbolos[this.atual].tipo) {
-                case tiposDeSimbolos.IDENTIFICADOR:
-                    const modificador = this.resolverModificador();
-                    modificadores.push(modificador);
-                    break;
-                default:
-                    const declaracaoAninhada = this.declaracao();
-                    declaracoesAninhadas.push(declaracaoAninhada);
-                    break;
+            if (this.estaNoFinal()) {
+                throw this.erro(
+                    this.simbolos[this.simbolos.length - 1],
+                    "Esperado '}' ao final do bloco.",
+                );
+            }
+
+            if (this.eInicioDeModificador()) {
+                modificadores.push(this.resolverModificador());
+            } else {
+                declaracoesAninhadas.push(this.declaracao());
             }
         }
 

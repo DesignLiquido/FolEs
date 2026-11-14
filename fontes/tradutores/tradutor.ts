@@ -61,6 +61,7 @@ export class Tradutor {
         );
 
         seletorTraduzido.pragmasTraducao = novosPragmasSeletor;
+        seletorTraduzido.separadoPorVirgula = seletor.separadoPorVirgula;
         return seletorTraduzido;
     }
 

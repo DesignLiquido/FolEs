@@ -2285,28 +2285,61 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
      */
     protected resolverSeletores(espacoReservado: string = null): Seletor[] {
         const seletores: Seletor[] = [];
+        let separadoPorVirgula = false;
 
-        do {
-            switch (this.simbolos[this.atual].tipo) {
-                case tiposDeSimbolos.ESTRUTURA:
-                    seletores.push(this.seletorPorEstrutura());
-                    break;
-                case tiposDeSimbolos.PERCENTUAL:
-                    seletores.push(this.seletorPorEspacoReservado());
-                    break;
-                case tiposDeSimbolos.PONTO:
-                    seletores.push(this.seletorPorNomeDeClasse());
-                    break;
-                case tiposDeSimbolos.CERQUILHA:
-                    seletores.push(this.seletorPorId());
-                    break;
+        while (true) {
+            const seletor = this.resolverSeletor();
+            if (!seletor) {
+                if (separadoPorVirgula) {
+                    throw this.erro(
+                        this.simbolos[this.atual] ?? this.simbolos[this.simbolos.length - 1],
+                        "Esperado seletor após ','.",
+                    );
+                }
+                break;
             }
-        } while (
-            this.simbolos[this.atual].tipo === tiposDeSimbolos.VIRGULA ||
-            this.simbolos[this.atual].tipo === tiposDeSimbolos.ESTRUTURA
-        );
+
+            seletor.separadoPorVirgula = separadoPorVirgula;
+            seletores.push(seletor);
+            separadoPorVirgula = false;
+
+            if (this.verificarTipoSimboloAtual(tiposDeSimbolos.VIRGULA)) {
+                this.avancarEDevolverAnterior();
+                separadoPorVirgula = true;
+                continue;
+            }
+
+            if (!this.verificarTipoSimboloAtual(tiposDeSimbolos.ESTRUTURA)) {
+                break;
+            }
+        }
 
         return seletores;
+    }
+
+    private resolverSeletor(): Seletor | null {
+        if (this.estaNoFinal()) return null;
+
+        switch (this.simbolos[this.atual].tipo) {
+            case tiposDeSimbolos.ESTRUTURA:
+                return this.seletorPorEstrutura();
+            case tiposDeSimbolos.PERCENTUAL:
+                return this.seletorPorEspacoReservado();
+            case tiposDeSimbolos.PONTO:
+                return this.seletorPorNomeDeClasse();
+            case tiposDeSimbolos.CERQUILHA:
+                return this.seletorPorId();
+            case tiposDeSimbolos.METODO:
+                // O lexador só produz CERQUILHA para `#` na primeira coluna;
+                // em qualquer outra posição, `#` vira o método de cor hexadecimal.
+                // Em posição de seletor, `#` só pode iniciar um seletor por id.
+                if (this.simbolos[this.atual].lexema === "#") {
+                    return this.seletorPorId();
+                }
+                return null;
+            default:
+                return null;
+        }
     }
 
     private resolverModificador(): Modificador {

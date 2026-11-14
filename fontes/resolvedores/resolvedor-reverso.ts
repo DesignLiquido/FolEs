@@ -2,6 +2,7 @@ import { BlocoDeclaracao, Declaracao, DeclaracaoVariavel } from "../declaracoes"
 import { Estrutura } from "../estruturas/estrutura";
 import { Modificador } from "../modificadores";
 import { valoresGerais } from "../modificadores/atributos/gerais";
+import { Seletor } from "../seletores";
 import { SeletorEspacoReservado } from "../seletores/seletor-espaco-reservado";
 import estruturasLmht from "../tradutores/estruturas-lmht";
 import { Valor, ValorNumerico, ValorQualitativo, ValorTexto } from "../valores";
@@ -118,65 +119,48 @@ export class ResolvedorReverso {
         this.variaveis[declaracaoVariavel.nome] = declaracaoVariavel.valores;
     }
 
+    private resolverTextoSeletor(seletor: Seletor): string {
+        if (!(seletor instanceof Estrutura)) {
+            return seletor.paraTexto();
+        }
+
+        const seletorHtml = seletor.tagHtml;
+        if (!seletor.pseudoclasse) {
+            return estruturasLmht[seletorHtml][0];
+        }
+
+        const seletorSemPseudoclasse = seletorHtml.split(":")[0];
+        const traducaoSeletor = estruturasLmht[seletorSemPseudoclasse][0];
+        const traducaoPseudoclasse = seletor.pseudoclasse.pseudoclasseCss;
+        return `${traducaoSeletor}:${traducaoPseudoclasse}`;
+    }
+
     resolverBlocoDeclaracao(
         declaracao: BlocoDeclaracao,
         textoSeletorAnterior: string,
     ): string {
-        let resultado = "";
-        const prefixos = [];
-        let deveImprimir = true;
+        if (declaracao.seletores.some((seletor) => seletor instanceof SeletorEspacoReservado)) {
+            return "";
+        }
 
+        // Seletores consecutivos formam um seletor descendente (`a b`);
+        // a vírgula inicia um novo item da lista de seletores (`a, b`).
+        const gruposDeSeletores: string[][] = [];
         for (const seletor of declaracao.seletores) {
-            if (seletor instanceof SeletorEspacoReservado) {
-                deveImprimir = false;
-                continue;
+            if (gruposDeSeletores.length === 0 || seletor.separadoPorVirgula) {
+                gruposDeSeletores.push([]);
             }
 
-            let prefixo: string;
-
-            if (seletor instanceof Estrutura) {
-                if (seletor.pseudoclasse) {
-                    const seletorHtml = seletor.tagHtml;
-                    const seletorSemPseudoclasse = seletorHtml.split(":")[0];
-
-                    const traducaoSeletor =
-                        estruturasLmht[seletorSemPseudoclasse][0];
-                    const traducaoPseudoclasse =
-                        seletor.pseudoclasse.pseudoclasseCss;
-
-                    prefixo = (
-                        textoSeletorAnterior +
-                        " " +
-                        `${traducaoSeletor}:${traducaoPseudoclasse}`
-                    ).trimStart();
-                } else {
-                    const seletorLmht = seletor.tagHtml;
-                    const traducaoSeletor = estruturasLmht[seletorLmht][0];
-                    prefixo = (
-                        textoSeletorAnterior +
-                        " " +
-                        traducaoSeletor
-                    ).trimStart();
-                }
-            } else {
-                prefixo = (
-                    textoSeletorAnterior +
-                    " " +
-                    seletor.paraTexto()
-                ).trimStart();
-            }
-
-            prefixos.push(prefixo);
-            resultado += " ".repeat(this.indentacao) + prefixo + ", ";
+            gruposDeSeletores[gruposDeSeletores.length - 1].push(
+                this.resolverTextoSeletor(seletor),
+            );
         }
 
-        if (!deveImprimir) {
-            return resultado;
-        }
+        const prefixos = gruposDeSeletores.map((grupo) =>
+            (textoSeletorAnterior + " " + grupo.join(" ")).trimStart(),
+        );
 
-        resultado = resultado.slice(0, -2);
-        resultado += " {\n";
-        if (resultado.includes(",")) resultado = resultado.replace(",", "");
+        let resultado = " ".repeat(this.indentacao) + prefixos.join(", ") + " {\n";
 
         for (const modificador of declaracao.modificadores) {
             resultado += this.resolverModificador(

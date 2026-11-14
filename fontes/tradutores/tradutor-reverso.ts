@@ -52,6 +52,7 @@ export class TradutorReverso {
             estruturaTraduzida,
             seletor.pseudoclasse,
         );
+        seletorTraduzido.separadoPorVirgula = seletor.separadoPorVirgula;
 
         return seletorTraduzido;
     }
