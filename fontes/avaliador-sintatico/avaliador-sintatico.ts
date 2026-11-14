@@ -2309,12 +2309,45 @@ export class AvaliadorSintatico implements AvaliadorSintaticoInterface {
                 continue;
             }
 
-            if (!this.verificarTipoSimboloAtual(tiposDeSimbolos.ESTRUTURA)) {
+            if (!this.continuaSeletorDescendente()) {
                 break;
             }
         }
 
         return seletores;
+    }
+
+    /**
+     * Verifica se o símbolo atual inicia outra parte de um seletor descendente
+     * (ex.: `b` em `a b`, `.b` em `.a .b`). Classes e ids só continuam o seletor
+     * quando separados por espaço: `.a.b` (seletor composto) não é suportado.
+     */
+    private continuaSeletorDescendente(): boolean {
+        if (this.estaNoFinal()) return false;
+
+        const simboloAtual = this.simbolos[this.atual];
+        switch (simboloAtual.tipo) {
+            case tiposDeSimbolos.ESTRUTURA:
+                return true;
+            case tiposDeSimbolos.PONTO:
+            case tiposDeSimbolos.CERQUILHA:
+                return this.haEspacoAntesDoSimboloAtual();
+            case tiposDeSimbolos.METODO:
+                return simboloAtual.lexema === "#" && this.haEspacoAntesDoSimboloAtual();
+            default:
+                return false;
+        }
+    }
+
+    private haEspacoAntesDoSimboloAtual(): boolean {
+        if (this.atual === 0) return true;
+
+        const anterior = this.simbolos[this.atual - 1];
+        const atual = this.simbolos[this.atual];
+        return (
+            atual.linha !== anterior.linha ||
+            atual.colunaInicial > anterior.colunaFinal + 1
+        );
     }
 
     private resolverSeletor(): Seletor | null {

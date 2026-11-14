@@ -141,4 +141,72 @@ describe('Classe FolEs - Tradução de Arquivos', () => {
             expect(resultado).toBe('    paragrafo {\n    cor: vermelho;\n    tamanho-fonte: 12px;\n    }\n\n');
         });
     });
+
+    describe('Cores hexadecimais, seletores descendentes e pseudoclasses', () => {
+        let foles: FolEs;
+
+        beforeEach(() => {
+            foles = new FolEs(false);
+        });
+
+        it.each([
+            ['p { color: #ff0000; }', 'cor: #ff0000;'],
+            ['p { color: #fff; }', 'cor: #fff;'],
+            ['p { color: #00ff00; }', 'cor: #00ff00;'],
+            ['p { background-color: #1e3aff; }', 'cor-fundo: #1e3aff;'],
+            ['p { color: #12ab34cd; }', 'cor: #12ab34cd;'],
+            ['p { border: 1px solid #fff; }', 'borda: 1px sólido #fff;'],
+        ])('CSS para FolEs - hexadecimal em %s', (css, esperado) => {
+            expect(foles.converterTextoParaFolEs(css)).toContain(esperado);
+        });
+
+        it('CSS para FolEs - cerquilha sem código hexadecimal gera erro', () => {
+            expect(() => foles.converterTextoParaFolEs('p { color: #; }'))
+                .toThrow("Esperado código hexadecimal válido após '#'.");
+        });
+
+        it('CSS para FolEs - hexadecimal com tamanho inválido gera erro', () => {
+            expect(() => foles.converterTextoParaFolEs('p { color: #ff00; }'))
+                .toThrow('hexadecimal inválido');
+        });
+
+        it('FolEs para CSS - seletores descendentes de classe e id', () => {
+            expect(foles.converterTextoParaCss('.a .b { margem: 0; }'))
+                .toBe('    .a .b {\n    margin: 0;\n    }\n\n');
+            expect(foles.converterTextoParaCss('#x .b { margem: 0; }'))
+                .toBe('    #x .b {\n    margin: 0;\n    }\n\n');
+            expect(foles.converterTextoParaCss('.a #b { margem: 0; }'))
+                .toBe('    .a #b {\n    margin: 0;\n    }\n\n');
+        });
+
+        it('CSS para FolEs - seletores descendentes de classe e id', () => {
+            expect(foles.converterTextoParaFolEs('.a .b { margin: 0; }'))
+                .toBe('    .a .b {\n    margem: 0;\n    }\n\n');
+            expect(foles.converterTextoParaFolEs('#x .b, div p { margin: 0; }'))
+                .toBe('    #x .b, divisao paragrafo {\n    margem: 0;\n    }\n\n');
+        });
+
+        it('CSS para FolEs - pseudoclasses', () => {
+            expect(foles.converterTextoParaFolEs('p:hover { margin: 0; }'))
+                .toBe('    paragrafo:sobre {\n    margem: 0;\n    }\n\n');
+            expect(foles.converterTextoParaFolEs('.a:hover .b, #x:focus { margin: 0; }'))
+                .toBe('    .a:sobre .b, #x:foco {\n    margem: 0;\n    }\n\n');
+        });
+
+        it('CSS para FolEs - pseudoclasse desconhecida gera erro', () => {
+            expect(() => foles.converterTextoParaFolEs('p:bogus { margin: 0; }'))
+                .toThrow("A pseudoclasse 'bogus' não é suportada.");
+        });
+
+        it('Ida e volta - lista, descendentes, pseudoclasses e hexadecimal', () => {
+            const css = foles.converterTextoParaCss(
+                '.a:sobre .b, paragrafo:foco, #x { cor: #1e3aff; cor-fundo: vermelho; }',
+            );
+            expect(css).toBe('    .a:hover .b, p:focus, #x {\n    color: #1e3aff;\n    background-color: red;\n    }\n\n');
+
+            const folEs = foles.converterTextoParaFolEs(css);
+            expect(folEs).toBe('    .a:sobre .b, paragrafo:foco, #x {\n    cor: #1e3aff;\n    cor-fundo: vermelho;\n    }\n\n');
+            expect(foles.converterTextoParaCss(folEs)).toBe(css);
+        });
+    });
 })

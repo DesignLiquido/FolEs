@@ -121,7 +121,18 @@ export class ResolvedorReverso {
 
     private resolverTextoSeletor(seletor: Seletor): string {
         if (!(seletor instanceof Estrutura)) {
-            return seletor.paraTexto();
+            const texto: string = seletor.paraTexto();
+            const pseudoclasse = seletor.pseudoclasse;
+            if (!pseudoclasse) return texto;
+
+            // `paraTexto()` escreve a pseudoclasse em CSS; aqui ela deve sair em FolEs.
+            const sufixoCss = `:${pseudoclasse.pseudoclasseCss}`;
+            const nomeFolEs = Array.isArray(pseudoclasse.nomeFoles)
+                ? pseudoclasse.nomeFoles[0]
+                : pseudoclasse.nomeFoles;
+            return texto.endsWith(sufixoCss)
+                ? `${texto.slice(0, -sufixoCss.length)}:${nomeFolEs}`
+                : texto;
         }
 
         const seletorHtml = seletor.tagHtml;

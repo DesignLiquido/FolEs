@@ -19,6 +19,8 @@ import {
     SimboloInterface,
 } from "../interfaces";
 import { HexadecimalCor } from "../valores/metodos/foles/hexadecimal-cor";
+import { DicionarioPseudoClasses } from "../pseudoclasses/dicionario-pseudoclasses";
+import { Pseudoclasse } from "../pseudoclasses/pseudoclasse";
 import { Estrutura } from "../estruturas/estrutura";
 import { Valor } from "../valores/valor";
 import { SeletorValorReverso } from "../valores/seletor-valor-reverso";
@@ -78,19 +80,39 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         return null;
     }
 
-    protected resolverPseudoclasse() {
-        let pseudoclasse;
+    protected resolverPseudoclasse(): Pseudoclasse | undefined {
+        if (!this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
+            return undefined;
+        }
 
-        // TODO: Validar pseudoclasse.
-        if (this.verificarTipoSimboloAtual(tiposDeSimbolos.DOIS_PONTOS)) {
-            this.avancarEDevolverAnterior();
-            pseudoclasse = this.consumir(
+        this.avancarEDevolverAnterior();
+        // O lexador reverso classifica pseudoclasses conhecidas como PSEUDO_CLASSE.
+        const simboloPseudoclasse = this.verificarTipoSimboloAtual(tiposDeSimbolos.PSEUDO_CLASSE)
+            ? this.avancarEDevolverAnterior()
+            : this.consumir(
                 tiposDeSimbolos.IDENTIFICADOR,
                 "Esperado nome de pseudoclasse.",
             );
+
+        const pragmas = {
+            linha: simboloPseudoclasse.linha,
+            colunaInicial: simboloPseudoclasse.colunaInicial,
+            colunaFinal: simboloPseudoclasse.colunaFinal,
+        };
+
+        for (const [nomeFolEs, ClassePseudoclasse] of Object.entries(DicionarioPseudoClasses)) {
+            const pseudoclasse: Pseudoclasse = new ClassePseudoclasse(pragmas);
+            if (pseudoclasse.pseudoclasseCss === simboloPseudoclasse.lexema) {
+                // A chave do dicionário é o nome que o avaliador sintático FolEs aceita.
+                pseudoclasse.nomeFoles = nomeFolEs;
+                return pseudoclasse;
+            }
         }
 
-        return pseudoclasse;
+        throw this.erro(
+            simboloPseudoclasse,
+            `A pseudoclasse '${simboloPseudoclasse.lexema}' não é suportada.`,
+        );
     }
 
     protected seletorPorEstrutura(): Seletor {
@@ -158,12 +180,42 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
                 continue;
             }
 
-            if (!this.verificarTipoSimboloAtual(tiposDeSimbolos.TAG)) {
+            if (!this.continuaSeletorDescendente()) {
                 break;
             }
         }
 
         return seletores;
+    }
+
+    /**
+     * Verifica se o símbolo atual inicia outra parte de um seletor descendente
+     * (ex.: `p` em `div p`, `.b` em `.a .b`). Classes e ids só continuam o seletor
+     * quando separados por espaço: `.a.b` (seletor composto) não é suportado.
+     */
+    private continuaSeletorDescendente(): boolean {
+        if (this.estaNoFinal()) return false;
+
+        switch (this.simbolos[this.atual].tipo) {
+            case tiposDeSimbolos.TAG:
+                return true;
+            case tiposDeSimbolos.PONTO:
+            case tiposDeSimbolos.CERQUILHA:
+                return this.haEspacoAntesDoSimboloAtual();
+            default:
+                return false;
+        }
+    }
+
+    private haEspacoAntesDoSimboloAtual(): boolean {
+        if (this.atual === 0) return true;
+
+        const anterior = this.simbolos[this.atual - 1];
+        const atual = this.simbolos[this.atual];
+        return (
+            atual.linha !== anterior.linha ||
+            atual.colunaInicial > anterior.colunaFinal + 1
+        );
     }
 
     private resolverSeletor(): Seletor | null {
@@ -183,9 +235,37 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
         }
     }
 
-    private resolverCor(): Metodo {
-        const codigoCor = this.avancarEDevolverAnterior();
-        return new HexadecimalCor(codigoCor.lexema);
+    /**
+     * O lexador reverso quebra um código hexadecimal em vários símbolos
+     * (por exemplo, `#1e3aff` vira `#`, `1` e `e3aff`). Aqui juntamos os
+     * símbolos imediatamente adjacentes à cerquilha que contenham apenas
+     * dígitos hexadecimais.
+     * @param cerquilha O símbolo `#` já consumido.
+     */
+    private resolverCorHexadecimal(cerquilha: Simbolo): Metodo {
+        let codigo = "";
+        let colunaFinalAnterior = cerquilha.colunaInicial;
+
+        while (!this.estaNoFinal()) {
+            const simbolo = this.simbolos[this.atual];
+            const adjacente =
+                simbolo.linha === cerquilha.linha &&
+                simbolo.colunaInicial === colunaFinalAnterior + 1;
+
+            if (!adjacente || !simbolo.lexema || !/^[0-9a-fA-F]+$/.test(simbolo.lexema)) {
+                break;
+            }
+
+            codigo += simbolo.lexema;
+            colunaFinalAnterior = simbolo.colunaFinal;
+            this.avancarEDevolverAnterior();
+        }
+
+        if (codigo.length === 0) {
+            throw this.erro(cerquilha, "Esperado código hexadecimal válido após '#'.");
+        }
+
+        return new HexadecimalCor(codigo);
     }
 
     // TODO: Implementar lógica para resolver método
@@ -1898,6 +1978,9 @@ export class AvaliadorSintaticoReverso implements AvaliadorSintaticoInterface {
             switch (valorModificador.tipo) {
                 case tiposDeSimbolos.BARRA:
                     valoresResolvidos.push(new ValorAbreviacao());
+                    break;
+                case tiposDeSimbolos.CERQUILHA:
+                    valoresResolvidos.push(this.resolverCorHexadecimal(valorModificador));
                     break;
                 case tiposDeSimbolos.CIFRAO:
                     const nomeVariavel = this.avancarEDevolverAnterior();
